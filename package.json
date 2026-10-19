@@ -1,0 +1,22 @@
+{
+  "name": "fogweave",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Hands + voice VR knowledge graph for Meta VR Start Developer Competition 2026",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "engines": {
+    "node": ">=20.19.0 <21.0.0-0 || >=22.12.0 <23.0.0-0 || >=24.0.0"
+  },
+  "dependencies": {
+    "@iwsdk/core": "1.0.1"
+  },
+  "devDependencies": {
+    "@iwsdk/vite-plugin-dev": "1.0.1",
+    "vite": "^7.0.0"
+  }
+}

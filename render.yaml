@@ -1,0 +1,19 @@
+# Render Blueprint for the FogWeave backend (free web service).
+# GROQ_API_KEY and FOGWEAVE_ALLOWED_ORIGINS are entered in the Render
+# dashboard when the Blueprint is created (sync: false) — never committed.
+services:
+  - type: web
+    name: fogweave-backend
+    runtime: python
+    plan: free
+    rootDir: server
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: GROQ_API_KEY
+        sync: false
+      - key: FOGWEAVE_ALLOWED_ORIGINS
+        sync: false

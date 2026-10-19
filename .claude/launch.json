@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "fogweave-client",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "port": 8081
+    },
+    {
+      "name": "fogweave-running",
+      "url": "https://localhost:8081"
+    }
+  ]
+}

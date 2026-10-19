@@ -1,0 +1,19 @@
+node_modules/
+dist/
+*.log
+
+# secrets — never commit
+.env
+.env.*
+!.env.example
+server/.env
+
+# local dev artifacts (contains self-signed HTTPS key/cert)
+.iwsdk/
+*.pem
+.claude/settings.local.json
+
+# python
+server/.venv/
+__pycache__/
+*.pyc
