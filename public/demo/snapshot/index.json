@@ -1,31 +1,26 @@
 {
- "schema": "fogweave.snapshot/1",
- "generatedAt": "2026-10-20T12:47:53Z",
+ "schema": "fogweave.snapshot/2",
+ "generatedAt": "2026-10-20T16:41:06Z",
  "provenance": {
   "kind": "pipeline",
   "note": "Recorded output of the live FogWeave engine. Titles, our own short summaries, short verbatim quotes and links only.",
   "ontology": "2.0.0",
   "embeddings": "bge-small-en-v1.5",
   "llm": {
-   "calls": 14,
-   "cached": 8,
-   "tokens": 17184,
+   "calls": 9,
+   "cached": 26,
+   "tokens": 10738,
    "retries": 0,
    "by_model": {
     "openai/gpt-oss-20b": 2,
-    "openai/gpt-oss-120b": 12
+    "openai/gpt-oss-120b": 7
    }
   },
   "sources": {
    "wikipedia": {
     "ok": true,
-    "count": 8,
-    "ms": 15
-   },
-   "arxiv": {
-    "ok": true,
-    "count": 4,
-    "ms": 0
+    "count": 26,
+    "ms": 16
    },
    "wikipedia-archive-35": {
     "ok": true,
@@ -35,29 +30,41 @@
    "wikipedia-archive-400": {
     "ok": true,
     "count": 2,
-    "ms": 16
+    "ms": 14
+   },
+   "arxiv": {
+    "ok": true,
+    "count": 8,
+    "ms": 0
    },
    "hackernews": {
     "ok": true,
-    "count": 4,
-    "ms": 32
-   },
-   "gdelt": {
-    "ok": false,
-    "error": "api.gdeltproject.org: "
+    "count": 6,
+    "ms": 1390
    },
    "wikipedia-search": {
     "ok": true,
     "count": 2,
-    "ms": 936
+    "ms": 0
    },
    "gdelt-search": {
+    "ok": true,
+    "count": 4,
+    "ms": 22578
+   },
+   "gdelt-explore": {
     "ok": false,
     "error": "api.gdeltproject.org: "
+   },
+   "arxiv-explore": {
+    "ok": true,
+    "count": 4,
+    "ms": 671
    }
   },
   "attribution": [
    "Wikipedia text is CC BY-SA 4.0 (Wikipedia contributors)",
+   "Wikidata is CC0",
    "News metadata: The GDELT Project, https://www.gdeltproject.org/",
    "Via Hacker News (titles and links)",
    "Paper metadata from arXiv (CC0); not endorsed by arXiv"
@@ -74,7 +81,579 @@
    "energy prices"
   ]
  },
- "lights": [
+ "pool": [
+  {
+   "id": "n:67e039915881",
+   "kind": "breaking",
+   "headline": "JAXA launches the Martian Moons eXploration spacecraft from the Tanegashima Space Center toward Phobos aboard…",
+   "source": "reuters.com",
+   "via": "wikipedia",
+   "url": "https://www.reuters.com/science/japan-launches-mission-return-samples-mars-moon-2026-10-19/",
+   "date": "2026-10-20T16:35:23.729818Z",
+   "summary": "JAXA launched the Martian Moons eXploration spacecraft from Tanegashima Space Center on an H3 rocket, heading toward Phobos to collect at least 10 grams of surface material and return it to Earth in 2031.",
+   "summaryBy": "model",
+   "claims": [
+    {
+     "text": "The spacecraft will collect at least 10 grams of surface material from Phobos.",
+     "quote": "aiming to collect at least 10 grams of surface material from the Martian moon"
+    },
+    {
+     "text": "The collected samples are planned to be returned to Earth in 2031.",
+     "quote": "return the samples to Earth in 2031"
+    },
+    {
+     "text": "JAXA launched the spacecraft from Tanegashima Space Center.",
+     "quote": "JAXA launches the Martian Moons eXploration spacecraft from the Tanegashima Space Center"
+    }
+   ],
+   "tags": [
+    "science",
+    "space",
+    "technology"
+   ],
+   "quality": 0.849,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 1.0,
+    "usefulness": 0.97,
+    "novelty": 0.55
+   },
+   "story": 0,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.reuters.com/science/japan-launches-mission-return-samples-mars-moon-2026-10-19/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_20#4",
+    "section": "Science and technology"
+   },
+   "textHow": "headline-only",
+   "claimsNote": "Only the headline was available (robots.txt, paywall or fetch failure).",
+   "live": false
+  },
+  {
+   "id": "n:0f2522fb512f",
+   "kind": "paper",
+   "headline": "AnyGoal: On World Model Generalization Beyond Expert Rollouts",
+   "source": "arxiv.org",
+   "via": "arxiv",
+   "url": "https://arxiv.org/abs/2610.26844v1",
+   "date": "2026-10-19T17:59:05Z",
+   "summary": "The paper discusses how a world model must generalize beyond expert rollouts, examining the relationship between data coverage and learned dynamics.",
+   "summaryBy": "model",
+   "claims": [
+    {
+     "text": "The goal of a world model is to capture the dynamics of an environment.",
+     "quote": "The goal of a world model is to capture the dynamics of an environment."
+    },
+    {
+     "text": "Learned dynamics must behave well beyond the specific state-action combinations observed in expert rollouts.",
+     "quote": "For these uses to be reliable, however, the learned dynamics must behave well beyond the specific state-action combinations observed in expert rollouts."
+    },
+    {
+     "text": "The relationship between data coverage, dynamics generalization, and downstream planning performance remains underexplored.",
+     "quote": "Despite this, the relationship between data coverage, dynamics generalization, and downstream planning performance remains underexplored."
+    }
+   ],
+   "tags": [
+    "cs.AI",
+    "science",
+    "technology"
+   ],
+   "quality": 0.844,
+   "qualityBreakdown": {
+    "source": 0.9,
+    "sourceClass": "education",
+    "recency": 0.83,
+    "usefulness": 1.0,
+    "novelty": 0.35
+   },
+   "story": 1,
+   "licence": "arXiv metadata, CC0",
+   "citations": [],
+   "extra": {
+    "authors": [
+     "Heejeong Nam",
+     "Divyat Mahajan",
+     "Quentin Le Lidec",
+     "Randall Balestriero"
+    ],
+    "categories": [
+     "cs.AI"
+    ]
+   },
+   "textHow": "abstract",
+   "live": false
+  },
+  {
+   "id": "n:dd835a3e3882",
+   "kind": "breaking",
+   "headline": "At least 14 people are killed and 20 others are injured after a bus and a truck collide head-on in Natore…",
+   "source": "english.news.cn",
+   "via": "wikipedia",
+   "url": "https://english.news.cn/20261020/483694d508bf4a94825dbdacb7ce64ae/c.html",
+   "date": "2026-10-20T16:35:23.729818Z",
+   "summary": "A head‑on collision between a bus and a truck in Natore District, Bangladesh, killed at least 14 people and injured 20 others.",
+   "summaryBy": "model",
+   "claims": [
+    {
+     "text": "Around 20 people were injured in the collision.",
+     "quote": "early Tuesday left at least 14 people dead and 20 others injured"
+    },
+    {
+     "text": "The accident occurred at about 4:15 a.m. local time.",
+     "quote": "The fatal road accident occurred at around 4:15 a.m. local time"
+    },
+    {
+     "text": "Reckless driving was cited as the primary cause.",
+     "quote": "The official cited reckless driving as the primary cause of the road accident."
+    }
+   ],
+   "tags": [
+    "climate",
+    "world"
+   ],
+   "quality": 0.84,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 1.0,
+    "usefulness": 0.7,
+    "novelty": 1.0
+   },
+   "story": 2,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://english.news.cn/20261020/483694d508bf4a94825dbdacb7ce64ae/c.html"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_20#0",
+    "section": "Disasters and accidents"
+   },
+   "textHow": "article",
+   "live": false
+  },
+  {
+   "id": "n:5992b71a7135",
+   "kind": "paper",
+   "headline": "Where is Physical RSI capability from? An Observational Scaling Law of LLM-as-policy",
+   "source": "arxiv.org",
+   "via": "arxiv",
+   "url": "https://arxiv.org/abs/2610.26848v1",
+   "date": "2026-10-19T17:59:30Z",
+   "summary": "The study introduces PhysRSI-eval, a five‑axis metric to quantify physical recursive self‑improvement, and evaluates various VLMs on 18 manipulation tasks.",
+   "summaryBy": "model",
+   "claims": [],
+   "tags": [
+    "cs.AI",
+    "cs.CV",
+    "cs.RO",
+    "science"
+   ],
+   "quality": 0.838,
+   "qualityBreakdown": {
+    "source": 0.9,
+    "sourceClass": "education",
+    "recency": 0.83,
+    "usefulness": 1.0,
+    "novelty": 0.3
+   },
+   "story": 3,
+   "licence": "arXiv metadata, CC0",
+   "citations": [],
+   "extra": {
+    "authors": [
+     "Zekai Li",
+     "Jiayi Yu",
+     "Jinlu Zhang",
+     "Luyang Niu"
+    ],
+    "categories": [
+     "cs.RO",
+     "cs.AI",
+     "cs.CV"
+    ]
+   },
+   "textHow": "abstract",
+   "live": false
+  },
+  {
+   "id": "n:d1734ebec6e3",
+   "kind": "paper",
+   "headline": "Train An Imaginative Agent",
+   "source": "arxiv.org",
+   "via": "arxiv",
+   "url": "https://arxiv.org/abs/2610.26845v1",
+   "date": "2026-10-19T17:59:12Z",
+   "summary": "The paper presents Agentic Imagination (Agima), a training framework that teaches agents to imagine consequences before acting to avoid irreversible mistakes.",
+   "summaryBy": "model",
+   "claims": [
+    {
+     "text": "A seemingly reasonable push in Sokoban can make the puzzle unsolvable.",
+     "quote": "A seemingly reasonable push in Sokoban can make the puzzle unsolvable."
+    },
+    {
+     "text": "Agima trains a single omni model to propose actions, generate images of outcomes, and reason over imagined futures.",
+     "quote": "Agima trains a single omni model to propose actions, generate images of their outcomes, and then reason over these imagined futures"
+    },
+    {
+     "text": "The agent can simulate a sequence of actions, explore alternatives, and compare possible futures.",
+     "quote": "the agent can simulate a sequence of actions, explore alternatives, and compare possible futures"
+    }
+   ],
+   "tags": [
+    "cs.AI",
+    "science"
+   ],
+   "quality": 0.838,
+   "qualityBreakdown": {
+    "source": 0.9,
+    "sourceClass": "education",
+    "recency": 0.83,
+    "usefulness": 1.0,
+    "novelty": 0.3
+   },
+   "story": 4,
+   "licence": "arXiv metadata, CC0",
+   "citations": [],
+   "extra": {
+    "authors": [
+     "Jiaxin Ge",
+     "Junyi Zhang",
+     "Tianning Chai",
+     "Hanjun Yoo"
+    ],
+    "categories": [
+     "cs.AI"
+    ]
+   },
+   "textHow": "abstract",
+   "live": false
+  },
+  {
+   "id": "n:eceb10125f1e",
+   "kind": "paper",
+   "headline": "CoopUQ: Robust Multi-Robot Social Navigation via Uncertainty-Aware Cooperative Forecasting",
+   "source": "arxiv.org",
+   "via": "arxiv",
+   "url": "https://arxiv.org/abs/2610.26852v1",
+   "date": "2026-10-19T17:59:49Z",
+   "summary": "The work proposes CoopUQ, a reinforcement learning approach that enables multi‑robot social navigation by incorporating uncertainty‑aware cooperative forecasting.",
+   "summaryBy": "model",
+   "claims": [
+    {
+     "text": "CoopUQ predicts future occupancy grid maps through cross-robot spatiotemporal feature fusion.",
+     "quote": "CoopUQ predicts future occupancy grid maps through cross-robot spatiotemporal feature fusion"
+    },
+    {
+     "text": "CoopUQ uses constrained multi-agent reinforcement learning to penalize navigation through predicted occupied or highly uncertain regions.",
+     "quote": "leverages forecasts and their uncertainty to guide policy via constrained multi-agent reinforcement learning, where the cost penalizes navigation through regions predicted to be occupied or"
+    },
+    {
+     "text": "CoopUQ adapts risk sensitivity under distribution shifts.",
+     "quote": "This design enables the policy to adapt its risk sensitivity under distribution shifts"
+    }
+   ],
+   "tags": [
+    "cs.AI",
+    "cs.LG",
+    "cs.RO",
+    "science",
+    "technology"
+   ],
+   "quality": 0.836,
+   "qualityBreakdown": {
+    "source": 0.9,
+    "sourceClass": "education",
+    "recency": 0.83,
+    "usefulness": 1.0,
+    "novelty": 0.27
+   },
+   "story": 5,
+   "licence": "arXiv metadata, CC0",
+   "citations": [],
+   "extra": {
+    "authors": [
+     "Zehao Wang",
+     "Jianpeng Yao",
+     "Yuping Wang",
+     "Yiping Li"
+    ],
+    "categories": [
+     "cs.RO",
+     "cs.AI",
+     "cs.LG"
+    ]
+   },
+   "textHow": "abstract",
+   "live": false
+  },
+  {
+   "id": "n:35e6d373f234",
+   "kind": "paper",
+   "headline": "LatComm: Reusable Context Compression for Latent Communication between Large Language Models",
+   "source": "arxiv.org",
+   "via": "arxiv",
+   "url": "https://arxiv.org/abs/2610.26840v1",
+   "date": "2026-10-19T17:58:41Z",
+   "summary": "The paper introduces LatComm, a method for compressing and reusing context between large language models to reduce token processing overhead.",
+   "summaryBy": "model",
+   "claims": [],
+   "tags": [
+    "cs.AI",
+    "cs.CL",
+    "science"
+   ],
+   "quality": 0.836,
+   "qualityBreakdown": {
+    "source": 0.9,
+    "sourceClass": "education",
+    "recency": 0.83,
+    "usefulness": 1.0,
+    "novelty": 0.27
+   },
+   "story": 6,
+   "licence": "arXiv metadata, CC0",
+   "citations": [],
+   "extra": {
+    "authors": [
+     "Huawei Lin",
+     "Jinting Liu",
+     "Tan Yu",
+     "Weijie Zhao"
+    ],
+    "categories": [
+     "cs.CL",
+     "cs.AI"
+    ]
+   },
+   "live": false
+  },
+  {
+   "id": "n:79fca884af4a",
+   "kind": "paper",
+   "headline": "OpenVLHarness: Real World Visual Agentic Tool-Use with Multimodal Memory",
+   "source": "arxiv.org",
+   "via": "arxiv",
+   "url": "https://arxiv.org/abs/2610.26860v1",
+   "date": "2026-10-19T17:59:58Z",
+   "summary": "The study shows that multimodal large language models need grounded perception and external knowledge, as increasing inference budget alone yields modest gains on 22 benchmarks.",
+   "summaryBy": "model",
+   "claims": [],
+   "tags": [
+    "cs.AI",
+    "cs.CL",
+    "cs.CV",
+    "cs.LG",
+    "science"
+   ],
+   "quality": 0.835,
+   "qualityBreakdown": {
+    "source": 0.9,
+    "sourceClass": "education",
+    "recency": 0.83,
+    "usefulness": 1.0,
+    "novelty": 0.26
+   },
+   "story": 5,
+   "licence": "arXiv metadata, CC0",
+   "citations": [],
+   "extra": {
+    "authors": [
+     "Yu Zhou",
+     "Cheng-Fu Yang",
+     "Rui Sun",
+     "Di Wu"
+    ],
+    "categories": [
+     "cs.CL",
+     "cs.AI",
+     "cs.CV",
+     "cs.LG"
+    ]
+   },
+   "live": false
+  },
+  {
+   "id": "n:56222b1f7fcb",
+   "kind": "paper",
+   "headline": "WeAct: Dynamic Weight Switching as Agent Actions",
+   "source": "arxiv.org",
+   "via": "arxiv",
+   "url": "https://arxiv.org/abs/2610.26847v1",
+   "date": "2026-10-19T17:59:19Z",
+   "summary": "The paper discusses WeAct, a dynamic weight‑switching technique that allows agents to adaptively select capabilities during long‑horizon tasks.",
+   "summaryBy": "model",
+   "claims": [],
+   "tags": [
+    "cs.AI",
+    "cs.CL",
+    "cs.LG",
+    "science"
+   ],
+   "quality": 0.831,
+   "qualityBreakdown": {
+    "source": 0.9,
+    "sourceClass": "education",
+    "recency": 0.83,
+    "usefulness": 1.0,
+    "novelty": 0.23
+   },
+   "story": 5,
+   "licence": "arXiv metadata, CC0",
+   "citations": [],
+   "extra": {
+    "authors": [
+     "Rui Shi",
+     "Xunjian Yin",
+     "Jiacheng Sang",
+     "Zichuan Liu"
+    ],
+    "categories": [
+     "cs.LG",
+     "cs.AI",
+     "cs.CL"
+    ]
+   },
+   "live": false
+  },
+  {
+   "id": "n:7e8c21958d43",
+   "kind": "paper",
+   "headline": "Reinforcement Learning with Visually Attributable On-Policy Self-Distillation",
+   "source": "arxiv.org",
+   "via": "arxiv",
+   "url": "https://arxiv.org/abs/2610.26856v1",
+   "date": "2026-10-19T17:59:56Z",
+   "summary": "The work presents on‑policy self‑distillation (OPSD) for multimodal reinforcement learning, providing token‑level corrections from a privileged teacher with evidence‑centered visual views.",
+   "summaryBy": "model",
+   "claims": [],
+   "tags": [
+    "cs.AI",
+    "cs.CV",
+    "science"
+   ],
+   "quality": 0.828,
+   "qualityBreakdown": {
+    "source": 0.9,
+    "sourceClass": "education",
+    "recency": 0.83,
+    "usefulness": 1.0,
+    "novelty": 0.19
+   },
+   "story": 5,
+   "licence": "arXiv metadata, CC0",
+   "citations": [],
+   "extra": {
+    "authors": [
+     "Shiao Xie",
+     "Siyu Chen",
+     "Jianwei Lv",
+     "Xiandong Li"
+    ],
+    "categories": [
+     "cs.CV",
+     "cs.AI"
+    ]
+   },
+   "live": false
+  },
+  {
+   "id": "n:86b54bb16134",
+   "kind": "breaking",
+   "headline": "Malaysia's Registrar of Societies [ms] deregisters the opposition coalition Perikatan Nasional, citing…",
+   "source": "reuters.com",
+   "via": "wikipedia",
+   "url": "https://www.reuters.com/world/asia-pacific/malaysia-de-registers-main-opposition-bloc-elections-loom-2026-10-20/",
+   "date": "2026-10-20T16:35:23.729818Z",
+   "summary": "Malaysia's Registrar of Societies deregistered the opposition coalition Perikatan Nasional due to internal disputes and constitutional breaches, preventing its parties from contesting elections under a common banner.",
+   "summaryBy": "model",
+   "claims": [
+    {
+     "text": "Malaysia's Registrar of Societies deregistered the opposition coalition Perikatan Nasional.",
+     "quote": "Malaysia's Registrar of Societies [ms] deregisters the opposition coalition Perikatan Nasional"
+    },
+    {
+     "text": "The deregistration was based on internal disputes within the coalition.",
+     "quote": "citing internal disputes"
+    },
+    {
+     "text": "The deregistration prevents component parties from contesting forthcoming elections under a common coalition banner.",
+     "quote": "preventing its component parties from contesting forthcoming elections under a common coalition banner"
+    }
+   ],
+   "tags": [
+    "politics"
+   ],
+   "quality": 0.815,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 1.0,
+    "usefulness": 0.85,
+    "novelty": 0.45
+   },
+   "story": 7,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.reuters.com/world/asia-pacific/malaysia-de-registers-main-opposition-bloc-elections-loom-2026-10-20/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_20#3",
+    "section": "Politics and elections"
+   },
+   "textHow": "headline-only",
+   "claimsNote": "Only the headline was available (robots.txt, paywall or fetch failure).",
+   "live": false
+  },
+  {
+   "id": "n:12fabc0b78de",
+   "kind": "breaking",
+   "headline": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…",
+   "source": "aljazeera.com",
+   "via": "wikipedia",
+   "url": "https://www.aljazeera.com/news/2026/10/19/florida-issues-arrest-warrant-for-cuban-leader-raul-castro",
+   "date": "2026-10-19T16:35:23.729818Z",
+   "summary": "A Miami‑Dade County judge issued a no‑bail arrest warrant for former Cuban president Raúl Castro after the Florida attorney general charged him with conspiracy to commit first‑degree murder related to a 1996 attack on Brothers to the Rescue planes.",
+   "summaryBy": "model",
+   "claims": [
+    {
+     "text": "The warrant is based on criminal charges that Castro ordered two unarmed aircraft to be shot down in 1996.",
+     "quote": "the warrant was based on criminal charges over Castro's alleged role in ordering two unarmed aircraft to be shot down in 1996."
+    },
+    {
+     "text": "Four people were killed in the 1996 attack.",
+     "quote": "Four people were killed in the attack."
+    },
+    {
+     "text": "The Trump administration has tightened U.S. restrictions on Cuba, including a de facto energy blockade.",
+     "quote": "the administration has tightened US restrictions on the island, including by imposing a de facto energy blockade in January."
+    }
+   ],
+   "tags": [
+    "politics"
+   ],
+   "quality": 0.792,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.82,
+    "usefulness": 1.0,
+    "novelty": 0.47
+   },
+   "story": 8,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.aljazeera.com/news/2026/10/19/florida-issues-arrest-warrant-for-cuban-leader-raul-castro"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#7",
+    "section": "Law and crime"
+   },
+   "textHow": "article",
+   "live": false
+  },
   {
    "id": "n:83d9d5c1e160",
    "kind": "breaking",
@@ -82,7 +661,7 @@
    "source": "rfi.fr",
    "via": "wikipedia",
    "url": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
-   "date": "2026-10-20T12:45:01.324203Z",
+   "date": "2026-10-20T16:35:23.729818Z",
    "summary": "South Korea has withdrawn additional embassy staff from Ukraine after a dispute over two North Korean soldiers who were transferred to South Korea.",
    "summaryBy": "model",
    "claims": [
@@ -99,90 +678,237 @@
      "quote": "South Korea's ambassador to Ukraine returned home after Seoul's demand for an official apology over what it called an \"unilateral disclosure\" by Zelensky went unanswered."
     }
    ],
-   "relevance": 0.392,
-   "story": 0,
+   "tags": [
+    "politics",
+    "world"
+   ],
+   "quality": 0.789,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 1.0,
+    "usefulness": 0.68,
+    "novelty": 0.52
+   },
+   "story": 9,
    "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
    "citations": [
     "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1"
    ],
    "extra": {
-    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_20#0"
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_20#2",
+    "section": "International relations"
    },
    "textHow": "article",
    "live": false
   },
   {
-   "id": "n:86b54bb16134",
+   "id": "n:54a830f0095a",
    "kind": "breaking",
-   "headline": "Malaysia's Registrar of Societies [ms] deregisters the opposition coalition Perikatan Nasional, citing…",
-   "source": "reuters.com",
+   "headline": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi…",
+   "source": "france24.com",
    "via": "wikipedia",
-   "url": "https://www.reuters.com/world/asia-pacific/malaysia-de-registers-main-opposition-bloc-elections-loom-2026-10-20/",
-   "date": "2026-10-20T12:45:01.324203Z",
-   "summary": "Malaysia's Registrar of Societies deregistered the opposition coalition Perikatan Nasional, citing internal disputes and constitutional breaches, preventing its component parties from contesting upcoming elections under a common coalition banner.",
+   "url": "https://www.france24.com/en/live-news/20261019-israel-announces-arrests-after-west-bank-settler-attacks-on-westerners",
+   "date": "2026-10-19T16:35:23.729818Z",
+   "summary": "Israel Police arrested ten people in the occupied West Bank over attacks on American photojournalist Heidi Levine and the mayor of Aulnoye-Aymeries, France, and seized vehicles and other evidence during raids.",
    "summaryBy": "model",
    "claims": [
     {
-     "text": "Malaysia's Registrar of Societies deregistered the opposition coalition Perikatan Nasional.",
-     "quote": "Malaysia's Registrar of Societies [ms] deregisters the opposition coalition Perikatan Nasional"
+     "text": "Israeli police arrested 10 people in the occupied West Bank after settler attacks on an American photographer and a French mayor.",
+     "quote": "Israeli police said Monday they had arrested 10 people in the occupied West Bank after settler attacks on an American photographer and a French mayor"
     },
     {
-     "text": "The deregistration was based on internal disputes within the coalition.",
-     "quote": "citing internal disputes"
+     "text": "Heidi Levine, the American photographer, suffered broken vertebrae and was hospitalized after the attack.",
+     "quote": "Levine, 65, who was on assignment for The Washington Post, was taken to a hospital with broken vertebrae."
     },
     {
-     "text": "The deregistration prevents component parties from contesting forthcoming elections under a common coalition banner.",
-     "quote": "preventing its component parties from contesting forthcoming elections under a common coalition banner"
+     "text": "British Foreign Secretary Ed Miliband accused Israel of an \"ethnic cleansing\" campaign and warned of sanctions on settlement goods.",
+     "quote": "British Foreign Secretary Ed Miliband to accuse Israel of an \"ethnic cleansing\" campaign and for his government to impose sanctions on goods from settlements."
     }
    ],
-   "relevance": 0.514,
-   "story": 1,
+   "tags": [
+    "business",
+    "politics"
+   ],
+   "quality": 0.775,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.82,
+    "usefulness": 0.93,
+    "novelty": 0.43
+   },
+   "story": 10,
    "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
    "citations": [
-    "https://www.reuters.com/world/asia-pacific/malaysia-de-registers-main-opposition-bloc-elections-loom-2026-10-20/"
+    "https://www.france24.com/en/live-news/20261019-israel-announces-arrests-after-west-bank-settler-attacks-on-westerners",
+    "https://www.reuters.com/business/media-telecom/israel-police-arrest-suspects-over-settler-attacks-us-journalist-european-2026-10-19/"
    ],
    "extra": {
-    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_20#1"
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#8",
+    "section": "Law and crime"
    },
-   "textHow": "headline-only",
-   "claimsNote": "Only the headline was available (robots.txt, paywall or fetch failure).",
+   "textHow": "article",
    "live": false
   },
   {
-   "id": "n:67e039915881",
+   "id": "n:1e0426a7e5b2",
    "kind": "breaking",
-   "headline": "JAXA launches the Martian Moons eXploration spacecraft from the Tanegashima Space Center toward Phobos aboard…",
-   "source": "reuters.com",
+   "headline": "A driver deliberately strikes with car independent Australian MP Helen Haines outside her office in…",
+   "source": "afp.com",
    "via": "wikipedia",
-   "url": "https://www.reuters.com/science/japan-launches-mission-return-samples-mars-moon-2026-10-19/",
-   "date": "2026-10-20T12:45:01.324203Z",
-   "summary": "Japan Aerospace Exploration Agency (JAXA) launched the Martian Moons eXploration spacecraft from Tanegashima Space Center toward Phobos aboard an H3 rocket, aiming to collect at least 10 grams of surface material from the Martian moon and return the samples to Earth in 2031.",
+   "url": "https://www.afp.com/en/australian-lawmaker-hurt-car-attack-loses-leg-media",
+   "date": "2026-10-19T16:35:23.729818Z",
+   "summary": "A driver deliberately struck independent Australian MP Helen Haines outside her office in Wangaratta, Victoria, leaving her in critical condition and without a leg; the driver was arrested and Haines was airlifted to a hospital.",
    "summaryBy": "model",
    "claims": [
     {
-     "text": "The spacecraft will collect at least 10 grams of surface material from Phobos.",
-     "quote": "aiming to collect at least 10 grams of surface material from the Martian moon"
+     "text": "Helen Haines was struck by a Toyota Land Cruiser in a deliberate attack.",
+     "quote": "She was hit by a Toyota Land Cruiser outside her office in the town of Wangaratta"
     },
     {
-     "text": "The collected samples are planned to be returned to Earth in 2031.",
-     "quote": "return the samples to Earth in 2031"
+     "text": "Prime Minister Anthony Albanese described the attack as a test of the nation's character.",
+     "quote": "Prime Minister Anthony Albanese said the attack was a \"test of our character"
     },
     {
-     "text": "JAXA launched the spacecraft from Tanegashima Space Center.",
-     "quote": "JAXA launches the Martian Moons eXploration spacecraft from the Tanegashima Space Center"
+     "text": "Helen Haines lost a leg and was critically injured, requiring surgery at Alfred Hospital.",
+     "quote": "She underwent surgery overnight at the Alfred hospital in Melbourne"
     }
    ],
-   "relevance": 0.452,
+   "tags": [
+    "health",
+    "politics"
+   ],
+   "quality": 0.77,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.82,
+    "usefulness": 0.92,
+    "novelty": 0.41
+   },
+   "story": 11,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.afp.com/en/australian-lawmaker-hurt-car-attack-loses-leg-media",
+    "https://www.reuters.com/world/asia-pacific/australia-pm-says-independent-mp-helen-haines-has-been-attacked-2026-10-19/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#10",
+    "section": "Law and crime"
+   },
+   "textHow": "article",
+   "live": false
+  },
+  {
+   "id": "n:00dfe2b0206f",
+   "kind": "breaking",
+   "headline": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+   "source": "france24.com",
+   "via": "wikipedia",
+   "url": "https://www.france24.com/en/live-news/20261019-un-agency-slashes-gaza-food-aid-over-funding-warns-needs-persist",
+   "date": "2026-10-19T16:35:23.729818Z",
+   "summary": "The World Food Programme has cut monthly food aid for about 500,000 people in the Gaza Strip due to funding shortages, reducing recipients from 1.6 million to 1.1 million.",
+   "summaryBy": "model",
+   "claims": [
+    {
+     "text": "WFP will end monthly assistance to 500,000 people in Gaza because of a funding shortfall.",
+     "quote": "The World Food Programme said Monday it would end monthly assistance to 500,000 people in Gaza due to a funding shortfall"
+    },
+    {
+     "text": "WFP needs about $450 million for the next six months for operations in Gaza and the West Bank.",
+     "quote": "The agency says it needs about $450 million over the next six months for its operations in Gaza and the West Bank"
+    }
+   ],
+   "tags": [
+    "politics",
+    "world"
+   ],
+   "quality": 0.757,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.82,
+    "usefulness": 0.87,
+    "novelty": 0.38
+   },
+   "story": 12,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.france24.com/en/live-news/20261019-un-agency-slashes-gaza-food-aid-over-funding-warns-needs-persist"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#6",
+    "section": "International relations"
+   },
+   "textHow": "article",
+   "live": false
+  },
+  {
+   "id": "n:efb2fc367da5",
+   "kind": "breaking",
+   "headline": "Twelve people are killed and 30 others are injured after a bus crashes into a truck near Cairo, Egypt",
+   "source": "english.news.cn",
+   "via": "wikipedia",
+   "url": "https://english.news.cn/20261020/5b4b8943276e45978e29afdd1ed6c0b1/c.html",
+   "date": "2026-10-20T16:35:23.729818Z",
+   "summary": "A bus crashed into a truck near Cairo, Egypt, killing twelve people and injuring thirty others.",
+   "summaryBy": "model",
+   "claims": [],
+   "tags": [
+    "climate",
+    "world"
+   ],
+   "quality": 0.744,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 1.0,
+    "usefulness": 0.62,
+    "novelty": 0.21
+   },
    "story": 2,
    "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
    "citations": [
-    "https://www.reuters.com/science/japan-launches-mission-return-samples-mars-moon-2026-10-19/"
+    "https://english.news.cn/20261020/5b4b8943276e45978e29afdd1ed6c0b1/c.html"
    ],
    "extra": {
-    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_20#2"
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_20#1",
+    "section": "Disasters and accidents"
    },
-   "textHow": "headline-only",
-   "claimsNote": "Only the headline was available (robots.txt, paywall or fetch failure).",
+   "live": false
+  },
+  {
+   "id": "n:afdc5ab9ef1a",
+   "kind": "breaking",
+   "headline": "A Kenyan court convicts Good News International Ministries leader Paul Nthenge Mackenzie of murdering 190…",
+   "source": "reuters.com",
+   "via": "wikipedia",
+   "url": "https://www.reuters.com/world/africa/paul-mackenzie-kenyan-preacher-who-led-hundreds-starve-death-2026-10-19/",
+   "date": "2026-10-19T16:35:23.729818Z",
+   "summary": "A Kenyan court convicted Good News International Ministries leader Paul Nthenge Mackenzie of murdering 190 children and an adult whose deaths were linked to starvation in Shakahola Forest.",
+   "summaryBy": "model",
+   "claims": [],
+   "tags": [
+    "politics"
+   ],
+   "quality": 0.741,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.82,
+    "usefulness": 0.77,
+    "novelty": 0.42
+   },
+   "story": 13,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.reuters.com/world/africa/paul-mackenzie-kenyan-preacher-who-led-hundreds-starve-death-2026-10-19/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#9",
+    "section": "Law and crime"
+   },
    "live": false
   },
   {
@@ -192,108 +918,63 @@
    "source": "reuters.com",
    "via": "wikipedia",
    "url": "https://www.reuters.com/world/least-18-killed-houthi-attack-yemeni-government-military-camp-shabwa-sources-say-2026-10-19/",
-   "date": "2026-10-19T12:45:01.324203Z",
-   "summary": "A missile attack by the Houthis killed 58 soldiers and injured over 200 at a training center in Shabwah Governorate, Yemen, with 14 missing.",
+   "date": "2026-10-19T16:35:23.729818Z",
+   "summary": "A missile attack by the Houthis killed 58 soldiers and injured over 200 at a training center in Shabwah Governorate, Yemen, with fourteen missing.",
    "summaryBy": "model",
-   "claims": [
-    {
-     "text": "58 soldiers were killed in the missile attack.",
-     "quote": "A missile attack by the Houthis kills 58 soldiers"
-    },
-    {
-     "text": "Over 200 soldiers were injured in the missile attack.",
-     "quote": "injure over 200 at a training center"
-    },
-    {
-     "text": "14 soldiers are missing after the attack.",
-     "quote": "There are 14 missing."
-    }
+   "claims": [],
+   "tags": [
+    "world"
    ],
-   "relevance": 0.439,
-   "story": 3,
+   "quality": 0.724,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.82,
+    "usefulness": 0.72,
+    "novelty": 0.35
+   },
+   "story": 14,
    "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
    "citations": [
     "https://www.reuters.com/world/least-18-killed-houthi-attack-yemeni-government-military-camp-shabwa-sources-say-2026-10-19/"
    ],
    "extra": {
-    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#0"
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#0",
+    "section": "Armed conflicts and attacks"
    },
-   "textHow": "headline-only",
-   "claimsNote": "Only the headline was available (robots.txt, paywall or fetch failure).",
    "live": false
   },
   {
-   "id": "n:75c973928996",
+   "id": "n:b5b898540120",
    "kind": "breaking",
-   "headline": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan",
-   "source": "apnews.com",
-   "via": "wikipedia",
-   "url": "https://apnews.com/article/sudan-drone-rapid-support-forces-khartoum-97536d115acd1afb479d2c7ff6df580d",
-   "date": "2026-10-19T12:45:01.324203Z",
-   "summary": "Three children were killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan.",
-   "summaryBy": "model",
-   "claims": [
-    {
-     "text": "Three children were killed in the strike.",
-     "quote": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan."
-    },
-    {
-     "text": "The strike was carried out by the Rapid Support Forces.",
-     "quote": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan."
-    },
-    {
-     "text": "The strike took place in Khartoum, Sudan.",
-     "quote": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan."
-    }
-   ],
-   "relevance": 0.432,
-   "story": 3,
-   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
-   "citations": [
-    "https://apnews.com/article/sudan-drone-rapid-support-forces-khartoum-97536d115acd1afb479d2c7ff6df580d"
-   ],
-   "extra": {
-    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#1"
-   },
-   "textHow": "headline-only",
-   "claimsNote": "Only the headline was available (robots.txt, paywall or fetch failure).",
-   "live": false
-  },
-  {
-   "id": "n:00eab1f15d72",
-   "kind": "breaking",
-   "headline": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+   "headline": "A teacher and a student are injured in a stabbing attack at a school in Bistrița, Romania",
    "source": "reuters.com",
    "via": "wikipedia",
-   "url": "https://www.reuters.com/world/africa/drone-strike-disputed-sudan-south-sudan-area-kills-dozens-minister-says-2026-10-20/",
-   "date": "2026-10-19T12:45:01.324203Z",
-   "summary": "A drone strike killed at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan.",
+   "url": "https://www.reuters.com/world/13-year-old-boy-suspected-stabbing-teacher-pupil-romania-after-tiktok-posts-2026-10-19/",
+   "date": "2026-10-19T16:35:23.729818Z",
+   "summary": "A teacher and a student were injured in a stabbing attack at a school in Bistrița, Romania, and a 13‑year‑old suspect was arrested.",
    "summaryBy": "model",
-   "claims": [
-    {
-     "text": "A drone strike killed at least 73 people.",
-     "quote": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan."
-    },
-    {
-     "text": "The strike occurred at a market in Abyei.",
-     "quote": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan."
-    },
-    {
-     "text": "Abyei is a disputed area between South Sudan and Sudan.",
-     "quote": "the disputed Abyei area between South Sudan and Sudan"
-    }
+   "claims": [],
+   "tags": [
+    "politics"
    ],
-   "relevance": 0.573,
-   "story": 3,
+   "quality": 0.722,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.82,
+    "usefulness": 0.7,
+    "novelty": 0.37
+   },
+   "story": 15,
    "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
    "citations": [
-    "https://www.reuters.com/world/africa/drone-strike-disputed-sudan-south-sudan-area-kills-dozens-minister-says-2026-10-20/"
+    "https://www.reuters.com/world/13-year-old-boy-suspected-stabbing-teacher-pupil-romania-after-tiktok-posts-2026-10-19/"
    ],
    "extra": {
-    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2"
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#11",
+    "section": "Law and crime"
    },
-   "textHow": "headline-only",
-   "claimsNote": "Only the headline was available (robots.txt, paywall or fetch failure).",
    "live": false
   },
   {
@@ -303,40 +984,433 @@
    "source": "apnews.com",
    "via": "wikipedia",
    "url": "https://apnews.com/article/greece-migrants-die-speedboats-capsize-8c9f49e307e32d73bd7dd039d7c79169",
-   "date": "2026-10-19T12:45:01.324203Z",
+   "date": "2026-10-19T16:35:23.729818Z",
    "summary": "Twelve migrants, including an infant, were killed when two separate speedboats capsized off the coast of the Lesbos and Samos islands in Greece.",
    "summaryBy": "model",
    "claims": [],
-   "relevance": 0.498,
-   "story": 4,
+   "tags": [
+    "climate",
+    "world"
+   ],
+   "quality": 0.718,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.82,
+    "usefulness": 0.68,
+    "novelty": 0.36
+   },
+   "story": 16,
    "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
    "citations": [
     "https://apnews.com/article/greece-migrants-die-speedboats-capsize-8c9f49e307e32d73bd7dd039d7c79169"
    ],
    "extra": {
-    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#3"
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#3",
+    "section": "Disasters and accidents"
+   },
+   "live": false
+  },
+  {
+   "id": "n:d14e6805baf3",
+   "kind": "breaking",
+   "headline": "Armed gang members ambush Salvadoran Air Force personnel serving with Haiti's Gang Suppression Force in…",
+   "source": "reuters.com",
+   "via": "wikipedia",
+   "url": "https://www.reuters.com/business/aerospace-defense/four-salvadoran-air-force-members-missing-after-gang-ambush-haiti-2026-10-19/",
+   "date": "2026-10-18T16:35:23.729818Z",
+   "summary": "Armed gang members ambushed Salvadoran Air Force personnel serving with Haiti's Gang Suppression Force in Port‑au‑Prince, using gunfire and explosives; four Salvadoran service members remain missing after escaping their burning armored vehicle.",
+   "summaryBy": "model",
+   "claims": [],
+   "tags": [
+    "world"
+   ],
+   "quality": 0.716,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.67,
+    "usefulness": 0.88,
+    "novelty": 0.38
+   },
+   "story": 17,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.reuters.com/business/aerospace-defense/four-salvadoran-air-force-members-missing-after-gang-ambush-haiti-2026-10-19/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_18#1",
+    "section": "Armed conflicts and attacks"
+   },
+   "live": false
+  },
+  {
+   "id": "n:2ea4338fe8f4",
+   "kind": "breaking",
+   "headline": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada",
+   "source": "reuters.com",
+   "via": "wikipedia",
+   "url": "https://www.reuters.com/world/americas/alberta-votes-leaving-canada-separatist-movement-likely-outlast-expected-defeat-2026-10-19/",
+   "date": "2026-10-19T16:35:23.729818Z",
+   "summary": "Albertans voted on ten referendums, including one to decide whether Alberta should seek separation from Canada.",
+   "summaryBy": "model",
+   "claims": [],
+   "tags": [
+    "politics"
+   ],
+   "quality": 0.706,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.82,
+    "usefulness": 0.57,
+    "novelty": 0.47
+   },
+   "story": 18,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.reuters.com/world/americas/alberta-votes-leaving-canada-separatist-movement-likely-outlast-expected-defeat-2026-10-19/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#12",
+    "section": "Politics and elections"
    },
    "live": false
   },
   {
    "id": "n:0f5a4c632e8d",
    "kind": "breaking",
-   "headline": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+   "headline": "Fourteen miners are killed and seven more injured when an open pit gold mine collapses in Nariño Department,…",
    "source": "apnews.com",
    "via": "wikipedia",
    "url": "https://apnews.com/article/colombia-mine-accident-gold-illegal-mining-bffbd24132af34a0cb14a414579d1e9b",
-   "date": "2026-10-19T12:45:01.324203Z",
-   "summary": "Fourteen miners were killed and seven more injured during the collapse of an open pit gold mine in Nariño Department, Colombia.",
+   "date": "2026-10-19T16:35:23.729818Z",
+   "summary": "Fourteen miners were killed and seven more injured when an open‑pit gold mine collapsed in Nariño Department, Colombia.",
    "summaryBy": "model",
    "claims": [],
-   "relevance": 0.478,
-   "story": 5,
+   "tags": [
+    "climate",
+    "world"
+   ],
+   "quality": 0.705,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.82,
+    "usefulness": 0.62,
+    "novelty": 0.36
+   },
+   "story": 19,
    "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
    "citations": [
     "https://apnews.com/article/colombia-mine-accident-gold-illegal-mining-bffbd24132af34a0cb14a414579d1e9b"
    ],
    "extra": {
-    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#4"
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#4",
+    "section": "Disasters and accidents"
+   },
+   "live": false
+  },
+  {
+   "id": "n:f7c2419ab740",
+   "kind": "breaking",
+   "headline": "Iran's Islamic Revolutionary Guard Corps reports that an oil tanker has caught on fire and exploded in the…",
+   "source": "middleeasteye.net",
+   "via": "wikipedia",
+   "url": "https://www.middleeasteye.net/live-blog/live-blog-update/irans-irgc-navy-says-oil-tanker-hits-mine-catches-fire-strait-hormuz",
+   "date": "2026-10-18T16:35:23.729818Z",
+   "summary": "Iran's Islamic Revolutionary Guard Corps reports that an oil tanker has caught on fire and exploded in the southern part of the Strait of Hormuz after striking a naval mine.",
+   "summaryBy": "source",
+   "claims": [],
+   "tags": [
+    "world"
+   ],
+   "quality": 0.7,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.67,
+    "usefulness": 0.82,
+    "novelty": 0.35
+   },
+   "story": 20,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.middleeasteye.net/live-blog/live-blog-update/irans-irgc-navy-says-oil-tanker-hits-mine-catches-fire-strait-hormuz"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_18#0",
+    "section": "Armed conflicts and attacks"
+   },
+   "live": false
+  },
+  {
+   "id": "n:00eab1f15d72",
+   "kind": "breaking",
+   "headline": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+   "source": "reuters.com",
+   "via": "wikipedia",
+   "url": "https://www.reuters.com/world/africa/drone-strike-disputed-sudan-south-sudan-area-kills-dozens-minister-says-2026-10-20/",
+   "date": "2026-10-19T16:35:23.729818Z",
+   "summary": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan.",
+   "summaryBy": "source",
+   "claims": [],
+   "tags": [
+    "business",
+    "world"
+   ],
+   "quality": 0.694,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.82,
+    "usefulness": 0.65,
+    "novelty": 0.18
+   },
+   "story": 14,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.reuters.com/world/africa/drone-strike-disputed-sudan-south-sudan-area-kills-dozens-minister-says-2026-10-20/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2",
+    "section": "Armed conflicts and attacks"
+   },
+   "live": false
+  },
+  {
+   "id": "n:2ef6e37a2b5f",
+   "kind": "breaking",
+   "headline": "Andorra and San Marino each sign an association agreement with the European Union",
+   "source": "brusselstimes.com",
+   "via": "wikipedia",
+   "url": "https://www.brusselstimes.com/eu-affairs/2368520/eu-agreement-brings-andorra-san-marino-into-internal-market?utm_term=Autofeed&utm_medium=Social&utm_source=Twitter",
+   "date": "2026-10-19T16:35:23.729818Z",
+   "summary": "Andorra and San Marino each sign an association agreement with the European Union.",
+   "summaryBy": "source",
+   "claims": [],
+   "tags": [
+    "politics",
+    "world"
+   ],
+   "quality": 0.692,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.82,
+    "usefulness": 0.52,
+    "novelty": 0.43
+   },
+   "story": 21,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.brusselstimes.com/eu-affairs/2368520/eu-agreement-brings-andorra-san-marino-into-internal-market?utm_term=Autofeed&utm_medium=Social&utm_source=Twitter"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#5",
+    "section": "International relations"
+   },
+   "live": false
+  },
+  {
+   "id": "n:ac99b0896a72",
+   "kind": "breaking",
+   "headline": "Equatorial Guinea announces that it will expand its program combating malaria to the mainland and Annobón",
+   "source": "independent.co.uk",
+   "via": "wikipedia",
+   "url": "https://www.independent.co.uk/news/equatorial-guinea-malaria-world-health-organization-rhode-island-african-b3068688.html",
+   "date": "2026-10-18T16:35:23.729818Z",
+   "summary": "Equatorial Guinea announces that it will expand its program combating malaria to the mainland and Annobón. The program has already heavily reduced malaria cases on Bioko Island.",
+   "summaryBy": "source",
+   "claims": [],
+   "tags": [
+    "climate",
+    "health"
+   ],
+   "quality": 0.691,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.67,
+    "usefulness": 0.75,
+    "novelty": 0.4
+   },
+   "story": 22,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.independent.co.uk/news/equatorial-guinea-malaria-world-health-organization-rhode-island-african-b3068688.html"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_18#5",
+    "section": "Health and environment"
+   },
+   "live": false
+  },
+  {
+   "id": "n:9700f8a230bf",
+   "kind": "breaking",
+   "headline": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near…",
+   "source": "thehindu.com",
+   "via": "wikipedia",
+   "url": "https://www.thehindu.com/news/international/taiwan-says-drives-away-16-chinese-ships-involved-in-maritime-harassment/article71600923.ece",
+   "date": "2026-10-18T16:35:23.729818Z",
+   "summary": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near Taiwan and the Pratas Island, including some that entered restricted waters.",
+   "summaryBy": "source",
+   "claims": [],
+   "tags": [
+    "politics",
+    "world"
+   ],
+   "quality": 0.69,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.67,
+    "usefulness": 0.75,
+    "novelty": 0.39
+   },
+   "story": 23,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.thehindu.com/news/international/taiwan-says-drives-away-16-chinese-ships-involved-in-maritime-harassment/article71600923.ece"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_18#6",
+    "section": "International relations"
+   },
+   "live": false
+  },
+  {
+   "id": "n:75c973928996",
+   "kind": "breaking",
+   "headline": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan",
+   "source": "apnews.com",
+   "via": "wikipedia",
+   "url": "https://apnews.com/article/sudan-drone-rapid-support-forces-khartoum-97536d115acd1afb479d2c7ff6df580d",
+   "date": "2026-10-19T16:35:23.729818Z",
+   "summary": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan.",
+   "summaryBy": "source",
+   "claims": [],
+   "tags": [
+    "world"
+   ],
+   "quality": 0.687,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.82,
+    "usefulness": 0.55,
+    "novelty": 0.31
+   },
+   "story": 14,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://apnews.com/article/sudan-drone-rapid-support-forces-khartoum-97536d115acd1afb479d2c7ff6df580d"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#1",
+    "section": "Armed conflicts and attacks"
+   },
+   "live": false
+  },
+  {
+   "id": "n:e72e6a719bce",
+   "kind": "archive",
+   "headline": "United States president Donald Trump claims that the U.S",
+   "source": "reuters.com",
+   "via": "wikipedia",
+   "url": "https://www.reuters.com/world/americas/trump-says-us-struck-another-alleged-venezuelan-drug-vessel-killing-three-2025-09-15/",
+   "date": "2025-09-15T16:35:23.746801Z",
+   "summary": "United States president Donald Trump claims that the U.S. military carried out a strike on an alleged Venezuelan drug cartel vessel in international waters, killing three people, making it the second such strike carried ",
+   "summaryBy": "source",
+   "claims": [],
+   "tags": [
+    "world"
+   ],
+   "quality": 0.687,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.5,
+    "usefulness": 1.0,
+    "novelty": 0.37
+   },
+   "story": 24,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.reuters.com/world/americas/trump-says-us-struck-another-alleged-venezuelan-drug-vessel-killing-three-2025-09-15/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2025_September_15#0",
+    "section": "Armed conflicts and attacks"
+   },
+   "live": false
+  },
+  {
+   "id": "n:31e326e183a6",
+   "kind": "breaking",
+   "headline": "Albertan voters reject pursuing a future independence referendum, with more than three-quarters supporting…",
+   "source": "bbc.com",
+   "via": "wikipedia",
+   "url": "https://www.bbc.com/news/articles/cxr5yqqd7nlpo",
+   "date": "2026-10-19T16:35:23.729818Z",
+   "summary": "Albertan voters reject pursuing a future independence referendum, with more than three-quarters supporting the province remaining in Canada.",
+   "summaryBy": "source",
+   "claims": [],
+   "tags": [
+    "politics"
+   ],
+   "quality": 0.686,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.82,
+    "usefulness": 0.62,
+    "novelty": 0.17
+   },
+   "story": 18,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.bbc.com/news/articles/cxr5yqqd7nlpo"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#13",
+    "section": "Politics and elections"
+   },
+   "live": false
+  },
+  {
+   "id": "n:e40e07b73237",
+   "kind": "breaking",
+   "headline": "A truck loses control and runs over devotees outside a temple in Gwalior, Madhya Pradesh, India, killing at…",
+   "source": "dawn.com",
+   "via": "wikipedia",
+   "url": "https://www.dawn.com/news/2038010/out-of-control-truck-kills-13-at-religious-festival-in-indias-madhya-pradesh",
+   "date": "2026-10-18T16:35:23.729818Z",
+   "summary": "A truck loses control and runs over devotees outside a temple in Gwalior, Madhya Pradesh, India, killing at least 13 and injuring nearly 40 others.",
+   "summaryBy": "source",
+   "claims": [],
+   "tags": [
+    "climate",
+    "world"
+   ],
+   "quality": 0.675,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.67,
+    "usefulness": 0.72,
+    "novelty": 0.31
+   },
+   "story": 25,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.dawn.com/news/2038010/out-of-control-truck-kills-13-at-religious-festival-in-indias-madhya-pradesh",
+    "https://indianexpress.com/article/india/gwalior-road-accident-truck-hits-devotees-sheetlamata-mandir-10926443/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_18#2",
+    "section": "Disasters and accidents"
    },
    "live": false
   },
@@ -348,11 +1422,21 @@
    "via": "hackernews",
    "url": "https://github.com/deepseek-ai/DeepInfer",
    "date": "2026-10-20T09:08:54Z",
-   "summary": "DeepSeek has opened‑source its inference engine.",
-   "summaryBy": "model",
+   "summary": "",
+   "summaryBy": "source",
    "claims": [],
-   "relevance": 0.682,
-   "story": 6,
+   "tags": [
+    "technology"
+   ],
+   "quality": 0.656,
+   "qualityBreakdown": {
+    "source": 0.3,
+    "sourceClass": "unknown",
+    "recency": 0.94,
+    "usefulness": 1.0,
+    "novelty": 0.54
+   },
+   "story": 26,
    "licence": "Hacker News API (titles and links)",
    "citations": [],
    "extra": {
@@ -361,206 +1445,37 @@
    "live": false
   },
   {
-   "id": "n:f90a2919f8bd",
+   "id": "n:2170d37bb218",
    "kind": "breaking",
-   "headline": "Nordwand Mono – A monospace font for coders and adventurers",
-   "source": "github.com",
-   "via": "hackernews",
-   "url": "https://github.com/tywr/Nordwand-Mono",
-   "date": "2026-10-18T14:48:01Z",
-   "summary": "Nordwand Mono is a monospace font designed for coders and adventurers.",
-   "summaryBy": "model",
+   "headline": "At least eight people are killed and eight others are injured after a mortar shell explosion in Zawiya, Libya",
+   "source": "english.news.cn",
+   "via": "wikipedia",
+   "url": "https://english.news.cn/20261019/d7f8a7b762034abbaee2236e9fdfaa13/c.html",
+   "date": "2026-10-18T16:35:23.729818Z",
+   "summary": "At least eight people are killed and eight others are injured after a mortar shell explosion in Zawiya, Libya.",
+   "summaryBy": "source",
    "claims": [],
-   "relevance": 0.675,
-   "story": 7,
-   "licence": "Hacker News API (titles and links)",
-   "citations": [],
-   "extra": {
-    "discussion": "https://news.ycombinator.com/item?id=50141581"
-   },
-   "live": false
-  },
-  {
-   "id": "n:9128766f1662",
-   "kind": "breaking",
-   "headline": "MicroG: Free-libre re-implementation of Google's proprietary Android user space",
-   "source": "github.com",
-   "via": "hackernews",
-   "url": "https://github.com/microg/GmsCore/wiki",
-   "date": "2026-10-20T06:37:07Z",
-   "summary": "MicroG is a free‑libre re‑implementation of Google's proprietary Android user space.",
-   "summaryBy": "model",
-   "claims": [
-    {
-     "text": "microG GmsCore is a free software reimplementation of Google's Play Services.",
-     "quote": "microG GmsCore is a free software reimplementation of Google's Play Services."
-    },
-    {
-     "text": "It allows apps that call proprietary Google APIs to run on AOSP-based ROMs such as LineageOS.",
-     "quote": "It allows applications calling proprietary Google APIs to run on AOSP-based ROMs like LineageOS"
-    },
-    {
-     "text": "microG GmsCore includes the Unified Network Location Provider module.",
-     "quote": "GmsCore includes the Unified Network Location Provider module (UnifiedNlp)"
-    }
+   "tags": [
+    "climate",
+    "world"
    ],
-   "relevance": 0.796,
-   "story": 8,
-   "licence": "Hacker News API (titles and links)",
-   "citations": [],
-   "extra": {
-    "discussion": "https://news.ycombinator.com/item?id=50162177"
+   "quality": 0.655,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.67,
+    "usefulness": 0.62,
+    "novelty": 0.31
    },
-   "textHow": "article",
-   "live": false
-  },
-  {
-   "id": "n:8e87036d11b5",
-   "kind": "breaking",
-   "headline": "OpenBSD 8.0",
-   "source": "openbsd.org",
-   "via": "hackernews",
-   "url": "https://www.openbsd.org/80.html",
-   "date": "2026-10-20T02:06:40Z",
-   "summary": "OpenBSD 8.0 is a new release of the OpenBSD operating system.",
-   "summaryBy": "model",
-   "claims": [
-    {
-     "text": "OpenBSD 8.0 includes new features and systems.",
-     "quote": "This is a partial list of new features and systems included in OpenBSD 8.0."
-    },
-    {
-     "text": "Installation media are provided for CD, USB, and network PXE boot.",
-     "quote": "If your machine can boot from CD, you can write install80.iso or cd80.iso to a CD and boot from it."
-    },
-    {
-     "text": "Source archives src.tar.gz and sys.tar.gz contain the full source and kernel sources.",
-     "quote": "src.tar.gz contains a source archive starting at /usr/src."
-    }
+   "story": 27,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://english.news.cn/20261019/d7f8a7b762034abbaee2236e9fdfaa13/c.html"
    ],
-   "relevance": 0.684,
-   "story": 9,
-   "licence": "Hacker News API (titles and links)",
-   "citations": [],
    "extra": {
-    "discussion": "https://news.ycombinator.com/item?id=50160494"
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_18#3",
+    "section": "Disasters and accidents"
    },
-   "textHow": "article",
-   "live": false
-  },
-  {
-   "id": "n:79fca884af4a",
-   "kind": "paper",
-   "headline": "OpenVLHarness: Real World Visual Agentic Tool-Use with Multimodal Memory",
-   "source": "arxiv.org",
-   "via": "arxiv",
-   "url": "https://arxiv.org/abs/2610.26860v1",
-   "date": "2026-10-19T17:59:58Z",
-   "summary": "Multimodal large language models have advanced visual reasoning, but a controlled study on 22 benchmarks shows that simply increasing the inference budget of the base model yields only modest gains, indicating that tasks requiring grounded perception, external knowledge, and numerical measurements need more than internal reasoning.",
-   "summaryBy": "model",
-   "claims": [],
-   "relevance": 0.649,
-   "story": 6,
-   "licence": "arXiv metadata, CC0",
-   "citations": [],
-   "extra": {
-    "authors": [
-     "Yu Zhou",
-     "Cheng-Fu Yang",
-     "Rui Sun",
-     "Di Wu"
-    ]
-   },
-   "live": false
-  },
-  {
-   "id": "n:7e8c21958d43",
-   "kind": "paper",
-   "headline": "Reinforcement Learning with Visually Attributable On-Policy Self-Distillation",
-   "source": "arxiv.org",
-   "via": "arxiv",
-   "url": "https://arxiv.org/abs/2610.26856v1",
-   "date": "2026-10-19T17:59:56Z",
-   "summary": "Multimodal reinforcement learning with verifiable rewards provides reliable task-level supervision but limited guidance for localizing errors in visual reasoning; on‑policy self‑distillation adds dense token‑level corrections from a privileged teacher with an evidence‑centered visual view, though these corrections may conflate visual and textual errors.",
-   "summaryBy": "model",
-   "claims": [],
-   "relevance": 0.599,
-   "story": 6,
-   "licence": "arXiv metadata, CC0",
-   "citations": [],
-   "extra": {
-    "authors": [
-     "Shiao Xie",
-     "Siyu Chen",
-     "Jianwei Lv",
-     "Xiandong Li"
-    ]
-   },
-   "live": false
-  },
-  {
-   "id": "n:eceb10125f1e",
-   "kind": "paper",
-   "headline": "CoopUQ: Robust Multi-Robot Social Navigation via Uncertainty-Aware Cooperative Forecasting",
-   "source": "arxiv.org",
-   "via": "arxiv",
-   "url": "https://arxiv.org/abs/2610.26852v1",
-   "date": "2026-10-19T17:59:49Z",
-   "summary": "Reinforcement learning enables mobile robots to make fast navigation decisions in human‑shared environments, but extending single‑robot approaches to multi‑robot settings often fails to ensure safety and efficiency, especially under occlusions and out‑of‑distribution scenarios where individual robots may overlook risks or make inaccurate predictions.",
-   "summaryBy": "model",
-   "claims": [
-    {
-     "text": "CoopUQ predicts future occupancy grid maps through cross-robot spatiotemporal feature fusion.",
-     "quote": "CoopUQ predicts future occupancy grid maps through cross-robot spatiotemporal feature fusion"
-    },
-    {
-     "text": "CoopUQ uses constrained multi-agent reinforcement learning to penalize navigation through predicted occupied or highly uncertain regions.",
-     "quote": "leverages forecasts and their uncertainty to guide policy via constrained multi-agent reinforcement learning, where the cost penalizes navigation through regions predicted to be occupied or"
-    },
-    {
-     "text": "CoopUQ adapts risk sensitivity under distribution shifts.",
-     "quote": "This design enables the policy to adapt its risk sensitivity under distribution shifts"
-    }
-   ],
-   "relevance": 0.697,
-   "story": 6,
-   "licence": "arXiv metadata, CC0",
-   "citations": [],
-   "extra": {
-    "authors": [
-     "Zehao Wang",
-     "Jianpeng Yao",
-     "Yuping Wang",
-     "Yiping Li"
-    ]
-   },
-   "textHow": "abstract",
-   "live": false
-  },
-  {
-   "id": "n:5992b71a7135",
-   "kind": "paper",
-   "headline": "Where is Physical RSI capability from? An Observational Scaling Law of LLM-as-policy",
-   "source": "arxiv.org",
-   "via": "arxiv",
-   "url": "https://arxiv.org/abs/2610.26848v1",
-   "date": "2026-10-19T17:59:30Z",
-   "summary": "The paper introduces PhysRSI‑eval to quantify physical recursive self‑improvement through a five‑axis metric and evaluates different VLMs on 18 manipulation tasks under a fixed interaction budget, analyzing mechanisms, scaling behavior, and generalization.",
-   "summaryBy": "model",
-   "claims": [],
-   "relevance": 0.736,
-   "story": 10,
-   "licence": "arXiv metadata, CC0",
-   "citations": [],
-   "extra": {
-    "authors": [
-     "Zekai Li",
-     "Jiayi Yu",
-     "Jinlu Zhang",
-     "Luyang Niu"
-    ]
-   },
-   "textHow": "abstract",
    "live": false
   },
   {
@@ -570,18 +1485,123 @@
    "source": "bbc.com",
    "via": "wikipedia",
    "url": "https://www.bbc.com/news/articles/c3n07ydqdzlvo",
-   "date": "2026-09-15T12:45:01.505792Z",
-   "summary": "Oman's maritime security centre reports that two sailors are missing after the Panama‑flagged oil tanker El Gaia was attacked in the Strait of Hormuz near the Musandam Peninsula.",
-   "summaryBy": "model",
+   "date": "2026-09-15T16:35:23.741746Z",
+   "summary": "Oman's maritime security centre reports that two sailors are reported to be missing after the Panama-flagged oil tanker El Gaia was attacked in the Strait of Hormuz near the Musandam Peninsula.",
+   "summaryBy": "source",
    "claims": [],
-   "relevance": 0.479,
-   "story": 11,
+   "tags": [
+    "world"
+   ],
+   "quality": 0.648,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.5,
+    "usefulness": 0.85,
+    "novelty": 0.28
+   },
+   "story": 20,
    "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
    "citations": [
     "https://www.bbc.com/news/articles/c3n07ydqdzlvo"
    ],
    "extra": {
-    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_September_15#0"
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_September_15#0",
+    "section": "Armed conflicts and attacks"
+   },
+   "live": false
+  },
+  {
+   "id": "n:bbbb75eb845c",
+   "kind": "breaking",
+   "headline": "A light aircraft crashes into a dry riverbed in Kondariotissa, Pieria, Greece",
+   "source": "english.news.cn",
+   "via": "wikipedia",
+   "url": "https://english.news.cn/20261018/1a193721f4a84bc1866f688182ca4086/c.html",
+   "date": "2026-10-18T16:35:23.729818Z",
+   "summary": "A light aircraft crashes into a dry riverbed in Kondariotissa, Pieria, Greece. Two people are killed.",
+   "summaryBy": "source",
+   "claims": [],
+   "tags": [
+    "climate",
+    "world"
+   ],
+   "quality": 0.647,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.67,
+    "usefulness": 0.57,
+    "novelty": 0.33
+   },
+   "story": 16,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://english.news.cn/20261018/1a193721f4a84bc1866f688182ca4086/c.html"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_18#4",
+    "section": "Disasters and accidents"
+   },
+   "live": false
+  },
+  {
+   "id": "n:48f38e6eeec6",
+   "kind": "breaking",
+   "headline": "Apple broke an essential presentation feature of iPads",
+   "source": "teddysvoronos.com",
+   "via": "hackernews",
+   "url": "https://teddysvoronos.com/2026-10-19-apple-broke-an-essential-presentation-feature-of-ipads/",
+   "date": "2026-10-20T12:17:28Z",
+   "summary": "",
+   "summaryBy": "source",
+   "claims": [],
+   "tags": [
+    "technology"
+   ],
+   "quality": 0.606,
+   "qualityBreakdown": {
+    "source": 0.3,
+    "sourceClass": "unknown",
+    "recency": 0.96,
+    "usefulness": 0.72,
+    "novelty": 0.52
+   },
+   "story": 28,
+   "licence": "Hacker News API (titles and links)",
+   "citations": [],
+   "extra": {
+    "discussion": "https://news.ycombinator.com/item?id=50165208"
+   },
+   "live": false
+  },
+  {
+   "id": "n:485bd8b965fc",
+   "kind": "breaking",
+   "headline": "Facebook now charging to post more than 2 links a month",
+   "source": "mastodon.gamedev.place",
+   "via": "hackernews",
+   "url": "https://mastodon.gamedev.place/@AshleyGullen/117473851565913919",
+   "date": "2026-10-20T15:06:08Z",
+   "summary": "",
+   "summaryBy": "source",
+   "claims": [],
+   "tags": [
+    "technology"
+   ],
+   "quality": 0.603,
+   "qualityBreakdown": {
+    "source": 0.3,
+    "sourceClass": "unknown",
+    "recency": 0.99,
+    "usefulness": 0.68,
+    "novelty": 0.5
+   },
+   "story": 29,
+   "licence": "Hacker News API (titles and links)",
+   "citations": [],
+   "extra": {
+    "discussion": "https://news.ycombinator.com/item?id=50167536"
    },
    "live": false
   },
@@ -592,40 +1612,174 @@
    "source": "arabtimesonline.com",
    "via": "wikipedia",
    "url": "https://www.arabtimesonline.com/news/kuwaits-grid-holds-despite-iran-attacks-record-summer-heat/",
-   "date": "2026-09-15T12:45:01.505792Z",
+   "date": "2026-09-15T16:35:23.741746Z",
    "summary": "The Kuwaiti energy ministry reports that Kuwait's electrical grid has held despite attacks from Iran against it.",
-   "summaryBy": "model",
-   "claims": [
-    {
-     "text": "Kuwait's electrical grid held despite attacks from Iran",
-     "quote": "national electricity grid successfully navigated the summer of 2026"
-    },
-    {
-     "text": "Kuwait's peak load in summer 2026 was 17,540 megawatts",
-     "quote": "recording a peak load of 17,540 megawatts"
-    },
-    {
-     "text": "Iran attacked Kuwait's electricity infrastructure",
-     "quote": "Iranian attacks that targeted parts of the electricity infrastructure"
-    }
+   "summaryBy": "source",
+   "claims": [],
+   "tags": [
+    "world"
    ],
-   "relevance": 0.689,
-   "story": 12,
+   "quality": 0.602,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.5,
+    "usefulness": 0.6,
+    "novelty": 0.32
+   },
+   "story": 20,
    "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
    "citations": [
     "https://www.arabtimesonline.com/news/kuwaits-grid-holds-despite-iran-attacks-record-summer-heat/"
    ],
    "extra": {
-    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_September_15#1"
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_September_15#1",
+    "section": "Armed conflicts and attacks"
    },
-   "textHow": "article",
+   "live": false
+  },
+  {
+   "id": "n:3f80d88f351a",
+   "kind": "archive",
+   "headline": "Nigerian troops kill at least eleven ISWAP fighters in two operations in the Adamawa and Borno states",
+   "source": "reuters.com",
+   "via": "wikipedia",
+   "url": "https://www.reuters.com/world/africa/nigerian-military-kills-11-iswap-militants-borno-adamawa-2025-09-16/",
+   "date": "2025-09-15T16:35:23.746801Z",
+   "summary": "Nigerian troops kill at least eleven ISWAP fighters in two operations in the Adamawa and Borno states.",
+   "summaryBy": "source",
+   "claims": [],
+   "tags": [
+    "world"
+   ],
+   "quality": 0.598,
+   "qualityBreakdown": {
+    "source": 0.75,
+    "sourceClass": "news",
+    "recency": 0.5,
+    "usefulness": 0.58,
+    "novelty": 0.31
+   },
+   "story": 30,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.reuters.com/world/africa/nigerian-military-kills-11-iswap-militants-borno-adamawa-2025-09-16/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2025_September_15#1",
+    "section": "Armed conflicts and attacks"
+   },
+   "live": false
+  },
+  {
+   "id": "n:8ffede9af239",
+   "kind": "breaking",
+   "headline": "EMudhra Intermediate CA Compromise",
+   "source": "emudhra.we-have-a-problem.com",
+   "via": "hackernews",
+   "url": "https://emudhra.we-have-a-problem.com/",
+   "date": "2026-10-20T13:58:33Z",
+   "summary": "",
+   "summaryBy": "source",
+   "claims": [],
+   "tags": [
+    "technology"
+   ],
+   "quality": 0.573,
+   "qualityBreakdown": {
+    "source": 0.3,
+    "sourceClass": "unknown",
+    "recency": 0.98,
+    "usefulness": 0.6,
+    "novelty": 0.4
+   },
+   "story": 31,
+   "licence": "Hacker News API (titles and links)",
+   "citations": [],
+   "extra": {
+    "discussion": "https://news.ycombinator.com/item?id=50166579"
+   },
+   "live": false
+  },
+  {
+   "id": "n:32c440526252",
+   "kind": "breaking",
+   "headline": "How I got over 300 Tor exit nodes removed",
+   "source": "kaba.cx",
+   "via": "hackernews",
+   "url": "https://kaba.cx/posts/20261020_Tor/",
+   "date": "2026-10-20T13:39:24Z",
+   "summary": "",
+   "summaryBy": "source",
+   "claims": [],
+   "tags": [
+    "technology"
+   ],
+   "quality": 0.568,
+   "qualityBreakdown": {
+    "source": 0.3,
+    "sourceClass": "unknown",
+    "recency": 0.98,
+    "usefulness": 0.54,
+    "novelty": 0.46
+   },
+   "story": 32,
+   "licence": "Hacker News API (titles and links)",
+   "citations": [],
+   "extra": {
+    "discussion": "https://news.ycombinator.com/item?id=50166257"
+   },
+   "live": false
+  },
+  {
+   "id": "n:408ed8a188b4",
+   "kind": "breaking",
+   "headline": "Ofcom Concedes Defeat in the 4chan Case",
+   "source": "prestonbyrne.com",
+   "via": "hackernews",
+   "url": "https://prestonbyrne.com/2026/10/20/ofcom-concedes-defeat/",
+   "date": "2026-10-20T14:30:31Z",
+   "summary": "",
+   "summaryBy": "source",
+   "claims": [],
+   "tags": [
+    "technology"
+   ],
+   "quality": 0.561,
+   "qualityBreakdown": {
+    "source": 0.3,
+    "sourceClass": "unknown",
+    "recency": 0.98,
+    "usefulness": 0.52,
+    "novelty": 0.41
+   },
+   "story": 33,
+   "licence": "Hacker News API (titles and links)",
+   "citations": [],
+   "extra": {
+    "discussion": "https://news.ycombinator.com/item?id=50167028"
+   },
    "live": false
   }
  ],
  "expansions": {
-  "n:949e2c06e9e0": "expansions/n-949e2c06e9e0.json",
+  "n:dd835a3e3882": "expansions/n-dd835a3e3882.json",
+  "n:12fabc0b78de": "expansions/n-12fabc0b78de.json",
   "n:83d9d5c1e160": "expansions/n-83d9d5c1e160.json",
-  "n:00eab1f15d72": "expansions/n-00eab1f15d72.json"
+  "n:54a830f0095a": "expansions/n-54a830f0095a.json",
+  "n:1e0426a7e5b2": "expansions/n-1e0426a7e5b2.json",
+  "n:00dfe2b0206f": "expansions/n-00dfe2b0206f.json"
  },
- "seconds": 172
+ "explores": {
+  "wd:Q121035921": "explores/wd-q121035921.json",
+  "wd:Q169889": "explores/wd-q169889.json",
+  "wd:Q902": "explores/wd-q902.json",
+  "wd:Q990843": "explores/wd-q990843.json",
+  "wd:Q241": "explores/wd-q241.json",
+  "wd:Q1354": "explores/wd-q1354.json",
+  "wd:Q7414": "explores/wd-q7414.json",
+  "wd:Q48": "explores/wd-q48.json"
+ },
+ "sharedEntities": {},
+ "seconds": 342
 }

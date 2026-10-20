@@ -52,3 +52,19 @@ One line each: what was chosen, and why. Newest last.
 - **Story timeline:** lights in the same embedding cluster ("Story +n") are listed oldest first and drift closer for a while. The card says plainly that "same story" means similar text, not the same event.
 - **Audio:** procedural Web Audio ambience (brown-noise wind and two soft tones, gain 0.05, 4 s fade in) after the first gesture; off in Settings. Read-aloud uses speechSynthesis where available. Voice input (Web Speech) is off by default and fills the keypad for confirmation.
 - **Gentle motion setting:** slower drift for nodes, lights and fog; softer reveal pulses.
+- **V2 update (§3b, §12), branch `v2-news`:** the V1 topic mode had already been replaced by the first V2 delta, and nothing was deployed. The fallback named in §12.1 is therefore the Phase 3 news build (commit `ee8aa3e`), not topic mode.
+- **Feed = curated random:**
+  - The server builds a scored candidate pool (`fogweave/feed.py`): quality = 0.40 source class + 0.30 recency + 0.20 usefulness + 0.10 novelty, with near-duplicates removed and tags (news types, arXiv categories) assigned.
+  - The client draws about 16 lights with seeded weighted random sampling (`src/feed.js`): never below a quality floor; at most one light per story and three per type; papers capped at a quarter (half when paper types are chosen); about 1 in 4 from outside your interests; muted topics never appear.
+  - Sampling runs on the device, so it also works offline on the bundled pool.
+  - Interests (news types, paper types, weighted topics, mutes, surprise) live on the device. Reshuffle and "more / less like this" adjust them. One idle light is swapped every 75 s, never one you are looking at.
+- **Explore any node** (`fogweave/explore.py`, `/explore`): a definition and origin from the Wikipedia lead (CC BY-SA, attributed); parts and membership from Wikidata statements (CC0, quoted as statements with the item URL); related news only if the text names the node; related papers only if the abstract names it; and impact with the same rules as expand (basis required, persona guard, aliases are not effects).
+  - The client shows about 8 new nodes per explore, with "show more", a breadcrumb trail with Back, Pin and Collapse.
+  - The visible cap is 60 nodes, ranked by distance from the focus, pins and seals.
+  - Touching a light also grows it (`settings.feed.autoExpand`), one at a time.
+- **Look (§12.4):** news lights are warm white-gold, with the kind shown by shape and glow pattern (latest = steady star, research = breathing orb, archive = dim orb). They leave short fading trails and brighten when a fingertip comes within 35 cm.
+  - Links carry small light pulses flowing from cause to affected; speed and brightness follow the label (reported > inferred > speculative).
+  - **Ambient motes are faint white, red and blue, tiny and purely decorative: they carry no meaning.** Evidence colours appear only on node rings and links.
+  - Calm mode (Settings → Gentle motion) cuts motes by 60%, glow by 30% and drops trails. All motion stays well under 3 flashes per second.
+  - Budget: 300 motes, 16–20 lights, 60 nodes, 300 links and pulses. The governor drops decoration first.
+- **Persona-chasing guard:** the eval showed speculative impact chains forced toward the reader's context ("migrant deaths → insurance → energy prices"). The impact prompt now forbids building chains to reach the context, and code drops speculative links that land on context labels.
