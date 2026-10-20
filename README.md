@@ -70,6 +70,7 @@ npm test               # model, algorithms, layout (node:test)
 npm run qa             # Phase 2 + 3 scripted-hands runs, live + offline; needs the dev server and backend running
 npm run qa:offline     # offline parts only
 node qa/v2-accept.mjs  # V2 acceptance (§12.5), live + offline; add 'offline' or 'live' for one
+node qa/prod-smoke.mjs # production build check: run `npm run build` and `npx vite preview --port 4173` first
 cd server && python -m pytest   # backend: sources, LLM governor, evidence, ontology, algorithms
 ```
 
