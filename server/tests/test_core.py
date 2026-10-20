@@ -294,3 +294,12 @@ def test_feed_tags_use_word_boundaries():
     assert "space" not in tags_for(paper) and "cs.RO" in tags_for(paper)
     news = RawItem("wikipedia", "breaking", "JAXA launches a spacecraft toward Mars", "https://x/1", "2026-10-19", extra={"section": "Science and technology"})
     assert {"space", "science"} <= set(tags_for(news))
+
+
+def test_amounts_are_not_entities_but_named_events_are():
+    from fogweave.pipeline import AMOUNT
+
+    for name in ["$450 million", "750 shekels", "12%", "3 billion"]:
+        assert AMOUNT.match(name), name
+    for name in ["2026 Iran war", "G7", "Bank of England", "2026 Strait of Hormuz crisis"]:
+        assert not AMOUNT.match(name), name

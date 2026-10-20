@@ -43,6 +43,9 @@ def slug(text: str) -> str:
     return re.sub(r"[^\w]+|_", "-", t).strip("-")[:80]
 
 
+# a name that is only a number and a unit: "$450 million", "750 shekels", "12%"
+AMOUNT = re.compile(r"^[$€£¥]?\s*\d[\d.,]*\s*(million|billion|trillion|thousand|percent|per cent|%)?\s*[a-z]*$", re.I)
+
 _CTX_STOP = {"and", "the", "of", "in", "for", "with", "work", "use", "uses"}
 
 
@@ -217,6 +220,8 @@ class Engine:
                 relations.append({"subject": r.subject, "relation": r.relation, "object": r.object, "quote": q})
         entities = []
         for e in x.entities[:10]:
+            if AMOUNT.match(e.name.strip()):
+                continue  # amounts and dates are facts, not entities ("$450 million", "750 shekels")
             mention = window(text, e.name) or (window(text, canonical(e.name)) if canonical(e.name) != e.name else None)
             if not mention:
                 continue  # not in the text: never invent an entity

@@ -4,6 +4,7 @@ so repeated demos and evals do not spend free quota twice."""
 import hashlib
 import json
 import time
+import uuid
 from pathlib import Path
 
 from .config import CACHE_DIR
@@ -35,11 +36,16 @@ class DiskCache:
         return data.get("v")
 
     def set(self, key: str, value) -> None:
+        """Best effort: a cache write must never fail a request. Concurrent
+        writers use their own temp files (Windows refuses a shared rename)."""
         p = self._path(key)
-        p.parent.mkdir(parents=True, exist_ok=True)
-        tmp = p.with_suffix(".tmp")
-        tmp.write_text(json.dumps({"t": time.time(), "v": value}, ensure_ascii=False), encoding="utf-8")
-        tmp.replace(p)
+        tmp = p.with_name(f"{p.stem}.{uuid.uuid4().hex}.tmp")
+        try:
+            p.parent.mkdir(parents=True, exist_ok=True)
+            tmp.write_text(json.dumps({"t": time.time(), "v": value}, ensure_ascii=False), encoding="utf-8")
+            tmp.replace(p)
+        except OSError:
+            tmp.unlink(missing_ok=True)
 
     def clear(self) -> int:
         n = 0
