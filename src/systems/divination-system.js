@@ -1,5 +1,5 @@
 /**
- * Hands-only divination, LOTM-style: the TOOL you hold decides what
+ * Hands-only divination: the TOOL you hold decides what
  * gets revealed, not a menu or typed command.
  *
  *  - Locket (pendulum): swing it near a node -> reveals that node's

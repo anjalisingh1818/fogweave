@@ -10,7 +10,7 @@ import { NodeRenderSystem } from './systems/node-render-system.js';
 import { EdgeRenderSystem } from './systems/edge-render-system.js';
 
 World.create(document.getElementById('scene-container'), projectOptions).then((world) => {
-  // Gray-fog atmosphere (Lord of the Mysteries inspired): distant
+  // Gray-fog atmosphere: distant
   // nodes/edges dissolve into mist rather than popping in/out.
   try {
     world.scene.fog = new FogExp2(0x2a2d33, 0.12);
