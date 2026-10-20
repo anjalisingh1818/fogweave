@@ -20,3 +20,4 @@ __pycache__/
 
 # scripted QA output (screenshots, videos)
 qa/recordings/
+server/.cache/
