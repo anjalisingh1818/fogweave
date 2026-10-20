@@ -69,6 +69,12 @@ class AskReq(BaseModel):
     fresh: bool = True
 
 
+class ExploreReq(BaseModel):
+    node: dict  # {id, type, label, qid?}
+    context: list[str] = Field(default_factory=list, max_length=12)
+    paperTypes: list[str] = Field(default_factory=list, max_length=10)
+
+
 class PackReq(BaseModel):
     pack: dict  # the client's JSON-LD Evidence Pack
 
@@ -131,6 +137,25 @@ def pack(req: PackReq):
         return check_pack(req.pack)
     except Exception as exc:  # noqa: BLE001 — report, don't crash
         raise HTTPException(status_code=422, detail=f"not valid JSON-LD: {type(exc).__name__}") from exc
+
+
+@app.post("/explore")
+async def explore(req: ExploreReq):
+    from fogweave.explore import Explorer
+
+    n = req.node or {}
+    if not isinstance(n.get("id"), str) or not isinstance(n.get("label"), str) or not n["label"].strip():
+        raise HTTPException(status_code=400, detail="node needs id and label")
+    node = {"id": n["id"][:120], "label": n["label"][:120], "type": n.get("type", "Topic"), "qid": n.get("qid") if isinstance(n.get("qid"), str) else None}
+
+    async def stream():
+        try:
+            async for ev in Explorer(engine).run(node, context=req.context, paper_types=req.paperTypes):
+                yield f"data: {json.dumps(ev, ensure_ascii=False)}\n\n"
+        except Exception as exc:  # noqa: BLE001
+            yield f"data: {json.dumps({'type': 'done', 'stats': {'error': str(exc)[:160]}})}\n\n"
+
+    return StreamingResponse(stream(), media_type="text/event-stream", headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
 
 
 @app.post("/expand")

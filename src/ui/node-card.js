@@ -66,7 +66,26 @@ export function nodeCardDraw(app, id) {
     y = ui.para(node.label, pad, y, w - pad * 2, { size: 42, weight: 600, maxLines: 2, lineHeight: 1.18 });
 
     if (node.type === 'Claim' && node.quote) y = ui.para(`“${node.quote}”`, pad, y + 2, w - pad * 2, { size: 29, color: '#cdd5df', maxLines: 2 });
-    else if (node.description) y = ui.para(node.description, pad, y + 2, w - pad * 2, { size: 28, color: UI.dim, maxLines: 1 });
+    else if (node.definition) {
+      // what it is / where it comes from (open reference, attributed)
+      y = ui.para(node.definition, pad, y + 2, w - pad * 2, { size: 26, color: '#cdd5df', maxLines: 3 });
+      if (node.origin) y = ui.para(`Origin: ${node.origin}`, pad, y, w - pad * 2, { size: 23, color: UI.dim, maxLines: 2 });
+      ui.text(`${node.definitionLicence || 'Wikipedia'} · ${String(node.definitionUrl || '').replace('https://', '')}`, pad, y + 4, { size: 20, color: '#8fb7e6', maxWidth: w - pad * 2 });
+      y += 26;
+    } else if (node.description) y = ui.para(node.description, pad, y + 2, w - pad * 2, { size: 28, color: UI.dim, maxLines: 1 });
+    else if (node.type === 'NewsItem' && node.summary) y = ui.para(node.summary, pad, y + 2, w - pad * 2, { size: 26, color: '#cdd5df', maxLines: 2 });
+    if (node.explored === 'running') {
+      ui.text('Opening the world around it…', pad, y + 26, { size: 24, color: UI.dim });
+      y += 34;
+    } else if (node.addedIds?.length) {
+      const groups = {};
+      for (const x of node.addedIds) {
+        const g = app.store.nodes.get(x)?.group || 'other';
+        groups[g] = (groups[g] || 0) + 1;
+      }
+      ui.text(Object.entries(groups).map(([g, c]) => `${c} ${g}`).join(' · '), pad, y + 26, { size: 23, color: '#ffe2a8', maxWidth: w - pad * 2 });
+      y += 34;
+    }
 
     const read = evidenceReadout(app.store, id);
     if (read) {
@@ -82,7 +101,7 @@ export function nodeCardDraw(app, id) {
     }
 
     // why it is here: labelled links with quote or reasoning
-    const links = whyLinks(app, id).slice(0, 3);
+    const links = whyLinks(app, id).slice(0, 2);
     if (links.length) {
       ui.rule(y + 18);
       y += 54;
@@ -100,6 +119,17 @@ export function nodeCardDraw(app, id) {
         y += 44;
       }
     }
+
+    // small row: trail / show more / pin / collapse / expand a news node
+    const small = [];
+    if (app.trail.length >= 2) small.push({ id: 'back', label: '‹ Back', on: () => app.back() });
+    const more = app.hiddenCount(id);
+    if (more) small.push({ id: 'more', label: `Show ${Math.min(8, more)} more`, on: () => app.showMore(id) });
+    if (node.type === 'NewsItem' && app.canExpand(id) && !app.getItem(id)?.expanded) small.push({ id: 'expand', label: 'Expand', on: () => app.expandLight(id) });
+    small.push({ id: 'pin', label: node.pinned ? 'Unpin' : 'Pin', on: () => app.togglePin(id) });
+    if (node.addedIds?.length) small.push({ id: 'collapse', label: 'Collapse', on: () => app.collapse(id) });
+    const sw = (w - pad * 2 - 12 * (small.length - 1)) / Math.max(4, small.length);
+    small.forEach((b, i) => ui.button(b.id, b.label, pad + i * (sw + 12), h - 200, sw, 58, b.on, { size: 22 }));
 
     // actions
     const by = h - 122;

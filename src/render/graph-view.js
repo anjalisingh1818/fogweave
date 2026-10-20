@@ -305,6 +305,31 @@ export class GraphView {
     return this.hitOrder[instanceId] ?? null;
   }
 
+  /** Hops from the focus (unexplored, far parts of the web fade first). */
+  _distances(focus) {
+    const d = new Map();
+    if (!focus || !this.store.nodes.has(focus)) return d;
+    d.set(focus, 0);
+    const q = [focus];
+    for (let i = 0; i < q.length; i++) {
+      for (const { id } of this.store.neighbors(q[i])) {
+        if (!d.has(id)) {
+          d.set(id, d.get(q[i]) + 1);
+          q.push(id);
+        }
+      }
+    }
+    return d;
+  }
+
+  setFocus(id) {
+    this.focusId = id;
+    const n = this.store.nodes.get(id);
+    for (const x of this.store.nodes.values()) x.focus = x.id === id;
+    this._dirty = true;
+    if (n) this._scheduleLayout();
+  }
+
   setSelected(id) {
     this.selectedId = id;
     this._dirty = true;
@@ -363,10 +388,11 @@ export class GraphView {
   }
 
   _recomputeVisible() {
-    const nodes = [...this.store.nodes.values()];
-    // importance for LOD (and the visible cap) over the whole web
+    // nodes waiting behind "show more" stay in the fog
+    const nodes = [...this.store.nodes.values()].filter((n) => !n.hidden);
     const view = this.store.view('all');
     this._ranks = pagerank(view);
+    this._dist = this._distances(this.focusId);
     let visible = nodes;
     if (nodes.length > settings.quality.maxNodes) {
       visible = [...nodes]
@@ -624,8 +650,11 @@ function easeOutBack(x) {
 
 function score(node, view) {
   let s = (view._ranks.get(node.id) || 0) * 100;
-  if (node.type === 'NewsItem' || node.type === 'ContextNode') s += 1000;
-  if (node.sealed) s += 500;
+  const d = view._dist?.get(node.id);
+  if (d !== undefined) s += 3000 - 600 * Math.min(d, 4); // near the focus first
+  if (node.pinned) s += 5000;
+  if (node.sealed) s += 800;
+  if (node.type === 'NewsItem' || node.type === 'ContextNode') s += 400;
   if (node.type === 'Claim') s += 50;
   return s;
 }

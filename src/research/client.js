@@ -79,14 +79,23 @@ export class ResearchClient {
    * Resolves to the final stats (or null if the stream broke). Pass an
    * AbortSignal to stop research at any time.
    */
-  async expand(id, { context = [], deep = false, signal, onEvent }) {
+  expand(id, { context = [], deep = false, signal, onEvent }) {
+    return this._stream('/expand', { id, context, deep }, { signal, onEvent });
+  }
+
+  /** Open the world around any node (definition, parts, news, papers, impact). */
+  explore(node, { context = [], paperTypes = [], signal, onEvent }) {
+    return this._stream('/explore', { node, context, paperTypes }, { signal, onEvent });
+  }
+
+  async _stream(path, body, { signal, onEvent }) {
     if (!this.base) return null;
     let res;
     try {
-      res = await fetch(this.base + '/expand', {
+      res = await fetch(this.base + path, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, context, deep }),
+        body: JSON.stringify(body),
         signal,
       });
     } catch {

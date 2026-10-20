@@ -8,7 +8,7 @@
  * real pipeline runs (take-it-away test), and the status line says which.
  */
 import { Vector3, Quaternion, Hovered } from '@iwsdk/core';
-import { GraphStore, similarity } from './model/graph.js';
+import { GraphStore, similarity, removeNodes as removeNodesFromStore } from './model/graph.js';
 import { shortestPath, importanceOf, mostImportant, evidenceReadout, bestPath, pagerank } from './model/algorithms.js';
 import { GraphView } from './render/graph-view.js';
 import { Atmosphere } from './render/atmosphere.js';
@@ -86,6 +86,7 @@ export class App {
     });
     this.selectedId = null;
     this.prevSelectedId = null;
+    this.trail = [];
     this.linkFromId = null;
     this.player = null; // replay of a recorded run
     this.expanding = null; // { id, controller } live run
@@ -642,11 +643,15 @@ export class App {
     const running = this.researching;
     this.statusCard.setContent((ctx, ui, w, h) => {
       const pad = 34;
-      const label = running ? `Fog is looking · ${this.statusText}` : this.statusText || this.notes[0] || this.modeLine();
+      const crumbs = this.trail.slice(-3).map((t) => shortLabel(this.store.nodes.get(t)?.label)).join(' › ');
+      const label = running ? `Fog is looking · ${this.statusText}` : this.statusText || (crumbs && this.trail.length >= 2 ? crumbs : '') || this.notes[0] || this.modeLine();
       if (running) ui.ringIcon(pad + 14, h / 2 - 2, 14, '#d9dee6', this.player?.paused ? 'dotted' : 'dashed');
-      ui.text(label, pad + (running ? 44 : 0), h / 2 + 11, { size: 30, maxWidth: w - pad * 2 - (running || this.insightList.length ? 240 : 0) });
+      ui.text(label, pad + (running ? 44 : 0), h / 2 + 11, { size: 28, maxWidth: w - pad * 2 - (running ? 240 : (this.insightList.length ? 240 : 0) + (this.trail.length >= 2 ? 250 : 0)) });
       if (running) ui.button('stop', 'Stop', w - pad - 180, 14, 180, h - 28, () => this.stopResearch(), { size: 26 });
-      else if (this.insightList.length) ui.button('insights', `Noticed ${this.insightList.length}`, w - pad - 220, 14, 220, h - 28, () => this.openInsights(), { size: 24 });
+      else {
+        if (this.trail.length >= 2) ui.button('back', '‹ Back', w - pad - 470, 14, 200, h - 28, () => this.back(), { size: 24 });
+        if (this.insightList.length) ui.button('insights', `Noticed ${this.insightList.length}`, w - pad - 220, 14, 220, h - 28, () => this.openInsights(), { size: 24 });
+      }
     });
   }
 
@@ -700,15 +705,132 @@ export class App {
     return entities.some((e) => e?.hasComponent?.(Hovered));
   }
 
-  pinchNode(id) {
+  // ---------- explore: touch a node and the world around it opens ----------
+
+  /** Focus a node: it moves to the middle, joins the trail, and is explored once. */
+  focusNode(id, { explore = true } = {}) {
+    const n = this.store.nodes.get(id);
+    if (!n) return;
+    if (this.trail.at(-1) !== id) this.trail.push(id);
+    if (this.trail.length > 12) this.trail.shift();
+    this.view.setFocus(id);
+    if (explore && !n.explored && this.canExplore(id)) this.exploreNode(id);
+    this._renderStatus();
+  }
+
+  canExplore(id) {
+    const n = this.store.nodes.get(id);
+    if (!n || ['Claim', 'Source', 'ContextNode'].includes(n.type)) return false;
+    if (n.type === 'NewsItem') return false; // news items grow with Expand
+    return this.mode === 'live' || !!this.snapshot?.explores?.[id];
+  }
+
+  async exploreNode(id) {
+    const n = this.store.nodes.get(id);
+    if (!n || this.researching) return;
+    n.explored = 'running';
+    const added = [];
+    const before = new Set(this.store.nodes.keys());
+    const onEvent = (ev) => {
+      if (ev.type === 'node' && !before.has(ev.node.id) && !added.includes(ev.node.id)) {
+        added.push(ev.node.id);
+        ev.node.addedBy = id;
+        ev.node.group = ev.group || ev.node.group;
+        ev.node.hidden = added.length > 8; // about 8 new nodes per expansion; the rest wait for "show more"
+      }
+      this._onResearchEvent(ev);
+    };
+    if (this.mode === 'live') {
+      const controller = new AbortController();
+      this.expanding = { id, controller };
+      await this.client.explore({ id: n.id, type: n.type, label: n.label, qid: n.qid }, {
+        context: this.context.labels(),
+        paperTypes: this.interests.data.paperTypes,
+        signal: controller.signal,
+        onEvent,
+      });
+      this.expanding = null;
+    } else {
+      const rec = await this._recorded(this.snapshot.explores[id]);
+      for (const ev of rec?.events || []) onEvent(ev);
+    }
+    n.explored = true;
+    n.addedIds = added;
+    this.context.syncToStore(this.store);
+    this.refreshInsights();
+    this.setStatus('');
+    this.view.markLabelsDirty();
+    this.cards.get(`node:${id}`)?.redraw();
+    this.onboarding.notify('explored');
+  }
+
+  async _recorded(file) {
+    if (!file) return null;
+    const res = await fetch(`demo/snapshot/${file}`).catch(() => null);
+    return res?.ok ? res.json() : null;
+  }
+
+  hiddenCount(id) {
+    return (this.store.nodes.get(id)?.addedIds || []).filter((x) => this.store.nodes.get(x)?.hidden).length;
+  }
+
+  showMore(id) {
+    const ids = (this.store.nodes.get(id)?.addedIds || []).filter((x) => this.store.nodes.get(x)?.hidden).slice(0, 8);
+    for (const x of ids) this.store.nodes.get(x).hidden = false;
+    this.store._emit('node-added', ids);
+    this.cards.get(`node:${id}`)?.redraw();
+    return ids.length;
+  }
+
+  back() {
+    if (this.trail.length < 2) return null;
+    this.trail.pop();
+    const prev = this.trail.at(-1);
+    this.view.setFocus(prev);
+    this.pinchNode(prev, { fromTrail: true });
+    return prev;
+  }
+
+  togglePin(id) {
+    const n = this.store.nodes.get(id);
+    if (!n) return;
+    n.pinned = !n.pinned;
+    this.view.markLabelsDirty();
+    this.view._dirty = true;
+    this.cards.get(`node:${id}`)?.redraw();
+  }
+
+  /** Fold an explored branch back into the fog (sealed and pinned nodes stay). */
+  collapse(id) {
+    const n = this.store.nodes.get(id);
+    if (!n?.addedIds?.length) return 0;
+    const remove = [];
+    const walk = (nid) => {
+      for (const x of this.store.nodes.get(nid)?.addedIds || []) {
+        const c = this.store.nodes.get(x);
+        if (!c || c.sealed || c.pinned || this.lights.get(x)?.expanded) continue;
+        walk(x);
+        remove.push(x);
+      }
+    };
+    walk(id);
+    removeNodesFromStore(this.store, remove);
+    n.addedIds = [];
+    n.explored = false;
+    this.cards.get(`node:${id}`)?.redraw();
+    return remove.length;
+  }
+
+  pinchNode(id, { fromTrail = false } = {}) {
     if (!this.store.nodes.has(id)) return;
+    if (!fromTrail) this.focusNode(id);
     if (this.selectedId !== id) this.prevSelectedId = this.selectedId;
     this.selectedId = id;
     this.view.setSelected(id);
     this.view.markLabelsDirty();
     const prefer = this.view.worldPositionOf(id);
     for (const e of [...this.cards.open]) if (e.key.startsWith('node:') && e.key !== `node:${id}`) this.cards.close(e.key);
-    this.cards.show(`node:${id}`, { width: 0.44, height: 0.4, draw: nodeCardDraw(this, id), prefer });
+    this.cards.show(`node:${id}`, { width: 0.46, height: 0.5, draw: nodeCardDraw(this, id), prefer });
     this.onboarding.notify('card-opened');
   }
 
@@ -740,6 +862,8 @@ export class App {
     this.cards.show(`light:${id}`, { width: 0.46, height: 0.48, draw: readerDraw(this, id), prefer: this.lights.worldPositionOf(id) });
     this.onboarding.notify('light-opened');
     if (it.live && !it.claims?.length && !it.claimsLoading && this.mode === 'live') this._loadClaims(it);
+    // touching a light also grows it into the web (one at a time)
+    if (settings.feed.autoExpand && !it.expanded && !this.researching && this.canExpand(id)) this.expandLight(id);
   }
 
   async _loadClaims(it) {
@@ -752,15 +876,28 @@ export class App {
     this.cards.get(`light:${it.id}`)?.redraw();
   }
 
+  /** A light, or a news node found while exploring (it can be expanded too). */
+  getItem(id) {
+    const light = this.lights.get(id);
+    if (light) return light;
+    const n = this.store.nodes.get(id);
+    if (n?.type !== 'NewsItem') return null;
+    this.extraItems ??= new Map();
+    if (!this.extraItems.has(id)) {
+      this.extraItems.set(id, { id, kind: n.kind || 'breaking', headline: n.label, source: n.outlet, url: n.url, date: n.date, summary: n.summary || '', live: this.mode === 'live', claims: [] });
+    }
+    return this.extraItems.get(id);
+  }
+
   canExpand(id) {
-    const it = this.lights.get(id);
+    const it = this.getItem(id);
     if (!it) return false;
     if (it.live && this.mode === 'live') return true;
     return !!this.snapshot?.expansions?.[id];
   }
 
   async expandLight(id) {
-    const it = this.lights.get(id);
+    const it = this.getItem(id);
     if (!it || this.researching || it.expanded) return;
     it.expanded = 'running';
     this.notes = [];
@@ -799,6 +936,7 @@ export class App {
       });
     }
     it.expanded = true;
+    if (this.store.nodes.has(id)) this.focusNode(id, { explore: false });
     this.context.syncToStore(this.store);
     this._applyRelevance();
     this.refreshInsights();
@@ -1176,6 +1314,11 @@ function importanceSeeds(app) {
   if (!seeds.length) return null;
   const pr = pagerank(app.store.view('all'), { seeds });
   return new Map([...pr].filter(([id]) => app.store.nodes.get(id)?.type === 'NewsItem'));
+}
+
+function shortLabel(s, n = 22) {
+  s = String(s || '');
+  return s.length > n ? s.slice(0, n - 1) + '…' : s;
 }
 
 function shortHeadline(h) {

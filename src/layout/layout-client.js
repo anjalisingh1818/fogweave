@@ -51,7 +51,7 @@ export class LayoutClient {
 
   async _run(nodes, edges, previous, key) {
     this._busy = true;
-    const slimNodes = nodes.map((n) => ({ id: n.id, type: n.type }));
+    const slimNodes = nodes.map((n) => ({ id: n.id, type: n.type, focus: !!n.focus }));
     const slimEdges = edges.map((e) => ({ from: e.from, to: e.to, type: e.type }));
     let positions;
     if (this._worker) {
@@ -76,7 +76,7 @@ export class LayoutClient {
 }
 
 function shapeKey(nodes, edges) {
-  const n = nodes.map((x) => x.id).sort().join('|');
+  const n = nodes.map((x) => x.id + (x.focus ? '*' : '')).sort().join('|');
   const e = edges.map((x) => `${x.from}>${x.to}`).sort().join('|');
   let h = 0;
   const s = n + '#' + e;

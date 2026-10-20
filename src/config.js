@@ -30,16 +30,18 @@ export const settings = {
     spawnDeferMs: 180, // time IWSDK gets to claim a pinch as a grab/press
   },
   layers: { includeFog: false }, // props/paths read the sealed layer by default
-  quality: { level: 2, labels: 22, particles: 520, fogSheets: true, glow: 1, maxNodes: 150 },
+  quality: { level: 2, labels: 22, particles: 300, fogSheets: true, glow: 1, maxNodes: 60 },
   comfort: { gentle: false },
   audio: { enabled: true, readAloud: true },
   voice: { enabled: false }, // optional extra; never required
+  feed: { autoExpand: true }, // touching a light also grows it into the web
 };
 
 const QUALITY_LEVELS = [
-  { labels: 8, particles: 0, fogSheets: false, glow: 0.7, maxNodes: 90 },
-  { labels: 14, particles: 220, fogSheets: false, glow: 0.85, maxNodes: 120 },
-  { labels: 22, particles: 520, fogSheets: true, glow: 1, maxNodes: 150 },
+  // the governor drops decoration first (motes, fog sheets, glow), never labels below 8 or text
+  { labels: 10, particles: 0, fogSheets: false, glow: 0.7, maxNodes: 60 },
+  { labels: 16, particles: 150, fogSheets: false, glow: 0.85, maxNodes: 60 },
+  { labels: 22, particles: 300, fogSheets: true, glow: 1, maxNodes: 60 },
 ];
 
 export function setQuality(level) {

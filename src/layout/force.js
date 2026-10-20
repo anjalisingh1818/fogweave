@@ -54,7 +54,7 @@ export function forceLayout(nodes, edges, { iterations = 220, previous = {} } = 
     springs.push([a, b, rest]);
   }
   // news items and the reader's context sit near the middle
-  const isTopic = nodes.map((nd) => nd.type === 'Topic' || nd.type === 'NewsItem' || nd.type === 'ContextNode');
+  const isTopic = nodes.map((nd) => nd.focus || nd.type === 'NewsItem' || nd.type === 'ContextNode');
   const repulse = 0.012 * Math.min(1, 40 / n + 0.3);
   const warm = Object.keys(previous).length > 0;
   let alpha = warm ? 0.35 : 1;
@@ -100,7 +100,7 @@ export function forceLayout(nodes, edges, { iterations = 220, previous = {} } = 
     }
     // centring (topics pulled harder so they sit in the middle)
     for (let i = 0; i < n; i++) {
-      const k = (isTopic[i] ? 0.05 : 0.012) * alpha;
+      const k = (nodes[i].focus ? 0.2 : isTopic[i] ? 0.05 : 0.012) * alpha;
       vel[i * 3] -= pos[i * 3] * k;
       vel[i * 3 + 1] -= pos[i * 3 + 1] * k;
       vel[i * 3 + 2] -= pos[i * 3 + 2] * k;

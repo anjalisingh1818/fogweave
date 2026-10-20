@@ -544,6 +544,9 @@ class Engine:
                 dropped += 1  # a weak guess "about you" is worse than none (eval top failure)
                 continue
             tk = key(link.target)
+            sk = key(link.source)
+            if tk == sk or tk.startswith(sk + " ") or sk.startswith(tk + " ") or tk.replace(" ag", "") == sk:
+                continue  # an alias of the source is not an effect
             if tk in ctx_keys:
                 tid = f"ctx:{slug(ctx_keys[tk])}"
                 n = {"id": tid, "type": "ContextNode", "label": ctx_keys[tk], "private": True}
