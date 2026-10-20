@@ -30,16 +30,24 @@ def prec(verdicts):
     return (round(sum(v) / len(v), 3), len(v)) if v else (None, 0)
 
 
+def ck(c):
+    """connection label key: the same item can be judged with two personas"""
+    return f"{c['id']}|{c['persona']}"
+
+
 def main():
     auto = load(RES / "auto.json", {})
     special = load(RES / "special.json", {})
     cluster = load(RES / "cluster.json", {})
     pairs = load(RES / "verifier_pairs.json", [])
     ablation = load(RES / "ablation.json", [])
-    sheet = load(LAB / "impact_sheet.json", [])
+    sheet = load(LAB / "impact_sheet.json", [])  # before the persona-chasing fix (eval/runs)
+    sheet_mid = load(LAB / "impact_sheet_after.json", [])  # after the persona fix (eval/runs_after)
+    sheet_after = load(LAB / "impact_sheet_after2.json", []) or sheet_mid  # + structure rule = current pipeline (eval/runs_after2)
     impact_l = load(LAB / "impact_labels.json", {})
     ver_l = load(LAB / "verifier_labels.json", [])
-    conn_sheet = load(LAB / "connection_sheet.json", [])
+    # "Touches me?": current pipeline, round-robin personas + matched personas
+    conn_sheet = (load(LAB / "connection_sheet_after2.json", []) or load(LAB / "connection_sheet_after.json", [])) + load(LAB / "connection_sheet_matched.json", [])
     conn_l = load(LAB / "connection_labels.json", {})
     abl_l = load(LAB / "ablation_labels.json", [])
     qa2 = load(QA / "phase2-results.json", {})
@@ -61,18 +69,35 @@ def main():
 
     # ---------------------------------------------------------------- summary
     rows = []
-    by_label = {lab: [impact_l.get(r["key"], {}).get("verdict") for r in sheet if r["label"] == lab] for lab in ("reported", "inferred", "speculative")}
-    for lab in ("reported", "inferred", "speculative"):
-        p, n = prec([v for v in by_label[lab] if v])
-        rows.append((f"Impact-link precision, {lab}", f"{p:.2f} (n={n})" if p is not None else "not labelled"))
+    LABS = ("reported", "inferred", "speculative")
+
+    def by_label_of(sh):
+        return {lab: [impact_l.get(r["key"], {}).get("verdict") for r in sh if r["label"] == lab] for lab in LABS}
+
+    def chasing(sh):
+        # wrong links whose reason is a chain toward the reader's context (persona-chasing)
+        return sum(1 for r in sh if impact_l.get(r["key"], {}).get("verdict") == "wrong" and "persona" in impact_l[r["key"]].get("why", ""))
+
+    by_before = by_label_of(sheet)
+    by_mid = by_label_of(sheet_mid)
+    by_after = by_label_of(sheet_after)
+    for lab in LABS:
+        pa, na = prec([v for v in by_after[lab] if v])
+        pb, nb = prec([v for v in by_before[lab] if v])
+        cell = f"{pa:.2f} (n={na})" if pa is not None else "not labelled"
+        if pb is not None:
+            cell += f"; before the fixes {pb:.2f} (n={nb})"
+        rows.append((f"Impact-link precision, {lab}", cell))
+    if sheet_after:
+        rows.append(("Persona-chasing links (wrong, toward the reader's context)", f"{chasing(sheet_after)} after vs {chasing(sheet)} before"))
     if ver_l and pairs:
         agree = sum(1 for p, l in zip(pairs, ver_l) if l.get("gold") == p["model"])
         rows.append(("Verifier agreement with hand labels", f"{agree / len(ver_l):.2f} (n={len(ver_l)})"))
     if conn_l:
-        vals = [conn_l[c["id"]] for c in conn_sheet if c["id"] in conn_l]
+        vals = [conn_l[ck(c)] for c in conn_sheet if ck(c) in conn_l]
         sens = sum(v["sensible"] for v in vals)
         rows.append(("\"Touches me?\" result sensible", f"{sens / len(vals):.2f} (n={len(vals)})"))
-        none_cases = [v for c, v in ((c, conn_l.get(c["id"])) for c in conn_sheet) if v and c["result"] == "no clear connection"]
+        none_cases = [v for c, v in ((c, conn_l.get(ck(c))) for c in conn_sheet) if v and c["result"] == "no clear connection"]
         if none_cases:
             rows.append(("\"No clear connection\" was correct", f"{sum(not v['plausible'] for v in none_cases) / len(none_cases):.2f} (n={len(none_cases)})"))
     if cluster:
@@ -106,17 +131,34 @@ def main():
     add("## 1. Impact chains (V2 §9)")
     add("")
     sections = Counter(r["section"] for r in sheet)
-    add(f"{auto.get('done', '?')} of {auto.get('runs', '?')} news items expanded live with a persona context. They span {len({r['item'] for r in sheet})} items with links in {len(sections)} Current-events sections. "
-        f"The labelled rows are every inferred and speculative impact link, plus every reported relation ({len(sheet)} rows).")
+    add(f"The same {auto.get('runs', '?')} news items, expanded live with a persona context, in three versions of the pipeline. Items span {len(sections)} Current-events sections. "
+        "Labelled rows: every inferred and speculative impact link, plus every reported relation.")
     add("")
-    add("| Label | correct | partial | wrong | precision |")
-    add("|---|---|---|---|---|")
-    for lab in ("reported", "inferred", "speculative"):
-        cnt = Counter(v for v in by_label[lab] if v)
-        p, n = prec([v for v in by_label[lab] if v])
-        add(f"| {lab} | {cnt['correct']} | {cnt['partial']} | {cnt['wrong']} | {p if p is not None else '–'} |")
+    add("1. **Before the fixes** (`eval/runs`).")
+    add("2. **Persona fix** (`eval/runs_after`): no chains whose only purpose is to reach a context node, generic effects become Speculative, amounts are not entities. "
+        "Speculative precision and persona-chasing improved, but Inferred precision fell: the impact step began restating structure (actor, place, victims, parts) as \"affects\".")
+    add("3. **Persona fix + structure rule = current pipeline** (`eval/runs_after2`): code drops an inferred or speculative link between two nodes that a reported link already joins. "
+        "Same cached LLM output as version 2, so its rows are a labelled subset of version 2.")
     add("")
-    wrongs = [(r, impact_l[r["key"]]) for r in sheet if impact_l.get(r["key"], {}).get("verdict") == "wrong"]
+    add("Version 2 and 3 re-used cached reads, extraction and verification from version 1; only the impact step re-ran (version 2) or was re-filtered (version 3).")
+    add("")
+    for name, sh, by in (("3. Current pipeline (persona fix + structure rule)", sheet_after, by_after), ("2. Persona fix only", sheet_mid if sheet_mid is not sheet_after else [], by_mid), ("1. Before the fixes", sheet, by_before)):
+        if not sh:
+            continue
+        add(f"**{name}**")
+        add("")
+        add("| Label | correct | partial | wrong | unlabelled | precision |")
+        add("|---|---|---|---|---|---|")
+        for lab in LABS:
+            cnt = Counter(v for v in by[lab] if v)
+            p, n = prec([v for v in by[lab] if v])
+            add(f"| {lab} | {cnt['correct']} | {cnt['partial']} | {cnt['wrong']} | {sum(1 for v in by[lab] if not v)} | {p if p is not None else '–'} |")
+        add("")
+        add(f"{len(sh)} rows.")
+        add("")
+    add(f"Persona-chasing links (labelled wrong because they chase the reader's context): **{chasing(sheet)} before, {chasing(sheet_mid)} after the persona fix, {chasing(sheet_after)} now**.")
+    add("")
+    wrongs = [(r, impact_l[r["key"]]) for r in (sheet_after or sheet) if impact_l.get(r["key"], {}).get("verdict") == "wrong"]
     if wrongs:
         add("Typical failures:")
         add("")
@@ -146,12 +188,12 @@ def main():
         add("## 3. \"How does this touch me?\" (connection eval)")
         add("")
         paths = [c for c in conn_sheet if c["result"] != "no clear connection"]
-        add(f"{len(conn_sheet)} items × their assigned persona (A Rotterdam/logistics, B Uttar Pradesh/farming, C Seoul/software). "
+        add(f"{len(conn_sheet)} cases: each item with its round-robin persona (A Rotterdam/logistics, B Uttar Pradesh/farming, C Seoul/software; mostly unrelated), plus items re-run with a hand-picked matching persona (`eval/connection_matched.py`). "
             f"The app found a grounded path for {len(paths)} and said \"no clear connection\" for {len(conn_sheet) - len(paths)}.")
         add("")
         if conn_l:
-            tp = sum(1 for c in conn_sheet if c["id"] in conn_l and c["result"] != "no clear connection" and conn_l[c["id"]]["sensible"])
-            fn = sum(1 for c in conn_sheet if c["id"] in conn_l and c["result"] == "no clear connection" and conn_l[c["id"]]["plausible"])
+            tp = sum(1 for c in conn_sheet if ck(c) in conn_l and c["result"] != "no clear connection" and conn_l[ck(c)]["sensible"])
+            fn = sum(1 for c in conn_sheet if ck(c) in conn_l and c["result"] == "no clear connection" and conn_l[ck(c)]["plausible"])
             add(f"- Paths shown that are sensible: {tp}/{len(paths) or 1}")
             add(f"- \"No clear connection\" when a grounded link plausibly exists (missed): {fn}")
             add("")

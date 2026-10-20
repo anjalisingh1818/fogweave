@@ -1,6 +1,7 @@
 """Labelling sheets for the hand-judged parts of the eval.
 
   python eval/sheets.py  ->  eval/labels/impact_sheet.json, connection_sheet.json
+  python eval/sheets.py --runs runs_after  ->  impact_sheet_after.json, connection_sheet_after.json
 
 impact_sheet: every inferred/speculative impact link and every reported
 relation with what it rests on (basis facts / quote), for correct / partial /
@@ -40,9 +41,10 @@ def similarity(a: str, b: str) -> float:
     return 0.6 * len(wa & wb) / max(len(wa), len(wb)) if wa and wb else 0.0
 
 
-def main():
+def main(runs: str = "runs"):
     impact, connection = [], []
-    for p in sorted(RUNS.glob("*.json")):
+    suffix = "" if runs == "runs" else "_" + runs.removeprefix("runs_")
+    for p in sorted((ROOT / "eval" / runs).glob("*.json")):
         r = json.loads(p.read_text(encoding="utf-8"))
         if not r.get("done"):
             continue
@@ -95,8 +97,8 @@ def main():
             "sensible": None,  # hand label: is the shown result sensible?
         })
     LABELS.mkdir(parents=True, exist_ok=True)
-    (LABELS / "impact_sheet.json").write_text(json.dumps(impact, indent=1, ensure_ascii=False), encoding="utf-8")
-    (LABELS / "connection_sheet.json").write_text(json.dumps(connection, indent=1, ensure_ascii=False), encoding="utf-8")
+    (LABELS / f"impact_sheet{suffix}.json").write_text(json.dumps(impact, indent=1, ensure_ascii=False), encoding="utf-8")
+    (LABELS / f"connection_sheet{suffix}.json").write_text(json.dumps(connection, indent=1, ensure_ascii=False), encoding="utf-8")
     by = {}
     for x in impact:
         by[x["label"]] = by.get(x["label"], 0) + 1
@@ -104,4 +106,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--runs", default="runs")
+    main(ap.parse_args().runs)

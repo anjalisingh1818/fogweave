@@ -838,5 +838,1643 @@
   "label": "speculative",
   "link": "Florida Panthers natural hat trick streak --affects--> player marketability (e.g., endorsement opportunities)",
   "by": "build assistant (Claude)"
+ },
+ "n:00dfe2b0206f|involves:ev:world food programme cuts monthly food aid in gaza->org:world food programme|reported": {
+  "verdict": "correct",
+  "why": "quote names the WFP ending assistance",
+  "label": "reported",
+  "link": "World Food Programme cuts monthly food aid in Gaza --involves--> World Food Programme",
+  "by": "build assistant (Claude)"
+ },
+ "n:00dfe2b0206f|affects:org:world food programme->org:500,000 people in gaza|inferred": {
+  "verdict": "correct",
+  "why": "basis: aid to 500,000 people ends",
+  "label": "inferred",
+  "link": "World Food Programme --affects--> 500,000 people in Gaza",
+  "by": "build assistant (Claude)"
+ },
+ "n:00dfe2b0206f|affects:org:500,000 people in gaza->topic:food insecurity in gaza|inferred": {
+  "verdict": "partial",
+  "why": "the aid cut, not the people, drives food insecurity; odd source node",
+  "label": "inferred",
+  "link": "500,000 people in Gaza --affects--> food insecurity in Gaza",
+  "by": "build assistant (Claude)"
+ },
+ "n:00dfe2b0206f|depends_on:org:world food programme->topic:$450 million funding need|inferred": {
+  "verdict": "correct",
+  "why": "basis states the $450 million need",
+  "label": "inferred",
+  "link": "World Food Programme --depends_on--> $450 million funding need",
+  "by": "build assistant (Claude)"
+ },
+ "n:00dfe2b0206f|affects:topic:$450 million funding need->org:donor contributions|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "$450 million funding need --affects--> donor contributions",
+  "by": "build assistant (Claude)"
+ },
+ "n:00eab1f15d72|happened_in:ev:drone strike on abyei market->wd:Q336494|reported": {
+  "verdict": "correct",
+  "why": "quote: market in Abyei",
+  "label": "reported",
+  "link": "Drone strike on Abyei market --happened_in--> Abyei",
+  "by": "build assistant (Claude)"
+ },
+ "n:00eab1f15d72|part_of:wd:Q336494->wd:Q958|reported": {
+  "verdict": "wrong",
+  "why": "Abyei is disputed between Sudan and South Sudan, not part of South Sudan",
+  "label": "reported",
+  "link": "Abyei --part_of--> South Sudan",
+  "by": "build assistant (Claude)"
+ },
+ "n:00eab1f15d72|affects:ev:drone strike on abyei market->topic:73 people|reported": {
+  "verdict": "correct",
+  "why": "quote: kills at least 73 people",
+  "label": "reported",
+  "link": "Drone strike on Abyei market --affects--> 73 people",
+  "by": "build assistant (Claude)"
+ },
+ "n:00eab1f15d72|affects:ev:drone strike on abyei market->place:abyei market|inferred": {
+  "verdict": "correct",
+  "why": "the strike hit the market",
+  "label": "inferred",
+  "link": "Drone strike on Abyei market --affects--> Abyei market",
+  "by": "build assistant (Claude)"
+ },
+ "n:00eab1f15d72|affects:place:abyei market->topic:local civilians|inferred": {
+  "verdict": "partial",
+  "why": "the strike, not the market, affects civilians",
+  "label": "inferred",
+  "link": "Abyei market --affects--> local civilians",
+  "by": "build assistant (Claude)"
+ },
+ "n:00eab1f15d72|affects:ev:drone strike on abyei market->topic:regional stability between south sudan and sudan|inferred": {
+  "verdict": "partial",
+  "why": "plausible, but the basis only says the area is disputed: closer to speculative",
+  "label": "inferred",
+  "link": "Drone strike on Abyei market --affects--> regional stability between South Sudan and Sudan",
+  "by": "build assistant (Claude)"
+ },
+ "n:00eab1f15d72|affects:topic:regional stability between south sudan and sudan->topic:global energy prices|speculative": {
+  "verdict": "wrong",
+  "why": "far-fetched chain toward the persona's energy prices",
+  "label": "speculative",
+  "link": "regional stability between South Sudan and Sudan --affects--> global energy prices",
+  "by": "build assistant (Claude)"
+ },
+ "n:0460555895d3|involves:ev:second protest over water crisis in guadalajara->topic:water shortages|reported": {
+  "verdict": "correct",
+  "why": "quote: protest over water shortages",
+  "label": "reported",
+  "link": "Second protest over water crisis in Guadalajara --involves--> water shortages",
+  "by": "build assistant (Claude)"
+ },
+ "n:0460555895d3|part_of:ev:second protest over water crisis in guadalajara->wd:Q13160|reported": {
+  "verdict": "partial",
+  "why": "should be happened_in (Guadalajara), not part_of Jalisco",
+  "label": "reported",
+  "link": "Second protest over water crisis in Guadalajara --part_of--> Jalisco",
+  "by": "build assistant (Claude)"
+ },
+ "n:0460555895d3|part_of:org:state congress building->wd:Q13160|reported": {
+  "verdict": "partial",
+  "why": "quote does not name Jalisco; implied only",
+  "label": "reported",
+  "link": "State Congress building --part_of--> Jalisco",
+  "by": "build assistant (Claude)"
+ },
+ "n:0460555895d3|depends_on:wd:Q56760439->tech:aging pipes|reported": {
+  "verdict": "wrong",
+  "why": "the governor attributes the crisis to pipes; he does not depend on them",
+  "label": "reported",
+  "link": "Pablo Lemus --depends_on--> aging pipes",
+  "by": "build assistant (Claude)"
+ },
+ "n:0460555895d3|affects:ev:second protest over water crisis in guadalajara->topic:public order in guadalajara|inferred": {
+  "verdict": "correct",
+  "why": "basis: violence and explosives at the protest",
+  "label": "inferred",
+  "link": "Second protest over water crisis in Guadalajara --affects--> public order in Guadalajara",
+  "by": "build assistant (Claude)"
+ },
+ "n:0460555895d3|affects:ev:second protest over water crisis in guadalajara->topic:detention of protesters|inferred": {
+  "verdict": "correct",
+  "why": "basis: five people detained",
+  "label": "inferred",
+  "link": "Second protest over water crisis in Guadalajara --affects--> detention of protesters",
+  "by": "build assistant (Claude)"
+ },
+ "n:0460555895d3|affects:ev:second protest over water crisis in guadalajara->org:political pressure on governor pablo lemur|inferred": {
+  "verdict": "partial",
+  "why": "plausible, but the governor's name is misspelled (Lemur)",
+  "label": "inferred",
+  "link": "Second protest over water crisis in Guadalajara --affects--> political pressure on Governor Pablo Lemur",
+  "by": "build assistant (Claude)"
+ },
+ "n:0460555895d3|depends_on:org:political pressure on governor pablo lemur->tech:aging water pipe infrastructure|inferred": {
+  "verdict": "wrong",
+  "why": "political pressure does not depend on the pipes",
+  "label": "inferred",
+  "link": "political pressure on Governor Pablo Lemur --depends_on--> aging water pipe infrastructure",
+  "by": "build assistant (Claude)"
+ },
+ "n:0460555895d3|affects:tech:aging water pipe infrastructure->topic:water availability in guadalajara|inferred": {
+  "verdict": "correct",
+  "why": "follows from the governor's attribution",
+  "label": "inferred",
+  "link": "aging water pipe infrastructure --affects--> water availability in Guadalajara",
+  "by": "build assistant (Claude)"
+ },
+ "n:0460555895d3|affects:topic:water availability in guadalajara->topic:public health concerns|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "water availability in Guadalajara --affects--> public health concerns",
+  "by": "build assistant (Claude)"
+ },
+ "n:0460555895d3|affects:ev:second protest over water crisis in guadalajara->topic:media attention to jalisco water issues|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Second protest over water crisis in Guadalajara --affects--> media attention to Jalisco water issues",
+  "by": "build assistant (Claude)"
+ },
+ "n:0460555895d3|affects:topic:media attention to jalisco water issues->topic:potential investment in water infrastructure|speculative": {
+  "verdict": "correct",
+  "why": "plausible and clearly weaker",
+  "label": "speculative",
+  "link": "media attention to Jalisco water issues --affects--> potential investment in water infrastructure",
+  "by": "build assistant (Claude)"
+ },
+ "n:2a0496d94138|happened_in:ev:2026 nobel prize in economic sciences awarded to hall and woodford->wd:Q1754|reported": {
+  "verdict": "correct",
+  "why": "quote: awarded in Stockholm",
+  "label": "reported",
+  "link": "2026 Nobel Prize in Economic Sciences awarded to Hall and Woodford --happened_in--> Stockholm",
+  "by": "build assistant (Claude)"
+ },
+ "n:2a0496d94138|involves:ev:2026 nobel prize in economic sciences awarded to hall and woodford->org:royal swedish academy of sciences|reported": {
+  "verdict": "correct",
+  "why": "quote names the Academy",
+  "label": "reported",
+  "link": "2026 Nobel Prize in Economic Sciences awarded to Hall and Woodford --involves--> Royal Swedish Academy of Sciences",
+  "by": "build assistant (Claude)"
+ },
+ "n:2a0496d94138|involves:ev:2026 nobel prize in economic sciences awarded to hall and woodford->wd:Q2156948|reported": {
+  "verdict": "correct",
+  "why": "quote names Hall",
+  "label": "reported",
+  "link": "2026 Nobel Prize in Economic Sciences awarded to Hall and Woodford --involves--> Robert Hall",
+  "by": "build assistant (Claude)"
+ },
+ "n:2a0496d94138|involves:ev:2026 nobel prize in economic sciences awarded to hall and woodford->wd:Q381692|reported": {
+  "verdict": "correct",
+  "why": "quote names Woodford",
+  "label": "reported",
+  "link": "2026 Nobel Prize in Economic Sciences awarded to Hall and Woodford --involves--> Michael Dean Woodford",
+  "by": "build assistant (Claude)"
+ },
+ "n:2a0496d94138|affects:ev:2026 nobel prize in economic sciences awarded to hall and woodford->topic:economic modeling used by governments and central banks|inferred": {
+  "verdict": "partial",
+  "why": "the models already exist; the prize does not change them",
+  "label": "inferred",
+  "link": "2026 Nobel Prize in Economic Sciences awarded to Hall and Woodford --affects--> Economic modeling used by governments and central banks",
+  "by": "build assistant (Claude)"
+ },
+ "n:2a0496d94138|affects:topic:economic modeling used by governments and central banks->topic:government macro‑policy design|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Economic modeling used by governments and central banks --affects--> Government macro‑policy design",
+  "by": "build assistant (Claude)"
+ },
+ "n:2a0496d94138|affects:topic:economic modeling used by governments and central banks->place:agricultural policy in uttar pradesh|speculative": {
+  "verdict": "wrong",
+  "why": "chain toward the persona (Uttar Pradesh farming), not supported",
+  "label": "speculative",
+  "link": "Economic modeling used by governments and central banks --affects--> Agricultural policy in Uttar Pradesh",
+  "by": "build assistant (Claude)"
+ },
+ "n:3dacd47cdd3e|happened_in:ev:ibwm vote to adopt leap hour->wd:Q621|reported": {
+  "verdict": "correct",
+  "why": "quote: vote at Versailles",
+  "label": "reported",
+  "link": "IBWM vote to adopt leap hour --happened_in--> Versailles",
+  "by": "build assistant (Claude)"
+ },
+ "n:3dacd47cdd3e|involves:ev:ibwm vote to adopt leap hour->tech:leap hour|reported": {
+  "verdict": "correct",
+  "why": "quote: the leap hour",
+  "label": "reported",
+  "link": "IBWM vote to adopt leap hour --involves--> leap hour",
+  "by": "build assistant (Claude)"
+ },
+ "n:3dacd47cdd3e|involves:ev:ibwm vote to adopt leap hour->tech:leap second|reported": {
+  "verdict": "correct",
+  "why": "quote: the leap second",
+  "label": "reported",
+  "link": "IBWM vote to adopt leap hour --involves--> leap second",
+  "by": "build assistant (Claude)"
+ },
+ "n:3dacd47cdd3e|competes_with:tech:leap second->tech:leap hour|reported": {
+  "verdict": "partial",
+  "why": "the leap hour replaces the leap second; competes_with is loose",
+  "label": "reported",
+  "link": "leap second --competes_with--> leap hour",
+  "by": "build assistant (Claude)"
+ },
+ "n:3dacd47cdd3e|part_of:org:iers earth orientation centre->wd:Q142|reported": {
+  "verdict": "partial",
+  "why": "located in Paris, not part of France as a relation",
+  "label": "reported",
+  "link": "IERS Earth Orientation Centre --part_of--> France",
+  "by": "build assistant (Claude)"
+ },
+ "n:3dacd47cdd3e|affects:ev:ibwm vote to adopt leap hour->topic:leap hour adoption|inferred": {
+  "verdict": "correct",
+  "why": "the vote adopts the leap hour",
+  "label": "inferred",
+  "link": "IBWM vote to adopt leap hour --affects--> leap hour adoption",
+  "by": "build assistant (Claude)"
+ },
+ "n:3dacd47cdd3e|affects:topic:leap hour adoption->topic:coordinated universal time (utc)|inferred": {
+  "verdict": "correct",
+  "why": "basis: UTC may drift up to an hour",
+  "label": "inferred",
+  "link": "leap hour adoption --affects--> Coordinated Universal Time (UTC)",
+  "by": "build assistant (Claude)"
+ },
+ "n:3dacd47cdd3e|affects:ev:ibwm vote to adopt leap hour->org:iers earth orientation centre|inferred": {
+  "verdict": "partial",
+  "why": "plausible, but the basis does not say the centre changes",
+  "label": "inferred",
+  "link": "IBWM vote to adopt leap hour --affects--> IERS Earth Orientation Centre",
+  "by": "build assistant (Claude)"
+ },
+ "n:3dacd47cdd3e|depends_on:org:iers earth orientation centre->topic:earth rotation measurements|inferred": {
+  "verdict": "correct",
+  "why": "basis: the centre tracks Earth rotation",
+  "label": "inferred",
+  "link": "IERS Earth Orientation Centre --depends_on--> Earth rotation measurements",
+  "by": "build assistant (Claude)"
+ },
+ "n:54a830f0095a|happened_in:ev:arrest of 10 people in west bank->wd:Q36678|reported": {
+  "verdict": "correct",
+  "why": "quote: arrests in the West Bank",
+  "label": "reported",
+  "link": "Arrest of 10 people in West Bank --happened_in--> West Bank",
+  "by": "build assistant (Claude)"
+ },
+ "n:54a830f0095a|involves:ev:arrest of 10 people in west bank->wd:Q594444|reported": {
+  "verdict": "correct",
+  "why": "quote: Israeli police said",
+  "label": "reported",
+  "link": "Arrest of 10 people in West Bank --involves--> Israel Police",
+  "by": "build assistant (Claude)"
+ },
+ "n:54a830f0095a|affects:wd:Q594444->topic:israeli police reputation|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Israel Police --affects--> Israeli police reputation",
+  "by": "build assistant (Claude)"
+ },
+ "n:54a830f0095a|affects:ev:arrest of 10 people in west bank->topic:settler‑palestinian tensions|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Arrest of 10 people in West Bank --affects--> settler‑Palestinian tensions",
+  "by": "build assistant (Claude)"
+ },
+ "n:54a830f0095a|affects:ev:arrest of 10 people in west bank->topic:british diplomatic pressure on israel|speculative": {
+  "verdict": "partial",
+  "why": "co-occurrence only; the arrests are not why the UK pressed",
+  "label": "speculative",
+  "link": "Arrest of 10 people in West Bank --affects--> British diplomatic pressure on Israel",
+  "by": "build assistant (Claude)"
+ },
+ "n:6a3502fcf385|happened_in:ev:sentencing of three mexican men in ensenada->wd:Q656189|reported": {
+  "verdict": "correct",
+  "why": "quote: a judge in Ensenada",
+  "label": "reported",
+  "link": "Sentencing of three Mexican men in Ensenada --happened_in--> Ensenada",
+  "by": "build assistant (Claude)"
+ },
+ "n:6a3502fcf385|involves:ev:sentencing of three mexican men in ensenada->org:three mexican men|reported": {
+  "verdict": "correct",
+  "why": "quote: three Mexican men",
+  "label": "reported",
+  "link": "Sentencing of three Mexican men in Ensenada --involves--> Three Mexican men",
+  "by": "build assistant (Claude)"
+ },
+ "n:6a3502fcf385|involves:ev:sentencing of three mexican men in ensenada->person:two australians|reported": {
+  "verdict": "correct",
+  "why": "quote: two Australians",
+  "label": "reported",
+  "link": "Sentencing of three Mexican men in Ensenada --involves--> Two Australians",
+  "by": "build assistant (Claude)"
+ },
+ "n:6a3502fcf385|involves:ev:sentencing of three mexican men in ensenada->person:american|reported": {
+  "verdict": "partial",
+  "why": "vague endpoint ('American')",
+  "label": "reported",
+  "link": "Sentencing of three Mexican men in Ensenada --involves--> American",
+  "by": "build assistant (Claude)"
+ },
+ "n:6a3502fcf385|part_of:wd:Q58731->wd:Q96|reported": {
+  "verdict": "correct",
+  "why": "quote: Baja California, Mexico",
+  "label": "reported",
+  "link": "Baja California --part_of--> Mexico",
+  "by": "build assistant (Claude)"
+ },
+ "n:6a3502fcf385|affects:ev:sentencing of three mexican men in ensenada->org:three mexican men|inferred": {
+  "verdict": "correct",
+  "why": "the sentence applies to them",
+  "label": "inferred",
+  "link": "Sentencing of three Mexican men in Ensenada --affects--> Three Mexican men",
+  "by": "build assistant (Claude)"
+ },
+ "n:6a3502fcf385|affects:ev:sentencing of three mexican men in ensenada->topic:perception of safety for foreign tourists in baja california|inferred": {
+  "verdict": "partial",
+  "why": "the murders, not the sentencing, shape perceived safety",
+  "label": "inferred",
+  "link": "Sentencing of three Mexican men in Ensenada --affects--> Perception of safety for foreign tourists in Baja California",
+  "by": "build assistant (Claude)"
+ },
+ "n:6a3502fcf385|affects:topic:perception of safety for foreign tourists in baja california->topic:tourism in baja california|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Perception of safety for foreign tourists in Baja California --affects--> Tourism in Baja California",
+  "by": "build assistant (Claude)"
+ },
+ "n:6a3502fcf385|affects:topic:tourism in baja california->topic:logistics demand in rotterdam|speculative": {
+  "verdict": "wrong",
+  "why": "chain toward the persona (Rotterdam logistics), far-fetched",
+  "label": "speculative",
+  "link": "Tourism in Baja California --affects--> Logistics demand in Rotterdam",
+  "by": "build assistant (Claude)"
+ },
+ "n:9700f8a230bf|happened_in:ev:taiwanese coast guard drives away 16 chinese vessels->place:pratas|reported": {
+  "verdict": "correct",
+  "why": "quote: around Pratas",
+  "label": "reported",
+  "link": "Taiwanese coast guard drives away 16 Chinese vessels --happened_in--> Pratas",
+  "by": "build assistant (Claude)"
+ },
+ "n:9700f8a230bf|involves:ev:taiwanese coast guard drives away 16 chinese vessels->org:chinese coast guard|reported": {
+  "verdict": "correct",
+  "why": "quote: Chinese coast guard vessels",
+  "label": "reported",
+  "link": "Taiwanese coast guard drives away 16 Chinese vessels --involves--> Chinese coast guard",
+  "by": "build assistant (Claude)"
+ },
+ "n:9700f8a230bf|affects:org:beijing->wd:Q127031|reported": {
+  "verdict": "partial",
+  "why": "Taiwan's accusation reported as a fact",
+  "label": "reported",
+  "link": "Beijing --affects--> Taiwan Strait",
+  "by": "build assistant (Claude)"
+ },
+ "n:9700f8a230bf|part_of:org:beijing->wd:Q37660|reported": {
+  "verdict": "wrong",
+  "why": "Beijing is not part of the South China Sea",
+  "label": "reported",
+  "link": "Beijing --part_of--> South China Sea",
+  "by": "build assistant (Claude)"
+ },
+ "n:9700f8a230bf|affects:ev:taiwanese coast guard drives away 16 chinese vessels->wd:Q127031|inferred": {
+  "verdict": "partial",
+  "why": "Pratas is in the South China Sea, not the Taiwan Strait",
+  "label": "inferred",
+  "link": "Taiwanese coast guard drives away 16 Chinese vessels --affects--> Taiwan Strait",
+  "by": "build assistant (Claude)"
+ },
+ "n:9700f8a230bf|affects:wd:Q127031->topic:regional trade routes|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Taiwan Strait --affects--> regional trade routes",
+  "by": "build assistant (Claude)"
+ },
+ "n:9700f8a230bf|affects:org:beijing->wd:Q865|inferred": {
+  "verdict": "correct",
+  "why": "basis: Beijing claims Taiwan",
+  "label": "inferred",
+  "link": "Beijing --affects--> Taiwan",
+  "by": "build assistant (Claude)"
+ },
+ "n:9700f8a230bf|affects:wd:Q865->topic:chinese maritime strategy|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Taiwan --affects--> Chinese maritime strategy",
+  "by": "build assistant (Claude)"
+ },
+ "n:9700f8a230bf|affects:place:pratas->topic:south china sea dynamics|inferred": {
+  "verdict": "partial",
+  "why": "plausible direction, but rests partly on a wrong fact",
+  "label": "inferred",
+  "link": "Pratas --affects--> South China Sea dynamics",
+  "by": "build assistant (Claude)"
+ },
+ "n:9700f8a230bf|affects:ev:taiwanese coast guard drives away 16 chinese vessels->topic:taiwan security|inferred": {
+  "verdict": "partial",
+  "why": "basis is the July deployment, not this incident",
+  "label": "inferred",
+  "link": "Taiwanese coast guard drives away 16 Chinese vessels --affects--> Taiwan security",
+  "by": "build assistant (Claude)"
+ },
+ "n:9700f8a230bf|affects:topic:taiwan security->topic:regional stability|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Taiwan security --affects--> regional stability",
+  "by": "build assistant (Claude)"
+ },
+ "n:ad5ac512ee13|happened_in:ev:police rescue from unregistered rehab centre->wd:Q132410|reported": {
+  "verdict": "correct",
+  "why": "quote: in Mpumalanga",
+  "label": "reported",
+  "link": "Police rescue from unregistered rehab centre --happened_in--> Mpumalanga",
+  "by": "build assistant (Claude)"
+ },
+ "n:ad5ac512ee13|involves:ev:police rescue from unregistered rehab centre->wd:Q2304339|reported": {
+  "verdict": "correct",
+  "why": "quote: South African police",
+  "label": "reported",
+  "link": "Police rescue from unregistered rehab centre --involves--> South African Police",
+  "by": "build assistant (Claude)"
+ },
+ "n:ad5ac512ee13|involves:ev:police rescue from unregistered rehab centre->org:unregistered rehabilitation centre|reported": {
+  "verdict": "correct",
+  "why": "quote: unregistered rehabilitation centre",
+  "label": "reported",
+  "link": "Police rescue from unregistered rehab centre --involves--> unregistered rehabilitation centre",
+  "by": "build assistant (Claude)"
+ },
+ "n:ad5ac512ee13|affects:ev:police rescue from unregistered rehab centre->topic:about 200 people|reported": {
+  "verdict": "correct",
+  "why": "quote: about 200 people",
+  "label": "reported",
+  "link": "Police rescue from unregistered rehab centre --affects--> about 200 people",
+  "by": "build assistant (Claude)"
+ },
+ "n:ad5ac512ee13|affects:ev:police rescue from unregistered rehab centre->topic:fourteen people|reported": {
+  "verdict": "correct",
+  "why": "quote: fourteen treated",
+  "label": "reported",
+  "link": "Police rescue from unregistered rehab centre --affects--> fourteen people",
+  "by": "build assistant (Claude)"
+ },
+ "n:ad5ac512ee13|depends_on:ev:police rescue from unregistered rehab centre->wd:Q4220055|reported": {
+  "verdict": "partial",
+  "why": "police are investigating kidnapping; depends_on is mistyped",
+  "label": "reported",
+  "link": "Police rescue from unregistered rehab centre --depends_on--> Kidnapping",
+  "by": "build assistant (Claude)"
+ },
+ "n:ad5ac512ee13|affects:ev:police rescue from unregistered rehab centre->topic:about 200 people|inferred": {
+  "verdict": "correct",
+  "why": "restates a reported fact (redundant)",
+  "label": "inferred",
+  "link": "Police rescue from unregistered rehab centre --affects--> about 200 people",
+  "by": "build assistant (Claude)"
+ },
+ "n:ad5ac512ee13|affects:ev:police rescue from unregistered rehab centre->topic:fourteen people receiving medical treatment|inferred": {
+  "verdict": "correct",
+  "why": "basis: fourteen received treatment",
+  "label": "inferred",
+  "link": "Police rescue from unregistered rehab centre --affects--> fourteen people receiving medical treatment",
+  "by": "build assistant (Claude)"
+ },
+ "n:ad5ac512ee13|affects:ev:police rescue from unregistered rehab centre->topic:two arrested individuals|inferred": {
+  "verdict": "correct",
+  "why": "basis: two arrested",
+  "label": "inferred",
+  "link": "Police rescue from unregistered rehab centre --affects--> two arrested individuals",
+  "by": "build assistant (Claude)"
+ },
+ "n:ad5ac512ee13|depends_on:ev:police rescue from unregistered rehab centre->topic:kidnapping allegations|inferred": {
+  "verdict": "partial",
+  "why": "linked to, not dependent on, the allegations",
+  "label": "inferred",
+  "link": "Police rescue from unregistered rehab centre --depends_on--> kidnapping allegations",
+  "by": "build assistant (Claude)"
+ },
+ "n:ad5ac512ee13|affects:topic:kidnapping allegations->topic:public trust in rehabilitation centres|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "kidnapping allegations --affects--> public trust in rehabilitation centres",
+  "by": "build assistant (Claude)"
+ },
+ "n:ad5ac512ee13|affects:ev:police rescue from unregistered rehab centre->topic:health and safety regulatory scrutiny of rehab industry|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Police rescue from unregistered rehab centre --affects--> health and safety regulatory scrutiny of rehab industry",
+  "by": "build assistant (Claude)"
+ },
+ "n:ad5ac512ee13|affects:topic:health and safety regulatory scrutiny of rehab industry->topic:future licensing requirements for rehabilitation centres|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "health and safety regulatory scrutiny of rehab industry --affects--> future licensing requirements for rehabilitation centres",
+  "by": "build assistant (Claude)"
+ },
+ "n:ad5ac512ee13|affects:ev:police rescue from unregistered rehab centre->topic:local community perception of safety in mpumalanga|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Police rescue from unregistered rehab centre --affects--> local community perception of safety in Mpumalanga",
+  "by": "build assistant (Claude)"
+ },
+ "n:afdc5ab9ef1a|happened_in:ev:conviction of paul nthenge mackenzie->wd:Q114|reported": {
+  "verdict": "correct",
+  "why": "quote: a Kenyan court",
+  "label": "reported",
+  "link": "Conviction of Paul Nthenge Mackenzie --happened_in--> Kenya",
+  "by": "build assistant (Claude)"
+ },
+ "n:afdc5ab9ef1a|involves:ev:conviction of paul nthenge mackenzie->person:paul nthenge mackenzie|reported": {
+  "verdict": "correct",
+  "why": "quote names Mackenzie",
+  "label": "reported",
+  "link": "Conviction of Paul Nthenge Mackenzie --involves--> Paul Nthenge Mackenzie",
+  "by": "build assistant (Claude)"
+ },
+ "n:afdc5ab9ef1a|involves:ev:conviction of paul nthenge mackenzie->wd:Q117837664|reported": {
+  "verdict": "correct",
+  "why": "quote names the ministry",
+  "label": "reported",
+  "link": "Conviction of Paul Nthenge Mackenzie --involves--> Good News International Ministries",
+  "by": "build assistant (Claude)"
+ },
+ "n:afdc5ab9ef1a|involves:ev:conviction of paul nthenge mackenzie->place:shakahola forest|reported": {
+  "verdict": "correct",
+  "why": "quote: Shakahola Forest",
+  "label": "reported",
+  "link": "Conviction of Paul Nthenge Mackenzie --involves--> Shakahola Forest",
+  "by": "build assistant (Claude)"
+ },
+ "n:afdc5ab9ef1a|part_of:topic:190 children and an adult->place:shakahola forest|reported": {
+  "verdict": "wrong",
+  "why": "the victims died in the forest; part_of is wrong",
+  "label": "reported",
+  "link": "190 children and an adult --part_of--> Shakahola Forest",
+  "by": "build assistant (Claude)"
+ },
+ "n:afdc5ab9ef1a|affects:ev:conviction of paul nthenge mackenzie->wd:Q117837664|inferred": {
+  "verdict": "correct",
+  "why": "the ministry's leader is convicted",
+  "label": "inferred",
+  "link": "Conviction of Paul Nthenge Mackenzie --affects--> Good News International Ministries",
+  "by": "build assistant (Claude)"
+ },
+ "n:afdc5ab9ef1a|affects:ev:conviction of paul nthenge mackenzie->topic:public trust in religious organisations|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Conviction of Paul Nthenge Mackenzie --affects--> public trust in religious organisations",
+  "by": "build assistant (Claude)"
+ },
+ "n:afdc5ab9ef1a|affects:ev:conviction of paul nthenge mackenzie->topic:kenyan legal and regulatory scrutiny of cult‑like groups|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Conviction of Paul Nthenge Mackenzie --affects--> Kenyan legal and regulatory scrutiny of cult‑like groups",
+  "by": "build assistant (Claude)"
+ },
+ "n:afdc5ab9ef1a|affects:ev:conviction of paul nthenge mackenzie->place:shakahola forest|speculative": {
+  "verdict": "partial",
+  "why": "weak: the case is about the deaths, not the forest",
+  "label": "speculative",
+  "link": "Conviction of Paul Nthenge Mackenzie --affects--> Shakahola Forest",
+  "by": "build assistant (Claude)"
+ },
+ "n:c40c295eedaa|happened_in:ev:discovery of the oldest known shipwreck->place:kekova island|reported": {
+  "verdict": "correct",
+  "why": "quote: near Kekova Island",
+  "label": "reported",
+  "link": "Discovery of the oldest known shipwreck --happened_in--> Kekova Island",
+  "by": "build assistant (Claude)"
+ },
+ "n:c40c295eedaa|involves:ev:discovery of the oldest known shipwreck->wd:Q169939|reported": {
+  "verdict": "correct",
+  "why": "quote: Akdeniz University",
+  "label": "reported",
+  "link": "Discovery of the oldest known shipwreck --involves--> Akdeniz University",
+  "by": "build assistant (Claude)"
+ },
+ "n:c40c295eedaa|involves:ev:discovery of the oldest known shipwreck->person:hakan öniz|reported": {
+  "verdict": "correct",
+  "why": "quote: led by Hakan Öniz",
+  "label": "reported",
+  "link": "Discovery of the oldest known shipwreck --involves--> Hakan Öniz",
+  "by": "build assistant (Claude)"
+ },
+ "n:c40c295eedaa|involves:ev:discovery of the oldest known shipwreck->person:mehmet nuri ersoy|reported": {
+  "verdict": "correct",
+  "why": "quote: the minister said",
+  "label": "reported",
+  "link": "Discovery of the oldest known shipwreck --involves--> Mehmet Nuri Ersoy",
+  "by": "build assistant (Claude)"
+ },
+ "n:c40c295eedaa|affects:ev:discovery of the oldest known shipwreck->wd:Q169939|inferred": {
+  "verdict": "partial",
+  "why": "derived only from 'involves'; involvement is not an effect",
+  "label": "inferred",
+  "link": "Discovery of the oldest known shipwreck --affects--> Akdeniz University",
+  "by": "build assistant (Claude)"
+ },
+ "n:c40c295eedaa|affects:wd:Q169939->topic:research funding for maritime archaeology|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Akdeniz University --affects--> research funding for maritime archaeology",
+  "by": "build assistant (Claude)"
+ },
+ "n:c40c295eedaa|affects:ev:discovery of the oldest known shipwreck->org:jordan valley amphora workshops|inferred": {
+  "verdict": "wrong",
+  "why": "backwards: the workshops made the amphorae; the find does not affect them",
+  "label": "inferred",
+  "link": "Discovery of the oldest known shipwreck --affects--> Jordan Valley amphora workshops",
+  "by": "build assistant (Claude)"
+ },
+ "n:c40c295eedaa|affects:org:jordan valley amphora workshops->topic:interest in ancient trade routes|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Jordan Valley amphora workshops --affects--> interest in ancient trade routes",
+  "by": "build assistant (Claude)"
+ },
+ "n:c40c295eedaa|affects:ev:discovery of the oldest known shipwreck->place:kekova island|inferred": {
+  "verdict": "partial",
+  "why": "location, not an affected party",
+  "label": "inferred",
+  "link": "Discovery of the oldest known shipwreck --affects--> Kekova Island",
+  "by": "build assistant (Claude)"
+ },
+ "n:c40c295eedaa|affects:place:kekova island->topic:local tourism economy|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Kekova Island --affects--> local tourism economy",
+  "by": "build assistant (Claude)"
+ },
+ "n:c40c295eedaa|affects:ev:discovery of the oldest known shipwreck->person:hakan öniz|inferred": {
+  "verdict": "partial",
+  "why": "involvement is not an effect",
+  "label": "inferred",
+  "link": "Discovery of the oldest known shipwreck --affects--> Hakan Öniz",
+  "by": "build assistant (Claude)"
+ },
+ "n:c40c295eedaa|affects:ev:discovery of the oldest known shipwreck->person:mehmet nuri ersoy|inferred": {
+  "verdict": "wrong",
+  "why": "the minister only commented",
+  "label": "inferred",
+  "link": "Discovery of the oldest known shipwreck --affects--> Mehmet Nuri Ersoy",
+  "by": "build assistant (Claude)"
+ },
+ "n:c4f3475d8101|happened_in:ev:deforestation in brazil amazon hits nearly four-decade low->wd:Q155|reported": {
+  "verdict": "correct",
+  "why": "quote: Brazilian Amazon",
+  "label": "reported",
+  "link": "Deforestation in Brazil Amazon hits nearly four-decade low --happened_in--> Brazil",
+  "by": "build assistant (Claude)"
+ },
+ "n:c4f3475d8101|affects:ev:deforestation in brazil amazon hits nearly four-decade low->wd:Q155|reported": {
+  "verdict": "partial",
+  "why": "the quote does not say the low affects Brazil",
+  "label": "reported",
+  "link": "Deforestation in Brazil Amazon hits nearly four-decade low --affects--> Brazil",
+  "by": "build assistant (Claude)"
+ },
+ "n:c4f3475d8101|part_of:tech:prodes->wd:Q1108347|reported": {
+  "verdict": "partial",
+  "why": "operated by, not part of",
+  "label": "reported",
+  "link": "Prodes --part_of--> National Institute for Space Research",
+  "by": "build assistant (Claude)"
+ },
+ "n:c4f3475d8101|part_of:place:cerrado savanna->wd:Q155|reported": {
+  "verdict": "correct",
+  "why": "quote: Cerrado south of the Amazon, in Brazil",
+  "label": "reported",
+  "link": "Cerrado savanna --part_of--> Brazil",
+  "by": "build assistant (Claude)"
+ },
+ "n:c4f3475d8101|affects:ev:deforestation in brazil amazon hits nearly four-decade low->wd:Q155|inferred": {
+  "verdict": "partial",
+  "why": "tautological restatement",
+  "label": "inferred",
+  "link": "Deforestation in Brazil Amazon hits nearly four-decade low --affects--> Brazil",
+  "by": "build assistant (Claude)"
+ },
+ "n:c4f3475d8101|affects:wd:Q155->topic:national carbon emissions|speculative": {
+  "verdict": "correct",
+  "why": "lower deforestation lowers emissions; well-grounded, labelled cautiously",
+  "label": "speculative",
+  "link": "Brazil --affects--> national carbon emissions",
+  "by": "build assistant (Claude)"
+ },
+ "n:c4f3475d8101|affects:topic:national carbon emissions->topic:global energy prices|speculative": {
+  "verdict": "wrong",
+  "why": "chain toward the persona's energy prices; does not follow",
+  "label": "speculative",
+  "link": "national carbon emissions --affects--> global energy prices",
+  "by": "build assistant (Claude)"
+ },
+ "n:c4f3475d8101|affects:wd:Q155->org:rotterdam logistics sector|speculative": {
+  "verdict": "wrong",
+  "why": "chain toward the persona (Rotterdam logistics); does not follow",
+  "label": "speculative",
+  "link": "Brazil --affects--> Rotterdam logistics sector",
+  "by": "build assistant (Claude)"
+ },
+ "n:c4f3475d8101|affects:topic:national carbon emissions->topic:public transport usage in brazil|speculative": {
+  "verdict": "wrong",
+  "why": "chain toward the persona (public transport); does not follow",
+  "label": "speculative",
+  "link": "national carbon emissions --affects--> public transport usage in Brazil",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|involves:ev:canada defeats england 24–21 in wxv global series match->org:canada|reported": {
+  "verdict": "correct",
+  "why": "quote: Canada defeats England",
+  "label": "reported",
+  "link": "Canada defeats England 24–21 in WXV Global Series match --involves--> Canada",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|involves:ev:canada defeats england 24–21 in wxv global series match->org:england|reported": {
+  "verdict": "correct",
+  "why": "quote: Canada defeats England",
+  "label": "reported",
+  "link": "Canada defeats England 24–21 in WXV Global Series match --involves--> England",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|involves:ev:canada defeats england 24–21 in wxv global series match->wd:Q139505275|reported": {
+  "verdict": "correct",
+  "why": "quote: WXV Global Series",
+  "label": "reported",
+  "link": "Canada defeats England 24–21 in WXV Global Series match --involves--> WXV Global Series",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|affects:ev:canada defeats england 24–21 in wxv global series match->org:red roses|reported": {
+  "verdict": "correct",
+  "why": "quote: ends the Red Roses' run",
+  "label": "reported",
+  "link": "Canada defeats England 24–21 in WXV Global Series match --affects--> Red Roses",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|part_of:org:red roses->topic:four-year unbeaten run|reported": {
+  "verdict": "wrong",
+  "why": "a team is not part of a run",
+  "label": "reported",
+  "link": "Red Roses --part_of--> four-year unbeaten run",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|part_of:topic:four-year unbeaten run->topic:41 matches|reported": {
+  "verdict": "wrong",
+  "why": "a run is not part of 41 matches",
+  "label": "reported",
+  "link": "four-year unbeaten run --part_of--> 41 matches",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|affects:person:shoshanah seumanutafa->ev:canada defeats england 24–21 in wxv global series match|reported": {
+  "verdict": "correct",
+  "why": "quote: late try",
+  "label": "reported",
+  "link": "Shoshanah Seumanutafa --affects--> Canada defeats England 24–21 in WXV Global Series match",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|affects:ev:canada defeats england 24–21 in wxv global series match->org:red roses|inferred": {
+  "verdict": "correct",
+  "why": "restates the reported effect",
+  "label": "inferred",
+  "link": "Canada defeats England 24–21 in WXV Global Series match --affects--> Red Roses",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|affects:org:red roses->topic:england's four‑year unbeaten run|inferred": {
+  "verdict": "partial",
+  "why": "the match, not the team, ended the run",
+  "label": "inferred",
+  "link": "Red Roses --affects--> England's four‑year unbeaten run",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|affects:ev:canada defeats england 24–21 in wxv global series match->topic:canada women's rugby profile|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Canada defeats England 24–21 in WXV Global Series match --affects--> Canada women's rugby profile",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|affects:person:shoshanah seumanutafa->topic:canada's win|inferred": {
+  "verdict": "correct",
+  "why": "follows from the fact",
+  "label": "inferred",
+  "link": "Shoshanah Seumanutafa --affects--> Canada's win",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|affects:topic:canada's win->topic:canadian rugby funding prospects|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Canada's win --affects--> Canadian rugby funding prospects",
+  "by": "build assistant (Claude)"
+ },
+ "n:12fabc0b78de|affects:ev:arrest warrant for raul castro->topic:political leadership of cuba|inferred": {
+  "verdict": "partial",
+  "why": "Castro is a former leader; 'political leadership of Cuba' overstates",
+  "label": "inferred",
+  "link": "Arrest warrant for Raul Castro --affects--> Political leadership of Cuba",
+  "by": "build assistant (Claude)"
+ },
+ "n:12fabc0b78de|affects:topic:political leadership of cuba->topic:us‑cuba diplomatic relations|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Political leadership of Cuba --affects--> US‑Cuba diplomatic relations",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ea4338fe8f4|affects:ev:albertans vote on ten referendums->topic:public discourse on alberta secession|inferred": {
+  "verdict": "correct",
+  "why": "basis: one referendum is on separation",
+  "label": "inferred",
+  "link": "Albertans vote on ten referendums --affects--> public discourse on Alberta secession",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ea4338fe8f4|affects:topic:public discourse on alberta secession->topic:political stability in canada|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "public discourse on Alberta secession --affects--> political stability in Canada",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ef6e37a2b5f|affects:wd:Q8880->wd:Q228|inferred": {
+  "verdict": "partial",
+  "why": "the agreement affects Andorra; the Commission is a party, not the cause",
+  "label": "inferred",
+  "link": "European Commission --affects--> Andorra",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ef6e37a2b5f|affects:wd:Q8880->wd:Q238|inferred": {
+  "verdict": "partial",
+  "why": "the agreement affects San Marino; the Commission is a party, not the cause",
+  "label": "inferred",
+  "link": "European Commission --affects--> San Marino",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ef6e37a2b5f|affects:org:council of the eu->wd:Q8889|inferred": {
+  "verdict": "partial",
+  "why": "a procedural step (asking consent), not an effect",
+  "label": "inferred",
+  "link": "Council of the EU --affects--> European Parliament",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ef6e37a2b5f|affects:topic:association agreement->topic:public authorities|inferred": {
+  "verdict": "correct",
+  "why": "basis: the deals aim at certainty for public authorities",
+  "label": "inferred",
+  "link": "Association Agreement --affects--> public authorities",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ef6e37a2b5f|affects:topic:association agreement->topic:legal certainty|speculative": {
+  "verdict": "correct",
+  "why": "stated aim, rightly cautious",
+  "label": "speculative",
+  "link": "Association Agreement --affects--> legal certainty",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ef6e37a2b5f|affects:topic:association agreement->topic:predictability|speculative": {
+  "verdict": "correct",
+  "why": "stated aim, rightly cautious",
+  "label": "speculative",
+  "link": "Association Agreement --affects--> predictability",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ef6e37a2b5f|affects:topic:monetary agreements->topic:overlap resolution|speculative": {
+  "verdict": "partial",
+  "why": "vague endpoint",
+  "label": "speculative",
+  "link": "Monetary Agreements --affects--> overlap resolution",
+  "by": "build assistant (Claude)"
+ },
+ "n:77c59dd165c5|affects:ev:opening of the new yalu river bridge->topic:trade volume between china and north korea|inferred": {
+  "verdict": "partial",
+  "why": "the reasoning says there is little effect, yet an affects link is drawn",
+  "label": "inferred",
+  "link": "Opening of the New Yalu River Bridge --affects--> trade volume between China and North Korea",
+  "by": "build assistant (Claude)"
+ },
+ "n:84bb02f4d37d|affects:ev:twelve migrants killed off lesbos and samos->topic:migrants|inferred": {
+  "verdict": "correct",
+  "why": "basis: migrants were killed",
+  "label": "inferred",
+  "link": "Twelve migrants killed off Lesbos and Samos --affects--> Migrants",
+  "by": "build assistant (Claude)"
+ },
+ "n:84bb02f4d37d|affects:ev:twelve migrants killed off lesbos and samos->tech:speedboats|inferred": {
+  "verdict": "wrong",
+  "why": "backwards: the capsizing caused the deaths",
+  "label": "inferred",
+  "link": "Twelve migrants killed off Lesbos and Samos --affects--> Speedboats",
+  "by": "build assistant (Claude)"
+ },
+ "n:84bb02f4d37d|affects:ev:twelve migrants killed off lesbos and samos->place:lesbos and samos islands|inferred": {
+  "verdict": "partial",
+  "why": "location, not an affected party",
+  "label": "inferred",
+  "link": "Twelve migrants killed off Lesbos and Samos --affects--> Lesbos and Samos islands",
+  "by": "build assistant (Claude)"
+ },
+ "n:945f742db3b8|affects:ev:houthis missile attack on training center->place:shabwah governorate|inferred": {
+  "verdict": "partial",
+  "why": "location, not an affected party",
+  "label": "inferred",
+  "link": "Houthis missile attack on training center --affects--> Shabwah Governorate",
+  "by": "build assistant (Claude)"
+ },
+ "n:945f742db3b8|affects:wd:Q4991371->topic:military readiness|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "soldiers --affects--> military readiness",
+  "by": "build assistant (Claude)"
+ },
+ "n:945f742db3b8|affects:wd:Q4991371->topic:morale of armed forces|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "soldiers --affects--> morale of armed forces",
+  "by": "build assistant (Claude)"
+ },
+ "n:945f742db3b8|affects:place:shabwah governorate->topic:regional security in yemen|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Shabwah Governorate --affects--> regional security in Yemen",
+  "by": "build assistant (Claude)"
+ },
+ "n:945f742db3b8|affects:wd:Q3042087->topic:regional tension|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Houthis --affects--> regional tension",
+  "by": "build assistant (Claude)"
+ },
+ "n:945f742db3b8|affects:wd:Q3042087->topic:humanitarian situation in yemen|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Houthis --affects--> humanitarian situation in Yemen",
+  "by": "build assistant (Claude)"
+ },
+ "n:ac99b0896a72|affects:ev:equatorial guinea expands malaria program->topic:malaria cases|inferred": {
+  "verdict": "correct",
+  "why": "the programme aims to cut cases",
+  "label": "inferred",
+  "link": "Equatorial Guinea expands malaria program --affects--> malaria cases",
+  "by": "build assistant (Claude)"
+ },
+ "n:ac99b0896a72|affects:topic:malaria cases->topic:public health|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "malaria cases --affects--> public health",
+  "by": "build assistant (Claude)"
+ },
+ "n:b88263d4e9c2|affects:ev:detention of abhijeet dipke->org:cockroach janta party|inferred": {
+  "verdict": "correct",
+  "why": "the party's leader is detained",
+  "label": "inferred",
+  "link": "Detention of Abhijeet Dipke --affects--> Cockroach Janta Party",
+  "by": "build assistant (Claude)"
+ },
+ "n:b88263d4e9c2|affects:ev:detention of abhijeet dipke->org:police|inferred": {
+  "verdict": "wrong",
+  "why": "backwards: the police carried out the detention",
+  "label": "inferred",
+  "link": "Detention of Abhijeet Dipke --affects--> Police",
+  "by": "build assistant (Claude)"
+ },
+ "n:b88263d4e9c2|affects:ev:detention of abhijeet dipke->place:planned protest at central park, connaught place|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Detention of Abhijeet Dipke --affects--> Planned protest at Central Park, Connaught Place",
+  "by": "build assistant (Claude)"
+ },
+ "n:b88263d4e9c2|affects:org:cockroach janta party->topic:opposition morale|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Cockroach Janta Party --affects--> Opposition morale",
+  "by": "build assistant (Claude)"
+ },
+ "n:b88263d4e9c2|affects:org:police->topic:public perception of law enforcement|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Police --affects--> Public perception of law enforcement",
+  "by": "build assistant (Claude)"
+ },
+ "n:b88263d4e9c2|affects:ev:detention of abhijeet dipke->topic:media coverage of opposition protests|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Detention of Abhijeet Dipke --affects--> Media coverage of opposition protests",
+  "by": "build assistant (Claude)"
+ },
+ "n:d0e0e4a57ac3|affects:ev:anne carson awarded nobel prize in literature->wd:Q192533|inferred": {
+  "verdict": "wrong",
+  "why": "Carney only commented; the award does not affect him",
+  "label": "inferred",
+  "link": "Anne Carson awarded Nobel Prize in Literature --affects--> Mark Carney",
+  "by": "build assistant (Claude)"
+ },
+ "n:d0e0e4a57ac3|affects:wd:Q192533->topic:canada's literary reputation|speculative": {
+  "verdict": "partial",
+  "why": "the award, not Carney's comment, shapes the reputation",
+  "label": "speculative",
+  "link": "Mark Carney --affects--> Canada's literary reputation",
+  "by": "build assistant (Claude)"
+ },
+ "n:d0e0e4a57ac3|affects:org:swedish academy->topic:nobel committee prestige|speculative": {
+  "verdict": "partial",
+  "why": "muddled: praise by the committee for the Academy's prestige",
+  "label": "speculative",
+  "link": "Swedish Academy --affects--> Nobel Committee prestige",
+  "by": "build assistant (Claude)"
+ },
+ "n:d7646cfd3bd0|affects:ev:discovery of first green star wd j1330+6435->topic:media coverage of space science|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Discovery of first green star WD J1330+6435 --affects--> media coverage of space science",
+  "by": "build assistant (Claude)"
+ },
+ "n:d7646cfd3bd0|affects:ev:discovery of first green star wd j1330+6435->topic:research into white dwarf atmospheric composition|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Discovery of first green star WD J1330+6435 --affects--> research into white dwarf atmospheric composition",
+  "by": "build assistant (Claude)"
+ },
+ "n:00dfe2b0206f|affects:org:world food programme->topic:500,000 people in gaza|inferred": {
+  "verdict": "correct",
+  "why": "basis: assistance to 500,000 people ends",
+  "label": "inferred",
+  "link": "World Food Programme --affects--> 500,000 people in Gaza",
+  "by": "build assistant (Claude)"
+ },
+ "n:00dfe2b0206f|affects:topic:500,000 people in gaza->topic:food insecurity in gaza|speculative": {
+  "verdict": "correct",
+  "why": "well grounded, labelled cautiously",
+  "label": "speculative",
+  "link": "500,000 people in Gaza --affects--> food insecurity in Gaza",
+  "by": "build assistant (Claude)"
+ },
+ "n:00dfe2b0206f|depends_on:org:world food programme->topic:funding shortfall of $450 million|inferred": {
+  "verdict": "correct",
+  "why": "basis: about $450 million needed",
+  "label": "inferred",
+  "link": "World Food Programme --depends_on--> funding shortfall of $450 million",
+  "by": "build assistant (Claude)"
+ },
+ "n:00dfe2b0206f|affects:topic:funding shortfall of $450 million->topic:ability to continue food aid in gaza|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "funding shortfall of $450 million --affects--> ability to continue food aid in Gaza",
+  "by": "build assistant (Claude)"
+ },
+ "n:00eab1f15d72|affects:ev:drone strike on abyei market->topic:people|inferred": {
+  "verdict": "partial",
+  "why": "vague endpoint ('people')",
+  "label": "inferred",
+  "link": "Drone strike on Abyei market --affects--> people",
+  "by": "build assistant (Claude)"
+ },
+ "n:00eab1f15d72|affects:ev:drone strike on abyei market->wd:Q336494|inferred": {
+  "verdict": "partial",
+  "why": "location restated as an effect",
+  "label": "inferred",
+  "link": "Drone strike on Abyei market --affects--> Abyei",
+  "by": "build assistant (Claude)"
+ },
+ "n:00eab1f15d72|affects:wd:Q336494->topic:south sudan–sudan relations|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Abyei --affects--> South Sudan–Sudan relations",
+  "by": "build assistant (Claude)"
+ },
+ "n:00eab1f15d72|affects:wd:Q336494->topic:humanitarian concern|speculative": {
+  "verdict": "partial",
+  "why": "vague endpoint; the strike, not Abyei, is the cause",
+  "label": "speculative",
+  "link": "Abyei --affects--> humanitarian concern",
+  "by": "build assistant (Claude)"
+ },
+ "n:0460555895d3|affects:ev:second protest over water crisis in guadalajara->topic:water shortages|inferred": {
+  "verdict": "wrong",
+  "why": "backwards: the shortages cause the protest",
+  "label": "inferred",
+  "link": "Second protest over water crisis in Guadalajara --affects--> water shortages",
+  "by": "build assistant (Claude)"
+ },
+ "n:0460555895d3|depends_on:topic:water shortages->tech:aging pipes|inferred": {
+  "verdict": "correct",
+  "why": "follows from the governor's attribution",
+  "label": "inferred",
+  "link": "water shortages --depends_on--> aging pipes",
+  "by": "build assistant (Claude)"
+ },
+ "n:0460555895d3|affects:ev:second protest over water crisis in guadalajara->topic:violence|inferred": {
+  "verdict": "partial",
+  "why": "violence happened during the protest; 'affects violence' is odd",
+  "label": "inferred",
+  "link": "Second protest over water crisis in Guadalajara --affects--> violence",
+  "by": "build assistant (Claude)"
+ },
+ "n:0460555895d3|affects:topic:violence->org:state congress building|speculative": {
+  "verdict": "correct",
+  "why": "the entrances of the Congress were set on fire",
+  "label": "speculative",
+  "link": "violence --affects--> State Congress building",
+  "by": "build assistant (Claude)"
+ },
+ "n:047b20792022|affects:wd:Q183231->topic:counterfeiting risk|inferred": {
+  "verdict": "correct",
+  "why": "basis: the designs help stop counterfeiting",
+  "label": "inferred",
+  "link": "Bank of England --affects--> counterfeiting risk",
+  "by": "build assistant (Claude)"
+ },
+ "n:047b20792022|affects:wd:Q183231->topic:public awareness of wildlife|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Bank of England --affects--> public awareness of wildlife",
+  "by": "build assistant (Claude)"
+ },
+ "n:047b20792022|depends_on:wd:Q951830->wd:Q183231|inferred": {
+  "verdict": "wrong",
+  "why": "the Royal Mint does not depend on the Bank; restates 'involves'",
+  "label": "inferred",
+  "link": "Royal Mint --depends_on--> Bank of England",
+  "by": "build assistant (Claude)"
+ },
+ "n:047b20792022|affects:ev:bank of england announces wildlife banknote designs->topic:public engagement with the bank of england|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Bank of England announces wildlife banknote designs --affects--> public engagement with the Bank of England",
+  "by": "build assistant (Claude)"
+ },
+ "n:047b20792022|affects:wd:Q183231->topic:sales of new banknotes|speculative": {
+  "verdict": "partial",
+  "why": "odd effect: notes are issued, not sold",
+  "label": "speculative",
+  "link": "Bank of England --affects--> sales of new banknotes",
+  "by": "build assistant (Claude)"
+ },
+ "n:047b20792022|affects:wd:Q183231->org:conservation charities|speculative": {
+  "verdict": "correct",
+  "why": "plausible and clearly weaker",
+  "label": "speculative",
+  "link": "Bank of England --affects--> conservation charities",
+  "by": "build assistant (Claude)"
+ },
+ "n:0f5a4c632e8d|affects:place:nariño department->wd:Q739|inferred": {
+  "verdict": "wrong",
+  "why": "part_of restated as affects",
+  "label": "inferred",
+  "link": "Nariño Department --affects--> Colombia",
+  "by": "build assistant (Claude)"
+ },
+ "n:0f5a4c632e8d|affects:ev:collapse of open pit gold mine in nariño->wd:Q739|inferred": {
+  "verdict": "partial",
+  "why": "location restated as an effect",
+  "label": "inferred",
+  "link": "Collapse of open pit gold mine in Nariño --affects--> Colombia",
+  "by": "build assistant (Claude)"
+ },
+ "n:0f5a4c632e8d|affects:wd:Q820037->topic:families of miners|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "miners --affects--> families of miners",
+  "by": "build assistant (Claude)"
+ },
+ "n:0f5a4c632e8d|affects:wd:Q820037->topic:local community morale|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "miners --affects--> local community morale",
+  "by": "build assistant (Claude)"
+ },
+ "n:2a0496d94138|affects:ev:2026 nobel prize in economic sciences awarded to hall and woodford->org:royal swedish academy of sciences|inferred": {
+  "verdict": "wrong",
+  "why": "the Academy awards the prize; it is not affected",
+  "label": "inferred",
+  "link": "2026 Nobel Prize in Economic Sciences awarded to Hall and Woodford --affects--> Royal Swedish Academy of Sciences",
+  "by": "build assistant (Claude)"
+ },
+ "n:2a0496d94138|affects:ev:2026 nobel prize in economic sciences awarded to hall and woodford->wd:Q1754|inferred": {
+  "verdict": "wrong",
+  "why": "location restated as an effect",
+  "label": "inferred",
+  "link": "2026 Nobel Prize in Economic Sciences awarded to Hall and Woodford --affects--> Stockholm",
+  "by": "build assistant (Claude)"
+ },
+ "n:2a0496d94138|affects:ev:2026 nobel prize in economic sciences awarded to hall and woodford->wd:Q2156948|inferred": {
+  "verdict": "correct",
+  "why": "the laureates are affected by the award",
+  "label": "inferred",
+  "link": "2026 Nobel Prize in Economic Sciences awarded to Hall and Woodford --affects--> Robert E. Hall",
+  "by": "build assistant (Claude)"
+ },
+ "n:2a0496d94138|affects:ev:2026 nobel prize in economic sciences awarded to hall and woodford->wd:Q381692|inferred": {
+  "verdict": "correct",
+  "why": "the laureates are affected by the award",
+  "label": "inferred",
+  "link": "2026 Nobel Prize in Economic Sciences awarded to Hall and Woodford --affects--> Michael Woodford",
+  "by": "build assistant (Claude)"
+ },
+ "n:2a0496d94138|affects:wd:Q2156948->tech:economic models|inferred": {
+  "verdict": "partial",
+  "why": "Hall made the models; 'affects' is loose",
+  "label": "inferred",
+  "link": "Robert E. Hall --affects--> economic models",
+  "by": "build assistant (Claude)"
+ },
+ "n:2a0496d94138|affects:wd:Q381692->tech:economic models|inferred": {
+  "verdict": "partial",
+  "why": "Woodford made the models; 'affects' is loose",
+  "label": "inferred",
+  "link": "Michael Woodford --affects--> economic models",
+  "by": "build assistant (Claude)"
+ },
+ "n:3dacd47cdd3e|affects:ev:ibwm vote to adopt leap hour->tech:leap hour|inferred": {
+  "verdict": "correct",
+  "why": "the vote adopts the leap hour",
+  "label": "inferred",
+  "link": "IBWM vote to adopt leap hour --affects--> leap hour",
+  "by": "build assistant (Claude)"
+ },
+ "n:3dacd47cdd3e|affects:ev:ibwm vote to adopt leap hour->tech:leap second|inferred": {
+  "verdict": "correct",
+  "why": "the vote retires the leap second",
+  "label": "inferred",
+  "link": "IBWM vote to adopt leap hour --affects--> leap second",
+  "by": "build assistant (Claude)"
+ },
+ "n:3dacd47cdd3e|affects:ev:ibwm vote to adopt leap hour->topic:utc|speculative": {
+  "verdict": "correct",
+  "why": "well grounded, labelled cautiously",
+  "label": "speculative",
+  "link": "IBWM vote to adopt leap hour --affects--> UTC",
+  "by": "build assistant (Claude)"
+ },
+ "n:3dacd47cdd3e|affects:ev:ibwm vote to adopt leap hour->tech:glonass navigation system|speculative": {
+  "verdict": "correct",
+  "why": "Russia's concern for GLONASS is reported",
+  "label": "speculative",
+  "link": "IBWM vote to adopt leap hour --affects--> GLONASS navigation system",
+  "by": "build assistant (Claude)"
+ },
+ "n:3dacd47cdd3e|depends_on:ev:ibwm vote to adopt leap hour->topic:earth rotation changes|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "IBWM vote to adopt leap hour --depends_on--> Earth rotation changes",
+  "by": "build assistant (Claude)"
+ },
+ "n:54a830f0095a|affects:ev:arrest of 10 people in west bank->wd:Q594444|inferred": {
+  "verdict": "wrong",
+  "why": "the police made the arrests; actor restated as affected",
+  "label": "inferred",
+  "link": "Arrest of 10 people in West Bank --affects--> Israeli police",
+  "by": "build assistant (Claude)"
+ },
+ "n:54a830f0095a|affects:ev:arrest of 10 people in west bank->wd:Q36678|inferred": {
+  "verdict": "partial",
+  "why": "location restated as an effect",
+  "label": "inferred",
+  "link": "Arrest of 10 people in West Bank --affects--> West Bank",
+  "by": "build assistant (Claude)"
+ },
+ "n:54a830f0095a|affects:ev:arrest of 10 people in west bank->topic:american photographer safety|inferred": {
+  "verdict": "partial",
+  "why": "plausible but not stated",
+  "label": "inferred",
+  "link": "Arrest of 10 people in West Bank --affects--> American photographer safety",
+  "by": "build assistant (Claude)"
+ },
+ "n:54a830f0095a|affects:wd:Q594444->topic:international perception of israel|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Israeli police --affects--> international perception of Israel",
+  "by": "build assistant (Claude)"
+ },
+ "n:54a830f0095a|affects:ev:arrest of 10 people in west bank->topic:sanctions discussion on settlement goods|speculative": {
+  "verdict": "correct",
+  "why": "plausible and clearly weaker",
+  "label": "speculative",
+  "link": "Arrest of 10 people in West Bank --affects--> sanctions discussion on settlement goods",
+  "by": "build assistant (Claude)"
+ },
+ "n:6a3502fcf385|affects:ev:sentencing of three mexican men in ensenada->wd:Q656189|inferred": {
+  "verdict": "partial",
+  "why": "location restated as an effect",
+  "label": "inferred",
+  "link": "Sentencing of three Mexican men in Ensenada --affects--> Ensenada",
+  "by": "build assistant (Claude)"
+ },
+ "n:6a3502fcf385|affects:ev:sentencing of three mexican men in ensenada->person:two australians|inferred": {
+  "verdict": "wrong",
+  "why": "the victims are dead; the sentence does not affect them",
+  "label": "inferred",
+  "link": "Sentencing of three Mexican men in Ensenada --affects--> Two Australians",
+  "by": "build assistant (Claude)"
+ },
+ "n:6a3502fcf385|affects:ev:sentencing of three mexican men in ensenada->person:american|inferred": {
+  "verdict": "wrong",
+  "why": "the victim is dead; the sentence does not affect them",
+  "label": "inferred",
+  "link": "Sentencing of three Mexican men in Ensenada --affects--> American",
+  "by": "build assistant (Claude)"
+ },
+ "n:6a3502fcf385|depends_on:ev:sentencing of three mexican men in ensenada->wd:Q58731|inferred": {
+  "verdict": "wrong",
+  "why": "the event does not depend on the state it happened in",
+  "label": "inferred",
+  "link": "Sentencing of three Mexican men in Ensenada --depends_on--> Baja California",
+  "by": "build assistant (Claude)"
+ },
+ "n:75c973928996|affects:ev:rapid support forces drone strike->wd:Q1963|inferred": {
+  "verdict": "partial",
+  "why": "location restated as an effect",
+  "label": "inferred",
+  "link": "Rapid Support Forces drone strike --affects--> Khartoum",
+  "by": "build assistant (Claude)"
+ },
+ "n:75c973928996|depends_on:wd:Q1963->wd:Q1049|inferred": {
+  "verdict": "wrong",
+  "why": "part_of restated as depends_on",
+  "label": "inferred",
+  "link": "Khartoum --depends_on--> Sudan",
+  "by": "build assistant (Claude)"
+ },
+ "n:8ab7353c3a4a|affects:wd:Q8901->wd:Q45568|inferred": {
+  "verdict": "correct",
+  "why": "the ECB authorised UniCredit",
+  "label": "inferred",
+  "link": "European Central Bank --affects--> UniCredit",
+  "by": "build assistant (Claude)"
+ },
+ "n:8ab7353c3a4a|affects:wd:Q8901->org:commerzbank|inferred": {
+  "verdict": "correct",
+  "why": "the authorisation concerns Commerzbank",
+  "label": "inferred",
+  "link": "European Central Bank --affects--> Commerzbank",
+  "by": "build assistant (Claude)"
+ },
+ "n:8ab7353c3a4a|affects:wd:Q45568->org:commerzbank|inferred": {
+  "verdict": "correct",
+  "why": "basis: stake above 30% allowed",
+  "label": "inferred",
+  "link": "UniCredit --affects--> Commerzbank",
+  "by": "build assistant (Claude)"
+ },
+ "n:8ab7353c3a4a|affects:ev:ecb authorizes unicredit stake increase->topic:german banking sector perception|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "ECB authorizes UniCredit stake increase --affects--> German banking sector perception",
+  "by": "build assistant (Claude)"
+ },
+ "n:9700f8a230bf|affects:ev:taiwanese coast guard drives away 16 chinese vessels->org:taiwanese coast guard|speculative": {
+  "verdict": "wrong",
+  "why": "the coast guard is the actor",
+  "label": "speculative",
+  "link": "Taiwanese coast guard drives away 16 Chinese vessels --affects--> Taiwanese coast guard",
+  "by": "build assistant (Claude)"
+ },
+ "n:9700f8a230bf|affects:ev:taiwanese coast guard drives away 16 chinese vessels->tech:chinese vessels|speculative": {
+  "verdict": "correct",
+  "why": "the vessels were driven away (could have been inferred)",
+  "label": "speculative",
+  "link": "Taiwanese coast guard drives away 16 Chinese vessels --affects--> Chinese vessels",
+  "by": "build assistant (Claude)"
+ },
+ "n:9700f8a230bf|affects:ev:taiwanese coast guard drives away 16 chinese vessels->place:pratas island|speculative": {
+  "verdict": "partial",
+  "why": "location restated as an effect",
+  "label": "speculative",
+  "link": "Taiwanese coast guard drives away 16 Chinese vessels --affects--> Pratas island",
+  "by": "build assistant (Claude)"
+ },
+ "n:9700f8a230bf|affects:ev:taiwanese coast guard drives away 16 chinese vessels->place:taiwan's restricted waters|inferred": {
+  "verdict": "partial",
+  "why": "the vessels entered the waters; the driving-away does not affect them",
+  "label": "inferred",
+  "link": "Taiwanese coast guard drives away 16 Chinese vessels --affects--> Taiwan's restricted waters",
+  "by": "build assistant (Claude)"
+ },
+ "n:9700f8a230bf|affects:ev:taiwanese coast guard drives away 16 chinese vessels->topic:china's maritime pressure|inferred": {
+  "verdict": "partial",
+  "why": "basis is the July deployment, not this incident",
+  "label": "inferred",
+  "link": "Taiwanese coast guard drives away 16 Chinese vessels --affects--> China's maritime pressure",
+  "by": "build assistant (Claude)"
+ },
+ "n:9700f8a230bf|affects:ev:taiwanese coast guard drives away 16 chinese vessels->org:chinese coast guard|inferred": {
+  "verdict": "correct",
+  "why": "the Chinese coast guard vessels were driven away",
+  "label": "inferred",
+  "link": "Taiwanese coast guard drives away 16 Chinese vessels --affects--> Chinese coast guard",
+  "by": "build assistant (Claude)"
+ },
+ "n:ad5ac512ee13|depends_on:topic:about 200 people->topic:medical treatment|inferred": {
+  "verdict": "partial",
+  "why": "only fourteen needed treatment",
+  "label": "inferred",
+  "link": "about 200 people --depends_on--> medical treatment",
+  "by": "build assistant (Claude)"
+ },
+ "n:ad5ac512ee13|depends_on:ev:police rescue from unregistered rehab centre->topic:kidnapping investigation|inferred": {
+  "verdict": "partial",
+  "why": "linked to, not dependent on, the investigation",
+  "label": "inferred",
+  "link": "Police rescue from unregistered rehab centre --depends_on--> kidnapping investigation",
+  "by": "build assistant (Claude)"
+ },
+ "n:afdc5ab9ef1a|affects:ev:conviction of paul nthenge mackenzie->place:shakahola forest|inferred": {
+  "verdict": "partial",
+  "why": "weak: the case is about the deaths, not the forest",
+  "label": "inferred",
+  "link": "Conviction of Paul Nthenge Mackenzie --affects--> Shakahola Forest",
+  "by": "build assistant (Claude)"
+ },
+ "n:afdc5ab9ef1a|affects:ev:conviction of paul nthenge mackenzie->wd:Q114|inferred": {
+  "verdict": "partial",
+  "why": "location restated as an effect",
+  "label": "inferred",
+  "link": "Conviction of Paul Nthenge Mackenzie --affects--> Kenya",
+  "by": "build assistant (Claude)"
+ },
+ "n:afdc5ab9ef1a|affects:ev:conviction of paul nthenge mackenzie->topic:190 children and an adult|inferred": {
+  "verdict": "wrong",
+  "why": "the victims are dead; the conviction does not affect them",
+  "label": "inferred",
+  "link": "Conviction of Paul Nthenge Mackenzie --affects--> 190 children and an adult",
+  "by": "build assistant (Claude)"
+ },
+ "n:c40c295eedaa|affects:ev:discovery of the oldest known shipwreck->topic:shipwreck|speculative": {
+  "verdict": "partial",
+  "why": "trivial",
+  "label": "speculative",
+  "link": "Discovery of the oldest known shipwreck --affects--> shipwreck",
+  "by": "build assistant (Claude)"
+ },
+ "n:c40c295eedaa|affects:topic:shipwreck->topic:amphorae|inferred": {
+  "verdict": "wrong",
+  "why": "the amphorae are part of the wreck, not affected by it",
+  "label": "inferred",
+  "link": "shipwreck --affects--> amphorae",
+  "by": "build assistant (Claude)"
+ },
+ "n:c40c295eedaa|affects:ev:discovery of the oldest known shipwreck->person:hakan öniz|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Discovery of the oldest known shipwreck --affects--> Hakan Öniz",
+  "by": "build assistant (Claude)"
+ },
+ "n:c40c295eedaa|affects:ev:discovery of the oldest known shipwreck->person:mehmet nuri ersoy|speculative": {
+  "verdict": "wrong",
+  "why": "the minister is not an academic; he only commented",
+  "label": "speculative",
+  "link": "Discovery of the oldest known shipwreck --affects--> Mehmet Nuri Ersoy",
+  "by": "build assistant (Claude)"
+ },
+ "n:c4f3475d8101|affects:place:brazilian amazon->wd:Q155|inferred": {
+  "verdict": "partial",
+  "why": "tautological",
+  "label": "inferred",
+  "link": "Brazilian Amazon --affects--> Brazil",
+  "by": "build assistant (Claude)"
+ },
+ "n:c4f3475d8101|depends_on:ev:deforestation in brazil amazon hits nearly four-decade low->topic:deforestation in the brazilian amazon|inferred": {
+  "verdict": "wrong",
+  "why": "depends on itself",
+  "label": "inferred",
+  "link": "Deforestation in Brazil Amazon hits nearly four-decade low --depends_on--> Deforestation in the Brazilian Amazon",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|affects:ev:canada defeats england 24–21 in wxv global series match->org:england national women's rugby team|inferred": {
+  "verdict": "correct",
+  "why": "England lost the match",
+  "label": "inferred",
+  "link": "Canada defeats England 24–21 in WXV Global Series match --affects--> England national women's rugby team",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|affects:ev:canada defeats england 24–21 in wxv global series match->org:canada national women's rugby team|inferred": {
+  "verdict": "correct",
+  "why": "Canada won the match",
+  "label": "inferred",
+  "link": "Canada defeats England 24–21 in WXV Global Series match --affects--> Canada national women's rugby team",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|affects:ev:canada defeats england 24–21 in wxv global series match->wd:Q139505275|inferred": {
+  "verdict": "partial",
+  "why": "loose: the match is part of the series",
+  "label": "inferred",
+  "link": "Canada defeats England 24–21 in WXV Global Series match --affects--> WXV Global Series",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|affects:ev:canada defeats england 24–21 in wxv global series match->person:shoshanah seumanutafa|inferred": {
+  "verdict": "wrong",
+  "why": "backwards: the player's try decided the match",
+  "label": "inferred",
+  "link": "Canada defeats England 24–21 in WXV Global Series match --affects--> Shoshanah Seumanutafa",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|depends_on:org:red roses->topic:four‑year unbeaten run|inferred": {
+  "verdict": "wrong",
+  "why": "a team does not depend on its run",
+  "label": "inferred",
+  "link": "Red Roses --depends_on--> four‑year unbeaten run",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|affects:org:red roses->org:england national women's rugby team|speculative": {
+  "verdict": "wrong",
+  "why": "the Red Roses are the England team",
+  "label": "speculative",
+  "link": "Red Roses --affects--> England national women's rugby team",
+  "by": "build assistant (Claude)"
+ },
+ "n:d2bd9be25b92|affects:person:shoshanah seumanutafa->org:canada national women's rugby team|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Shoshanah Seumanutafa --affects--> Canada national women's rugby team",
+  "by": "build assistant (Claude)"
+ },
+ "n:f5225c9d8fb5|affects:ev:kenya confirms four additional bundibugyo ebolavirus cases->topic:public perception of ebola risk in kenya|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Kenya confirms four additional Bundibugyo ebolavirus cases --affects--> public perception of Ebola risk in Kenya",
+  "by": "build assistant (Claude)"
+ },
+ "n:f5225c9d8fb5|affects:topic:public perception of ebola risk in kenya->topic:travel demand to/from kenya|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "public perception of Ebola risk in Kenya --affects--> travel demand to/from Kenya",
+  "by": "build assistant (Claude)"
+ },
+ "n:f5225c9d8fb5|affects:ev:kenya confirms four additional bundibugyo ebolavirus cases->org:international health monitoring agencies|inferred": {
+  "verdict": "partial",
+  "why": "plausible, but the basis does not mention the agencies",
+  "label": "inferred",
+  "link": "Kenya confirms four additional Bundibugyo ebolavirus cases --affects--> international health monitoring agencies",
+  "by": "build assistant (Claude)"
+ },
+ "n:f5225c9d8fb5|affects:org:international health monitoring agencies->topic:global ebola surveillance efforts|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "international health monitoring agencies --affects--> global Ebola surveillance efforts",
+  "by": "build assistant (Claude)"
+ },
+ "n:f5225c9d8fb5|affects:ev:kenya confirms four additional bundibugyo ebolavirus cases->topic:local healthcare resource allocation|inferred": {
+  "verdict": "correct",
+  "why": "more cases need isolation capacity",
+  "label": "inferred",
+  "link": "Kenya confirms four additional Bundibugyo ebolavirus cases --affects--> local healthcare resource allocation",
+  "by": "build assistant (Claude)"
+ },
+ "n:fa08b85b6159|affects:ev:florida panthers natural hat trick streak->org:national hockey league|inferred": {
+  "verdict": "partial",
+  "why": "the streak happens in the NHL; 'affects' is loose",
+  "label": "inferred",
+  "link": "Florida Panthers natural hat trick streak --affects--> National Hockey League",
+  "by": "build assistant (Claude)"
+ },
+ "n:fa08b85b6159|affects:ev:florida panthers natural hat trick streak->wd:Q41466|inferred": {
+  "verdict": "partial",
+  "why": "the streak is in the sport; 'affects' is loose",
+  "label": "inferred",
+  "link": "Florida Panthers natural hat trick streak --affects--> ice hockey",
+  "by": "build assistant (Claude)"
  }
 }

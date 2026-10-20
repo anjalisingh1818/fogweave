@@ -1,0 +1,289 @@
+[
+ {
+  "claim_id": "n:00dfe2b0206f:c1",
+  "claim": "WFP will end monthly assistance to 500,000 people in Gaza because of a funding shortfall.",
+  "evidence_domain": "euronews.com",
+  "evidence": "UN food agency to cut aid to 500 , 000 people in Gaza. The World Food Programme will stop monthly assistance to half a million people in Gaza because of a funding shortfall, the UN agency said on Monday. It needs about $450 million over the next six months for Gaza and the West Bank, but has received only around half its usual funding for the Palestinian territories this year. \"And that’s not because we don’t have humanitarian access to deliver food; that’s because we don’t have funding.\"\nSmaller rations\nFamilies receiving food will now get one parcel instead of two and a smaller bag of wheat flour. In September, it halved the number of people it helps in the West Bank to 200,000.",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:00dfe2b0206f:c1",
+  "claim": "WFP will end monthly assistance to 500,000 people in Gaza because of a funding shortfall.",
+  "evidence_domain": "arabnews.com",
+  "evidence": "Arab News | World Food Programme says ending aid for half million in Gaza due to funding shortfall. The agency says it needs about $450 million over the next six months for its operations in Gaza and the West Bank, but in 2026 it has only received about half the usual financing for the Palestinian territories. - World Food Programme halts aid to 500,000 people in Gaza\n- Decision results from a significant funding shortfall\nThe World Food Programme said Monday it would end monthly assistance to 500,000 people in Gaza due to a funding shortfall, despite acute needs in the war-battered Palestinian territory. With the cutbacks, 1.1 million Palestinians in Gaza -- still about half the population ",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:00dfe2b0206f:c2",
+  "claim": "WFP needs about $450 million for the next six months for operations in Gaza and the West Bank.",
+  "evidence_domain": "euronews.com",
+  "evidence": "UN food agency to cut aid to 500 , 000 people in Gaza. The World Food Programme will stop monthly assistance to half a million people in Gaza because of a funding shortfall, the UN agency said on Monday. It needs about $450 million over the next six months for Gaza and the West Bank, but has received only around half its usual funding for the Palestinian territories this year. \"And that’s not because we don’t have humanitarian access to deliver food; that’s because we don’t have funding.\"\nSmaller rations\nFamilies receiving food will now get one parcel instead of two and a smaller bag of wheat flour. In September, it halved the number of people it helps in the West Bank to 200,000.",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:00dfe2b0206f:c2",
+  "claim": "WFP needs about $450 million for the next six months for operations in Gaza and the West Bank.",
+  "evidence_domain": "arabnews.com",
+  "evidence": "Arab News | World Food Programme says ending aid for half million in Gaza due to funding shortfall. The agency says it needs about $450 million over the next six months for its operations in Gaza and the West Bank, but in 2026 it has only received about half the usual financing for the Palestinian territories. - World Food Programme halts aid to 500,000 people in Gaza\n- Decision results from a significant funding shortfall\nThe World Food Programme said Monday it would end monthly assistance to 500,000 people in Gaza due to a funding shortfall, despite acute needs in the war-battered Palestinian territory. With the cutbacks, 1.1 million Palestinians in Gaza -- still about half the population ",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:0460555895d3:c1",
+  "claim": "Violence erupted during the second weekly protest over water shortages in Guadalajara.",
+  "evidence_domain": "turkiyetoday.com",
+  "evidence": "turkiyetoday.com. Violence erupted Sunday during a protest over water shortages and contamination in Guadalajara, western Mexico, in the city's second demonstration over the crisis in a week. Sunday's march turned violent when a group of hooded individuals reportedly set off explosives and set fire to the entrances of the state Congress building. Jalisco Governor Pablo Lemus acknowledged what he described as \"an unprecedented drinking water crisis\" earlier this month, with health authorities detecting coliform bacteria in the water supply. They are suspected of setting fire to entrances to the state Congress and Judicial Branch buildings.",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:0460555895d3:c2",
+  "claim": "Governor Pablo Lemus called the situation an unprecedented drinking water crisis.",
+  "evidence_domain": "turkiyetoday.com",
+  "evidence": "turkiyetoday.com. Violence erupted Sunday during a protest over water shortages and contamination in Guadalajara, western Mexico, in the city's second demonstration over the crisis in a week. Sunday's march turned violent when a group of hooded individuals reportedly set off explosives and set fire to the entrances of the state Congress building. Jalisco Governor Pablo Lemus acknowledged what he described as \"an unprecedented drinking water crisis\" earlier this month, with health authorities detecting coliform bacteria in the water supply. They are suspected of setting fire to entrances to the state Congress and Judicial Branch buildings.",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:0460555895d3:c3",
+  "claim": "Hooded individuals set off explosives and set fire to the entrances of the State Congress building.",
+  "evidence_domain": "turkiyetoday.com",
+  "evidence": "turkiyetoday.com. Violence erupted Sunday during a protest over water shortages and contamination in Guadalajara, western Mexico, in the city's second demonstration over the crisis in a week. Sunday's march turned violent when a group of hooded individuals reportedly set off explosives and set fire to the entrances of the state Congress building. Jalisco Governor Pablo Lemus acknowledged what he described as \"an unprecedented drinking water crisis\" earlier this month, with health authorities detecting coliform bacteria in the water supply. They are suspected of setting fire to entrances to the state Congress and Judicial Branch buildings.",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:047b20792022:c1",
+  "claim": "Four wildlife species will appear on the redesigned Bank of England notes.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "Banknotes of the pound sterling. The Bank of England has a legal monopoly of banknote issuance in England and Wales, but not in Scotland and Northern Ireland, where three banks in Scotland and three in Northern Ireland, issue their own banknotes as provisioned by the Banking Act 2009. However, the law requires that the issuing banks in Scotland and Northern Ireland hold a sum of Bank of England banknotes (or gold) equivalent to the total value of notes issued. Versions of the pound sterling issued by Crown Dependencies and other areas are regulated by their local governments and not by the Bank of England. Four British Overseas Territories (Gibraltar, Saint Helena, Ascension Island and the F",
+  "model": "unclear"
+ },
+ {
+  "claim_id": "n:047b20792022:c1",
+  "claim": "Four wildlife species will appear on the redesigned Bank of England notes.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "South African rand. The South African rand, or simply the rand, (sign: R; code: ZAR) is the official currency of South Africa. It is subdivided into 100 cents (sign: \"c\"), a comma separates the rand and cents. The South African rand is legal tender in the Common Monetary Area member states of Namibia, Lesotho, and Eswatini, with these three countries also having national currencies (the dollar, the loti, and the lilangeni respectively) pegged with the rand at parity and still widely accepted as substitutes. The rand was also legal tender in Botswana until 1976, when the pula replaced the rand at par.",
+  "model": "unclear"
+ },
+ {
+  "claim_id": "n:047b20792022:c2",
+  "claim": "The owl, bumblebee and hedgehog topped a public vote in their categories.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "Banknotes of the pound sterling. The Bank of England has a legal monopoly of banknote issuance in England and Wales, but not in Scotland and Northern Ireland, where three banks in Scotland and three in Northern Ireland, issue their own banknotes as provisioned by the Banking Act 2009. However, the law requires that the issuing banks in Scotland and Northern Ireland hold a sum of Bank of England banknotes (or gold) equivalent to the total value of notes issued. Versions of the pound sterling issued by Crown Dependencies and other areas are regulated by their local governments and not by the Bank of England. Four British Overseas Territories (Gibraltar, Saint Helena, Ascension Island and the F",
+  "model": "unclear"
+ },
+ {
+  "claim_id": "n:047b20792022:c2",
+  "claim": "The owl, bumblebee and hedgehog topped a public vote in their categories.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "South African rand. The South African rand, or simply the rand, (sign: R; code: ZAR) is the official currency of South Africa. It is subdivided into 100 cents (sign: \"c\"), a comma separates the rand and cents. The South African rand is legal tender in the Common Monetary Area member states of Namibia, Lesotho, and Eswatini, with these three countries also having national currencies (the dollar, the loti, and the lilangeni respectively) pegged with the rand at parity and still widely accepted as substitutes. The rand was also legal tender in Botswana until 1976, when the pula replaced the rand at par.",
+  "model": "unclear"
+ },
+ {
+  "claim_id": "n:047b20792022:c3",
+  "claim": "The puffin was included to celebrate marine life and British coastline.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "Banknotes of the pound sterling. The Bank of England has a legal monopoly of banknote issuance in England and Wales, but not in Scotland and Northern Ireland, where three banks in Scotland and three in Northern Ireland, issue their own banknotes as provisioned by the Banking Act 2009. However, the law requires that the issuing banks in Scotland and Northern Ireland hold a sum of Bank of England banknotes (or gold) equivalent to the total value of notes issued. Versions of the pound sterling issued by Crown Dependencies and other areas are regulated by their local governments and not by the Bank of England. Four British Overseas Territories (Gibraltar, Saint Helena, Ascension Island and the F",
+  "model": "unclear"
+ },
+ {
+  "claim_id": "n:047b20792022:c3",
+  "claim": "The puffin was included to celebrate marine life and British coastline.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "South African rand. The South African rand, or simply the rand, (sign: R; code: ZAR) is the official currency of South Africa. It is subdivided into 100 cents (sign: \"c\"), a comma separates the rand and cents. The South African rand is legal tender in the Common Monetary Area member states of Namibia, Lesotho, and Eswatini, with these three countries also having national currencies (the dollar, the loti, and the lilangeni respectively) pegged with the rand at parity and still widely accepted as substitutes. The rand was also legal tender in Botswana until 1976, when the pula replaced the rand at par.",
+  "model": "unclear"
+ },
+ {
+  "claim_id": "n:0f5a4c632e8d:c1",
+  "claim": "Fourteen miners were killed in the collapse.",
+  "evidence_domain": "pajhwok.com",
+  "evidence": "14 killed in gold mine collapse in Colombia. KABUL (Pajhwok): At least 14 people have been killed and several others injured after a gold mine collapsed in a remote area of Colombia, a media report said on Tuesday. It added that 14 people had died and several others had been injured in the collapse. No further details have been released about the cause of the collapse or the condition of the injured. It said the mine is located in a heavily forested area that can only be accessed by boat or aircraft.",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:0f5a4c632e8d:c2",
+  "claim": "Seven miners were injured in the collapse.",
+  "evidence_domain": "pajhwok.com",
+  "evidence": "14 killed in gold mine collapse in Colombia. KABUL (Pajhwok): At least 14 people have been killed and several others injured after a gold mine collapsed in a remote area of Colombia, a media report said on Tuesday. It added that 14 people had died and several others had been injured in the collapse. No further details have been released about the cause of the collapse or the condition of the injured. It said the mine is located in a heavily forested area that can only be accessed by boat or aircraft.",
+  "model": "unclear"
+ },
+ {
+  "claim_id": "n:0f5a4c632e8d:c3",
+  "claim": "The incident occurred at an open pit gold mine.",
+  "evidence_domain": "pajhwok.com",
+  "evidence": "14 killed in gold mine collapse in Colombia. KABUL (Pajhwok): At least 14 people have been killed and several others injured after a gold mine collapsed in a remote area of Colombia, a media report said on Tuesday. It added that 14 people had died and several others had been injured in the collapse. No further details have been released about the cause of the collapse or the condition of the injured. It said the mine is located in a heavily forested area that can only be accessed by boat or aircraft.",
+  "model": "unclear"
+ },
+ {
+  "claim_id": "n:12fabc0b78de:c1",
+  "claim": "The warrant is based on criminal charges that Castro ordered two unarmed aircraft to be shot down in 1996.",
+  "evidence_domain": "dominicanrepublicpost.com",
+  "evidence": "Florida issues arrest warrant for Cuban leader Raul Castro - Dominican Republic Post – Caribbean News , Business , Travel & Culture. State Attorney General James Uthmeier said on Monday that the warrant was based on criminal charges over Castro’s alleged role in ordering two unarmed aircraft to be shot down in 1996. To trigger such change, the administration has tightened US restrictions on the island, including by imposing a de facto energy blockade in January. Four people were killed in the attack. It charges Castro with federal crimes including conspiracy to kill US nationals, destroying aircraft and four counts of murder.",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:12fabc0b78de:c1",
+  "claim": "The warrant is based on criminal charges that Castro ordered two unarmed aircraft to be shot down in 1996.",
+  "evidence_domain": "yourdemocracy.net.au",
+  "evidence": "an arrest warrant for conspiracy to commit first - degree murder ...... In February of 1996, Cuban fighter jets shot down two US planes operated by Brothers to the Rescue, a Miami-based Cuban exile group, killing four men. After US forces kidnapped Venezuelan President Nicolas Maduro in January, Trump imposed a near-total energy blockade of Cuba and announced that the island will be “next” in line for regime change. The warrant pertains to the 1996 shooting down of two American planes operated by anti-communist Cuban exiles off Cuba’s coast. Prosecutors had gathered evidence and witness testimony linking a Cuban spy network to the operation that allegedly led Castro to order the planes shot ",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:12fabc0b78de:c1",
+  "claim": "The warrant is based on criminal charges that Castro ordered two unarmed aircraft to be shot down in 1996.",
+  "evidence_domain": "yourdemocracy.net",
+  "evidence": "an arrest warrant for conspiracy to commit first - degree murder ...... In February of 1996, Cuban fighter jets shot down two US planes operated by Brothers to the Rescue, a Miami-based Cuban exile group, killing four men. After US forces kidnapped Venezuelan President Nicolas Maduro in January, Trump imposed a near-total energy blockade of Cuba and announced that the island will be “next” in line for regime change. The warrant pertains to the 1996 shooting down of two American planes operated by anti-communist Cuban exiles off Cuba’s coast. Prosecutors had gathered evidence and witness testimony linking a Cuban spy network to the operation that allegedly led Castro to order the planes shot ",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:12fabc0b78de:c1",
+  "claim": "The warrant is based on criminal charges that Castro ordered two unarmed aircraft to be shot down in 1996.",
+  "evidence_domain": "caribbeanherald.com",
+  "evidence": "US state issues arrest warrant for Raul Castro. In February of 1996, Cuban fighter jets shot down two US planes operated by Brothers to the Rescue, a Miami-based Cuban exile group, killing four men. After US forces kidnapped Venezuelan President Nicolas Maduro in January, Trump imposed a near-total energy blockade of Cuba and announced that the island will be \"next\" in line for regime change. RT.com\n                \n20 Oct 2026, 02:15 GMT+10\n            \nA Florida court has approved legal action against the former Cuban leader over the 1996 shooting down of two US planes\nA Florida judge has issued an arrest warrant for former Cuban President Raul Castro, 95, the state's attorney general anno",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:12fabc0b78de:c2",
+  "claim": "Four people were killed in the 1996 attack.",
+  "evidence_domain": "dominicanrepublicpost.com",
+  "evidence": "Florida issues arrest warrant for Cuban leader Raul Castro - Dominican Republic Post – Caribbean News , Business , Travel & Culture. State Attorney General James Uthmeier said on Monday that the warrant was based on criminal charges over Castro’s alleged role in ordering two unarmed aircraft to be shot down in 1996. To trigger such change, the administration has tightened US restrictions on the island, including by imposing a de facto energy blockade in January. Four people were killed in the attack. It charges Castro with federal crimes including conspiracy to kill US nationals, destroying aircraft and four counts of murder.",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:12fabc0b78de:c2",
+  "claim": "Four people were killed in the 1996 attack.",
+  "evidence_domain": "yourdemocracy.net.au",
+  "evidence": "an arrest warrant for conspiracy to commit first - degree murder ...... In February of 1996, Cuban fighter jets shot down two US planes operated by Brothers to the Rescue, a Miami-based Cuban exile group, killing four men. After US forces kidnapped Venezuelan President Nicolas Maduro in January, Trump imposed a near-total energy blockade of Cuba and announced that the island will be “next” in line for regime change. The warrant pertains to the 1996 shooting down of two American planes operated by anti-communist Cuban exiles off Cuba’s coast. Prosecutors had gathered evidence and witness testimony linking a Cuban spy network to the operation that allegedly led Castro to order the planes shot ",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:12fabc0b78de:c2",
+  "claim": "Four people were killed in the 1996 attack.",
+  "evidence_domain": "yourdemocracy.net",
+  "evidence": "an arrest warrant for conspiracy to commit first - degree murder ...... In February of 1996, Cuban fighter jets shot down two US planes operated by Brothers to the Rescue, a Miami-based Cuban exile group, killing four men. After US forces kidnapped Venezuelan President Nicolas Maduro in January, Trump imposed a near-total energy blockade of Cuba and announced that the island will be “next” in line for regime change. The warrant pertains to the 1996 shooting down of two American planes operated by anti-communist Cuban exiles off Cuba’s coast. Prosecutors had gathered evidence and witness testimony linking a Cuban spy network to the operation that allegedly led Castro to order the planes shot ",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:12fabc0b78de:c2",
+  "claim": "Four people were killed in the 1996 attack.",
+  "evidence_domain": "caribbeanherald.com",
+  "evidence": "US state issues arrest warrant for Raul Castro. In February of 1996, Cuban fighter jets shot down two US planes operated by Brothers to the Rescue, a Miami-based Cuban exile group, killing four men. After US forces kidnapped Venezuelan President Nicolas Maduro in January, Trump imposed a near-total energy blockade of Cuba and announced that the island will be \"next\" in line for regime change. RT.com\n                \n20 Oct 2026, 02:15 GMT+10\n            \nA Florida court has approved legal action against the former Cuban leader over the 1996 shooting down of two US planes\nA Florida judge has issued an arrest warrant for former Cuban President Raul Castro, 95, the state's attorney general anno",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:12fabc0b78de:c3",
+  "claim": "The Trump administration has tightened U.S. restrictions on Cuba, including a de facto energy blockade.",
+  "evidence_domain": "dominicanrepublicpost.com",
+  "evidence": "Florida issues arrest warrant for Cuban leader Raul Castro - Dominican Republic Post – Caribbean News , Business , Travel & Culture. State Attorney General James Uthmeier said on Monday that the warrant was based on criminal charges over Castro’s alleged role in ordering two unarmed aircraft to be shot down in 1996. To trigger such change, the administration has tightened US restrictions on the island, including by imposing a de facto energy blockade in January. Four people were killed in the attack. It charges Castro with federal crimes including conspiracy to kill US nationals, destroying aircraft and four counts of murder.",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:12fabc0b78de:c3",
+  "claim": "The Trump administration has tightened U.S. restrictions on Cuba, including a de facto energy blockade.",
+  "evidence_domain": "yourdemocracy.net.au",
+  "evidence": "an arrest warrant for conspiracy to commit first - degree murder ...... In February of 1996, Cuban fighter jets shot down two US planes operated by Brothers to the Rescue, a Miami-based Cuban exile group, killing four men. After US forces kidnapped Venezuelan President Nicolas Maduro in January, Trump imposed a near-total energy blockade of Cuba and announced that the island will be “next” in line for regime change. The warrant pertains to the 1996 shooting down of two American planes operated by anti-communist Cuban exiles off Cuba’s coast. Prosecutors had gathered evidence and witness testimony linking a Cuban spy network to the operation that allegedly led Castro to order the planes shot ",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:12fabc0b78de:c3",
+  "claim": "The Trump administration has tightened U.S. restrictions on Cuba, including a de facto energy blockade.",
+  "evidence_domain": "yourdemocracy.net",
+  "evidence": "an arrest warrant for conspiracy to commit first - degree murder ...... In February of 1996, Cuban fighter jets shot down two US planes operated by Brothers to the Rescue, a Miami-based Cuban exile group, killing four men. After US forces kidnapped Venezuelan President Nicolas Maduro in January, Trump imposed a near-total energy blockade of Cuba and announced that the island will be “next” in line for regime change. The warrant pertains to the 1996 shooting down of two American planes operated by anti-communist Cuban exiles off Cuba’s coast. Prosecutors had gathered evidence and witness testimony linking a Cuban spy network to the operation that allegedly led Castro to order the planes shot ",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:12fabc0b78de:c3",
+  "claim": "The Trump administration has tightened U.S. restrictions on Cuba, including a de facto energy blockade.",
+  "evidence_domain": "caribbeanherald.com",
+  "evidence": "US state issues arrest warrant for Raul Castro. In February of 1996, Cuban fighter jets shot down two US planes operated by Brothers to the Rescue, a Miami-based Cuban exile group, killing four men. After US forces kidnapped Venezuelan President Nicolas Maduro in January, Trump imposed a near-total energy blockade of Cuba and announced that the island will be \"next\" in line for regime change. RT.com\n                \n20 Oct 2026, 02:15 GMT+10\n            \nA Florida court has approved legal action against the former Cuban leader over the 1996 shooting down of two US planes\nA Florida judge has issued an arrest warrant for former Cuban President Raul Castro, 95, the state's attorney general anno",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:2a0496d94138:c1",
+  "claim": "Robert E. Hall and Michael Woodford won the 2026 Nobel prize in economics.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "Michael Dean Woodford. In 2026, he was awarded the Nobel Memorial Prize in Economic Sciences, along with Robert Hall. Michael Dean Woodford (born 1955) is an American macroeconomist and monetary theorist who teaches at Columbia University.",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:2a0496d94138:c1",
+  "claim": "Robert E. Hall and Michael Woodford won the 2026 Nobel prize in economics.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "Nobel Memorial Prize in Economic Sciences. Officially, it is titled The Sveriges Riksbank Prize in Economic Sciences in Memory of Alfred Nobel (Swedish: Sveriges riksbanks pris i ekonomisk vetenskap till Alfred Nobels minne), established in 1968 by Sweden's central bank, Sveriges Riksbank, to celebrate its 300th anniversary and in memory of Alfred Nobel. The laureates of the Prize in Economic Sciences are selected by the Royal Swedish Academy of Sciences, which also selects the laureates of the prizes in Physics and Chemistry. The Nobel Memorial Prize in Economic Sciences, often referred to as the Nobel Prize in Economics, is an award in the field of economic sciences administered by the Nob",
+  "model": "unclear"
+ },
+ {
+  "claim_id": "n:2a0496d94138:c2",
+  "claim": "The prize was awarded by the Royal Swedish Academy of Sciences in Stockholm.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "Michael Dean Woodford. In 2026, he was awarded the Nobel Memorial Prize in Economic Sciences, along with Robert Hall. Michael Dean Woodford (born 1955) is an American macroeconomist and monetary theorist who teaches at Columbia University.",
+  "model": "unclear"
+ },
+ {
+  "claim_id": "n:2a0496d94138:c2",
+  "claim": "The prize was awarded by the Royal Swedish Academy of Sciences in Stockholm.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "Nobel Memorial Prize in Economic Sciences. Officially, it is titled The Sveriges Riksbank Prize in Economic Sciences in Memory of Alfred Nobel (Swedish: Sveriges riksbanks pris i ekonomisk vetenskap till Alfred Nobels minne), established in 1968 by Sweden's central bank, Sveriges Riksbank, to celebrate its 300th anniversary and in memory of Alfred Nobel. The laureates of the Prize in Economic Sciences are selected by the Royal Swedish Academy of Sciences, which also selects the laureates of the prizes in Physics and Chemistry. The Nobel Memorial Prize in Economic Sciences, often referred to as the Nobel Prize in Economics, is an award in the field of economic sciences administered by the Nob",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:2a0496d94138:c3",
+  "claim": "Their economic models help governments and central banks stabilize economies against external shocks.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "Michael Dean Woodford. In 2026, he was awarded the Nobel Memorial Prize in Economic Sciences, along with Robert Hall. Michael Dean Woodford (born 1955) is an American macroeconomist and monetary theorist who teaches at Columbia University.",
+  "model": "unclear"
+ },
+ {
+  "claim_id": "n:2a0496d94138:c3",
+  "claim": "Their economic models help governments and central banks stabilize economies against external shocks.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "Nobel Memorial Prize in Economic Sciences. Officially, it is titled The Sveriges Riksbank Prize in Economic Sciences in Memory of Alfred Nobel (Swedish: Sveriges riksbanks pris i ekonomisk vetenskap till Alfred Nobels minne), established in 1968 by Sweden's central bank, Sveriges Riksbank, to celebrate its 300th anniversary and in memory of Alfred Nobel. The laureates of the Prize in Economic Sciences are selected by the Royal Swedish Academy of Sciences, which also selects the laureates of the prizes in Physics and Chemistry. The Nobel Memorial Prize in Economic Sciences, often referred to as the Nobel Prize in Economics, is an award in the field of economic sciences administered by the Nob",
+  "model": "unclear"
+ },
+ {
+  "claim_id": "n:2ea4338fe8f4:c1",
+  "claim": "Albertans are voting on ten referendums.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "2026 Alberta referendum. On May 21, 2026, Smith announced a tenth referendum question, on whether Alberta should remain within Canada or pursue a path toward a binding referendum on separating from Canada. The other four are constitutional, and relate to Alberta's relationship with the Government of Canada, seeking amendments to the Constitution of Canada. On February 19, 2026, Alberta premier Danielle Smith announced a referendum to be held on October 19, 2026. In her address, she announced that Albertans will be asked to vote on nine questions.",
+  "model": "contradicts"
+ },
+ {
+  "claim_id": "n:2ea4338fe8f4:c1",
+  "claim": "Albertans are voting on ten referendums.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "Alberta separatist movement. The Alberta separatist movement is a series of 20th- and 21st-century secessionist movements advocating the separation of the province of Alberta from Canada, with some groups also supporting the creation of a sovereign union with the other provinces of Western Canada, and other groups supporting Alberta joining the United States. In 2025, the Alberta Forever Canada citizen initiative opposing Alberta's separation from Canada was launched and verified by Elections Alberta pending its meeting the required number of signatures. On May 13, 2026, Alberta Justice Shaina Leonard ruled in favour of several First Nations whose lawyers argued that using Alberta's referend",
+  "model": "unclear"
+ },
+ {
+  "claim_id": "n:2ea4338fe8f4:c2",
+  "claim": "One of the referendums asks whether Alberta should seek separation from Canada.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "2026 Alberta referendum. On May 21, 2026, Smith announced a tenth referendum question, on whether Alberta should remain within Canada or pursue a path toward a binding referendum on separating from Canada. The other four are constitutional, and relate to Alberta's relationship with the Government of Canada, seeking amendments to the Constitution of Canada. On February 19, 2026, Alberta premier Danielle Smith announced a referendum to be held on October 19, 2026. In her address, she announced that Albertans will be asked to vote on nine questions.",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:2ea4338fe8f4:c2",
+  "claim": "One of the referendums asks whether Alberta should seek separation from Canada.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "Alberta separatist movement. The Alberta separatist movement is a series of 20th- and 21st-century secessionist movements advocating the separation of the province of Alberta from Canada, with some groups also supporting the creation of a sovereign union with the other provinces of Western Canada, and other groups supporting Alberta joining the United States. In 2025, the Alberta Forever Canada citizen initiative opposing Alberta's separation from Canada was launched and verified by Elections Alberta pending its meeting the required number of signatures. On May 13, 2026, Alberta Justice Shaina Leonard ruled in favour of several First Nations whose lawyers argued that using Alberta's referend",
+  "model": "unclear"
+ },
+ {
+  "claim_id": "n:2ef6e37a2b5f:c1",
+  "claim": "The European Commission signed Association Agreements with Andorra and San Marino.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "Andorra—San Marino—European Union Association Agreement. The Andorra—San Marino—European Union Association Agreement, formally the Agreement establishing an association between the European Union and its Member States, of the one part, and the Principality of Andorra and the Republic of San Marino, each as a separate Party, of the other part is an association agreement of the European Union (and its 27 member states) with Andorra and San Marino. The agreement is the most comprehensive the EU has ever negotiated as \n\nit includes extension of the European single market to Andorra and San Marino and thus the application of the four freedoms: free movement of goods as well as capital, freedom to",
+  "model": "supports"
+ },
+ {
+  "claim_id": "n:2ef6e37a2b5f:c2",
+  "claim": "The deals aim to provide greater legal certainty and predictability for citizens, businesses and public authorities.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "Andorra—San Marino—European Union Association Agreement. The Andorra—San Marino—European Union Association Agreement, formally the Agreement establishing an association between the European Union and its Member States, of the one part, and the Principality of Andorra and the Republic of San Marino, each as a separate Party, of the other part is an association agreement of the European Union (and its 27 member states) with Andorra and San Marino. The agreement is the most comprehensive the EU has ever negotiated as \n\nit includes extension of the European single market to Andorra and San Marino and thus the application of the four freedoms: free movement of goods as well as capital, freedom to",
+  "model": "unclear"
+ },
+ {
+  "claim_id": "n:2ef6e37a2b5f:c3",
+  "claim": "Updated Monetary Agreements were also signed with Andorra and San Marino to address overlaps with the new Association Agreement.",
+  "evidence_domain": "en.wikipedia.org",
+  "evidence": "Andorra—San Marino—European Union Association Agreement. The Andorra—San Marino—European Union Association Agreement, formally the Agreement establishing an association between the European Union and its Member States, of the one part, and the Principality of Andorra and the Republic of San Marino, each as a separate Party, of the other part is an association agreement of the European Union (and its 27 member states) with Andorra and San Marino. The agreement is the most comprehensive the EU has ever negotiated as \n\nit includes extension of the European single market to Andorra and San Marino and thus the application of the four freedoms: free movement of goods as well as capital, freedom to",
+  "model": "unclear"
+ }
+]

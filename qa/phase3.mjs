@@ -54,6 +54,14 @@ async function helpers(page) {
         if (key === 'help-button') return app.helpButton;
         return app.cards.get(key);
       },
+      /** Expand a light: press Expand, or (V2 auto-expand on touch) it is already growing. */
+      async expand(id) {
+        const app = window.__fw.app;
+        const it = app.getItem ? app.getItem(id) : app.lights.get(id);
+        if (it?.expanded || app.expanding?.id === id) return 'auto';
+        await this.press(`light:${id}`, 'expand');
+        return 'pressed';
+      },
       async press(key, id) {
         await wait(500);
         const c = this.cardOf(key);
@@ -171,7 +179,7 @@ async function liveRun() {
       await ev(page, () => window.__fw.app.cards.closeAll({ keepPinned: true }));
       const id = await ev(page, () => window.__fw.app.lights.items.find((x) => x.live && !x.expanded && x.via === 'wikipedia')?.id);
       await ev(page, (lid) => window.__fw.app.openLight(lid), id);
-      await ev(page, (lid) => window.__qa.press(`light:${lid}`, 'expand'), id);
+      await ev(page, (lid) => window.__qa.expand(lid), id);
       await page.waitForFunction((lid) => window.__fw.app.lights.get(lid).expanded === true, id, { timeout: 180000 });
       const n = await ev(page, () => window.__fw.app.insightList.length);
       if (!n) return { insights: 0, note: 'nothing notable in this web' };
@@ -267,7 +275,7 @@ async function offlineRun() {
     await step(page, 'offline: recorded answer replays for a suggested question', async () => {
       const id = await ev(page, () => Object.keys(window.__fw.app.snapshot.expansions)[1] || Object.keys(window.__fw.app.snapshot.expansions)[0]);
       await ev(page, (lid) => window.__fw.app.openLight(lid), id);
-      await ev(page, (lid) => window.__qa.press(`light:${lid}`, 'expand'), id);
+      await ev(page, (lid) => window.__qa.expand(lid), id);
       await page.waitForFunction((lid) => window.__fw.app.lights.get(lid).expanded === true, id, { timeout: 60000 });
       await ev(page, (lid) => window.__fw.app.ask('Who is affected?', lid), id);
       const a = await ev(page, () => window.__fw.app.lastAnswer);

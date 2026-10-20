@@ -32,6 +32,14 @@ await page.evaluate(() => {
       await wait(120);
       await d.remote.dispatch('set_select_value', { device: 'hand-right', value: 0 });
     },
+    /** Expand a light: press Expand, or (V2 auto-expand on touch) it is already growing. */
+    async expand(id) {
+      const app = window.__fw.app;
+      const it = app.getItem ? app.getItem(id) : app.lights.get(id);
+      if (it?.expanded || app.expanding?.id === id) return 'auto';
+      await this.press(`light:${id}`, 'expand');
+      return 'pressed';
+    },
     async press(key, id) {
       await wait(450); // let the card settle (a person would read it)
       const c = key === 'help-button' ? app.helpButton : app.cards.get(key);
@@ -53,7 +61,7 @@ await page.waitForFunction((lid) => window.__fw.app.cards.get(`light:${lid}`), i
 steps['touch light → reader card open'] = t() - t0;
 
 t0 = t();
-await page.evaluate((lid) => window.__qa.press(`light:${lid}`, 'expand'), id);
+await page.evaluate((lid) => window.__qa.expand(lid), id);
 await page.waitForFunction((lid) => window.__fw.app.store.nodes.has(lid), id, { timeout: 20000 });
 steps['pinch Expand → first node'] = t() - t0;
 await page.waitForFunction((lid) => window.__fw.app.lights.get(lid).expanded === true, id, { timeout: 60000 });

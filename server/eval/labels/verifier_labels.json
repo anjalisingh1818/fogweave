@@ -1,0 +1,289 @@
+[
+ {
+  "i": 0,
+  "claim_id": "n:00dfe2b0206f:c1",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 1,
+  "claim_id": "n:00dfe2b0206f:c1",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 2,
+  "claim_id": "n:00dfe2b0206f:c2",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 3,
+  "claim_id": "n:00dfe2b0206f:c2",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 4,
+  "claim_id": "n:0460555895d3:c1",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 5,
+  "claim_id": "n:0460555895d3:c2",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 6,
+  "claim_id": "n:0460555895d3:c3",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 7,
+  "claim_id": "n:047b20792022:c1",
+  "gold": "unclear",
+  "why": "unrelated banknote article",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 8,
+  "claim_id": "n:047b20792022:c1",
+  "gold": "unclear",
+  "why": "unrelated currency article",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 9,
+  "claim_id": "n:047b20792022:c2",
+  "gold": "unclear",
+  "why": "unrelated",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 10,
+  "claim_id": "n:047b20792022:c2",
+  "gold": "unclear",
+  "why": "unrelated",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 11,
+  "claim_id": "n:047b20792022:c3",
+  "gold": "unclear",
+  "why": "unrelated",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 12,
+  "claim_id": "n:047b20792022:c3",
+  "gold": "unclear",
+  "why": "unrelated",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 13,
+  "claim_id": "n:0f5a4c632e8d:c1",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 14,
+  "claim_id": "n:0f5a4c632e8d:c2",
+  "gold": "unclear",
+  "why": "says 'several injured', not seven",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 15,
+  "claim_id": "n:0f5a4c632e8d:c3",
+  "gold": "unclear",
+  "why": "gold mine, but open pit is not stated",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 16,
+  "claim_id": "n:12fabc0b78de:c1",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 17,
+  "claim_id": "n:12fabc0b78de:c1",
+  "gold": "supports",
+  "why": "the full excerpt says the evidence allegedly led Castro to order the planes shot down (corrected after reading the full 700-character excerpt the model saw; the first pass read 420)",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 18,
+  "claim_id": "n:12fabc0b78de:c1",
+  "gold": "supports",
+  "why": "same text as 17 (corrected after reading the full 700-character excerpt the model saw; the first pass read 420)",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 19,
+  "claim_id": "n:12fabc0b78de:c1",
+  "gold": "unclear",
+  "why": "same text as 17",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 20,
+  "claim_id": "n:12fabc0b78de:c2",
+  "gold": "supports",
+  "why": "the full excerpt says four people were killed (corrected after reading the full 700-character excerpt the model saw; the first pass read 420)",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 21,
+  "claim_id": "n:12fabc0b78de:c2",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 22,
+  "claim_id": "n:12fabc0b78de:c2",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 23,
+  "claim_id": "n:12fabc0b78de:c2",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 24,
+  "claim_id": "n:12fabc0b78de:c3",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 25,
+  "claim_id": "n:12fabc0b78de:c3",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 26,
+  "claim_id": "n:12fabc0b78de:c3",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 27,
+  "claim_id": "n:12fabc0b78de:c3",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 28,
+  "claim_id": "n:2a0496d94138:c1",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 29,
+  "claim_id": "n:2a0496d94138:c1",
+  "gold": "unclear",
+  "why": "general article on the prize",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 30,
+  "claim_id": "n:2a0496d94138:c2",
+  "gold": "unclear",
+  "why": "does not name the awarding body or place",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 31,
+  "claim_id": "n:2a0496d94138:c2",
+  "gold": "unclear",
+  "why": "general article; not this award",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 32,
+  "claim_id": "n:2a0496d94138:c3",
+  "gold": "unclear",
+  "why": "does not mention the models' use",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 33,
+  "claim_id": "n:2a0496d94138:c3",
+  "gold": "unclear",
+  "why": "general article",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 34,
+  "claim_id": "n:2ea4338fe8f4:c1",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 35,
+  "claim_id": "n:2ea4338fe8f4:c1",
+  "gold": "unclear",
+  "why": "general article on the movement",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 36,
+  "claim_id": "n:2ea4338fe8f4:c2",
+  "gold": "supports",
+  "why": "the excerpt states it",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 37,
+  "claim_id": "n:2ea4338fe8f4:c2",
+  "gold": "unclear",
+  "why": "general article on the movement",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 38,
+  "claim_id": "n:2ef6e37a2b5f:c1",
+  "gold": "supports",
+  "why": "the agreement between the EU and both states is described; the signing body is not",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 39,
+  "claim_id": "n:2ef6e37a2b5f:c2",
+  "gold": "unclear",
+  "why": "aims are not in the excerpt",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ },
+ {
+  "i": 40,
+  "claim_id": "n:2ef6e37a2b5f:c3",
+  "gold": "unclear",
+  "why": "monetary agreements are not in the excerpt",
+  "by": "build assistant (Claude), labelled without seeing the model's stance"
+ }
+]

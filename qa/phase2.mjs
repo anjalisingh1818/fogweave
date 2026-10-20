@@ -61,6 +61,14 @@ async function helpers(page) {
         if (key === 'help-button') return app.helpButton;
         return app.cards.get(key);
       },
+      /** Expand a light: press Expand, or (V2 auto-expand on touch) it is already growing. */
+      async expand(id) {
+        const app = window.__fw.app;
+        const it = app.getItem ? app.getItem(id) : app.lights.get(id);
+        if (it?.expanded || app.expanding?.id === id) return 'auto';
+        await this.press(`light:${id}`, 'expand');
+        return 'pressed';
+      },
       async press(key, id, device = 'hand-right') {
         await wait(500);
         const c = this.cardOf(key);
@@ -121,14 +129,15 @@ async function liveRun() {
         const it = window.__fw.app.lights.get(id);
         return { headline: it.headline, claims: (it.claims || []).length, note: it.claimsNote, buttons: window.__qa.cardOf(`light:${id}`).buttonIds() };
       }, lightId);
-      if (!r.buttons.includes('expand')) throw new Error('Expand not offered: ' + JSON.stringify(r));
+      r.autoExpand = await ev((id) => !!(window.__fw.app.getItem(id)?.expanded || window.__fw.app.expanding?.id === id), lightId);
+      if (!r.buttons.includes('expand') && !r.autoExpand) throw new Error('Expand not offered: ' + JSON.stringify(r));
       await shot(page, 'p2-02-reader');
       return r;
     });
 
     await step(page, 'Expand by pinch: graph streams in with labelled links', async () => {
       const t0 = Date.now();
-      await ev((id) => window.__qa.press(`light:${id}`, 'expand'), lightId);
+      await ev((id) => window.__qa.expand(id), lightId);
       await page.waitForFunction((id) => window.__fw.app.store.nodes.has(id), lightId, { timeout: 30000 });
       timings.firstNodeMs = Date.now() - t0;
       await page.waitForFunction((id) => window.__fw.app.lights.get(id).expanded === true, lightId, { timeout: 180000 });
@@ -259,7 +268,7 @@ async function liveRun() {
       const other = await ev(() => window.__fw.app.lights.items.find((x) => !x.expanded && x.live)?.id);
       if (!other) return { skipped: 'no second light' };
       await ev((id) => window.__fw.app.openLight(id), other);
-      await ev((id) => window.__qa.press(`light:${id}`, 'expand'), other);
+      await ev((id) => window.__qa.expand(id), other);
       await page.waitForTimeout(2500);
       await ev(() => window.__qa.press('status', 'stop'));
       await page.waitForFunction(() => !window.__fw.app.researching, null, { timeout: 20000 });
@@ -306,7 +315,7 @@ async function offlineRun() {
     await step(page, 'offline: Expand replays a recorded real run', async () => {
       const ids = await ev(() => Object.keys(window.__fw.app.snapshot.expansions));
       await ev((id) => window.__fw.app.openLight(id), ids[0]);
-      await ev((id) => window.__qa.press(`light:${id}`, 'expand'), ids[0]);
+      await ev((id) => window.__qa.expand(id), ids[0]);
       await page.waitForFunction((id) => window.__fw.app.lights.get(id).expanded === true, ids[0], { timeout: 60000 });
       await page.waitForTimeout(2000);
       const r = await ev(() => {
@@ -327,7 +336,7 @@ async function offlineRun() {
       return r;
     });
 
-    await step(page, 'stress web: 160 nodes capped to 150, frame stats', async () => {
+    await step(page, 'stress web: 160 nodes, at most 60 drawn (focus-aware), frame stats', async () => {
       const doc = JSON.parse(readFileSync('qa/fixtures/stress-150.json', 'utf8'));
       await ev((d) => {
         const app = window.__fw.app;
@@ -353,7 +362,7 @@ async function offlineRun() {
         const avg = dts.reduce((a, b) => a + b, 0) / dts.length;
         return { visible: app.view.visibleIds.length, total: app.store.nodes.size, fps: +(1000 / avg).toFixed(1), p95ms: +dts[Math.floor(dts.length * 0.95)].toFixed(1) };
       });
-      if (s.visible > 150) throw new Error(JSON.stringify(s));
+      if (s.visible > 60) throw new Error(JSON.stringify(s));
       return s;
     });
 

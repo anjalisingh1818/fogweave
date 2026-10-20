@@ -3,6 +3,7 @@ log (resumable: finished items are skipped; LLM/HTTP caches make reruns cheap).
 
   python eval/run.py            all items
   python eval/run.py --limit 5
+  python eval/run.py --out runs_after   (same items, current pipeline, for before/after)
 """
 
 from __future__ import annotations
@@ -23,7 +24,8 @@ DATA = ROOT / "eval" / "data"
 RUNS = ROOT / "eval" / "runs"
 
 
-async def main(limit: int | None):
+async def main(limit: int | None, out_dir: str):
+    RUNS = ROOT / "eval" / out_dir
     spec = json.loads((DATA / "items.json").read_text(encoding="utf-8"))
     personas = spec["personas"]
     RUNS.mkdir(parents=True, exist_ok=True)
@@ -58,4 +60,6 @@ async def main(limit: int | None):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int)
-    asyncio.run(main(ap.parse_args().limit))
+    ap.add_argument("--out", default="runs")
+    a = ap.parse_args()
+    asyncio.run(main(a.limit, a.out))
