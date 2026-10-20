@@ -25,10 +25,19 @@ import { readerDraw } from './ui/reader-card.js';
 import { EventPlayer, applyEvent } from './research/events.js';
 import { ResearchClient } from './research/client.js';
 import { ContextStore, SAMPLE_PERSONA, CONTEXT_KINDS } from './context.js';
-import { settings, loadSettings, setQuality } from './config.js';
+import { settings, loadSettings, setQuality, saveSettings } from './config.js';
+import { answerDraw, ASK_SUGGESTIONS, notesDraw, lightsPanelDraw, settingsDraw, timelineDraw, briefingDraw, exportDraw, insightsDraw } from './ui/panels.js';
+import { insights } from './insights.js';
+import { Ambient, speech } from './audio.js';
+import { listenOnce } from './voice-input.js';
+import { sealedView, buildJsonLd, buildJsonl, buildMarkdown } from './export/pack.js';
+import { zipSync, strToU8 } from 'fflate';
 import { QualityGovernor } from './quality.js';
 
 const LIBRARY_KEY = 'fogweave.library.v1';
+const NOTES_KEY = 'fogweave.notes.v1';
+const ANSWERS_KEY = 'fogweave.answers.v1';
+const BRIEFING_KEY = 'fogweave.briefing.v1';
 const SEALED_LIGHTS_KEY = 'fogweave.sealedLights.v1';
 const SNAPSHOT = 'demo/snapshot/index.json';
 
@@ -74,8 +83,15 @@ export class App {
     this.player = null; // replay of a recorded run
     this.expanding = null; // { id, controller } live run
     this.statusText = '';
-    this.notes = [];
+    this.notes = []; // status notes from the engine
     this.lastStats = null;
+    this.userNotes = readJSON(NOTES_KEY, []);
+    this.sealedAnswers = readJSON(ANSWERS_KEY, []);
+    this.answers = []; // session memory of answers
+    this.insightList = [];
+    this.briefing = null;
+    this.ambient = new Ambient();
+    this._gestureSeen = false;
     this._buildStatusCard();
     this._buildHelpButton();
     this._wireNodePicking();
@@ -112,7 +128,371 @@ export class App {
     }
     this._applyRelevance();
     this.setStatus('');
+    this._restoreWorkspace();
     if (Onboarding.needed()) this.startOnboarding();
+    else this._offerBriefing();
+  }
+
+  // ---------- workspace panels (pinned cards come back where you left them) ----------
+
+  _restoreWorkspace() {
+    const layout = this.cards.savedLayout();
+    const open = { library: () => this.openLibrary(layout.library), notes: () => this.openNotes(layout.notes), lights: () => this.openLightsPanel(layout.lights) };
+    for (const key of Object.keys(layout)) {
+      if (!open[key]) continue;
+      open[key]();
+      this.cards.entry(key) && (this.cards.entry(key).pinned = true);
+      this.cards.get(key)?.redraw();
+    }
+  }
+
+  get notesList() {
+    return this.userNotes;
+  }
+
+  openNotes(slot = 3) {
+    this.closeCard('help');
+    this.cards.show('notes', { width: 0.44, height: 0.4, draw: notesDraw(this), slot });
+  }
+
+  openLightsPanel(slot = 4) {
+    this.closeCard('help');
+    this.cards.show('lights', { width: 0.46, height: 0.42, draw: lightsPanelDraw(this), slot });
+  }
+
+  openSettings() {
+    this.closeCard('help');
+    this.cards.show('settings', { width: 0.46, height: 0.42, draw: settingsDraw(this), slot: 1 });
+  }
+
+  saveSettings() {
+    saveSettings();
+    this.setAmbient(settings.audio.enabled, { persist: false });
+  }
+
+  setAmbient(on, { persist = true } = {}) {
+    settings.audio.enabled = on;
+    if (persist) saveSettings();
+    if (on && this._gestureSeen) this.ambient.start();
+    if (!on) this.ambient.stop();
+  }
+
+  /** Browsers only allow sound after a gesture: the first pinch/click. */
+  userGesture() {
+    if (this._gestureSeen) return;
+    this._gestureSeen = true;
+    if (settings.audio.enabled) this.ambient.start();
+  }
+
+  voiceAvailable() {
+    return typeof window !== 'undefined' && !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+  }
+
+  addNote(text) {
+    const t = String(text || '').trim().slice(0, 200);
+    if (!t) return;
+    this.userNotes.push({ text: t, at: new Date().toISOString() });
+    writeJSON(NOTES_KEY, this.userNotes);
+    this.cards.get('notes')?.redraw();
+  }
+
+  removeNote(i) {
+    this.userNotes.splice(i, 1);
+    writeJSON(NOTES_KEY, this.userNotes);
+    this.cards.get('notes')?.redraw();
+  }
+
+  // ---------- Ask (GraphRAG on the server; reliability answered locally) ----------
+
+  openAsk(focusId) {
+    this.askFocus = focusId;
+    this.openKeypad('ask');
+  }
+
+  async ask(question, focusId = this.askFocus) {
+    const q = String(question || '').trim();
+    if (!q) return null;
+    this.setStatus('Thinking about your question…');
+    let a;
+    if (/^is this reliable\??$/i.test(q)) a = this._localReliability(q, focusId);
+    else if (this.mode === 'live') {
+      const r = await this.client.ask(q, this.compactGraph(focusId));
+      a = r ? { ...r, question: q } : { question: q, refused: false, answerable: false, text: 'The engine did not answer; try again.', sentences: [], citations: {} };
+    } else {
+      const rec = this._recordedAnswer(q, focusId);
+      a = rec || { question: q, refused: false, answerable: false, text: 'Asking needs the live engine. Offline, recorded answers exist for the suggested questions on expanded items.', sentences: [], citations: {} };
+    }
+    a.focus = focusId;
+    this.answers.push(a);
+    this.lastAnswer = a;
+    this.setStatus('');
+    this.cards.show('answer', { width: 0.48, height: 0.46, draw: answerDraw(this, a), slot: 2 });
+    this.onboarding.notify('asked');
+    return a;
+  }
+
+  _recordedAnswer(q, focusId) {
+    const recs = this._recordedAnswers?.[focusId] || {};
+    const hit = Object.entries(recs).find(([k]) => k.toLowerCase() === q.toLowerCase());
+    return hit ? { ...hit[1], question: q, recorded: hit[1].recordedAt || this.snapshot?.generatedAt } : null;
+  }
+
+  /** "Is this reliable?" from the evidence breakdown: deterministic, no LLM. */
+  _localReliability(q, focusId) {
+    const id = focusId && this.store.nodes.has(focusId) ? focusId : null;
+    const light = this.lights.get(focusId);
+    const citations = {};
+    const sentences = [];
+    if (!id) {
+      const n = (light?.claims || []).length;
+      sentences.push({ text: `${n} key claim${n === 1 ? '' : 's'} were read from ${light?.source || 'the source'}; none is checked against other sources until you expand it.`, cites: ['F1'], kind: 'supported' });
+      citations.F1 = { text: light?.headline || '', source: light?.url || '', quote: light?.claims?.[0]?.quote || '' };
+      return { question: q, local: true, answerable: true, refused: false, sentences, citations, text: sentences[0].text };
+    }
+    const node = this.store.nodes.get(id);
+    const claims = [...this.store.edges.values()].filter((e) => e.from === id && e.type === 'reports').map((e) => this.store.nodes.get(e.to)).filter(Boolean);
+    const list = node.type === 'Claim' ? [node] : claims;
+    const count = (v) => list.filter((c) => (c.verdict || 'unverified') === v).length;
+    const s1 = `Of ${list.length} key claim${list.length === 1 ? '' : 's'}, ${count('supported')} ${count('supported') === 1 ? 'is' : 'are'} well supported by independent sources, ${count('mixed')} mixed, ${count('contradicted')} contradicted and ${count('unverified')} unverified.`;
+    sentences.push({ text: s1, cites: list.slice(0, 3).map((c, i) => `F${i + 1}`), kind: 'supported' });
+    list.slice(0, 3).forEach((c, i) => (citations[`F${i + 1}`] = { node: c.id, text: c.label, quote: c.quote || '', source: c.url || '' }));
+    const weak = list.filter((c) => (c.evidence?.independentDomains ?? 1) <= 1).length;
+    if (weak) sentences.push({ text: `${weak} rest${weak === 1 ? 's' : ''} on a single source, which is a weak spot.`, cites: list.slice(0, 1).map(() => 'F1'), kind: 'supported' });
+    if (node.outlet) sentences.push({ text: `The outlet is ${node.outlet}${node.sourceClass ? ` (${node.sourceClass})` : ''}.`, cites: ['F1'], kind: 'supported' });
+    return { question: q, local: true, answerable: true, refused: false, sentences, citations, text: sentences.map((s) => s.text).join(' ') };
+  }
+
+  /** The part of the web around a focus, without private context. */
+  compactGraph(focusId, limit = 60) {
+    const keep = new Set();
+    const queue = [];
+    if (focusId && this.store.nodes.has(focusId)) {
+      keep.add(focusId);
+      queue.push([focusId, 0]);
+    }
+    while (queue.length && keep.size < limit) {
+      const [id, d] = queue.shift();
+      if (d >= 2) continue;
+      for (const { id: nb } of this.store.neighbors(id)) {
+        const n = this.store.nodes.get(nb);
+        if (!n || n.private || n.type === 'ContextNode' || keep.has(nb)) continue;
+        keep.add(nb);
+        queue.push([nb, d + 1]);
+      }
+    }
+    const nodes = [...keep].map((id) => {
+      const n = this.store.nodes.get(id);
+      return { id: n.id, type: n.type, label: n.label, quote: n.quote, verdict: n.verdict, evidence: n.evidence && { independentDomains: n.evidence.independentDomains }, outlet: n.outlet, date: n.date, url: n.url };
+    });
+    // an unexpanded light: send what its reader card shows
+    const light = this.lights.get(focusId);
+    if (light && !keep.has(focusId)) {
+      nodes.push({ id: light.id, type: 'NewsItem', label: light.headline, outlet: light.source, date: light.date, url: light.url });
+      (light.claims || []).forEach((c, i) => nodes.push({ id: `${light.id}:rc${i}`, type: 'Claim', label: c.text, quote: c.quote, verdict: 'unverified', url: light.url }));
+    }
+    const edges = [...this.store.edges.values()]
+      .filter((e) => keep.has(e.from) && keep.has(e.to))
+      .map((e) => ({ id: e.id, type: e.type, from: e.from, to: e.to, label: e.label, reasoning: e.reasoning, evidence: (e.evidence || []).slice(0, 1) }));
+    return { nodes, edges };
+  }
+
+  showCitation(a, cid) {
+    const c = a.citations?.[cid];
+    if (!c) return;
+    if (c.node && this.store.nodes.has(c.node)) {
+      this.view.flash(c.node, 3);
+      return this.pinchNode(c.node);
+    }
+    if (c.edge && this.store.edges.has(c.edge)) {
+      const e = this.store.edges.get(c.edge);
+      this.view.showPath({ nodes: [e.from, e.to], edges: [e] });
+      this.view.flash(e.from, 3);
+      this.view.flash(e.to, 3);
+      return this.pinchNode(e.from);
+    }
+    this.cards.show('citation', {
+      width: 0.44,
+      height: 0.3,
+      draw: messageDraw(this, 'citation', `Source ${cid.slice(1)}`, `${c.text}${c.quote ? `\n“${c.quote}”` : ''}\n${c.source || ''}`),
+    });
+  }
+
+  keepAnswer(a) {
+    if (a.refused) return;
+    this.sealedAnswers.push({ question: a.question, text: a.text, citations: Object.values(a.citations || {}).map((c) => ({ text: c.text, quote: c.quote, source: c.source })), keptAt: new Date().toISOString() });
+    writeJSON(ANSWERS_KEY, this.sealedAnswers);
+    this.cards.get('answer')?.redraw();
+    this.onboarding.notify('sealed');
+  }
+
+  // ---------- stories / timeline ----------
+
+  storyMates(id, { includeSelf = false } = {}) {
+    const it = this.lights.get(id);
+    if (!it || it.story === undefined || it.story === null) return includeSelf && it ? [it] : [];
+    return this.lights.items
+      .filter((x) => x.story === it.story && (includeSelf || x.id !== id))
+      .sort((a, b) => String(a.date).localeCompare(String(b.date)));
+  }
+
+  openTimeline(id) {
+    this.lights.pull(this.storyMates(id, { includeSelf: true }).map((x) => x.id));
+    this.cards.show('timeline', { width: 0.46, height: 0.42, draw: timelineDraw(this, id), slot: 2 });
+  }
+
+  /** Grounded effects for a news item (never speculative): for the briefing. */
+  impactThread(newsId) {
+    const about = [...this.store.edges.values()].filter((e) => e.from === newsId && e.type === 'about').map((e) => e.to);
+    const from = new Set([newsId, ...about]);
+    const out = [];
+    for (const e of this.store.edges.values()) {
+      if (!from.has(e.from) || e.label === 'speculative' || !['affects', 'depends_on'].includes(e.type)) continue;
+      out.push({ label: e.label, text: `${this.store.nodes.get(e.from)?.label} → ${e.type.replace('_', ' ')} → ${this.store.nodes.get(e.to)?.label}` });
+    }
+    return out.sort((a, b) => (a.label === 'reported' ? -1 : 1) - (b.label === 'reported' ? -1 : 1));
+  }
+
+  // ---------- daily briefing (about 5 minutes) ----------
+
+  _offerBriefing() {
+    const today = new Date().toISOString().slice(0, 10);
+    if (readJSON(BRIEFING_KEY, {}).offered === today || this.lights.items.length < 3) return;
+    writeJSON(BRIEFING_KEY, { ...readJSON(BRIEFING_KEY, {}), offered: today });
+    this.cards.show('briefing-offer', {
+      width: 0.42,
+      height: 0.24,
+      slot: 1,
+      draw: messageDraw(this, 'briefing-offer', 'Morning briefing?', 'Five minutes: a few lights picked for you, one from outside your bubble, and what they may affect.', [
+        { id: 'start', label: 'Start', primary: true, onPress: () => this.startBriefing() },
+      ]),
+    });
+  }
+
+  pickBriefing(n = 4, seedDate = new Date().toISOString().slice(0, 10)) {
+    const items = [...this.lights.items].filter((x) => x.kind !== 'archive');
+    const ranked = items.sort((a, b) => (b.relevance ?? 0) - (a.relevance ?? 0));
+    const picks = [];
+    const stories = new Set();
+    for (const it of ranked) {
+      if (picks.length >= n) break;
+      if (stories.has(it.story)) continue; // one item per story
+      picks.push(it);
+      stories.add(it.story);
+    }
+    // one from outside the bubble: an ordinary seeded pick among the least relevant other stories
+    const rest = ranked.filter((x) => !stories.has(x.story)).slice(-Math.max(3, Math.floor(ranked.length / 2)));
+    if (rest.length) {
+      let h = 0;
+      for (const ch of seedDate) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+      picks.push({ ...rest[h % rest.length], outside: true });
+    }
+    return picks;
+  }
+
+  startBriefing() {
+    this.closeCard('briefing-offer');
+    this.closeCard('help');
+    const items = this.pickBriefing();
+    if (!items.length) return null;
+    this.briefing = { items, i: 0, sealedCount: 0, endsAt: Date.now() + 5 * 60000, done: false };
+    this._showBriefingStep();
+    return this.briefing;
+  }
+
+  _showBriefingStep() {
+    const b = this.briefing;
+    if (!b) return;
+    if (!b.done) this.openLight(b.items[b.i].id);
+    this.cards.show('briefing', { width: 0.46, height: 0.36, draw: briefingDraw(this), slot: 1 });
+  }
+
+  briefingKeep() {
+    const b = this.briefing;
+    if (!b) return;
+    this.sealLight(b.items[b.i].id);
+    b.sealedCount++;
+    this.cards.get('briefing')?.redraw();
+  }
+
+  briefingNext() {
+    const b = this.briefing;
+    if (!b) return;
+    if (b.i + 1 < b.items.length && Date.now() < b.endsAt) b.i++;
+    else b.done = true;
+    this._showBriefingStep();
+  }
+
+  endBriefing() {
+    this.briefing = null;
+    this.closeCard('briefing');
+    writeJSON(BRIEFING_KEY, { ...readJSON(BRIEFING_KEY, {}), done: new Date().toISOString().slice(0, 10) });
+  }
+
+  // ---------- Evidence Pack export ----------
+
+  async exportPack() {
+    const generatedAt = new Date().toISOString();
+    const view = sealedView(this.store, this.sealedLights);
+    const notes = this.userNotes;
+    const answers = this.sealedAnswers;
+    const jsonld = buildJsonLd(view, { generatedAt, notes, answers });
+    const validation = this.mode === 'live' ? await this.client.pack(jsonld) : null;
+    const files = {
+      'pack.jsonld': strToU8(JSON.stringify(jsonld, null, 1)),
+      'claims.jsonl': strToU8(buildJsonl(view)),
+      'README.md': strToU8(buildMarkdown(view, { generatedAt, notes, answers, validation })),
+    };
+    if (validation) files['validation.json'] = strToU8(JSON.stringify(validation, null, 1));
+    const zip = zipSync(files);
+    const filename = `fogweave-evidence-pack-${generatedAt.slice(0, 10)}.zip`;
+    let downloaded = false;
+    try {
+      const url = URL.createObjectURL(new Blob([zip], { type: 'application/zip' }));
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+      downloaded = true;
+    } catch (err) {
+      console.warn('[fogweave] download failed', err);
+    }
+    const r = {
+      filename,
+      bytes: zip.length,
+      downloaded,
+      validation,
+      counts: {
+        news: view.nodes.filter((n) => n.type === 'NewsItem').length,
+        claims: view.nodes.filter((n) => n.type === 'Claim').length,
+        links: view.edges.length,
+        answers: answers.length,
+        notes: notes.length,
+      },
+    };
+    this.lastExport = r;
+    this.cards.show('export', { width: 0.46, height: 0.36, draw: exportDraw(this, r), slot: 2 });
+    return r;
+  }
+
+  // ---------- insights ----------
+
+  refreshInsights() {
+    this.insightList = insights(this.store);
+    this._renderStatus();
+    return this.insightList;
+  }
+
+  openInsights() {
+    this.cards.show('insights', { width: 0.46, height: 0.5, draw: insightsDraw(this, this.insightList), slot: 2 });
+  }
+
+  showInsight(ins) {
+    for (const id of ins.ids) this.view.flash(id, 3);
+    const first = ins.ids.find((id) => this.store.nodes.has(id));
+    if (first) this.pinchNode(first);
   }
 
   async _loadSnapshot() {
@@ -198,8 +578,9 @@ export class App {
       const pad = 34;
       const label = running ? `Fog is looking · ${this.statusText}` : this.statusText || this.notes[0] || this.modeLine();
       if (running) ui.ringIcon(pad + 14, h / 2 - 2, 14, '#d9dee6', this.player?.paused ? 'dotted' : 'dashed');
-      ui.text(label, pad + (running ? 44 : 0), h / 2 + 11, { size: 30, maxWidth: w - pad * 2 - (running ? 230 : 0) });
+      ui.text(label, pad + (running ? 44 : 0), h / 2 + 11, { size: 30, maxWidth: w - pad * 2 - (running || this.insightList.length ? 240 : 0) });
       if (running) ui.button('stop', 'Stop', w - pad - 180, 14, 180, h - 28, () => this.stopResearch(), { size: 26 });
+      else if (this.insightList.length) ui.button('insights', `Noticed ${this.insightList.length}`, w - pad - 220, 14, 220, h - 28, () => this.openInsights(), { size: 24 });
     });
   }
 
@@ -215,12 +596,12 @@ export class App {
 
   toggleHelp() {
     if (this.cards.get('help')) this.closeCard('help');
-    else this.cards.show('help', { width: 0.44, height: 0.46, draw: helpDraw(this), slot: 1 });
+    else this.cards.show('help', { width: 0.44, height: 0.52, draw: helpDraw(this), slot: 1 });
   }
 
-  openLibrary() {
+  openLibrary(slot = 1) {
     this.closeCard('help');
-    this.cards.show('library', { width: 0.44, height: 0.38, draw: libraryDraw(this), slot: 1 });
+    this.cards.show('library', { width: 0.44, height: 0.44, draw: libraryDraw(this), slot });
   }
 
   openContext() {
@@ -338,6 +719,8 @@ export class App {
         this.setStatus('That recorded run is missing from the snapshot.');
         return;
       }
+      this._recordedAnswers ??= {};
+      if (rec.answers) this._recordedAnswers[id] = rec.answers;
       await new Promise((resolve) => {
         this.player = new EventPlayer(this.store, rec.events, {
           durationMs: 9000,
@@ -352,6 +735,7 @@ export class App {
     it.expanded = true;
     this.context.syncToStore(this.store);
     this._applyRelevance();
+    this.refreshInsights();
     this.setStatus('');
     this._refreshCards();
     this.onboarding.notify('expanded');
@@ -555,18 +939,37 @@ export class App {
   openKeypad(mode = 'find') {
     this.keypadMode = mode;
     if (this.keypad.isOpen) this.keypad.close();
+    const mic = settings.voice.enabled && this.voiceAvailable() ? () => this.voiceInto() : null;
     if (mode === 'context') {
       const have = new Set(this.context.labels().map((l) => l.toLowerCase()));
       const sugg = SAMPLE_PERSONA.map((p) => p.label).filter((l) => !have.has(l.toLowerCase()));
-      this.keypad.open({ prompt: 'Add to your context (coarse, no personal details)', suggestions: sugg });
+      this.keypad.open({ prompt: 'Add to your context (coarse, no personal details)', suggestions: sugg, mic });
+    } else if (mode === 'ask') {
+      this.keypad.open({ prompt: 'Ask about this', suggestions: ASK_SUGGESTIONS, mic });
+    } else if (mode === 'note') {
+      this.keypad.open({ prompt: 'Add a note', suggestions: [], mic });
     } else {
       const sugg = [...this.lights.items].sort((a, b) => (b.relevance ?? 0) - (a.relevance ?? 0)).slice(0, 4).map((it) => shortHeadline(it.headline));
-      this.keypad.open({ prompt: 'Find a light', suggestions: sugg });
+      this.keypad.open({ prompt: 'Find a light', suggestions: sugg, mic });
     }
+  }
+
+  /** Optional voice: fills the keypad; the reader confirms with Go (or edits). */
+  async voiceInto() {
+    if (!this.keypad.isOpen) return;
+    const prompt = this.keypad.prompt;
+    this.keypad.prompt = 'Listening…';
+    this.keypad.card?.redraw();
+    const heard = await listenOnce({ timeoutMs: 7000 });
+    this.keypad.prompt = heard ? `I heard: "${heard}". Go to confirm, or edit` : `${prompt} (didn't catch that)`;
+    if (heard) this.keypad.text = heard.slice(0, 80);
+    this.keypad.card?.redraw();
   }
 
   async _onKeypadSubmit(text) {
     if (this.keypadMode === 'context') return this.addContext(text);
+    if (this.keypadMode === 'ask') return this.ask(text);
+    if (this.keypadMode === 'note') return this.addNote(text);
     return this.findLight(text);
   }
 
@@ -662,6 +1065,7 @@ export class App {
   }
 
   update(delta) {
+    if (!this._gestureSeen && (this.world.session || this.keypad.isOpen)) this.userGesture();
     this.headPose(_hp, _hq);
     const now = performance.now();
     this.player?.update(delta * 1000);

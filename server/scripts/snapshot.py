@@ -23,7 +23,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from fogweave import embed, ontology  # noqa: E402
+from fogweave.answer import answer  # noqa: E402
 from fogweave.pipeline import Engine, now_iso  # noqa: E402
+
+QUESTIONS = ["What changes because of this?", "Who is affected?", "What happened before this?"]
 
 OUT = ROOT.parent / "public" / "demo" / "snapshot"
 PERSONA = ["Rotterdam", "logistics", "cloud computing", "electric vehicles", "public transport", "energy prices"]
@@ -72,9 +75,26 @@ async def main(n_expand: int, n_read: int, max_lights: int):
         async for ev in eng.expand(it["id"], context=PERSONA):
             events.append(ev)
         stats = events[-1].get("stats", {}) if events else {}
+        # recorded answers to the suggested questions, over exactly this web
+        nodes, edges = {}, []
+        for ev in events:
+            if ev["type"] == "node":
+                nodes[ev["node"]["id"]] = dict(ev["node"])
+            elif ev["type"] == "edge":
+                edges.append(ev["edge"])
+            elif ev["type"] == "verified" and ev["id"] in nodes:
+                nodes[ev["id"]].update(verdict=ev["verdict"], evidence=ev["evidence"])
+        graph = {"nodes": [n for n in nodes.values() if n.get("type") != "ContextNode"], "edges": edges}
+        answers = {}
+        for q in QUESTIONS:
+            try:
+                r = await answer(eng.llm, eng.router, q, graph, fresh=False)
+                answers[q] = {**r, "recordedAt": now_iso()}
+            except Exception as exc:  # noqa: BLE001
+                print("   answer failed:", q, exc)
         name = safe_name(it["id"])
         (OUT / "expansions" / name).write_text(
-            json.dumps({"id": it["id"], "recordedAt": now_iso(), "context": "sample persona (fictional)", "events": events, "stats": stats}, ensure_ascii=False),
+            json.dumps({"id": it["id"], "recordedAt": now_iso(), "context": "sample persona (fictional)", "events": events, "stats": stats, "answers": answers}, ensure_ascii=False),
             encoding="utf-8",
         )
         expansions[it["id"]] = f"expansions/{name}"

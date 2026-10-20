@@ -23,6 +23,9 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
 from fogweave import embed, ontology
+from fogweave.answer import answer as answer_question
+from fogweave.llm import QuotaExhausted
+from fogweave.rdf import check_pack
 from fogweave.config import ALLOWED_ORIGINS, GROQ_API_KEY
 from fogweave.pipeline import Engine
 from fogweave.safety import check_request
@@ -56,6 +59,16 @@ class CheckReq(BaseModel):
     text: str = Field(max_length=300)
 
 
+class AskReq(BaseModel):
+    question: str = Field(min_length=3, max_length=300)
+    graph: dict = Field(default_factory=dict)  # compact web around the focus (no private context)
+    fresh: bool = True
+
+
+class PackReq(BaseModel):
+    pack: dict  # the client's JSON-LD Evidence Pack
+
+
 @app.get("/health")
 def health():
     quotas = {m: {"requestsToday": q.day_requests, "tokensToday": q.day_tokens, "rpd": q.rpd, "tpd": q.tpd} for m, q in engine.llm.quotas.items()}
@@ -85,6 +98,24 @@ async def read(req: ReadReq):
 def check(req: CheckReq):
     refusal = check_request(req.text)
     return {"ok": refusal is None, "message": refusal}
+
+
+@app.post("/ask")
+async def ask(req: AskReq):
+    graph = {"nodes": req.graph.get("nodes", [])[:80], "edges": req.graph.get("edges", [])[:160]}
+    try:
+        return await answer_question(engine.llm, engine.router, req.question, graph, fresh=req.fresh)
+    except QuotaExhausted:
+        return {"refused": False, "answerable": False, "text": "Free model quota is spent for now; try again later.", "sentences": [], "citations": {}, "degraded": True}
+
+
+@app.post("/pack")
+def pack(req: PackReq):
+    """Validate an Evidence Pack: JSON-LD -> RDF (rdflib), SHACL (pySHACL), SPARQL."""
+    try:
+        return check_pack(req.pack)
+    except Exception as exc:  # noqa: BLE001 — report, don't crash
+        raise HTTPException(status_code=422, detail=f"not valid JSON-LD: {type(exc).__name__}") from exc
 
 
 @app.post("/expand")

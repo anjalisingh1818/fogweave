@@ -85,7 +85,7 @@ export class Atmosphere {
   }
 
   update(delta) {
-    this.t += delta;
+    this.t += delta * (settings.comfort.gentle ? 0.4 : 1);
     const q = settings.quality;
     const count = Math.min(q.particles, this.seed.length);
     this.points.visible = count > 0;

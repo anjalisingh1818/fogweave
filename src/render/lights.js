@@ -29,6 +29,7 @@ import {
 import { glowTexture } from './textures.js';
 import { UI } from './card.js';
 import { hash01 } from '../layout/force.js';
+import { settings } from '../config.js';
 
 export const LIGHT_KINDS = {
   breaking: { label: 'Latest', color: 0xffe2a8, css: '#ffe2a8' },
@@ -132,6 +133,15 @@ export class LightField {
     return this.items.find((x) => x.id === id) || null;
   }
 
+  /** Related lights (same story) drift closer for a while. */
+  pull(ids, seconds = 20) {
+    const until = this.time + seconds;
+    for (const id of ids) {
+      const st = this.state.get(id);
+      if (st) st.pullUntil = until;
+    }
+  }
+
   /** Age in days from the item's date (0 for undated). */
   ageDays(item) {
     const t = Date.parse(item.date || '');
@@ -142,9 +152,12 @@ export class LightField {
     const st = this.state.get(id);
     if (!st) return null;
     const { head, yaw } = this.anchor;
-    const a = yaw + st.yaw + Math.sin(this.time * st.speed * 6 + st.phase) * 0.03;
-    const e = st.elev + Math.sin(this.time * st.speed * 4 + st.phase * 1.7) * 0.02;
-    out.set(head.x + Math.sin(a) * Math.cos(e) * st.dist, head.y + Math.sin(e) * st.dist, head.z - Math.cos(a) * Math.cos(e) * st.dist);
+    const g = settings.comfort.gentle ? 0.4 : 1;
+    st.pull = (st.pull || 0) + (((st.pullUntil || 0) > this.time ? 1 : 0) - (st.pull || 0)) * 0.02;
+    const a = yaw + st.yaw * (1 - 0.45 * st.pull) + Math.sin(this.time * st.speed * 6 * g + st.phase) * 0.03;
+    const e = st.elev * (1 - 0.5 * st.pull) + Math.sin(this.time * st.speed * 4 * g + st.phase * 1.7) * 0.02;
+    const dist = st.dist - 0.35 * st.pull;
+    out.set(head.x + Math.sin(a) * Math.cos(e) * dist, head.y + Math.sin(e) * dist, head.z - Math.cos(a) * Math.cos(e) * dist);
     return out;
   }
 

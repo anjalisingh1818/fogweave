@@ -10,18 +10,20 @@
     "preview": "vite preview",
     "test": "node --test \"tests/*.test.js\"",
     "fixtures": "node scripts/make-fixtures.mjs",
-    "qa": "node qa/phase2.mjs",
-    "qa:offline": "node qa/phase2.mjs offline"
+    "qa": "node qa/phase2.mjs && node qa/phase3.mjs",
+    "qa:offline": "node qa/phase2.mjs offline && node qa/phase3.mjs offline",
+    "pack:sample": "node scripts/sample-pack.mjs"
   },
   "engines": {
     "node": ">=20.19.0 <21.0.0-0 || >=22.12.0 <23.0.0-0 || >=24.0.0"
   },
   "dependencies": {
-    "@iwsdk/core": "1.0.1"
+    "@iwsdk/core": "1.0.1",
+    "fflate": "0.8.3"
   },
   "devDependencies": {
     "@iwsdk/vite-plugin-dev": "1.0.1",
-    "vite": "7.3.7",
-    "playwright": "1.64.1"
+    "playwright": "1.64.1",
+    "vite": "7.3.7"
   }
 }

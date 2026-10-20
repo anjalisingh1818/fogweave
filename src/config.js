@@ -32,7 +32,7 @@ export const settings = {
   layers: { includeFog: false }, // props/paths read the sealed layer by default
   quality: { level: 2, labels: 22, particles: 520, fogSheets: true, glow: 1, maxNodes: 150 },
   comfort: { gentle: false },
-  audio: { enabled: true },
+  audio: { enabled: true, readAloud: true },
   voice: { enabled: false }, // optional extra; never required
 };
 

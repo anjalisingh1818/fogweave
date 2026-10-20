@@ -1,0 +1,2143 @@
+{
+ "@context": {
+  "fw": "urn:fogweave:ontology:2#",
+  "prov": "http://www.w3.org/ns/prov#",
+  "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+  "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+  "schema": "https://schema.org/",
+  "dct": "http://purl.org/dc/terms/",
+  "xsd": "http://www.w3.org/2001/XMLSchema#",
+  "label": "rdfs:label",
+  "url": {
+   "@id": "schema:url",
+   "@type": "@id"
+  },
+  "sameAs": {
+   "@id": "schema:sameAs",
+   "@type": "@id"
+  },
+  "date": "dct:date",
+  "outlet": "fw:outlet",
+  "quote": "fw:quote",
+  "verdict": "fw:verdict",
+  "sourceClass": "fw:sourceClass",
+  "independentDomains": {
+   "@id": "fw:independentDomains",
+   "@type": "xsd:integer"
+  },
+  "supports": {
+   "@id": "fw:supportCount",
+   "@type": "xsd:integer"
+  },
+  "contradicts": {
+   "@id": "fw:contradictCount",
+   "@type": "xsd:integer"
+  },
+  "linkLabel": "fw:label",
+  "reasoning": "fw:reasoning",
+  "basis": {
+   "@id": "fw:basis",
+   "@type": "@id"
+  },
+  "subject": {
+   "@id": "rdf:subject",
+   "@type": "@id"
+  },
+  "predicate": {
+   "@id": "rdf:predicate",
+   "@type": "@id"
+  },
+  "object": {
+   "@id": "rdf:object",
+   "@type": "@id"
+  },
+  "derivedFrom": {
+   "@id": "prov:wasDerivedFrom",
+   "@type": "@id"
+  },
+  "primarySource": {
+   "@id": "prov:hadPrimarySource",
+   "@type": "@id"
+  },
+  "value": "prov:value",
+  "generatedAtTime": {
+   "@id": "prov:generatedAtTime",
+   "@type": "xsd:dateTime"
+  },
+  "attributedTo": {
+   "@id": "prov:wasAttributedTo",
+   "@type": "@id"
+  },
+  "generatedBy": {
+   "@id": "prov:wasGeneratedBy",
+   "@type": "@id"
+  }
+ },
+ "@graph": [
+  {
+   "@id": "urn:fogweave:pack:2026-10-20T12:00:00.000Z",
+   "@type": [
+    "prov:Bundle",
+    "fw:EvidencePack"
+   ],
+   "dct:created": "2026-10-20T12:00:00.000Z",
+   "dct:description": "FogWeave Evidence Pack (ontology 2.0.0). A cited research dataset: links and short quotes only.",
+   "dct:rights": "Wikipedia text is CC BY-SA 4.0 (Wikipedia contributors); excerpts are attributed and linked. News metadata: The GDELT Project, https://www.gdeltproject.org/ Via Hacker News (titles and links). Paper metadata from arXiv (CC0); not endorsed by arXiv. Quotes are short (25 words or fewer) and link to their sources; article texts are not included."
+  },
+  {
+   "@id": "urn:fogweave:agent:fogweave",
+   "@type": [
+    "prov:SoftwareAgent"
+   ],
+   "label": "FogWeave"
+  },
+  {
+   "@id": "urn:fogweave:node:n%3A7c531405de72",
+   "@type": [
+    "fw:NewsItem"
+   ],
+   "label": "UP - AGREES : A new roadmap for agricultural prosperity in eastern UP and Bundelkhand",
+   "url": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+   "date": "2026-10-20",
+   "outlet": "timesofindia.indiatimes.com"
+  },
+  {
+   "@id": "urn:fogweave:node:ev%3Aup-agrees",
+   "@type": [
+    "fw:Event"
+   ],
+   "label": "UP-AGREES"
+  },
+  {
+   "@id": "urn:fogweave:node:wd%3AQ1498",
+   "@type": [
+    "fw:Place"
+   ],
+   "label": "Uttar Pradesh",
+   "sameAs": "http://www.wikidata.org/entity/Q1498"
+  },
+  {
+   "@id": "urn:fogweave:node:org%3Aworld%20bank",
+   "@type": [
+    "fw:Organisation"
+   ],
+   "label": "World Bank"
+  },
+  {
+   "@id": "urn:fogweave:node:wd%3AQ95",
+   "@type": [
+    "fw:Organisation"
+   ],
+   "label": "Google",
+   "sameAs": "http://www.wikidata.org/entity/Q95"
+  },
+  {
+   "@id": "urn:fogweave:node:org%3Anetwork%20for%20humanity",
+   "@type": [
+    "fw:Organisation"
+   ],
+   "label": "Network for Humanity"
+  },
+  {
+   "@id": "urn:fogweave:node:org%3Aitc",
+   "@type": [
+    "fw:Organisation"
+   ],
+   "label": "ITC"
+  },
+  {
+   "@id": "urn:fogweave:node:org%3Aaquabridge",
+   "@type": [
+    "fw:Organisation"
+   ],
+   "label": "Aquabridge"
+  },
+  {
+   "@id": "urn:fogweave:node:wd%3AQ1204921",
+   "@type": [
+    "fw:Organisation"
+   ],
+   "label": "International Rice Research Institute",
+   "sameAs": "http://www.wikidata.org/entity/Q1204921"
+  },
+  {
+   "@id": "urn:fogweave:node:wd%3AQ4683097",
+   "@type": [
+    "fw:PublicFigure"
+   ],
+   "label": "Yogi Adityanath",
+   "sameAs": "http://www.wikidata.org/entity/Q4683097"
+  },
+  {
+   "@id": "urn:fogweave:node:place%3Aeastern%20uttar%20pradesh",
+   "@type": [
+    "fw:Place"
+   ],
+   "label": "Eastern Uttar Pradesh"
+  },
+  {
+   "@id": "urn:fogweave:node:ev%3Aup-agrees%20project%20launch",
+   "@type": [
+    "fw:Event"
+   ],
+   "label": "UP-AGREES Project Launch"
+  },
+  {
+   "@id": "urn:fogweave:node:n%3A7c531405de72%3Ac1",
+   "@type": [
+    "fw:Claim"
+   ],
+   "label": "UP-AGREES is a World Bank-supported project aimed at improving agricultural productivity and farmer incomes in Eastern Uttar Pradesh and Bundelkhand.",
+   "url": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+   "quote": "World Bank-supported Uttar Pradesh Agriculture Growth and Rural Enterprise Ecosystem Strengthening (UP-AGREES) Project",
+   "verdict": "unverified",
+   "independentDomains": 1,
+   "supports": 1,
+   "contradicts": 0
+  },
+  {
+   "@id": "urn:fogweave:node:n%3A7c531405de72%3Ac2",
+   "@type": [
+    "fw:Claim"
+   ],
+   "label": "UP-AGREES will cover 123 development blocks in 28 districts, benefiting nearly 10 lakh farmers, 35,000 fish-producing farmers and around three lakh women.",
+   "url": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+   "quote": "project is being implemented across 123 development blocks in 28 districts, with the objective of benefiting nearly 10 lakh farmers",
+   "verdict": "unverified",
+   "independentDomains": 1,
+   "supports": 1,
+   "contradicts": 0
+  },
+  {
+   "@id": "urn:fogweave:node:n%3A7c531405de72%3Ac3",
+   "@type": [
+    "fw:Claim"
+   ],
+   "label": "UP-AGREES aims to introduce Direct Seeded Rice (DSR) and climate-smart practices such as zero tillage and improved seeds.",
+   "url": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+   "quote": "Direct Seeded Rice, or DSR, is being experimented with across 3,000 hectares",
+   "verdict": "unverified",
+   "independentDomains": 1,
+   "supports": 1,
+   "contradicts": 0
+  },
+  {
+   "@id": "urn:fogweave:node:n%3A7c531405de72%3Ac4",
+   "@type": [
+    "fw:Claim"
+   ],
+   "label": "The project plans a 1,500‑acre paddy cluster in Bahraich to improve income per acre by 20‑30% and reduce urea consumption by 25%.",
+   "url": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+   "quote": "development of a 1,500-acre paddy cluster in Bahraich",
+   "verdict": "unverified",
+   "independentDomains": 1,
+   "supports": 0,
+   "contradicts": 0
+  },
+  {
+   "@id": "urn:fogweave:node:topic%3Afarmer%20incomes",
+   "@type": [
+    "fw:Topic"
+   ],
+   "label": "farmer incomes"
+  },
+  {
+   "@id": "urn:fogweave:node:topic%3Aagricultural%20productivity",
+   "@type": [
+    "fw:Topic"
+   ],
+   "label": "agricultural productivity"
+  },
+  {
+   "@id": "urn:fogweave:node:topic%3Aurea%20consumption",
+   "@type": [
+    "fw:Topic"
+   ],
+   "label": "urea consumption"
+  },
+  {
+   "@id": "urn:fogweave:node:topic%3Afertiliser%20market%20demand",
+   "@type": [
+    "fw:Topic"
+   ],
+   "label": "fertiliser market demand"
+  },
+  {
+   "@id": "urn:fogweave:node:topic%3Awomen%20farmers",
+   "@type": [
+    "fw:Topic"
+   ],
+   "label": "women farmers"
+  },
+  {
+   "@id": "urn:fogweave:node:topic%3Afish%E2%80%91producing%20farmers",
+   "@type": [
+    "fw:Topic"
+   ],
+   "label": "fish‑producing farmers"
+  },
+  {
+   "@id": "urn:fogweave:node:place%3Aeastern%20uttar%20pradesh%20region",
+   "@type": [
+    "fw:Place"
+   ],
+   "label": "Eastern Uttar Pradesh region"
+  },
+  {
+   "@id": "urn:fogweave:node:n%3A83d9d5c1e160",
+   "@type": [
+    "fw:NewsItem"
+   ],
+   "label": "South Korea withdraws additional embassy staff from Ukraine following a dispute over two captured North…",
+   "url": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+   "date": "2026-10-20",
+   "outlet": "rfi.fr"
+  },
+  {
+   "@id": "urn:fogweave:node:org%3Asouth%20korea",
+   "@type": [
+    "fw:Organisation"
+   ],
+   "label": "South Korea"
+  },
+  {
+   "@id": "urn:fogweave:node:wd%3AQ212",
+   "@type": [
+    "fw:Place"
+   ],
+   "label": "Ukraine",
+   "sameAs": "http://www.wikidata.org/entity/Q212"
+  },
+  {
+   "@id": "urn:fogweave:node:wd%3AQ423",
+   "@type": [
+    "fw:Place"
+   ],
+   "label": "North Korea",
+   "sameAs": "http://www.wikidata.org/entity/Q423"
+  },
+  {
+   "@id": "urn:fogweave:node:person%3Avolodymyr%20zelensky",
+   "@type": [
+    "fw:PublicFigure"
+   ],
+   "label": "Volodymyr Zelensky"
+  },
+  {
+   "@id": "urn:fogweave:node:person%3Apark%20doo-soon",
+   "@type": [
+    "fw:PublicFigure"
+   ],
+   "label": "Park Doo-soon"
+  },
+  {
+   "@id": "urn:fogweave:node:wd%3AQ31178872",
+   "@type": [
+    "fw:PublicFigure"
+   ],
+   "label": "Cho Hyun",
+   "sameAs": "http://www.wikidata.org/entity/Q31178872"
+  },
+  {
+   "@id": "urn:fogweave:node:org%3Asouth%20korean%20media",
+   "@type": [
+    "fw:Organisation"
+   ],
+   "label": "South Korean media"
+  },
+  {
+   "@id": "urn:fogweave:node:person%3Akyiv's%20ambassador",
+   "@type": [
+    "fw:PublicFigure"
+   ],
+   "label": "Kyiv's ambassador"
+  },
+  {
+   "@id": "urn:fogweave:node:ev%3Asouth%20korea%20withdraws%20embassy%20staff%20from%20ukraine",
+   "@type": [
+    "fw:Event"
+   ],
+   "label": "South Korea withdraws embassy staff from Ukraine"
+  },
+  {
+   "@id": "urn:fogweave:node:n%3A83d9d5c1e160%3Ac1",
+   "@type": [
+    "fw:Claim"
+   ],
+   "label": "South Korea will withdraw some staff from its embassy in Ukraine due to a diplomatic row over North Korean POWs.",
+   "url": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+   "quote": "South Korea's foreign ministry said Tuesday it will withdraw some staff from its embassy in Ukraine, as a diplomatic row deepens over the transfer of",
+   "verdict": "unverified",
+   "independentDomains": 1,
+   "supports": 1,
+   "contradicts": 0
+  },
+  {
+   "@id": "urn:fogweave:node:n%3A83d9d5c1e160%3Ac2",
+   "@type": [
+    "fw:Claim"
+   ],
+   "label": "Ukrainian President Volodymyr Zelensky disclosed the transfer of the North Korean POWs, angering South Korea.",
+   "url": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+   "quote": "Ukrainian President Volodymyr Zelensky disclosed the prisoner transfer last month, angering Seoul, which said the operation should have remained confidential.",
+   "verdict": "unverified",
+   "independentDomains": 1,
+   "supports": 1,
+   "contradicts": 0
+  },
+  {
+   "@id": "urn:fogweave:node:n%3A83d9d5c1e160%3Ac3",
+   "@type": [
+    "fw:Claim"
+   ],
+   "label": "South Korea's ambassador to Ukraine returned home after Seoul demanded an apology from Zelensky.",
+   "url": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+   "quote": "South Korea's ambassador to Ukraine returned home after Seoul's demand for an official apology over what it called an \"unilateral disclosure\" by Zelensky went unanswered.",
+   "verdict": "unverified",
+   "independentDomains": 1,
+   "supports": 1,
+   "contradicts": 0
+  },
+  {
+   "@id": "urn:fogweave:node:n%3A83d9d5c1e160%3Ac4",
+   "@type": [
+    "fw:Claim"
+   ],
+   "label": "Park Doo‑soon said the threat of air strikes made staff safety difficult, prompting the withdrawal.",
+   "url": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+   "quote": "In \"light of the persistent threat of air strikes throughout the country, which makes ensuring the safety of personnel difficult, the government has decided to",
+   "verdict": "unverified",
+   "independentDomains": 1,
+   "supports": 0,
+   "contradicts": 0
+  },
+  {
+   "@id": "urn:fogweave:node:n%3A83d9d5c1e160%3Ac5",
+   "@type": [
+    "fw:Claim"
+   ],
+   "label": "South Korea has refrained from supplying lethal weapons to Ukraine, citing its policy of not arming parties in active conflicts.",
+   "url": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+   "quote": "But it has refrained from supplying Kyiv with lethal weapons, citing its longstanding policy of not arming countries engaged in active conflicts.",
+   "verdict": "unverified",
+   "independentDomains": 1,
+   "supports": 0,
+   "contradicts": 0
+  },
+  {
+   "@id": "urn:fogweave:node:org%3Asouth%20korean%20embassy%20in%20ukraine",
+   "@type": [
+    "fw:Organisation"
+   ],
+   "label": "South Korean Embassy in Ukraine"
+  },
+  {
+   "@id": "urn:fogweave:node:topic%3Asouth%20korea%E2%80%91ukraine%20diplomatic%20relations",
+   "@type": [
+    "fw:Topic"
+   ],
+   "label": "South Korea‑Ukraine diplomatic relations"
+  },
+  {
+   "@id": "urn:fogweave:node:topic%3Asouth%20korea's%20ability%20to%20gather%20on%E2%80%91ground%20intelligence%20in%20ukraine",
+   "@type": [
+    "fw:Topic"
+   ],
+   "label": "South Korea's ability to gather on‑ground intelligence in Ukraine"
+  },
+  {
+   "@id": "urn:fogweave:node:n%3A84bb02f4d37d",
+   "@type": [
+    "fw:NewsItem"
+   ],
+   "label": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…",
+   "url": "https://apnews.com/article/greece-migrants-die-speedboats-capsize-8c9f49e307e32d73bd7dd039d7c79169",
+   "date": "2026-10-19",
+   "outlet": "apnews.com"
+  },
+  {
+   "@id": "urn:fogweave:node:topic%3Atwelve%20migrants",
+   "@type": [
+    "fw:Topic"
+   ],
+   "label": "Twelve migrants"
+  },
+  {
+   "@id": "urn:fogweave:node:topic%3Ainfant",
+   "@type": [
+    "fw:Topic"
+   ],
+   "label": "infant"
+  },
+  {
+   "@id": "urn:fogweave:node:wd%3AQ128087",
+   "@type": [
+    "fw:Place"
+   ],
+   "label": "Lesbos",
+   "sameAs": "http://www.wikidata.org/entity/Q128087"
+  },
+  {
+   "@id": "urn:fogweave:node:wd%3AQ13580795",
+   "@type": [
+    "fw:Place"
+   ],
+   "label": "Samos",
+   "sameAs": "http://www.wikidata.org/entity/Q13580795"
+  },
+  {
+   "@id": "urn:fogweave:node:wd%3AQ41",
+   "@type": [
+    "fw:Place"
+   ],
+   "label": "Greece",
+   "sameAs": "http://www.wikidata.org/entity/Q41"
+  },
+  {
+   "@id": "urn:fogweave:node:tech%3Aspeedboats",
+   "@type": [
+    "fw:Technology"
+   ],
+   "label": "speedboats"
+  },
+  {
+   "@id": "urn:fogweave:node:ev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos",
+   "@type": [
+    "fw:Event"
+   ],
+   "label": "Twelve migrants killed off Lesbos and Samos"
+  },
+  {
+   "@id": "urn:fogweave:node:n%3A84bb02f4d37d%3Ac1",
+   "@type": [
+    "fw:Claim"
+   ],
+   "label": "Twelve migrants, including an infant, were killed.",
+   "url": "https://apnews.com/article/greece-migrants-die-speedboats-capsize-8c9f49e307e32d73bd7dd039d7c79169",
+   "quote": "Twelve migrants, including an infant, are killed",
+   "verdict": "unverified",
+   "independentDomains": 1,
+   "supports": 1,
+   "contradicts": 0
+  },
+  {
+   "@id": "urn:fogweave:node:n%3A84bb02f4d37d%3Ac2",
+   "@type": [
+    "fw:Claim"
+   ],
+   "label": "Two separate speedboats capsized.",
+   "url": "https://apnews.com/article/greece-migrants-die-speedboats-capsize-8c9f49e307e32d73bd7dd039d7c79169",
+   "quote": "two separate speedboats capsize",
+   "verdict": "unverified",
+   "independentDomains": 1,
+   "supports": 1,
+   "contradicts": 0
+  },
+  {
+   "@id": "urn:fogweave:node:n%3A84bb02f4d37d%3Ac3",
+   "@type": [
+    "fw:Claim"
+   ],
+   "label": "The capsizing occurred off the coast of Lesbos and Samos islands in Greece.",
+   "url": "https://apnews.com/article/greece-migrants-die-speedboats-capsize-8c9f49e307e32d73bd7dd039d7c79169",
+   "quote": "off the coast of the Lesbos and Samos islands in Greece",
+   "verdict": "supported",
+   "independentDomains": 2,
+   "supports": 3,
+   "contradicts": 0
+  },
+  {
+   "@id": "urn:fogweave:node:src%3Awikipedia.org",
+   "@type": [
+    "fw:Source"
+   ],
+   "label": "en.wikipedia.org",
+   "url": "https://en.wikipedia.org/wiki/Samos",
+   "sourceClass": "reference"
+  },
+  {
+   "@id": "urn:fogweave:node:topic%3Amigrants",
+   "@type": [
+    "fw:Topic"
+   ],
+   "label": "Migrants"
+  },
+  {
+   "@id": "urn:fogweave:node:topic%3Aeu%20migration%20policy",
+   "@type": [
+    "fw:Topic"
+   ],
+   "label": "EU migration policy"
+  },
+  {
+   "@id": "urn:fogweave:node:org%3Agreek%20authorities",
+   "@type": [
+    "fw:Organisation"
+   ],
+   "label": "Greek authorities"
+  },
+  {
+   "@id": "urn:fogweave:node:topic%3Aborder%20control%20operations",
+   "@type": [
+    "fw:Topic"
+   ],
+   "label": "Border control operations"
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Eev%3Aup-agrees",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A7c531405de72",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:ev%3Aup-agrees",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Eev%3Aup-agrees:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "Bank-supported Uttar Pradesh Agriculture Growth and Rural Enterprise Ecosystem Strengthening ( UP-AGREES ) Project. With a clear focus on improving productivity, increasing farmers’",
+     "primarySource": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+     "generatedAtTime": "2026-10-20T12:13:58.000Z",
+     "fw:source": "timesofindia.indiatimes.com"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Ewd%3AQ1498",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A7c531405de72",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:wd%3AQ1498",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Ewd%3AQ1498:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "NEW DELHI: Uttar Pradesh is preparing to take a major leap in agricultural transformation through",
+     "primarySource": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+     "generatedAtTime": "2026-10-20T12:13:58.000Z",
+     "fw:source": "timesofindia.indiatimes.com"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Eorg%3Aworld%20bank",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A7c531405de72",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:org%3Aworld%20bank",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Eorg%3Aworld%20bank:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "preparing to take a major leap in agricultural transformation through the World Bank -supported Uttar Pradesh Agriculture Growth and Rural Enterprise Ecosystem Strengthening (UP-AGREES)",
+     "primarySource": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+     "generatedAtTime": "2026-10-20T12:13:58.000Z",
+     "fw:source": "timesofindia.indiatimes.com"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Ewd%3AQ95",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A7c531405de72",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:wd%3AQ95",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Ewd%3AQ95:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "Pradesh Diversified Agriculture Support Project (UPDASP) signed Memorandums of Understanding with Google and Network for Humanity, ITC and Aquabridge. These partnerships bring together",
+     "primarySource": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+     "generatedAtTime": "2026-10-20T12:13:58.000Z",
+     "fw:source": "timesofindia.indiatimes.com"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Eorg%3Anetwork%20for%20humanity",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A7c531405de72",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:org%3Anetwork%20for%20humanity",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Eorg%3Anetwork%20for%20humanity:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "Agriculture Support Project (UPDASP) signed Memorandums of Understanding with Google and Network for Humanity , ITC and Aquabridge. These partnerships bring together technology, digital infrastructure,",
+     "primarySource": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+     "generatedAtTime": "2026-10-20T12:13:58.000Z",
+     "fw:source": "timesofindia.indiatimes.com"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Eorg%3Aitc",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A7c531405de72",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:org%3Aitc",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Eorg%3Aitc:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "(UPDASP) signed Memorandums of Understanding with Google and Network for Humanity, ITC and Aquabridge. These partnerships bring together technology, digital infrastructure, climate-smart agriculture,",
+     "primarySource": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+     "generatedAtTime": "2026-10-20T12:13:58.000Z",
+     "fw:source": "timesofindia.indiatimes.com"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Eorg%3Aaquabridge",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A7c531405de72",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:org%3Aaquabridge",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Eorg%3Aaquabridge:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "Memorandums of Understanding with Google and Network for Humanity, ITC and Aquabridge . These partnerships bring together technology, digital infrastructure, climate-smart agriculture, market",
+     "primarySource": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+     "generatedAtTime": "2026-10-20T12:13:58.000Z",
+     "fw:source": "timesofindia.indiatimes.com"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Ewd%3AQ1204921",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A7c531405de72",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:wd%3AQ1204921",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Ewd%3AQ1204921:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "introduction of scientific and climate-responsive farming practices. In partnership with the International Rice Research Institute (IRRI), modern agricultural techniques are being taken directly to farmers’",
+     "primarySource": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+     "generatedAtTime": "2026-10-20T12:13:58.000Z",
+     "fw:source": "timesofindia.indiatimes.com"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Ewd%3AQ4683097",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A7c531405de72",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:wd%3AQ4683097",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Ewd%3AQ4683097:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "fresh momentum on Wednesday when, in the presence of Chief Minister Yogi Adityanath , the Uttar Pradesh Diversified Agriculture Support Project (UPDASP) signed Memorandums",
+     "primarySource": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+     "generatedAtTime": "2026-10-20T12:13:58.000Z",
+     "fw:source": "timesofindia.indiatimes.com"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Eplace%3Aeastern%20uttar%20pradesh",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A7c531405de72",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:place%3Aeastern%20uttar%20pradesh",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A7c531405de72-%3Eplace%3Aeastern%20uttar%20pradesh:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "set to bring a new agricultural ecosystem to 21 districts of Eastern Uttar Pradesh and seven districts of Bundelkhand. The initiative received fresh momentum on",
+     "primarySource": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+     "generatedAtTime": "2026-10-20T12:13:58.000Z",
+     "fw:source": "timesofindia.indiatimes.com"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:about%3An%3A7c531405de72-%3Eev%3Aup-agrees%20project%20launch",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A7c531405de72",
+   "predicate": "fw:about",
+   "object": "urn:fogweave:node:ev%3Aup-agrees%20project%20launch",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:about%3An%3A7c531405de72-%3Eev%3Aup-agrees%20project%20launch:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "UP - AGREES : A new roadmap for agricultural prosperity in eastern UP and Bundelkhand",
+     "primarySource": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+     "generatedAtTime": "2026-10-20T12:13:58.000Z",
+     "fw:source": "timesofindia.indiatimes.com"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:reports%3An%3A7c531405de72-%3En%3A7c531405de72%3Ac1",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A7c531405de72",
+   "predicate": "fw:reports",
+   "object": "urn:fogweave:node:n%3A7c531405de72%3Ac1",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:reports%3An%3A7c531405de72-%3En%3A7c531405de72%3Ac1:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "World Bank-supported Uttar Pradesh Agriculture Growth and Rural Enterprise Ecosystem Strengthening (UP-AGREES) Project",
+     "primarySource": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+     "generatedAtTime": "2026-10-20T12:13:58.000Z",
+     "fw:source": "timesofindia.indiatimes.com"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:reports%3An%3A7c531405de72-%3En%3A7c531405de72%3Ac2",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A7c531405de72",
+   "predicate": "fw:reports",
+   "object": "urn:fogweave:node:n%3A7c531405de72%3Ac2",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:reports%3An%3A7c531405de72-%3En%3A7c531405de72%3Ac2:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "project is being implemented across 123 development blocks in 28 districts, with the objective of benefiting nearly 10 lakh farmers",
+     "primarySource": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+     "generatedAtTime": "2026-10-20T12:13:58.000Z",
+     "fw:source": "timesofindia.indiatimes.com"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:reports%3An%3A7c531405de72-%3En%3A7c531405de72%3Ac3",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A7c531405de72",
+   "predicate": "fw:reports",
+   "object": "urn:fogweave:node:n%3A7c531405de72%3Ac3",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:reports%3An%3A7c531405de72-%3En%3A7c531405de72%3Ac3:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "Direct Seeded Rice, or DSR, is being experimented with across 3,000 hectares",
+     "primarySource": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+     "generatedAtTime": "2026-10-20T12:13:58.000Z",
+     "fw:source": "timesofindia.indiatimes.com"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:reports%3An%3A7c531405de72-%3En%3A7c531405de72%3Ac4",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A7c531405de72",
+   "predicate": "fw:reports",
+   "object": "urn:fogweave:node:n%3A7c531405de72%3Ac4",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:reports%3An%3A7c531405de72-%3En%3A7c531405de72%3Ac4:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "development of a 1,500-acre paddy cluster in Bahraich",
+     "primarySource": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+     "generatedAtTime": "2026-10-20T12:13:58.000Z",
+     "fw:source": "timesofindia.indiatimes.com"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:involves%3Aev%3Aup-agrees-%3Eorg%3Aworld%20bank",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:ev%3Aup-agrees",
+   "predicate": "fw:involves",
+   "object": "urn:fogweave:node:org%3Aworld%20bank",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:involves%3Aev%3Aup-agrees-%3Eorg%3Aworld%20bank:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "World Bank-supported Uttar Pradesh Agriculture Growth and Rural Enterprise Ecosystem Strengthening (UP-AGREES) Project",
+     "primarySource": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+     "generatedAtTime": "2026-10-20T12:13:58.000Z",
+     "fw:source": "timesofindia.indiatimes.com"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:involves%3Aev%3Aup-agrees-%3Ewd%3AQ1204921",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:ev%3Aup-agrees",
+   "predicate": "fw:involves",
+   "object": "urn:fogweave:node:wd%3AQ1204921",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:involves%3Aev%3Aup-agrees-%3Ewd%3AQ1204921:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "In partnership with the International Rice Research Institute (IRRI)",
+     "primarySource": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+     "generatedAtTime": "2026-10-20T12:13:58.000Z",
+     "fw:source": "timesofindia.indiatimes.com"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:affects%3Aev%3Aup-agrees-%3Eplace%3Aeastern%20uttar%20pradesh",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement",
+    "fw:AffectsStatement"
+   ],
+   "subject": "urn:fogweave:node:ev%3Aup-agrees",
+   "predicate": "fw:affects",
+   "object": "urn:fogweave:node:place%3Aeastern%20uttar%20pradesh",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:affects%3Aev%3Aup-agrees-%3Eplace%3Aeastern%20uttar%20pradesh:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "focused particularly on Eastern Uttar Pradesh and Bundelkhand",
+     "primarySource": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+     "generatedAtTime": "2026-10-20T12:13:58.000Z",
+     "fw:source": "timesofindia.indiatimes.com"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:affects%3Aev%3Aup-agrees-%3Etopic%3Afarmer%20incomes",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:InferredStatement",
+    "fw:AffectsStatement"
+   ],
+   "subject": "urn:fogweave:node:ev%3Aup-agrees",
+   "predicate": "fw:affects",
+   "object": "urn:fogweave:node:topic%3Afarmer%20incomes",
+   "linkLabel": "inferred",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "reasoning": "Project aims to improve incomes for the listed farmers.",
+   "basis": [
+    "urn:fogweave:node:n%3A7c531405de72%3Ac1",
+    "urn:fogweave:node:n%3A7c531405de72%3Ac2"
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:affects%3Aev%3Aup-agrees-%3Etopic%3Aagricultural%20productivity",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:InferredStatement",
+    "fw:AffectsStatement"
+   ],
+   "subject": "urn:fogweave:node:ev%3Aup-agrees",
+   "predicate": "fw:affects",
+   "object": "urn:fogweave:node:topic%3Aagricultural%20productivity",
+   "linkLabel": "inferred",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "reasoning": "Project introduces productivity‑enhancing practices like DSR and improved seeds.",
+   "basis": [
+    "urn:fogweave:node:n%3A7c531405de72%3Ac1",
+    "urn:fogweave:node:n%3A7c531405de72%3Ac3"
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:affects%3Aev%3Aup-agrees-%3Etopic%3Aurea%20consumption",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:InferredStatement",
+    "fw:AffectsStatement"
+   ],
+   "subject": "urn:fogweave:node:ev%3Aup-agrees",
+   "predicate": "fw:affects",
+   "object": "urn:fogweave:node:topic%3Aurea%20consumption",
+   "linkLabel": "inferred",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "reasoning": "The Bahraich paddy cluster plans to cut urea use by 25%.",
+   "basis": [
+    "urn:fogweave:node:n%3A7c531405de72%3Ac4"
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:affects%3Atopic%3Aurea%20consumption-%3Etopic%3Afertiliser%20market%20demand",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:SpeculativeStatement",
+    "fw:AffectsStatement"
+   ],
+   "subject": "urn:fogweave:node:topic%3Aurea%20consumption",
+   "predicate": "fw:affects",
+   "object": "urn:fogweave:node:topic%3Afertiliser%20market%20demand",
+   "linkLabel": "speculative",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "reasoning": "Reduced urea use could lower overall demand for fertiliser."
+  },
+  {
+   "@id": "urn:fogweave:stmt:affects%3Aev%3Aup-agrees-%3Etopic%3Awomen%20farmers",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:InferredStatement",
+    "fw:AffectsStatement"
+   ],
+   "subject": "urn:fogweave:node:ev%3Aup-agrees",
+   "predicate": "fw:affects",
+   "object": "urn:fogweave:node:topic%3Awomen%20farmers",
+   "linkLabel": "inferred",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "reasoning": "Project explicitly includes around three lakh women among beneficiaries.",
+   "basis": [
+    "urn:fogweave:node:n%3A7c531405de72%3Ac2"
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:affects%3Aev%3Aup-agrees-%3Etopic%3Afish%E2%80%91producing%20farmers",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:InferredStatement",
+    "fw:AffectsStatement"
+   ],
+   "subject": "urn:fogweave:node:ev%3Aup-agrees",
+   "predicate": "fw:affects",
+   "object": "urn:fogweave:node:topic%3Afish%E2%80%91producing%20farmers",
+   "linkLabel": "inferred",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "reasoning": "35,000 fish‑producing farmers are listed as beneficiaries.",
+   "basis": [
+    "urn:fogweave:node:n%3A7c531405de72%3Ac2"
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:affects%3Aev%3Aup-agrees-%3Eplace%3Aeastern%20uttar%20pradesh%20region",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:InferredStatement",
+    "fw:AffectsStatement"
+   ],
+   "subject": "urn:fogweave:node:ev%3Aup-agrees",
+   "predicate": "fw:affects",
+   "object": "urn:fogweave:node:place%3Aeastern%20uttar%20pradesh%20region",
+   "linkLabel": "inferred",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "reasoning": "The project is stated to affect Eastern Uttar Pradesh.",
+   "basis": [
+    "urn:fogweave:stmt:affects%3Aev%3Aup-agrees-%3Eplace%3Aeastern%20uttar%20pradesh"
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A83d9d5c1e160-%3Eorg%3Asouth%20korea",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A83d9d5c1e160",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:org%3Asouth%20korea",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A83d9d5c1e160-%3Eorg%3Asouth%20korea:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "South Korea to withdraw some Ukraine embassy staff after POW row Seoul (AFP)",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A83d9d5c1e160-%3Ewd%3AQ212",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A83d9d5c1e160",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:wd%3AQ212",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A83d9d5c1e160-%3Ewd%3AQ212:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "South Korea to withdraw some Ukraine embassy staff after POW row Seoul (AFP) – South Korea's foreign",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A83d9d5c1e160-%3Ewd%3AQ423",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A83d9d5c1e160",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:wd%3AQ423",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A83d9d5c1e160-%3Ewd%3AQ423:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "in Ukraine, as a diplomatic row deepens over the transfer of North Korea n prisoners of war to Seoul. Issued on: The two countries",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A83d9d5c1e160-%3Eperson%3Avolodymyr%20zelensky",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A83d9d5c1e160",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:person%3Avolodymyr%20zelensky",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A83d9d5c1e160-%3Eperson%3Avolodymyr%20zelensky:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "on: The two countries have been at loggerheads since Ukrainian President Volodymyr Zelensky disclosed the prisoner transfer last month, angering Seoul, which said the",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A83d9d5c1e160-%3Eperson%3Apark%20doo-soon",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A83d9d5c1e160",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:person%3Apark%20doo-soon",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A83d9d5c1e160-%3Eperson%3Apark%20doo-soon:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "ambassador has met with \"no positive response from the Ukrainian side\", Park Doo-soon , the spokesperson for Seoul's foreign ministry, told reporters Tuesday. And",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A83d9d5c1e160-%3Ewd%3AQ31178872",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A83d9d5c1e160",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:wd%3AQ31178872",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A83d9d5c1e160-%3Ewd%3AQ31178872:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "they consider \"the situation resolved\". Earlier this month, Seoul's foreign minister Cho Hyun said Ukraine had sent a message that \"included words of apology\"",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A83d9d5c1e160-%3Eorg%3Asouth%20korean%20media",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A83d9d5c1e160",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:org%3Asouth%20korean%20media",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A83d9d5c1e160-%3Eorg%3Asouth%20korean%20media:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "mind. Both POWs were identifiable, as they had been photographed by South Korean media before their arrival in the South. North Korea is known to",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A83d9d5c1e160-%3Eperson%3Akyiv's%20ambassador",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A83d9d5c1e160",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:person%3Akyiv's%20ambassador",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A83d9d5c1e160-%3Eperson%3Akyiv's%20ambassador:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "turning the POWs' defection into a public spectacle. Seoul previously summoned Kyiv's ambassador and threatened unspecified \"further measures\". Ukraine has insisted that \"diplomacy must",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:about%3An%3A83d9d5c1e160-%3Eev%3Asouth%20korea%20withdraws%20embassy%20staff%20from%20ukraine",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A83d9d5c1e160",
+   "predicate": "fw:about",
+   "object": "urn:fogweave:node:ev%3Asouth%20korea%20withdraws%20embassy%20staff%20from%20ukraine",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:about%3An%3A83d9d5c1e160-%3Eev%3Asouth%20korea%20withdraws%20embassy%20staff%20from%20ukraine:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "South Korea withdraws additional embassy staff from Ukraine following a dispute over two captured North…",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:reports%3An%3A83d9d5c1e160-%3En%3A83d9d5c1e160%3Ac1",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A83d9d5c1e160",
+   "predicate": "fw:reports",
+   "object": "urn:fogweave:node:n%3A83d9d5c1e160%3Ac1",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:reports%3An%3A83d9d5c1e160-%3En%3A83d9d5c1e160%3Ac1:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "South Korea's foreign ministry said Tuesday it will withdraw some staff from its embassy in Ukraine, as a diplomatic row deepens over the transfer of",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:reports%3An%3A83d9d5c1e160-%3En%3A83d9d5c1e160%3Ac2",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A83d9d5c1e160",
+   "predicate": "fw:reports",
+   "object": "urn:fogweave:node:n%3A83d9d5c1e160%3Ac2",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:reports%3An%3A83d9d5c1e160-%3En%3A83d9d5c1e160%3Ac2:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "Ukrainian President Volodymyr Zelensky disclosed the prisoner transfer last month, angering Seoul, which said the operation should have remained confidential.",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:reports%3An%3A83d9d5c1e160-%3En%3A83d9d5c1e160%3Ac3",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A83d9d5c1e160",
+   "predicate": "fw:reports",
+   "object": "urn:fogweave:node:n%3A83d9d5c1e160%3Ac3",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:reports%3An%3A83d9d5c1e160-%3En%3A83d9d5c1e160%3Ac3:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "South Korea's ambassador to Ukraine returned home after Seoul's demand for an official apology over what it called an \"unilateral disclosure\" by Zelensky went unanswered.",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:reports%3An%3A83d9d5c1e160-%3En%3A83d9d5c1e160%3Ac4",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A83d9d5c1e160",
+   "predicate": "fw:reports",
+   "object": "urn:fogweave:node:n%3A83d9d5c1e160%3Ac4",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:reports%3An%3A83d9d5c1e160-%3En%3A83d9d5c1e160%3Ac4:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "In \"light of the persistent threat of air strikes throughout the country, which makes ensuring the safety of personnel difficult, the government has decided to",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:reports%3An%3A83d9d5c1e160-%3En%3A83d9d5c1e160%3Ac5",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A83d9d5c1e160",
+   "predicate": "fw:reports",
+   "object": "urn:fogweave:node:n%3A83d9d5c1e160%3Ac5",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:reports%3An%3A83d9d5c1e160-%3En%3A83d9d5c1e160%3Ac5:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "But it has refrained from supplying Kyiv with lethal weapons, citing its longstanding policy of not arming countries engaged in active conflicts.",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:happened_in%3Aev%3Asouth%20korea%20withdraws%20embassy%20staff%20from%20ukraine-%3Ewd%3AQ212",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:ev%3Asouth%20korea%20withdraws%20embassy%20staff%20from%20ukraine",
+   "predicate": "fw:happened_in",
+   "object": "urn:fogweave:node:wd%3AQ212",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:happened_in%3Aev%3Asouth%20korea%20withdraws%20embassy%20staff%20from%20ukraine-%3Ewd%3AQ212:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "South Korea's foreign ministry said Tuesday it will withdraw some staff from its embassy in Ukraine",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:involves%3Aev%3Asouth%20korea%20withdraws%20embassy%20staff%20from%20ukraine-%3Eorg%3Asouth%20korea",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:ev%3Asouth%20korea%20withdraws%20embassy%20staff%20from%20ukraine",
+   "predicate": "fw:involves",
+   "object": "urn:fogweave:node:org%3Asouth%20korea",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:involves%3Aev%3Asouth%20korea%20withdraws%20embassy%20staff%20from%20ukraine-%3Eorg%3Asouth%20korea:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "South Korea's foreign ministry said Tuesday it will withdraw some staff",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:affects%3Aev%3Asouth%20korea%20withdraws%20embassy%20staff%20from%20ukraine-%3Eperson%3Apark%20doo-soon",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement",
+    "fw:AffectsStatement"
+   ],
+   "subject": "urn:fogweave:node:ev%3Asouth%20korea%20withdraws%20embassy%20staff%20from%20ukraine",
+   "predicate": "fw:affects",
+   "object": "urn:fogweave:node:person%3Apark%20doo-soon",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:affects%3Aev%3Asouth%20korea%20withdraws%20embassy%20staff%20from%20ukraine-%3Eperson%3Apark%20doo-soon:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "Park Doo-soon, the spokesperson for Seoul's foreign ministry, told reporters Tuesday",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:affects%3Aperson%3Avolodymyr%20zelensky-%3Eorg%3Asouth%20korea",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement",
+    "fw:AffectsStatement"
+   ],
+   "subject": "urn:fogweave:node:person%3Avolodymyr%20zelensky",
+   "predicate": "fw:affects",
+   "object": "urn:fogweave:node:org%3Asouth%20korea",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:affects%3Aperson%3Avolodymyr%20zelensky-%3Eorg%3Asouth%20korea:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "Zelensky disclosed the prisoner transfer last month, angering Seoul",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:depends_on%3Awd%3AQ423-%3Eorg%3Asouth%20korea",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:wd%3AQ423",
+   "predicate": "fw:depends_on",
+   "object": "urn:fogweave:node:org%3Asouth%20korea",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:depends_on%3Awd%3AQ423-%3Eorg%3Asouth%20korea:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "Under Seoul's constitution, all North Koreans are considered citizens of the Republic of Korea",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:part_of%3Aorg%3Asouth%20korean%20media-%3Eorg%3Asouth%20korea",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:org%3Asouth%20korean%20media",
+   "predicate": "fw:part_of",
+   "object": "urn:fogweave:node:org%3Asouth%20korea",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:part_of%3Aorg%3Asouth%20korean%20media-%3Eorg%3Asouth%20korea:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "Both POWs were identifiable, as they had been photographed by South Korean media before their arrival in the South",
+     "primarySource": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+     "generatedAtTime": "2026-10-20T12:13:54.000Z",
+     "fw:source": "rfi.fr"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:affects%3Aev%3Asouth%20korea%20withdraws%20embassy%20staff%20from%20ukraine-%3Eorg%3Asouth%20korean%20embassy%20in%20ukraine",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:InferredStatement",
+    "fw:AffectsStatement"
+   ],
+   "subject": "urn:fogweave:node:ev%3Asouth%20korea%20withdraws%20embassy%20staff%20from%20ukraine",
+   "predicate": "fw:affects",
+   "object": "urn:fogweave:node:org%3Asouth%20korean%20embassy%20in%20ukraine",
+   "linkLabel": "inferred",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "reasoning": "The event is the withdrawal of staff from the embassy, directly affecting the embassy as an organisation.",
+   "basis": [
+    "urn:fogweave:node:n%3A83d9d5c1e160%3Ac1",
+    "urn:fogweave:node:n%3A83d9d5c1e160%3Ac3",
+    "urn:fogweave:node:n%3A83d9d5c1e160%3Ac4"
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:affects%3Aorg%3Asouth%20korean%20embassy%20in%20ukraine-%3Etopic%3Asouth%20korea%E2%80%91ukraine%20diplomatic%20relations",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:SpeculativeStatement",
+    "fw:AffectsStatement"
+   ],
+   "subject": "urn:fogweave:node:org%3Asouth%20korean%20embassy%20in%20ukraine",
+   "predicate": "fw:affects",
+   "object": "urn:fogweave:node:topic%3Asouth%20korea%E2%80%91ukraine%20diplomatic%20relations",
+   "linkLabel": "speculative",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "reasoning": "A reduced diplomatic presence is likely to strain bilateral relations, though the facts do not state this explicitly."
+  },
+  {
+   "@id": "urn:fogweave:stmt:affects%3Atopic%3Asouth%20korea%E2%80%91ukraine%20diplomatic%20relations-%3Etopic%3Asouth%20korea's%20ability%20to%20gather%20on%E2%80%91ground%20intelligence%20in%20ukraine",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:SpeculativeStatement",
+    "fw:AffectsStatement"
+   ],
+   "subject": "urn:fogweave:node:topic%3Asouth%20korea%E2%80%91ukraine%20diplomatic%20relations",
+   "predicate": "fw:affects",
+   "object": "urn:fogweave:node:topic%3Asouth%20korea's%20ability%20to%20gather%20on%E2%80%91ground%20intelligence%20in%20ukraine",
+   "linkLabel": "speculative",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "reasoning": "Weaker diplomatic ties and fewer embassy staff could limit intelligence‑gathering capabilities."
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A84bb02f4d37d-%3Etopic%3Atwelve%20migrants",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A84bb02f4d37d",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:topic%3Atwelve%20migrants",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A84bb02f4d37d-%3Etopic%3Atwelve%20migrants:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "Twelve migrants , including an infant, are killed when two separate speedboats capsize",
+     "primarySource": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2",
+     "generatedAtTime": "2026-10-20T12:13:55.000Z",
+     "fw:source": "en.wikipedia.org"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A84bb02f4d37d-%3Etopic%3Ainfant",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A84bb02f4d37d",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:topic%3Ainfant",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A84bb02f4d37d-%3Etopic%3Ainfant:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "Twelve migrants, including an infant , are killed when two separate speedboats capsize off the coast",
+     "primarySource": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2",
+     "generatedAtTime": "2026-10-20T12:13:55.000Z",
+     "fw:source": "en.wikipedia.org"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A84bb02f4d37d-%3Ewd%3AQ128087",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A84bb02f4d37d",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:wd%3AQ128087",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A84bb02f4d37d-%3Ewd%3AQ128087:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "killed when two separate speedboats capsize off the coast of the Lesbos and Samos islands in Greece.",
+     "primarySource": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2",
+     "generatedAtTime": "2026-10-20T12:13:55.000Z",
+     "fw:source": "en.wikipedia.org"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A84bb02f4d37d-%3Ewd%3AQ13580795",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A84bb02f4d37d",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:wd%3AQ13580795",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A84bb02f4d37d-%3Ewd%3AQ13580795:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "two separate speedboats capsize off the coast of the Lesbos and Samos islands in Greece.",
+     "primarySource": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2",
+     "generatedAtTime": "2026-10-20T12:13:55.000Z",
+     "fw:source": "en.wikipedia.org"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A84bb02f4d37d-%3Ewd%3AQ41",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A84bb02f4d37d",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:wd%3AQ41",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A84bb02f4d37d-%3Ewd%3AQ41:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "capsize off the coast of the Lesbos and Samos islands in Greece .",
+     "primarySource": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2",
+     "generatedAtTime": "2026-10-20T12:13:55.000Z",
+     "fw:source": "en.wikipedia.org"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:mentions%3An%3A84bb02f4d37d-%3Etech%3Aspeedboats",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A84bb02f4d37d",
+   "predicate": "fw:mentions",
+   "object": "urn:fogweave:node:tech%3Aspeedboats",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:mentions%3An%3A84bb02f4d37d-%3Etech%3Aspeedboats:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…. Twelve migrants, including an infant,",
+     "primarySource": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2",
+     "generatedAtTime": "2026-10-20T12:13:55.000Z",
+     "fw:source": "en.wikipedia.org"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:about%3An%3A84bb02f4d37d-%3Eev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A84bb02f4d37d",
+   "predicate": "fw:about",
+   "object": "urn:fogweave:node:ev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:about%3An%3A84bb02f4d37d-%3Eev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…",
+     "primarySource": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2",
+     "generatedAtTime": "2026-10-20T12:13:55.000Z",
+     "fw:source": "en.wikipedia.org"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:reports%3An%3A84bb02f4d37d-%3En%3A84bb02f4d37d%3Ac1",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A84bb02f4d37d",
+   "predicate": "fw:reports",
+   "object": "urn:fogweave:node:n%3A84bb02f4d37d%3Ac1",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:reports%3An%3A84bb02f4d37d-%3En%3A84bb02f4d37d%3Ac1:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "Twelve migrants, including an infant, are killed",
+     "primarySource": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2",
+     "generatedAtTime": "2026-10-20T12:13:55.000Z",
+     "fw:source": "en.wikipedia.org"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:reports%3An%3A84bb02f4d37d-%3En%3A84bb02f4d37d%3Ac2",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A84bb02f4d37d",
+   "predicate": "fw:reports",
+   "object": "urn:fogweave:node:n%3A84bb02f4d37d%3Ac2",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:reports%3An%3A84bb02f4d37d-%3En%3A84bb02f4d37d%3Ac2:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "two separate speedboats capsize",
+     "primarySource": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2",
+     "generatedAtTime": "2026-10-20T12:13:55.000Z",
+     "fw:source": "en.wikipedia.org"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:reports%3An%3A84bb02f4d37d-%3En%3A84bb02f4d37d%3Ac3",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:n%3A84bb02f4d37d",
+   "predicate": "fw:reports",
+   "object": "urn:fogweave:node:n%3A84bb02f4d37d%3Ac3",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:reports%3An%3A84bb02f4d37d-%3En%3A84bb02f4d37d%3Ac3:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "off the coast of the Lesbos and Samos islands in Greece",
+     "primarySource": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2",
+     "generatedAtTime": "2026-10-20T12:13:55.000Z",
+     "fw:source": "en.wikipedia.org"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:happened_in%3Aev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos-%3Ewd%3AQ128087",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:ev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos",
+   "predicate": "fw:happened_in",
+   "object": "urn:fogweave:node:wd%3AQ128087",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:happened_in%3Aev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos-%3Ewd%3AQ128087:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "off the coast of the Lesbos",
+     "primarySource": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2",
+     "generatedAtTime": "2026-10-20T12:13:55.000Z",
+     "fw:source": "en.wikipedia.org"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:involves%3Aev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos-%3Etopic%3Atwelve%20migrants",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:ev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos",
+   "predicate": "fw:involves",
+   "object": "urn:fogweave:node:topic%3Atwelve%20migrants",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:involves%3Aev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos-%3Etopic%3Atwelve%20migrants:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "Twelve migrants, including an infant, are killed",
+     "primarySource": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2",
+     "generatedAtTime": "2026-10-20T12:13:55.000Z",
+     "fw:source": "en.wikipedia.org"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:involves%3Aev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos-%3Etech%3Aspeedboats",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:ev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos",
+   "predicate": "fw:involves",
+   "object": "urn:fogweave:node:tech%3Aspeedboats",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:involves%3Aev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos-%3Etech%3Aspeedboats:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "two separate speedboats capsize",
+     "primarySource": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2",
+     "generatedAtTime": "2026-10-20T12:13:55.000Z",
+     "fw:source": "en.wikipedia.org"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:supports%3Asrc%3Awikipedia.org-%3En%3A84bb02f4d37d%3Ac3",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:ReportedStatement"
+   ],
+   "subject": "urn:fogweave:node:src%3Awikipedia.org",
+   "predicate": "fw:supports",
+   "object": "urn:fogweave:node:n%3A84bb02f4d37d%3Ac3",
+   "linkLabel": "reported",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "derivedFrom": [
+    {
+     "@id": "urn:fogweave:stmt:supports%3Asrc%3Awikipedia.org-%3En%3A84bb02f4d37d%3Ac3:ev1",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "Lesbos. The region includes the islands of Lesbos, Chios, Ikaria, Lemnos, and Samos. Lesbos is a separate regional unit with the seat in Mytilene, which",
+     "primarySource": "https://en.wikipedia.org/wiki/Lesbos",
+     "generatedAtTime": "2026-10-20T12:15:46.000Z",
+     "fw:source": "en.wikipedia.org"
+    },
+    {
+     "@id": "urn:fogweave:stmt:supports%3Asrc%3Awikipedia.org-%3En%3A84bb02f4d37d%3Ac3:ev2",
+     "@type": [
+      "prov:Entity"
+     ],
+     "value": "Samos. Samos (, also US: ; Greek: Σάμος, romanized: Sámos, Greek pronunciation: [ˈsa.mos]) is a Greek island in the eastern Aegean Sea, south of Chios,",
+     "primarySource": "https://en.wikipedia.org/wiki/Samos",
+     "generatedAtTime": "2026-10-20T12:15:46.000Z",
+     "fw:source": "en.wikipedia.org"
+    }
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:affects%3Aev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos-%3Etopic%3Amigrants",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:InferredStatement",
+    "fw:AffectsStatement"
+   ],
+   "subject": "urn:fogweave:node:ev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos",
+   "predicate": "fw:affects",
+   "object": "urn:fogweave:node:topic%3Amigrants",
+   "linkLabel": "inferred",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "reasoning": "The event directly resulted in the death of twelve migrants.",
+   "basis": [
+    "urn:fogweave:node:n%3A84bb02f4d37d%3Ac1",
+    "urn:fogweave:stmt:involves%3Aev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos-%3Etopic%3Atwelve%20migrants"
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:affects%3Atopic%3Amigrants-%3Etopic%3Aeu%20migration%20policy",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:SpeculativeStatement",
+    "fw:AffectsStatement"
+   ],
+   "subject": "urn:fogweave:node:topic%3Amigrants",
+   "predicate": "fw:affects",
+   "object": "urn:fogweave:node:topic%3Aeu%20migration%20policy",
+   "linkLabel": "speculative",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "reasoning": "Such fatalities often lead to discussions and possible changes in migration policy at the EU level."
+  },
+  {
+   "@id": "urn:fogweave:stmt:affects%3Aev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos-%3Eorg%3Agreek%20authorities",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:InferredStatement",
+    "fw:AffectsStatement"
+   ],
+   "subject": "urn:fogweave:node:ev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos",
+   "predicate": "fw:affects",
+   "object": "urn:fogweave:node:org%3Agreek%20authorities",
+   "linkLabel": "inferred",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "reasoning": "The incident occurred in Greek waters, implicating national authorities.",
+   "basis": [
+    "urn:fogweave:node:n%3A84bb02f4d37d%3Ac3",
+    "urn:fogweave:stmt:happened_in%3Aev%3Atwelve%20migrants%20killed%20off%20lesbos%20and%20samos-%3Ewd%3AQ128087"
+   ]
+  },
+  {
+   "@id": "urn:fogweave:stmt:affects%3Aorg%3Agreek%20authorities-%3Etopic%3Aborder%20control%20operations",
+   "@type": [
+    "rdf:Statement",
+    "prov:Entity",
+    "fw:SpeculativeStatement",
+    "fw:AffectsStatement"
+   ],
+   "subject": "urn:fogweave:node:org%3Agreek%20authorities",
+   "predicate": "fw:affects",
+   "object": "urn:fogweave:node:topic%3Aborder%20control%20operations",
+   "linkLabel": "speculative",
+   "generatedBy": "urn:fogweave:agent:fogweave",
+   "reasoning": "Authorities may respond by tightening border control measures after the tragedy."
+  }
+ ]
+}

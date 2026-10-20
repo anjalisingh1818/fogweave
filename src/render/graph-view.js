@@ -403,12 +403,12 @@ export class GraphView {
       const flashing = (this.pulse.get(id) ?? 0) > this.time;
       const bloom = easeOutBack(st.scale);
       let size = base * bloom * (emphasized ? 1.25 : 1);
-      if (flashing) size *= 1 + 0.15 * Math.sin(this.time * 8);
+      if (flashing) size *= 1 + (settings.comfort.gentle ? 0.05 : 0.15) * Math.sin(this.time * (settings.comfort.gentle ? 4 : 8));
 
       // fog-layer nodes drift gently; sealed nodes hold still
       _p.copy(st.cur);
       if (!node.sealed) {
-        const t = this.time * 0.35 + st.phase;
+        const t = this.time * (settings.comfort.gentle ? 0.15 : 0.35) + st.phase;
         _p.x += Math.sin(t) * 0.025;
         _p.y += Math.cos(t * 0.8) * 0.025;
       }

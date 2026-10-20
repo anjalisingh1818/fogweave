@@ -46,13 +46,25 @@ export function helpDraw(app) {
       ui.text(`· ${t}`, pad, y, { size: 25, color: '#d6dce4', maxWidth: w - pad * 2 });
       y += 34;
     }
-    const n = app.store.sealedIds().length + Object.keys(app.sealedLights || {}).length;
+    const n = app.store.sealedIds().length + Object.keys(app.sealedLights || {}).length + (app.sealedAnswers?.length || 0);
     const bw = (w - pad * 2 - 60) / 4;
-    const by = h - 112;
-    ui.button('library', `Library ${n}`, pad, by, bw, 80, () => app.openLibrary(), { size: 27 });
-    ui.button('context', 'My context', pad + bw + 20, by, bw, 80, () => app.openContext(), { size: 27, primary: true });
-    ui.button('tour', 'Tour', pad + (bw + 20) * 2, by, bw, 80, () => app.startOnboarding(true), { size: 27 });
-    ui.button('close', 'Close', pad + (bw + 20) * 3, by, bw, 80, () => app.closeCard('help'), { size: 27, icon: '✕' });
+    const rows = [
+      [
+        ['library', `Library ${n}`, () => app.openLibrary()],
+        ['notes', 'Notes', () => app.openNotes()],
+        ['lights', 'Lights', () => app.openLightsPanel()],
+        ['context', 'My context', () => app.openContext(), true],
+      ],
+      [
+        ['briefing', 'Briefing', () => app.startBriefing()],
+        ['settings', 'Settings', () => app.openSettings()],
+        ['tour', 'Tour', () => app.startOnboarding(true)],
+        ['close', 'Close', () => app.closeCard('help')],
+      ],
+    ];
+    rows.forEach((row, r) =>
+      row.forEach(([id, label, on, primary], i) => ui.button(id, label, pad + i * (bw + 20), h - 200 + r * 92, bw, 80, on, { size: 26, primary: !!primary })),
+    );
   };
 }
 
@@ -62,8 +74,16 @@ export function libraryDraw(app) {
     const sealed = [...app.store.nodes.values()].filter((n) => n.sealed);
     const lights = Object.values(app.sealedLights || {});
     ui.text('LIBRARY · WHAT YOU SEALED', pad, 70, { size: 30, color: UI.accent, weight: 600 });
-    ui.text('Kept on this device. Export arrives with the Evidence Pack.', pad, 110, { size: 24, color: UI.dim, maxWidth: w - pad * 2 });
-    let y = 164;
+    const e = app.cards.entry('library');
+    ui.button('pin', e?.pinned ? 'Unpin' : 'Pin', w - pad - 330, 26, 150, 64, () => app.cards.setPinned('library', !e?.pinned), { size: 26 });
+    ui.button('move', 'Move', w - pad - 170, 26, 150, 64, () => app.cards.move('library'), { size: 26 });
+    ui.text('Kept on this device. Export makes an Evidence Pack (links and short quotes only).', pad, 120, { size: 23, color: UI.dim, maxWidth: w - pad * 2 });
+    let y = 170;
+    for (const a of (app.sealedAnswers || []).slice(-2)) {
+      ui.text('?', pad + 8, y, { size: 28, color: '#9cc7ff', weight: 700 });
+      ui.text(a.question, pad + 40, y, { size: 27, maxWidth: w - pad * 2 - 40 });
+      y += 38;
+    }
     for (const it of lights.slice(0, 4)) {
       ui.text('✦', pad + 4, y, { size: 28, color: '#ffe2a8' });
       ui.text(it.headline, pad + 40, y, { size: 27, maxWidth: w - pad * 2 - 40 });
@@ -88,6 +108,7 @@ export function libraryDraw(app) {
       y += 38;
     }
     if (rest.length > shown) ui.text(`+ ${rest.length - shown} more`, pad + 40, y, { size: 25, color: UI.dim });
+    ui.button('export', 'Export pack', pad, h - 112, 280, 80, () => app.exportPack(), { primary: true, size: 28 });
     ui.button('close', 'Close', w - pad - 200, h - 112, 200, 80, () => app.closeCard('library'), { icon: '✕' });
   };
 }

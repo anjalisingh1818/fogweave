@@ -4,10 +4,13 @@
  * is always on the card (read-aloud, later, is only an extra).
  *
  * Expand grows the item into the web (live, or a recorded run offline).
- * Ask arrives in Phase 3 and is shown inactive until then.
+ * Ask answers from the web with citations (live; recorded answers offline).
+ * Listen reads the card aloud where the browser can; Story lists related items.
  */
 import { UI } from '../render/card.js';
 import { LIGHT_KINDS, ageMark } from '../render/lights.js';
+import { speech } from '../audio.js';
+import { settings } from '../config.js';
 
 export function readerDraw(app, id) {
   return (ctx, ui, w, h) => {
@@ -36,13 +39,23 @@ export function readerDraw(app, id) {
       y += 40;
     }
     for (const c of (it.claims || []).slice(0, 3)) {
-      if (y > h - 260) break;
+      if (y > h - 330) break;
       y = ui.para(`• ${c.text}`, pad, y, w - pad * 2, { size: 28, maxLines: 2 });
       if (c.quote) y = ui.para(`“${c.quote}”`, pad + 28, y, w - pad * 2 - 28, { size: 24, color: UI.dim, maxLines: 1 });
       y += 6;
     }
-    if (it.claimsNote) ui.text(it.claimsNote, pad, Math.min(y + 4, h - 230), { size: 24, color: '#f0c987', maxWidth: w - pad * 2 });
-    if (it.url) ui.text(shortUrl(it.url), pad, h - 196, { size: 25, color: '#8fb7e6', maxWidth: w - pad * 2 });
+    if (it.claimsNote) ui.text(it.claimsNote, pad, Math.min(y + 4, h - 300), { size: 24, color: '#f0c987', maxWidth: w - pad * 2 });
+    if (it.url) ui.text(shortUrl(it.url), pad, h - 270, { size: 25, color: '#8fb7e6', maxWidth: w - pad * 2 });
+    // small row: read aloud, same story, touches me
+    const small = [];
+    if (speech.available() && settings.audio.readAloud) {
+      small.push({ id: 'listen', label: speech.speaking() ? 'Stop' : 'Listen', on: () => (speech.speaking() ? speech.stop() : speech.speak([it.headline, it.summary, ...(it.claims || []).map((c) => c.text)].filter(Boolean).join('. '))) });
+    }
+    const mates = app.storyMates(id).length;
+    if (mates) small.push({ id: 'story', label: `Story +${mates}`, on: () => app.openTimeline(id) });
+    if (it.expanded === true) small.push({ id: 'touch', label: 'Touches me?', on: () => app.touchesMe(id) });
+    const sw = 210;
+    small.forEach((b, i) => ui.button(b.id, b.label, pad + i * (sw + 16), h - 244, sw, 58, b.on, { size: 24 }));
     const can = app.canExpand(id);
     const note = it.expanded === 'running' ? 'Growing into the web…' : it.expanded ? 'In the web: pinch its node for links and effects.' : can ? 'Expand shows what it connects to and may affect.' : 'Expand needs the live engine (no recorded run for this light).';
     ui.text(note, pad, h - 152, { size: 24, color: UI.dim, maxWidth: w - pad * 2 });
@@ -53,7 +66,7 @@ export function readerDraw(app, id) {
     else ui.button('seal', 'Seal', pad, by, bw, 88, () => app.sealLight(id), { primary: true, icon: '◆', size: 30 });
     const expLabel = it.expanded === 'running' ? 'Growing' : it.expanded ? 'Expanded' : 'Expand';
     ui.button('expand', expLabel, pad + (bw + 20), by, bw, 88, () => app.expandLight(id), { disabled: !can || !!it.expanded || app.researching, size: 30, primary: can && !it.expanded });
-    ui.button('ask', 'Ask', pad + (bw + 20) * 2, by, bw, 88, null, { disabled: true, size: 30 });
+    ui.button('ask', 'Ask', pad + (bw + 20) * 2, by, bw, 88, () => app.openAsk(id), { size: 30 });
     ui.button('close', 'Close', pad + (bw + 20) * 3, by, bw, 88, () => app.closeCard(`light:${id}`), { icon: '✕', size: 30 });
   };
 }

@@ -58,6 +58,14 @@ export class ResearchClient {
     return this._json('/read', { body: { id }, timeout: 60000 });
   }
 
+  ask(question, graph) {
+    return this._json('/ask', { body: { question, graph, fresh: true }, timeout: 90000 });
+  }
+
+  pack(pack) {
+    return this._json('/pack', { body: { pack }, timeout: 30000 });
+  }
+
   check(text) {
     return this._json('/check', { body: { text }, timeout: 5000 });
   }

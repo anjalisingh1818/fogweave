@@ -108,11 +108,12 @@ export function nodeCardDraw(app, id) {
       buttons.push(node.sealed ? { id: 'unseal', label: 'Unseal', icon: '◇', on: () => app.unseal(id) } : { id: 'seal', label: 'Seal', icon: '◆', primary: true, on: () => app.seal(id) });
     }
     if (node.type === 'NewsItem') buttons.push({ id: 'touch', label: 'Touches me?', on: () => app.touchesMe(id) });
+    if (node.type !== 'ContextNode' && node.type !== 'Source') buttons.push({ id: 'ask', label: 'Ask', on: () => app.openAsk(id) });
     const linking = app.linkFromId && app.linkFromId !== id;
     buttons.push({ id: 'link', label: linking ? 'Path here' : app.linkFromId === id ? 'Linking…' : 'Link', primary: linking, on: () => app.link(id) });
     buttons.push({ id: 'close', label: 'Close', icon: '✕', on: () => app.closeCard(`node:${id}`) });
     const bw = (w - pad * 2 - 20 * (buttons.length - 1)) / buttons.length;
-    buttons.forEach((b, i) => ui.button(b.id, b.label, pad + i * (bw + 20), by, bw, 88, b.on, { primary: b.primary, icon: b.icon, size: buttons.length > 3 ? 28 : 32 }));
+    buttons.forEach((b, i) => ui.button(b.id, b.label, pad + i * (bw + 20), by, bw, 88, b.on, { primary: b.primary, icon: buttons.length > 4 ? null : b.icon, size: buttons.length > 4 ? 24 : buttons.length > 3 ? 28 : 32 }));
   };
 }
 

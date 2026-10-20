@@ -23,7 +23,8 @@ export class Keypad {
     return !!this.card;
   }
 
-  open({ prompt = 'Name a topic', suggestions = [], text = '' } = {}) {
+  open({ prompt = 'Name a topic', suggestions = [], text = '', mic = null } = {}) {
+    this.mic = mic; // optional voice: only when enabled and the browser supports it
     this.prompt = prompt;
     this.suggestions = suggestions.slice(0, 4);
     this.text = text;
@@ -78,9 +79,11 @@ export class Keypad {
     // input line
     ui.text(this.prompt.toUpperCase(), pad, 58, { size: 26, color: UI.dim, weight: 600 });
     ctx.fillStyle = 'rgba(255,255,255,0.07)';
-    ctx.fillRect(pad, 74, w - pad * 2 - 110, 70);
+    const micW = this.mic ? 110 : 0;
+    ctx.fillRect(pad, 74, w - pad * 2 - 110 - micW, 70);
     const shown = this.text || '';
-    ui.text(shown + '▏', pad + 18, 124, { size: 40, maxWidth: w - pad * 2 - 150 });
+    ui.text(shown + '▏', pad + 18, 124, { size: 40, maxWidth: w - pad * 2 - 150 - micW });
+    if (this.mic) ui.button('mic', 'Mic', w - pad - 92 - micW, 74, 92, 70, () => this.mic(), { size: 26 });
     ui.button('close', '✕', w - pad - 92, 74, 92, 70, () => this.close(), { size: 34 });
 
     // suggestion cards

@@ -14,6 +14,7 @@ export async function launch({ width = 1280, height = 800, gpu = true } = {}) {
   const args = gpu ? ['--use-angle=d3d11', '--enable-gpu', '--ignore-gpu-blocklist'] : [];
   const browser = await chromium.launch({ headless: true, args });
   const context = await browser.newContext({
+    acceptDownloads: true,
     viewport: { width, height },
     recordVideo: process.env.FW_VIDEO ? { dir: OUT, size: { width, height } } : undefined,
   });

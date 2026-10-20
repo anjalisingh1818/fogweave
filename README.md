@@ -4,7 +4,7 @@ A hands-first VR **news impact graph** set in a gray fog. News arrives as drifti
 
 Built with [IWSDK](https://developers.meta.com/horizon/documentation/iwsdk/) (WebXR, three.js and ECS) for the Meta VR Start Developer Competition 2026. It is seated and works with hands only; voice is an optional extra.
 
-> **Status (Phase 2 done, 2026-10-20).** The live news engine runs on four free sources: news lights, reader claims with verbatim quotes, and streaming Expand into a labelled impact web. Your private context, the personalized Locket and the "Touches me?" thread work too. Offline, the app replays a dated snapshot of real pipeline runs. Still to come (Phase 3): Ask, the timeline, the daily briefing, the Evidence Pack export, read-aloud and voice.
+> **Status (Phase 3 done, 2026-10-20).** The live news engine runs on four free sources: news lights, reader claims with verbatim quotes, and streaming Expand into a labelled impact web. Your private context, the personalized Locket and the "Touches me?" thread work too. Also built: Ask with citations, insights, the story timeline, the daily briefing, workspace panels (Library, Notes, Lights), settings, ambient sound, optional read-aloud and voice, and the Evidence Pack export (JSON-LD + PROV-O, validated with SHACL and SPARQL). Offline, the app replays a dated snapshot of real pipeline runs. Next: evaluation (Phase 4) and release QA (Phase 5).
 
 ## Reading the fog
 
@@ -27,6 +27,9 @@ Translucent, drifting items are **fog**: found this session, and gone afterwards
 - **Coin:** flip it near a node, or tap it (a quick pinch on the coin, or a pinch on its tag). It shows the verdict and its breakdown. Flipped in open air, it finds the most central node.
 - **Locket:** swing it near a node, or tap it. It shows the node's rank ("3rd of 12") and why.
 - **Link** on two cards, or hold both props, highlights the shortest path between the two nodes.
+- **Ask** (reader or node card): a suggestion card or the keypad. Answers cite where each sentence comes from; pinch a citation to see it. "Is this reliable?" is answered from the evidence itself.
+- **Library → Export pack** saves a zip: `pack.jsonld` (PROV-O), `claims.jsonl`, `README.md`, and `validation.json` when online.
+- **"?" on the wrist**: Library, Notes, Lights, My context, Briefing, Settings, Tour. Panels can be pinned and moved.
 - **Flick** a card away, or press Close. The **"?"** on your left wrist opens help and the Library.
 
 ## Run it
@@ -61,8 +64,8 @@ python scripts/snapshot.py   # refresh the offline snapshot from real runs
 
 ```bash
 npm test               # model, algorithms, layout (node:test)
-npm run qa             # scripted-hands emulator run, live + offline; needs the dev server and backend running
-npm run qa:offline     # offline part only
+npm run qa             # Phase 2 + 3 scripted-hands runs, live + offline; needs the dev server and backend running
+npm run qa:offline     # offline parts only
 cd server && python -m pytest   # backend: sources, LLM governor, evidence, ontology, algorithms
 ```
 
