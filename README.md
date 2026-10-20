@@ -1,10 +1,10 @@
 # FogWeave
 
-A hands-first VR knowledge workspace set in a gray fog. An AI researches a topic, checks each key claim against independent sources, and grows a 3D web of knowledge. You seal only what you trust into a cited, exportable Library.
+A hands-first VR **news impact graph** set in a gray fog. News arrives as drifting lights. Touch one to see what it connects to, what it may affect, and how it may reach your own world. Every link is labelled by how well supported it is, and you seal only what you trust into a cited, exportable Library. (V2 direction: see [docs/PLAN.md](docs/PLAN.md).)
 
 Built with [IWSDK](https://developers.meta.com/horizon/documentation/iwsdk/) (WebXR, three.js and ECS) for the Meta VR Start Developer Competition 2026. It is seated and works with hands only; voice is an optional extra.
 
-> **Status (Phase 1 of the plan, 2026-10-20).** The world, the web renderer, cards, sealing, the props, paths, the keypad and onboarding all work in the emulator. The research engine (Phase 2) is not wired in yet. The bundled webs are **synthetic test fixtures** (badged TEST FIXTURE) until real pipeline runs replace them.
+> **Status (Phase 1 done, 2026-10-20).** The world, the web renderer, news lights, the reader-card shell, cards, sealing, the props, paths, the keypad and onboarding all work in the emulator. The news engine (Phase 2) is not wired in yet. The bundled webs and lights are **synthetic test fixtures** (badged TEST FIXTURE) until a dated real snapshot replaces them.
 
 ## Reading the fog
 
@@ -19,6 +19,7 @@ Translucent, drifting items are **fog**: found this session, and gone afterwards
 
 ## What you do (hands only)
 
+- **Pinch a light** to open its reader card (headline, source, date, summary, key claims with short quotes, link). Seal keeps it.
 - **Pinch a node** to open its card, with evidence lines (independent domains, source classes, support and contradiction counts) and a risk note.
 - **Seal** on a card keeps the item. Sealing a claim also seals the sources and edges that back it.
 - **Pinch empty space** to name a topic with the pinch keypad, or pick a suggestion card.

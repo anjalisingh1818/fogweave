@@ -351,6 +351,46 @@ try {
     return r;
   });
 
+  let lightId = null;
+  await step('news lights drift in the fog (bundled snapshot)', async () => {
+    const r = await ev(() => {
+      const L = window.__fw.app.lights;
+      return { count: L.items.length, kinds: [...new Set(L.items.map((x) => x.kind))].sort(), meta: window.__fw.app.lightsMeta };
+    });
+    if (r.count < 10 || r.kinds.length < 3) throw new Error(JSON.stringify(r));
+    return r;
+  });
+
+  await step('pinch a light opens its reader card', async () => {
+    await ev(() => window.__fw.app.cards.closeAll());
+    const ids = await ev(() => window.__fw.app.lights.items.map((x) => x.id));
+    for (const id of ids) {
+      await ev(async (lid) => {
+        const p = window.__fw.app.lights.worldPositionOf(lid);
+        await window.__qa.pinchAt('hand-right', { x: p.x, y: p.y, z: p.z });
+      }, id);
+      const open = (await ev(() => window.__qa.openCards())).find((k) => k.startsWith('light:'));
+      if (open) {
+        lightId = open.slice(6);
+        break;
+      }
+    }
+    if (!lightId) throw new Error('no reader card opened');
+    const buttons = await ev((id) => window.__qa.cardOf(`light:${id}`).buttonIds(), lightId);
+    if (!buttons.includes('seal') || !buttons.includes('close') || buttons.includes('expand')) throw new Error(JSON.stringify(buttons));
+    await shot(page, '12-reader-card');
+    return { lightId, buttons };
+  });
+
+  await step('Seal a news item by pinch; the Library lists it', async () => {
+    await ev((id) => window.__qa.press(`light:${id}`, 'seal'), lightId);
+    const r = await ev((id) => ({ sealed: !!window.__fw.app.sealedLights[id], stored: !!JSON.parse(localStorage.getItem('fogweave.sealedLights.v1') || '{}')[id] }), lightId);
+    if (!r.sealed || !r.stored) throw new Error(JSON.stringify(r));
+    await ev(() => window.__fw.app.openLibrary());
+    await shot(page, '13-library-with-news');
+    return r;
+  });
+
   await step('stress web: 160 nodes capped to 150, frame stats', async () => {
     const doc = JSON.parse(readFileSync('qa/fixtures/stress-150.json', 'utf8'));
     await ev((d) => {

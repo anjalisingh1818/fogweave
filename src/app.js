@@ -15,6 +15,8 @@ import { helpDraw, libraryDraw } from './ui/help.js';
 import { Keypad } from './ui/keypad.js';
 import { Onboarding } from './ui/onboarding.js';
 import { Props } from './props.js';
+import { LightField } from './render/lights.js';
+import { readerDraw } from './ui/reader-card.js';
 import { graphToEvents, EventPlayer, applyEvent } from './research/events.js';
 import { settings, loadSettings, setQuality, DEBUG } from './config.js';
 import { QualityGovernor } from './quality.js';
@@ -22,6 +24,7 @@ import { QualityGovernor } from './quality.js';
 const SEALED_KEY = 'fogweave.sealed.v1';
 const RECENT_KEY = 'fogweave.recent.v1';
 const LAST_KEY = 'fogweave.last.v1';
+const SEALED_LIGHTS_KEY = 'fogweave.sealedLights.v1';
 
 const _hp = new Vector3();
 const _hq = new Quaternion();
@@ -46,6 +49,11 @@ export class App {
       onReveal: (kind, info) => this.reveal(kind, info),
       onBothHeld: () => this.pathFromProps(),
     });
+    this.lights = new LightField(this.world, this.anchor);
+    this.lights.onSelect = (id) => this.openLight(id);
+    this.lightsMeta = null;
+    this.sealedLights = readJSON(SEALED_LIGHTS_KEY, {}); // id -> item copy (Library)
+    this.lights.sealed = new Set(Object.keys(this.sealedLights));
     this.onboarding = new Onboarding(this);
     this.governor = new QualityGovernor((level) => {
       setQuality(level);
@@ -68,6 +76,7 @@ export class App {
   // ---------- startup ----------
 
   async _start() {
+    this._loadLights();
     try {
       const res = await fetch('demo/index.json');
       this.demos = res.ok ? await res.json() : [];
@@ -79,6 +88,45 @@ export class App {
     const key = (!first && last && this.demos.find((d) => d.topicKey === last)?.topicKey) || this.demos[0]?.topicKey;
     if (key) await this.loadDemo(key, { replay: true });
     if (first) this.startOnboarding();
+  }
+
+  /** Bundled light snapshot (dated); the news engine will stream fresh ones. */
+  async _loadLights() {
+    try {
+      const res = await fetch('demo/lights.json');
+      if (!res.ok) return;
+      const doc = await res.json();
+      this.lightsMeta = { kind: doc.provenance?.kind, generatedAt: doc.generatedAt };
+      this.lights.setItems(doc.items || []);
+    } catch (err) {
+      console.warn('[fogweave] no bundled lights', err);
+    }
+  }
+
+  openLight(id) {
+    if (!this.lights.get(id)) return;
+    for (const e of [...this.cards.open]) if (e.key.startsWith('light:') && e.key !== `light:${id}`) this.cards.close(e.key);
+    this.lights.openId = id;
+    this.cards.show(`light:${id}`, { width: 0.46, height: 0.46, draw: readerDraw(this, id), prefer: this.lights.worldPositionOf(id) });
+    this.onboarding.notify('light-opened');
+  }
+
+  sealLight(id) {
+    const it = this.lights.get(id);
+    if (!it) return;
+    const { claims, ...rest } = it;
+    this.sealedLights[id] = { ...rest, claims: (claims || []).slice(0, 3), sealedAt: new Date().toISOString() };
+    this.lights.sealed.add(id);
+    writeJSON(SEALED_LIGHTS_KEY, this.sealedLights);
+    this.cards.get(`light:${id}`)?.redraw();
+    this.onboarding.notify('sealed');
+  }
+
+  unsealLight(id) {
+    delete this.sealedLights[id];
+    this.lights.sealed.delete(id);
+    writeJSON(SEALED_LIGHTS_KEY, this.sealedLights);
+    this.cards.get(`light:${id}`)?.redraw();
   }
 
   _bubbleCenter() {
@@ -173,7 +221,7 @@ export class App {
 
   /** True while any of our interactive things is under a pointer. */
   anythingHovered() {
-    const entities = [this.view.hitEntity, this.statusCard.entity, this.helpButton.entity, ...this.props.items.map((p) => p.entity)];
+    const entities = [this.view.hitEntity, this.lights.hitEntity, this.statusCard.entity, this.helpButton.entity, ...this.props.items.map((p) => p.entity)];
     for (const e of this.cards.open) entities.push(e.card.entity);
     if (this.keypad.card) entities.push(this.keypad.card.entity);
     return entities.some((e) => e?.hasComponent?.(Hovered));
@@ -202,6 +250,7 @@ export class App {
       this.view.setSelected(null);
     }
     if (key === 'path') this.view.clearPath();
+    if (key.startsWith('light:') && this.lights.openId === key.slice(6)) this.lights.openId = null;
   }
 
   _refreshCards() {
@@ -469,6 +518,7 @@ export class App {
     const now = performance.now();
     this.player?.update(delta * 1000);
     this.view.update(delta, _hp, _hq);
+    this.lights.update(delta, _hq);
     this.cards.update(delta);
     this.atmosphere.update(delta);
     this.props.update(delta, now);

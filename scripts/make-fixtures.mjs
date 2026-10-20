@@ -100,6 +100,44 @@ writeFileSync(
     1,
   ),
 );
+// news lights: synthetic items, dated relative to the generation date
+const GEN = Date.parse('2026-10-20T08:00:00Z');
+const LIGHT_PLAN = [
+  ['breaking', 2], ['breaking', 5], ['paper', 20], ['breaking', 30], ['paper', 52], ['breaking', 70],
+  ['paper', 120], ['breaking', 200], ['archive', 24 * 40], ['archive', 24 * 210], ['archive', 24 * 800], ['paper', 24 * 9],
+];
+const lights = LIGHT_PLAN.map(([kind, hoursAgo], i) => {
+  const n = i + 1;
+  return {
+    id: `fixture-light-${n}`,
+    kind,
+    headline: `Fixture ${kind === 'paper' ? 'paper' : 'news item'} ${n}: synthetic headline for testing`,
+    source: `fixture-source-${(n % 5) + 1}.example`,
+    url: `https://fixture-source-${(n % 5) + 1}.example/item-${n}`,
+    date: new Date(GEN - hoursAgo * 3600000).toISOString(),
+    summary: 'Synthetic summary used to test the reader card layout. Not a real news item.',
+    claims: [
+      { text: `Fixture claim ${n}.1 stated by the synthetic source.`, quote: 'Synthetic fixture quote.' },
+      { text: `Fixture claim ${n}.2 stated by the synthetic source.`, quote: 'Another synthetic quote.' },
+    ],
+    relevance: Math.round((0.15 + 0.85 * ((n * 37) % 100) / 100) * 100) / 100,
+  };
+});
+writeFileSync(
+  'public/demo/lights.json',
+  JSON.stringify(
+    {
+      schema: 'fogweave.lights/1',
+      generatedAt: new Date(GEN).toISOString(),
+      provenance: { kind: 'fixture', note: 'Synthetic test fixture; replaced by a dated real snapshot in Phase 2.' },
+      items: lights,
+    },
+    null,
+    1,
+  ),
+);
+console.log(`lights: ${lights.length} items`);
+
 const stress = fixture('S', { claims: 50, seed: 11, subtopics: 6 });
 writeFileSync('qa/fixtures/stress-150.json', JSON.stringify(stress));
 console.log(demos.map((d) => `${d.topicKey}: ${d.nodes.length} nodes, ${d.edges.length} edges`).join('\n'));
