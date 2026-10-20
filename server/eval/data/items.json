@@ -1,0 +1,676 @@
+{
+ "collected": "2026-10-20T13:15:23.230009+00:00",
+ "personas": {
+  "A": [
+   "Rotterdam",
+   "logistics",
+   "energy prices",
+   "public transport"
+  ],
+  "B": [
+   "Uttar Pradesh",
+   "farming",
+   "monsoon",
+   "rice"
+  ],
+  "C": [
+   "Seoul",
+   "software engineering",
+   "cloud computing",
+   "semiconductors"
+  ]
+ },
+ "items": [
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…",
+   "url": "https://www.reuters.com/world/least-18-killed-houthi-attack-yemeni-government-military-camp-shabwa-sources-say-2026-10-19/",
+   "date": "2026-10-19T00:00:00Z",
+   "snippet": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen. There are 14 missing.",
+   "outlet": "reuters.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.reuters.com/world/least-18-killed-houthi-attack-yemeni-government-military-camp-shabwa-sources-say-2026-10-19/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#0",
+    "section": "Armed conflicts and attacks",
+    "storyPath": [
+     "Yemeni civil war",
+     "2026 Yemen offensives",
+     "2026 Shabwah missile attack"
+    ]
+   },
+   "id": "n:945f742db3b8",
+   "persona": "A"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…",
+   "url": "https://www.bbc.com/news/articles/cq4g1j54nepyo",
+   "date": "2026-10-08T00:00:00Z",
+   "snippet": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that, in playful dialogue with the classical tradition, has created new forms ‌for contemporary literature\".",
+   "outlet": "bbc.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.bbc.com/news/articles/cq4g1j54nepyo"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_8#5",
+    "section": "Arts and culture",
+    "storyPath": [
+     "2026 Nobel Prize in Literature"
+    ]
+   },
+   "id": "n:d0e0e4a57ac3",
+   "persona": "B"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "The New Yalu River Bridge connecting Dandong, China, and Sinuiju, North Korea, opens following a 12-year…",
+   "url": "https://www.bbc.com/news/articles/ck1exgw3j115o",
+   "date": "2026-10-15T00:00:00Z",
+   "snippet": "The New Yalu River Bridge connecting Dandong, China, and Sinuiju, North Korea, opens following a 12-year delay.",
+   "outlet": "bbc.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.bbc.com/news/articles/ck1exgw3j115o",
+    "https://www.nknews.org/2026/10/north-korea-china-officially-open-long-delayed-new-yalu-river-bridge/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_15#2",
+    "section": "Business and economy",
+    "storyPath": [
+     "China–North Korea relations"
+    ]
+   },
+   "id": "n:77c59dd165c5",
+   "persona": "C"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…",
+   "url": "https://apnews.com/article/greece-migrants-die-speedboats-capsize-8c9f49e307e32d73bd7dd039d7c79169",
+   "date": "2026-10-19T00:00:00Z",
+   "snippet": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the Lesbos and Samos islands in Greece.",
+   "outlet": "apnews.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://apnews.com/article/greece-migrants-die-speedboats-capsize-8c9f49e307e32d73bd7dd039d7c79169"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#3",
+    "section": "Disasters and accidents",
+    "storyPath": [
+     "Mediterranean Sea migrant smuggling"
+    ]
+   },
+   "id": "n:84bb02f4d37d",
+   "persona": "A"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "Equatorial Guinea announces that it will expand its program combating malaria to the mainland and Annobón",
+   "url": "https://www.independent.co.uk/news/equatorial-guinea-malaria-world-health-organization-rhode-island-african-b3068688.html",
+   "date": "2026-10-18T00:00:00Z",
+   "snippet": "Equatorial Guinea announces that it will expand its program combating malaria to the mainland and Annobón. The program has already heavily reduced malaria cases on Bioko Island.",
+   "outlet": "independent.co.uk",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.independent.co.uk/news/equatorial-guinea-malaria-world-health-organization-rhode-island-african-b3068688.html"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_18#5",
+    "section": "Health and environment",
+    "storyPath": []
+   },
+   "id": "n:ac99b0896a72",
+   "persona": "B"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "Andorra and San Marino each sign an association agreement with the European Union",
+   "url": "https://www.brusselstimes.com/eu-affairs/2368520/eu-agreement-brings-andorra-san-marino-into-internal-market?utm_term=Autofeed&utm_medium=Social&utm_source=Twitter",
+   "date": "2026-10-19T00:00:00Z",
+   "snippet": "Andorra and San Marino each sign an association agreement with the European Union.",
+   "outlet": "brusselstimes.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.brusselstimes.com/eu-affairs/2368520/eu-agreement-brings-andorra-san-marino-into-internal-market?utm_term=Autofeed&utm_medium=Social&utm_source=Twitter"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#5",
+    "section": "International relations",
+    "storyPath": [
+     "Andorra–European Union relations, San Marino–European Union relations, Potential enlargement of the European Union"
+    ]
+   },
+   "id": "n:2ef6e37a2b5f",
+   "persona": "C"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…",
+   "url": "https://www.aljazeera.com/news/2026/10/19/florida-issues-arrest-warrant-for-cuban-leader-raul-castro",
+   "date": "2026-10-19T00:00:00Z",
+   "snippet": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban president Raúl Castro after Florida attorney general James Uthmeier charged Castro with conspiracy to commit first-degree murder by directing spies to infiltrate Brothers to the Rescue and ordering the attack on their planes in 1996.",
+   "outlet": "aljazeera.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.aljazeera.com/news/2026/10/19/florida-issues-arrest-warrant-for-cuban-leader-raul-castro"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#7",
+    "section": "Law and crime",
+    "storyPath": [
+     "Cuba–United States relations",
+     "1996 shootdown of Brothers to the Rescue aircraft, United States embargo against Cuba"
+    ]
+   },
+   "id": "n:12fabc0b78de",
+   "persona": "A"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead of the party's planned march",
+   "url": "https://www.bbc.com/news/articles/cmx237n1y9lzo",
+   "date": "2026-10-16T00:00:00Z",
+   "snippet": "Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead of the party's planned march.",
+   "outlet": "bbc.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.bbc.com/news/articles/cmx237n1y9lzo"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_16#5",
+    "section": "Law and crimes",
+    "storyPath": [
+     "2026 anti-CEC protests"
+    ]
+   },
+   "id": "n:b88263d4e9c2",
+   "persona": "B"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada",
+   "url": "https://www.reuters.com/world/americas/alberta-votes-leaving-canada-separatist-movement-likely-outlast-expected-defeat-2026-10-19/",
+   "date": "2026-10-19T00:00:00Z",
+   "snippet": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada.",
+   "outlet": "reuters.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.reuters.com/world/americas/alberta-votes-leaving-canada-separatist-movement-likely-outlast-expected-defeat-2026-10-19/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#12",
+    "section": "Politics and elections",
+    "storyPath": [
+     "2026 Alberta referendums, 2026 Alberta independence referendum"
+    ]
+   },
+   "id": "n:2ea4338fe8f4",
+   "persona": "C"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "Astronomers discover the first green star, WD J1330+6435, according to a study published by RAS Techniques…",
+   "url": "https://www.popsci.com/science/first-green-star-reddest-star/",
+   "date": "2026-10-15T00:00:00Z",
+   "snippet": "Astronomers discover the first green star, WD J1330+6435, according to a study published by RAS Techniques and Instruments.",
+   "outlet": "popsci.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.popsci.com/science/first-green-star-reddest-star/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_15#14",
+    "section": "Science and technology",
+    "storyPath": []
+   },
+   "id": "n:d7646cfd3bd0",
+   "persona": "A"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…",
+   "url": "https://www.nytimes.com/athletic/7699587/2026/10/17/panthers-nhl-natural-hat-tricks-verhaeghe-history/",
+   "date": "2026-10-17T00:00:00Z",
+   "snippet": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural hat trick in three consecutive games.",
+   "outlet": "nytimes.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.nytimes.com/athletic/7699587/2026/10/17/panthers-nhl-natural-hat-tricks-verhaeghe-history/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_17#17",
+    "section": "Sports",
+    "storyPath": [
+     "2026–27 NHL season"
+    ]
+   },
+   "id": "n:fa08b85b6159",
+   "persona": "B"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan",
+   "url": "https://apnews.com/article/sudan-drone-rapid-support-forces-khartoum-97536d115acd1afb479d2c7ff6df580d",
+   "date": "2026-10-19T00:00:00Z",
+   "snippet": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan.",
+   "outlet": "apnews.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://apnews.com/article/sudan-drone-rapid-support-forces-khartoum-97536d115acd1afb479d2c7ff6df580d"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#1",
+    "section": "Armed conflicts and attacks",
+    "storyPath": [
+     "Sudanese civil war",
+     "Rapid Support Forces atrocities in Khartoum"
+    ]
+   },
+   "id": "n:75c973928996",
+   "persona": "C"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…",
+   "url": "https://www.bbc.co.uk/news/articles/cwe8ld517ry3o",
+   "date": "2026-10-08T00:00:00Z",
+   "snippet": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European hedgehog will feature on the next set of pound sterling notes to be issued in the United Kingdom. It will be the first time animals have replaced people on banknotes in England, which is intended to increase awareness of British wildlife.",
+   "outlet": "bbc.co.uk",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.bbc.co.uk/news/articles/cwe8ld517ry3o"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_8#6",
+    "section": "Arts and culture",
+    "storyPath": []
+   },
+   "id": "n:047b20792022",
+   "persona": "A"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper…",
+   "url": "https://easternherald.com/2026/10/15/unicredit-commerzbank-ecb-approval-control/",
+   "date": "2026-10-15T00:00:00Z",
+   "snippet": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper limit, allowing the Italian bank to proceed toward taking control of the German lender.",
+   "outlet": "easternherald.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://easternherald.com/2026/10/15/unicredit-commerzbank-ecb-approval-control/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_15#3",
+    "section": "Business and economy",
+    "storyPath": []
+   },
+   "id": "n:8ab7353c3a4a",
+   "persona": "B"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+   "url": "https://apnews.com/article/colombia-mine-accident-gold-illegal-mining-bffbd24132af34a0cb14a414579d1e9b",
+   "date": "2026-10-19T00:00:00Z",
+   "snippet": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño Department, Colombia.",
+   "outlet": "apnews.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://apnews.com/article/colombia-mine-accident-gold-illegal-mining-bffbd24132af34a0cb14a414579d1e9b"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#4",
+    "section": "Disasters and accidents",
+    "storyPath": []
+   },
+   "id": "n:0f5a4c632e8d",
+   "persona": "C"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "Kenya confirms four additional cases of Bundibugyo ebolavirus, including three health workers who treated…",
+   "url": "https://www.france24.com/en/live-news/20261017-four-more-ebola-cases-detected-in-kenya-bringing-total-to-seven",
+   "date": "2026-10-17T00:00:00Z",
+   "snippet": "Kenya confirms four additional cases of Bundibugyo ebolavirus, including three health workers who treated Kenya's first patient and one of his relatives, raising the national total to seven. All four are already in quarantine.",
+   "outlet": "france24.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.france24.com/en/live-news/20261017-four-more-ebola-cases-detected-in-kenya-bringing-total-to-seven"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_17#7",
+    "section": "Health and environment",
+    "storyPath": [
+     "2026 Ebola epidemic"
+    ]
+   },
+   "id": "n:f5225c9d8fb5",
+   "persona": "A"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+   "url": "https://www.france24.com/en/live-news/20261019-un-agency-slashes-gaza-food-aid-over-funding-warns-needs-persist",
+   "date": "2026-10-19T00:00:00Z",
+   "snippet": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding shortages, reducing the number of recipients from 1.6 million to 1.1 million.",
+   "outlet": "france24.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.france24.com/en/live-news/20261019-un-agency-slashes-gaza-food-aid-over-funding-warns-needs-persist"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#6",
+    "section": "International relations",
+    "storyPath": [
+     "Gaza Strip famine, Palestine and the United Nations"
+    ]
+   },
+   "id": "n:00dfe2b0206f",
+   "persona": "B"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi…",
+   "url": "https://www.france24.com/en/live-news/20261019-israel-announces-arrests-after-west-bank-settler-attacks-on-westerners",
+   "date": "2026-10-19T00:00:00Z",
+   "snippet": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi Levine and the mayor of Aulnoye-Aymeries, France, who were travelling with European diplomats, and seize vehicles and other evidence during raids.",
+   "outlet": "france24.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.france24.com/en/live-news/20261019-israel-announces-arrests-after-west-bank-settler-attacks-on-westerners",
+    "https://www.reuters.com/business/media-telecom/israel-police-arrest-suspects-over-settler-attacks-us-journalist-european-2026-10-19/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#8",
+    "section": "Law and crime",
+    "storyPath": [
+     "Israeli settler violence"
+    ]
+   },
+   "id": "n:54a830f0095a",
+   "persona": "C"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "South African police rescue about 200 people from an unregistered rehabilitation centre in Mpumalanga and…",
+   "url": "https://www.reuters.com/world/africa/about-200-people-rescued-unregistered-south-african-rehab-centre-police-say-2026-10-16/",
+   "date": "2026-10-16T00:00:00Z",
+   "snippet": "South African police rescue about 200 people from an unregistered rehabilitation centre in Mpumalanga and arrest two people while investigating alleged kidnapping and health and safety violations. Fourteen people receive medical treatment following the rescue.",
+   "outlet": "reuters.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.reuters.com/world/africa/about-200-people-rescued-unregistered-south-african-rehab-centre-police-say-2026-10-16/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_16#6",
+    "section": "Law and crimes",
+    "storyPath": []
+   },
+   "id": "n:ad5ac512ee13",
+   "persona": "A"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "At the General Conference on Weights and Measures, the International Bureau of Weights and Measures votes to…",
+   "url": "https://www.theguardian.com/science/2026/oct/15/times-up-for-the-leap-second-as-scientists-swap-it-for-the-leap-hour",
+   "date": "2026-10-15T00:00:00Z",
+   "snippet": "At the General Conference on Weights and Measures, the International Bureau of Weights and Measures votes to abolish future leap seconds and make Coordinated Universal Time (UTC) continuous, starting 20 May 2027. To account for future differences between UTC and International Atomic Time, a leap hour will be observed as needed.",
+   "outlet": "theguardian.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.theguardian.com/science/2026/oct/15/times-up-for-the-leap-second-as-scientists-swap-it-for-the-leap-hour",
+    "https://www.scientificamerican.com/article/scientists-vote-to-end-leap-seconds-redefining-how-the-world-keeps-time/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_15#15",
+    "section": "Science and technology",
+    "storyPath": []
+   },
+   "id": "n:3dacd47cdd3e",
+   "persona": "B"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "In women's rugby union, Canada defeats England 24–21 in a WXV Global Series match in Toronto, ending the Red…",
+   "url": "https://www.stuff.co.nz/sport/361047724/canada-stun-england-end-four-year-unbeaten-streak-womens-rugby",
+   "date": "2026-10-16T00:00:00Z",
+   "snippet": "In women's rugby union, Canada defeats England 24–21 in a WXV Global Series match in Toronto, ending the Red Roses' four-year unbeaten run at 41 matches (the longest in rugby union history) after Shoshanah Seumanutafa scores a late try.",
+   "outlet": "stuff.co.nz",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.stuff.co.nz/sport/361047724/canada-stun-england-end-four-year-unbeaten-streak-womens-rugby"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_16#10",
+    "section": "Sports",
+    "storyPath": [
+     "2026 WXV Global Series"
+    ]
+   },
+   "id": "n:d2bd9be25b92",
+   "persona": "C"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+   "url": "https://www.reuters.com/world/africa/drone-strike-disputed-sudan-south-sudan-area-kills-dozens-minister-says-2026-10-20/",
+   "date": "2026-10-19T00:00:00Z",
+   "snippet": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan.",
+   "outlet": "reuters.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.reuters.com/world/africa/drone-strike-disputed-sudan-south-sudan-area-kills-dozens-minister-says-2026-10-20/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2",
+    "section": "Armed conflicts and attacks",
+    "storyPath": [
+     "Abyei border conflict"
+    ]
+   },
+   "id": "n:00eab1f15d72",
+   "persona": "A"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "American economists Robert Ernest Hall and Michael Dean Woodford are jointly awarded the Nobel Memorial Prize…",
+   "url": "https://edition.cnn.com/2026/10/12/business/nobel-prize-economics-intl",
+   "date": "2026-10-12T00:00:00Z",
+   "snippet": "American economists Robert Ernest Hall and Michael Dean Woodford are jointly awarded the Nobel Memorial Prize in Economic Sciences for their work on \"microeconomic foundations of macroeconomic stabilisation\".",
+   "outlet": "edition.cnn.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://edition.cnn.com/2026/10/12/business/nobel-prize-economics-intl"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_12#3",
+    "section": "Business and economy",
+    "storyPath": [
+     "2026 Nobel Prizes"
+    ]
+   },
+   "id": "n:2a0496d94138",
+   "persona": "B"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "A truck loses control and runs over devotees outside a temple in Gwalior, Madhya Pradesh, India, killing at…",
+   "url": "https://www.dawn.com/news/2038010/out-of-control-truck-kills-13-at-religious-festival-in-indias-madhya-pradesh",
+   "date": "2026-10-18T00:00:00Z",
+   "snippet": "A truck loses control and runs over devotees outside a temple in Gwalior, Madhya Pradesh, India, killing at least 13 and injuring nearly 40 others.",
+   "outlet": "dawn.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.dawn.com/news/2038010/out-of-control-truck-kills-13-at-religious-festival-in-indias-madhya-pradesh",
+    "https://indianexpress.com/article/india/gwalior-road-accident-truck-hits-devotees-sheetlamata-mandir-10926443/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_18#2",
+    "section": "Disasters and accidents",
+    "storyPath": []
+   },
+   "id": "n:e40e07b73237",
+   "persona": "C"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "Brazilian environment minister João Paulo Capobianco [pt] reports that deforestation in Brazil's Amazon…",
+   "url": "https://www.france24.com/en/live-news/20261016-deforestation-in-brazil-amazon-hits-nearly-four-decade-low",
+   "date": "2026-10-16T00:00:00Z",
+   "snippet": "Brazilian environment minister João Paulo Capobianco [pt] reports that deforestation in Brazil's Amazon rainforest fell to 5,796 km2 (2,238 sq mi) in the year through July 2026, the lowest level since 1988 except for 2012.",
+   "outlet": "france24.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.france24.com/en/live-news/20261016-deforestation-in-brazil-amazon-hits-nearly-four-decade-low"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_16#2",
+    "section": "Health and environment",
+    "storyPath": [
+     "Deforestation of the Amazon rainforest"
+    ]
+   },
+   "id": "n:c4f3475d8101",
+   "persona": "A"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near…",
+   "url": "https://www.thehindu.com/news/international/taiwan-says-drives-away-16-chinese-ships-involved-in-maritime-harassment/article71600923.ece",
+   "date": "2026-10-18T00:00:00Z",
+   "snippet": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near Taiwan and the Pratas Island, including some that entered restricted waters.",
+   "outlet": "thehindu.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.thehindu.com/news/international/taiwan-says-drives-away-16-chinese-ships-involved-in-maritime-harassment/article71600923.ece"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_18#6",
+    "section": "International relations",
+    "storyPath": [
+     "Cross-strait relations"
+    ]
+   },
+   "id": "n:9700f8a230bf",
+   "persona": "B"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "A Kenyan court convicts Good News International Ministries leader Paul Nthenge Mackenzie of murdering 190…",
+   "url": "https://www.reuters.com/world/africa/paul-mackenzie-kenyan-preacher-who-led-hundreds-starve-death-2026-10-19/",
+   "date": "2026-10-19T00:00:00Z",
+   "snippet": "A Kenyan court convicts Good News International Ministries leader Paul Nthenge Mackenzie of murdering 190 children and an adult whose deaths were linked to starvation in Shakahola Forest.",
+   "outlet": "reuters.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.reuters.com/world/africa/paul-mackenzie-kenyan-preacher-who-led-hundreds-starve-death-2026-10-19/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#9",
+    "section": "Law and crime",
+    "storyPath": [
+     "Shakahola Forest incident"
+    ]
+   },
+   "id": "n:afdc5ab9ef1a",
+   "persona": "C"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "A judge in Ensenada, Baja California, Mexico, sentences three Mexican men to over 158 years in prison each…",
+   "url": "https://apnews.com/article/mexico-australia-surfers-sentencing-7367cb9e73e4987168b3c830bdfdf9ba",
+   "date": "2026-10-16T00:00:00Z",
+   "snippet": "A judge in Ensenada, Baja California, Mexico, sentences three Mexican men to over 158 years in prison each for the murder of two Australians and an American in 2024.",
+   "outlet": "apnews.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://apnews.com/article/mexico-australia-surfers-sentencing-7367cb9e73e4987168b3c830bdfdf9ba"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_16#7",
+    "section": "Law and crimes",
+    "storyPath": []
+   },
+   "id": "n:6a3502fcf385",
+   "persona": "A"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+   "url": "https://www.reuters.com/business/environment/worsening-water-crisis-sparks-protests-mexicos-guadalajara-2026-10-16/",
+   "date": "2026-10-18T00:00:00Z",
+   "snippet": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread contamination. A study in June found that at least 93% of households' water systems contained no residual chlorine, but had elevated levels of lead, mercury, nitrates, and E. coli.",
+   "outlet": "reuters.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.reuters.com/business/environment/worsening-water-crisis-sparks-protests-mexicos-guadalajara-2026-10-16/",
+    "https://www.turkiyetoday.com/world/violence-erupts-at-second-guadalajara-water-protest-in-mexico-3230624?s=3"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_18#8",
+    "section": "Politics and elections",
+    "storyPath": [
+     "Water scarcity in Mexico"
+    ]
+   },
+   "id": "n:0460555895d3",
+   "persona": "B"
+  },
+  {
+   "source": "wikipedia",
+   "kind": "breaking",
+   "title": "The oldest known shipwreck in the world (c",
+   "url": "https://www.cnn.com/2026/10/14/science/worlds-oldest-shipwreck-turkey-scli-intl",
+   "date": "2026-10-14T00:00:00Z",
+   "snippet": "The oldest known shipwreck in the world (c. 2700–2400 BC) is excavated in Kekova, Turkey.",
+   "outlet": "cnn.com",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.cnn.com/2026/10/14/science/worlds-oldest-shipwreck-turkey-scli-intl"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_14#16",
+    "section": "Science and technology",
+    "storyPath": [
+     "Kekova shipwreck"
+    ]
+   },
+   "id": "n:c40c295eedaa",
+   "persona": "C"
+  }
+ ]
+}

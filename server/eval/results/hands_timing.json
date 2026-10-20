@@ -1,0 +1,14 @@
+{
+ "when": "2026-10-20T13:27:20.687Z",
+ "scripted": true,
+ "mode": "offline (recorded run)",
+ "steps": {
+  "touch light → reader card open": 546,
+  "pinch Expand → first node": 1381,
+  "pinch Expand → web complete (recorded replay)": 9904,
+  "pinch Ask → suggestion → answer card": 1915,
+  "pinch Seal → sealed": 957,
+  "wrist ? → Library open": 1552
+ },
+ "total_ms": 14874
+}

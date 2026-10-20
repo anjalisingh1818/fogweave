@@ -1,0 +1,360 @@
+0|rep|The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bu
+   LINK: Bank of England announces wildlife banknote designs --involves--> Bank of England
+   WHY:  | QUOTE: Bank of England has revealed the four creatures that will feature on our money | BASIS: 
+1|rep|The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bu
+   LINK: Bank of England announces wildlife banknote designs --involves--> Royal Mint
+   WHY:  | QUOTE: The puffin and bees also feature on coins, as part of the Royal Mint's redesigned 20p and £1 coins respectively | BASIS: 
+2|inf|The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bu
+   LINK: Bank of England --affects--> security of Bank of England banknotes
+   WHY: The Bank states wildlife images will enhance security and help stop counterfeiting. | QUOTE:  | BASIS: The Bank says wildlife images will enhance security and help stop counterfeiting.
+3|spe|The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bu
+   LINK: security of Bank of England banknotes --affects--> counterfeiting incidence
+   WHY: Improved security is likely to reduce the number of counterfeit notes. | QUOTE:  | BASIS: 
+4|spe|The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bu
+   LINK: Bank of England --affects--> public awareness of British wildlife species
+   WHY: Featuring four native species on widely‑circulated notes may increase public attention to those animals. | QUOTE:  | BASIS: Four wildlife species will appear on the redesigned Bank of England notes.; The owl, bumblebee and hedgehog topped a public vote in their categories.; The puffin was included to celebrate marine life and British coastline.
+5|rep|Fourteen miners are killed and seven more injured during the collapse of an open
+   LINK: Collapse of open pit gold mine in Nariño --happened_in--> Nariño Department
+   WHY:  | QUOTE: collapse of an open pit gold mine in Nariño Department | BASIS: 
+6|rep|Fourteen miners are killed and seven more injured during the collapse of an open
+   LINK: Collapse of open pit gold mine in Nariño --involves--> miners
+   WHY:  | QUOTE: Fourteen miners are killed and seven more injured | BASIS: 
+7|rep|Fourteen miners are killed and seven more injured during the collapse of an open
+   LINK: Collapse of open pit gold mine in Nariño --affects--> open pit gold mine
+   WHY:  | QUOTE: collapse of an open pit gold mine | BASIS: 
+8|rep|Fourteen miners are killed and seven more injured during the collapse of an open
+   LINK: Nariño Department --part_of--> Colombia
+   WHY:  | QUOTE: Nariño Department, Colombia | BASIS: 
+9|inf|Fourteen miners are killed and seven more injured during the collapse of an open
+   LINK: Collapse of open pit gold mine in Nariño --affects--> miners
+   WHY: The collapse involved miners, resulting in deaths and injuries. | QUOTE:  | BASIS: Collapse of open pit gold mine in Nariño involves miners; Fourteen miners were killed in the collapse.; Seven miners were injured in the collapse.
+10|spe|Fourteen miners are killed and seven more injured during the collapse of an open
+   LINK: miners --affects--> local community in Nariño
+   WHY: Loss of miners likely impacts families and the surrounding community. | QUOTE:  | BASIS: 
+11|inf|Fourteen miners are killed and seven more injured during the collapse of an open
+   LINK: Collapse of open pit gold mine in Nariño --affects--> open pit gold mine
+   WHY: The event directly impacted the mine where the collapse occurred. | QUOTE:  | BASIS: Collapse of open pit gold mine in Nariño affects open pit gold mine; The incident occurred at an open pit gold mine.
+12|spe|Fourteen miners are killed and seven more injured during the collapse of an open
+   LINK: open pit gold mine --affects--> gold production
+   WHY: Disruption of the mine would likely reduce its gold output. | QUOTE:  | BASIS: 
+13|inf|Fourteen miners are killed and seven more injured during the collapse of an open
+   LINK: Collapse of open pit gold mine in Nariño --affects--> Nariño Department
+   WHY: The collapse occurred within Nariño Department, affecting the region. | QUOTE:  | BASIS: The collapse happened in Nariño Department, Colombia.; Collapse of open pit gold mine in Nariño happened_in Nariño Department; Nariño Department part_of Colombia
+14|spe|Fourteen miners are killed and seven more injured during the collapse of an open
+   LINK: Nariño Department --affects--> regional employment
+   WHY: A major mine incident can influence jobs in the surrounding area. | QUOTE:  | BASIS: 
+15|rep|A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arre
+   LINK: Federal indictment --depends_on--> Arrest warrant for Raul Castro
+   WHY:  | QUOTE: The Trump administration unveiled a superseding indictment also targeting Raul Castro for the 1996 plane downings. | BASIS: 
+16|inf|A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arre
+   LINK: Arrest warrant for Raul Castro --affects--> U.S.-Cuba diplomatic relations
+   WHY: The warrant is part of a U.S. legal action that builds on existing tightened restrictions. | QUOTE:  | BASIS: The Trump administration has tightened U.S. restrictions on Cuba, including a de facto energy blockade.; Federal indictment depends_on Arrest warrant for Raul Castro
+17|spe|A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arre
+   LINK: U.S.-Cuba diplomatic relations --affects--> energy prices in global markets
+   WHY: Further strain could reduce Cuban energy exports and affect regional supply, influencing prices. | QUOTE:  | BASIS: 
+18|spe|A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arre
+   LINK: U.S.-Cuba diplomatic relations --affects--> logistics flows through Rotterdam port
+   WHY: Heightened tensions may lead to sanctions that disrupt cargo routes involving Cuban trade, impacting Rotterdam logistics. | QUOTE:  | BASIS: 
+19|spe|A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arre
+   LINK: Arrest warrant for Raul Castro --affects--> public perception of U.S. policy on Cuba
+   WHY: A high‑profile warrant can shape how the public views the administration’s stance toward Cuba. | QUOTE:  | BASIS: 
+20|rep|Albertans vote on ten referendums, including one to decide if Alberta should see
+   LINK: Albertans vote on ten referendums --happened_in--> Alberta
+   WHY:  | QUOTE: Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada. | BASIS: 
+21|rep|Albertans vote on ten referendums, including one to decide if Alberta should see
+   LINK: Albertans vote on ten referendums --involves--> Referendums
+   WHY:  | QUOTE: Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada. | BASIS: 
+22|inf|Albertans vote on ten referendums, including one to decide if Alberta should see
+   LINK: Albertans vote on ten referendums --affects--> Alberta
+   WHY: The event is taking place in Alberta, so the province is directly affected. | QUOTE:  | BASIS: Albertans are voting on ten referendums.; Albertans vote on ten referendums happened_in Alberta
+23|spe|Albertans vote on ten referendums, including one to decide if Alberta should see
+   LINK: Albertans vote on ten referendums --affects--> political stability in Canada
+   WHY: A referendum on separation could create uncertainty and affect national political stability. | QUOTE:  | BASIS: One of the referendums asks whether Alberta should seek separation from Canada.
+24|spe|Albertans vote on ten referendums, including one to decide if Alberta should see
+   LINK: political stability in Canada --affects--> investment in semiconductor sector
+   WHY: Reduced political stability may make investors more cautious about funding capital‑intensive industries like semiconductors. | QUOTE:  | BASIS: 
+25|spe|Albertans vote on ten referendums, including one to decide if Alberta should see
+   LINK: Albertans vote on ten referendums --affects--> public discourse on Canadian federalism
+   WHY: A separation referendum is likely to spark broader discussion about the federal structure of Canada. | QUOTE:  | BASIS: One of the referendums asks whether Alberta should seek separation from Canada.
+26|rep|Andorra and San Marino each sign an association agreement with the European Unio
+   LINK: Signing of Association Agreements with Andorra and San Marino --involves--> European Commission
+   WHY:  | QUOTE: The European Commission has signed an Association Agreement with Andorra and San Marino | BASIS: 
+27|rep|Andorra and San Marino each sign an association agreement with the European Unio
+   LINK: Signing of Association Agreements with Andorra and San Marino --involves--> Andorra
+   WHY:  | QUOTE: The European Commission has signed an Association Agreement with Andorra and San Marino | BASIS: 
+28|rep|Andorra and San Marino each sign an association agreement with the European Unio
+   LINK: Signing of Association Agreements with Andorra and San Marino --involves--> San Marino
+   WHY:  | QUOTE: The European Commission has signed an Association Agreement with Andorra and San Marino | BASIS: 
+29|rep|Andorra and San Marino each sign an association agreement with the European Unio
+   LINK: Signing of Association Agreements with Andorra and San Marino --affects--> Internal Market
+   WHY:  | QUOTE: The agreement gives Andorra and San Marino access to the EU's Internal Market | BASIS: 
+30|rep|Andorra and San Marino each sign an association agreement with the European Unio
+   LINK: Signing of Association Agreements with Andorra and San Marino --depends_on--> Monetary Agreements
+   WHY:  | QUOTE: The EU has also signed updated Monetary Agreements with Andorra and San Marino to address overlaps with the new Association Agreement | BASIS: 
+31|inf|Andorra and San Marino each sign an association agreement with the European Unio
+   LINK: European Commission --affects--> Internal Market
+   WHY: The agreements are stated to affect the Internal Market | QUOTE:  | BASIS: Signing of Association Agreements with Andorra and San Marino affects Internal Market
+32|inf|Andorra and San Marino each sign an association agreement with the European Unio
+   LINK: Signing of Association Agreements with Andorra and San Marino --affects--> Businesses
+   WHY: The deals aim to provide greater legal certainty for businesses | QUOTE:  | BASIS: The deals aim to provide greater legal certainty and predictability for citizens, businesses and public authorities.
+33|inf|Andorra and San Marino each sign an association agreement with the European Unio
+   LINK: Signing of Association Agreements with Andorra and San Marino --affects--> Citizens
+   WHY: The deals aim to provide greater predictability for citizens | QUOTE:  | BASIS: The deals aim to provide greater legal certainty and predictability for citizens, businesses and public authorities.
+34|inf|Andorra and San Marino each sign an association agreement with the European Unio
+   LINK: Signing of Association Agreements with Andorra and San Marino --depends_on--> Monetary Agreements
+   WHY: The agreements depend on the updated Monetary Agreements | QUOTE:  | BASIS: Signing of Association Agreements with Andorra and San Marino depends_on Monetary Agreements
+35|inf|Andorra and San Marino each sign an association agreement with the European Unio
+   LINK: Monetary Agreements --affects--> Public authorities
+   WHY: Updated monetary terms impact public authorities in the parties | QUOTE:  | BASIS: Updated Monetary Agreements were also signed with Andorra and San Marino to address overlaps with the new Association Agreement.
+36|spe|Andorra and San Marino each sign an association agreement with the European Unio
+   LINK: Signing of Association Agreements with Andorra and San Marino --affects--> EU external relations
+   WHY: New agreements could strengthen the EU's relations with Andorra and San Marino | QUOTE:  | BASIS: 
+37|rep|Three children are killed in an alleged Rapid Support Forces drone strike in Kha
+   LINK: Rapid Support Forces drone strike --happened_in--> Khartoum
+   WHY:  | QUOTE: Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan. | BASIS: 
+38|rep|Three children are killed in an alleged Rapid Support Forces drone strike in Kha
+   LINK: Rapid Support Forces drone strike --involves--> Rapid Support Forces
+   WHY:  | QUOTE: Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan. | BASIS: 
+39|rep|Three children are killed in an alleged Rapid Support Forces drone strike in Kha
+   LINK: Khartoum --part_of--> Sudan
+   WHY:  | QUOTE: Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan. | BASIS: 
+40|rep|Three children are killed in an alleged Rapid Support Forces drone strike in Kha
+   LINK: Rapid Support Forces drone strike --affects--> three children
+   WHY:  | QUOTE: Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan. | BASIS: 
+41|inf|Three children are killed in an alleged Rapid Support Forces drone strike in Kha
+   LINK: Rapid Support Forces drone strike --affects--> three children
+   WHY: The strike killed three children. | QUOTE:  | BASIS: Three children were killed in the strike.; Rapid Support Forces drone strike affects three children
+42|spe|Three children are killed in an alleged Rapid Support Forces drone strike in Kha
+   LINK: three children --affects--> public outrage
+   WHY: Deaths of children often trigger public outrage. | QUOTE:  | BASIS: 
+43|spe|Three children are killed in an alleged Rapid Support Forces drone strike in Kha
+   LINK: Rapid Support Forces drone strike --affects--> international condemnation
+   WHY: Civilian casualties in a drone strike can lead to condemnation from other states and NGOs. | QUOTE:  | BASIS: 
+44|spe|Three children are killed in an alleged Rapid Support Forces drone strike in Kha
+   LINK: international condemnation --affects--> Sudan's diplomatic relations
+   WHY: Condemnation may strain Sudan's diplomatic ties with other countries. | QUOTE:  | BASIS: 
+45|spe|The New Yalu River Bridge connecting Dandong, China, and Sinuiju, North Korea, o
+   LINK: Opening of the New Yalu River Bridge --affects--> China-North Korea trade
+   WHY: A new bridge creates a physical route that could enable more cross‑border trade. | QUOTE:  | BASIS: 
+46|inf|The New Yalu River Bridge connecting Dandong, China, and Sinuiju, North Korea, o
+   LINK: North Korea --affects--> Sharp increase in trade between China and North Korea
+   WHY: The sanctions explicitly limit the ability to expand trade. | QUOTE:  | BASIS: UN sanctions on North Korea remain in effect, making a sharp increase in trade unlikely.
+47|spe|The New Yalu River Bridge connecting Dandong, China, and Sinuiju, North Korea, o
+   LINK: China-North Korea trade --affects--> Semiconductor supply chain
+   WHY: Changes in trade volumes could alter the flow of raw materials used in semiconductor manufacturing. | QUOTE:  | BASIS: 
+48|spe|The New Yalu River Bridge connecting Dandong, China, and Sinuiju, North Korea, o
+   LINK: Opening of the New Yalu River Bridge --depends_on--> Sharp increase in trade between China and North Korea
+   WHY: The bridge’s impact on trade depends on whether sanctions are relaxed enough to allow a sharp increase. | QUOTE:  | BASIS: UN sanctions on North Korea remain in effect, making a sharp increase in trade unlikely.
+49|rep|Twelve migrants, including an infant, are killed when two separate speedboats ca
+   LINK: Twelve migrants killed off Lesbos and Samos --happened_in--> Lesbos
+   WHY:  | QUOTE: off the coast of the Lesbos | BASIS: 
+50|rep|Twelve migrants, including an infant, are killed when two separate speedboats ca
+   LINK: Twelve migrants killed off Lesbos and Samos --involves--> Twelve migrants
+   WHY:  | QUOTE: Twelve migrants, including an infant, are killed | BASIS: 
+51|rep|Twelve migrants, including an infant, are killed when two separate speedboats ca
+   LINK: Twelve migrants killed off Lesbos and Samos --involves--> speedboats
+   WHY:  | QUOTE: two separate speedboats capsize | BASIS: 
+52|spe|Twelve migrants, including an infant, are killed when two separate speedboats ca
+   LINK: Twelve migrants killed off Lesbos and Samos --affects--> Greek maritime safety regulations
+   WHY: The incident may prompt Greece to review and tighten maritime safety rules. | QUOTE:  | BASIS: 
+53|spe|Twelve migrants, including an infant, are killed when two separate speedboats ca
+   LINK: Greek maritime safety regulations --affects--> shipping routes in the Aegean Sea
+   WHY: Stricter safety rules could alter preferred shipping lanes. | QUOTE:  | BASIS: 
+54|spe|Twelve migrants, including an infant, are killed when two separate speedboats ca
+   LINK: Twelve migrants killed off Lesbos and Samos --affects--> Greek maritime insurance premiums
+   WHY: Incidents often lead to higher insurance costs for maritime operators. | QUOTE:  | BASIS: 
+55|spe|Twelve migrants, including an infant, are killed when two separate speedboats ca
+   LINK: Greek maritime insurance premiums --affects--> energy prices
+   WHY: Higher shipping insurance can increase overall energy transport costs, feeding into energy prices. | QUOTE:  | BASIS: 
+56|spe|Twelve migrants, including an infant, are killed when two separate speedboats ca
+   LINK: Twelve migrants killed off Lesbos and Samos --affects--> public transport in Lesbos and Samos
+   WHY: The tragedy may strain local transport services handling migrant movements. | QUOTE:  | BASIS: 
+57|spe|Twelve migrants, including an infant, are killed when two separate speedboats ca
+   LINK: public transport in Lesbos and Samos --affects--> public transport in Greece
+   WHY: Local disruptions can ripple into national public transport planning. | QUOTE:  | BASIS: 
+58|spe|Twelve migrants, including an infant, are killed when two separate speedboats ca
+   LINK: Twelve migrants killed off Lesbos and Samos --affects--> international maritime safety protocols
+   WHY: High-profile incidents can influence global maritime safety standards. | QUOTE:  | BASIS: 
+59|rep|The European Central Bank authorizes UniCredit to raise its stake in Commerzbank
+   LINK: ECB authorizes UniCredit stake increase --involves--> European Central Bank
+   WHY:  | QUOTE: The European Central Bank authorizes UniCredit | BASIS: 
+60|rep|The European Central Bank authorizes UniCredit to raise its stake in Commerzbank
+   LINK: ECB authorizes UniCredit stake increase --involves--> UniCredit
+   WHY:  | QUOTE: authorizes UniCredit to raise its stake | BASIS: 
+61|rep|The European Central Bank authorizes UniCredit to raise its stake in Commerzbank
+   LINK: ECB authorizes UniCredit stake increase --involves--> Commerzbank
+   WHY:  | QUOTE: raise its stake in Commerzbank | BASIS: 
+62|inf|The European Central Bank authorizes UniCredit to raise its stake in Commerzbank
+   LINK: ECB authorizes UniCredit stake increase --affects--> UniCredit
+   WHY: The authorization directly involves UniCredit. | QUOTE:  | BASIS: ECB authorizes UniCredit stake increase involves UniCredit
+63|inf|The European Central Bank authorizes UniCredit to raise its stake in Commerzbank
+   LINK: ECB authorizes UniCredit stake increase --affects--> Commerzbank
+   WHY: The authorization directly involves Commerzbank. | QUOTE:  | BASIS: ECB authorizes UniCredit stake increase involves Commerzbank
+64|inf|The European Central Bank authorizes UniCredit to raise its stake in Commerzbank
+   LINK: UniCredit --affects--> Commerzbank ownership structure
+   WHY: UniCredit can raise its stake above 30% with no upper limit, moving toward control. | QUOTE:  | BASIS: The European Central Bank authorized UniCredit to raise its stake in Commerzbank above 30%.; There is no upper limit on the stake UniCredit can acquire in Commerzbank.; The authorization allows UniCredit to proceed toward taking control of the German lender.
+65|spe|The European Central Bank authorizes UniCredit to raise its stake in Commerzbank
+   LINK: UniCredit --affects--> Italian banking sector exposure to German market
+   WHY: Greater control of a German lender increases UniCredit's exposure to Germany. | QUOTE:  | BASIS: 
+66|rep|A missile attack by the Houthis kills 58 soldiers and injure over 200 at a train
+   LINK: Houthis missile attack on training center --happened_in--> Shabwah Governorate
+   WHY:  | QUOTE: at a training center in Shabwah Governorate | BASIS: 
+67|rep|A missile attack by the Houthis kills 58 soldiers and injure over 200 at a train
+   LINK: Houthis missile attack on training center --involves--> Houthis
+   WHY:  | QUOTE: A missile attack by the Houthis | BASIS: 
+68|rep|A missile attack by the Houthis kills 58 soldiers and injure over 200 at a train
+   LINK: Houthis missile attack on training center --affects--> soldier
+   WHY:  | QUOTE: kills 58 soldiers and injure over 200 | BASIS: 
+69|rep|A missile attack by the Houthis kills 58 soldiers and injure over 200 at a train
+   LINK: Shabwah Governorate --part_of--> Yemen
+   WHY:  | QUOTE: Shabwah Governorate, Yemen | BASIS: 
+70|inf|A missile attack by the Houthis kills 58 soldiers and injure over 200 at a train
+   LINK: Houthis missile attack on training center --affects--> Yemeni military personnel
+   WHY: The attack killed, injured and left missing a large number of soldiers. | QUOTE:  | BASIS: 58 soldiers were killed in the missile attack.; Over 200 soldiers were injured in the missile attack.; 14 soldiers are missing after the attack.; Houthis missile attack on training center affects soldier
+71|spe|A missile attack by the Houthis kills 58 soldiers and injure over 200 at a train
+   LINK: Yemeni military personnel --affects--> Yemen's internal security
+   WHY: Reduced combat strength may weaken the government's ability to maintain security. | QUOTE:  | BASIS: 
+72|spe|A missile attack by the Houthis kills 58 soldiers and injure over 200 at a train
+   LINK: Houthis missile attack on training center --affects--> Houthis' operational reputation
+   WHY: A high‑profile strike demonstrates capability, potentially enhancing the group's perceived strength. | QUOTE:  | BASIS: 
+73|spe|A missile attack by the Houthis kills 58 soldiers and injure over 200 at a train
+   LINK: Houthis' operational reputation --affects--> Regional risk perception for shipping routes
+   WHY: Increased perception of Houthi threat may raise security concerns for vessels transiting nearby waters. | QUOTE:  | BASIS: 
+74|spe|A missile attack by the Houthis kills 58 soldiers and injure over 200 at a train
+   LINK: Houthis missile attack on training center --affects--> Energy market sentiment
+   WHY: Escalation of conflict in Yemen can influence expectations about oil supply disruptions. | QUOTE:  | BASIS: 
+75|spe|A missile attack by the Houthis kills 58 soldiers and injure over 200 at a train
+   LINK: Energy market sentiment --affects--> Energy prices in Europe
+   WHY: Shifts in sentiment about supply risk can translate into price movements for European energy markets. | QUOTE:  | BASIS: 
+76|rep|Equatorial Guinea announces that it will expand its program combating malaria to
+   LINK: Equatorial Guinea expands malaria program --involves--> Equatorial Guinea
+   WHY:  | QUOTE: Equatorial Guinea announces that it will expand its program... | BASIS: 
+77|rep|Equatorial Guinea announces that it will expand its program combating malaria to
+   LINK: Equatorial Guinea expands malaria program --happened_in--> Mainland
+   WHY:  | QUOTE: expand its program combating malaria to the mainland | BASIS: 
+78|rep|Equatorial Guinea announces that it will expand its program combating malaria to
+   LINK: Equatorial Guinea expands malaria program --affects--> malaria
+   WHY:  | QUOTE: program combating malaria | BASIS: 
+79|spe|Equatorial Guinea announces that it will expand its program combating malaria to
+   LINK: Equatorial Guinea expands malaria program --affects--> malaria cases on mainland
+   WHY: Past expansion on Bioko reduced cases, so similar effect is plausible on the mainland | QUOTE:  | BASIS: 
+80|spe|Equatorial Guinea announces that it will expand its program combating malaria to
+   LINK: malaria cases on mainland --affects--> farm productivity in mainland
+   WHY: Fewer malaria cases improve worker health, likely boosting agricultural output | QUOTE:  | BASIS: 
+81|rep|Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead o
+   LINK: Detention of Abhijeet Dipke --involves--> Cockroach Janta Party
+   WHY:  | QUOTE: The Gen Z-led Cockroach Janta Party (CJP) accuses... | BASIS: 
+82|inf|Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead o
+   LINK: Detention of Abhijeet Dipke --affects--> planned protest at Central Park in Connaught Place
+   WHY: Detaining a protest organizer is likely to disrupt the scheduled demonstration. | QUOTE:  | BASIS: Abhijeet Dipke was detained by police in Delhi ahead of a planned protest.; The protest was planned for Central Park in Connaught Place.
+83|inf|Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead o
+   LINK: Detention of Abhijeet Dipke --affects--> Cockroach Janta Party mobilisation
+   WHY: The party’s leader and other CJP leaders were detained, reducing its ability to coordinate actions. | QUOTE:  | BASIS: Abhijeet Dipke was detained by police in Delhi ahead of a planned protest.; Police also detained other CJP leaders Saurav Das and Ashutosh Ranka after they returned to Jantar Mantar.; Detention of Abhijeet Dipke involves Cockroach Janta Party
+84|spe|Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead o
+   LINK: Detention of Abhijeet Dipke --affects--> Opposition morale
+   WHY: Arrests of opposition figures can lower morale among their supporters. | QUOTE:  | BASIS: 
+85|spe|Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead o
+   LINK: planned protest at Central Park in Connaught Place --affects--> public visibility of CJP grievances
+   WHY: A cancelled protest reduces media exposure of the party’s complaints. | QUOTE:  | BASIS: 
+86|spe|Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead o
+   LINK: Cockroach Janta Party mobilisation --affects--> pressure on Election Commission
+   WHY: Weaker mobilisation may lessen the party’s ability to pressure the Election Commission. | QUOTE:  | BASIS: 
+87|rep|Canadian poet Anne Carson is awarded the Nobel Prize in Literature for "her bold
+   LINK: Anne Carson awarded Nobel Prize in Literature --involves--> Anne Carson
+   WHY:  | QUOTE: Canadian poet, essayist and translator Anne Carson has been awarded this year's Nobel Prize in Literature. | BASIS: 
+88|rep|Canadian poet Anne Carson is awarded the Nobel Prize in Literature for "her bold
+   LINK: Anne Carson awarded Nobel Prize in Literature --involves--> Swedish Academy
+   WHY:  | QUOTE: Ingrid Carlberg, permanent secretary of the Swedish Academy, said she had broken the news to Carson | BASIS: 
+89|rep|Canadian poet Anne Carson is awarded the Nobel Prize in Literature for "her bold
+   LINK: Anne Carson awarded Nobel Prize in Literature --affects--> Canada
+   WHY:  | QUOTE: Canadian Prime Minister Mark Carney said Carson's win was "an extraordinary achievement and a proud moment for Canada". | BASIS: 
+90|rep|Canadian poet Anne Carson is awarded the Nobel Prize in Literature for "her bold
+   LINK: Anne Carson awarded Nobel Prize in Literature --involves--> Mark Carney
+   WHY:  | QUOTE: Canadian Prime Minister Mark Carney said Carson's win was "an extraordinary achievement and a proud moment for Canada". | BASIS: 
+91|rep|Canadian poet Anne Carson is awarded the Nobel Prize in Literature for "her bold
+   LINK: Anne Carson awarded Nobel Prize in Literature --involves--> Anders Olsson
+   WHY:  | QUOTE: Anders Olsson, chairman of the Swedish Academy's Nobel committee for Literature, praised the way Carson has "broken away from lyrical poetry... | BASIS: 
+92|rep|Canadian poet Anne Carson is awarded the Nobel Prize in Literature for "her bold
+   LINK: Anne Carson awarded Nobel Prize in Literature --involves--> Ingrid Carlberg
+   WHY:  | QUOTE: Ingrid Carlberg, permanent secretary of the Swedish Academy, said she had broken the news to Carson on the phone | BASIS: 
+93|rep|Canadian poet Anne Carson is awarded the Nobel Prize in Literature for "her bold
+   LINK: Anne Carson awarded Nobel Prize in Literature --part_of--> Swedish Academy's Nobel committee for Literature
+   WHY:  | QUOTE: Anders Olsson, chairman of the Swedish Academy's Nobel committee for Literature, praised the way Carson has... | BASIS: 
+94|inf|Canadian poet Anne Carson is awarded the Nobel Prize in Literature for "her bold
+   LINK: Anne Carson awarded Nobel Prize in Literature --affects--> Canada
+   WHY: Fact F8 explicitly states the award affects Canada. | QUOTE:  | BASIS: Anne Carson awarded Nobel Prize in Literature affects Canada
+95|spe|Canadian poet Anne Carson is awarded the Nobel Prize in Literature for "her bold
+   LINK: Canada --affects--> Canadian literary community
+   WHY: A Nobel win linked to Canada is likely to raise interest and activity within its literary community. | QUOTE:  | BASIS: 
+96|inf|Canadian poet Anne Carson is awarded the Nobel Prize in Literature for "her bold
+   LINK: Anne Carson awarded Nobel Prize in Literature --affects--> Swedish Academy
+   WHY: Fact F7 notes the award involves the Swedish Academy, implying an effect on the Academy. | QUOTE:  | BASIS: Anne Carson awarded Nobel Prize in Literature involves Swedish Academy
+97|spe|Canadian poet Anne Carson is awarded the Nobel Prize in Literature for "her bold
+   LINK: Swedish Academy --affects--> global perception of the Nobel Prize in Literature
+   WHY: Changes in the Academy’s decisions can influence how the Nobel Prize is viewed worldwide. | QUOTE:  | BASIS: 
+98|rep|Astronomers discover the first green star, WD J1330+6435, according to a study p
+   LINK: Discovery of first green star WD J1330+6435 --involves--> WD J1330+6435
+   WHY:  | QUOTE: The most striking example is WD J1330+6435 | BASIS: 
+99|rep|Astronomers discover the first green star, WD J1330+6435, according to a study p
+   LINK: WD J1330+6435 --part_of--> White Dwarf Stars
+   WHY:  | QUOTE: white dwarfs can glow in a wide range of colors | BASIS: 
+100|spe|Astronomers discover the first green star, WD J1330+6435, according to a study p
+   LINK: Discovery of first green star WD J1330+6435 --affects--> public interest in astronomy
+   WHY: A novel astronomical finding is likely to attract media attention and public curiosity. | QUOTE:  | BASIS: 
+101|spe|Astronomers discover the first green star, WD J1330+6435, according to a study p
+   LINK: public interest in astronomy --affects--> science education programmes
+   WHY: Higher public interest can lead schools and museums to expand astronomy‑related curricula and events. | QUOTE:  | BASIS: 
+102|rep|Kenya confirms four additional cases of Bundibugyo ebolavirus, including three h
+   LINK: first victim --part_of--> Democratic Republic of the Congo
+   WHY:  | QUOTE: He had been treated in the DRC, before travelling overland to the Ugandan capital, Kampala | BASIS: 
+103|inf|Kenya confirms four additional cases of Bundibugyo ebolavirus, including three h
+   LINK: Kenya confirms four additional Bundibugyo ebolavirus cases --affects--> Kenya Ministry of Health
+   WHY: The announcement triggers a direct response from the national health authority. | QUOTE:  | BASIS: Kenya confirmed four new cases of Bundibugyo ebolavirus, raising the total to seven.; The risk to the general public remains low with no evidence of community transmission.
+104|spe|Kenya confirms four additional cases of Bundibugyo ebolavirus, including three h
+   LINK: Kenya Ministry of Health --affects--> border screening and cargo handling procedures
+   WHY: Health authorities may tighten screening, which can impact logistics at ports and airports. | QUOTE:  | BASIS: 
+105|inf|Kenya confirms four additional cases of Bundibugyo ebolavirus, including three h
+   LINK: Kenya confirms four additional Bundibugyo ebolavirus cases --affects--> public perception of Ebola risk in East Africa
+   WHY: The increase in confirmed cases raises awareness of the disease in the region. | QUOTE:  | BASIS: Kenya confirmed four new cases of Bundibugyo ebolavirus, raising the total to seven.; The risk to the general public remains low with no evidence of community transmission.
+106|spe|Kenya confirms four additional cases of Bundibugyo ebolavirus, including three h
+   LINK: public perception of Ebola risk in East Africa --affects--> international travel demand to Kenya
+   WHY: Higher perceived risk may discourage tourists and business travelers, affecting travel volumes. | QUOTE:  | BASIS: 
+107|spe|Kenya confirms four additional cases of Bundibugyo ebolavirus, including three h
+   LINK: international travel demand to Kenya --affects--> global logistics flows through major hubs such as Rotterdam
+   WHY: Reduced travel can lead to lower cargo volumes on connecting routes that pass through Rotterdam. | QUOTE:  | BASIS: 
+108|spe|Kenya confirms four additional cases of Bundibugyo ebolavirus, including three h
+   LINK: Kenya confirms four additional Bundibugyo ebolavirus cases --affects--> local public transport usage in Kenya
+   WHY: Outbreak news often leads people to avoid crowded buses and trains. | QUOTE:  | BASIS: 
+109|spe|Kenya confirms four additional cases of Bundibugyo ebolavirus, including three h
+   LINK: local public transport usage in Kenya --affects--> fuel consumption patterns in Kenya
+   WHY: Reduced ridership may shift travel to private vehicles, altering fuel demand. | QUOTE:  | BASIS: 
+110|spe|Kenya confirms four additional cases of Bundibugyo ebolavirus, including three h
+   LINK: fuel consumption patterns in Kenya --affects--> regional energy price trends
+   WHY: Changes in demand from a sizable market can influence regional oil price dynamics. | QUOTE:  | BASIS: 
+111|rep|In ice hockey, the Florida Panthers become the first team in the National Hockey
+   LINK: Florida Panthers natural hat trick streak --involves--> Florida Panthers
+   WHY:  | QUOTE: Florida Panthers become the first team in the National Hockey League... | BASIS: 
+112|rep|In ice hockey, the Florida Panthers become the first team in the National Hockey
+   LINK: Florida Panthers natural hat trick streak --involves--> National Hockey League
+   WHY:  | QUOTE: first team in the National Hockey League to record a natural hat trick... | BASIS: 
+113|rep|In ice hockey, the Florida Panthers become the first team in the National Hockey
+   LINK: Florida Panthers natural hat trick streak --part_of--> ice hockey
+   WHY:  | QUOTE: In ice hockey, the Florida Panthers become the first team... | BASIS: 
+114|inf|In ice hockey, the Florida Panthers become the first team in the National Hockey
+   LINK: Florida Panthers natural hat trick streak --affects--> NHL fan engagement
+   WHY: A historic scoring streak draws media attention and boosts interest in the league. | QUOTE:  | BASIS: The Florida Panthers became the first NHL team to record a natural hat trick in three consecutive games.; Florida Panthers natural hat trick streak involves National Hockey League
+115|spe|In ice hockey, the Florida Panthers become the first team in the National Hockey
+   LINK: NHL fan engagement --affects--> ticket sales for Florida Panthers games
+   WHY: Higher fan interest typically leads to increased attendance. | QUOTE:  | BASIS: 
+116|spe|In ice hockey, the Florida Panthers become the first team in the National Hockey
+   LINK: Florida Panthers natural hat trick streak --affects--> Panthers merchandise sales
+   WHY: Notable player achievements often drive demand for team apparel. | QUOTE:  | BASIS: 
+117|inf|In ice hockey, the Florida Panthers become the first team in the National Hockey
+   LINK: Florida Panthers natural hat trick streak --affects--> media coverage of the NHL
+   WHY: A first‑ever three‑game natural hat‑trick streak is newsworthy for sports outlets. | QUOTE:  | BASIS: The Florida Panthers became the first NHL team to record a natural hat trick in three consecutive games.; Florida Panthers natural hat trick streak involves National Hockey League
+118|spe|In ice hockey, the Florida Panthers become the first team in the National Hockey
+   LINK: media coverage of the NHL --affects--> advertising revenue for NHL broadcast partners
+   WHY: More coverage can increase viewership, which advertisers value. | QUOTE:  | BASIS: 
+119|spe|In ice hockey, the Florida Panthers become the first team in the National Hockey
+   LINK: Florida Panthers natural hat trick streak --affects--> player marketability (e.g., endorsement opportunities)
+   WHY: Players involved in a historic streak become more visible to sponsors. | QUOTE:  | BASIS: 

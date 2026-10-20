@@ -1,0 +1,842 @@
+{
+ "n:047b20792022|involves:ev:bank of england announces wildlife banknote designs->wd:Q183231|reported": {
+  "verdict": "correct",
+  "why": "quote names the Bank of England announcing",
+  "label": "reported",
+  "link": "Bank of England announces wildlife banknote designs --involves--> Bank of England",
+  "by": "build assistant (Claude)"
+ },
+ "n:047b20792022|involves:ev:bank of england announces wildlife banknote designs->wd:Q951830|reported": {
+  "verdict": "partial",
+  "why": "Royal Mint is about the coin redesign, not the banknote announcement",
+  "label": "reported",
+  "link": "Bank of England announces wildlife banknote designs --involves--> Royal Mint",
+  "by": "build assistant (Claude)"
+ },
+ "n:047b20792022|affects:wd:Q183231->topic:security of bank of england banknotes|inferred": {
+  "verdict": "correct",
+  "why": "basis states the Bank says the images enhance security",
+  "label": "inferred",
+  "link": "Bank of England --affects--> security of Bank of England banknotes",
+  "by": "build assistant (Claude)"
+ },
+ "n:047b20792022|affects:topic:security of bank of england banknotes->topic:counterfeiting incidence|speculative": {
+  "verdict": "correct",
+  "why": "plausible downstream effect, rightly speculative",
+  "label": "speculative",
+  "link": "security of Bank of England banknotes --affects--> counterfeiting incidence",
+  "by": "build assistant (Claude)"
+ },
+ "n:047b20792022|affects:wd:Q183231->topic:public awareness of british wildlife species|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Bank of England --affects--> public awareness of British wildlife species",
+  "by": "build assistant (Claude)"
+ },
+ "n:0f5a4c632e8d|happened_in:ev:collapse of open pit gold mine in nariño->place:nariño department|reported": {
+  "verdict": "correct",
+  "why": "quote states Nariño Department",
+  "label": "reported",
+  "link": "Collapse of open pit gold mine in Nariño --happened_in--> Nariño Department",
+  "by": "build assistant (Claude)"
+ },
+ "n:0f5a4c632e8d|involves:ev:collapse of open pit gold mine in nariño->wd:Q820037|reported": {
+  "verdict": "correct",
+  "why": "quote: miners killed",
+  "label": "reported",
+  "link": "Collapse of open pit gold mine in Nariño --involves--> miners",
+  "by": "build assistant (Claude)"
+ },
+ "n:0f5a4c632e8d|affects:ev:collapse of open pit gold mine in nariño->topic:open pit gold mine|reported": {
+  "verdict": "correct",
+  "why": "trivially true: the collapse affected the mine",
+  "label": "reported",
+  "link": "Collapse of open pit gold mine in Nariño --affects--> open pit gold mine",
+  "by": "build assistant (Claude)"
+ },
+ "n:0f5a4c632e8d|part_of:place:nariño department->wd:Q739|reported": {
+  "verdict": "correct",
+  "why": "quote: Nariño Department, Colombia",
+  "label": "reported",
+  "link": "Nariño Department --part_of--> Colombia",
+  "by": "build assistant (Claude)"
+ },
+ "n:0f5a4c632e8d|affects:ev:collapse of open pit gold mine in nariño->wd:Q820037|inferred": {
+  "verdict": "correct",
+  "why": "follows from the deaths and injuries",
+  "label": "inferred",
+  "link": "Collapse of open pit gold mine in Nariño --affects--> miners",
+  "by": "build assistant (Claude)"
+ },
+ "n:0f5a4c632e8d|affects:wd:Q820037->topic:local community in nariño|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "miners --affects--> local community in Nariño",
+  "by": "build assistant (Claude)"
+ },
+ "n:0f5a4c632e8d|affects:ev:collapse of open pit gold mine in nariño->topic:open pit gold mine|inferred": {
+  "verdict": "correct",
+  "why": "follows from the facts",
+  "label": "inferred",
+  "link": "Collapse of open pit gold mine in Nariño --affects--> open pit gold mine",
+  "by": "build assistant (Claude)"
+ },
+ "n:0f5a4c632e8d|affects:topic:open pit gold mine->topic:gold production|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "open pit gold mine --affects--> gold production",
+  "by": "build assistant (Claude)"
+ },
+ "n:0f5a4c632e8d|affects:ev:collapse of open pit gold mine in nariño->place:nariño department|inferred": {
+  "verdict": "partial",
+  "why": "vague: 'affects the department' adds little",
+  "label": "inferred",
+  "link": "Collapse of open pit gold mine in Nariño --affects--> Nariño Department",
+  "by": "build assistant (Claude)"
+ },
+ "n:0f5a4c632e8d|affects:place:nariño department->topic:regional employment|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Nariño Department --affects--> regional employment",
+  "by": "build assistant (Claude)"
+ },
+ "n:12fabc0b78de|depends_on:topic:federal indictment->ev:arrest warrant for raul castro|reported": {
+  "verdict": "wrong",
+  "why": "direction wrong: the warrant follows from the indictment, not the reverse",
+  "label": "reported",
+  "link": "Federal indictment --depends_on--> Arrest warrant for Raul Castro",
+  "by": "build assistant (Claude)"
+ },
+ "n:12fabc0b78de|affects:ev:arrest warrant for raul castro->topic:u.s.-cuba diplomatic relations|inferred": {
+  "verdict": "partial",
+  "why": "plausible, but the basis facts do not show an effect on relations",
+  "label": "inferred",
+  "link": "Arrest warrant for Raul Castro --affects--> U.S.-Cuba diplomatic relations",
+  "by": "build assistant (Claude)"
+ },
+ "n:12fabc0b78de|affects:topic:u.s.-cuba diplomatic relations->topic:energy prices in global markets|speculative": {
+  "verdict": "wrong",
+  "why": "Cuba is not an energy exporter; chain unfounded",
+  "label": "speculative",
+  "link": "U.S.-Cuba diplomatic relations --affects--> energy prices in global markets",
+  "by": "build assistant (Claude)"
+ },
+ "n:12fabc0b78de|affects:topic:u.s.-cuba diplomatic relations->topic:logistics flows through rotterdam port|speculative": {
+  "verdict": "wrong",
+  "why": "forced toward the persona (Rotterdam logistics); no grounding",
+  "label": "speculative",
+  "link": "U.S.-Cuba diplomatic relations --affects--> logistics flows through Rotterdam port",
+  "by": "build assistant (Claude)"
+ },
+ "n:12fabc0b78de|affects:ev:arrest warrant for raul castro->topic:public perception of u.s. policy on cuba|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Arrest warrant for Raul Castro --affects--> public perception of U.S. policy on Cuba",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ea4338fe8f4|happened_in:ev:albertans vote on ten referendums->wd:Q1951|reported": {
+  "verdict": "correct",
+  "why": "quote states Alberta",
+  "label": "reported",
+  "link": "Albertans vote on ten referendums --happened_in--> Alberta",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ea4338fe8f4|involves:ev:albertans vote on ten referendums->topic:referendums|reported": {
+  "verdict": "correct",
+  "why": "quote: ten referendums",
+  "label": "reported",
+  "link": "Albertans vote on ten referendums --involves--> Referendums",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ea4338fe8f4|affects:ev:albertans vote on ten referendums->wd:Q1951|inferred": {
+  "verdict": "partial",
+  "why": "vague restatement of location",
+  "label": "inferred",
+  "link": "Albertans vote on ten referendums --affects--> Alberta",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ea4338fe8f4|affects:ev:albertans vote on ten referendums->topic:political stability in canada|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Albertans vote on ten referendums --affects--> political stability in Canada",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ea4338fe8f4|affects:topic:political stability in canada->topic:investment in semiconductor sector|speculative": {
+  "verdict": "wrong",
+  "why": "forced toward the persona (semiconductors)",
+  "label": "speculative",
+  "link": "political stability in Canada --affects--> investment in semiconductor sector",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ea4338fe8f4|affects:ev:albertans vote on ten referendums->topic:public discourse on canadian federalism|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Albertans vote on ten referendums --affects--> public discourse on Canadian federalism",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ef6e37a2b5f|involves:ev:signing of association agreements with andorra and san marino->wd:Q8880|reported": {
+  "verdict": "correct",
+  "why": "quote: the Commission signed",
+  "label": "reported",
+  "link": "Signing of Association Agreements with Andorra and San Marino --involves--> European Commission",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ef6e37a2b5f|involves:ev:signing of association agreements with andorra and san marino->wd:Q228|reported": {
+  "verdict": "correct",
+  "why": "quote names Andorra",
+  "label": "reported",
+  "link": "Signing of Association Agreements with Andorra and San Marino --involves--> Andorra",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ef6e37a2b5f|involves:ev:signing of association agreements with andorra and san marino->wd:Q238|reported": {
+  "verdict": "correct",
+  "why": "quote names San Marino",
+  "label": "reported",
+  "link": "Signing of Association Agreements with Andorra and San Marino --involves--> San Marino",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ef6e37a2b5f|affects:ev:signing of association agreements with andorra and san marino->topic:internal market|reported": {
+  "verdict": "correct",
+  "why": "quote: access to the Internal Market",
+  "label": "reported",
+  "link": "Signing of Association Agreements with Andorra and San Marino --affects--> Internal Market",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ef6e37a2b5f|depends_on:ev:signing of association agreements with andorra and san marino->topic:monetary agreements|reported": {
+  "verdict": "partial",
+  "why": "monetary agreements address overlaps; 'depends on' overstates",
+  "label": "reported",
+  "link": "Signing of Association Agreements with Andorra and San Marino --depends_on--> Monetary Agreements",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ef6e37a2b5f|affects:wd:Q8880->topic:internal market|inferred": {
+  "verdict": "partial",
+  "why": "source should be the agreement, not the Commission",
+  "label": "inferred",
+  "link": "European Commission --affects--> Internal Market",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ef6e37a2b5f|affects:ev:signing of association agreements with andorra and san marino->org:businesses|inferred": {
+  "verdict": "correct",
+  "why": "basis: legal certainty for businesses",
+  "label": "inferred",
+  "link": "Signing of Association Agreements with Andorra and San Marino --affects--> Businesses",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ef6e37a2b5f|affects:ev:signing of association agreements with andorra and san marino->org:citizens|inferred": {
+  "verdict": "correct",
+  "why": "basis: predictability for citizens",
+  "label": "inferred",
+  "link": "Signing of Association Agreements with Andorra and San Marino --affects--> Citizens",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ef6e37a2b5f|depends_on:ev:signing of association agreements with andorra and san marino->topic:monetary agreements|inferred": {
+  "verdict": "partial",
+  "why": "same overstatement as row 30",
+  "label": "inferred",
+  "link": "Signing of Association Agreements with Andorra and San Marino --depends_on--> Monetary Agreements",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ef6e37a2b5f|affects:topic:monetary agreements->org:public authorities|inferred": {
+  "verdict": "partial",
+  "why": "generic; the basis is about overlaps, not authorities",
+  "label": "inferred",
+  "link": "Monetary Agreements --affects--> Public authorities",
+  "by": "build assistant (Claude)"
+ },
+ "n:2ef6e37a2b5f|affects:ev:signing of association agreements with andorra and san marino->topic:eu external relations|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Signing of Association Agreements with Andorra and San Marino --affects--> EU external relations",
+  "by": "build assistant (Claude)"
+ },
+ "n:75c973928996|happened_in:ev:rapid support forces drone strike->wd:Q1963|reported": {
+  "verdict": "correct",
+  "why": "quote: Khartoum",
+  "label": "reported",
+  "link": "Rapid Support Forces drone strike --happened_in--> Khartoum",
+  "by": "build assistant (Claude)"
+ },
+ "n:75c973928996|involves:ev:rapid support forces drone strike->org:rapid support forces|reported": {
+  "verdict": "correct",
+  "why": "quote names the RSF",
+  "label": "reported",
+  "link": "Rapid Support Forces drone strike --involves--> Rapid Support Forces",
+  "by": "build assistant (Claude)"
+ },
+ "n:75c973928996|part_of:wd:Q1963->wd:Q1049|reported": {
+  "verdict": "correct",
+  "why": "quote: Khartoum, Sudan",
+  "label": "reported",
+  "link": "Khartoum --part_of--> Sudan",
+  "by": "build assistant (Claude)"
+ },
+ "n:75c973928996|affects:ev:rapid support forces drone strike->wd:Q19884357|reported": {
+  "verdict": "correct",
+  "why": "quote: three children killed",
+  "label": "reported",
+  "link": "Rapid Support Forces drone strike --affects--> three children",
+  "by": "build assistant (Claude)"
+ },
+ "n:75c973928996|affects:ev:rapid support forces drone strike->wd:Q19884357|inferred": {
+  "verdict": "correct",
+  "why": "follows from the facts",
+  "label": "inferred",
+  "link": "Rapid Support Forces drone strike --affects--> three children",
+  "by": "build assistant (Claude)"
+ },
+ "n:75c973928996|affects:wd:Q19884357->topic:public outrage|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "three children --affects--> public outrage",
+  "by": "build assistant (Claude)"
+ },
+ "n:75c973928996|affects:ev:rapid support forces drone strike->topic:international condemnation|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Rapid Support Forces drone strike --affects--> international condemnation",
+  "by": "build assistant (Claude)"
+ },
+ "n:75c973928996|affects:topic:international condemnation->topic:sudan's diplomatic relations|speculative": {
+  "verdict": "partial",
+  "why": "the RSF is not the Sudanese government; misattributed target",
+  "label": "speculative",
+  "link": "international condemnation --affects--> Sudan's diplomatic relations",
+  "by": "build assistant (Claude)"
+ },
+ "n:77c59dd165c5|affects:ev:opening of the new yalu river bridge->topic:china-north korea trade|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Opening of the New Yalu River Bridge --affects--> China-North Korea trade",
+  "by": "build assistant (Claude)"
+ },
+ "n:77c59dd165c5|affects:org:north korea->topic:sharp increase in trade between china and north korea|inferred": {
+  "verdict": "wrong",
+  "why": "garbled: North Korea 'affects' a non-event; reverses the stated fact",
+  "label": "inferred",
+  "link": "North Korea --affects--> Sharp increase in trade between China and North Korea",
+  "by": "build assistant (Claude)"
+ },
+ "n:77c59dd165c5|affects:topic:china-north korea trade->topic:semiconductor supply chain|speculative": {
+  "verdict": "wrong",
+  "why": "forced toward the persona (semiconductors)",
+  "label": "speculative",
+  "link": "China-North Korea trade --affects--> Semiconductor supply chain",
+  "by": "build assistant (Claude)"
+ },
+ "n:77c59dd165c5|depends_on:ev:opening of the new yalu river bridge->topic:sharp increase in trade between china and north korea|speculative": {
+  "verdict": "wrong",
+  "why": "direction and meaning garbled",
+  "label": "speculative",
+  "link": "Opening of the New Yalu River Bridge --depends_on--> Sharp increase in trade between China and North Korea",
+  "by": "build assistant (Claude)"
+ },
+ "n:84bb02f4d37d|happened_in:ev:twelve migrants killed off lesbos and samos->wd:Q128087|reported": {
+  "verdict": "correct",
+  "why": "quote: off the coast of Lesbos",
+  "label": "reported",
+  "link": "Twelve migrants killed off Lesbos and Samos --happened_in--> Lesbos",
+  "by": "build assistant (Claude)"
+ },
+ "n:84bb02f4d37d|involves:ev:twelve migrants killed off lesbos and samos->topic:twelve migrants|reported": {
+  "verdict": "correct",
+  "why": "quote: twelve migrants",
+  "label": "reported",
+  "link": "Twelve migrants killed off Lesbos and Samos --involves--> Twelve migrants",
+  "by": "build assistant (Claude)"
+ },
+ "n:84bb02f4d37d|involves:ev:twelve migrants killed off lesbos and samos->tech:speedboats|reported": {
+  "verdict": "correct",
+  "why": "quote: two speedboats",
+  "label": "reported",
+  "link": "Twelve migrants killed off Lesbos and Samos --involves--> speedboats",
+  "by": "build assistant (Claude)"
+ },
+ "n:84bb02f4d37d|affects:ev:twelve migrants killed off lesbos and samos->topic:greek maritime safety regulations|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Twelve migrants killed off Lesbos and Samos --affects--> Greek maritime safety regulations",
+  "by": "build assistant (Claude)"
+ },
+ "n:84bb02f4d37d|affects:topic:greek maritime safety regulations->topic:shipping routes in the aegean sea|speculative": {
+  "verdict": "partial",
+  "why": "far-fetched second hop",
+  "label": "speculative",
+  "link": "Greek maritime safety regulations --affects--> shipping routes in the Aegean Sea",
+  "by": "build assistant (Claude)"
+ },
+ "n:84bb02f4d37d|affects:ev:twelve migrants killed off lesbos and samos->topic:greek maritime insurance premiums|speculative": {
+  "verdict": "wrong",
+  "why": "migrant speedboat deaths do not move maritime insurance",
+  "label": "speculative",
+  "link": "Twelve migrants killed off Lesbos and Samos --affects--> Greek maritime insurance premiums",
+  "by": "build assistant (Claude)"
+ },
+ "n:84bb02f4d37d|affects:topic:greek maritime insurance premiums->ctx:energy-prices|speculative": {
+  "verdict": "wrong",
+  "why": "chain forced toward the persona (energy prices)",
+  "label": "speculative",
+  "link": "Greek maritime insurance premiums --affects--> energy prices",
+  "by": "build assistant (Claude)"
+ },
+ "n:84bb02f4d37d|affects:ev:twelve migrants killed off lesbos and samos->topic:public transport in lesbos and samos|speculative": {
+  "verdict": "wrong",
+  "why": "forced toward the persona (public transport)",
+  "label": "speculative",
+  "link": "Twelve migrants killed off Lesbos and Samos --affects--> public transport in Lesbos and Samos",
+  "by": "build assistant (Claude)"
+ },
+ "n:84bb02f4d37d|affects:topic:public transport in lesbos and samos->topic:public transport in greece|speculative": {
+  "verdict": "wrong",
+  "why": "forced toward the persona",
+  "label": "speculative",
+  "link": "public transport in Lesbos and Samos --affects--> public transport in Greece",
+  "by": "build assistant (Claude)"
+ },
+ "n:84bb02f4d37d|affects:ev:twelve migrants killed off lesbos and samos->topic:international maritime safety protocols|speculative": {
+  "verdict": "partial",
+  "why": "possible but remote",
+  "label": "speculative",
+  "link": "Twelve migrants killed off Lesbos and Samos --affects--> international maritime safety protocols",
+  "by": "build assistant (Claude)"
+ },
+ "n:8ab7353c3a4a|involves:ev:ecb authorizes unicredit stake increase->wd:Q8901|reported": {
+  "verdict": "correct",
+  "why": "quote: the ECB authorizes",
+  "label": "reported",
+  "link": "ECB authorizes UniCredit stake increase --involves--> European Central Bank",
+  "by": "build assistant (Claude)"
+ },
+ "n:8ab7353c3a4a|involves:ev:ecb authorizes unicredit stake increase->wd:Q45568|reported": {
+  "verdict": "correct",
+  "why": "quote names UniCredit",
+  "label": "reported",
+  "link": "ECB authorizes UniCredit stake increase --involves--> UniCredit",
+  "by": "build assistant (Claude)"
+ },
+ "n:8ab7353c3a4a|involves:ev:ecb authorizes unicredit stake increase->org:commerzbank|reported": {
+  "verdict": "correct",
+  "why": "quote names Commerzbank",
+  "label": "reported",
+  "link": "ECB authorizes UniCredit stake increase --involves--> Commerzbank",
+  "by": "build assistant (Claude)"
+ },
+ "n:8ab7353c3a4a|affects:ev:ecb authorizes unicredit stake increase->wd:Q45568|inferred": {
+  "verdict": "correct",
+  "why": "follows from the facts",
+  "label": "inferred",
+  "link": "ECB authorizes UniCredit stake increase --affects--> UniCredit",
+  "by": "build assistant (Claude)"
+ },
+ "n:8ab7353c3a4a|affects:ev:ecb authorizes unicredit stake increase->org:commerzbank|inferred": {
+  "verdict": "correct",
+  "why": "follows from the facts",
+  "label": "inferred",
+  "link": "ECB authorizes UniCredit stake increase --affects--> Commerzbank",
+  "by": "build assistant (Claude)"
+ },
+ "n:8ab7353c3a4a|affects:wd:Q45568->topic:commerzbank ownership structure|inferred": {
+  "verdict": "correct",
+  "why": "basis: above 30%, no upper limit, toward control",
+  "label": "inferred",
+  "link": "UniCredit --affects--> Commerzbank ownership structure",
+  "by": "build assistant (Claude)"
+ },
+ "n:8ab7353c3a4a|affects:wd:Q45568->topic:italian banking sector exposure to german market|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "UniCredit --affects--> Italian banking sector exposure to German market",
+  "by": "build assistant (Claude)"
+ },
+ "n:945f742db3b8|happened_in:ev:houthis missile attack on training center->place:shabwah governorate|reported": {
+  "verdict": "correct",
+  "why": "quote: Shabwah Governorate",
+  "label": "reported",
+  "link": "Houthis missile attack on training center --happened_in--> Shabwah Governorate",
+  "by": "build assistant (Claude)"
+ },
+ "n:945f742db3b8|involves:ev:houthis missile attack on training center->wd:Q3042087|reported": {
+  "verdict": "correct",
+  "why": "quote names the Houthis",
+  "label": "reported",
+  "link": "Houthis missile attack on training center --involves--> Houthis",
+  "by": "build assistant (Claude)"
+ },
+ "n:945f742db3b8|affects:ev:houthis missile attack on training center->wd:Q4991371|reported": {
+  "verdict": "correct",
+  "why": "quote: 58 soldiers killed",
+  "label": "reported",
+  "link": "Houthis missile attack on training center --affects--> soldier",
+  "by": "build assistant (Claude)"
+ },
+ "n:945f742db3b8|part_of:place:shabwah governorate->wd:Q805|reported": {
+  "verdict": "correct",
+  "why": "quote: Shabwah Governorate, Yemen",
+  "label": "reported",
+  "link": "Shabwah Governorate --part_of--> Yemen",
+  "by": "build assistant (Claude)"
+ },
+ "n:945f742db3b8|affects:ev:houthis missile attack on training center->org:yemeni military personnel|inferred": {
+  "verdict": "correct",
+  "why": "follows from the casualties",
+  "label": "inferred",
+  "link": "Houthis missile attack on training center --affects--> Yemeni military personnel",
+  "by": "build assistant (Claude)"
+ },
+ "n:945f742db3b8|affects:org:yemeni military personnel->topic:yemen's internal security|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Yemeni military personnel --affects--> Yemen's internal security",
+  "by": "build assistant (Claude)"
+ },
+ "n:945f742db3b8|affects:ev:houthis missile attack on training center->topic:houthis' operational reputation|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Houthis missile attack on training center --affects--> Houthis' operational reputation",
+  "by": "build assistant (Claude)"
+ },
+ "n:945f742db3b8|affects:topic:houthis' operational reputation->topic:regional risk perception for shipping routes|speculative": {
+  "verdict": "correct",
+  "why": "plausible (Houthi shipping attacks are a known pattern), rightly speculative",
+  "label": "speculative",
+  "link": "Houthis' operational reputation --affects--> Regional risk perception for shipping routes",
+  "by": "build assistant (Claude)"
+ },
+ "n:945f742db3b8|affects:ev:houthis missile attack on training center->topic:energy market sentiment|speculative": {
+  "verdict": "partial",
+  "why": "a training-centre strike is weakly tied to oil supply",
+  "label": "speculative",
+  "link": "Houthis missile attack on training center --affects--> Energy market sentiment",
+  "by": "build assistant (Claude)"
+ },
+ "n:945f742db3b8|affects:topic:energy market sentiment->topic:energy prices in europe|speculative": {
+  "verdict": "partial",
+  "why": "remote second hop toward the persona",
+  "label": "speculative",
+  "link": "Energy market sentiment --affects--> Energy prices in Europe",
+  "by": "build assistant (Claude)"
+ },
+ "n:ac99b0896a72|involves:ev:equatorial guinea expands malaria program->wd:Q983|reported": {
+  "verdict": "correct",
+  "why": "quote names Equatorial Guinea",
+  "label": "reported",
+  "link": "Equatorial Guinea expands malaria program --involves--> Equatorial Guinea",
+  "by": "build assistant (Claude)"
+ },
+ "n:ac99b0896a72|happened_in:ev:equatorial guinea expands malaria program->wd:Q148749|reported": {
+  "verdict": "partial",
+  "why": "'Mainland' is too vague a place",
+  "label": "reported",
+  "link": "Equatorial Guinea expands malaria program --happened_in--> Mainland",
+  "by": "build assistant (Claude)"
+ },
+ "n:ac99b0896a72|affects:ev:equatorial guinea expands malaria program->wd:Q12156|reported": {
+  "verdict": "correct",
+  "why": "quote: the program combats malaria",
+  "label": "reported",
+  "link": "Equatorial Guinea expands malaria program --affects--> malaria",
+  "by": "build assistant (Claude)"
+ },
+ "n:ac99b0896a72|affects:ev:equatorial guinea expands malaria program->topic:malaria cases on mainland|speculative": {
+  "verdict": "correct",
+  "why": "plausible; the reasoning cites the earlier Bioko result",
+  "label": "speculative",
+  "link": "Equatorial Guinea expands malaria program --affects--> malaria cases on mainland",
+  "by": "build assistant (Claude)"
+ },
+ "n:ac99b0896a72|affects:topic:malaria cases on mainland->topic:farm productivity in mainland|speculative": {
+  "verdict": "partial",
+  "why": "remote, nudged toward the persona (farming)",
+  "label": "speculative",
+  "link": "malaria cases on mainland --affects--> farm productivity in mainland",
+  "by": "build assistant (Claude)"
+ },
+ "n:b88263d4e9c2|involves:ev:detention of abhijeet dipke->org:cockroach janta party|reported": {
+  "verdict": "correct",
+  "why": "quote names the party",
+  "label": "reported",
+  "link": "Detention of Abhijeet Dipke --involves--> Cockroach Janta Party",
+  "by": "build assistant (Claude)"
+ },
+ "n:b88263d4e9c2|affects:ev:detention of abhijeet dipke->place:planned protest at central park in connaught place|inferred": {
+  "verdict": "correct",
+  "why": "follows from detention before the protest",
+  "label": "inferred",
+  "link": "Detention of Abhijeet Dipke --affects--> planned protest at Central Park in Connaught Place",
+  "by": "build assistant (Claude)"
+ },
+ "n:b88263d4e9c2|affects:ev:detention of abhijeet dipke->org:cockroach janta party mobilisation|inferred": {
+  "verdict": "correct",
+  "why": "follows from the leaders' detention",
+  "label": "inferred",
+  "link": "Detention of Abhijeet Dipke --affects--> Cockroach Janta Party mobilisation",
+  "by": "build assistant (Claude)"
+ },
+ "n:b88263d4e9c2|affects:ev:detention of abhijeet dipke->topic:opposition morale|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Detention of Abhijeet Dipke --affects--> Opposition morale",
+  "by": "build assistant (Claude)"
+ },
+ "n:b88263d4e9c2|affects:place:planned protest at central park in connaught place->topic:public visibility of cjp grievances|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "planned protest at Central Park in Connaught Place --affects--> public visibility of CJP grievances",
+  "by": "build assistant (Claude)"
+ },
+ "n:b88263d4e9c2|affects:org:cockroach janta party mobilisation->org:pressure on election commission|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Cockroach Janta Party mobilisation --affects--> pressure on Election Commission",
+  "by": "build assistant (Claude)"
+ },
+ "n:d0e0e4a57ac3|involves:ev:anne carson awarded nobel prize in literature->person:anne carson|reported": {
+  "verdict": "correct",
+  "why": "quote names Anne Carson",
+  "label": "reported",
+  "link": "Anne Carson awarded Nobel Prize in Literature --involves--> Anne Carson",
+  "by": "build assistant (Claude)"
+ },
+ "n:d0e0e4a57ac3|involves:ev:anne carson awarded nobel prize in literature->org:swedish academy|reported": {
+  "verdict": "correct",
+  "why": "quote names the Swedish Academy",
+  "label": "reported",
+  "link": "Anne Carson awarded Nobel Prize in Literature --involves--> Swedish Academy",
+  "by": "build assistant (Claude)"
+ },
+ "n:d0e0e4a57ac3|affects:ev:anne carson awarded nobel prize in literature->wd:Q16|reported": {
+  "verdict": "partial",
+  "why": "a PM's praise is not an 'effect' on Canada",
+  "label": "reported",
+  "link": "Anne Carson awarded Nobel Prize in Literature --affects--> Canada",
+  "by": "build assistant (Claude)"
+ },
+ "n:d0e0e4a57ac3|involves:ev:anne carson awarded nobel prize in literature->wd:Q192533|reported": {
+  "verdict": "partial",
+  "why": "he commented; 'involves' is loose",
+  "label": "reported",
+  "link": "Anne Carson awarded Nobel Prize in Literature --involves--> Mark Carney",
+  "by": "build assistant (Claude)"
+ },
+ "n:d0e0e4a57ac3|involves:ev:anne carson awarded nobel prize in literature->person:anders olsson|reported": {
+  "verdict": "correct",
+  "why": "the committee chair is involved in the award",
+  "label": "reported",
+  "link": "Anne Carson awarded Nobel Prize in Literature --involves--> Anders Olsson",
+  "by": "build assistant (Claude)"
+ },
+ "n:d0e0e4a57ac3|involves:ev:anne carson awarded nobel prize in literature->person:ingrid carlberg|reported": {
+  "verdict": "correct",
+  "why": "the Academy secretary is involved",
+  "label": "reported",
+  "link": "Anne Carson awarded Nobel Prize in Literature --involves--> Ingrid Carlberg",
+  "by": "build assistant (Claude)"
+ },
+ "n:d0e0e4a57ac3|part_of:ev:anne carson awarded nobel prize in literature->org:swedish academy's nobel committee for literature|reported": {
+  "verdict": "wrong",
+  "why": "an award is not part of a committee",
+  "label": "reported",
+  "link": "Anne Carson awarded Nobel Prize in Literature --part_of--> Swedish Academy's Nobel committee for Literature",
+  "by": "build assistant (Claude)"
+ },
+ "n:d0e0e4a57ac3|affects:ev:anne carson awarded nobel prize in literature->wd:Q16|inferred": {
+  "verdict": "partial",
+  "why": "weak, as row 89",
+  "label": "inferred",
+  "link": "Anne Carson awarded Nobel Prize in Literature --affects--> Canada",
+  "by": "build assistant (Claude)"
+ },
+ "n:d0e0e4a57ac3|affects:wd:Q16->topic:canadian literary community|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Canada --affects--> Canadian literary community",
+  "by": "build assistant (Claude)"
+ },
+ "n:d0e0e4a57ac3|affects:ev:anne carson awarded nobel prize in literature->org:swedish academy|inferred": {
+  "verdict": "partial",
+  "why": "the Academy gives the prize; 'affects' is weak",
+  "label": "inferred",
+  "link": "Anne Carson awarded Nobel Prize in Literature --affects--> Swedish Academy",
+  "by": "build assistant (Claude)"
+ },
+ "n:d0e0e4a57ac3|affects:org:swedish academy->topic:global perception of the nobel prize in literature|speculative": {
+  "verdict": "partial",
+  "why": "vague",
+  "label": "speculative",
+  "link": "Swedish Academy --affects--> global perception of the Nobel Prize in Literature",
+  "by": "build assistant (Claude)"
+ },
+ "n:d7646cfd3bd0|involves:ev:discovery of first green star wd j1330+6435->topic:wd j1330+6435|reported": {
+  "verdict": "correct",
+  "why": "quote names the star",
+  "label": "reported",
+  "link": "Discovery of first green star WD J1330+6435 --involves--> WD J1330+6435",
+  "by": "build assistant (Claude)"
+ },
+ "n:d7646cfd3bd0|part_of:topic:wd j1330+6435->wd:Q54012779|reported": {
+  "verdict": "correct",
+  "why": "the star is a white dwarf",
+  "label": "reported",
+  "link": "WD J1330+6435 --part_of--> White Dwarf Stars",
+  "by": "build assistant (Claude)"
+ },
+ "n:d7646cfd3bd0|affects:ev:discovery of first green star wd j1330+6435->topic:public interest in astronomy|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Discovery of first green star WD J1330+6435 --affects--> public interest in astronomy",
+  "by": "build assistant (Claude)"
+ },
+ "n:d7646cfd3bd0|affects:topic:public interest in astronomy->org:science education programmes|speculative": {
+  "verdict": "partial",
+  "why": "remote second hop",
+  "label": "speculative",
+  "link": "public interest in astronomy --affects--> science education programmes",
+  "by": "build assistant (Claude)"
+ },
+ "n:f5225c9d8fb5|part_of:person:first victim->wd:Q974|reported": {
+  "verdict": "wrong",
+  "why": "a person is not part of a country; misread quote",
+  "label": "reported",
+  "link": "first victim --part_of--> Democratic Republic of the Congo",
+  "by": "build assistant (Claude)"
+ },
+ "n:f5225c9d8fb5|affects:ev:kenya confirms four additional bundibugyo ebolavirus cases->org:kenya ministry of health|inferred": {
+  "verdict": "partial",
+  "why": "the basis does not mention the ministry",
+  "label": "inferred",
+  "link": "Kenya confirms four additional Bundibugyo ebolavirus cases --affects--> Kenya Ministry of Health",
+  "by": "build assistant (Claude)"
+ },
+ "n:f5225c9d8fb5|affects:org:kenya ministry of health->topic:border screening and cargo handling procedures|speculative": {
+  "verdict": "partial",
+  "why": "plausible but nudged toward the persona (logistics)",
+  "label": "speculative",
+  "link": "Kenya Ministry of Health --affects--> border screening and cargo handling procedures",
+  "by": "build assistant (Claude)"
+ },
+ "n:f5225c9d8fb5|affects:ev:kenya confirms four additional bundibugyo ebolavirus cases->topic:public perception of ebola risk in east africa|inferred": {
+  "verdict": "partial",
+  "why": "basis says risk is low; the link overstates",
+  "label": "inferred",
+  "link": "Kenya confirms four additional Bundibugyo ebolavirus cases --affects--> public perception of Ebola risk in East Africa",
+  "by": "build assistant (Claude)"
+ },
+ "n:f5225c9d8fb5|affects:topic:public perception of ebola risk in east africa->topic:international travel demand to kenya|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "public perception of Ebola risk in East Africa --affects--> international travel demand to Kenya",
+  "by": "build assistant (Claude)"
+ },
+ "n:f5225c9d8fb5|affects:topic:international travel demand to kenya->place:global logistics flows through major hubs such as rotterdam|speculative": {
+  "verdict": "wrong",
+  "why": "forced toward the persona (Rotterdam logistics)",
+  "label": "speculative",
+  "link": "international travel demand to Kenya --affects--> global logistics flows through major hubs such as Rotterdam",
+  "by": "build assistant (Claude)"
+ },
+ "n:f5225c9d8fb5|affects:ev:kenya confirms four additional bundibugyo ebolavirus cases->topic:local public transport usage in kenya|speculative": {
+  "verdict": "partial",
+  "why": "nudged toward the persona (public transport)",
+  "label": "speculative",
+  "link": "Kenya confirms four additional Bundibugyo ebolavirus cases --affects--> local public transport usage in Kenya",
+  "by": "build assistant (Claude)"
+ },
+ "n:f5225c9d8fb5|affects:topic:local public transport usage in kenya->topic:fuel consumption patterns in kenya|speculative": {
+  "verdict": "wrong",
+  "why": "unfounded chain",
+  "label": "speculative",
+  "link": "local public transport usage in Kenya --affects--> fuel consumption patterns in Kenya",
+  "by": "build assistant (Claude)"
+ },
+ "n:f5225c9d8fb5|affects:topic:fuel consumption patterns in kenya->topic:regional energy price trends|speculative": {
+  "verdict": "wrong",
+  "why": "unfounded chain toward the persona (energy prices)",
+  "label": "speculative",
+  "link": "fuel consumption patterns in Kenya --affects--> regional energy price trends",
+  "by": "build assistant (Claude)"
+ },
+ "n:fa08b85b6159|involves:ev:florida panthers natural hat trick streak->org:florida panthers|reported": {
+  "verdict": "correct",
+  "why": "quote names the Panthers",
+  "label": "reported",
+  "link": "Florida Panthers natural hat trick streak --involves--> Florida Panthers",
+  "by": "build assistant (Claude)"
+ },
+ "n:fa08b85b6159|involves:ev:florida panthers natural hat trick streak->org:national hockey league|reported": {
+  "verdict": "correct",
+  "why": "quote names the NHL",
+  "label": "reported",
+  "link": "Florida Panthers natural hat trick streak --involves--> National Hockey League",
+  "by": "build assistant (Claude)"
+ },
+ "n:fa08b85b6159|part_of:ev:florida panthers natural hat trick streak->wd:Q41466|reported": {
+  "verdict": "correct",
+  "why": "quote: in ice hockey",
+  "label": "reported",
+  "link": "Florida Panthers natural hat trick streak --part_of--> ice hockey",
+  "by": "build assistant (Claude)"
+ },
+ "n:fa08b85b6159|affects:ev:florida panthers natural hat trick streak->topic:nhl fan engagement|inferred": {
+  "verdict": "partial",
+  "why": "generic; should be speculative, not inferred",
+  "label": "inferred",
+  "link": "Florida Panthers natural hat trick streak --affects--> NHL fan engagement",
+  "by": "build assistant (Claude)"
+ },
+ "n:fa08b85b6159|affects:topic:nhl fan engagement->org:ticket sales for florida panthers games|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "NHL fan engagement --affects--> ticket sales for Florida Panthers games",
+  "by": "build assistant (Claude)"
+ },
+ "n:fa08b85b6159|affects:ev:florida panthers natural hat trick streak->topic:panthers merchandise sales|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Florida Panthers natural hat trick streak --affects--> Panthers merchandise sales",
+  "by": "build assistant (Claude)"
+ },
+ "n:fa08b85b6159|affects:ev:florida panthers natural hat trick streak->topic:media coverage of the nhl|inferred": {
+  "verdict": "partial",
+  "why": "generic; should be speculative",
+  "label": "inferred",
+  "link": "Florida Panthers natural hat trick streak --affects--> media coverage of the NHL",
+  "by": "build assistant (Claude)"
+ },
+ "n:fa08b85b6159|affects:topic:media coverage of the nhl->org:advertising revenue for nhl broadcast partners|speculative": {
+  "verdict": "partial",
+  "why": "remote second hop",
+  "label": "speculative",
+  "link": "media coverage of the NHL --affects--> advertising revenue for NHL broadcast partners",
+  "by": "build assistant (Claude)"
+ },
+ "n:fa08b85b6159|affects:ev:florida panthers natural hat trick streak->topic:player marketability (e.g., endorsement opportunities)|speculative": {
+  "verdict": "correct",
+  "why": "plausible, rightly speculative",
+  "label": "speculative",
+  "link": "Florida Panthers natural hat trick streak --affects--> player marketability (e.g., endorsement opportunities)",
+  "by": "build assistant (Claude)"
+ }
+}

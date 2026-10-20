@@ -1,0 +1,260 @@
+[
+ {
+  "item": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…",
+  "id": "n:047b20792022",
+  "persona": "A",
+  "context": [
+   "Rotterdam",
+   "logistics",
+   "energy prices",
+   "public transport"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+  "id": "n:0f5a4c632e8d",
+  "persona": "C",
+  "context": [
+   "Seoul",
+   "software engineering",
+   "cloud computing",
+   "semiconductors"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…",
+  "id": "n:12fabc0b78de",
+  "persona": "A",
+  "context": [
+   "Rotterdam",
+   "logistics",
+   "energy prices",
+   "public transport"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada",
+  "id": "n:2ea4338fe8f4",
+  "persona": "C",
+  "context": [
+   "Seoul",
+   "software engineering",
+   "cloud computing",
+   "semiconductors"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Andorra and San Marino each sign an association agreement with the European Union",
+  "id": "n:2ef6e37a2b5f",
+  "persona": "C",
+  "context": [
+   "Seoul",
+   "software engineering",
+   "cloud computing",
+   "semiconductors"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan",
+  "id": "n:75c973928996",
+  "persona": "C",
+  "context": [
+   "Seoul",
+   "software engineering",
+   "cloud computing",
+   "semiconductors"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "The New Yalu River Bridge connecting Dandong, China, and Sinuiju, North Korea, opens following a 12-year…",
+  "id": "n:77c59dd165c5",
+  "persona": "C",
+  "context": [
+   "Seoul",
+   "software engineering",
+   "cloud computing",
+   "semiconductors"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…",
+  "id": "n:84bb02f4d37d",
+  "persona": "A",
+  "context": [
+   "Rotterdam",
+   "logistics",
+   "energy prices",
+   "public transport"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [
+   "Greek maritime insurance premiums --affects/speculative--> energy prices"
+  ],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper…",
+  "id": "n:8ab7353c3a4a",
+  "persona": "B",
+  "context": [
+   "Uttar Pradesh",
+   "farming",
+   "monsoon",
+   "rice"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…",
+  "id": "n:945f742db3b8",
+  "persona": "A",
+  "context": [
+   "Rotterdam",
+   "logistics",
+   "energy prices",
+   "public transport"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Equatorial Guinea announces that it will expand its program combating malaria to the mainland and Annobón",
+  "id": "n:ac99b0896a72",
+  "persona": "B",
+  "context": [
+   "Uttar Pradesh",
+   "farming",
+   "monsoon",
+   "rice"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead of the party's planned march",
+  "id": "n:b88263d4e9c2",
+  "persona": "B",
+  "context": [
+   "Uttar Pradesh",
+   "farming",
+   "monsoon",
+   "rice"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…",
+  "id": "n:d0e0e4a57ac3",
+  "persona": "B",
+  "context": [
+   "Uttar Pradesh",
+   "farming",
+   "monsoon",
+   "rice"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Astronomers discover the first green star, WD J1330+6435, according to a study published by RAS Techniques…",
+  "id": "n:d7646cfd3bd0",
+  "persona": "A",
+  "context": [
+   "Rotterdam",
+   "logistics",
+   "energy prices",
+   "public transport"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Kenya confirms four additional cases of Bundibugyo ebolavirus, including three health workers who treated…",
+  "id": "n:f5225c9d8fb5",
+  "persona": "A",
+  "context": [
+   "Rotterdam",
+   "logistics",
+   "energy prices",
+   "public transport"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…",
+  "id": "n:fa08b85b6159",
+  "persona": "B",
+  "context": [
+   "Uttar Pradesh",
+   "farming",
+   "monsoon",
+   "rice"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ }
+]

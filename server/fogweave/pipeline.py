@@ -22,7 +22,8 @@ from datetime import datetime, timezone
 from . import ontology
 from .cache import DiskCache
 from .config import MAX_ARTICLE_CHARS, MAX_CLAIMS_TO_VERIFY
-from .embed import cluster, embed, near_duplicates
+from .embed import embed, near_duplicates
+from .embed import stories as story_clusters
 from .evidence import classify_source, registered_domain, strength
 from .http import PoliteClient
 from .linking import WikidataLinker, canonical, key, merge_entities
@@ -76,7 +77,7 @@ class Engine:
             keep = [i for i in range(len(raw)) if i not in drop]
             raw = [raw[i] for i in keep]
             vecs = vecs[keep]
-            stories = cluster(vecs)
+            stories = story_clusters([f"{r.title}. {r.snippet[:200]}" for r in raw])
         else:
             stories = []
         summaries: dict[str, str] = {}
@@ -206,6 +207,7 @@ class Engine:
             timings[name] = int((time.monotonic() - t0) * 1000)
 
         calls0 = self.llm.stats["calls"]
+        tokens0 = self.llm.stats["tokens"]
         context = [c for c in (context or []) if isinstance(c, str) and 0 < len(c) < 60][:8]
         nodes: dict[str, dict] = {}
         rejected: list[dict] = []
@@ -303,6 +305,8 @@ class Engine:
                 yield ev
 
         # reported relations
+        reported_triples: set[tuple[str, str, str]] = set()
+        self._reported_triples = reported_triples
         facts = [{"id": f"F{i + 1}", "text": c["text"], "ref": cid} for i, (c, cid) in enumerate(zip(x["claims"], claim_ids))]
         for r in x["relations"]:
             s = ent_id.get(key(r["subject"])) or (event_id if key(r["subject"]) == key(ev_name) else None)
@@ -312,6 +316,7 @@ class Engine:
                 continue
             e = edge({"type": r["relation"], "from": s, "to": o, "label": "reported", "evidence": [prov(r["quote"])]})
             if e:
+                reported_triples.add((r["relation"], s, o))
                 facts.append({"id": f"F{len(facts) + 1}", "text": f"{r['subject']} {r['relation'].replace('_', ' ')} {r['object']}", "ref": e["edge"]["id"]})
                 yield e
 
@@ -345,6 +350,7 @@ class Engine:
                 "ms": int((time.monotonic() - t0) * 1000),
                 "timings": timings,
                 "llmCalls": self.llm.stats["calls"] - calls0,
+                "llmTokens": self.llm.stats["tokens"] - tokens0,
                 "nodes": len(nodes),
                 "rejected": rejected[:20],
                 "dropped": x["dropped"],
@@ -467,6 +473,7 @@ class Engine:
             return event_id if hop == 1 else None  # a first hop always starts at the event
 
         dropped = 0
+        emitted: set[tuple[str, str, str]] = set(self._reported_triples) if hasattr(self, "_reported_triples") else set()
         for link in out.links[:8]:
             if link.hop > (3 if deep else 2):
                 continue
@@ -489,6 +496,9 @@ class Engine:
             if ev := node(n):
                 yield ev
             known[tk] = tid
+            if (link.relation, s, tid) in emitted:
+                continue  # already a reported (or earlier) link: the source wins
+            emitted.add((link.relation, s, tid))
             e = {
                 "type": link.relation, "from": s, "to": tid, "label": label, "hop": link.hop,
                 "reasoning": link.reasoning, "basis": basis, "evidence": [],

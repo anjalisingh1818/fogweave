@@ -79,3 +79,46 @@ def near_duplicates(vectors: np.ndarray, threshold: float = 0.93) -> set[int]:
             if sims[i, j] >= threshold:
                 drop.add(j)
     return drop
+
+
+_STOP = {"the", "a", "an", "at", "in", "on", "following", "after", "during", "several", "two", "three", "four", "five", "least"}
+
+
+def _names(text: str) -> set[str]:
+    """Capitalised name phrases ('South Korea', 'Gang Suppression Force')."""
+    return {w.lower() for w in re.findall(r"\b[A-Z][a-zA-Z\-]{2,}(?:\s+[A-Z][a-zA-Z\-]{2,})*", text)} - _STOP
+
+
+def stories(texts: list[str], alpha: float = 0.5, threshold: float = 0.35) -> list[int]:
+    """Story clusters: average-link agglomerative clustering on a blend of
+    embedding cosine and shared-name Jaccard. Tuned on the eval DEV days
+    (eval/cluster_eval.py); single-link on embeddings alone chained unrelated
+    stories together (test F1 0.31 vs 0.48)."""
+    n = len(texts)
+    if n == 0:
+        return []
+    vecs = embed(texts)
+    names = [_names(t) for t in texts]
+    sim = (1 - alpha) * (vecs @ vecs.T)
+    for i in range(n):
+        for j in range(n):
+            u = names[i] | names[j]
+            if u:
+                sim[i, j] += alpha * len(names[i] & names[j]) / len(u)
+    clusters = [[i] for i in range(n)]
+    while True:
+        best, pair = threshold, None
+        for a in range(len(clusters)):
+            for b in range(a + 1, len(clusters)):
+                s_ = float(np.mean(sim[np.ix_(clusters[a], clusters[b])]))
+                if s_ >= best:
+                    best, pair = s_, (a, b)
+        if not pair:
+            break
+        a, b = pair
+        clusters[a] += clusters.pop(b)
+    label = [0] * n
+    for k, c in enumerate(sorted(clusters, key=min)):
+        for i in c:
+            label[i] = k
+    return label

@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import html
 import re
+from html.parser import HTMLParser
 from datetime import datetime, timedelta, timezone
 
 from ..http import SourceError
@@ -29,21 +30,68 @@ def _clean(fragment: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+class _CEParser(HTMLParser):
+    """Walks the portal HTML keeping the section (<p><b>Domain</b>) and the
+    story path (headings of enclosing list items) for every leaf entry."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.section = ""
+        self.in_b = False
+        self.in_p = False
+        self.stack: list[dict] = []  # open <li>: {"text": [...], "links": [...], "has_child": bool, "heading": str}
+        self.entries: list[dict] = []
+
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        if tag == "p":
+            self.in_p = True
+        elif tag == "b" and self.in_p:
+            self.in_b = True
+            self._b = []
+        elif tag == "li":
+            self.stack.append({"text": [], "links": [], "has_child": False})
+        elif tag == "ul" and self.stack:
+            top = self.stack[-1]
+            top["has_child"] = True
+            top["heading"] = re.sub(r"\s+", " ", "".join(top["text"])).strip()
+        elif tag == "a" and self.stack:
+            href = a.get("href", "")
+            if href.startswith("http") and "wikipedia.org" not in href and "wikimedia.org" not in href:
+                self.stack[-1]["links"].append(href)
+
+    def handle_endtag(self, tag):
+        if tag == "p":
+            self.in_p = False
+        elif tag == "b" and self.in_b:
+            self.in_b = False
+            self.section = "".join(self._b).strip()
+        elif tag == "li" and self.stack:
+            li = self.stack.pop()
+            if not li["has_child"]:
+                path = [x.get("heading", "") for x in self.stack if x.get("heading")]
+                self.entries.append({"text": "".join(li["text"]), "citations": li["links"], "section": self.section, "path": path})
+
+    def handle_data(self, data):
+        if self.in_b:
+            self._b.append(data)
+        if self.stack and not self.stack[-1]["has_child"]:
+            self.stack[-1]["text"].append(data)
+
+
 def parse_current_events(page_html: str, day: datetime) -> list[dict]:
-    """Leaf <li> entries that cite at least one outside source."""
+    """Leaf entries that cite at least one outside source, with their
+    section (e.g. 'Business and economy') and story path (e.g. ['2026 Iran war'])."""
+    p = _CEParser()
+    p.feed(page_html)
     entries = []
-    for m in LI_OPEN.finditer(page_html):
-        nxt = NEXT_TAG.search(page_html, m.end())
-        frag = page_html[m.end() : nxt.start() if nxt else len(page_html)]
-        if "<ul" in frag:
-            continue  # a category heading with children, not a story
-        cites = [u for u in HREF.findall(frag) if "wikipedia.org" not in u and "wikimedia.org" not in u]
-        text = _clean(frag)
-        if not cites or len(text) < 40:
+    for e in p.entries:
+        text = re.sub(r"\[\d+\]", "", e["text"])
+        text = re.sub(r"\s+", " ", text).strip()
+        if not e["citations"] or len(text) < 40:
             continue
-        # drop the trailing "(Outlet) (Outlet)" citation labels from the text
         text = re.sub(r"(\s*\([^()]{2,60}\))+\s*$", "", text).strip()
-        entries.append({"text": text, "citations": cites, "day": day})
+        entries.append({"text": text, "citations": e["citations"], "day": day, "section": e["section"], "path": e["path"]})
     return entries
 
 
@@ -78,7 +126,7 @@ class WikipediaAdapter(SourceAdapter):
                     outlet=domain_of(first),
                     licence=self.licence,
                     citations=e["citations"][:4],
-                    extra={"portal": f"{page_url}#{i}"},
+                    extra={"portal": f"{page_url}#{i}", "section": e["section"], "storyPath": e["path"]},
                 )
             )
         return items

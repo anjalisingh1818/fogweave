@@ -37,11 +37,12 @@ export class CardManager {
         this.close(victim.key);
       }
       const card = new Card(this.world, { width, height, poke, name: `card:${key}` });
-      const s = slot !== null && !this.open.some((e) => e.slot === slot) ? slot : this._freeSlot(prefer, slot);
+      // a requested slot is a preference: never push out the card you came from
+      const busy = new Set(this.open.map((e) => e.slot));
+      const s = slot !== null && !busy.has(slot) ? slot : this._freeSlot(prefer, null);
       entry = { key, card, slot: s, born: performance.now(), pinned };
-      // a card already in that slot (unpinned) makes room
-      const clash = this.open.find((e) => e.slot === s && !e.pinned);
-      if (clash) this.close(clash.key);
+      const clash = this.open.find((e) => e.slot === s);
+      if (clash && !clash.pinned) this.close(clash.key); // only when the arc is full
       this.open.push(entry);
       const t = this._slotPosition(entry.slot);
       card.placeFacing(t.clone().lerp(this.anchor.head, -0.25), this.anchor.head);
