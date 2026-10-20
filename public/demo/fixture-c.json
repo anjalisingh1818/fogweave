@@ -1,0 +1,837 @@
+{
+ "schema": "fogweave.graph/1",
+ "topic": "Fixture C",
+ "topicKey": "fixture-c",
+ "generatedAt": "2026-10-20T00:00:00Z",
+ "provenance": {
+  "kind": "fixture",
+  "note": "Synthetic test fixture; replaced by real pipeline runs in Phase 2."
+ },
+ "nodes": [
+  {
+   "id": "C:topic",
+   "type": "Topic",
+   "label": "Fixture C",
+   "summary": "Synthetic test fixture. Not research output."
+  },
+  {
+   "id": "C:sub1",
+   "type": "Entity",
+   "label": "Fixture C · area 1"
+  },
+  {
+   "id": "C:sub2",
+   "type": "Entity",
+   "label": "Fixture C · area 2"
+  },
+  {
+   "id": "C:sub3",
+   "type": "Entity",
+   "label": "Fixture C · area 3"
+  },
+  {
+   "id": "C:sub4",
+   "type": "Entity",
+   "label": "Fixture C · area 4"
+  },
+  {
+   "id": "C:s1",
+   "type": "Source",
+   "label": "Fixture source C1",
+   "domain": "fixture-c1.example",
+   "url": "https://fixture-c1.example/",
+   "sourceClass": "government",
+   "date": "2026-02-17"
+  },
+  {
+   "id": "C:c1",
+   "type": "Claim",
+   "label": "Fixture C claim 1",
+   "quote": "Synthetic fixture quote.",
+   "verdict": "unverified",
+   "evidence": {
+    "independentDomains": 1,
+    "sourceClasses": {
+     "government": 1
+    },
+    "supports": 1,
+    "contradicts": 0,
+    "unclear": 0,
+    "newest": "2026-09-30"
+   }
+  },
+  {
+   "id": "C:s2",
+   "type": "Source",
+   "label": "Fixture source C2",
+   "domain": "fixture-c2.example",
+   "url": "https://fixture-c2.example/",
+   "sourceClass": "blog",
+   "date": "2026-09-13"
+  },
+  {
+   "id": "C:s3",
+   "type": "Source",
+   "label": "Fixture source C3",
+   "domain": "fixture-c3.example",
+   "url": "https://fixture-c3.example/",
+   "sourceClass": "government",
+   "date": "2026-02-13"
+  },
+  {
+   "id": "C:c2",
+   "type": "Claim",
+   "label": "Fixture C claim 2",
+   "quote": "Synthetic fixture quote.",
+   "verdict": "contradicted",
+   "evidence": {
+    "independentDomains": 2,
+    "sourceClasses": {
+     "blog": 1,
+     "government": 1
+    },
+    "supports": 1,
+    "contradicts": 1,
+    "unclear": 0,
+    "newest": "2026-09-30"
+   }
+  },
+  {
+   "id": "C:s4",
+   "type": "Source",
+   "label": "Fixture source C4",
+   "domain": "fixture-c4.example",
+   "url": "https://fixture-c4.example/",
+   "sourceClass": "blog",
+   "date": "2026-05-12"
+  },
+  {
+   "id": "C:s5",
+   "type": "Source",
+   "label": "Fixture source C5",
+   "domain": "fixture-c5.example",
+   "url": "https://fixture-c5.example/",
+   "sourceClass": "organisation",
+   "date": "2026-07-10"
+  },
+  {
+   "id": "C:c3",
+   "type": "Claim",
+   "label": "Fixture C claim 3",
+   "quote": "Synthetic fixture quote.",
+   "verdict": "supported",
+   "evidence": {
+    "independentDomains": 2,
+    "sourceClasses": {
+     "blog": 1,
+     "organisation": 1
+    },
+    "supports": 2,
+    "contradicts": 0,
+    "unclear": 0,
+    "newest": "2026-09-30"
+   }
+  },
+  {
+   "id": "C:s6",
+   "type": "Source",
+   "label": "Fixture source C6",
+   "domain": "fixture-c6.example",
+   "url": "https://fixture-c6.example/",
+   "sourceClass": "news",
+   "date": "2026-07-11"
+  },
+  {
+   "id": "C:c4",
+   "type": "Claim",
+   "label": "Fixture C claim 4",
+   "quote": "Synthetic fixture quote.",
+   "verdict": "unverified",
+   "evidence": {
+    "independentDomains": 1,
+    "sourceClasses": {
+     "news": 1
+    },
+    "supports": 1,
+    "contradicts": 0,
+    "unclear": 0,
+    "newest": "2026-09-30"
+   }
+  },
+  {
+   "id": "C:s7",
+   "type": "Source",
+   "label": "Fixture source C7",
+   "domain": "fixture-c7.example",
+   "url": "https://fixture-c7.example/",
+   "sourceClass": "blog",
+   "date": "2026-08-17"
+  },
+  {
+   "id": "C:s8",
+   "type": "Source",
+   "label": "Fixture source C8",
+   "domain": "fixture-c8.example",
+   "url": "https://fixture-c8.example/",
+   "sourceClass": "blog",
+   "date": "2026-03-11"
+  },
+  {
+   "id": "C:s9",
+   "type": "Source",
+   "label": "Fixture source C9",
+   "domain": "fixture-c9.example",
+   "url": "https://fixture-c9.example/",
+   "sourceClass": "unknown",
+   "date": "2026-04-13"
+  },
+  {
+   "id": "C:c5",
+   "type": "Claim",
+   "label": "Fixture C claim 5",
+   "quote": "Synthetic fixture quote.",
+   "verdict": "supported",
+   "evidence": {
+    "independentDomains": 3,
+    "sourceClasses": {
+     "blog": 2,
+     "unknown": 1
+    },
+    "supports": 3,
+    "contradicts": 0,
+    "unclear": 0,
+    "newest": "2026-09-30"
+   }
+  },
+  {
+   "id": "C:s10",
+   "type": "Source",
+   "label": "Fixture source C10",
+   "domain": "fixture-c10.example",
+   "url": "https://fixture-c10.example/",
+   "sourceClass": "blog",
+   "date": "2026-08-18"
+  },
+  {
+   "id": "C:s11",
+   "type": "Source",
+   "label": "Fixture source C11",
+   "domain": "fixture-c11.example",
+   "url": "https://fixture-c11.example/",
+   "sourceClass": "education",
+   "date": "2026-03-17"
+  },
+  {
+   "id": "C:s12",
+   "type": "Source",
+   "label": "Fixture source C12",
+   "domain": "fixture-c12.example",
+   "url": "https://fixture-c12.example/",
+   "sourceClass": "news",
+   "date": "2026-08-17"
+  },
+  {
+   "id": "C:c6",
+   "type": "Claim",
+   "label": "Fixture C claim 6",
+   "quote": "Synthetic fixture quote.",
+   "verdict": "supported",
+   "evidence": {
+    "independentDomains": 3,
+    "sourceClasses": {
+     "blog": 1,
+     "education": 1,
+     "news": 1
+    },
+    "supports": 3,
+    "contradicts": 0,
+    "unclear": 0,
+    "newest": "2026-09-30"
+   }
+  },
+  {
+   "id": "C:s13",
+   "type": "Source",
+   "label": "Fixture source C13",
+   "domain": "fixture-c13.example",
+   "url": "https://fixture-c13.example/",
+   "sourceClass": "unknown",
+   "date": "2026-05-18"
+  },
+  {
+   "id": "C:s14",
+   "type": "Source",
+   "label": "Fixture source C14",
+   "domain": "fixture-c14.example",
+   "url": "https://fixture-c14.example/",
+   "sourceClass": "unknown",
+   "date": "2026-03-11"
+  },
+  {
+   "id": "C:s15",
+   "type": "Source",
+   "label": "Fixture source C15",
+   "domain": "fixture-c15.example",
+   "url": "https://fixture-c15.example/",
+   "sourceClass": "organisation",
+   "date": "2026-03-14"
+  },
+  {
+   "id": "C:c7",
+   "type": "Claim",
+   "label": "Fixture C claim 7",
+   "quote": "Synthetic fixture quote.",
+   "verdict": "mixed",
+   "evidence": {
+    "independentDomains": 3,
+    "sourceClasses": {
+     "unknown": 2,
+     "organisation": 1
+    },
+    "supports": 2,
+    "contradicts": 1,
+    "unclear": 0,
+    "newest": "2026-09-30"
+   }
+  },
+  {
+   "id": "C:s16",
+   "type": "Source",
+   "label": "Fixture source C16",
+   "domain": "fixture-c16.example",
+   "url": "https://fixture-c16.example/",
+   "sourceClass": "government",
+   "date": "2026-02-14"
+  },
+  {
+   "id": "C:c8",
+   "type": "Claim",
+   "label": "Fixture C claim 8",
+   "quote": "Synthetic fixture quote.",
+   "verdict": "unverified",
+   "evidence": {
+    "independentDomains": 1,
+    "sourceClasses": {
+     "government": 1
+    },
+    "supports": 1,
+    "contradicts": 0,
+    "unclear": 0,
+    "newest": "2026-09-30"
+   }
+  },
+  {
+   "id": "C:s17",
+   "type": "Source",
+   "label": "Fixture source C17",
+   "domain": "fixture-c17.example",
+   "url": "https://fixture-c17.example/",
+   "sourceClass": "unknown",
+   "date": "2026-08-14"
+  },
+  {
+   "id": "C:s18",
+   "type": "Source",
+   "label": "Fixture source C18",
+   "domain": "fixture-c18.example",
+   "url": "https://fixture-c18.example/",
+   "sourceClass": "organisation",
+   "date": "2026-08-14"
+  },
+  {
+   "id": "C:s19",
+   "type": "Source",
+   "label": "Fixture source C19",
+   "domain": "fixture-c19.example",
+   "url": "https://fixture-c19.example/",
+   "sourceClass": "news",
+   "date": "2026-05-14"
+  },
+  {
+   "id": "C:c9",
+   "type": "Claim",
+   "label": "Fixture C claim 9",
+   "quote": "Synthetic fixture quote.",
+   "verdict": "contradicted",
+   "evidence": {
+    "independentDomains": 3,
+    "sourceClasses": {
+     "unknown": 1,
+     "organisation": 1,
+     "news": 1
+    },
+    "supports": 1,
+    "contradicts": 2,
+    "unclear": 0,
+    "newest": "2026-09-30"
+   }
+  },
+  {
+   "id": "C:s20",
+   "type": "Source",
+   "label": "Fixture source C20",
+   "domain": "fixture-c20.example",
+   "url": "https://fixture-c20.example/",
+   "sourceClass": "blog",
+   "date": "2026-02-14"
+  },
+  {
+   "id": "C:s21",
+   "type": "Source",
+   "label": "Fixture source C21",
+   "domain": "fixture-c21.example",
+   "url": "https://fixture-c21.example/",
+   "sourceClass": "organisation",
+   "date": "2026-08-18"
+  },
+  {
+   "id": "C:c10",
+   "type": "Claim",
+   "label": "Fixture C claim 10",
+   "quote": "Synthetic fixture quote.",
+   "verdict": "supported",
+   "evidence": {
+    "independentDomains": 2,
+    "sourceClasses": {
+     "blog": 1,
+     "organisation": 1
+    },
+    "supports": 2,
+    "contradicts": 0,
+    "unclear": 0,
+    "newest": "2026-09-30"
+   }
+  },
+  {
+   "id": "C:s22",
+   "type": "Source",
+   "label": "Fixture source C22",
+   "domain": "fixture-c22.example",
+   "url": "https://fixture-c22.example/",
+   "sourceClass": "government",
+   "date": "2026-02-11"
+  },
+  {
+   "id": "C:c11",
+   "type": "Claim",
+   "label": "Fixture C claim 11",
+   "quote": "Synthetic fixture quote.",
+   "verdict": "unverified",
+   "evidence": {
+    "independentDomains": 1,
+    "sourceClasses": {
+     "government": 1
+    },
+    "supports": 1,
+    "contradicts": 0,
+    "unclear": 0,
+    "newest": "2026-09-30"
+   }
+  },
+  {
+   "id": "C:s23",
+   "type": "Source",
+   "label": "Fixture source C23",
+   "domain": "fixture-c23.example",
+   "url": "https://fixture-c23.example/",
+   "sourceClass": "news",
+   "date": "2026-05-18"
+  },
+  {
+   "id": "C:s24",
+   "type": "Source",
+   "label": "Fixture source C24",
+   "domain": "fixture-c24.example",
+   "url": "https://fixture-c24.example/",
+   "sourceClass": "unknown",
+   "date": "2026-01-16"
+  },
+  {
+   "id": "C:s25",
+   "type": "Source",
+   "label": "Fixture source C25",
+   "domain": "fixture-c25.example",
+   "url": "https://fixture-c25.example/",
+   "sourceClass": "government",
+   "date": "2026-06-12"
+  },
+  {
+   "id": "C:c12",
+   "type": "Claim",
+   "label": "Fixture C claim 12",
+   "quote": "Synthetic fixture quote.",
+   "verdict": "supported",
+   "evidence": {
+    "independentDomains": 3,
+    "sourceClasses": {
+     "news": 1,
+     "unknown": 1,
+     "government": 1
+    },
+    "supports": 3,
+    "contradicts": 0,
+    "unclear": 0,
+    "newest": "2026-09-30"
+   }
+  },
+  {
+   "id": "C:s26",
+   "type": "Source",
+   "label": "Fixture source C26",
+   "domain": "fixture-c26.example",
+   "url": "https://fixture-c26.example/",
+   "sourceClass": "news",
+   "date": "2026-04-16"
+  },
+  {
+   "id": "C:s27",
+   "type": "Source",
+   "label": "Fixture source C27",
+   "domain": "fixture-c27.example",
+   "url": "https://fixture-c27.example/",
+   "sourceClass": "unknown",
+   "date": "2026-02-15"
+  },
+  {
+   "id": "C:s28",
+   "type": "Source",
+   "label": "Fixture source C28",
+   "domain": "fixture-c28.example",
+   "url": "https://fixture-c28.example/",
+   "sourceClass": "news",
+   "date": "2026-04-11"
+  },
+  {
+   "id": "C:c13",
+   "type": "Claim",
+   "label": "Fixture C claim 13",
+   "quote": "Synthetic fixture quote.",
+   "verdict": "supported",
+   "evidence": {
+    "independentDomains": 3,
+    "sourceClasses": {
+     "news": 2,
+     "unknown": 1
+    },
+    "supports": 3,
+    "contradicts": 0,
+    "unclear": 0,
+    "newest": "2026-09-30"
+   }
+  },
+  {
+   "id": "C:s29",
+   "type": "Source",
+   "label": "Fixture source C29",
+   "domain": "fixture-c29.example",
+   "url": "https://fixture-c29.example/",
+   "sourceClass": "organisation",
+   "date": "2026-06-16"
+  },
+  {
+   "id": "C:s30",
+   "type": "Source",
+   "label": "Fixture source C30",
+   "domain": "fixture-c30.example",
+   "url": "https://fixture-c30.example/",
+   "sourceClass": "unknown",
+   "date": "2026-01-15"
+  },
+  {
+   "id": "C:s31",
+   "type": "Source",
+   "label": "Fixture source C31",
+   "domain": "fixture-c31.example",
+   "url": "https://fixture-c31.example/",
+   "sourceClass": "news",
+   "date": "2026-04-18"
+  },
+  {
+   "id": "C:c14",
+   "type": "Claim",
+   "label": "Fixture C claim 14",
+   "quote": "Synthetic fixture quote.",
+   "verdict": "mixed",
+   "evidence": {
+    "independentDomains": 3,
+    "sourceClasses": {
+     "organisation": 1,
+     "unknown": 1,
+     "news": 1
+    },
+    "supports": 2,
+    "contradicts": 1,
+    "unclear": 0,
+    "newest": "2026-09-30"
+   }
+  }
+ ],
+ "edges": [
+  {
+   "type": "part_of",
+   "from": "C:sub1",
+   "to": "C:topic"
+  },
+  {
+   "type": "part_of",
+   "from": "C:sub2",
+   "to": "C:topic"
+  },
+  {
+   "type": "part_of",
+   "from": "C:sub3",
+   "to": "C:topic"
+  },
+  {
+   "type": "part_of",
+   "from": "C:sub4",
+   "to": "C:topic"
+  },
+  {
+   "type": "part_of",
+   "from": "C:c1",
+   "to": "C:sub2"
+  },
+  {
+   "type": "cites",
+   "from": "C:c1",
+   "to": "C:s1"
+  },
+  {
+   "type": "part_of",
+   "from": "C:c2",
+   "to": "C:sub3"
+  },
+  {
+   "type": "cites",
+   "from": "C:c2",
+   "to": "C:s2"
+  },
+  {
+   "type": "contradicts",
+   "from": "C:s3",
+   "to": "C:c2"
+  },
+  {
+   "type": "part_of",
+   "from": "C:c3",
+   "to": "C:sub4"
+  },
+  {
+   "type": "cites",
+   "from": "C:c3",
+   "to": "C:s4"
+  },
+  {
+   "type": "supports",
+   "from": "C:s5",
+   "to": "C:c3"
+  },
+  {
+   "type": "relates_to",
+   "from": "C:c3",
+   "to": "C:c1"
+  },
+  {
+   "type": "part_of",
+   "from": "C:c4",
+   "to": "C:sub1"
+  },
+  {
+   "type": "cites",
+   "from": "C:c4",
+   "to": "C:s6"
+  },
+  {
+   "type": "relates_to",
+   "from": "C:c4",
+   "to": "C:c2"
+  },
+  {
+   "type": "part_of",
+   "from": "C:c5",
+   "to": "C:sub2"
+  },
+  {
+   "type": "cites",
+   "from": "C:c5",
+   "to": "C:s7"
+  },
+  {
+   "type": "supports",
+   "from": "C:s8",
+   "to": "C:c5"
+  },
+  {
+   "type": "supports",
+   "from": "C:s9",
+   "to": "C:c5"
+  },
+  {
+   "type": "part_of",
+   "from": "C:c6",
+   "to": "C:sub3"
+  },
+  {
+   "type": "cites",
+   "from": "C:c6",
+   "to": "C:s10"
+  },
+  {
+   "type": "supports",
+   "from": "C:s11",
+   "to": "C:c6"
+  },
+  {
+   "type": "supports",
+   "from": "C:s12",
+   "to": "C:c6"
+  },
+  {
+   "type": "part_of",
+   "from": "C:c7",
+   "to": "C:sub4"
+  },
+  {
+   "type": "cites",
+   "from": "C:c7",
+   "to": "C:s13"
+  },
+  {
+   "type": "contradicts",
+   "from": "C:s14",
+   "to": "C:c7"
+  },
+  {
+   "type": "supports",
+   "from": "C:s15",
+   "to": "C:c7"
+  },
+  {
+   "type": "part_of",
+   "from": "C:c8",
+   "to": "C:sub1"
+  },
+  {
+   "type": "cites",
+   "from": "C:c8",
+   "to": "C:s16"
+  },
+  {
+   "type": "relates_to",
+   "from": "C:c8",
+   "to": "C:c4"
+  },
+  {
+   "type": "part_of",
+   "from": "C:c9",
+   "to": "C:sub2"
+  },
+  {
+   "type": "cites",
+   "from": "C:c9",
+   "to": "C:s17"
+  },
+  {
+   "type": "contradicts",
+   "from": "C:s18",
+   "to": "C:c9"
+  },
+  {
+   "type": "contradicts",
+   "from": "C:s19",
+   "to": "C:c9"
+  },
+  {
+   "type": "part_of",
+   "from": "C:c10",
+   "to": "C:sub3"
+  },
+  {
+   "type": "cites",
+   "from": "C:c10",
+   "to": "C:s20"
+  },
+  {
+   "type": "supports",
+   "from": "C:s21",
+   "to": "C:c10"
+  },
+  {
+   "type": "part_of",
+   "from": "C:c11",
+   "to": "C:sub4"
+  },
+  {
+   "type": "cites",
+   "from": "C:c11",
+   "to": "C:s22"
+  },
+  {
+   "type": "part_of",
+   "from": "C:c12",
+   "to": "C:sub1"
+  },
+  {
+   "type": "cites",
+   "from": "C:c12",
+   "to": "C:s23"
+  },
+  {
+   "type": "supports",
+   "from": "C:s24",
+   "to": "C:c12"
+  },
+  {
+   "type": "supports",
+   "from": "C:s25",
+   "to": "C:c12"
+  },
+  {
+   "type": "part_of",
+   "from": "C:c13",
+   "to": "C:sub2"
+  },
+  {
+   "type": "cites",
+   "from": "C:c13",
+   "to": "C:s26"
+  },
+  {
+   "type": "supports",
+   "from": "C:s27",
+   "to": "C:c13"
+  },
+  {
+   "type": "supports",
+   "from": "C:s28",
+   "to": "C:c13"
+  },
+  {
+   "type": "relates_to",
+   "from": "C:c13",
+   "to": "C:c4"
+  },
+  {
+   "type": "part_of",
+   "from": "C:c14",
+   "to": "C:sub3"
+  },
+  {
+   "type": "cites",
+   "from": "C:c14",
+   "to": "C:s29"
+  },
+  {
+   "type": "contradicts",
+   "from": "C:s30",
+   "to": "C:c14"
+  },
+  {
+   "type": "supports",
+   "from": "C:s31",
+   "to": "C:c14"
+  }
+ ],
+ "insights": []
+}

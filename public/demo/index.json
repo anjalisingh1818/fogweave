@@ -1,0 +1,23 @@
+[
+ {
+  "topicKey": "fixture-a",
+  "topic": "Fixture A",
+  "file": "fixture-a.json",
+  "kind": "fixture",
+  "nodes": 41
+ },
+ {
+  "topicKey": "fixture-b",
+  "topic": "Fixture B",
+  "file": "fixture-b.json",
+  "kind": "fixture",
+  "nodes": 32
+ },
+ {
+  "topicKey": "fixture-c",
+  "topic": "Fixture C",
+  "file": "fixture-c.json",
+  "kind": "fixture",
+  "nodes": 50
+ }
+]
