@@ -25,6 +25,9 @@ import { readerDraw } from './ui/reader-card.js';
 import { EventPlayer, applyEvent } from './research/events.js';
 import { ResearchClient } from './research/client.js';
 import { ContextStore, SAMPLE_PERSONA, CONTEXT_KINDS } from './context.js';
+import { InterestStore } from './interests.js';
+import { sampleFeed, seedFrom } from './feed.js';
+import { interestsDraw } from './ui/interests-card.js';
 import { settings, loadSettings, setQuality, saveSettings } from './config.js';
 import { answerDraw, ASK_SUGGESTIONS, notesDraw, lightsPanelDraw, settingsDraw, timelineDraw, briefingDraw, exportDraw, insightsDraw } from './ui/panels.js';
 import { insights } from './insights.js';
@@ -69,6 +72,10 @@ export class App {
     this.sealedLights = readJSON(SEALED_LIGHTS_KEY, {});
     this.lights.sealed = new Set(Object.keys(this.sealedLights));
     this.context = new ContextStore();
+    this.interests = new InterestStore();
+    this.pool = [];
+    this.feedSeed = seedFrom(new Date().toISOString().slice(0, 10));
+    this._refreshAt = 0;
     this.client = new ResearchClient();
     this.snapshot = null;
     this.mode = 'starting'; // live | offline
@@ -106,27 +113,27 @@ export class App {
   async _start() {
     const [health, snap] = await Promise.all([this.client.health(), this._loadSnapshot()]);
     this.snapshot = snap;
-    let lights = null;
+    let pool = null;
     if (health?.ok) {
       this.setStatus('Gathering the latest news…');
-      lights = await this.client.lights(this.context.labels());
+      pool = await this.client.pool(this.interests.forServer());
     }
-    if (lights?.items?.length) {
+    if (pool?.items?.length) {
       this.mode = 'live';
-      const ok = Object.values(lights.sources || {}).filter((s) => s.ok).length;
-      const all = Object.keys(lights.sources || {}).length;
-      this.lightsMeta = { kind: 'live', generatedAt: lights.generatedAt, sources: `${ok} of ${all} feeds` };
-      this.notes = lights.notes || [];
-      this.lights.setItems(lights.items.map((it) => ({ ...it, live: true })));
+      const ok = Object.values(pool.sources || {}).filter((s) => s.ok).length;
+      const all = Object.keys(pool.sources || {}).length;
+      this.lightsMeta = { kind: 'live', generatedAt: pool.generatedAt, sources: `${ok} of ${all} feeds` };
+      this.notes = pool.notes || [];
+      this.pool = pool.items.map((it) => ({ ...it, live: true }));
     } else if (snap) {
       this.mode = 'offline';
       this.lightsMeta = { kind: snap.provenance?.kind, generatedAt: snap.generatedAt };
-      this.lights.setItems(snap.lights || []);
+      this.pool = snap.pool || snap.lights || [];
     } else {
       this.mode = 'offline';
       this.lightsMeta = { kind: 'none' };
     }
-    this._applyRelevance();
+    this.drawLights();
     this.setStatus('');
     this._restoreWorkspace();
     if (Onboarding.needed()) this.startOnboarding();
@@ -493,6 +500,65 @@ export class App {
     for (const id of ins.ids) this.view.flash(id, 3);
     const first = ins.ids.find((id) => this.store.nodes.has(id));
     if (first) this.pinchNode(first);
+  }
+
+  // ---------- feed: good news, random but curated ----------
+
+  /** Draw the lights from the pool (seeded weighted random sampling). */
+  drawLights({ keep = true } = {}) {
+    const busy = keep ? this.lights.busyIds() : new Set();
+    const kept = this.lights.items.filter((it) => busy.has(it.id));
+    const picks = sampleFeed(this.pool, this.interests, { n: 16 - kept.length, seed: this.feedSeed, exclude: new Set(kept.map((k) => k.id)) });
+    this.lights.setItems([...kept, ...picks]);
+    this._applyRelevance();
+    this._refreshAt = performance.now() + 75000;
+    this.cards.get('lights')?.redraw();
+    return picks;
+  }
+
+  /** "New lights": a new seed, same quality rules. */
+  reshuffle() {
+    this.feedSeed = (this.feedSeed * 1103515245 + 12345) >>> 0;
+    this.drawLights();
+    this.onboarding.notify('reshuffle');
+  }
+
+  /** Interests changed: live pools are re-fetched (queries depend on them). */
+  async interestsChanged() {
+    this.cards.get('interests')?.redraw();
+    if (this.mode === 'live') {
+      this.setStatus('Looking for lights that match…');
+      const pool = await this.client.pool(this.interests.forServer());
+      if (pool?.items?.length) this.pool = pool.items.map((it) => ({ ...it, live: true }));
+      this.setStatus('');
+    }
+    this.drawLights();
+  }
+
+  likeLight(id, more = true) {
+    const it = this.lights.get(id);
+    if (!it) return;
+    this.interests.likeItem(it, more);
+    this.cards.get(`light:${id}`)?.redraw();
+    this.interestsChanged();
+  }
+
+  openInterests() {
+    this.closeCard('help');
+    this.cards.show('interests', { width: 0.5, height: 0.5, draw: interestsDraw(this), slot: 1 });
+  }
+
+  /** Slowly swap one idle light for a fresh pick (never one you look at). */
+  _slowRefresh(now) {
+    if (!this._refreshAt || now < this._refreshAt || !this.pool.length) return;
+    this._refreshAt = now + 75000;
+    const busy = this.lights.busyIds();
+    const shown = new Set(this.lights.items.map((x) => x.id));
+    const victim = this.lights.items.find((x) => !busy.has(x.id) && !this.lights.sealed.has(x.id) && !x.expanded);
+    if (!victim) return;
+    this.feedSeed = (this.feedSeed + 7919) >>> 0;
+    const [fresh] = sampleFeed(this.pool, this.interests, { n: 1, seed: this.feedSeed, exclude: shown });
+    if (fresh) this.lights.replaceItem(victim.id, fresh);
   }
 
   async _loadSnapshot() {
@@ -948,6 +1014,8 @@ export class App {
       this.keypad.open({ prompt: 'Ask about this', suggestions: ASK_SUGGESTIONS, mic });
     } else if (mode === 'note') {
       this.keypad.open({ prompt: 'Add a note', suggestions: [], mic });
+    } else if (mode === 'interest') {
+      this.keypad.open({ prompt: 'Add a topic you are interested in', suggestions: ['electric vehicles', 'quantum computing', 'public health', 'renewable energy'], mic });
     } else {
       const sugg = [...this.lights.items].sort((a, b) => (b.relevance ?? 0) - (a.relevance ?? 0)).slice(0, 4).map((it) => shortHeadline(it.headline));
       this.keypad.open({ prompt: 'Find a light', suggestions: sugg, mic });
@@ -970,6 +1038,10 @@ export class App {
     if (this.keypadMode === 'context') return this.addContext(text);
     if (this.keypadMode === 'ask') return this.ask(text);
     if (this.keypadMode === 'note') return this.addNote(text);
+    if (this.keypadMode === 'interest') {
+      if (this.interests.addTopic(text, 1.5)) await this.interestsChanged();
+      return null;
+    }
     return this.findLight(text);
   }
 
@@ -1075,6 +1147,7 @@ export class App {
     this.atmosphere.update(delta);
     this.props.update(delta, now);
     this._followWrist();
+    this._slowRefresh(now);
     this.governor.sample(delta);
     if (this._wasResearching !== this.researching) {
       this._wasResearching = this.researching;

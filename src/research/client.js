@@ -54,6 +54,10 @@ export class ResearchClient {
     return this._json('/lights', { body: { context }, timeout: 90000 });
   }
 
+  pool(interests) {
+    return this._json('/pool', { body: { interests }, timeout: 120000 });
+  }
+
   read(id) {
     return this._json('/read', { body: { id }, timeout: 60000 });
   }

@@ -56,9 +56,9 @@ export function helpDraw(app) {
         ['context', 'My context', () => app.openContext(), true],
       ],
       [
+        ['interests', 'Interests', () => app.openInterests(), true],
         ['briefing', 'Briefing', () => app.startBriefing()],
         ['settings', 'Settings', () => app.openSettings()],
-        ['tour', 'Tour', () => app.startOnboarding(true)],
         ['close', 'Close', () => app.closeCard('help')],
       ],
     ];

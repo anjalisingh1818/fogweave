@@ -54,8 +54,11 @@ export function readerDraw(app, id) {
     const mates = app.storyMates(id).length;
     if (mates) small.push({ id: 'story', label: `Story +${mates}`, on: () => app.openTimeline(id) });
     if (it.expanded === true) small.push({ id: 'touch', label: 'Touches me?', on: () => app.touchesMe(id) });
-    const sw = 210;
-    small.forEach((b, i) => ui.button(b.id, b.label, pad + i * (sw + 16), h - 244, sw, 58, b.on, { size: 24 }));
+    small.push({ id: 'more', label: 'More like this', on: () => app.likeLight(id, true) });
+    small.push({ id: 'less', label: 'Less', on: () => app.likeLight(id, false) });
+    const sw = small.length > 4 ? 150 : 200;
+    small.forEach((b, i) => ui.button(b.id, b.label, pad + i * (sw + 12), h - 244, sw, 58, b.on, { size: small.length > 4 ? 20 : 24 }));
+    if (it.outside) ui.text('Outside your usual interests', w - pad, 112, { size: 22, color: '#9fe3ff', align: 'right' });
     const can = app.canExpand(id);
     const note = it.expanded === 'running' ? 'Growing into the web…' : it.expanded ? 'In the web: pinch its node for links and effects.' : can ? 'Expand shows what it connects to and may affect.' : 'Expand needs the live engine (no recorded run for this light).';
     ui.text(note, pad, h - 152, { size: 24, color: UI.dim, maxWidth: w - pad * 2 });

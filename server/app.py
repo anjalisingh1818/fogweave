@@ -45,6 +45,10 @@ class LightsReq(BaseModel):
     context: list[str] = Field(default_factory=list, max_length=12)
 
 
+class PoolReq(BaseModel):
+    interests: dict = Field(default_factory=dict)  # labels only: topics, newsTypes, paperTypes
+
+
 class ReadReq(BaseModel):
     id: str = Field(max_length=40)
 
@@ -87,6 +91,17 @@ def health():
 @app.post("/lights")
 async def lights(req: LightsReq):
     return await engine.lights(context=[c for c in req.context if 0 < len(c) < 60])
+
+
+@app.post("/pool")
+async def pool(req: PoolReq):
+    i = req.interests or {}
+    clean = {
+        "topics": [t for t in i.get("topics", []) if isinstance(t, dict) and isinstance(t.get("label"), str)][:8],
+        "newsTypes": [t for t in i.get("newsTypes", []) if isinstance(t, str)][:10],
+        "paperTypes": [t for t in i.get("paperTypes", []) if isinstance(t, str)][:10],
+    }
+    return await engine.pool(clean)
 
 
 @app.post("/read")

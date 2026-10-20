@@ -274,3 +274,23 @@ def test_stories_bridges_and_suggestions_are_deterministic():
     assert graphalgo.bridges(g)[0][0] in {"ev", "org", "n2", "topic", "n1"}
     sugg = graphalgo.link_suggestions(g, top=3)
     assert all(s["label"] == "speculative" and s["type"] == "relates_to" for s in sugg)
+
+
+def test_persona_chasing_guard():
+    from fogweave.pipeline import touches_context
+
+    ctx = ["Rotterdam", "energy prices", "public transport"]
+    assert touches_context("logistics flows through Rotterdam port", ctx)
+    assert touches_context("regional energy prices", ctx)
+    assert not touches_context("energy market sentiment", ctx)
+    assert not touches_context("Greek maritime safety rules", ctx)
+
+
+def test_feed_tags_use_word_boundaries():
+    from fogweave.feed import tags_for
+    from fogweave.sources.base import RawItem
+
+    paper = RawItem("arxiv", "paper", "Latent space models for smarter robots", "https://arxiv.org/abs/1", "2026-10-19", snippet="We start from a world model.", extra={"categories": ["cs.RO"]})
+    assert "space" not in tags_for(paper) and "cs.RO" in tags_for(paper)
+    news = RawItem("wikipedia", "breaking", "JAXA launches a spacecraft toward Mars", "https://x/1", "2026-10-19", extra={"section": "Science and technology"})
+    assert {"space", "science"} <= set(tags_for(news))

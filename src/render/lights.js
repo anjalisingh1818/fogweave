@@ -133,6 +133,22 @@ export class LightField {
     return this.items.find((x) => x.id === id) || null;
   }
 
+  /** Swap one light for another in the same place in the sky (slow refresh). */
+  replaceItem(oldId, item) {
+    const i = this.items.findIndex((x) => x.id === oldId);
+    if (i < 0) return false;
+    const st = this.state.get(oldId);
+    this.state.delete(oldId);
+    this.items[i] = item;
+    if (st) this.state.set(item.id, { ...st, pullUntil: 0, pull: 0, born: this.time });
+    return true;
+  }
+
+  /** Lights the reader is engaged with: never swapped out. */
+  busyIds() {
+    return new Set([this.hoveredId, this.openId].filter(Boolean));
+  }
+
   /** Related lights (same story) drift closer for a while. */
   pull(ids, seconds = 20) {
     const until = this.time + seconds;

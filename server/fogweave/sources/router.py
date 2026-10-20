@@ -46,6 +46,35 @@ class SourceRouter:
         batches = await asyncio.gather(*jobs)
         return dedupe([it for b in batches for it in b])
 
+    async def pool(self, gdelt_queries: list[tuple[str, str]], paper_cats: list[str]) -> list[RawItem]:
+        """Candidate pool for the curated-random feed: broad news, archive,
+        tech, papers in the chosen fields, plus up to two interest-shaped
+        news searches (GDELT is paced, so at most two)."""
+        jobs = []
+        if "wikipedia" in self.adapters:
+            jobs.append(self._safe("wikipedia", self.adapters["wikipedia"].latest(limit=26)))
+            for d in (35, 400):
+                jobs.append(self._safe(f"wikipedia-archive-{d}", self.adapters["wikipedia"].archive(d, limit=2)))
+        if "hackernews" in self.adapters:
+            jobs.append(self._safe("hackernews", self.adapters["hackernews"].latest(limit=6)))
+        if "arxiv" in self.adapters:
+            jobs.append(self._safe("arxiv", self.adapters["arxiv"].latest(limit=8, categories=paper_cats or None)))
+
+        async def gdelt_typed():
+            out = []
+            for qtype, q in gdelt_queries:
+                items = await self._safe(f"gdelt:{qtype}", self.adapters["gdelt"]._query(q, 8, timespan="2d"))
+                for it in items:
+                    it.extra["type"] = qtype if qtype in ("technology", "science", "business", "climate", "health", "space", "politics", "world", "culture", "sports") else ""
+                    it.extra["interest"] = qtype
+                out += items
+            return out
+
+        if "gdelt" in self.adapters and gdelt_queries:
+            jobs.append(gdelt_typed())
+        batches = await asyncio.gather(*jobs)
+        return dedupe([it for b in batches for it in b])
+
     async def corroborate(self, query: str, limit: int = 6) -> list[RawItem]:
         jobs = []
         if "gdelt" in self.adapters:

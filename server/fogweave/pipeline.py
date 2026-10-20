@@ -43,6 +43,19 @@ def slug(text: str) -> str:
     return re.sub(r"[^\w]+|_", "-", t).strip("-")[:80]
 
 
+_CTX_STOP = {"and", "the", "of", "in", "for", "with", "work", "use", "uses"}
+
+
+def touches_context(text: str, context: list[str]) -> bool:
+    """Does an impact target name one of the reader's context labels?"""
+    words = set(re.findall(r"[a-z0-9]{3,}", text.lower())) - _CTX_STOP
+    for c in context:
+        cw = set(re.findall(r"[a-z0-9]{3,}", c.lower())) - _CTX_STOP
+        if cw and cw <= words:
+            return True
+    return False
+
+
 def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
 
@@ -67,6 +80,48 @@ class Engine:
         self.reads = DiskCache("reads")  # extraction results by id
 
     # ------------------------------------------------------------------ lights
+
+    async def pool(self, interests: dict | None = None, summarize: int = 24) -> dict:
+        """Candidate pool for the curated-random feed (client samples from it)."""
+        from .feed import TYPE_QUERIES, interest_queries, quality, tags_for
+
+        interests = interests or {}
+        queries, cats = interest_queries(interests)
+        typed = []
+        for q in queries:
+            qtype = next((t for t, tq in TYPE_QUERIES.items() if tq == q), "topic")
+            typed.append((qtype, q))
+        raw = await self.router.pool(typed, cats)
+        notes = []
+        vecs = embed([f"{r.title}. {r.snippet[:200]}" for r in raw]) if raw else None
+        if vecs is not None and len(raw):
+            drop = near_duplicates(vecs)
+            keep = [i for i in range(len(raw)) if i not in drop]
+            raw, vecs = [raw[i] for i in keep], vecs[keep]
+        q = quality(raw, vecs) if raw else []
+        order = sorted(range(len(raw)), key=lambda i: -q[i]["quality"])
+        raw, q = [raw[i] for i in order], [q[i] for i in order]
+        vecs = vecs[order] if vecs is not None and len(raw) else vecs
+        stories = story_clusters([f"{r.title}. {r.snippet[:200]}" for r in raw]) if raw else []
+        summaries: dict[str, str] = {}
+        try:
+            top = raw[:summarize]
+            for i in range(0, len(top), 12):
+                out = await Summarizer(self.llm).run([{"id": r.id, "title": r.title, "snippet": r.snippet} for r in top[i : i + 12]])
+                summaries.update({s.id: s.summary for s in out.items})
+        except QuotaExhausted:
+            notes.append("Free model quota is spent for now: summaries show the source's own short text.")
+        items = []
+        for i, r in enumerate(raw):
+            self.items.set(r.id, r.to_dict())
+            items.append({
+                "id": r.id, "kind": r.kind, "headline": r.title, "source": r.outlet, "via": r.source, "url": r.url, "date": r.date,
+                "summary": summaries.get(r.id) or r.snippet[:220], "summaryBy": "model" if r.id in summaries else "source",
+                "claims": [], "tags": tags_for(r), "quality": q[i]["quality"], "qualityBreakdown": q[i]["breakdown"],
+                "story": int(stories[i]) if stories else i, "licence": r.licence, "citations": r.citations,
+                "extra": {k: v for k, v in r.extra.items() if k in ("discussion", "portal", "authors", "section", "categories", "interest")},
+            })
+        return {"generatedAt": now_iso(), "sources": self.router.status, "notes": notes, "interestsUsed": {"queries": [t for t, _ in typed], "paperTypes": cats}, "items": items}
 
     async def lights(self, context: list[str] | None = None) -> dict:
         raw = await self.router.lights()
@@ -485,6 +540,9 @@ class Engine:
             basis = [fact_ref[b] for b in link.basis if b in fact_ref]
             if label == "inferred" and not basis:
                 label = "speculative"  # claimed grounding that does not exist: demote
+            if label == "speculative" and touches_context(link.target, context):
+                dropped += 1  # a weak guess "about you" is worse than none (eval top failure)
+                continue
             tk = key(link.target)
             if tk in ctx_keys:
                 tid = f"ctx:{slug(ctx_keys[tk])}"

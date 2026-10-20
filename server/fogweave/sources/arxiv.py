@@ -36,7 +36,10 @@ def parse_feed(xml_text: str) -> list[RawItem]:
                 snippet=summary[:1200],
                 outlet="arxiv.org",
                 licence="arXiv metadata, CC0",
-                extra={"authors": [a.findtext("a:name", default="", namespaces=NS) for a in e.findall("a:author", NS)][:4]},
+                extra={
+                    "authors": [a.findtext("a:name", default="", namespaces=NS) for a in e.findall("a:author", NS)][:4],
+                    "categories": [c.get("term") for c in e.findall("a:category", NS) if c.get("term")][:4],
+                },
             )
         )
     return out
@@ -48,10 +51,12 @@ class ArxivAdapter(SourceAdapter):
     licence = "arXiv metadata, CC0"
     attribution = "Paper metadata from arXiv (not endorsed by arXiv)"
 
-    async def latest(self, limit: int = 4, categories: str = "cat:cs.AI OR cat:physics.soc-ph OR cat:econ.GN OR cat:q-bio.PE") -> list[RawItem]:
+    async def latest(self, limit: int = 4, categories: list[str] | None = None) -> list[RawItem]:
+        cats = categories or ["cs.AI", "physics.soc-ph", "econ.GN", "q-bio.PE"]
+        query = " OR ".join(f"cat:{c}" for c in cats)
         text = await self.http.get(
             API,
-            params={"search_query": categories, "sortBy": "submittedDate", "sortOrder": "descending", "max_results": str(limit)},
+            params={"search_query": query, "sortBy": "submittedDate", "sortOrder": "descending", "max_results": str(limit)},
             ttl=3600,
         )
         return parse_feed(text)

@@ -171,7 +171,9 @@ class ImpactAnalyst:
     async def run(self, event: str, facts: list[dict], context: list[str], max_hop: int = 2) -> Impact:
         f = "\n".join(f"{x['id']}: {x['text']}" for x in facts)
         ctx = (
-            "\nThe reader's coarse context (consider effects on these only if the facts justify it): " + "; ".join(context[:8])
+            "\nThe reader's coarse context: " + "; ".join(context[:8])
+            + ". Link to it ONLY when a listed fact directly involves it; never build chains just to reach it. "
+            "If nothing in the facts touches it, leave it out."
             if context
             else ""
         )
@@ -180,7 +182,8 @@ class ImpactAnalyst:
             system=(
                 "You map possible effects of a news event as short chains (event -> affected thing -> second-order effect). "
                 f"Use at most {max_hop} hops and at most 8 links. "
-                "Label a link 'inferred' only when it follows directly from the listed facts, and list those fact ids in basis. "
+                "Label a link 'inferred' only when it follows directly from the listed facts, and list those fact ids in basis; "
+                "generic effects such as attention, interest, perception, morale or media coverage are 'speculative'. "
                 "Label it 'speculative' when it is plausible but not grounded in the facts. "
                 "These are possible effects, not predictions or advice. Do not invent facts. " + UNTRUSTED_RULES
             ),

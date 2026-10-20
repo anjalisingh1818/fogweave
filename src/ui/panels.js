@@ -84,6 +84,7 @@ export function lightsPanelDraw(app) {
       ui.text(it.headline, pad + 190, y + 40, { size: 24, maxWidth: w - pad * 2 - 210 });
       y += 70;
     }
+    ui.button('reshuffle', 'New lights', pad, h - 104, 240, 76, () => app.reshuffle(), { primary: true, size: 28 });
     ui.button('close', 'Close', w - pad - 200, h - 104, 200, 76, () => app.closeCard('lights'), { icon: '✕', size: 28 });
   };
 }
