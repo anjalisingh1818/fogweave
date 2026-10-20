@@ -1,144 +1,47 @@
 /**
- * Generates SYNTHETIC test fixtures (structure only, generic labels).
- * They exist so the client can be built and tested before the research
- * engine produces real webs; Phase 2 replaces public/demo/* with real
- * pipeline runs. Each file is marked provenance.kind = "fixture" and the
- * UI badges it as a test fixture.
+ * Generates a SYNTHETIC V2 stress web for performance QA only
+ * (qa/fixtures/stress-150.json). It is never shipped or shown as research:
+ * the app's offline content is the recorded real snapshot in
+ * public/demo/snapshot/ (server/scripts/snapshot.py).
  *
  *   node scripts/make-fixtures.mjs
  */
 import { writeFileSync, mkdirSync } from 'node:fs';
 
-const CLASSES = ['government', 'education', 'organisation', 'news', 'blog', 'unknown'];
-const VERDICT_CYCLE = ['supported', 'supported', 'mixed', 'unverified', 'contradicted', 'supported', 'unverified'];
+const VERDICTS = ['supported', 'supported', 'mixed', 'unverified', 'contradicted', 'unverified'];
+const ENT = ['Organisation', 'Place', 'Topic', 'Technology'];
+const Q = (q) => [{ quote: q, url: 'https://fixture.example/x', source: 'fixture.example' }];
 
 function rng(seed) {
   let s = seed;
   return () => ((s = (s * 16807) % 2147483647) / 2147483647);
 }
 
-function fixture(letter, { claims, seed, subtopics = 3 }) {
-  const r = rng(seed);
-  const topicLabel = `Fixture ${letter}`;
-  const nodes = [{ id: `${letter}:topic`, type: 'Topic', label: topicLabel, summary: 'Synthetic test fixture. Not research output.' }];
-  const edges = [];
-  for (let i = 1; i <= subtopics; i++) {
-    nodes.push({ id: `${letter}:sub${i}`, type: 'Entity', label: `${topicLabel} · area ${i}` });
-    edges.push({ type: 'part_of', from: `${letter}:sub${i}`, to: `${letter}:topic` });
-  }
-  let srcCount = 0;
-  for (let c = 1; c <= claims; c++) {
-    const id = `${letter}:c${c}`;
-    const verdict = VERDICT_CYCLE[(c + seed) % VERDICT_CYCLE.length];
-    const nSources = verdict === 'unverified' ? 1 : 2 + Math.floor(r() * 2);
-    const classes = {};
-    const sourceIds = [];
-    for (let k = 0; k < nSources; k++) {
-      const sid = `${letter}:s${++srcCount}`;
-      const cls = CLASSES[Math.floor(r() * CLASSES.length)];
-      classes[cls] = (classes[cls] || 0) + 1;
-      nodes.push({
-        id: sid,
-        type: 'Source',
-        label: `Fixture source ${letter}${srcCount}`,
-        domain: `fixture-${letter.toLowerCase()}${srcCount}.example`,
-        url: `https://fixture-${letter.toLowerCase()}${srcCount}.example/`,
-        sourceClass: cls,
-        date: `2026-0${1 + Math.floor(r() * 9)}-1${Math.floor(r() * 9)}`,
-      });
-      sourceIds.push(sid);
-    }
-    const contradicts = verdict === 'contradicted' ? nSources - 1 : verdict === 'mixed' ? 1 : 0;
-    const supports = nSources - contradicts;
-    nodes.push({
-      id,
-      type: 'Claim',
-      label: `${topicLabel} claim ${c}`,
-      quote: 'Synthetic fixture quote.',
-      verdict,
-      evidence: {
-        independentDomains: nSources,
-        sourceClasses: classes,
-        supports,
-        contradicts,
-        unclear: 0,
-        newest: '2026-09-30',
-      },
-    });
-    edges.push({ type: 'part_of', from: id, to: `${letter}:sub${1 + (c % subtopics)}` });
-    edges.push({ type: 'cites', from: id, to: sourceIds[0] });
-    sourceIds.slice(1).forEach((sid, k) => {
-      edges.push({ type: k < contradicts ? 'contradicts' : 'supports', from: sid, to: id });
-    });
-    if (c > 2 && r() < 0.35) edges.push({ type: 'relates_to', from: id, to: `${letter}:c${1 + Math.floor(r() * (c - 1))}` });
-  }
-  return {
-    schema: 'fogweave.graph/1',
-    topic: topicLabel,
-    topicKey: `fixture-${letter.toLowerCase()}`,
-    generatedAt: '2026-10-20T00:00:00Z',
-    provenance: { kind: 'fixture', note: 'Synthetic test fixture; replaced by real pipeline runs in Phase 2.' },
-    nodes,
-    edges,
-    insights: [],
-  };
+const r = rng(11);
+const nodes = [];
+const edges = [];
+for (let i = 1; i <= 12; i++) {
+  nodes.push({ id: `n${i}`, type: 'NewsItem', label: `Fixture news ${i}`, outlet: 'fixture.example', date: '2026-10-19' });
+  nodes.push({ id: `ev${i}`, type: 'Event', label: `Fixture event ${i}` });
+  edges.push({ type: 'about', from: `n${i}`, to: `ev${i}`, label: 'reported', evidence: Q('fixture words here') });
 }
-
-mkdirSync('public/demo', { recursive: true });
+for (let i = 1; i <= 40; i++) {
+  const t = ENT[i % ENT.length];
+  nodes.push({ id: `e${i}`, type: t, label: `Fixture ${t.toLowerCase()} ${i}` });
+  const ev = `ev${1 + Math.floor(r() * 12)}`;
+  edges.push({ type: 'affects', from: ev, to: `e${i}`, label: r() < 0.7 ? 'inferred' : 'speculative', reasoning: 'synthetic', basis: [ev] });
+  edges.push({ type: 'mentions', from: `n${1 + Math.floor(r() * 12)}`, to: `e${i}`, label: 'reported', evidence: Q('fixture words here') });
+}
+for (let i = 1; i <= 40; i++) {
+  const n = `n${1 + (i % 12)}`;
+  nodes.push({ id: `c${i}`, type: 'Claim', label: `Fixture claim ${i}`, quote: 'fixture words here', verdict: VERDICTS[i % VERDICTS.length], evidence: { independentDomains: 1 + (i % 3), supports: 1 + (i % 3), contradicts: i % 4 === 0 ? 1 : 0, unclear: 0 } });
+  edges.push({ type: 'reports', from: n, to: `c${i}`, label: 'reported', evidence: Q('fixture words here') });
+}
+for (let i = 1; i <= 56; i++) {
+  nodes.push({ id: `s${i}`, type: 'Source', label: `fixture-src-${i}.example`, domain: `fixture-src-${i}.example`, sourceClass: 'news' });
+  edges.push({ type: i % 5 ? 'supports' : 'contradicts', from: `s${i}`, to: `c${1 + (i % 40)}`, label: 'reported', evidence: Q('fixture words here') });
+}
 mkdirSync('qa/fixtures', { recursive: true });
-const demos = [
-  fixture('A', { claims: 12, seed: 3 }),
-  fixture('B', { claims: 9, seed: 5 }),
-  fixture('C', { claims: 14, seed: 9, subtopics: 4 }),
-];
-for (const d of demos) writeFileSync(`public/demo/${d.topicKey}.json`, JSON.stringify(d, null, 1));
-writeFileSync(
-  'public/demo/index.json',
-  JSON.stringify(
-    demos.map((d) => ({ topicKey: d.topicKey, topic: d.topic, file: `${d.topicKey}.json`, kind: d.provenance.kind, nodes: d.nodes.length })),
-    null,
-    1,
-  ),
-);
-// news lights: synthetic items, dated relative to the generation date
-const GEN = Date.parse('2026-10-20T08:00:00Z');
-const LIGHT_PLAN = [
-  ['breaking', 2], ['breaking', 5], ['paper', 20], ['breaking', 30], ['paper', 52], ['breaking', 70],
-  ['paper', 120], ['breaking', 200], ['archive', 24 * 40], ['archive', 24 * 210], ['archive', 24 * 800], ['paper', 24 * 9],
-];
-const lights = LIGHT_PLAN.map(([kind, hoursAgo], i) => {
-  const n = i + 1;
-  return {
-    id: `fixture-light-${n}`,
-    kind,
-    headline: `Fixture ${kind === 'paper' ? 'paper' : 'news item'} ${n}: synthetic headline for testing`,
-    source: `fixture-source-${(n % 5) + 1}.example`,
-    url: `https://fixture-source-${(n % 5) + 1}.example/item-${n}`,
-    date: new Date(GEN - hoursAgo * 3600000).toISOString(),
-    summary: 'Synthetic summary used to test the reader card layout. Not a real news item.',
-    claims: [
-      { text: `Fixture claim ${n}.1 stated by the synthetic source.`, quote: 'Synthetic fixture quote.' },
-      { text: `Fixture claim ${n}.2 stated by the synthetic source.`, quote: 'Another synthetic quote.' },
-    ],
-    relevance: Math.round((0.15 + 0.85 * ((n * 37) % 100) / 100) * 100) / 100,
-  };
-});
-writeFileSync(
-  'public/demo/lights.json',
-  JSON.stringify(
-    {
-      schema: 'fogweave.lights/1',
-      generatedAt: new Date(GEN).toISOString(),
-      provenance: { kind: 'fixture', note: 'Synthetic test fixture; replaced by a dated real snapshot in Phase 2.' },
-      items: lights,
-    },
-    null,
-    1,
-  ),
-);
-console.log(`lights: ${lights.length} items`);
-
-const stress = fixture('S', { claims: 50, seed: 11, subtopics: 6 });
-writeFileSync('qa/fixtures/stress-150.json', JSON.stringify(stress));
-console.log(demos.map((d) => `${d.topicKey}: ${d.nodes.length} nodes, ${d.edges.length} edges`).join('\n'));
-console.log(`stress: ${stress.nodes.length} nodes, ${stress.edges.length} edges`);
+const doc = { schema: 'fogweave.graph/2', topic: 'Stress fixture', topicKey: 'stress', provenance: { kind: 'fixture' }, nodes, edges, insights: [] };
+writeFileSync('qa/fixtures/stress-150.json', JSON.stringify(doc));
+console.log(`stress: ${nodes.length} nodes, ${edges.length} edges (synthetic, QA only)`);

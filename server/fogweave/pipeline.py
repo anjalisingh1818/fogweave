@@ -16,6 +16,7 @@ from __future__ import annotations
 import asyncio
 import re
 import time
+import unicodedata
 from datetime import datetime, timezone
 
 from . import ontology
@@ -33,6 +34,12 @@ from .sources.router import SourceRouter
 
 EXTRACTOR_VERSION = "fogweave-extractor/2.0"
 TYPE_PREFIX = {"Event": "ev", "Organisation": "org", "Place": "place", "Topic": "topic", "Technology": "tech", "PublicFigure": "person"}
+
+
+def slug(text: str) -> str:
+    """Same as the client's topicKey(): context ids must match on both sides."""
+    t = unicodedata.normalize("NFKD", str(text).lower())
+    return re.sub(r"[^\w]+|_", "-", t).strip("-")[:80]
 
 
 def now_iso() -> str:
@@ -118,25 +125,30 @@ class Engine:
 
     # -------------------------------------------------------------------- read
 
-    async def _source_text(self, item: RawItem) -> tuple[str, str]:
-        """(text, how) for extraction. Text is used transiently, never stored."""
+    async def _source_text(self, item: RawItem) -> tuple[str, str, dict]:
+        """(text, how, where) for extraction. `where` is the page the text
+        (and therefore every quote) really came from. Text is used
+        transiently and never stored."""
         if item.source == "arxiv":
-            return f"{item.title}. {item.snippet}", "abstract"
+            return f"{item.title}. {item.snippet}", "abstract", {"url": item.url, "source": item.outlet}
         text = await self.http.fetch_article(item.url)
         if text and len(text) > 400:
-            return text, "article"
+            return text, "article", {"url": item.url, "source": item.outlet}
         for alt in item.citations[1:3]:
             text = await self.http.fetch_article(alt)
             if text and len(text) > 400:
-                return text, "article"
+                return text, "article", {"url": alt, "source": domain_of(alt)}
         base = f"{item.title}. {item.snippet}".strip()
-        return base, "headline-only"
+        if item.source == "wikipedia":
+            # the summary is Wikipedia's (CC BY-SA), not the outlet's words
+            return base, "headline-only", {"url": item.extra.get("portal") or "https://en.wikipedia.org/wiki/Portal:Current_events", "source": "en.wikipedia.org"}
+        return base, "headline-only", {"url": item.url, "source": item.outlet}
 
     async def _extract(self, item: RawItem) -> dict:
         cached = self.reads.get(item.id)
         if cached:
             return cached
-        text, how = await self._source_text(item)
+        text, how, where = await self._source_text(item)
         x = await Extractor(self.llm).run(item.title, text, MAX_ARTICLE_CHARS)
         claims, relations = [], []
         for c in x.claims[:5]:
@@ -159,6 +171,7 @@ class Engine:
             "claims": claims,
             "relations": relations,
             "textHow": how,
+            "textSource": where,
             "dropped": {"claims": len(x.claims) - len(claims), "relations": len(x.relations) - len(relations), "entities": len(x.entities) - len(entities)},
             "retrievedAt": now_iso(),
         }
@@ -247,7 +260,9 @@ class Engine:
         retrieved = x["retrievedAt"]
         mark("extracted")
 
-        def prov(quote: str, url: str = item.url, source: str = item.outlet, date: str = item.date):
+        where = x.get("textSource") or {"url": item.url, "source": item.outlet}
+
+        def prov(quote: str, url: str = where["url"], source: str = where["source"], date: str = item.date):
             return {"source": source, "url": url, "quote": quote, "date": date, "retrievedAt": retrieved, "extractor": EXTRACTOR_VERSION}
 
         # entities (linked conservatively, merged by Wikidata id / canonical name)
@@ -274,7 +289,7 @@ class Engine:
         if ev := node({"id": event_id, "type": "Event", "label": ev_name, "when": x["event"].get("when")}):
             yield ev
         ent_id[key(ev_name)] = event_id
-        if ev := edge({"type": "about", "from": item.id, "to": event_id, "label": "reported", "evidence": [prov(item.title[:200])]}):
+        if ev := edge({"type": "about", "from": item.id, "to": event_id, "label": "reported", "evidence": [prov(" ".join(item.title.split()[:25]), url=item.url if item.source != "wikipedia" else where["url"], source=item.outlet if item.source != "wikipedia" else where["source"])]}):
             yield ev
 
         # claims
@@ -433,11 +448,31 @@ class Engine:
         fact_ref = {f["id"]: f["ref"] for f in facts}
         ctx_keys = {key(c): c for c in context}
         known = dict(ent_id)
+        known[key(ev_name)] = event_id
+
+        def resolve(name: str, hop: int):
+            k = key(name)
+            if k in known:
+                return known[k]
+            words = set(re.findall(r"\w{3,}", k))
+            best, score = None, 0.0
+            for kk, nid in known.items():
+                kw = set(re.findall(r"\w{3,}", kk))
+                if words and kw:
+                    s_ = len(words & kw) / len(words | kw)
+                    if s_ > score:
+                        best, score = nid, s_
+            if score >= 0.5:
+                return best
+            return event_id if hop == 1 else None  # a first hop always starts at the event
+
+        dropped = 0
         for link in out.links[:8]:
             if link.hop > (3 if deep else 2):
                 continue
-            s = known.get(key(link.source)) or (event_id if key(link.source) == key(ev_name) else None)
+            s = resolve(link.source, link.hop)
             if not s:
+                dropped += 1
                 continue
             label = link.label
             basis = [fact_ref[b] for b in link.basis if b in fact_ref]
@@ -445,7 +480,7 @@ class Engine:
                 label = "speculative"  # claimed grounding that does not exist: demote
             tk = key(link.target)
             if tk in ctx_keys:
-                tid = f"ctx:{tk}"
+                tid = f"ctx:{slug(ctx_keys[tk])}"
                 n = {"id": tid, "type": "ContextNode", "label": ctx_keys[tk], "private": True}
             else:
                 ttype = link.target_type

@@ -109,6 +109,11 @@ class LLMChain:
         self.models = models or LLM_MODELS
         self.quotas = {m: ModelQuota(m, **DEFAULT_LIMITS) for m in self.models}
         self.cache = DiskCache("llm")
+        self._usage = DiskCache("quota")  # daily counts survive restarts
+        for m, q in self.quotas.items():
+            saved = self._usage.get(f"day:{m}") or {}
+            if saved.get("day") == time.strftime("%Y-%m-%d", time.gmtime()):
+                q.day, q.day_requests, q.day_tokens = saved["day"], saved["requests"], saved["tokens"]
         self.max_wait = max_wait
         self._client = client
         self.stats = {"calls": 0, "cached": 0, "tokens": 0, "retries": 0, "by_model": {}}
@@ -149,6 +154,7 @@ class LLMChain:
                 try:
                     data, used = await self._call(model, system, user, schema, max_tokens)
                     q.record(used)
+                    self._usage.set(f"day:{model}", {"day": q.day, "requests": q.day_requests, "tokens": q.day_tokens})
                     self.stats["calls"] += 1
                     self.stats["tokens"] += used
                     self.stats["by_model"][model] = self.stats["by_model"].get(model, 0) + 1

@@ -1,0 +1,583 @@
+{
+ "schema": "fogweave.snapshot/1",
+ "generatedAt": "2026-10-20T12:15:46Z",
+ "provenance": {
+  "kind": "pipeline",
+  "note": "Recorded output of the live FogWeave engine. Titles, our own short summaries, short verbatim quotes and links only.",
+  "ontology": "2.0.0",
+  "embeddings": "bge-small-en-v1.5",
+  "llm": {
+   "calls": 5,
+   "cached": 15,
+   "tokens": 7003,
+   "retries": 0,
+   "by_model": {
+    "openai/gpt-oss-120b": 3,
+    "openai/gpt-oss-20b": 2
+   }
+  },
+  "sources": {
+   "wikipedia": {
+    "ok": true,
+    "count": 8,
+    "ms": 0
+   },
+   "arxiv": {
+    "ok": true,
+    "count": 4,
+    "ms": 0
+   },
+   "wikipedia-archive-35": {
+    "ok": true,
+    "count": 2,
+    "ms": 0
+   },
+   "wikipedia-archive-400": {
+    "ok": true,
+    "count": 2,
+    "ms": 0
+   },
+   "hackernews": {
+    "ok": true,
+    "count": 4,
+    "ms": 14
+   },
+   "gdelt": {
+    "ok": true,
+    "count": 6,
+    "ms": 15202
+   },
+   "wikipedia-search": {
+    "ok": true,
+    "count": 2,
+    "ms": 14
+   },
+   "gdelt-search": {
+    "ok": false,
+    "error": "api.gdeltproject.org: "
+   }
+  },
+  "attribution": [
+   "Wikipedia text is CC BY-SA 4.0 (Wikipedia contributors)",
+   "News metadata: The GDELT Project, https://www.gdeltproject.org/",
+   "Via Hacker News (titles and links)",
+   "Paper metadata from arXiv (CC0); not endorsed by arXiv"
+  ]
+ },
+ "persona": {
+  "fictional": true,
+  "labels": [
+   "Rotterdam",
+   "logistics",
+   "cloud computing",
+   "electric vehicles",
+   "public transport",
+   "energy prices"
+  ]
+ },
+ "lights": [
+  {
+   "id": "n:83d9d5c1e160",
+   "kind": "breaking",
+   "headline": "South Korea withdraws additional embassy staff from Ukraine following a dispute over two captured North…",
+   "source": "rfi.fr",
+   "via": "wikipedia",
+   "url": "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1",
+   "date": "2026-10-20T12:13:30.300791Z",
+   "summary": "South Korea withdrew additional embassy staff from Ukraine after a dispute involving two captured North Korean soldiers who had been transferred to South Korea.",
+   "summaryBy": "model",
+   "claims": [
+    {
+     "text": "South Korea will withdraw some staff from its embassy in Ukraine due to a diplomatic row over North Korean POWs.",
+     "quote": "South Korea's foreign ministry said Tuesday it will withdraw some staff from its embassy in Ukraine, as a diplomatic row deepens over the transfer of"
+    },
+    {
+     "text": "Ukrainian President Volodymyr Zelensky disclosed the transfer of the North Korean POWs, angering South Korea.",
+     "quote": "Ukrainian President Volodymyr Zelensky disclosed the prisoner transfer last month, angering Seoul, which said the operation should have remained confidential."
+    },
+    {
+     "text": "South Korea's ambassador to Ukraine returned home after Seoul demanded an apology from Zelensky.",
+     "quote": "South Korea's ambassador to Ukraine returned home after Seoul's demand for an official apology over what it called an \"unilateral disclosure\" by Zelensky went unanswered."
+    }
+   ],
+   "relevance": 0.392,
+   "story": 0,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.rfi.fr/en/international-news/20261020-south-korea-to-withdraw-some-ukraine-embassy-staff-after-pow-row-1"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_20#0"
+   },
+   "textHow": "article",
+   "live": false
+  },
+  {
+   "id": "n:67e039915881",
+   "kind": "breaking",
+   "headline": "JAXA launches the Martian Moons eXploration spacecraft from the Tanegashima Space Center toward Phobos aboard…",
+   "source": "reuters.com",
+   "via": "wikipedia",
+   "url": "https://www.reuters.com/science/japan-launches-mission-return-samples-mars-moon-2026-10-19/",
+   "date": "2026-10-20T12:13:30.300791Z",
+   "summary": "Japan's space agency JAXA launched the Martian Moons eXploration spacecraft from the Tanegashima Space Center on an H3 rocket, targeting Phobos to collect at least 10 grams of material and return it to Earth by 2031.",
+   "summaryBy": "model",
+   "claims": [
+    {
+     "text": "The spacecraft will collect at least 10 grams of surface material from Phobos.",
+     "quote": "aiming to collect at least 10 grams of surface material from the Martian moon"
+    },
+    {
+     "text": "The collected samples are planned to be returned to Earth in 2031.",
+     "quote": "return the samples to Earth in 2031"
+    },
+    {
+     "text": "JAXA launched the spacecraft from Tanegashima Space Center.",
+     "quote": "JAXA launches the Martian Moons eXploration spacecraft from the Tanegashima Space Center"
+    }
+   ],
+   "relevance": 0.452,
+   "story": 1,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.reuters.com/science/japan-launches-mission-return-samples-mars-moon-2026-10-19/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_20#1"
+   },
+   "textHow": "headline-only",
+   "claimsNote": "Only the headline was available (robots.txt, paywall or fetch failure).",
+   "live": false
+  },
+  {
+   "id": "n:945f742db3b8",
+   "kind": "breaking",
+   "headline": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…",
+   "source": "reuters.com",
+   "via": "wikipedia",
+   "url": "https://www.reuters.com/world/least-18-killed-houthi-attack-yemeni-government-military-camp-shabwa-sources-say-2026-10-19/",
+   "date": "2026-10-19T12:13:30.300791Z",
+   "summary": "A missile attack by the Houthis at a training center in Yemen's Shabwah Governorate killed 58 soldiers, injured over 200, and left 14 people missing.",
+   "summaryBy": "model",
+   "claims": [
+    {
+     "text": "58 soldiers were killed in the missile attack.",
+     "quote": "A missile attack by the Houthis kills 58 soldiers"
+    },
+    {
+     "text": "Over 200 soldiers were injured in the missile attack.",
+     "quote": "injure over 200 at a training center"
+    },
+    {
+     "text": "14 soldiers are missing after the attack.",
+     "quote": "There are 14 missing."
+    }
+   ],
+   "relevance": 0.439,
+   "story": 2,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.reuters.com/world/least-18-killed-houthi-attack-yemeni-government-military-camp-shabwa-sources-say-2026-10-19/"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#0"
+   },
+   "textHow": "headline-only",
+   "claimsNote": "Only the headline was available (robots.txt, paywall or fetch failure).",
+   "live": false
+  },
+  {
+   "id": "n:75c973928996",
+   "kind": "breaking",
+   "headline": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan",
+   "source": "apnews.com",
+   "via": "wikipedia",
+   "url": "https://apnews.com/article/sudan-drone-rapid-support-forces-khartoum-97536d115acd1afb479d2c7ff6df580d",
+   "date": "2026-10-19T12:13:30.300791Z",
+   "summary": "Three children were killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan.",
+   "summaryBy": "model",
+   "claims": [
+    {
+     "text": "Three children were killed in the strike.",
+     "quote": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan."
+    },
+    {
+     "text": "The strike was carried out by the Rapid Support Forces.",
+     "quote": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan."
+    },
+    {
+     "text": "The strike took place in Khartoum, Sudan.",
+     "quote": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan."
+    }
+   ],
+   "relevance": 0.432,
+   "story": 3,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://apnews.com/article/sudan-drone-rapid-support-forces-khartoum-97536d115acd1afb479d2c7ff6df580d"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#1"
+   },
+   "textHow": "headline-only",
+   "claimsNote": "Only the headline was available (robots.txt, paywall or fetch failure).",
+   "live": false
+  },
+  {
+   "id": "n:84bb02f4d37d",
+   "kind": "breaking",
+   "headline": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…",
+   "source": "apnews.com",
+   "via": "wikipedia",
+   "url": "https://apnews.com/article/greece-migrants-die-speedboats-capsize-8c9f49e307e32d73bd7dd039d7c79169",
+   "date": "2026-10-19T12:13:30.300791Z",
+   "summary": "Twelve migrants, including an infant, died when two speedboats capsized off the Greek islands of Lesbos and Samos.",
+   "summaryBy": "model",
+   "claims": [
+    {
+     "text": "Twelve migrants, including an infant, were killed.",
+     "quote": "Twelve migrants, including an infant, are killed"
+    },
+    {
+     "text": "Two separate speedboats capsized.",
+     "quote": "two separate speedboats capsize"
+    },
+    {
+     "text": "The capsizing occurred off the coast of Lesbos and Samos islands in Greece.",
+     "quote": "off the coast of the Lesbos and Samos islands in Greece"
+    }
+   ],
+   "relevance": 0.498,
+   "story": 4,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://apnews.com/article/greece-migrants-die-speedboats-capsize-8c9f49e307e32d73bd7dd039d7c79169"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2"
+   },
+   "textHow": "headline-only",
+   "claimsNote": "Only the headline was available (robots.txt, paywall or fetch failure).",
+   "live": false
+  },
+  {
+   "id": "n:0f5a4c632e8d",
+   "kind": "breaking",
+   "headline": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+   "source": "apnews.com",
+   "via": "wikipedia",
+   "url": "https://apnews.com/article/colombia-mine-accident-gold-illegal-mining-bffbd24132af34a0cb14a414579d1e9b",
+   "date": "2026-10-19T12:13:30.300791Z",
+   "summary": "Fourteen miners were killed and seven injured when an open-pit gold mine collapsed in Colombia's Nariño Department.",
+   "summaryBy": "model",
+   "claims": [
+    {
+     "text": "Fourteen miners were killed in the collapse.",
+     "quote": "Fourteen miners are killed"
+    },
+    {
+     "text": "Seven miners were injured in the collapse.",
+     "quote": "seven more injured"
+    },
+    {
+     "text": "The incident occurred at an open pit gold mine.",
+     "quote": "collapse of an open pit gold mine"
+    }
+   ],
+   "relevance": 0.478,
+   "story": 5,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://apnews.com/article/colombia-mine-accident-gold-illegal-mining-bffbd24132af34a0cb14a414579d1e9b"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#3"
+   },
+   "textHow": "headline-only",
+   "claimsNote": "Only the headline was available (robots.txt, paywall or fetch failure).",
+   "live": false
+  },
+  {
+   "id": "n:04ba8f115dad",
+   "kind": "breaking",
+   "headline": "Andorra and San Marino each sign an association agreement with the European Union",
+   "source": "brusselstimes.com",
+   "via": "wikipedia",
+   "url": "https://www.brusselstimes.com/eu-affairs/2368520/eu-agreement-brings-andorra-san-marino-into-internal-market?utm_term=Autofeed&amp;utm_medium=Social&amp;utm_source=Twitter",
+   "date": "2026-10-19T12:13:30.300791Z",
+   "summary": "Andorra and San Marino each signed an association agreement with the European Union.",
+   "summaryBy": "model",
+   "claims": [],
+   "relevance": 0.505,
+   "story": 6,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.brusselstimes.com/eu-affairs/2368520/eu-agreement-brings-andorra-san-marino-into-internal-market?utm_term=Autofeed&amp;utm_medium=Social&amp;utm_source=Twitter"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#4"
+   },
+   "live": false
+  },
+  {
+   "id": "n:00dfe2b0206f",
+   "kind": "breaking",
+   "headline": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+   "source": "france24.com",
+   "via": "wikipedia",
+   "url": "https://www.france24.com/en/live-news/20261019-un-agency-slashes-gaza-food-aid-over-funding-warns-needs-persist",
+   "date": "2026-10-19T12:13:30.300791Z",
+   "summary": "The World Food Programme reduced monthly food aid in the Gaza Strip from 1.6 million to 1.1 million people, affecting about 500,000 recipients due to funding shortages.",
+   "summaryBy": "model",
+   "claims": [],
+   "relevance": 0.47,
+   "story": 7,
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+   "citations": [
+    "https://www.france24.com/en/live-news/20261019-un-agency-slashes-gaza-food-aid-over-funding-warns-needs-persist"
+   ],
+   "extra": {
+    "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#5"
+   },
+   "live": false
+  },
+  {
+   "id": "n:8d966e23b4f4",
+   "kind": "breaking",
+   "headline": "Science and diplomacy : two Swiss strengths help anticipate tomorrow world",
+   "source": "swissinfo.ch",
+   "via": "gdelt",
+   "url": "https://www.swissinfo.ch/eng/archive-science/science-and-diplomacy-two-swiss-strengths-help-anticipate-tomorrows-world/73963097",
+   "date": "2026-10-20T09:15:00Z",
+   "summary": "Science and diplomacy: two Swiss strengths help anticipate tomorrow world.",
+   "summaryBy": "model",
+   "claims": [],
+   "relevance": 0.611,
+   "story": 8,
+   "licence": "GDELT Project terms (free use with citation)",
+   "citations": [],
+   "extra": {},
+   "live": false
+  },
+  {
+   "id": "n:7c531405de72",
+   "kind": "breaking",
+   "headline": "UP - AGREES : A new roadmap for agricultural prosperity in eastern UP and Bundelkhand",
+   "source": "timesofindia.indiatimes.com",
+   "via": "gdelt",
+   "url": "https://timesofindia.indiatimes.com/city/lucknow/up-agrees-a-new-roadmap-for-agricultural-prosperity-in-eastern-up-and-bundelkhand/articleshow/135066096.cms",
+   "date": "2026-10-20T10:00:00Z",
+   "summary": "UP - AGREES: A new roadmap for agricultural prosperity in eastern UP and Bundelkhand.",
+   "summaryBy": "model",
+   "claims": [
+    {
+     "text": "UP-AGREES is a World Bank-supported project aimed at improving agricultural productivity and farmer incomes in Eastern Uttar Pradesh and Bundelkhand.",
+     "quote": "World Bank-supported Uttar Pradesh Agriculture Growth and Rural Enterprise Ecosystem Strengthening (UP-AGREES) Project"
+    },
+    {
+     "text": "UP-AGREES will cover 123 development blocks in 28 districts, benefiting nearly 10 lakh farmers, 35,000 fish-producing farmers and around three lakh women.",
+     "quote": "project is being implemented across 123 development blocks in 28 districts, with the objective of benefiting nearly 10 lakh farmers"
+    },
+    {
+     "text": "UP-AGREES aims to introduce Direct Seeded Rice (DSR) and climate-smart practices such as zero tillage and improved seeds.",
+     "quote": "Direct Seeded Rice, or DSR, is being experimented with across 3,000 hectares"
+    }
+   ],
+   "relevance": 0.659,
+   "story": 9,
+   "licence": "GDELT Project terms (free use with citation)",
+   "citations": [],
+   "extra": {},
+   "textHow": "article",
+   "live": false
+  },
+  {
+   "id": "n:12b231690d8d",
+   "kind": "breaking",
+   "headline": "Wits and SA universities must cut fossil fuel ties",
+   "source": "dailymaverick.co.za",
+   "via": "gdelt",
+   "url": "https://www.dailymaverick.co.za/opinionista/2026-10-19-wits-and-sa-universities-must-cut-fossil-fuel-ties-to-champion-climate-action/",
+   "date": "2026-10-19T12:15:00Z",
+   "summary": "Wits and SA universities must cut fossil fuel ties.",
+   "summaryBy": "model",
+   "claims": [],
+   "relevance": 0.583,
+   "story": 10,
+   "licence": "GDELT Project terms (free use with citation)",
+   "citations": [],
+   "extra": {},
+   "live": false
+  },
+  {
+   "id": "n:abb92272cef7",
+   "kind": "breaking",
+   "headline": "NTHU to explore research reactor development with NuCube",
+   "source": "taipeitimes.com",
+   "via": "gdelt",
+   "url": "https://www.taipeitimes.com/News/taiwan/archives/2026/10/20/2003866288",
+   "date": "2026-10-19T16:45:00Z",
+   "summary": "NTHU to explore research reactor development with NuCube.",
+   "summaryBy": "model",
+   "claims": [],
+   "relevance": 0.581,
+   "story": 11,
+   "licence": "GDELT Project terms (free use with citation)",
+   "citations": [],
+   "extra": {},
+   "live": false
+  },
+  {
+   "id": "n:3da4e2559f71",
+   "kind": "breaking",
+   "headline": "Why more science funding is critical for NZ agriculture – Dr Jacqueline Rowarth",
+   "source": "nzherald.co.nz",
+   "via": "gdelt",
+   "url": "https://www.nzherald.co.nz/the-country/news/why-more-science-funding-is-critical-for-nz-agriculture-dr-jacqueline-rowarth/P25MCO3ZJNDL7MWIW74TVJBK3U/",
+   "date": "2026-10-19T17:45:00Z",
+   "summary": "The article discusses why increased science funding is essential for New Zealand agriculture, featuring Dr Jacqueline Rowarth.",
+   "summaryBy": "model",
+   "claims": [],
+   "relevance": 0.556,
+   "story": 12,
+   "licence": "GDELT Project terms (free use with citation)",
+   "citations": [],
+   "extra": {},
+   "live": false
+  },
+  {
+   "id": "n:586437100511",
+   "kind": "breaking",
+   "headline": "HT Evening News Brief October 19 : Tiger Shroff attacker planned escape via Nepal ; Mizoram Chinmay Sutar scripts Ranji history",
+   "source": "hindustantimes.com",
+   "via": "gdelt",
+   "url": "https://www.hindustantimes.com/india-news/ht-evening-news-brief-october-19-tiger-shroff-attackers-planned-escape-via-nepal-mizoram-s-chinmay-sutar-scripts-ranji-history-101792410617553.html",
+   "date": "2026-10-19T13:00:00Z",
+   "summary": "The piece covers a Tiger Shroff attacker who planned an escape via Nepal and mentions Mizoram Chinmay Sutar scripting Ranji history.",
+   "summaryBy": "model",
+   "claims": [],
+   "relevance": 0.456,
+   "story": 13,
+   "licence": "GDELT Project terms (free use with citation)",
+   "citations": [],
+   "extra": {},
+   "live": false
+  },
+  {
+   "id": "n:79e072c52849",
+   "kind": "breaking",
+   "headline": "DeepSeek just open-sourced its inference engine",
+   "source": "github.com",
+   "via": "hackernews",
+   "url": "https://github.com/deepseek-ai/DeepInfer",
+   "date": "2026-10-20T09:08:54Z",
+   "summary": "DeepSeek has released its inference engine as open source.",
+   "summaryBy": "model",
+   "claims": [],
+   "relevance": 0.682,
+   "story": 14,
+   "licence": "Hacker News API (titles and links)",
+   "citations": [],
+   "extra": {
+    "discussion": "https://news.ycombinator.com/item?id=50163277"
+   },
+   "textHow": "article",
+   "live": false
+  },
+  {
+   "id": "n:f90a2919f8bd",
+   "kind": "breaking",
+   "headline": "Nordwand Mono – A monospace font for coders and adventurers",
+   "source": "github.com",
+   "via": "hackernews",
+   "url": "https://github.com/tywr/Nordwand-Mono",
+   "date": "2026-10-18T14:48:01Z",
+   "summary": "Nordwand Mono is a monospace font designed for coders and adventurers.",
+   "summaryBy": "model",
+   "claims": [],
+   "relevance": 0.675,
+   "story": 15,
+   "licence": "Hacker News API (titles and links)",
+   "citations": [],
+   "extra": {
+    "discussion": "https://news.ycombinator.com/item?id=50141581"
+   },
+   "textHow": "article",
+   "live": false
+  },
+  {
+   "id": "n:9128766f1662",
+   "kind": "breaking",
+   "headline": "MicroG: Free-libre re-implementation of Google's proprietary Android user space",
+   "source": "github.com",
+   "via": "hackernews",
+   "url": "https://github.com/microg/GmsCore/wiki",
+   "date": "2026-10-20T06:37:07Z",
+   "summary": "MicroG is a free‑libre re‑implementation of Google's proprietary Android user space.",
+   "summaryBy": "model",
+   "claims": [
+    {
+     "text": "microG GmsCore is a free software reimplementation of Google's Play Services.",
+     "quote": "microG GmsCore is a free software reimplementation of Google's Play Services."
+    },
+    {
+     "text": "It allows apps that call proprietary Google APIs to run on AOSP-based ROMs such as LineageOS.",
+     "quote": "It allows applications calling proprietary Google APIs to run on AOSP-based ROMs like LineageOS"
+    },
+    {
+     "text": "microG GmsCore includes the Unified Network Location Provider module.",
+     "quote": "GmsCore includes the Unified Network Location Provider module (UnifiedNlp)"
+    }
+   ],
+   "relevance": 0.796,
+   "story": 16,
+   "licence": "Hacker News API (titles and links)",
+   "citations": [],
+   "extra": {
+    "discussion": "https://news.ycombinator.com/item?id=50162177"
+   },
+   "textHow": "article",
+   "live": false
+  },
+  {
+   "id": "n:8e87036d11b5",
+   "kind": "breaking",
+   "headline": "OpenBSD 8.0",
+   "source": "openbsd.org",
+   "via": "hackernews",
+   "url": "https://www.openbsd.org/80.html",
+   "date": "2026-10-20T02:06:40Z",
+   "summary": "OpenBSD 8.0 is a new release of the OpenBSD operating system.",
+   "summaryBy": "model",
+   "claims": [
+    {
+     "text": "OpenBSD 8.0 includes new features and systems.",
+     "quote": "This is a partial list of new features and systems included in OpenBSD 8.0."
+    },
+    {
+     "text": "Installation media are provided for CD, USB, and network PXE boot.",
+     "quote": "If your machine can boot from CD, you can write install80.iso or cd80.iso to a CD and boot from it."
+    },
+    {
+     "text": "Source archives src.tar.gz and sys.tar.gz contain the full source and kernel sources.",
+     "quote": "src.tar.gz contains a source archive starting at /usr/src."
+    }
+   ],
+   "relevance": 0.684,
+   "story": 17,
+   "licence": "Hacker News API (titles and links)",
+   "citations": [],
+   "extra": {
+    "discussion": "https://news.ycombinator.com/item?id=50160494"
+   },
+   "textHow": "article",
+   "live": false
+  }
+ ],
+ "expansions": {
+  "n:7c531405de72": "expansions/n-7c531405de72.json",
+  "n:83d9d5c1e160": "expansions/n-83d9d5c1e160.json",
+  "n:84bb02f4d37d": "expansions/n-84bb02f4d37d.json"
+ },
+ "seconds": 136
+}

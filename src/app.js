@@ -1,30 +1,36 @@
 /**
- * App: glue between the knowledge web (GraphStore), its view, the cards,
- * the keypad, the props and onboarding. All user actions come in here so
- * the hand path, the desktop path and scripted QA share one code path.
+ * App: glue between the news web (GraphStore), its view, the lights, the
+ * cards, the keypad, the props, the reader's private context and the
+ * research engine. All user actions come in here, so the hand path, the
+ * desktop path and scripted QA share one code path.
+ *
+ * Live when the backend answers; otherwise the bundled, dated snapshot of
+ * real pipeline runs (take-it-away test), and the status line says which.
  */
 import { Vector3, Quaternion, Hovered } from '@iwsdk/core';
-import { GraphStore, topicKey, similarity } from './model/graph.js';
-import { shortestPath, importanceOf, mostImportant, evidenceReadout } from './model/algorithms.js';
+import { GraphStore, similarity } from './model/graph.js';
+import { shortestPath, importanceOf, mostImportant, evidenceReadout, bestPath, pagerank } from './model/algorithms.js';
 import { GraphView } from './render/graph-view.js';
 import { Atmosphere } from './render/atmosphere.js';
-import { Card, UI } from './render/card.js';
+import { Card } from './render/card.js';
 import { CardManager } from './ui/card-manager.js';
-import { nodeCardDraw, locketDraw, coinDraw, messageDraw } from './ui/node-card.js';
+import { nodeCardDraw, locketDraw, coinDraw, messageDraw, pathDraw } from './ui/node-card.js';
 import { helpDraw, libraryDraw } from './ui/help.js';
+import { contextDraw } from './ui/context-card.js';
 import { Keypad } from './ui/keypad.js';
 import { Onboarding } from './ui/onboarding.js';
 import { Props } from './props.js';
 import { LightField } from './render/lights.js';
 import { readerDraw } from './ui/reader-card.js';
-import { graphToEvents, EventPlayer, applyEvent } from './research/events.js';
-import { settings, loadSettings, setQuality, DEBUG } from './config.js';
+import { EventPlayer, applyEvent } from './research/events.js';
+import { ResearchClient } from './research/client.js';
+import { ContextStore, SAMPLE_PERSONA, CONTEXT_KINDS } from './context.js';
+import { settings, loadSettings, setQuality } from './config.js';
 import { QualityGovernor } from './quality.js';
 
-const SEALED_KEY = 'fogweave.sealed.v1';
-const RECENT_KEY = 'fogweave.recent.v1';
-const LAST_KEY = 'fogweave.last.v1';
+const LIBRARY_KEY = 'fogweave.library.v1';
 const SEALED_LIGHTS_KEY = 'fogweave.sealedLights.v1';
+const SNAPSHOT = 'demo/snapshot/index.json';
 
 const _hp = new Vector3();
 const _hq = new Quaternion();
@@ -37,14 +43,13 @@ export class App {
     // seated anchor: refreshed from the real head pose when XR starts
     this.anchor = { head: new Vector3(0, 1.2, 0), yaw: 0 };
     this.store = new GraphStore();
+    this.store.setMeta({ topic: 'News web', topicKey: 'news' });
     this.atmosphere = new Atmosphere(this.world);
     this.view = new GraphView(this.world, this.store, { center: this._bubbleCenter(), radius: settings.bubble.radius });
     this.cards = new CardManager(this.world, this.anchor);
     this.cards.onClose = (key) => this._onCardClosed(key);
-    this.keypad = new Keypad(this.world, this.anchor, {
-      onSubmit: (text) => this.submitTopic(text),
-      onClose: () => {},
-    });
+    this.keypad = new Keypad(this.world, this.anchor, { onSubmit: (text) => this._onKeypadSubmit(text), onClose: () => {} });
+    this.keypadMode = 'find';
     this.props = new Props(this.world, this.anchor, {
       onReveal: (kind, info) => this.reveal(kind, info),
       onBothHeld: () => this.pathFromProps(),
@@ -52,8 +57,12 @@ export class App {
     this.lights = new LightField(this.world, this.anchor);
     this.lights.onSelect = (id) => this.openLight(id);
     this.lightsMeta = null;
-    this.sealedLights = readJSON(SEALED_LIGHTS_KEY, {}); // id -> item copy (Library)
+    this.sealedLights = readJSON(SEALED_LIGHTS_KEY, {});
     this.lights.sealed = new Set(Object.keys(this.sealedLights));
+    this.context = new ContextStore();
+    this.client = new ResearchClient();
+    this.snapshot = null;
+    this.mode = 'starting'; // live | offline
     this.onboarding = new Onboarding(this);
     this.governor = new QualityGovernor((level) => {
       setQuality(level);
@@ -62,71 +71,77 @@ export class App {
     this.selectedId = null;
     this.prevSelectedId = null;
     this.linkFromId = null;
-    this.player = null;
+    this.player = null; // replay of a recorded run
+    this.expanding = null; // { id, controller } live run
     this.statusText = '';
-    this.demos = [];
-    this._pathTimer = null;
+    this.notes = [];
+    this.lastStats = null;
     this._buildStatusCard();
     this._buildHelpButton();
     this._wireNodePicking();
     this.store.on((ev) => this._onStoreChange(ev));
+    this._restoreLibrary();
+    this.context.syncToStore(this.store);
     this.ready = this._start();
   }
 
-  // ---------- startup ----------
+  // ---------- startup: live or snapshot ----------
 
   async _start() {
-    this._loadLights();
+    const [health, snap] = await Promise.all([this.client.health(), this._loadSnapshot()]);
+    this.snapshot = snap;
+    let lights = null;
+    if (health?.ok) {
+      this.setStatus('Gathering the latest news…');
+      lights = await this.client.lights(this.context.labels());
+    }
+    if (lights?.items?.length) {
+      this.mode = 'live';
+      const ok = Object.values(lights.sources || {}).filter((s) => s.ok).length;
+      const all = Object.keys(lights.sources || {}).length;
+      this.lightsMeta = { kind: 'live', generatedAt: lights.generatedAt, sources: `${ok} of ${all} feeds` };
+      this.notes = lights.notes || [];
+      this.lights.setItems(lights.items.map((it) => ({ ...it, live: true })));
+    } else if (snap) {
+      this.mode = 'offline';
+      this.lightsMeta = { kind: snap.provenance?.kind, generatedAt: snap.generatedAt };
+      this.lights.setItems(snap.lights || []);
+    } else {
+      this.mode = 'offline';
+      this.lightsMeta = { kind: 'none' };
+    }
+    this._applyRelevance();
+    this.setStatus('');
+    if (Onboarding.needed()) this.startOnboarding();
+  }
+
+  async _loadSnapshot() {
     try {
-      const res = await fetch('demo/index.json');
-      this.demos = res.ok ? await res.json() : [];
+      const res = await fetch(SNAPSHOT);
+      return res.ok ? await res.json() : null;
     } catch {
-      this.demos = [];
-    }
-    const last = readJSON(LAST_KEY, null);
-    const first = Onboarding.needed();
-    const key = (!first && last && this.demos.find((d) => d.topicKey === last)?.topicKey) || this.demos[0]?.topicKey;
-    if (key) await this.loadDemo(key, { replay: true });
-    if (first) this.startOnboarding();
-  }
-
-  /** Bundled light snapshot (dated); the news engine will stream fresh ones. */
-  async _loadLights() {
-    try {
-      const res = await fetch('demo/lights.json');
-      if (!res.ok) return;
-      const doc = await res.json();
-      this.lightsMeta = { kind: doc.provenance?.kind, generatedAt: doc.generatedAt };
-      this.lights.setItems(doc.items || []);
-    } catch (err) {
-      console.warn('[fogweave] no bundled lights', err);
+      return null;
     }
   }
 
-  openLight(id) {
-    if (!this.lights.get(id)) return;
-    for (const e of [...this.cards.open]) if (e.key.startsWith('light:') && e.key !== `light:${id}`) this.cards.close(e.key);
-    this.lights.openId = id;
-    this.cards.show(`light:${id}`, { width: 0.46, height: 0.46, draw: readerDraw(this, id), prefer: this.lights.worldPositionOf(id) });
-    this.onboarding.notify('light-opened');
-  }
-
-  sealLight(id) {
-    const it = this.lights.get(id);
-    if (!it) return;
-    const { claims, ...rest } = it;
-    this.sealedLights[id] = { ...rest, claims: (claims || []).slice(0, 3), sealedAt: new Date().toISOString() };
-    this.lights.sealed.add(id);
-    writeJSON(SEALED_LIGHTS_KEY, this.sealedLights);
-    this.cards.get(`light:${id}`)?.redraw();
-    this.onboarding.notify('sealed');
-  }
-
-  unsealLight(id) {
-    delete this.sealedLights[id];
-    this.lights.sealed.delete(id);
-    writeJSON(SEALED_LIGHTS_KEY, this.sealedLights);
-    this.cards.get(`light:${id}`)?.redraw();
+  /**
+   * Light glow = relevance to the reader. With a context, items mentioning
+   * it glow brighter; expanded items use personalized PageRank in the web.
+   */
+  _applyRelevance() {
+    const labels = this.context.labels().map((l) => l.toLowerCase());
+    const pr = labels.length ? importanceSeeds(this) : null;
+    for (const it of this.lights.items) {
+      let rel = it.relevance ?? 0.35;
+      if (labels.length) {
+        const text = `${it.headline} ${it.summary || ''}`.toLowerCase();
+        const lex = Math.max(0, ...labels.map((l) => (text.includes(l) ? 1 : similarity(l, text))));
+        rel = Math.max(rel * 0.6, 0.15 + 0.85 * lex);
+      }
+      if (pr?.has(it.id)) rel = Math.max(rel, Math.min(1, pr.get(it.id) * 12));
+      it.glow = rel;
+    }
+    this.lights.items.forEach((it) => (it.relevance = it.glow));
   }
 
   _bubbleCenter() {
@@ -150,7 +165,7 @@ export class App {
   // ---------- status line ----------
 
   _buildStatusCard() {
-    this.statusCard = new Card(this.world, { width: 0.46, height: 0.075, name: 'status' });
+    this.statusCard = new Card(this.world, { width: 0.5, height: 0.075, name: 'status' });
     this.statusCard.placeFacing(this._statusPosition(), this.anchor.head);
     this._renderStatus();
   }
@@ -165,20 +180,26 @@ export class App {
     this._renderStatus();
   }
 
+  get researching() {
+    return !!this.expanding || (this.player && !this.player.done && !this.player.stopped);
+  }
+
+  modeLine() {
+    const m = this.lightsMeta || {};
+    if (this.mode === 'live') return `Live · ${m.sources || ''}`;
+    if (m.kind === 'pipeline') return `Offline · snapshot of ${String(m.generatedAt || '').slice(0, 10)}`;
+    if (m.kind === 'fixture') return 'Offline · test fixture';
+    return this.mode === 'starting' ? 'Starting…' : 'Offline';
+  }
+
   _renderStatus() {
-    const running = this.player && !this.player.done && !this.player.stopped;
-    const fixture = this.store.meta.provenance?.kind === 'fixture';
+    const running = this.researching;
     this.statusCard.setContent((ctx, ui, w, h) => {
-      const pad = 36;
-      const label = running ? `Fog is looking · ${this.statusText}` : this.statusText || this.store.meta.topic || 'Pinch empty space to name a topic';
-      if (running) ui.ringIcon(pad + 14, h / 2 - 2, 14, '#d9dee6', this.player.paused ? 'dotted' : 'dashed');
-      ui.text(label, pad + (running ? 44 : 0), h / 2 + 12, { size: 32, maxWidth: w - pad * 2 - (running ? 360 : fixture ? 250 : 0) });
-      if (running) {
-        ui.button('pause', this.player.paused ? 'Resume' : 'Pause', w - pad - 330, 14, 160, h - 28, () => this.togglePause(), { size: 26 });
-        ui.button('stop', 'Stop', w - pad - 160, 14, 160, h - 28, () => this.stopResearch(), { size: 26 });
-      } else if (fixture) {
-        ui.text('TEST FIXTURE', w - pad, h / 2 + 10, { size: 26, color: '#f0c987', weight: 700, align: 'right' });
-      }
+      const pad = 34;
+      const label = running ? `Fog is looking · ${this.statusText}` : this.statusText || this.notes[0] || this.modeLine();
+      if (running) ui.ringIcon(pad + 14, h / 2 - 2, 14, '#d9dee6', this.player?.paused ? 'dotted' : 'dashed');
+      ui.text(label, pad + (running ? 44 : 0), h / 2 + 11, { size: 30, maxWidth: w - pad * 2 - (running ? 230 : 0) });
+      if (running) ui.button('stop', 'Stop', w - pad - 180, 14, 180, h - 28, () => this.stopResearch(), { size: 26 });
     });
   }
 
@@ -194,12 +215,17 @@ export class App {
 
   toggleHelp() {
     if (this.cards.get('help')) this.closeCard('help');
-    else this.cards.show('help', { width: 0.44, height: 0.42, draw: helpDraw(this), slot: 1 });
+    else this.cards.show('help', { width: 0.44, height: 0.46, draw: helpDraw(this), slot: 1 });
   }
 
   openLibrary() {
     this.closeCard('help');
-    this.cards.show('library', { width: 0.44, height: 0.36, draw: libraryDraw(this), slot: 1 });
+    this.cards.show('library', { width: 0.44, height: 0.38, draw: libraryDraw(this), slot: 1 });
+  }
+
+  openContext() {
+    this.closeCard('help');
+    this.cards.show('context', { width: 0.46, height: 0.42, draw: contextDraw(this), slot: 1 });
   }
 
   startOnboarding(fromHelp = false) {
@@ -234,9 +260,8 @@ export class App {
     this.view.setSelected(id);
     this.view.markLabelsDirty();
     const prefer = this.view.worldPositionOf(id);
-    // one node card at a time keeps the arc readable
     for (const e of [...this.cards.open]) if (e.key.startsWith('node:') && e.key !== `node:${id}`) this.cards.close(e.key);
-    this.cards.show(`node:${id}`, { width: 0.44, height: 0.36, draw: nodeCardDraw(this, id), prefer });
+    this.cards.show(`node:${id}`, { width: 0.44, height: 0.4, draw: nodeCardDraw(this, id), prefer });
     this.onboarding.notify('card-opened');
   }
 
@@ -258,11 +283,123 @@ export class App {
     this.view.markLabelsDirty();
   }
 
-  // ---------- seal / unseal ----------
+  // ---------- lights + reader card ----------
+
+  openLight(id) {
+    const it = this.lights.get(id);
+    if (!it) return;
+    for (const e of [...this.cards.open]) if (e.key.startsWith('light:') && e.key !== `light:${id}`) this.cards.close(e.key);
+    this.lights.openId = id;
+    this.cards.show(`light:${id}`, { width: 0.46, height: 0.48, draw: readerDraw(this, id), prefer: this.lights.worldPositionOf(id) });
+    this.onboarding.notify('light-opened');
+    if (it.live && !it.claims?.length && !it.claimsLoading && this.mode === 'live') this._loadClaims(it);
+  }
+
+  async _loadClaims(it) {
+    it.claimsLoading = true;
+    this.cards.get(`light:${it.id}`)?.redraw();
+    const r = await this.client.read(it.id);
+    it.claimsLoading = false;
+    if (r?.claims) it.claims = r.claims;
+    it.claimsNote = r?.note || (r ? '' : 'Could not load key claims right now.');
+    this.cards.get(`light:${it.id}`)?.redraw();
+  }
+
+  canExpand(id) {
+    const it = this.lights.get(id);
+    if (!it) return false;
+    if (it.live && this.mode === 'live') return true;
+    return !!this.snapshot?.expansions?.[id];
+  }
+
+  async expandLight(id) {
+    const it = this.lights.get(id);
+    if (!it || this.researching || it.expanded) return;
+    it.expanded = 'running';
+    this.notes = [];
+    this.cards.get(`light:${id}`)?.redraw();
+    if (it.live && this.mode === 'live') {
+      const controller = new AbortController();
+      this.expanding = { id, controller };
+      this.setStatus(`Reading ${it.source}`);
+      const stats = await this.client.expand(id, {
+        context: this.context.labels(),
+        signal: controller.signal,
+        onEvent: (ev) => this._onResearchEvent(ev),
+      });
+      this.expanding = null;
+      this.lastStats = stats;
+      if (!stats) this.notes.unshift('The research stream stopped early; what arrived stays.');
+    } else if (this.snapshot?.expansions?.[id]) {
+      const res = await fetch(`demo/snapshot/${this.snapshot.expansions[id]}`).catch(() => null);
+      const rec = res?.ok ? await res.json() : null;
+      if (!rec) {
+        it.expanded = false;
+        this.setStatus('That recorded run is missing from the snapshot.');
+        return;
+      }
+      await new Promise((resolve) => {
+        this.player = new EventPlayer(this.store, rec.events, {
+          durationMs: 9000,
+          onStatus: (s) => this.setStatus(`${s} (recorded ${String(rec.recordedAt || '').slice(0, 10)})`),
+          onNote: (n) => this.notes.unshift(n.text),
+          onStats: (s) => (this.lastStats = s),
+          onDone: resolve,
+        });
+        this._renderStatus();
+      });
+    }
+    it.expanded = true;
+    this.context.syncToStore(this.store);
+    this._applyRelevance();
+    this.setStatus('');
+    this._refreshCards();
+    this.onboarding.notify('expanded');
+  }
+
+  _onResearchEvent(ev) {
+    const phrase = applyEvent(this.store, ev);
+    if (ev.type === 'note' && ev.text) this.notes.unshift(ev.text);
+    if (ev.type === 'status' && phrase) this.setStatus(phrase);
+    if (ev.type === 'verified') for (const e of this.cards.open) if (e.key === `node:${ev.id}`) e.card.redraw();
+  }
+
+  stopResearch() {
+    if (this.expanding) {
+      this.expanding.controller.abort();
+      this.setStatus('Stopped. What grew so far stays.');
+    } else if (this.player && !this.player.done) {
+      this.player.stop();
+      this.player.onDone?.();
+      this.setStatus('Stopped. What grew so far stays.');
+    }
+  }
+
+  sealLight(id) {
+    const it = this.lights.get(id);
+    if (!it) return;
+    const { claims, live, claimsLoading, glow, ...rest } = it;
+    this.sealedLights[id] = { ...rest, claims: (claims || []).slice(0, 3), sealedAt: new Date().toISOString() };
+    this.lights.sealed.add(id);
+    writeJSON(SEALED_LIGHTS_KEY, this.sealedLights);
+    if (this.store.nodes.has(id)) this.seal(id);
+    this.cards.get(`light:${id}`)?.redraw();
+    this.onboarding.notify('sealed');
+  }
+
+  unsealLight(id) {
+    delete this.sealedLights[id];
+    this.lights.sealed.delete(id);
+    writeJSON(SEALED_LIGHTS_KEY, this.sealedLights);
+    if (this.store.nodes.get(id)?.sealed) this.unseal(id);
+    this.cards.get(`light:${id}`)?.redraw();
+  }
+
+  // ---------- seal / unseal (the Library persists; the fog does not) ----------
 
   seal(id) {
     const changed = this.store.seal(id);
-    this._saveSealed();
+    this._saveLibrary();
     for (const c of changed) this.view.flash(c, 1.2);
     this._refreshCards();
     this.onboarding.notify('sealed');
@@ -271,25 +408,29 @@ export class App {
 
   unseal(id) {
     const changed = this.store.unseal(id);
-    this._saveSealed();
+    this._saveLibrary();
     this._refreshCards();
     return changed;
   }
 
-  _saveSealed() {
-    const key = this.store.meta.topicKey;
-    if (!key) return;
-    const all = readJSON(SEALED_KEY, {});
-    all[key] = this.store.sealedIds();
-    writeJSON(SEALED_KEY, all);
+  _saveLibrary() {
+    const doc = this.store.toDocument(); // private context already filtered out
+    writeJSON(LIBRARY_KEY, {
+      savedAt: new Date().toISOString(),
+      nodes: doc.nodes.filter((n) => n.sealed),
+      edges: doc.edges.filter((e) => e.sealed),
+    });
   }
 
-  _restoreSealed() {
-    const ids = readJSON(SEALED_KEY, {})[this.store.meta.topicKey];
-    if (ids?.length) this.store.restoreSealed(ids.filter((id) => this.store.nodes.has(id) || this.store.edges.has(id)));
+  _restoreLibrary() {
+    const lib = readJSON(LIBRARY_KEY, null);
+    if (!lib) return;
+    for (const n of lib.nodes || []) this.store.addNode({ ...n, sealed: true }, { silent: true });
+    for (const e of lib.edges || []) this.store.addEdge({ ...e, sealed: true }, { silent: true });
+    this.store._emit('loaded');
   }
 
-  // ---------- link / path ----------
+  // ---------- link / path / "how does this touch me" ----------
 
   link(id) {
     if (!this.linkFromId || this.linkFromId === id) {
@@ -325,35 +466,60 @@ export class App {
       note = 'No path in your sealed web yet. Shown through the fog instead.';
       layer = 'all';
     }
-    const la = this.store.nodes.get(a)?.label;
-    const lb = this.store.nodes.get(b)?.label;
     if (!path) {
       this.view.clearPath();
-      this.cards.show('path', { width: 0.42, height: 0.24, draw: messageDraw(this, 'path', 'No connection found', `“${la}” and “${lb}” are not connected in this web.`) });
+      const la = this.store.nodes.get(a)?.label;
+      const lb = this.store.nodes.get(b)?.label;
+      this.cards.show('path', { width: 0.42, height: 0.24, draw: messageDraw(this, 'path', 'No connection found', `“${la}” and “${lb}” are not connected by reported or inferred links.`) });
       return null;
     }
+    this._showPath(path, `Path: ${path.edges.length} step${path.edges.length === 1 ? '' : 's'}`, note);
+    return path;
+  }
+
+  /** Grounded path from a news item to the reader's context, or an honest "no". */
+  touchesMe(id) {
+    const ctx = this.context.ids().filter((c) => this.store.nodes.has(c));
+    if (!ctx.length) {
+      this.cards.show('path', {
+        width: 0.42,
+        height: 0.26,
+        draw: messageDraw(this, 'path', 'Add your context first', 'Add a few coarse things (city, field, tools you use) so FogWeave can look for a connection.', [
+          { id: 'ctx', label: 'My context', onPress: () => this.openContext(), primary: true },
+        ]),
+      });
+      return null;
+    }
+    const path = bestPath(this.store.view('all'), id, ctx);
+    if (!path) {
+      this.view.clearPath();
+      this.cards.show('path', { width: 0.42, height: 0.24, draw: messageDraw(this, 'path', 'No clear connection found', 'Nothing reported or inferred links this to your context. FogWeave does not guess one.') });
+      this.lastTouch = null;
+      return null;
+    }
+    this.lastTouch = path;
+    this._showPath(path, 'How this may touch you', 'Possible effects, not predictions. Check the sources.');
+    return path;
+  }
+
+  _showPath(path, title, note) {
     this.view.showPath(path);
     for (const id of path.nodes) this.view.flash(id, 2);
-    const steps = path.nodes.map((id) => this.store.nodes.get(id)?.label).join(' → ');
-    this.cards.show('path', {
-      width: 0.44,
-      height: 0.3,
-      draw: messageDraw(this, 'path', `Path: ${path.edges.length} step${path.edges.length === 1 ? '' : 's'}`, `${steps}\n${note}`),
-    });
+    this.cards.show('path', { width: 0.46, height: 0.4, draw: pathDraw(this, path, title, note) });
     this.setStatus('');
     this._refreshCards();
-    return path;
   }
 
   // ---------- props ----------
 
   reveal(kind, { via, worldPos }) {
+    const seeds = this.context.ids().filter((c) => this.store.nodes.has(c));
     let id = worldPos ? this.view.nearestNode(worldPos, settings.props.lockRadius) : this.selectedId;
     const openAir = !id;
     if (openAir) {
-      const top = mostImportant(this.store.view(this._layerFor(null)));
+      const top = mostImportant(this.store.view(this._layerFor(null)), { seeds, exclude: (n) => n.type === 'ContextNode' });
       if (!top) {
-        this.cards.show('reveal', { width: 0.4, height: 0.22, draw: messageDraw(this, 'reveal', 'Nothing to read yet', 'Name a topic first: pinch empty space.') });
+        this.cards.show('reveal', { width: 0.4, height: 0.22, draw: messageDraw(this, 'reveal', 'Nothing to read yet', 'Touch a light and press Expand first.') });
         return null;
       }
       id = top.id;
@@ -363,10 +529,9 @@ export class App {
     let result;
     if (kind === 'locket' || (kind === 'coin' && openAir)) {
       const layer = this._layerFor(id);
-      result = importanceOf(this.store.view(layer), id);
-      const scope = layer === 'sealed' ? 'in your sealed web' : 'in the whole web';
-      const label = openAir ? `${scope} · most central` : scope;
-      this.cards.show('reveal', { width: 0.4, height: 0.3, draw: locketDraw(this, id, result, label), prefer });
+      result = importanceOf(this.store.view(layer), id, { seeds });
+      const scope = `${layer === 'sealed' ? 'in your sealed web' : 'in the whole web'}${seeds.length ? ' · for you' : ''}`;
+      this.cards.show('reveal', { width: 0.4, height: 0.3, draw: locketDraw(this, id, result, openAir ? `${scope} · most relevant` : scope), prefer });
     } else {
       result = evidenceReadout(this.store, id);
       this.cards.show('reveal', { width: 0.4, height: 0.32, draw: coinDraw(this, id, result), prefer });
@@ -385,96 +550,79 @@ export class App {
     return 'sealed';
   }
 
-  // ---------- topics ----------
+  // ---------- keypad: find a light, or add context ----------
 
-  openKeypad() {
-    if (this.keypad.isOpen) return;
-    this.keypad.open({ prompt: 'Name a topic', suggestions: this.topicSuggestions() });
-  }
-
-  topicSuggestions() {
-    const out = [];
-    const add = (s) => {
-      if (s && !out.some((x) => x.toLowerCase() === s.toLowerCase())) out.push(s);
-    };
-    for (const r of readJSON(RECENT_KEY, [])) add(r);
-    for (const d of this.demos) if (d.topicKey !== this.store.meta.topicKey) add(d.topic);
-    // related: named areas in the current web
-    for (const n of this.store.nodes.values()) if (n.type === 'Entity' && out.length < 8) add(n.label);
-    return out.slice(0, 4);
-  }
-
-  async submitTopic(text) {
-    const recent = [text, ...readJSON(RECENT_KEY, []).filter((t) => t.toLowerCase() !== text.toLowerCase())].slice(0, 6);
-    writeJSON(RECENT_KEY, recent);
-    const demo = this.demos
-      .map((d) => ({ d, s: Math.max(similarity(text.toLowerCase(), d.topic.toLowerCase()), topicKey(text) === d.topicKey ? 1 : 0) }))
-      .sort((a, b) => b.s - a.s)[0];
-    if (demo && demo.s >= 0.5) return this.loadDemo(demo.d.topicKey, { replay: true });
-    return this.startResearch(text);
-  }
-
-  /**
-   * Live research arrives in Phase 2. Until then (and whenever the
-   * backend is off) the topic is planted unresearched and we say so.
-   */
-  startResearch(text) {
-    this.stopResearch();
-    this.store.clear();
-    applyEvent(this.store, { type: 'plan', node: { id: `topic:${topicKey(text)}`, type: 'Topic', label: text }, topicKey: topicKey(text), provenance: { kind: 'unresearched' } });
-    this.setStatus('Research backend is off: only the bundled webs can grow right now.');
-    this.cards.show('research', {
-      width: 0.42,
-      height: 0.26,
-      draw: messageDraw(this, 'research', 'Backend offline', `“${text}” was planted but not researched. Bundled webs still work fully.`, [
-        { id: 'demos', label: 'Bundled', onPress: () => this.openKeypad(), primary: true },
-      ]),
-    });
-  }
-
-  async loadDemo(key, { replay = true } = {}) {
-    const entry = this.demos.find((d) => d.topicKey === key);
-    if (!entry) return false;
-    let doc;
-    try {
-      const res = await fetch(`demo/${entry.file}`);
-      doc = await res.json();
-    } catch (err) {
-      console.warn('[fogweave] could not load bundled web', key, err);
-      return false;
+  openKeypad(mode = 'find') {
+    this.keypadMode = mode;
+    if (this.keypad.isOpen) this.keypad.close();
+    if (mode === 'context') {
+      const have = new Set(this.context.labels().map((l) => l.toLowerCase()));
+      const sugg = SAMPLE_PERSONA.map((p) => p.label).filter((l) => !have.has(l.toLowerCase()));
+      this.keypad.open({ prompt: 'Add to your context (coarse, no personal details)', suggestions: sugg });
+    } else {
+      const sugg = [...this.lights.items].sort((a, b) => (b.relevance ?? 0) - (a.relevance ?? 0)).slice(0, 4).map((it) => shortHeadline(it.headline));
+      this.keypad.open({ prompt: 'Find a light', suggestions: sugg });
     }
-    this.stopResearch();
-    this.cards.closeAll();
-    this.store.clear();
-    writeJSON(LAST_KEY, key);
-    const events = graphToEvents(doc);
-    this.player = new EventPlayer(this.store, events, {
-      durationMs: replay ? 9000 : 0,
-      onStatus: (s) => this.setStatus(s),
-      onDone: () => {
-        this.store.insights = doc.insights || [];
-        this._restoreSealed();
-        this.setStatus('');
-        this._renderStatus();
-      },
-    });
-    if (!replay) this.player.finish();
-    this._renderStatus();
-    return true;
   }
 
-  togglePause() {
-    if (!this.player) return;
-    if (this.player.paused) this.player.resume();
-    else this.player.pause();
-    this._renderStatus();
+  async _onKeypadSubmit(text) {
+    if (this.keypadMode === 'context') return this.addContext(text);
+    return this.findLight(text);
   }
 
-  stopResearch() {
-    if (this.player && !this.player.done) {
-      this.player.stop();
-      this.setStatus('Stopped. What grew so far stays.');
+  findLight(text) {
+    const needle = text.toLowerCase();
+    let best = null;
+    let bestScore = 0;
+    for (const it of this.lights.items) {
+      const hay = `${it.headline} ${it.summary || ''}`.toLowerCase();
+      const s = hay.includes(needle) ? 1 : Math.max(similarity(needle, it.headline.toLowerCase()), similarity(needle, hay));
+      if (s > bestScore) {
+        bestScore = s;
+        best = it;
+      }
     }
+    if (best && bestScore >= 0.3) {
+      this.openLight(best.id);
+      return best.id;
+    }
+    this.cards.show('find', { width: 0.42, height: 0.24, draw: messageDraw(this, 'find', 'No light matches', `Nothing drifting here matches “${text}”. Asking about any topic comes with Ask.`) });
+    return null;
+  }
+
+  addContext(label, kind = 'interest') {
+    const r = this.context.add(label, kind);
+    if (!r.ok) {
+      this.cards.show('context-error', { width: 0.4, height: 0.22, draw: messageDraw(this, 'context-error', 'Not added', r.problem) });
+      return r;
+    }
+    this.context.syncToStore(this.store);
+    this._applyRelevance();
+    this.cards.get('context')?.redraw();
+    this.onboarding.notify('context');
+    return r;
+  }
+
+  removeContext(id) {
+    this.context.remove(id);
+    this.context.syncToStore(this.store);
+    this._applyRelevance();
+    this.cards.get('context')?.redraw();
+  }
+
+  useSamplePersona() {
+    this.context.useSamplePersona();
+    this.context.syncToStore(this.store);
+    this._applyRelevance();
+    this.cards.get('context')?.redraw();
+    this.onboarding.notify('context');
+  }
+
+  clearContext() {
+    this.context.clear();
+    this.context.syncToStore(this.store);
+    this._applyRelevance();
+    this.cards.get('context')?.redraw();
   }
 
   _onStoreChange(ev) {
@@ -487,7 +635,7 @@ export class App {
 
   onEmptyPinch() {
     if (this.keypad.isOpen) return;
-    this.openKeypad();
+    this.openKeypad('find');
   }
 
   /** Flick-to-dismiss: close the card whose mesh the flicking hand's ray was on. */
@@ -524,6 +672,10 @@ export class App {
     this.props.update(delta, now);
     this._followWrist();
     this.governor.sample(delta);
+    if (this._wasResearching !== this.researching) {
+      this._wasResearching = this.researching;
+      this._renderStatus();
+    }
   }
 
   _followWrist() {
@@ -534,12 +686,24 @@ export class App {
       o.position.y += 0.09;
       o.lookAt(_hp);
     } else {
-      // no hands (flat page): park it at the lower left of the arc
       const { head, yaw } = this.anchor;
       o.position.set(head.x + Math.sin(yaw - 0.5) * 0.6, head.y - 0.3, head.z - Math.cos(yaw - 0.5) * 0.6);
       o.lookAt(head);
     }
   }
+}
+
+/** Personalized PageRank over the web, seeded at the reader's context. */
+function importanceSeeds(app) {
+  const seeds = app.context.ids().filter((c) => app.store.nodes.has(c));
+  if (!seeds.length) return null;
+  const pr = pagerank(app.store.view('all'), { seeds });
+  return new Map([...pr].filter(([id]) => app.store.nodes.get(id)?.type === 'NewsItem'));
+}
+
+function shortHeadline(h) {
+  const words = h.split(/\s+/).slice(0, 5).join(' ');
+  return words.length < h.length ? words : h;
 }
 
 function readJSON(key, fallback) {
@@ -559,4 +723,4 @@ function writeJSON(key, value) {
   }
 }
 
-export { UI, DEBUG };
+export { CONTEXT_KINDS };

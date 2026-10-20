@@ -89,9 +89,9 @@ export class GraphStore {
     return edge;
   }
 
-  /** Bulk load a fogweave.graph/1 document. */
+  /** Bulk load a fogweave.graph/2 document. */
   loadGraph(doc) {
-    if (!doc || doc.schema !== SCHEMA_ID) throw new Error('not a fogweave.graph/1 document');
+    if (!doc || doc.schema !== SCHEMA_ID) throw new Error('not a fogweave.graph/2 document');
     this.clear();
     this.setMeta({
       topic: doc.topic,
@@ -112,8 +112,9 @@ export class GraphStore {
       topicKey: this.meta.topicKey,
       provenance: this.meta.provenance,
       generatedAt: this.meta.generatedAt,
-      nodes: [...this.nodes.values()],
-      edges: [...this.edges.values()],
+      // private context never leaves the device in a document
+      nodes: [...this.nodes.values()].filter((n) => !isPrivate(n)),
+      edges: [...this.edges.values()].filter((e) => !isPrivate(this.nodes.get(e.from)) && !isPrivate(this.nodes.get(e.to))),
       insights: this.insights,
     };
   }
@@ -121,14 +122,18 @@ export class GraphStore {
   // ---------- sealing ----------
 
   /**
-   * Seal a node or edge. Sealing a claim also seals the sources that
-   * back it (supports/cites) and the edges that connect them, so the
-   * Library never holds a claim without its evidence.
+   * Seal a node or edge. Provenance comes along so the Library never holds
+   * a statement without its evidence:
+   *  - a Claim brings the NewsItem that reported it and the Sources that
+   *    support or contradict it (with those links);
+   *  - a NewsItem brings the Event it is about;
+   *  - a link brings both ends.
+   * Private context nodes are never sealed: they stay on the device.
    */
   seal(id) {
     const changed = [];
     const mark = (item) => {
-      if (item && !item.sealed) {
+      if (item && !item.sealed && !isPrivate(item)) {
         item.sealed = true;
         changed.push(item.id);
       }
@@ -136,14 +141,18 @@ export class GraphStore {
     const node = this.nodes.get(id);
     if (node) {
       mark(node);
-      if (node.type === 'Claim') {
-        for (const e of this.edges.values()) {
-          const backs = e.to === id && (e.type === 'supports' || e.type === 'contradicts') && this.nodes.get(e.from)?.type === 'Source';
-          const cites = e.from === id && e.type === 'cites';
-          if (backs || cites) {
-            mark(e);
-            mark(this.nodes.get(backs ? e.from : e.to));
-          }
+      for (const e of this.edges.values()) {
+        let other = null;
+        if (node.type === 'Claim') {
+          const fromSource = this.nodes.get(e.from)?.type === 'Source';
+          if (e.to === id && (e.type === 'supports' || e.type === 'contradicts') && fromSource) other = e.from;
+          if (e.to === id && e.type === 'reports') other = e.from;
+        } else if (node.type === 'NewsItem' && e.from === id && e.type === 'about') {
+          other = e.to;
+        }
+        if (other && !isPrivate(this.nodes.get(other))) {
+          mark(this.nodes.get(other));
+          mark(e);
         }
       }
       // edges between two sealed nodes become sealed too
@@ -153,6 +162,7 @@ export class GraphStore {
     } else {
       const edge = this.edges.get(id);
       if (!edge) return [];
+      if (isPrivate(this.nodes.get(edge.from)) || isPrivate(this.nodes.get(edge.to))) return [];
       mark(edge);
       mark(this.nodes.get(edge.from));
       mark(this.nodes.get(edge.to));
@@ -198,18 +208,25 @@ export class GraphStore {
     this._emit('sealed', ids);
   }
 
-  /** Plain arrays for algorithms. layer: 'sealed' | 'all' */
-  view(layer = 'all') {
+  /**
+   * Plain arrays for algorithms. layer: 'sealed' | 'all'.
+   * Speculative links are left out unless asked for: they are never used
+   * for rankings, paths or insights.
+   */
+  view(layer = 'all', { speculative = false } = {}) {
     const nodes = [];
     const ids = new Set();
     for (const n of this.nodes.values()) {
-      if (layer === 'sealed' && !n.sealed) continue;
+      // the reader's own context belongs to every layer (it is never sealed)
+      if (layer === 'sealed' && !n.sealed && !isPrivate(n)) continue;
       nodes.push(n);
       ids.add(n.id);
     }
     const edges = [];
     for (const e of this.edges.values()) {
-      if (layer === 'sealed' && !e.sealed) continue;
+      const own = isPrivate(this.nodes.get(e.from)) || isPrivate(this.nodes.get(e.to));
+      if (layer === 'sealed' && !e.sealed && !own) continue;
+      if (!speculative && e.label === 'speculative') continue;
       if (ids.has(e.from) && ids.has(e.to)) edges.push(e);
     }
     return { nodes, edges };
@@ -238,6 +255,19 @@ export class GraphStore {
     }
     return bestScore >= 0.4 ? best : null;
   }
+}
+
+/** Context nodes are the reader's private data. */
+export function isPrivate(node) {
+  return !!node && (node.private === true || node.type === 'ContextNode');
+}
+
+/** Remove nodes (and their links), e.g. when the reader clears their context. */
+export function removeNodes(store, ids) {
+  const set = new Set(ids);
+  for (const id of set) store.nodes.delete(id);
+  for (const [eid, e] of store.edges) if (set.has(e.from) || set.has(e.to)) store.edges.delete(eid);
+  store._emit('removed', [...set]);
 }
 
 export function topicKey(text) {

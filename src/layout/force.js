@@ -50,10 +50,11 @@ export function forceLayout(nodes, edges, { iterations = 220, previous = {} } = 
     const b = index.get(e.to);
     if (a === undefined || b === undefined || a === b) continue;
     // claim<->source links stay short so sources orbit their claims
-    const rest = e.type === 'cites' || e.type === 'supports' || e.type === 'contradicts' ? 0.22 : 0.42;
+    const rest = e.type === 'supports' || e.type === 'contradicts' || e.type === 'reports' || e.type === 'mentions' ? 0.24 : 0.42;
     springs.push([a, b, rest]);
   }
-  const isTopic = nodes.map((nd) => nd.type === 'Topic');
+  // news items and the reader's context sit near the middle
+  const isTopic = nodes.map((nd) => nd.type === 'Topic' || nd.type === 'NewsItem' || nd.type === 'ContextNode');
   const repulse = 0.012 * Math.min(1, 40 / n + 0.3);
   const warm = Object.keys(previous).length > 0;
   let alpha = warm ? 0.35 : 1;

@@ -34,7 +34,7 @@ import {
   DynamicDrawUsage,
   RayInteractable,
 } from '@iwsdk/core';
-import { VERDICT_STYLE, TYPE_STYLE, EDGE_STYLE } from '../model/schema.js';
+import { VERDICT_STYLE, TYPE_STYLE, LABEL_STYLE, RELATION_COLOR, DEFAULT_RELATION_COLOR, NODE_TYPES } from '../model/schema.js';
 import { pagerank } from '../model/algorithms.js';
 import { LayoutClient } from '../layout/layout-client.js';
 import { ringTexture, glowTexture } from './textures.js';
@@ -43,10 +43,10 @@ import { settings } from '../config.js';
 
 const MAX_NODES = 160;
 const MAX_EDGES = 400;
-const TYPES = ['Topic', 'Claim', 'Source', 'Entity'];
+const TYPES = NODE_TYPES;
 const LAYERS = ['fog', 'sealed'];
 const RING_STYLES = ['solid', 'double', 'dashed', 'dotted'];
-const EDGE_GROUPS = ['supports', 'contradicts', 'cites', 'relates'];
+const EDGE_GROUPS = Object.keys(LABEL_STYLE); // reported | inferred | speculative
 const SHAPE = [1.25, 0.8, 0.5];
 
 const _m = new Matrix4();
@@ -95,12 +95,13 @@ export class GraphView {
   // ---------- construction ----------
 
   _buildMeshes() {
-    const geoms = {
-      Topic: new IcosahedronGeometry(1, 2),
-      Claim: new SphereGeometry(1, 20, 14),
-      Source: new OctahedronGeometry(1, 0),
-      Entity: new BoxGeometry(1.4, 1.4, 1.4),
+    const shapes = {
+      star: new OctahedronGeometry(1, 0),
+      gem: new IcosahedronGeometry(1, 0),
+      box: new BoxGeometry(1.3, 1.3, 1.3),
+      ball: new SphereGeometry(1, 20, 14),
     };
+    const geoms = Object.fromEntries(TYPES.map((t) => [t, shapes[TYPE_STYLE[t]?.shape || 'ball']]));
     this.nodeMeshes = {};
     for (const type of TYPES) {
       for (const layer of LAYERS) {
@@ -161,16 +162,19 @@ export class GraphView {
     this.hitEntity = this.world.createTransformEntity(this.hitMesh, this.rootEntity);
     this.hitEntity.addComponent(RayInteractable);
 
+    // one line object per label x layer; relation colour rides on vertex colours
     this.edgeLines = {};
     for (const group of EDGE_GROUPS) {
       for (const layer of LAYERS) {
-        const style = Object.values(EDGE_STYLE).find((s) => s.group === group);
-        const opacity = layer === 'sealed' ? 0.9 : 0.38;
+        const style = LABEL_STYLE[group];
+        const opacity = style.opacity[layer === 'sealed' ? 1 : 0];
+        const common = { vertexColors: true, transparent: true, opacity, depthWrite: false };
         const mat = style.dash
-          ? new LineDashedMaterial({ color: style.color, dashSize: style.dash[0], gapSize: style.dash[1], transparent: true, opacity, depthWrite: false })
-          : new LineBasicMaterial({ color: style.color, transparent: true, opacity, depthWrite: false });
+          ? new LineDashedMaterial({ ...common, dashSize: style.dash[0], gapSize: style.dash[1] })
+          : new LineBasicMaterial(common);
         const geo = new BufferGeometry();
         geo.setAttribute('position', new Float32BufferAttribute(new Float32Array(MAX_EDGES * 6), 3).setUsage(DynamicDrawUsage));
+        geo.setAttribute('color', new Float32BufferAttribute(new Float32Array(MAX_EDGES * 6), 3).setUsage(DynamicDrawUsage));
         geo.setDrawRange(0, 0);
         const line = new LineSegments(geo, mat);
         line.frustumCulled = false;
@@ -440,7 +444,7 @@ export class GraphView {
 
       // glow halo
       let glow = node.sealed ? 0.55 : 0.3;
-      if (node.type === 'Topic') glow = 0.45;
+      if (node.type === 'NewsItem' || node.type === 'ContextNode') glow = 0.5;
       if (emphasized) glow = 1;
       if (flashing) glow = 1.2;
       _s.setScalar(size * (emphasized || flashing ? 5.5 : 4));
@@ -476,7 +480,7 @@ export class GraphView {
     for (const line of Object.values(this.edgeLines)) line.edges.length = 0;
     for (const e of this.store.edges.values()) {
       if (!this._visibleSet?.has(e.from) || !this._visibleSet.has(e.to)) continue;
-      const group = EDGE_STYLE[e.type]?.group || 'relates';
+      const group = LABEL_STYLE[e.label] ? e.label : 'reported';
       const layer = e.sealed ? 'sealed' : 'fog';
       const line = this.edgeLines[`${group}:${layer}`];
       if (line.edges.length < MAX_EDGES) line.edges.push(e);
@@ -485,6 +489,7 @@ export class GraphView {
     const b = new Vector3();
     for (const line of Object.values(this.edgeLines)) {
       const attr = line.geometry.attributes.position;
+      const col = line.geometry.attributes.color;
       let i = 0;
       for (const e of line.edges) {
         const sa = this.state.get(e.from);
@@ -495,6 +500,12 @@ export class GraphView {
         // edges grow out as the younger endpoint blooms in
         const grow = Math.min(sa.scale, sb.scale);
         b.lerpVectors(a, b, grow);
+        _c.setHex(RELATION_COLOR[e.type] ?? DEFAULT_RELATION_COLOR);
+        for (let k = 0; k < 2; k++) {
+          col.array[i + k * 3] = _c.r;
+          col.array[i + k * 3 + 1] = _c.g;
+          col.array[i + k * 3 + 2] = _c.b;
+        }
         attr.array[i++] = a.x;
         attr.array[i++] = a.y;
         attr.array[i++] = a.z;
@@ -503,6 +514,7 @@ export class GraphView {
         attr.array[i++] = b.z;
       }
       attr.needsUpdate = true;
+      col.needsUpdate = true;
       line.geometry.setDrawRange(0, i / 3);
       if (line.dashed && i) line.computeLineDistances();
     }
@@ -545,7 +557,9 @@ export class GraphView {
       .map((id) => {
         const n = this.store.nodes.get(id);
         let p = (this._ranks.get(id) || 0) * 100;
-        if (n.type === 'Topic') p += 700;
+        if (n.type === 'NewsItem') p += 700;
+        if (n.type === 'ContextNode') p += 650;
+        if (n.type === 'Event') p += 400;
         if (n.sealed) p += 200;
         if (this.pathNodes.has(id)) p += 800;
         if (id === this.hoveredId) p += 900;
@@ -610,7 +624,7 @@ function easeOutBack(x) {
 
 function score(node, view) {
   let s = (view._ranks.get(node.id) || 0) * 100;
-  if (node.type === 'Topic') s += 1000;
+  if (node.type === 'NewsItem' || node.type === 'ContextNode') s += 1000;
   if (node.sealed) s += 500;
   if (node.type === 'Claim') s += 50;
   return s;
@@ -628,7 +642,8 @@ function hash(str, salt) {
 function drawLabel(lab, node, selected) {
   const { ctx, canvas, tex } = lab;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.font = `${node.type === 'Topic' ? 600 : 500} 46px ${UI.font}`;
+  const strong = node.type === 'NewsItem' || node.type === 'ContextNode';
+  ctx.font = `${strong ? 600 : 500} 46px ${UI.font}`;
   let text = node.label;
   const maxW = canvas.width - 40;
   while (ctx.measureText(text).width > maxW && text.length > 4) text = text.slice(0, -2);
@@ -640,7 +655,7 @@ function drawLabel(lab, node, selected) {
   if (ctx.roundRect) ctx.roundRect(x0, 14, w, 84, 30);
   else ctx.rect(x0, 14, w, 84);
   ctx.fill();
-  ctx.fillStyle = node.type === 'Topic' ? '#f6efdc' : '#e6eaf0';
+  ctx.fillStyle = node.type === 'ContextNode' ? '#ffe2a0' : strong ? '#f6efdc' : '#e6eaf0';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText(text, canvas.width / 2, 58);

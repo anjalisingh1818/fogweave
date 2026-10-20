@@ -9,14 +9,16 @@ const STEPS = [
   {
     id: 'welcome',
     title: 'Welcome to FogWeave',
-    body: 'Research grows here as a web of claims. Each claim shows how well independent sources support it.',
+    body: 'News drifts here as lights. Each link you will see says whether a source reported it, it was inferred, or it is only speculative.',
     wait: null,
   },
-  { id: 'pinch-node', title: 'Open a node', body: 'Point at a glowing node and pinch. Its card shows the evidence.', wait: 'card-opened' },
-  { id: 'seal', title: 'Keep what you trust', body: 'Press Seal on the card. Sealed items turn solid and go to your Library.', wait: 'sealed' },
+  { id: 'light', title: 'Touch a light', body: 'Point at a drifting light and pinch. Its reader card shows the story, key claims and quotes.', wait: 'light-opened' },
+  { id: 'expand', title: 'Grow it into the web', body: 'Press Expand on the card. Watch who and what it involves, and what it may affect.', wait: 'expanded' },
+  { id: 'pinch-node', title: 'Open a node', body: 'Pinch a node in the web. Its card shows its links with quotes or reasoning.', wait: 'card-opened' },
+  { id: 'seal', title: 'Keep what you trust', body: 'Press Seal. Sealed items turn solid and go to your Library.', wait: 'sealed' },
   { id: 'coin', title: 'The Coin', body: 'Tap the Coin at your lower right (or flip it near a node) to read its evidence.', wait: 'coin' },
-  { id: 'locket', title: 'The Locket', body: 'Tap the Locket at your lower left (or swing it near a node) to see how central it is.', wait: 'locket' },
-  { id: 'your-turn', title: 'Your turn', body: 'Pinch empty space to name your own topic. The "?" on your left wrist has help.', wait: null, last: true },
+  { id: 'locket', title: 'The Locket', body: 'Tap the Locket at your lower left (or swing it near a node) to see how relevant it is.', wait: 'locket' },
+  { id: 'your-turn', title: 'Make it yours', body: 'The "?" on your left wrist has My context: add a city, field or tools you use, then try "Touches me?".', wait: null, last: true },
 ];
 
 const DONE_KEY = 'fogweave.onboarded.v1';

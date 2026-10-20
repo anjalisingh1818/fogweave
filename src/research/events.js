@@ -1,8 +1,8 @@
 /**
- * Research event stream shared by live research (server, Phase 2) and
- * replays of bundled webs. Event types:
- *   plan {topic node, subquestions}   source_found {node}   claim {node}
- *   verified {id, verdict, evidence}  edge {edge}  insight {insight}  done {}
+ * Research event stream shared by the live engine and replays of recorded
+ * runs. V2 types: status {text}, node {node}, edge {edge},
+ * verified {id, verdict, evidence}, note {level, text}, done {stats}.
+ * (V1 types plan / source_found / claim / insight are still understood.)
  */
 
 /** Apply one event to a GraphStore. Returns a short status phrase. */
@@ -28,6 +28,17 @@ export function applyEvent(store, ev) {
     case 'insight':
       store.insights.push(ev.insight);
       return 'Looking for patterns';
+    // V2 stream (live engine and recorded snapshots)
+    case 'node':
+      store.addNode(ev.node);
+      return null;
+    case 'edge':
+      store.addEdge(ev.edge);
+      return null;
+    case 'status':
+      return ev.text || null;
+    case 'note':
+      return null;
     case 'done':
       return 'Done';
     default:
@@ -90,7 +101,9 @@ function topicMatches(n, doc) {
  * phase changes. pause()/resume()/stop() let the user halt growth.
  */
 export class EventPlayer {
-  constructor(store, events, { durationMs = 10000, onStatus, onDone } = {}) {
+  constructor(store, events, { durationMs = 10000, onStatus, onDone, onNote, onStats } = {}) {
+    this.onNote = onNote;
+    this.onStats = onStats;
     this.store = store;
     this.events = events;
     this.i = 0;
@@ -108,7 +121,10 @@ export class EventPlayer {
     this.acc += deltaMs;
     while (this.acc >= this.interval && this.i < this.events.length) {
       this.acc -= this.interval;
-      const phrase = applyEvent(this.store, this.events[this.i++]);
+      const ev = this.events[this.i++];
+      if (ev.type === 'note') this.onNote?.(ev);
+      if (ev.type === 'done') this.onStats?.(ev.stats);
+      const phrase = applyEvent(this.store, ev);
       if (phrase && phrase !== this._last) {
         this._last = phrase;
         this.onStatus?.(phrase);

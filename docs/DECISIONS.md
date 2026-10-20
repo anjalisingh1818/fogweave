@@ -26,3 +26,20 @@ One line each: what was chosen, and why. Newest last.
 - **News lights:** instanced like the web (one core mesh per kind, one glow mesh, one enlarged hit mesh), spread over a 220° arc at 1.45–2.2 m, outside the web bubble. Glow follows relevance, and dimming follows age (never below 35%, so old lights stay reachable). Pinching opens the reader card.
 - **Reader-card shell:** Seal and Close work, and sealed news is stored on the device and listed in the Library. Expand and Ask are drawn but inactive, and the card says the news engine is not connected. They arrive in Phase 2/3.
 - **Light fixtures:** `public/demo/lights.json` holds 12 synthetic items (badged TEST FIXTURE) until Phase 2 produces a dated real snapshot.
+- **Phase 2 backend shape:** FastAPI + an in-house orchestrator with role agents (Summarizer, Extractor, Verifier, ImpactAnalyst), each behind one `run() -> Pydantic` interface. Agno was dropped for now: Groq cannot combine JSON mode with tool calls, and the scaffold's agent hid the steps. The interface stays small, so an agent framework can be swapped back in. Source search is our own adapters, not agent tools, so every request is paced and cached.
+- **LLM chain:** `openai/gpt-oss-120b`, then `openai/gpt-oss-20b`, then `qwen/qwen3.8-27b` on the Groq free tier. Llama 3.3 70B is no longer served to the key (checked 2026-10-20).
+  - Strict `json_schema` structured outputs; at most 2 retries; results cached by input hash.
+  - Roles prefer different models (summarizer and verifier use 20b) because each model has its own 8K tokens/minute.
+  - Daily usage persists across restarts.
+- **Sources live:** Wikipedia Current events (with the outlets it cites), GDELT DOC 2.0, Hacker News and arXiv. Wikidata for linking and Wikipedia leads for corroboration. OpenAlex is skipped (needs a key). Terms and limits are in [SOURCES.md](SOURCES.md).
+- **GDELT rate-limit detection:** GDELT answers over-limit requests with HTTP 200 plain text, which we treat as a rate limit, with a 90 s host cooldown.
+- **Quotes must be verbatim:** every quote the LLM returns is checked against the text it came from (normalised whitespace and quotes, 25 words or fewer). Unverifiable claims, relations and entities are dropped and counted. Quotes from Wikipedia's portal summary are credited to Wikipedia, not to the outlet.
+- **Impact labels enforced in code:** an "inferred" link whose basis ids do not exist is demoted to speculative. Impact sources are resolved to known entities by exact match, then token overlap (0.5 or more); otherwise first hops attach to the main event.
+- **Evidence threshold:** "Well supported" needs 2 or more independent supporting domains with mass 1.3 or more (lowered from 1.6; see EVIDENCE.md).
+- **Embeddings:** BAAI/bge-small-en-v1.5 via fastembed (ONNX, CPU). Set `FOGWEAVE_EMBEDDINGS=0` on small hosts to use the hashed bag-of-words fallback.
+- **SciPy** (BSD) is required by networkx PageRank.
+- **One shared ontology file** (`shared/ontology.v2.json`) for client and server. Added `same_as` (private context to entity, on device) and `relates_to` (speculative suggestions only).
+- **Client algorithms in JS for anything personal or offline:** personalized PageRank and the evidence-weighted path. networkx on the server for pipeline and eval. Both are tested.
+- **The web accumulates across expansions:** related items connect through shared entities. The **sealed layer persists** on the device (`fogweave.library.v1`); the fog does not.
+- **Offline = a recorded real run:** `server/scripts/snapshot.py` records lights, reader claims and 3 expansions event by event into `public/demo/snapshot/` (dated, `provenance.kind = "pipeline"`, fictional sample persona). The synthetic topic and light fixtures are removed. A V2 synthetic stress web stays in `qa/fixtures/` for frame tests only.
+- **QA:** `qa/phase2.mjs` replaces the Phase 1 script. It has a live run and an offline run with the backend blocked by Playwright routing.

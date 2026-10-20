@@ -8,6 +8,7 @@
 export function adjacency({ nodes, edges }) {
   const adj = new Map(nodes.map((n) => [n.id, []]));
   for (const e of edges) {
+    if (e.label === 'speculative') continue; // never ranked, never walked
     if (!adj.has(e.from) || !adj.has(e.to)) continue;
     adj.get(e.from).push({ id: e.to, edge: e });
     adj.get(e.to).push({ id: e.from, edge: e });
@@ -15,18 +16,24 @@ export function adjacency({ nodes, edges }) {
   return adj;
 }
 
-export function pagerank(view, { damping = 0.85, iterations = 60 } = {}) {
+/**
+ * PageRank; with `seeds` it is personalised (random walks restart at the
+ * reader's context nodes), which is what the Locket and light glow use.
+ */
+export function pagerank(view, { damping = 0.85, iterations = 60, seeds = [] } = {}) {
   const adj = adjacency(view);
   const ids = [...adj.keys()];
   const n = ids.length;
   const pr = new Map();
   if (!n) return pr;
-  for (const id of ids) pr.set(id, 1 / n);
+  const seedSet = seeds.filter((s) => adj.has(s));
+  const restart = new Map(ids.map((id) => [id, seedSet.length ? (seedSet.includes(id) ? 1 / seedSet.length : 0) : 1 / n]));
+  for (const id of ids) pr.set(id, restart.get(id)); // sums to 1 by construction
   for (let it = 0; it < iterations; it++) {
     let dangling = 0;
     for (const id of ids) if (adj.get(id).length === 0) dangling += pr.get(id);
     const next = new Map();
-    for (const id of ids) next.set(id, (1 - damping) / n + (damping * dangling) / n);
+    for (const id of ids) next.set(id, (1 - damping) * restart.get(id) + damping * dangling * restart.get(id));
     for (const id of ids) {
       const out = adj.get(id);
       if (!out.length) continue;
@@ -89,9 +96,9 @@ export function degree(view) {
  * Importance of one node inside a view, as a rank plus a plain why.
  * Ranking key: PageRank, ties broken by degree then id (stable).
  */
-export function importanceOf(view, nodeId) {
+export function importanceOf(view, nodeId, { seeds = [] } = {}) {
   if (!view.nodes.some((n) => n.id === nodeId)) return null;
-  const pr = pagerank(view);
+  const pr = pagerank(view, { seeds });
   const deg = degree(view);
   const btw = betweenness(view);
   const order = view.nodes
@@ -107,9 +114,16 @@ export function importanceOf(view, nodeId) {
   } else if (btw.get(nodeId) === 0) {
     why.push('not on any shortest path between others');
   }
+  const personal = seeds.some((s) => view.nodes.some((n) => n.id === s));
+  if (personal) {
+    const near = bestPath(view, nodeId, seeds);
+    const label = near && view.nodes.find((n) => n.id === near.nodes.at(-1))?.label;
+    why.unshift(near ? `${near.edges.length} step${near.edges.length === 1 ? '' : 's'} from your “${label}”` : 'no grounded link to your context');
+  }
   return {
     rank,
     of: order.length,
+    personal,
     pagerank: pr.get(nodeId),
     degree: deg.get(nodeId),
     betweenness: btw.get(nodeId),
@@ -117,14 +131,62 @@ export function importanceOf(view, nodeId) {
   };
 }
 
-export function mostImportant(view) {
+export function mostImportant(view, { seeds = [], exclude = () => false } = {}) {
   if (!view.nodes.length) return null;
-  const pr = pagerank(view);
+  const pr = pagerank(view, { seeds });
   const deg = degree(view);
   const id = view.nodes
+    .filter((n) => !exclude(n))
     .map((n) => n.id)
     .sort((a, b) => pr.get(b) - pr.get(a) || deg.get(b) - deg.get(a) || (a < b ? -1 : 1))[0];
-  return importanceOf(view, id) && { id, ...importanceOf(view, id) };
+  if (!id) return null;
+  return { id, ...importanceOf(view, id, { seeds }) };
+}
+
+export const LABEL_COST = { reported: 1, inferred: 2 }; // speculative: not walkable
+
+/**
+ * Cheapest grounded path from one node to any of `targets` (Dijkstra,
+ * Reported links cost 1, Inferred 2, Speculative excluded). Returns
+ * { nodes, edges, cost } or null, which means "no clear connection found".
+ */
+export function bestPath(view, fromId, targets) {
+  const adj = adjacency(view);
+  if (!adj.has(fromId)) return null;
+  const goal = new Set(targets.filter((t) => t !== fromId && adj.has(t)));
+  if (!goal.size) return null;
+  const dist = new Map([[fromId, 0]]);
+  const prev = new Map();
+  const done = new Set();
+  while (true) {
+    let v = null;
+    let best = Infinity;
+    for (const [id, d] of dist) {
+      if (!done.has(id) && (d < best || (d === best && v !== null && id < v))) {
+        best = d;
+        v = id;
+      }
+    }
+    if (v === null) return null;
+    if (goal.has(v)) {
+      const nodes = [v];
+      const edges = [];
+      while (prev.has(nodes[0])) {
+        const p = prev.get(nodes[0]);
+        edges.unshift(p.edge);
+        nodes.unshift(p.v);
+      }
+      return { nodes, edges, cost: best };
+    }
+    done.add(v);
+    for (const { id: w, edge } of adj.get(v)) {
+      const c = best + (LABEL_COST[edge.label || 'reported'] ?? Infinity);
+      if (c < (dist.get(w) ?? Infinity)) {
+        dist.set(w, c);
+        prev.set(w, { v, edge });
+      }
+    }
+  }
 }
 
 /** BFS shortest path. Returns { nodes: [ids], edges: [edge objects] } or null. */
@@ -176,6 +238,24 @@ export function evidenceReadout(store, nodeId) {
     lines.push(`${ev.supports ?? 0} support · ${ev.contradicts ?? 0} contradict · ${ev.unclear ?? 0} unclear`);
     if (ev.newest) lines.push(`Newest evidence: ${ev.newest}`);
     return { verdict: node.verdict || 'unverified', lines, risk: riskNote(node.verdict, ev) };
+  }
+  if (node.type === 'NewsItem') {
+    const claims = store.neighbors(nodeId).map((x) => store.nodes.get(x.id)).filter((n) => n?.type === 'Claim');
+    const counts = { supported: 0, contradicted: 0, mixed: 0, unverified: 0 };
+    for (const c of claims) counts[c.verdict || 'unverified']++;
+    return {
+      verdict: null,
+      lines: [
+        `Outlet: ${node.outlet}${node.sourceClass ? ` (${node.sourceClass})` : ''}`,
+        node.date ? `Dated: ${String(node.date).slice(0, 10)}` : 'No date',
+        claims.length ? `${claims.length} key claim${claims.length === 1 ? '' : 's'}: ${counts.supported} well supported, ${counts.mixed} mixed` : 'Not expanded yet',
+        claims.length ? `${counts.contradicted} contradicted, ${counts.unverified} unverified` : null,
+      ].filter(Boolean),
+      risk: counts.contradicted ? 'Other sources disagree with part of this story.' : !claims.length ? '' : counts.supported === 0 ? 'No claim here is confirmed by an independent source yet.' : '',
+    };
+  }
+  if (node.type === 'ContextNode') {
+    return { verdict: null, lines: ['Your own context (stored on this device only)'], risk: '' };
   }
   if (node.type === 'Source') {
     const backed = store.neighbors(nodeId).filter((x) => x.edge.type === 'supports' || x.edge.type === 'cites');

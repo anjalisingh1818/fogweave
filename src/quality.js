@@ -14,7 +14,7 @@ export class QualityGovernor {
     this.under = 0;
     this.stats = { fps: 0, avgMs: 0, p95Ms: 0, level };
     this.locked = false; // QA can lock the level to measure a fixed config
-    this.emulated = typeof window !== 'undefined' && !!window.IWER_DEVICE;
+
   }
 
   setTargetHz(hz) {
@@ -30,7 +30,8 @@ export class QualityGovernor {
     const avg = sorted.reduce((a, b) => a + b, 0) / sorted.length;
     // In the desktop emulator the session claims 72 Hz but the monitor sets
     // the pace, so judge against the interval actually delivered (p10).
-    const target = this.emulated ? Math.max(this.targetMs, sorted[Math.floor(sorted.length * 0.1)]) : this.targetMs;
+    const emulated = typeof window !== 'undefined' && !!window.IWER_DEVICE; // injected after startup
+    const target = emulated ? Math.max(this.targetMs, sorted[Math.floor(sorted.length * 0.1)]) : this.targetMs;
     this.stats = {
       fps: 1000 / avg,
       avgMs: avg,
