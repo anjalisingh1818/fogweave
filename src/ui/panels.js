@@ -111,6 +111,10 @@ export function settingsDraw(app) {
       }, { primary: on, size: 28 });
       y += 82;
     }
+    ui.button('tour', 'Tour', pad, h - 104, 200, 76, () => {
+      app.closeCard('settings');
+      app.startOnboarding();
+    }, { size: 28 });
     ui.button('close', 'Close', w - pad - 200, h - 104, 200, 76, () => app.closeCard('settings'), { icon: '✕', size: 28 });
   };
 }

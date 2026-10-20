@@ -47,17 +47,26 @@ export class Atmosphere {
       this.seed[i] = rnd() * 100;
     }
     this.base = pos.slice();
+    // purely decorative motes: faint white, red and blue, tiny, no meaning
+    // (evidence colours live only on node rings and links; see DECISIONS)
+    const col = new Float32Array(n * 3);
+    const tints = [[0.86, 0.88, 0.92], [0.92, 0.7, 0.7], [0.68, 0.76, 0.95]];
+    for (let i = 0; i < n; i++) {
+      const t = tints[i % 7 === 0 ? 1 : i % 5 === 0 ? 2 : 0];
+      col.set(t, i * 3);
+    }
     const geo = new BufferGeometry();
     geo.setAttribute('position', new Float32BufferAttribute(pos, 3));
+    geo.setAttribute('color', new Float32BufferAttribute(col, 3));
     this.points = new Points(
       geo,
       new PointsMaterial({
-        size: 0.018,
+        size: 0.014,
         map: particleTexture(),
         transparent: true,
-        opacity: 0.55,
+        opacity: 0.5,
         depthWrite: false,
-        color: 0xd8dde6,
+        vertexColors: true,
         sizeAttenuation: true,
       }),
     );
@@ -87,7 +96,7 @@ export class Atmosphere {
   update(delta) {
     this.t += delta * (settings.comfort.gentle ? 0.4 : 1);
     const q = settings.quality;
-    const count = Math.min(q.particles, this.seed.length);
+    const count = Math.min(Math.round(q.particles * (settings.comfort.gentle ? 0.4 : 1)), this.seed.length);
     this.points.visible = count > 0;
     this.points.geometry.setDrawRange(0, count);
     if (count) {

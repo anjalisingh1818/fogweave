@@ -185,6 +185,17 @@ export class GraphView {
       }
     }
 
+    // pulses: small lights travelling from cause to affected; faster and
+    // brighter with stronger evidence (reported > inferred > speculative)
+    this.pulseMesh = new InstancedMesh(
+      new SphereGeometry(1, 8, 6),
+      new MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.9, depthWrite: false, blending: AdditiveBlending }),
+      300,
+    );
+    this.pulseMesh.count = 0;
+    this.pulseMesh.frustumCulled = false;
+    this.root.add(this.pulseMesh);
+
     // highlighted path: thin gold tubes
     this.pathMesh = new InstancedMesh(
       new CylinderGeometry(1, 1, 1, 6, 1, true),
@@ -383,6 +394,7 @@ export class GraphView {
     _q.copy(this.root.getWorldQuaternion(new Quaternion())).invert().multiply(headWorldQuat);
     this._writeNodes(_q);
     this._writeEdges();
+    this._writePulses();
     this._writePath();
     this._updateLabels(delta, headWorldPos);
   }
@@ -544,6 +556,40 @@ export class GraphView {
       line.geometry.setDrawRange(0, i / 3);
       if (line.dashed && i) line.computeLineDistances();
     }
+  }
+
+  _writePulses() {
+    const SPEED = { reported: 0.55, inferred: 0.35, speculative: 0.12 };
+    const BRIGHT = { reported: 1, inferred: 0.75, speculative: 0.3 };
+    const DIRECTED = new Set(['affects', 'depends_on', 'supports', 'contradicts', 'follows', 'part_of', 'involves', 'happened_in']);
+    const a = new Vector3();
+    const b = new Vector3();
+    let n = 0;
+    const gentle = settings.comfort.gentle ? 0.5 : 1;
+    for (const line of Object.values(this.edgeLines)) {
+      for (const e of line.edges) {
+        if (n >= 300 || !DIRECTED.has(e.type)) continue;
+        const sa = this.state.get(e.from);
+        const sb = this.state.get(e.to);
+        if (!sa || !sb || Math.min(sa.scale, sb.scale) < 1) continue;
+        this._drawPos(e.from, a);
+        this._drawPos(e.to, b);
+        const label = e.label || 'reported';
+        // depends_on points from the dependent to what it needs: the effect flows the other way
+        const [p0, p1] = e.type === 'depends_on' ? [b, a] : [a, b];
+        const t = (this.time * SPEED[label] * gentle + hash(e.id, 9)) % 1;
+        _p.lerpVectors(p0, p1, t);
+        _s.setScalar((0.006 + 0.004 * BRIGHT[label]) / this.radius);
+        _m.compose(_p, IDENTITY_Q, _s);
+        this.pulseMesh.setMatrixAt(n, _m);
+        _c.setHex(RELATION_COLOR[e.type] ?? DEFAULT_RELATION_COLOR).multiplyScalar(BRIGHT[label] * Math.sin(Math.PI * t) * (e.sealed ? 1.2 : 0.9));
+        this.pulseMesh.setColorAt(n, _c);
+        n++;
+      }
+    }
+    this.pulseMesh.count = n;
+    this.pulseMesh.instanceMatrix.needsUpdate = true;
+    if (this.pulseMesh.instanceColor) this.pulseMesh.instanceColor.needsUpdate = true;
   }
 
   _writePath() {

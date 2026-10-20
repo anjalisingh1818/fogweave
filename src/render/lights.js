@@ -31,11 +31,16 @@ import { UI } from './card.js';
 import { hash01 } from '../layout/force.js';
 import { settings } from '../config.js';
 
+// News lights are warm white-gold. Evidence colours (blue/red/violet/gray)
+// are reserved for node rings and links, so a light never reads as a verdict.
+// Kind = shape + glow pattern: latest = star, steady; research = orb, slow
+// breathing; archive = small orb, dimmer.
 export const LIGHT_KINDS = {
-  breaking: { label: 'Latest', color: 0xffe2a8, css: '#ffe2a8' },
-  paper: { label: 'Research', color: 0x9fe3ff, css: '#9fe3ff' },
-  archive: { label: 'Archive', color: 0xd9a066, css: '#d9a066' },
+  breaking: { label: 'Latest', color: 0xffe6b4, css: '#ffe6b4', pattern: 'steady' },
+  paper: { label: 'Research', color: 0xfff2d6, css: '#fff2d6', pattern: 'breathe' },
+  archive: { label: 'Archive', color: 0xe0c08c, css: '#e0c08c', pattern: 'dim' },
 };
+const TRAIL = 3; // fading ghosts behind each light
 
 const MAX = 48;
 const _m = new Matrix4();
@@ -43,6 +48,7 @@ const _q = new Quaternion();
 const _s = new Vector3();
 const _p = new Vector3();
 const _c = new Color();
+const _t = new Vector3();
 const ID_Q = new Quaternion();
 
 export class LightField {
@@ -74,8 +80,9 @@ export class LightField {
     this.glow = new InstancedMesh(
       new PlaneGeometry(1, 1),
       new MeshBasicMaterial({ map: glowTexture(), transparent: true, depthWrite: false, blending: AdditiveBlending }),
-      MAX,
+      MAX * (1 + TRAIL),
     );
+    this.hands = [];
     this.glow.count = 0;
     this.glow.frustumCulled = false;
     this.group.add(this.glow);
@@ -177,8 +184,14 @@ export class LightField {
     return out;
   }
 
+  /** World positions of the fingertips/wrists (lights brighten when a hand comes near). */
+  setHands(points) {
+    this.hands = points;
+  }
+
   update(delta, headQuat) {
     this.time += delta;
+    const calm = settings.comfort.gentle;
     for (const mesh of Object.values(this.cores)) mesh.count = 0;
     this.glow.count = 0;
     this.hit.count = 0;
@@ -187,10 +200,14 @@ export class LightField {
       const kind = LIGHT_KINDS[it.kind] ? it.kind : 'breaking';
       this.worldPositionOf(it.id, _p);
       const age = this.ageDays(it);
-      const fresh = Math.max(0.35, 1 - age / 45); // old lights dim, never vanish
+      const fresh = Math.max(0.35, 1 - age / 45) * (kind === 'archive' ? 0.75 : 1); // old lights dim, never vanish
       const rel = Math.max(0, Math.min(1, it.relevance ?? 0.3));
+      let near = 0;
+      for (const h of this.hands) near = Math.max(near, 1 - Math.min(1, h.distanceTo(_p) / 0.35));
       const focus = it.id === this.hoveredId || it.id === this.openId;
-      const twinkle = 1 + 0.08 * Math.sin(this.time * 1.3 + hash01(it.id, 6) * 6);
+      const ph = hash01(it.id, 6) * 6;
+      // slow patterns only (well under 3 flashes per second)
+      const twinkle = LIGHT_KINDS[kind].pattern === 'breathe' ? 1 + 0.18 * Math.sin(this.time * 0.9 + ph) : 1 + 0.06 * Math.sin(this.time * 1.3 + ph);
       const core = (kind === 'breaking' ? 0.026 : 0.021) * (focus ? 1.35 : 1);
 
       const mesh = this.cores[kind];
@@ -200,10 +217,25 @@ export class LightField {
       _c.setHex(LIGHT_KINDS[kind].color).multiplyScalar(this.sealed.has(it.id) ? 1 : 0.55 + 0.45 * fresh);
       mesh.setColorAt(mesh.count++, _c);
 
-      _m.compose(_p, headQuat, _s.setScalar(core * (6 + 7 * rel) * twinkle * (focus ? 1.3 : 1)));
+      const lift = (focus ? 1.4 : 1) * (1 + 0.8 * near) * (calm ? 0.7 : 1);
+      _m.compose(_p, headQuat, _s.setScalar(core * (6 + 7 * rel) * twinkle * (focus ? 1.3 : 1) * (1 + 0.3 * near)));
       this.glow.setMatrixAt(this.glow.count, _m);
-      _c.setHex(LIGHT_KINDS[kind].color).multiplyScalar((0.25 + 0.75 * rel) * fresh * (focus ? 1.4 : 1));
+      _c.setHex(LIGHT_KINDS[kind].color).multiplyScalar((0.25 + 0.75 * rel) * fresh * lift);
       this.glow.setColorAt(this.glow.count++, _c);
+      // short fading trail: where the light was a moment ago
+      if (!calm) {
+        const save = this.time;
+        for (let k = 1; k <= TRAIL; k++) {
+          this.time = save - k * 0.35;
+          this.worldPositionOf(it.id, _t);
+          _m.compose(_t, headQuat, _s.setScalar(core * (4 - k)));
+          this.glow.setMatrixAt(this.glow.count, _m);
+          _c.setHex(LIGHT_KINDS[kind].color).multiplyScalar(0.18 * (1 - k / (TRAIL + 1)) * fresh);
+          this.glow.setColorAt(this.glow.count++, _c);
+        }
+        this.time = save;
+        this.worldPositionOf(it.id, _p);
+      }
 
       _m.compose(_p, ID_Q, _s.setScalar(0.07)); // generous touch target
       this.hit.setMatrixAt(this.hit.count++, _m);

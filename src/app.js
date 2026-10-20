@@ -26,7 +26,7 @@ import { EventPlayer, applyEvent } from './research/events.js';
 import { ResearchClient } from './research/client.js';
 import { ContextStore, SAMPLE_PERSONA, CONTEXT_KINDS } from './context.js';
 import { InterestStore } from './interests.js';
-import { sampleFeed, seedFrom } from './feed.js';
+import { isMuted, sampleFeed, seedFrom } from './feed.js';
 import { interestsDraw } from './ui/interests-card.js';
 import { settings, loadSettings, setQuality, saveSettings } from './config.js';
 import { answerDraw, ASK_SUGGESTIONS, notesDraw, lightsPanelDraw, settingsDraw, timelineDraw, briefingDraw, exportDraw, insightsDraw } from './ui/panels.js';
@@ -126,6 +126,7 @@ export class App {
       this.lightsMeta = { kind: 'live', generatedAt: pool.generatedAt, sources: `${ok} of ${all} feeds` };
       this.notes = pool.notes || [];
       this.pool = pool.items.map((it) => ({ ...it, live: true }));
+      this._poolCache = new Map([[JSON.stringify(this.interests.forServer()), this.pool]]);
     } else if (snap) {
       this.mode = 'offline';
       this.lightsMeta = { kind: snap.provenance?.kind, generatedAt: snap.generatedAt };
@@ -135,6 +136,7 @@ export class App {
       this.lightsMeta = { kind: 'none' };
     }
     this.drawLights();
+    this._shownKey = JSON.stringify(this.interests.forServer());
     this.setStatus('');
     this._restoreWorkspace();
     if (Onboarding.needed()) this.startOnboarding();
@@ -524,16 +526,49 @@ export class App {
     this.onboarding.notify('reshuffle');
   }
 
-  /** Interests changed: live pools are re-fetched (queries depend on them). */
+  /**
+   * Interests changed: live pools are re-fetched (queries depend on them).
+   * Going back to an earlier set of interests brings back the lights it showed.
+   * Several quick changes: only the latest one draws.
+   */
   async interestsChanged() {
     this.cards.get('interests')?.redraw();
+    const gen = (this._interestGen = (this._interestGen || 0) + 1);
+    const key = JSON.stringify(this.interests.forServer());
+    this._shownLights ??= new Map();
+    if (this._shownKey) this._shownLights.set(this._shownKey, [...this.lights.items]);
     if (this.mode === 'live') {
-      this.setStatus('Looking for lights that match…');
-      const pool = await this.client.pool(this.interests.forServer());
-      if (pool?.items?.length) this.pool = pool.items.map((it) => ({ ...it, live: true }));
-      this.setStatus('');
+      this._poolCache ??= new Map();
+      let pool = this._poolCache.get(key);
+      if (!pool) {
+        this.setStatus('Looking for lights that match…');
+        const res = await this.client.pool(this.interests.forServer());
+        if (res?.items?.length) {
+          pool = res.items.map((it) => ({ ...it, live: true }));
+          this._poolCache.set(key, pool);
+        }
+      }
+      if (gen !== this._interestGen) return; // a newer change is on its way
+      if (this.statusText.startsWith('Looking for lights')) this.setStatus('');
+      if (pool) this.pool = pool;
     }
-    this.drawLights();
+    const earlier = this._shownLights.get(key);
+    if (earlier) this._restoreLights(earlier);
+    else this.drawLights();
+    this._shownKey = key;
+  }
+
+  /** Show these lights again, topped up by the sampler. */
+  _restoreLights(earlier) {
+    const busy = this.lights.busyIds();
+    const kept = this.lights.items.filter((it) => busy.has(it.id));
+    const back = earlier.filter((it) => !busy.has(it.id) && !isMuted(it, this.interests));
+    const items = [...kept, ...back].slice(0, 16);
+    const fill = sampleFeed(this.pool, this.interests, { n: 16 - items.length, seed: this.feedSeed, exclude: new Set(items.map((k) => k.id)) });
+    this.lights.setItems([...items, ...fill]);
+    this._applyRelevance();
+    this._refreshAt = performance.now() + 75000;
+    this.cards.get('lights')?.redraw();
   }
 
   likeLight(id, more = true) {
@@ -964,7 +999,7 @@ export class App {
   }
 
   sealLight(id) {
-    const it = this.lights.get(id);
+    const it = this.getItem(id);
     if (!it) return;
     const { claims, live, claimsLoading, glow, ...rest } = it;
     this.sealedLights[id] = { ...rest, claims: (claims || []).slice(0, 3), sealedAt: new Date().toISOString() };
@@ -1280,6 +1315,9 @@ export class App {
     const now = performance.now();
     this.player?.update(delta * 1000);
     this.view.update(delta, _hp, _hq);
+    this._handPoints ??= [new Vector3(), new Vector3()];
+    const tips = this.world.session ? ['left', 'right'].map((s, i) => this.sys.player.indexTipSpaces?.[s]?.getWorldPosition(this._handPoints[i])).filter(Boolean) : [];
+    this.lights.setHands(tips);
     this.lights.update(delta, _hq);
     this.cards.update(delta);
     this.atmosphere.update(delta);
