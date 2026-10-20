@@ -1,0 +1,1478 @@
+[
+ {
+  "item": "n:00dfe2b0206f",
+  "title": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+  "question": "Who is affected?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The World Food Programme’s decision to cut monthly food aid will affect about 500,000 people in the Gaza Strip. These individuals are residents of Gaza who rely on the WFP for regular food assistance.",
+   "sentences": [
+    {
+     "text": "The World Food Programme’s decision to cut monthly food aid will affect about 500,000 people in the Gaza Strip.",
+     "cites": [
+      "F1",
+      "F4",
+      "F5"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "These individuals are residents of Gaza who rely on the WFP for regular food assistance.",
+     "cites": [
+      "F6"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F1": {
+     "text": "News item from france24.com dated 2026-10-19: The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+     "quote": "",
+     "source": "https://www.france24.com/en/live-news/20261019-un-agency-slashes-gaza-food-aid-over-funding-warns-needs-persist",
+     "node": "n:00dfe2b0206f"
+    },
+    "F4": {
+     "text": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding… about World Food Programme cuts monthly food aid in Gaza",
+     "quote": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+     "source": "https://www.france24.com/en/live-news/20261019-un-agency-slashes-gaza-food-aid-over-funding-warns-needs-persist",
+     "edge": "about:n:00dfe2b0206f->ev:world food programme cuts monthly food aid in gaza"
+    },
+    "F5": {
+     "text": "World Food Programme cuts monthly food aid in Gaza involves World Food Programme",
+     "quote": "The World Food Programme said Monday it would end monthly assistance to 500,000 people in Gaza due to a funding shortfall",
+     "source": "https://www.france24.com/en/live-news/20261019-un-agency-slashes-gaza-food-aid-over-funding-warns-needs-persist",
+     "edge": "involves:ev:world food programme cuts monthly food aid in gaza->org:world food programme"
+    },
+    "F6": {
+     "text": "World Food Programme affects 500,000 people in Gaza (inferred: WFP ending assistance directly removes food aid for these people)",
+     "quote": "",
+     "source": "",
+     "edge": "affects:org:world food programme->org:500,000 people in gaza"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:00dfe2b0206f",
+  "title": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+  "question": "What changes because of this?",
+  "search_only": {
+   "refused": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {},
+   "answerable": false
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The World Food Programme will stop providing monthly food aid to about 500,000 people in the Gaza Strip. This reduction is due to a funding shortfall that the WFP cannot cover with its current resources. The loss of aid will increase food insecurity for those affected, raising the risk that they will not have enough food each month. The WFP has stated it needs roughly $450 million over the next six months to maintain operations in Gaza and the West Bank.",
+   "sentences": [
+    {
+     "text": "The World Food Programme will stop providing monthly food aid to about 500,000 people in the Gaza Strip.",
+     "cites": [
+      "F1",
+      "F4",
+      "F5"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "This reduction is due to a funding shortfall that the WFP cannot cover with its current resources.",
+     "cites": [
+      "F1",
+      "F4",
+      "F5"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "The loss of aid will increase food insecurity for those affected, raising the risk that they will not have enough food each month.",
+     "cites": [
+      "F6",
+      "F7"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "The WFP has stated it needs roughly $450 million over the next six months to maintain operations in Gaza and the West Bank.",
+     "cites": [
+      "F3",
+      "F8"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F1": {
+     "text": "News item from france24.com dated 2026-10-19: The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+     "quote": "",
+     "source": "https://www.france24.com/en/live-news/20261019-un-agency-slashes-gaza-food-aid-over-funding-warns-needs-persist",
+     "node": "n:00dfe2b0206f"
+    },
+    "F3": {
+     "text": "Claim (unverified, 1 independent domain(s)): WFP needs about $450 million for the next six months for operations in Gaza and the West Bank.",
+     "quote": "The agency says it needs about $450 million over the next six months for its operations in Gaza and the West Bank",
+     "source": "https://www.france24.com/en/live-news/20261019-un-agency-slashes-gaza-food-aid-over-funding-warns-needs-persist",
+     "node": "n:00dfe2b0206f:c2"
+    },
+    "F4": {
+     "text": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding… about World Food Programme cuts monthly food aid in Gaza",
+     "quote": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+     "source": "https://www.france24.com/en/live-news/20261019-un-agency-slashes-gaza-food-aid-over-funding-warns-needs-persist",
+     "edge": "about:n:00dfe2b0206f->ev:world food programme cuts monthly food aid in gaza"
+    },
+    "F5": {
+     "text": "World Food Programme cuts monthly food aid in Gaza involves World Food Programme",
+     "quote": "The World Food Programme said Monday it would end monthly assistance to 500,000 people in Gaza due to a funding shortfall",
+     "source": "https://www.france24.com/en/live-news/20261019-un-agency-slashes-gaza-food-aid-over-funding-warns-needs-persist",
+     "edge": "involves:ev:world food programme cuts monthly food aid in gaza->org:world food programme"
+    },
+    "F6": {
+     "text": "World Food Programme affects 500,000 people in Gaza (inferred: WFP ending assistance directly removes food aid for these people)",
+     "quote": "",
+     "source": "",
+     "edge": "affects:org:world food programme->org:500,000 people in gaza"
+    },
+    "F7": {
+     "text": "500,000 people in Gaza affects food insecurity in Gaza (inferred: Loss of monthly aid increases the risk of insufficient food)",
+     "quote": "",
+     "source": "",
+     "edge": "affects:org:500,000 people in gaza->topic:food insecurity in gaza"
+    },
+    "F8": {
+     "text": "World Food Programme depends on $450 million funding need (inferred: WFP requires this amount to sustain operations)",
+     "quote": "",
+     "source": "",
+     "edge": "depends_on:org:world food programme->topic:$450 million funding need"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:00dfe2b0206f",
+  "title": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+  "question": "Where did this happen?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip.",
+   "sentences": [
+    {
+     "text": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip.",
+     "cites": [
+      "F1",
+      "F4"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F1": {
+     "text": "News item from france24.com dated 2026-10-19: The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+     "quote": "",
+     "source": "https://www.france24.com/en/live-news/20261019-un-agency-slashes-gaza-food-aid-over-funding-warns-needs-persist",
+     "node": "n:00dfe2b0206f"
+    },
+    "F4": {
+     "text": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding… about World Food Programme cuts monthly food aid in Gaza",
+     "quote": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+     "source": "https://www.france24.com/en/live-news/20261019-un-agency-slashes-gaza-food-aid-over-funding-warns-needs-persist",
+     "edge": "about:n:00dfe2b0206f->ev:world food programme cuts monthly food aid in gaza"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:00eab1f15d72",
+  "title": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+  "question": "Who is affected?",
+  "search_only": {
+   "refused": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {},
+   "answerable": false
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The drone strike killed at least 73 people at the Abyei market. Those killed were likely local civilians present at the market. The attack also impacts regional stability between South Sudan and Sudan.",
+   "sentences": [
+    {
+     "text": "The drone strike killed at least 73 people at the Abyei market.",
+     "cites": [
+      "F1",
+      "F8"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "Those killed were likely local civilians present at the market.",
+     "cites": [
+      "F10"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "The attack also impacts regional stability between South Sudan and Sudan.",
+     "cites": [
+      "F11"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F1": {
+     "text": "News item from reuters.com dated 2026-10-19: A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+     "quote": "",
+     "source": "https://www.reuters.com/world/africa/drone-strike-disputed-sudan-south-sudan-area-kills-dozens-minister-says-2026-10-20/",
+     "node": "n:00eab1f15d72"
+    },
+    "F8": {
+     "text": "Drone strike on Abyei market affects 73 people",
+     "quote": "kills at least 73 people",
+     "source": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2",
+     "edge": "affects:ev:drone strike on abyei market->topic:73 people"
+    },
+    "F10": {
+     "text": "Abyei market affects local civilians (inferred: The strike killed at least 73 people, indicating impact on civilians present at the market.)",
+     "quote": "",
+     "source": "",
+     "edge": "affects:place:abyei market->topic:local civilians"
+    },
+    "F11": {
+     "text": "Drone strike on Abyei market affects regional stability between South Sudan and Sudan (inferred: Abyei is a disputed area; violence there can heighten tensions between the two states.)",
+     "quote": "",
+     "source": "",
+     "edge": "affects:ev:drone strike on abyei market->topic:regional stability between south sudan and sudan"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:00eab1f15d72",
+  "title": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+  "question": "What changes because of this?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  }
+ },
+ {
+  "item": "n:00eab1f15d72",
+  "title": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+  "question": "Where did this happen?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The drone strike occurred in the Abyei area, a disputed region between South Sudan and Sudan.",
+   "sentences": [
+    {
+     "text": "The drone strike occurred in the Abyei area, a disputed region between South Sudan and Sudan.",
+     "cites": [
+      "F1",
+      "F4",
+      "F6"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F1": {
+     "text": "News item from reuters.com dated 2026-10-19: A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+     "quote": "",
+     "source": "https://www.reuters.com/world/africa/drone-strike-disputed-sudan-south-sudan-area-kills-dozens-minister-says-2026-10-20/",
+     "node": "n:00eab1f15d72"
+    },
+    "F4": {
+     "text": "Claim (unverified, 1 independent domain(s)): Abyei is a disputed area between South Sudan and Sudan.",
+     "quote": "the disputed Abyei area between South Sudan and Sudan",
+     "source": "https://www.reuters.com/world/africa/drone-strike-disputed-sudan-south-sudan-area-kills-dozens-minister-says-2026-10-20/",
+     "node": "n:00eab1f15d72:c3"
+    },
+    "F6": {
+     "text": "Drone strike on Abyei market happened in Abyei",
+     "quote": "at a market in the disputed Abyei area",
+     "source": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#2",
+     "edge": "happened_in:ev:drone strike on abyei market->wd:Q336494"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:0460555895d3",
+  "title": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+  "question": "Who is affected?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The protests involve local residents who are affected by the water shortages. The demonstrations have disrupted public order in Guadalajara. Five people were detained in connection with the protest activities. The situation has increased political pressure on Governor Pablo Lemus.",
+   "sentences": [
+    {
+     "text": "The protests involve local residents who are affected by the water shortages.",
+     "cites": [
+      "F5"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "The demonstrations have disrupted public order in Guadalajara.",
+     "cites": [
+      "F9"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "Five people were detained in connection with the protest activities.",
+     "cites": [
+      "F10"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "The situation has increased political pressure on Governor Pablo Lemus.",
+     "cites": [
+      "F11"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F5": {
+     "text": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread… about Second protest over water crisis in Guadalajara",
+     "quote": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+     "source": "https://www.turkiyetoday.com/world/violence-erupts-at-second-guadalajara-water-protest-in-mexico-3230624?s=3",
+     "edge": "about:n:0460555895d3->ev:second protest over water crisis in guadalajara"
+    },
+    "F9": {
+     "text": "Second protest over water crisis in Guadalajara affects public order in Guadalajara (inferred: Violence and explosives at the protest indicate disruption of public order)",
+     "quote": "",
+     "source": "",
+     "edge": "affects:ev:second protest over water crisis in guadalajara->topic:public order in guadalajara"
+    },
+    "F10": {
+     "text": "Second protest over water crisis in Guadalajara affects detention of protesters (inferred: Five people were detained in connection with the protest activities)",
+     "quote": "",
+     "source": "",
+     "edge": "affects:ev:second protest over water crisis in guadalajara->topic:detention of protesters"
+    },
+    "F11": {
+     "text": "Second protest over water crisis in Guadalajara affects political pressure on Governor Pablo Lemur (inferred: Violent protest and a declared crisis increase scrutiny on the governor)",
+     "quote": "",
+     "source": "",
+     "edge": "affects:ev:second protest over water crisis in guadalajara->org:political pressure on governor pablo lemur"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:0460555895d3",
+  "title": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+  "question": "What changes because of this?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  }
+ },
+ {
+  "item": "n:0460555895d3",
+  "title": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+  "question": "Where did this happen?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The protests are taking place in Guadalajara, Jalisco, Mexico. The demonstrations are occurring during the second week of protests over water shortages.",
+   "sentences": [
+    {
+     "text": "The protests are taking place in Guadalajara, Jalisco, Mexico.",
+     "cites": [
+      "F1",
+      "F5",
+      "F7"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "The demonstrations are occurring during the second week of protests over water shortages.",
+     "cites": [
+      "F1",
+      "F5"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F1": {
+     "text": "News item from reuters.com dated 2026-10-18: Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+     "quote": "",
+     "source": "https://www.reuters.com/business/environment/worsening-water-crisis-sparks-protests-mexicos-guadalajara-2026-10-16/",
+     "node": "n:0460555895d3"
+    },
+    "F5": {
+     "text": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread… about Second protest over water crisis in Guadalajara",
+     "quote": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+     "source": "https://www.turkiyetoday.com/world/violence-erupts-at-second-guadalajara-water-protest-in-mexico-3230624?s=3",
+     "edge": "about:n:0460555895d3->ev:second protest over water crisis in guadalajara"
+    },
+    "F7": {
+     "text": "Second protest over water crisis in Guadalajara part of Jalisco",
+     "quote": "in Guadalajara, western Mexico",
+     "source": "https://www.turkiyetoday.com/world/violence-erupts-at-second-guadalajara-water-protest-in-mexico-3230624?s=3",
+     "edge": "part_of:ev:second protest over water crisis in guadalajara->wd:Q13160"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:047b20792022",
+  "title": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…",
+  "question": "Who is affected?",
+  "search_only": {
+   "refused": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {},
+   "answerable": false
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The Bank of England is affected by the announcement, as it will redesign its banknotes to feature the Atlantic puffin, barn owl, buff‑tailed bumblebee and European hedgehog. The change is intended to enhance the security of Bank of England banknotes and help stop counterfeiting.",
+   "sentences": [
+    {
+     "text": "The Bank of England is affected by the announcement, as it will redesign its banknotes to feature the Atlantic puffin, barn owl, buff‑tailed bumblebee and European hedgehog.",
+     "cites": [
+      "F1",
+      "F6"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "The change is intended to enhance the security of Bank of England banknotes and help stop counterfeiting.",
+     "cites": [
+      "F5",
+      "F9"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F1": {
+     "text": "News item from bbc.co.uk dated 2026-10-08: The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…",
+     "quote": "",
+     "source": "https://www.bbc.co.uk/news/articles/cwe8ld517ry3o",
+     "node": "n:047b20792022"
+    },
+    "F5": {
+     "text": "Claim (unverified, 1 independent domain(s)): The Bank says wildlife images will enhance security and help stop counterfeiting.",
+     "quote": "will also enhance the security of our banknotes",
+     "source": "https://www.bbc.co.uk/news/articles/cwe8ld517ry3o",
+     "node": "n:047b20792022:c4"
+    },
+    "F6": {
+     "text": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European… about Bank of England announces wildlife banknote designs",
+     "quote": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…",
+     "source": "https://www.bbc.co.uk/news/articles/cwe8ld517ry3o",
+     "edge": "about:n:047b20792022->ev:bank of england announces wildlife banknote designs"
+    },
+    "F9": {
+     "text": "Bank of England affects security of Bank of England banknotes (inferred: The Bank states wildlife images will enhance security and help stop counterfeiting.)",
+     "quote": "",
+     "source": "",
+     "edge": "affects:wd:Q183231->topic:security of bank of england banknotes"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:047b20792022",
+  "title": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…",
+  "question": "What changes because of this?",
+  "search_only": {
+   "refused": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {},
+   "answerable": false
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "Four wildlife species – the Atlantic puffin, barn owl, buff-tailed bumblebee and European hedgehog – will appear on the redesigned Bank of England notes. The Bank says the inclusion of these wildlife images will enhance the security of the banknotes and help stop counterfeiting.",
+   "sentences": [
+    {
+     "text": "Four wildlife species – the Atlantic puffin, barn owl, buff-tailed bumblebee and European hedgehog – will appear on the redesigned Bank of England notes.",
+     "cites": [
+      "F2"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "The Bank says the inclusion of these wildlife images will enhance the security of the banknotes and help stop counterfeiting.",
+     "cites": [
+      "F5",
+      "F9"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F2": {
+     "text": "Claim (unverified, 1 independent domain(s)): Four wildlife species will appear on the redesigned Bank of England notes.",
+     "quote": "The Atlantic puffin, barn owl, buff-tailed bumblebee and European hedgehog will appear on the redesigned notes",
+     "source": "https://www.bbc.co.uk/news/articles/cwe8ld517ry3o",
+     "node": "n:047b20792022:c1"
+    },
+    "F5": {
+     "text": "Claim (unverified, 1 independent domain(s)): The Bank says wildlife images will enhance security and help stop counterfeiting.",
+     "quote": "will also enhance the security of our banknotes",
+     "source": "https://www.bbc.co.uk/news/articles/cwe8ld517ry3o",
+     "node": "n:047b20792022:c4"
+    },
+    "F9": {
+     "text": "Bank of England affects security of Bank of England banknotes (inferred: The Bank states wildlife images will enhance security and help stop counterfeiting.)",
+     "quote": "",
+     "source": "",
+     "edge": "affects:wd:Q183231->topic:security of bank of england banknotes"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:047b20792022",
+  "title": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…",
+  "question": "Where did this happen?",
+  "search_only": {
+   "refused": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {},
+   "answerable": false
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The announcement was made by the Bank of England.",
+   "sentences": [
+    {
+     "text": "The announcement was made by the Bank of England.",
+     "cites": [
+      "F1",
+      "F6",
+      "F7"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F1": {
+     "text": "News item from bbc.co.uk dated 2026-10-08: The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…",
+     "quote": "",
+     "source": "https://www.bbc.co.uk/news/articles/cwe8ld517ry3o",
+     "node": "n:047b20792022"
+    },
+    "F6": {
+     "text": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European… about Bank of England announces wildlife banknote designs",
+     "quote": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…",
+     "source": "https://www.bbc.co.uk/news/articles/cwe8ld517ry3o",
+     "edge": "about:n:047b20792022->ev:bank of england announces wildlife banknote designs"
+    },
+    "F7": {
+     "text": "Bank of England announces wildlife banknote designs involves Bank of England",
+     "quote": "Bank of England has revealed the four creatures that will feature on our money",
+     "source": "https://www.bbc.co.uk/news/articles/cwe8ld517ry3o",
+     "edge": "involves:ev:bank of england announces wildlife banknote designs->wd:Q183231"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:0f5a4c632e8d",
+  "title": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+  "question": "Who is affected?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The collapse affected the miners working at the open‑pit gold mine. Fourteen miners were killed and seven more were injured in the incident.",
+   "sentences": [
+    {
+     "text": "The collapse affected the miners working at the open‑pit gold mine.",
+     "cites": [
+      "F8"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "Fourteen miners were killed and seven more were injured in the incident.",
+     "cites": [
+      "F1",
+      "F2",
+      "F3"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F1": {
+     "text": "News item from apnews.com dated 2026-10-19: Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+     "quote": "",
+     "source": "https://apnews.com/article/colombia-mine-accident-gold-illegal-mining-bffbd24132af34a0cb14a414579d1e9b",
+     "node": "n:0f5a4c632e8d"
+    },
+    "F2": {
+     "text": "Claim (unverified, 1 independent domain(s)): Fourteen miners were killed in the collapse.",
+     "quote": "Fourteen miners are killed",
+     "source": "https://apnews.com/article/colombia-mine-accident-gold-illegal-mining-bffbd24132af34a0cb14a414579d1e9b",
+     "node": "n:0f5a4c632e8d:c1"
+    },
+    "F3": {
+     "text": "Claim (unverified, 1 independent domain(s)): Seven miners were injured in the collapse.",
+     "quote": "seven more injured",
+     "source": "https://apnews.com/article/colombia-mine-accident-gold-illegal-mining-bffbd24132af34a0cb14a414579d1e9b",
+     "node": "n:0f5a4c632e8d:c2"
+    },
+    "F8": {
+     "text": "Collapse of open pit gold mine in Nariño involves miners",
+     "quote": "Fourteen miners are killed and seven more injured",
+     "source": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#3",
+     "edge": "involves:ev:collapse of open pit gold mine in nariño->wd:Q820037"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:0f5a4c632e8d",
+  "title": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+  "question": "What changes because of this?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  }
+ },
+ {
+  "item": "n:0f5a4c632e8d",
+  "title": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+  "question": "Where did this happen?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The collapse occurred in the Nariño Department of Colombia.",
+   "sentences": [
+    {
+     "text": "The collapse occurred in the Nariño Department of Colombia.",
+     "cites": [
+      "F1",
+      "F5",
+      "F7"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F1": {
+     "text": "News item from apnews.com dated 2026-10-19: Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+     "quote": "",
+     "source": "https://apnews.com/article/colombia-mine-accident-gold-illegal-mining-bffbd24132af34a0cb14a414579d1e9b",
+     "node": "n:0f5a4c632e8d"
+    },
+    "F5": {
+     "text": "Claim (unverified, 1 independent domain(s)): The collapse happened in Nariño Department, Colombia.",
+     "quote": "in Nariño Department, Colombia",
+     "source": "https://apnews.com/article/colombia-mine-accident-gold-illegal-mining-bffbd24132af34a0cb14a414579d1e9b",
+     "node": "n:0f5a4c632e8d:c4"
+    },
+    "F7": {
+     "text": "Collapse of open pit gold mine in Nariño happened in Nariño Department",
+     "quote": "collapse of an open pit gold mine in Nariño Department",
+     "source": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#3",
+     "edge": "happened_in:ev:collapse of open pit gold mine in nariño->place:nariño department"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:12fabc0b78de",
+  "title": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…",
+  "question": "Who is affected?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The no‑bail bond arrest warrant is issued against former Cuban leader Raul Castro.",
+   "sentences": [
+    {
+     "text": "The no‑bail bond arrest warrant is issued against former Cuban leader Raul Castro.",
+     "cites": [
+      "F5"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F5": {
+     "text": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban… about Arrest warrant for Raul Castro",
+     "quote": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…",
+     "source": "https://www.aljazeera.com/news/2026/10/19/florida-issues-arrest-warrant-for-cuban-leader-raul-castro",
+     "edge": "about:n:12fabc0b78de->ev:arrest warrant for raul castro"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:12fabc0b78de",
+  "title": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…",
+  "question": "What changes because of this?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The issuance of the no‑bail bond arrest warrant for former Cuban leader Raul Castro is expected to affect U.S.–Cuba diplomatic relations.",
+   "sentences": [
+    {
+     "text": "The issuance of the no‑bail bond arrest warrant for former Cuban leader Raul Castro is expected to affect U.S.–Cuba diplomatic relations.",
+     "cites": [
+      "F7"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F7": {
+     "text": "Arrest warrant for Raul Castro affects U.S.-Cuba diplomatic relations (inferred: The warrant is part of a U.S. legal action that builds on existing tightened restrictions.)",
+     "quote": "",
+     "source": "",
+     "edge": "affects:ev:arrest warrant for raul castro->topic:u.s.-cuba diplomatic relations"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:12fabc0b78de",
+  "title": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…",
+  "question": "Where did this happen?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The no‑bail bond arrest warrant was issued in Miami‑Dade County, Florida, United States. The warrant was issued by a judge in that county.",
+   "sentences": [
+    {
+     "text": "The no‑bail bond arrest warrant was issued in Miami‑Dade County, Florida, United States.",
+     "cites": [
+      "F1",
+      "F5"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "The warrant was issued by a judge in that county.",
+     "cites": [
+      "F1",
+      "F5"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F1": {
+     "text": "News item from aljazeera.com dated 2026-10-19: A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…",
+     "quote": "",
+     "source": "https://www.aljazeera.com/news/2026/10/19/florida-issues-arrest-warrant-for-cuban-leader-raul-castro",
+     "node": "n:12fabc0b78de"
+    },
+    "F5": {
+     "text": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban… about Arrest warrant for Raul Castro",
+     "quote": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…",
+     "source": "https://www.aljazeera.com/news/2026/10/19/florida-issues-arrest-warrant-for-cuban-leader-raul-castro",
+     "edge": "about:n:12fabc0b78de->ev:arrest warrant for raul castro"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:2a0496d94138",
+  "title": "American economists Robert Ernest Hall and Michael Dean Woodford are jointly awarded the Nobel Memorial Prize…",
+  "question": "Who is affected?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "Governments and central banks are affected by the prize, as the laureates’ economic models help them stabilize economies against external shocks.",
+   "sentences": [
+    {
+     "text": "Governments and central banks are affected by the prize, as the laureates’ economic models help them stabilize economies against external shocks.",
+     "cites": [
+      "F4",
+      "F13"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F4": {
+     "text": "Claim (unverified, 1 independent domain(s)): Their economic models help governments and central banks stabilize economies against external shocks.",
+     "quote": "developing new economic models that help governments and central banks stabilize their economies to minimize the impact of external shocks",
+     "source": "https://edition.cnn.com/2026/10/12/business/nobel-prize-economics-intl",
+     "node": "n:2a0496d94138:c3"
+    },
+    "F13": {
+     "text": "2026 Nobel Prize in Economic Sciences awarded to Hall and Woodford affects Economic modeling used by governments and central banks (inferred: The prize highlights the laureates' models that already help stabilize economies.)",
+     "quote": "",
+     "source": "",
+     "edge": "affects:ev:2026 nobel prize in economic sciences awarded to hall and woodford->topic:economic modeling used by governments and central banks"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:2a0496d94138",
+  "title": "American economists Robert Ernest Hall and Michael Dean Woodford are jointly awarded the Nobel Memorial Prize…",
+  "question": "What changes because of this?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  }
+ },
+ {
+  "item": "n:2a0496d94138",
+  "title": "American economists Robert Ernest Hall and Michael Dean Woodford are jointly awarded the Nobel Memorial Prize…",
+  "question": "Where did this happen?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The Nobel Memorial Prize in Economic Sciences was awarded in Stockholm. The award was presented by the Royal Swedish Academy of Sciences.",
+   "sentences": [
+    {
+     "text": "The Nobel Memorial Prize in Economic Sciences was awarded in Stockholm.",
+     "cites": [
+      "F3",
+      "F6"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "The award was presented by the Royal Swedish Academy of Sciences.",
+     "cites": [
+      "F3",
+      "F7"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F3": {
+     "text": "Claim (supported, 2 independent domain(s)): The prize was awarded by the Royal Swedish Academy of Sciences in Stockholm.",
+     "quote": "The Royal Swedish Academy of Sciences awarded the prize in Stockholm on Monday.",
+     "source": "https://edition.cnn.com/2026/10/12/business/nobel-prize-economics-intl",
+     "node": "n:2a0496d94138:c2"
+    },
+    "F6": {
+     "text": "2026 Nobel Prize in Economic Sciences awarded to Hall and Woodford happened in Stockholm",
+     "quote": "The Royal Swedish Academy of Sciences awarded the prize in Stockholm on Monday.",
+     "source": "https://edition.cnn.com/2026/10/12/business/nobel-prize-economics-intl",
+     "edge": "happened_in:ev:2026 nobel prize in economic sciences awarded to hall and woodford->wd:Q1754"
+    },
+    "F7": {
+     "text": "2026 Nobel Prize in Economic Sciences awarded to Hall and Woodford involves Royal Swedish Academy of Sciences",
+     "quote": "The Royal Swedish Academy of Sciences awarded the prize",
+     "source": "https://edition.cnn.com/2026/10/12/business/nobel-prize-economics-intl",
+     "edge": "involves:ev:2026 nobel prize in economic sciences awarded to hall and woodford->org:royal swedish academy of sciences"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:2ea4338fe8f4",
+  "title": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada",
+  "question": "Who is affected?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The referendum directly affects Albertans, as it is held in Alberta and involves decisions about the province’s future. The event is taking place in Alberta, so the province itself is directly affected.",
+   "sentences": [
+    {
+     "text": "The referendum directly affects Albertans, as it is held in Alberta and involves decisions about the province’s future.",
+     "cites": [
+      "F9"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "The event is taking place in Alberta, so the province itself is directly affected.",
+     "cites": [
+      "F5"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F5": {
+     "text": "Albertans vote on ten referendums happened in Alberta",
+     "quote": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada.",
+     "source": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#12",
+     "edge": "happened_in:ev:albertans vote on ten referendums->wd:Q1951"
+    },
+    "F9": {
+     "text": "Albertans vote on ten referendums affects Alberta (inferred: The event is taking place in Alberta, so the province is directly affected.)",
+     "quote": "",
+     "source": "",
+     "edge": "affects:ev:albertans vote on ten referendums->wd:Q1951"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:2ea4338fe8f4",
+  "title": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada",
+  "question": "What changes because of this?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The referendum will allow Albertans to decide whether the province should pursue separation from Canada. If the referendum passes, Alberta would become a separate entity from Canada, potentially altering its political and economic relationship with the rest of the country.",
+   "sentences": [
+    {
+     "text": "The referendum will allow Albertans to decide whether the province should pursue separation from Canada.",
+     "cites": [
+      "F1",
+      "F3"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "If the referendum passes, Alberta would become a separate entity from Canada, potentially altering its political and economic relationship with the rest of the country.",
+     "cites": [
+      "F10"
+     ],
+     "kind": "guess"
+    }
+   ],
+   "citations": {
+    "F1": {
+     "text": "News item from reuters.com dated 2026-10-19: Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada",
+     "quote": "",
+     "source": "https://www.reuters.com/world/americas/alberta-votes-leaving-canada-separatist-movement-likely-outlast-expected-defeat-2026-10-19/",
+     "node": "n:2ea4338fe8f4"
+    },
+    "F3": {
+     "text": "Claim (supported, 2 independent domain(s)): One of the referendums asks whether Alberta should seek separation from Canada.",
+     "quote": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada.",
+     "source": "https://www.reuters.com/world/americas/alberta-votes-leaving-canada-separatist-movement-likely-outlast-expected-defeat-2026-10-19/",
+     "node": "n:2ea4338fe8f4:c2"
+    },
+    "F10": {
+     "text": "Alberta separatist movement: The Alberta separatist movement is a secessionist movement that advocates for the separation of the province of Alberta from Canada, with some groups also supporting the creation of a sovereign union with the ot",
+     "quote": "",
+     "source": "https://en.wikipedia.org/wiki/Alberta_separatist_movement",
+     "url": "https://en.wikipedia.org/wiki/Alberta_separatist_movement"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:2ea4338fe8f4",
+  "title": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada",
+  "question": "Where did this happen?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The referendums took place in Alberta.",
+   "sentences": [
+    {
+     "text": "The referendums took place in Alberta.",
+     "cites": [
+      "F5"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F5": {
+     "text": "Albertans vote on ten referendums happened in Alberta",
+     "quote": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada.",
+     "source": "https://en.wikipedia.org/wiki/Portal:Current_events/2026_October_19#12",
+     "edge": "happened_in:ev:albertans vote on ten referendums->wd:Q1951"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:2ef6e37a2b5f",
+  "title": "Andorra and San Marino each sign an association agreement with the European Union",
+  "question": "Who is affected?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The association agreements affect the countries of Andorra and San Marino. They give Andorra and San Marino access to the EU's Internal Market. The agreements are expected to provide greater legal certainty for businesses in those countries. They also aim to give citizens of Andorra and San Marino greater predictability in their interactions with the EU.",
+   "sentences": [
+    {
+     "text": "The association agreements affect the countries of Andorra and San Marino.",
+     "cites": [
+      "F1",
+      "F4",
+      "F6",
+      "F7"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "They give Andorra and San Marino access to the EU's Internal Market.",
+     "cites": [
+      "F8"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "The agreements are expected to provide greater legal certainty for businesses in those countries.",
+     "cites": [
+      "F11"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "They also aim to give citizens of Andorra and San Marino greater predictability in their interactions with the EU.",
+     "cites": [
+      "F12"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F1": {
+     "text": "News item from brusselstimes.com dated 2026-10-19: Andorra and San Marino each sign an association agreement with the European Union",
+     "quote": "",
+     "source": "https://www.brusselstimes.com/eu-affairs/2368520/eu-agreement-brings-andorra-san-marino-into-internal-market?utm_term=Autofeed&utm_medium=Social&utm_source=Twitter",
+     "node": "n:2ef6e37a2b5f"
+    },
+    "F4": {
+     "text": "Andorra and San Marino each sign an association agreement with the European Union about Signing of Association Agreements with Andorra and San Marino",
+     "quote": "Andorra and San Marino each sign an association agreement with the European Union",
+     "source": "https://www.brusselstimes.com/eu-affairs/2368520/eu-agreement-brings-andorra-san-marino-into-internal-market?utm_term=Autofeed&utm_medium=Social&utm_source=Twitter",
+     "edge": "about:n:2ef6e37a2b5f->ev:signing of association agreements with andorra and san marino"
+    },
+    "F6": {
+     "text": "Signing of Association Agreements with Andorra and San Marino involves Andorra",
+     "quote": "The European Commission has signed an Association Agreement with Andorra and San Marino",
+     "source": "https://www.brusselstimes.com/eu-affairs/2368520/eu-agreement-brings-andorra-san-marino-into-internal-market?utm_term=Autofeed&utm_medium=Social&utm_source=Twitter",
+     "edge": "involves:ev:signing of association agreements with andorra and san marino->wd:Q228"
+    },
+    "F7": {
+     "text": "Signing of Association Agreements with Andorra and San Marino involves San Marino",
+     "quote": "The European Commission has signed an Association Agreement with Andorra and San Marino",
+     "source": "https://www.brusselstimes.com/eu-affairs/2368520/eu-agreement-brings-andorra-san-marino-into-internal-market?utm_term=Autofeed&utm_medium=Social&utm_source=Twitter",
+     "edge": "involves:ev:signing of association agreements with andorra and san marino->wd:Q238"
+    },
+    "F8": {
+     "text": "Signing of Association Agreements with Andorra and San Marino affects Internal Market",
+     "quote": "The agreement gives Andorra and San Marino access to the EU's Internal Market",
+     "source": "https://www.brusselstimes.com/eu-affairs/2368520/eu-agreement-brings-andorra-san-marino-into-internal-market?utm_term=Autofeed&utm_medium=Social&utm_source=Twitter",
+     "edge": "affects:ev:signing of association agreements with andorra and san marino->topic:internal market"
+    },
+    "F11": {
+     "text": "Signing of Association Agreements with Andorra and San Marino affects Businesses (inferred: The deals aim to provide greater legal certainty for businesses)",
+     "quote": "",
+     "source": "",
+     "edge": "affects:ev:signing of association agreements with andorra and san marino->org:businesses"
+    },
+    "F12": {
+     "text": "Signing of Association Agreements with Andorra and San Marino affects Citizens (inferred: The deals aim to provide greater predictability for citizens)",
+     "quote": "",
+     "source": "",
+     "edge": "affects:ev:signing of association agreements with andorra and san marino->org:citizens"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:2ef6e37a2b5f",
+  "title": "Andorra and San Marino each sign an association agreement with the European Union",
+  "question": "What changes because of this?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The association agreements give Andorra and San Marino access to the EU's Internal Market. The agreements also require updated Monetary Agreements to address overlaps with the new Association Agreement.",
+   "sentences": [
+    {
+     "text": "The association agreements give Andorra and San Marino access to the EU's Internal Market.",
+     "cites": [
+      "F8"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "The agreements also require updated Monetary Agreements to address overlaps with the new Association Agreement.",
+     "cites": [
+      "F3",
+      "F9"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F3": {
+     "text": "Claim (unverified, 1 independent domain(s)): Updated Monetary Agreements were also signed with Andorra and San Marino to address overlaps with the new Association Agreement.",
+     "quote": "The EU has also signed updated Monetary Agreements with Andorra and San Marino to address overlaps with the new Association Agreement",
+     "source": "https://www.brusselstimes.com/eu-affairs/2368520/eu-agreement-brings-andorra-san-marino-into-internal-market?utm_term=Autofeed&utm_medium=Social&utm_source=Twitter",
+     "node": "n:2ef6e37a2b5f:c3"
+    },
+    "F8": {
+     "text": "Signing of Association Agreements with Andorra and San Marino affects Internal Market",
+     "quote": "The agreement gives Andorra and San Marino access to the EU's Internal Market",
+     "source": "https://www.brusselstimes.com/eu-affairs/2368520/eu-agreement-brings-andorra-san-marino-into-internal-market?utm_term=Autofeed&utm_medium=Social&utm_source=Twitter",
+     "edge": "affects:ev:signing of association agreements with andorra and san marino->topic:internal market"
+    },
+    "F9": {
+     "text": "Signing of Association Agreements with Andorra and San Marino depends on Monetary Agreements",
+     "quote": "The EU has also signed updated Monetary Agreements with Andorra and San Marino to address overlaps with the new Association Agreement",
+     "source": "https://www.brusselstimes.com/eu-affairs/2368520/eu-agreement-brings-andorra-san-marino-into-internal-market?utm_term=Autofeed&utm_medium=Social&utm_source=Twitter",
+     "edge": "depends_on:ev:signing of association agreements with andorra and san marino->topic:monetary agreements"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:2ef6e37a2b5f",
+  "title": "Andorra and San Marino each sign an association agreement with the European Union",
+  "question": "Where did this happen?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  }
+ },
+ {
+  "item": "n:3dacd47cdd3e",
+  "title": "At the General Conference on Weights and Measures, the International Bureau of Weights and Measures votes to…",
+  "question": "Who is affected?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "Russia opposed the move because of concerns for its GLONASS navigation system. The vote to adopt a leap hour would affect Coordinated Universal Time (UTC). The IERS Earth Orientation Centre, which provides the data that underpins decisions about leap adjustments, would also be affected.",
+   "sentences": [
+    {
+     "text": "Russia opposed the move because of concerns for its GLONASS navigation system.",
+     "cites": [
+      "F2"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "The vote to adopt a leap hour would affect Coordinated Universal Time (UTC).",
+     "cites": [
+      "F10"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "The IERS Earth Orientation Centre, which provides the data that underpins decisions about leap adjustments, would also be affected.",
+     "cites": [
+      "F11"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F2": {
+     "text": "Claim (unverified, 1 independent domain(s)): Russia opposed the move because of concerns for its GLONASS navigation system.",
+     "quote": "Russia has also opposed the move, citing concerns of the impact on its Glonass satellite navigation system.",
+     "source": "https://www.theguardian.com/science/2026/oct/15/times-up-for-the-leap-second-as-scientists-swap-it-for-the-leap-hour",
+     "node": "n:3dacd47cdd3e:c2"
+    },
+    "F10": {
+     "text": "leap hour adoption affects Coordinated Universal Time (UTC) (inferred: A leap hour is introduced when UTC drifts from astronomical time.)",
+     "quote": "",
+     "source": "",
+     "edge": "affects:topic:leap hour adoption->topic:coordinated universal time (utc)"
+    },
+    "F11": {
+     "text": "IBWM vote to adopt leap hour affects IERS Earth Orientation Centre (inferred: The centre provides the data that underpins decisions about leap adjustments.)",
+     "quote": "",
+     "source": "",
+     "edge": "affects:ev:ibwm vote to adopt leap hour->org:iers earth orientation centre"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:3dacd47cdd3e",
+  "title": "At the General Conference on Weights and Measures, the International Bureau of Weights and Measures votes to…",
+  "question": "What changes because of this?",
+  "search_only": {
+   "refused": false,
+   "answerable": false,
+   "text": "The web doesn't tell us.",
+   "sentences": [],
+   "citations": {}
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The vote to adopt a leap hour means that Coordinated Universal Time (UTC) can drift up to an hour from astronomical time. The leap hour would replace the existing leap second correction, which has been used to keep UTC in line with Earth's rotation.",
+   "sentences": [
+    {
+     "text": "The vote to adopt a leap hour means that Coordinated Universal Time (UTC) can drift up to an hour from astronomical time.",
+     "cites": [
+      "F5",
+      "F10"
+     ],
+     "kind": "supported"
+    },
+    {
+     "text": "The leap hour would replace the existing leap second correction, which has been used to keep UTC in line with Earth's rotation.",
+     "cites": [
+      "F6",
+      "F7"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F5": {
+     "text": "IBWM vote to adopt leap hour happened in Versailles",
+     "quote": "The vote at Versailles means that coordinated universal time (UTC) can drift up to an hour ...",
+     "source": "https://www.theguardian.com/science/2026/oct/15/times-up-for-the-leap-second-as-scientists-swap-it-for-the-leap-hour",
+     "edge": "happened_in:ev:ibwm vote to adopt leap hour->wd:Q621"
+    },
+    "F6": {
+     "text": "IBWM vote to adopt leap hour involves leap hour",
+     "quote": "to replace what many viewed as a tiresome correction: the leap second. It's time, they say, for the leap hour.",
+     "source": "https://www.theguardian.com/science/2026/oct/15/times-up-for-the-leap-second-as-scientists-swap-it-for-the-leap-hour",
+     "edge": "involves:ev:ibwm vote to adopt leap hour->tech:leap hour"
+    },
+    "F7": {
+     "text": "IBWM vote to adopt leap hour involves leap second",
+     "quote": "to replace what many viewed as a tiresome correction: the leap second.",
+     "source": "https://www.theguardian.com/science/2026/oct/15/times-up-for-the-leap-second-as-scientists-swap-it-for-the-leap-hour",
+     "edge": "involves:ev:ibwm vote to adopt leap hour->tech:leap second"
+    },
+    "F10": {
+     "text": "leap hour adoption affects Coordinated Universal Time (UTC) (inferred: A leap hour is introduced when UTC drifts from astronomical time.)",
+     "quote": "",
+     "source": "",
+     "edge": "affects:topic:leap hour adoption->topic:coordinated universal time (utc)"
+    }
+   }
+  }
+ },
+ {
+  "item": "n:3dacd47cdd3e",
+  "title": "At the General Conference on Weights and Measures, the International Bureau of Weights and Measures votes to…",
+  "question": "Where did this happen?",
+  "search_only": {
+   "refused": false,
+   "answerable": true,
+   "text": "The International Bureau of Weights and Measures is headquartered in the Pavillon de Breteuil in Saint‑Cloud, near Paris, France.",
+   "sentences": [
+    {
+     "text": "The International Bureau of Weights and Measures is headquartered in the Pavillon de Breteuil in Saint‑Cloud, near Paris, France.",
+     "cites": [
+      "F1"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F1": {
+     "text": "International Bureau of Weights and Measures: The International Bureau of Weights and Measures (French: Bureau international des poids et mesures, BIPM) is an intergovernmental organisation (IGO), through which its 67 member-states act on m",
+     "quote": "",
+     "source": "https://en.wikipedia.org/wiki/International_Bureau_of_Weights_and_Measures",
+     "url": "https://en.wikipedia.org/wiki/International_Bureau_of_Weights_and_Measures"
+    }
+   }
+  },
+  "graph": {
+   "refused": false,
+   "answerable": true,
+   "text": "The vote by the International Bureau of Weights and Measures to adopt a leap hour took place in Versailles.",
+   "sentences": [
+    {
+     "text": "The vote by the International Bureau of Weights and Measures to adopt a leap hour took place in Versailles.",
+     "cites": [
+      "F5"
+     ],
+     "kind": "supported"
+    }
+   ],
+   "citations": {
+    "F5": {
+     "text": "IBWM vote to adopt leap hour happened in Versailles",
+     "quote": "The vote at Versailles means that coordinated universal time (UTC) can drift up to an hour ...",
+     "source": "https://www.theguardian.com/science/2026/oct/15/times-up-for-the-leap-second-as-scientists-swap-it-for-the-leap-hour",
+     "edge": "happened_in:ev:ibwm vote to adopt leap hour->wd:Q621"
+    }
+   }
+  }
+ }
+]

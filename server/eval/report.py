@@ -52,6 +52,7 @@ def main():
     abl_l = load(LAB / "ablation_labels.json", [])
     qa2 = load(QA / "phase2-results.json", {})
     qa3 = load(QA / "phase3-results.json", {})
+    v2a = load(QA / "v2-accept-results.json", {})
     hands = load(RES / "hands_timing.json", {})
 
     md = []
@@ -115,7 +116,7 @@ def main():
         rows.append(("Quotes found verbatim on re-check", f"{c['quotes_verbatim']}/{c['quotes_rechecked']}"))
         rows.append(("Pack conforms to SHACL shapes", f"{auto['pack']['shacl']['conforms']} ({auto['pack']['triples']} triples)"))
         lat = auto["latency_ms"]
-        rows.append(("Latency: first node p50 / done p50 (p95)", f"{lat['first_node_p50']} ms / {lat['done_p50'] / 1000:.0f} s ({lat['done_p95'] / 1000:.0f} s)"))
+        rows.append(("Latency: first event (the news node) p50 / web complete p50 (p95)", f"{lat['first_node_p50']} ms / {lat['done_p50'] / 1000:.0f} s ({lat['done_p95'] / 1000:.0f} s)"))
         rows.append(("LLM per item: calls / tokens (mean)", f"{auto['llm_per_item']['calls_mean']} / {auto['llm_per_item']['tokens_mean']}"))
     if special:
         rows.append(("Safety cases passed", f"{sum(1 for v in special.values() if v.get('pass'))}/{len(special)}"))
@@ -237,6 +238,10 @@ def main():
         answerable = Counter((x["search_only"].get("answerable"), x["graph"].get("answerable")) for x in ablation)
         add(f"Answerable (search-only, graph): {dict((str(k), v) for k, v in answerable.items())}")
         add("")
+        add("**Read this carefully.** Search-only answered almost nothing: its fresh search (GDELT plus Wikipedia, one query per question) mostly returned no usable facts, because GDELT rate-limits a single IP and Wikipedia search rarely matches a one-day news event. "
+            "So this shows that the graph grounds answers when live search is thin, which is the app's normal situation on free sources. It does **not** show that the graph beats a good search engine. "
+            "The answers in this run came mostly from gpt-oss-20b (50 of 55 calls), because the daily quota for gpt-oss-120b was used up by the other evaluations.")
+        add("")
 
     # ---------------------------------------------------------------- automatic
     if auto:
@@ -259,7 +264,7 @@ def main():
             add(f"- **{k}**: {'PASS' if v.get('pass') else 'FAIL'} — {json.dumps(detail, ensure_ascii=False)[:300]}")
         add("")
 
-    if hands or qa2 or qa3:
+    if hands or qa2 or qa3 or v2a:
         add("## 8. Hands path (scripted IWER hands, emulator)")
         add("")
         if hands:
@@ -272,6 +277,11 @@ def main():
             if q:
                 res = q.get("results", [])
                 add(f"- {name}: {sum(r['pass'] for r in res)}/{len(res)} steps passed ({q.get('when', '')[:10]}).")
+        if v2a:
+            res = v2a.get("results", v2a if isinstance(v2a, list) else [])
+            modes = sorted({r["mode"] for r in res})
+            add(f"- V2 acceptance (§12.5, `qa/v2-accept.mjs`): {sum(r['pass'] for r in res)}/{len(res)} steps passed ({', '.join(modes)}). "
+                "When a scripted pinch misses a node that is still settling, the script closes the keypad the miss opened and opens the node through the same handler a hit would call.")
         add("")
 
     notes = load(LAB / "notes.json", {})
