@@ -303,3 +303,39 @@ def test_amounts_are_not_entities_but_named_events_are():
         assert AMOUNT.match(name), name
     for name in ["2026 Iran war", "G7", "Bank of England", "2026 Strait of Hormuz crisis"]:
         assert not AMOUNT.match(name), name
+
+
+def test_impact_does_not_restate_reported_structure(monkeypatch):
+    """An inferred 'affects' between nodes a reported link already joins (actor,
+    place, part) only restates structure: it is dropped, other effects stay."""
+    import asyncio
+    from types import SimpleNamespace as NS
+
+    from fogweave import pipeline
+
+    def link(src, tgt, ttype="Place", hop=1, rel="affects", label="inferred"):
+        return NS(hop=hop, source=src, target=tgt, target_type=ttype, relation=rel, label=label, basis=["F1"], reasoning="r")
+
+    out = NS(links=[
+        link("Mine collapse", "Narino Department"),  # reported happened_in already joins them
+        link("Narino Department", "Colombia", hop=2),  # reported part_of already joins them
+        link("Mine collapse", "families of miners", ttype="Topic"),  # a real effect
+    ])
+
+    async def fake_run(self, *a, **k):
+        return out
+
+    monkeypatch.setattr(pipeline.ImpactAnalyst, "run", fake_run)
+    eng = pipeline.Engine.__new__(pipeline.Engine)
+    eng.llm = None
+    eng._reported_triples = {("happened_in", "ev:mine", "wd:Q1"), ("part_of", "wd:Q1", "wd:Q739")}
+    ents = {"narino department": "wd:Q1", "colombia": "wd:Q739"}
+    edges = []
+
+    async def go():
+        async for _ in eng._impact("Mine collapse", "ev:mine", [{"id": "F1", "ref": "ev:mine"}], ents, [], False, lambda n: None, lambda e: edges.append(e)):
+            pass
+
+    asyncio.run(go())
+    assert len(edges) == 1
+    assert edges[0]["from"] == "ev:mine" and edges[0]["to"].endswith("families of miners")

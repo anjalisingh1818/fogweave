@@ -534,6 +534,10 @@ class Engine:
 
         dropped = 0
         emitted: set[tuple[str, str, str]] = set(self._reported_triples) if hasattr(self, "_reported_triples") else set()
+        # pairs already joined by a reported link (actor, place, participant, part):
+        # an inferred "affects" between them only restates that structure (eval: the
+        # top inferred failure after the persona fix), so it is not drawn
+        joined = {frozenset((f, t)) for _, f, t in emitted}
         for link in out.links[:8]:
             if link.hop > (3 if deep else 2):
                 continue
@@ -559,6 +563,9 @@ class Engine:
                 ttype = link.target_type
                 tid = known.get(tk) or f"{TYPE_PREFIX[ttype]}:{tk}"
                 n = {"id": tid, "type": ttype, "label": canonical(link.target), "derived": True}
+            if frozenset((s, tid)) in joined or s == tid:
+                dropped += 1
+                continue
             if ev := node(n):
                 yield ev
             known[tk] = tid
