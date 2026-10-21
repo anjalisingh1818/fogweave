@@ -18,7 +18,7 @@ context.on('request', (r) => {
 context.on('requestfailed', (r) => failed.push(`${r.url()} ${r.failure()?.errorText}`));
 if (offline) await context.route('http://localhost:8787/**', (r) => r.abort());
 
-await open(page);
+await open(page, offline ? { query: '?debug&demo' } : {});
 await enterXR(page);
 await page.waitForTimeout(3000);
 // controllers too: their models are the other remote asset IWSDK knows about

@@ -2,7 +2,7 @@
 import { launch, open, enterXR } from './lib.mjs';
 const { browser, context, page } = await launch();
 await context.route('http://localhost:8787/**', (r) => r.abort());
-await open(page);
+await open(page, { query: '?debug&demo' });
 await enterXR(page);
 await page.waitForFunction(() => window.__fw.app.mode !== 'starting', null, { timeout: 60000 });
 const measure = () => page.evaluate(async () => {

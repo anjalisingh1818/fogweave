@@ -1,0 +1,498 @@
+{
+ "nodes": 15,
+ "types": {
+  "Organisation": 4,
+  "Place": 4,
+  "PublicFigure": 3,
+  "Technology": 1,
+  "Topic": 3
+ },
+ "facts": 61,
+ "facts_supported": 61,
+ "overviews": 14,
+ "overviews_verbatim": 14,
+ "rows": [
+  {
+   "id": "org:ukraine",
+   "label": "Ukraine",
+   "type": "Organisation",
+   "qid": "Q212",
+   "overview": {
+    "ok": true,
+    "sentences": 2
+   },
+   "facts": [
+    {
+     "fact": "is a: sovereign state (since 1991)",
+     "property": "P31",
+     "ok": true
+    },
+    {
+     "fact": "is a: country",
+     "property": "P31",
+     "ok": true
+    },
+    {
+     "fact": "founded: 24 August 1991",
+     "property": "P571",
+     "ok": true
+    }
+   ]
+  },
+  {
+   "id": "wd:Q1439",
+   "label": "Texas",
+   "type": "Place",
+   "qid": "Q1439",
+   "overview": {
+    "ok": true,
+    "sentences": 2
+   },
+   "facts": [
+    {
+     "fact": "is a: U.S. state",
+     "property": "P31",
+     "ok": true
+    },
+    {
+     "fact": "country: United States",
+     "property": "P17",
+     "ok": true
+    },
+    {
+     "fact": "located in: United States",
+     "property": "P131",
+     "ok": true
+    },
+    {
+     "fact": "capital: Austin",
+     "property": "P36",
+     "ok": true
+    },
+    {
+     "fact": "population: 29,145,505",
+     "property": "P1082",
+     "ok": true
+    },
+    {
+     "fact": "area: 696,241 km²",
+     "property": "P2046",
+     "ok": true
+    }
+   ]
+  },
+  {
+   "id": "wd:Q22686",
+   "label": "Donald Trump",
+   "type": "PublicFigure",
+   "qid": "Q22686",
+   "overview": {
+    "ok": true,
+    "sentences": 2
+   },
+   "facts": [
+    {
+     "fact": "position held: President of the United States (since 2025)",
+     "property": "P39",
+     "ok": true
+    },
+    {
+     "fact": "party: Republican Party (since 2012)",
+     "property": "P102",
+     "ok": true
+    },
+    {
+     "fact": "occupation: business magnate",
+     "property": "P106",
+     "ok": true
+    },
+    {
+     "fact": "occupation: investor",
+     "property": "P106",
+     "ok": true
+    },
+    {
+     "fact": "member of: The World's Billionaires",
+     "property": "P463",
+     "ok": true
+    }
+   ]
+  },
+  {
+   "id": "tech:h3 rocket",
+   "label": "H3 rocket",
+   "type": "Technology",
+   "qid": "Q11222053",
+   "overview": {
+    "ok": true,
+    "sentences": 2
+   },
+   "facts": [
+    {
+     "fact": "is a: rocket family",
+     "property": "P31",
+     "ok": true
+    },
+    {
+     "fact": "a kind of: expendable launch vehicle",
+     "property": "P279",
+     "ok": true
+    }
+   ]
+  },
+  {
+   "id": "wd:Q110999040",
+   "label": "full-scale Russo-Ukrainian war",
+   "type": "Topic",
+   "qid": "Q110999040",
+   "overview": {
+    "ok": true,
+    "sentences": 2
+   },
+   "facts": [
+    {
+     "fact": "is a: war",
+     "property": "P31",
+     "ok": true
+    },
+    {
+     "fact": "is a: military operation",
+     "property": "P31",
+     "ok": true
+    },
+    {
+     "fact": "part of: post-Soviet conflicts",
+     "property": "P361",
+     "ok": true
+    }
+   ]
+  },
+  {
+   "id": "wd:Q990843",
+   "label": "Brothers to the Rescue",
+   "type": "Organisation",
+   "qid": "Q990843",
+   "overview": {
+    "ok": true,
+    "sentences": 2
+   },
+   "facts": [
+    {
+     "fact": "is a: organization",
+     "property": "P31",
+     "ok": true
+    },
+    {
+     "fact": "founded: 1991",
+     "property": "P571",
+     "ok": true
+    },
+    {
+     "fact": "country: United States",
+     "property": "P17",
+     "ok": true
+    }
+   ]
+  },
+  {
+   "id": "wd:Q975",
+   "label": "San Antonio",
+   "type": "Place",
+   "qid": "Q975",
+   "overview": {
+    "ok": true,
+    "sentences": 2
+   },
+   "facts": [
+    {
+     "fact": "is a: city in the United States",
+     "property": "P31",
+     "ok": true
+    },
+    {
+     "fact": "is a: big city",
+     "property": "P31",
+     "ok": true
+    },
+    {
+     "fact": "country: United States",
+     "property": "P17",
+     "ok": true
+    },
+    {
+     "fact": "located in: Bexar County",
+     "property": "P131",
+     "ok": true
+    },
+    {
+     "fact": "population: 1,434,625",
+     "property": "P1082",
+     "ok": true
+    },
+    {
+     "fact": "area: 1,208.8 km²",
+     "property": "P2046",
+     "ok": true
+    }
+   ]
+  },
+  {
+   "id": "person:volodymyr zelensky",
+   "label": "Volodymyr Zelensky",
+   "type": "PublicFigure",
+   "qid": "Q3874799",
+   "overview": {
+    "ok": true,
+    "sentences": 2
+   },
+   "facts": [
+    {
+     "fact": "position held: President of Ukraine (since 2019)",
+     "property": "P39",
+     "ok": true
+    },
+    {
+     "fact": "position held: Supreme Commander of the Armed Forces of Ukraine (since 2019)",
+     "property": "P39",
+     "ok": true
+    },
+    {
+     "fact": "party: independent politician",
+     "property": "P102",
+     "ok": true
+    },
+    {
+     "fact": "occupation: politician",
+     "property": "P106",
+     "ok": true
+    }
+   ]
+  },
+  {
+   "id": "wd:Q3381348",
+   "label": "Phobos",
+   "type": "Topic",
+   "qid": "Q3381348",
+   "overview": null,
+   "facts": [
+    {
+     "fact": "is a: fictional human hybrid",
+     "property": "P31",
+     "ok": true
+    },
+    {
+     "fact": "is a: comics character",
+     "property": "P31",
+     "ok": true
+    }
+   ]
+  },
+  {
+   "id": "wd:Q29468",
+   "label": "Republican Party",
+   "type": "Organisation",
+   "qid": "Q29468",
+   "overview": {
+    "ok": true,
+    "sentences": 2
+   },
+   "facts": [
+    {
+     "fact": "is a: political party",
+     "property": "P31",
+     "ok": true
+    },
+    {
+     "fact": "founded: 20 March 1854",
+     "property": "P571",
+     "ok": true
+    },
+    {
+     "fact": "headquarters: Washington, D.C.",
+     "property": "P159",
+     "ok": true
+    },
+    {
+     "fact": "country: United States",
+     "property": "P17",
+     "ok": true
+    }
+   ]
+  },
+  {
+   "id": "wd:Q96",
+   "label": "Mexico",
+   "type": "Place",
+   "qid": "Q96",
+   "overview": {
+    "ok": true,
+    "sentences": 2
+   },
+   "facts": [
+    {
+     "fact": "is a: sovereign state",
+     "property": "P31",
+     "ok": true
+    },
+    {
+     "fact": "is a: country",
+     "property": "P31",
+     "ok": true
+    },
+    {
+     "fact": "capital: Mexico City",
+     "property": "P36",
+     "ok": true
+    },
+    {
+     "fact": "population: 132,274,416",
+     "property": "P1082",
+     "ok": true
+    },
+    {
+     "fact": "area: 1,972,550 km²",
+     "property": "P2046",
+     "ok": true
+    },
+    {
+     "fact": "continent: North America",
+     "property": "P30",
+     "ok": true
+    }
+   ]
+  },
+  {
+   "id": "wd:Q11256",
+   "label": "Fidel Castro",
+   "type": "PublicFigure",
+   "qid": "Q11256",
+   "overview": {
+    "ok": true,
+    "sentences": 2
+   },
+   "facts": [
+    {
+     "fact": "position held: President of Cuba (1976–2008)",
+     "property": "P39",
+     "ok": true
+    },
+    {
+     "fact": "position held: First Secretary of the Communist Party of Cuba (1961–2011)",
+     "property": "P39",
+     "ok": true
+    },
+    {
+     "fact": "party: Communist Party of Cuba (since 1965)",
+     "property": "P102",
+     "ok": true
+    },
+    {
+     "fact": "occupation: politician",
+     "property": "P106",
+     "ok": true
+    },
+    {
+     "fact": "occupation: lawyer",
+     "property": "P106",
+     "ok": true
+    },
+    {
+     "fact": "member of: 26th of July Movement",
+     "property": "P463",
+     "ok": true
+    }
+   ]
+  },
+  {
+   "id": "topic:martian moon",
+   "label": "Martian moon",
+   "type": "Topic",
+   "qid": "Q177268",
+   "overview": {
+    "ok": true,
+    "sentences": 2
+   },
+   "facts": [
+    {
+     "fact": "a kind of: planetary moon",
+     "property": "P279",
+     "ok": true
+    }
+   ]
+  },
+  {
+   "id": "wd:Q1893430",
+   "label": "Reform Party of the United States of America",
+   "type": "Organisation",
+   "qid": "Q1893430",
+   "overview": {
+    "ok": true,
+    "sentences": 2
+   },
+   "facts": [
+    {
+     "fact": "is a: political party",
+     "property": "P31",
+     "ok": true
+    },
+    {
+     "fact": "founded: 1995",
+     "property": "P571",
+     "ok": true
+    },
+    {
+     "fact": "headquarters: Bohemia",
+     "property": "P159",
+     "ok": true
+    },
+    {
+     "fact": "country: United States",
+     "property": "P17",
+     "ok": true
+    }
+   ]
+  },
+  {
+   "id": "wd:Q774",
+   "label": "Guatemala",
+   "type": "Place",
+   "qid": "Q774",
+   "overview": {
+    "ok": true,
+    "sentences": 2
+   },
+   "facts": [
+    {
+     "fact": "is a: sovereign state",
+     "property": "P31",
+     "ok": true
+    },
+    {
+     "fact": "is a: republic",
+     "property": "P31",
+     "ok": true
+    },
+    {
+     "fact": "capital: Guatemala City",
+     "property": "P36",
+     "ok": true
+    },
+    {
+     "fact": "population: 17,263,239",
+     "property": "P1082",
+     "ok": true
+    },
+    {
+     "fact": "area: 108,889 km²",
+     "property": "P2046",
+     "ok": true
+    },
+    {
+     "fact": "continent: North America",
+     "property": "P30",
+     "ok": true
+    }
+   ]
+  }
+ ]
+}

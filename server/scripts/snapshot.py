@@ -80,7 +80,7 @@ async def main(n_expand: int, n_explore: int, n_read: int):
     (tmp / "explores").mkdir(parents=True)
 
     candidates = sorted([it for it in to_read if len(it.get("claims") or []) >= 2], key=lambda it: (it["via"] not in ("wikipedia", "gdelt"), it.get("textHow") != "article", -it["quality"]))
-    expansions, entity_count, entity_info = {}, Counter(), {}
+    expansions, entity_count, entity_info, star_entities = {}, Counter(), {}, {}
     for it in candidates[:n_expand]:
         events = [ev async for ev in eng.expand(it["id"], context=PERSONA)]
         g = graph_of(events)
@@ -97,12 +97,22 @@ async def main(n_expand: int, n_explore: int, n_read: int):
             if n["type"] in ("Organisation", "Place", "Technology", "Topic", "Event", "PublicFigure") and not n.get("derived"):
                 entity_count[n["id"]] += 1
                 entity_info[n["id"]] = n
+                star_entities.setdefault(it["id"], []).append(n["id"])
         labels = Counter(e["label"] for e in g["edges"])
         print(f"  expand {it['id']} nodes={len(g['nodes'])} labels={dict(labels)} | {it['headline'][:60]}", flush=True)
 
     # explore: entities shared by stories first (one node, two stories), then others
     type_rank = {"Place": 0, "Organisation": 0, "Technology": 1, "PublicFigure": 2, "Topic": 3, "Event": 4}
-    order = sorted(entity_count, key=lambda k: (-entity_count[k], not k.startswith("wd:"), type_rank.get(entity_info[k]["type"], 5), entity_info[k]["label"]))
+    rank = lambda k: (-entity_count[k], not k.startswith("wd:"), type_rank.get(entity_info[k]["type"], 5), entity_info[k]["label"])  # noqa: E731
+    order = sorted(entity_count, key=rank)
+    # every grown star gets at least one place, organisation or topic that opens up offline
+    first = []
+    for ids in star_entities.values():
+        things = sorted({k for k in ids if entity_info[k]["type"] != "PublicFigure"}, key=rank)
+        if things and not any(k in first for k in things):
+            first.append(things[0])
+    order = first + [k for k in order if k not in first]
+    n_explore = max(n_explore, len(first))
     explores = {}
     for nid in order[:n_explore]:
         n = entity_info[nid]
@@ -169,6 +179,10 @@ async def main(n_expand: int, n_explore: int, n_read: int):
         shutil.rmtree(OUT, ignore_errors=True)
     shutil.copytree(tmp, OUT, dirs_exist_ok=True)
     shutil.rmtree(tmp, ignore_errors=True)
+    # what every node in the recorded webs is, with key facts and sources
+    from snapshot_dossiers import add_dossiers
+
+    await add_dossiers(OUT, eng)
     print(f"wrote {OUT} in {index['seconds']} s; shared entities {index['sharedEntities']}; llm {eng.llm.stats}", flush=True)
     await eng.http.aclose()
 

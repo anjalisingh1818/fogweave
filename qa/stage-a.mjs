@@ -24,7 +24,7 @@ const VIEWPORTS = [
 
 async function setup(page, context) {
   if (mode === 'offline') await context.route('http://localhost:8787/**', (r) => r.abort());
-  await open(page);
+  await open(page, mode === 'offline' ? { query: '?debug&demo' } : {});
   await page.waitForFunction(() => window.__fw?.app && window.__fw.app.mode !== 'starting' && window.__fw.app.lights.items.length > 0, null, { timeout: 150000 });
   await page.evaluate(() => {
     const a = window.__fw.app;

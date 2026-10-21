@@ -1,0 +1,30 @@
+{
+ "version": 1,
+ "note": "One list for server and client (FogWeave refuses these politely). Patterns are lower-case regular expressions.",
+ "private_person": [
+  "\\bwhere (does|do|did) [\\w .'-]{2,40} (live|work|stay)\\b",
+  "\\b(home|house|street) address\\b",
+  "\\b(phone|mobile) number (of|for)\\b",
+  "\\b(find|locate|track|trace|stalk|dox+)\\b.{0,30}\\b(person|someone|my (ex|neighbou?r|boss|coworker|colleague))\\b",
+  "\\bdox+(ing)?\\b",
+  "\\bbackground check\\b",
+  "\\bprofile (of|on) (my|a private)\\b"
+ ],
+ "harmful": [
+  "\\b(make|build|synthes[iy]s?e?|produce)\\b.{0,30}\\b(bomb|explosive|nerve agent|sarin|ricin|anthrax|bioweapon|chemical weapon|meth(amphetamine)?)\\b",
+  "\\b(ransomware|keylogger|malware)\\b.{0,20}\\b(write|build|make|code)\\b|\\b(write|build|make|code)\\b.{0,20}\\b(ransomware|keylogger|malware)\\b",
+  "\\bhow to (kill|poison|hurt) (someone|a person|people)\\b"
+ ],
+ "restricted": [
+  "\\bdark ?web\\b|\\bdarknet\\b|\\bdeep ?web market",
+  "\\b\\.onion\\b|\\bonion (site|link|address)|\\bvia tor\\b|\\btor browser\\b|\\bon tor\\b",
+  "\\bleak(ed|s)?\\b.{0,20}\\b(database|dump|passwords?|credentials|emails?)\\b|\\b(database|data) dump\\b|\\bhacked (data|emails|database)\\b",
+  "\\b(bypass|get (around|past)|skip|remove)\\b.{0,15}\\b(paywall|login|captcha|bot detection)\\b",
+  "\\b(stolen|breached) (data|credentials|accounts)\\b"
+ ],
+ "messages": {
+  "private_person": "I only research topics and public news, not private people.",
+  "harmful": "I can't help with that. FogWeave researches public news and topics safely.",
+  "restricted": "I only use open, legal sources: no dark web, leaked data, or getting past paywalls, logins or bot checks."
+ }
+}

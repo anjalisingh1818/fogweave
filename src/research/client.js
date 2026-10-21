@@ -62,6 +62,21 @@ export class ResearchClient {
     return this._json('/read', { body: { id }, timeout: 60000 });
   }
 
+  /** What each node is, with key facts and sources (fast, cached on the server). */
+  dossiers(nodes, places = []) {
+    return this._json('/dossiers', { body: { nodes, places }, timeout: 30000 });
+  }
+
+  /** Ask the fog: news about any topic, recent and older, to show as stars. */
+  search(q) {
+    return this._json('/search', { body: { q }, timeout: 90000 });
+  }
+
+  /** Connect the dots: patterns across Library items (each kept only with verbatim quotes). */
+  patterns(items) {
+    return this._json('/patterns', { body: { items }, timeout: 90000 });
+  }
+
   ask(question, graph) {
     return this._json('/ask', { body: { question, graph, fresh: true }, timeout: 90000 });
   }

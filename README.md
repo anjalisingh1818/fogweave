@@ -1,10 +1,10 @@
 # FogWeave
 
-A hands-first VR **news impact graph** set in a gray fog. News arrives as drifting lights. Touch one to see what it connects to, what it may affect, and how it may reach your own world. Every link is labelled by how well supported it is, and you seal only what you trust into a cited, exportable Library. (Plan: [docs/PLAN.md](docs/PLAN.md); V2 spec: [docs/FOGWEAVE_V2_DELTA.md](docs/FOGWEAVE_V2_DELTA.md).)
+A hands-first VR **news impact graph** set in a gray fog. News arrives as drifting lights. Touch one to see what it connects to, what it may affect, and how it may reach your own world. Every link is labelled by how well supported it is, and you seal only what you trust into a cited, exportable Library. (Plan: [docs/FOGWEAVE_V3_BEST_PROMPT.md](docs/FOGWEAVE_V3_BEST_PROMPT.md); older prompts in docs/old-prompts.)
 
 Built with [IWSDK](https://developers.meta.com/horizon/documentation/iwsdk/) (WebXR, three.js and ECS) for the Meta VR Start Developer Competition 2026. It is seated and works with hands only; voice is an optional extra.
 
-> **Status (V2 N3 done, 2026-10-20; N4 evaluation and release QA in progress).** V2 adds a curated-random feed shaped by your interests, exploring any node (definition, origin, parts, related news and papers, labelled impact) with a breadcrumb trail, and the new look. The V2 acceptance run (§12.5) passes 14/14 with scripted emulator hands, live and offline. Earlier: The live news engine runs on four free sources: news lights, reader claims with verbatim quotes, and streaming Expand into a labelled impact web. Your private context, the personalized Locket and the "Touches me?" thread work too. Also built: Ask with citations, insights, the story timeline, the daily briefing, workspace panels (Library, Notes, Lights), settings, ambient sound, optional read-aloud and voice, and the Evidence Pack export (JSON-LD + PROV-O, validated with SHACL and SPARQL). Offline, the app replays a dated snapshot of real pipeline runs. Next: evaluation (Phase 4) and release QA (Phase 5).
+> **Status (V3 Stage A, 2026-10-21).** Working to [docs/FOGWEAVE_V3_BEST_PROMPT.md](docs/FOGWEAVE_V3_BEST_PROMPT.md) (V3-LITE scope). Live news is the default scene; the bundled snapshot is a separate Demo scene behind the Menu. Earlier work: a curated-random feed shaped by interests, nodes that open up (definition, origin, parts, recent and older news, papers, datasets, labelled impact), compact cards that work with hands and a mouse, and the evaluation in [docs/EVAL_REPORT.md](docs/EVAL_REPORT.md).
 
 ## Reading the fog
 
@@ -23,17 +23,18 @@ Translucent, drifting items are **fog**: found this session, and gone afterwards
 - Light shape and glow show the kind: **Latest** is a steady star, **Research** a slowly breathing orb, **Archive** a small, dimmer orb. Lights are warm white-gold; evidence colours appear only on node rings and links. Small pulses run along links from cause to affected, faster for better-supported links. The faint coloured specks in the fog are decoration only.
 - **Pinch any node** (a place, organisation, topic…) and it **opens up**: a definition and origin (Wikipedia lead), its parts and context (Wikidata statements), related news and papers that name it, and labelled impact. About eight new nodes come per step; **Show more**, **Pin** and **Collapse** are on its card. The status bar shows your trail ("Bangladesh › Rajshahi Division"), and **‹ Back** returns.
 - **Pinch a light** to open its reader card (headline, source, date, summary, key claims with short verbatim quotes, link). **Expand** grows it into the web: who and what it involves, and what it may affect. Every link is labelled **Reported**, **Inferred** or **Speculative**.
-- **"Touches me?"** on a news node draws a grounded thread to your context, or says "no clear connection found". Your context (city, field, tools, interests; nothing sensitive) lives only on the device ("?" → My context).
+- **Show related** grows a star: about five of the closest nodes come first (related news, then its claims and the people, places and organisations it names). The rest wait behind buttons on its card, such as **+3 People**, **+4 Places** and **All 12**. Other news, recent and older, links in with a typed relation (same event, background, earlier similar case …) and a quote from each item.
 - **Pinch a node** to open its card, with evidence lines (independent domains, source classes, support and contradiction counts) and a risk note.
 - **Seal** on a card keeps the item. Sealing a claim also seals the sources and edges that back it.
-- **Pinch empty space** to name a topic with the pinch keypad, or pick a suggestion card.
+- **Pinch empty fog: Ask the fog.** Ask about any topic or past news with the pinch keypad or a suggestion card. A star drifting here that matches opens; otherwise you get a cited answer. News about it arrives as stars in front of you (recent and older; **Clear stars** on the answer card removes them, sealed ones stay), and drifting stars that already name it come closer. Requests about private people, harmful how-tos or restricted sources (dark web, leaks, paywall or login bypass) are refused politely.
 - **Coin:** flip it near a node, or tap it (a quick pinch on the coin, or a pinch on its tag). It shows the verdict and its breakdown. Flipped in open air, it finds the most central node.
 - **Locket:** swing it near a node, or tap it. It shows the node's rank ("3rd of 12") and why.
 - **Link** on two cards, or hold both props, highlights the shortest path between the two nodes.
 - **Ask** (reader or node card): a suggestion card or the keypad. Answers cite where each sentence comes from; pinch a citation to see it. "Is this reliable?" is answered from the evidence itself.
+- **Library → Find patterns** (Connect the dots) looks across what you sealed. Names two or more items share come from the sources' own links and words (Reported). The live engine also reads them together for a recurring event, a sequence, a contrast or the same actor; it keeps a pattern only when each item has a verbatim quote that shows it (Inferred).
 - **Library → Export pack** saves a zip: `pack.jsonld` (PROV-O), `claims.jsonl`, `README.md`, and `validation.json` when online.
-- **"?" on the wrist**: Library, Notes, Lights, Interests, My context, Briefing, Settings (the Tour is in Settings). Panels can be pinned and moved.
-- **Flick** a card away, or press Close. The **"?"** on your left wrist opens help and the Library.
+- **Menu on the left wrist**: Library (with your notes), Interests, Calm, Demo / Live scene, Help (how to read the fog), About & limits, Settings.
+- **Flick** a card away, or press Close.
 
 ## Run it
 
@@ -50,7 +51,7 @@ FW_HTTP=1 npm run dev  # http://localhost:8081  (add ?debug for an fps meter and
 
 The emulator (IWER, Meta Quest 3 profile) is injected on localhost only.
 
-**Without the backend:** the app uses the dated snapshot of real runs in `public/demo/snapshot/`, and the status line says so. Recorded expansions replay; lights without a recording say Expand needs the live engine.
+**Live first, Demo on request:** the default scene is live. If the news engine is unreachable, the app says so and offers **Open demo**; it never shows old data as live. Menu → Demo scene (or `?demo` in the URL) loads the dated snapshot of real runs in `public/demo/snapshot/`, labelled "Demo scene · snapshot of (date)".
 
 **Backend** (news engine):
 

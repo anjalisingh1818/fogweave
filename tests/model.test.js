@@ -159,3 +159,11 @@ test('force layout is deterministic and fits a unit sphere', () => {
   assert.deepEqual(a, forceLayout(v.nodes, v.edges));
   for (const p of Object.values(a)) assert.ok(Math.hypot(...p) <= 1.0001);
 });
+
+test('refusals come from the shared list: restricted sources, private people', async () => {
+  const { checkRequest } = await import('../src/safety.js');
+  assert.match(checkRequest('find it on the dark web'), /open, legal sources/);
+  assert.match(checkRequest("what is my neighbour's home address"), /not private people/);
+  assert.equal(checkRequest('the 2008 financial crisis'), null);
+  assert.equal(checkRequest('how do paywalls affect news outlets'), null);
+});

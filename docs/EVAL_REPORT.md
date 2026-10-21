@@ -1,6 +1,6 @@
 # FogWeave evaluation report
 
-Generated 2026-10-20 18:14 UTC by `server/eval/report.py` (re-run with `/eval`). News window: Wikipedia Current events, 2026-10-06 to 2026-10-19. LLMs: Groq free tier (gpt-oss-120b / gpt-oss-20b / qwen3.8-27b).
+Generated 2026-10-21 15:20 UTC by `server/eval/report.py` (re-run with `/eval`). News window: Wikipedia Current events, 2026-10-06 to 2026-10-19. LLMs: Groq free tier (gpt-oss-120b / gpt-oss-20b / qwen3.8-27b).
 
 > **Honesty notes.**
 >
@@ -25,6 +25,9 @@ Generated 2026-10-20 18:14 UTC by `server/eval/report.py` (re-run with `/eval`).
 | Pack conforms to SHACL shapes | True (9713 triples) |
 | Latency: first event (the news node) p50 / web complete p50 (p95) | 15 ms / 41 s (60 s) |
 | LLM per item: calls / tokens (mean) | 2.67 / 4162 |
+| V3 related-news relation precision | 0.93 (n=43 pairs, 31 with older news) |
+| V3 dossier key facts matching their source (Wikidata) | 61/61 on 15 nodes |
+| V3 dossier overviews verbatim in the Wikipedia lead | 14/14 |
 | Safety cases passed | 5/5 |
 
 ## 1. Impact chains (V2 §9)
@@ -145,16 +148,42 @@ Answerable (search-only, graph): {'(False, True)': 24, '(False, False)': 5, '(Tr
 
 | Step | ms |
 |---|---|
-| touch light → reader card open | 546 |
-| pinch Expand → first node | 1381 |
-| pinch Expand → web complete (recorded replay) | 9904 |
-| pinch Ask → suggestion → answer card | 1915 |
-| pinch Seal → sealed | 957 |
-| wrist ? → Library open | 1552 |
+| touch light → reader card open | 658 |
+| pinch Expand → first node | 346 |
+| pinch Expand → web complete (recorded replay) | 9051 |
+| pinch Ask → suggestion → answer card | 2256 |
+| pinch Seal → sealed | 1005 |
+| wrist ? → Library open | 1575 |
 
-- Phase 2 QA: 5/5 steps passed (2026-10-20).
-- Phase 3 QA: 4/4 steps passed (2026-10-20).
+- Phase 2 QA: 20/20 steps passed (2026-10-21).
+- Phase 3 QA: 4/4 steps passed (2026-10-21).
 - V2 acceptance (§12.5, `qa/v2-accept.mjs`): 14/14 steps passed (live, offline). When a scripted pinch misses a node that is still settling, the script closes the keypad the miss opened and opens the node through the same handler a hit would call.
+
+## 8b. V3: related news and dossiers (V3 §11)
+
+**Relation precision.** The 30 eval news items (`eval/data/items.json`) were grown live; every related-news link the Related-News Finder emitted is a pair (43 pairs, `eval/runs_v3/relations.json`). A label says whether the stated relation holds for the two texts (kind, direction in time, and the quotes show it). Labels by Claude, with reasons, in `eval/labels/v3_relation_labels.json`.
+
+| Relation | n | precision |
+|---|---|---|
+| shares_entity | 25 | 0.96 |
+| similar_pattern | 9 | 0.89 |
+| background | 7 | 0.86 |
+| precedent_of | 1 | 1.00 |
+| follow_up | 1 | 1.00 |
+| **all** | 43 | **0.93** |
+
+True and also useful (not a generic or broad-place-only link): 35/43. Wrong:
+
+- `shares_entity`: 'speedboats' is a common noun, not a shared entity; a migrant shipwreck off Lesbos and a Venezuelan 'marine incursion' are not linked.
+- `background`: Declassified CIA documents do not explain a 2026 arrest warrant; the 'background' is only that both concern the Castros.
+- `similar_pattern`: Water-shortage protests in Guadalajara and the 2014 attack on Guerrero's congress share only 'protest in Mexico'; too loose for a similar pattern.
+
+Changed after labelling: a shared name must be a proper name ("speedboats" was linked), and big places (a state with its country) never link two stories on their own; the pairs above were collected before these two rules.
+
+**Dossier facts.** 15 nodes with a dossier from the Demo snapshot (Organisation 4, Place 4, PublicFigure 3, Technology 1, Topic 3), re-checked against their sources by another route (`eval/v3_dossiers.py`, automatic, no hand labels): each key fact against the item's Wikidata entry (Special:EntityData), each overview against the Wikipedia lead (parentheticals set aside: the dossier drops a person's "(born …)").
+
+- Key facts matching their source: **61/61**
+- Overviews verbatim: **14/14**
 
 ## 9. Top failures and what was changed
 

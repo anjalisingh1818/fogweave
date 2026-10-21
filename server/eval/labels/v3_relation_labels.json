@@ -1,0 +1,217 @@
+{
+ "n:945f742db3b8|n:646d85364670": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:945f742db3b8|n:4f1d307cc684": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:945f742db3b8|n:aff2a7c718a8": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:945f742db3b8|n:3a9bf872d177": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:945f742db3b8|n:aee81d6892f3": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:945f742db3b8|n:67b67b52f643": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:d0e0e4a57ac3|n:1def1469b371": {
+  "ok": true,
+  "useful": true,
+  "reason": "precedent_of holds for the two texts and the quotes show it."
+ },
+ "n:d0e0e4a57ac3|n:1610b49ca41e": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:84bb02f4d37d|n:4385bc964605": {
+  "ok": false,
+  "useful": false,
+  "reason": "'speedboats' is a common noun, not a shared entity; a migrant shipwreck off Lesbos and a Venezuelan 'marine incursion' are not linked."
+ },
+ "n:12fabc0b78de|n:6b2124a981e9": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:12fabc0b78de|n:9335a99da24a": {
+  "ok": false,
+  "useful": false,
+  "reason": "Declassified CIA documents do not explain a 2026 arrest warrant; the 'background' is only that both concern the Castros."
+ },
+ "n:b88263d4e9c2|n:f819de50ee9e": {
+  "ok": true,
+  "useful": true,
+  "reason": "follow_up holds for the two texts and the quotes show it."
+ },
+ "n:b88263d4e9c2|n:dd598f2e69a2": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:2ea4338fe8f4|n:e3c10a58ad24": {
+  "ok": true,
+  "useful": true,
+  "reason": "background holds for the two texts and the quotes show it."
+ },
+ "n:fa08b85b6159|n:f36d50b440e9": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:fa08b85b6159|n:c1e085c41238": {
+  "ok": true,
+  "useful": false,
+  "reason": "True (both name the NHL) but generic."
+ },
+ "n:fa08b85b6159|n:e137c100160e": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:fa08b85b6159|n:77afa8464b01": {
+  "ok": true,
+  "useful": false,
+  "reason": "True (both name the NHL) but generic."
+ },
+ "n:75c973928996|n:1da73c111789": {
+  "ok": true,
+  "useful": false,
+  "reason": "Famine as background to a drone strike: same war, loose."
+ },
+ "n:75c973928996|n:90b75aad1a16": {
+  "ok": true,
+  "useful": true,
+  "reason": "similar_pattern holds for the two texts and the quotes show it."
+ },
+ "n:75c973928996|n:7b5a5bd02efc": {
+  "ok": true,
+  "useful": true,
+  "reason": "similar_pattern holds for the two texts and the quotes show it."
+ },
+ "n:75c973928996|n:7aec12aa26a2": {
+  "ok": true,
+  "useful": true,
+  "reason": "background holds for the two texts and the quotes show it."
+ },
+ "n:75c973928996|n:075e009ed214": {
+  "ok": true,
+  "useful": true,
+  "reason": "background holds for the two texts and the quotes show it."
+ },
+ "n:047b20792022|n:9f573e30cbee": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:047b20792022|n:a6c727b5e01d": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:8ab7353c3a4a|n:b17c77f97b22": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:8ab7353c3a4a|n:c3e279d67ef7": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:8ab7353c3a4a|n:3cf985552f76": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:0f5a4c632e8d|n:25ea52ec016a": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:00dfe2b0206f|n:a9a856a2a4bb": {
+  "ok": true,
+  "useful": true,
+  "reason": "similar_pattern holds for the two texts and the quotes show it."
+ },
+ "n:54a830f0095a|n:e2f17011491e": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:54a830f0095a|n:9eacdae21b99": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:00eab1f15d72|n:4cdf31325659": {
+  "ok": true,
+  "useful": true,
+  "reason": "similar_pattern holds for the two texts and the quotes show it."
+ },
+ "n:00eab1f15d72|n:75c973928996": {
+  "ok": true,
+  "useful": true,
+  "reason": "similar_pattern holds for the two texts and the quotes show it."
+ },
+ "n:00eab1f15d72|n:90b75aad1a16": {
+  "ok": true,
+  "useful": true,
+  "reason": "similar_pattern holds for the two texts and the quotes show it."
+ },
+ "n:e40e07b73237|n:d530b7d5236f": {
+  "ok": true,
+  "useful": false,
+  "reason": "True (both name Madhya Pradesh) but a state alone is a weak reason to link two road accidents' stories; should not pass the broad-place rule."
+ },
+ "n:e40e07b73237|n:a8b447e55982": {
+  "ok": true,
+  "useful": false,
+  "reason": "True (both name Madhya Pradesh) but a state alone is weak; should not pass the broad-place rule."
+ },
+ "n:c4f3475d8101|n:40c0f80db8df": {
+  "ok": true,
+  "useful": true,
+  "reason": "shares_entity holds for the two texts and the quotes show it."
+ },
+ "n:9700f8a230bf|n:51d07aa2665f": {
+  "ok": true,
+  "useful": true,
+  "reason": "similar_pattern holds for the two texts and the quotes show it."
+ },
+ "n:9700f8a230bf|n:0f6233341e91": {
+  "ok": true,
+  "useful": true,
+  "reason": "similar_pattern holds for the two texts and the quotes show it."
+ },
+ "n:afdc5ab9ef1a|n:658a2a771679": {
+  "ok": true,
+  "useful": true,
+  "reason": "background holds for the two texts and the quotes show it."
+ },
+ "n:6a3502fcf385|n:04233cbda03d": {
+  "ok": true,
+  "useful": true,
+  "reason": "background holds for the two texts and the quotes show it."
+ },
+ "n:0460555895d3|n:5549db261760": {
+  "ok": false,
+  "useful": false,
+  "reason": "Water-shortage protests in Guadalajara and the 2014 attack on Guerrero's congress share only 'protest in Mexico'; too loose for a similar pattern."
+ }
+}

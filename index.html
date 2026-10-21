@@ -6,11 +6,60 @@
     <link rel="icon" href="data:," />
     <title>FogWeave</title>
     <style>
-      html, body { margin: 0; height: 100%; background: #0a0a0f; }
+      html, body { margin: 0; height: 100%; background: #05070d; }
       #scene-container { width: 100%; height: 100%; }
+
+      /* Welcome screen: shown from the first frame until the stars are in (src/ui/welcome.js) */
+      #welcome {
+        position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center;
+        background: linear-gradient(180deg, #020308 0%, #050a17 40%, #0c1a33 72%, #070d1c 100%), #05070d;
+        color: #eef1f6; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        transition: opacity 0.9s ease; overflow: hidden;
+      }
+      #welcome.gone { opacity: 0; pointer-events: none; }
+      /* gray fog drifting over the night */
+      #welcome .fog { position: absolute; width: 70vmax; height: 40vmax; border-radius: 50%; filter: blur(40px);
+        background: radial-gradient(ellipse at center, #9aa3b133 0%, #9aa3b11a 45%, transparent 70%); animation: fw-fog 38s ease-in-out infinite alternate; }
+      @keyframes fw-fog { from { transform: translate(-8vw, 2vh) scale(1); } to { transform: translate(8vw, -3vh) scale(1.15); } }
+      #welcome .box { position: relative; text-align: center; padding: 0 24px; max-width: 560px; }
+      #welcome h1 { margin: 0 0 14px; font-size: clamp(40px, 8vw, 68px); font-weight: 300; letter-spacing: 0.14em; }
+      #welcome h1 b { font-weight: 600; color: #ffe6b4; }
+      #welcome .tag { margin: 0 0 40px; font-size: clamp(16px, 2.6vw, 20px); line-height: 1.5; color: #c9d1dc; }
+      #welcome .step { min-height: 1.5em; font-size: 16px; color: #aeb8c6; }
+      #welcome .bar { width: 180px; height: 3px; margin: 14px auto 0; border-radius: 3px; background: #ffffff1f; overflow: hidden; }
+      #welcome .bar i { display: block; width: 40%; height: 100%; border-radius: 3px; background: #ffe6b4; animation: fw-slide 1.6s ease-in-out infinite; }
+      #welcome .alt { margin-top: 28px; min-height: 44px; }
+      #welcome button {
+        font: inherit; font-size: 15px; color: #eef1f6; background: #ffffff14; border: 1px solid #ffffff33;
+        border-radius: 22px; padding: 10px 20px; cursor: pointer;
+      }
+      #welcome button:hover { background: #ffffff26; }
+      #welcome .star { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: #ffe6b4; box-shadow: 0 0 14px 5px #ffe6b455; animation: fw-drift 9s ease-in-out infinite alternate; }
+      @keyframes fw-slide { from { transform: translateX(-110%); } to { transform: translateX(260%); } }
+      @keyframes fw-drift { from { transform: translate(0, 0); opacity: 0.45; } to { transform: translate(18px, -14px); opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) {
+        #welcome .star, #welcome .bar i, #welcome .fog { animation: none; }
+      }
     </style>
   </head>
   <body>
+    <div id="welcome" role="status" aria-live="polite">
+      <span class="fog" style="left: -20vmax; top: 10%"></span>
+      <span class="fog" style="right: -25vmax; top: 45%; animation-delay: -14s; animation-duration: 46s"></span>
+      <span class="fog" style="left: 10%; bottom: -18vmax; animation-delay: -25s"></span>
+      <span class="star" style="left: 14%; top: 22%"></span>
+      <span class="star" style="left: 78%; top: 18%; animation-delay: -3s"></span>
+      <span class="star" style="left: 66%; top: 70%; animation-delay: -6s"></span>
+      <span class="star" style="left: 24%; top: 74%; animation-delay: -1.5s"></span>
+      <span class="star" style="left: 88%; top: 48%; animation-delay: -4.5s"></span>
+      <div class="box">
+        <h1>Fog<b>Weave</b></h1>
+        <p class="tag">Today’s news drifts in a quiet fog as stars.<br />Touch one to see what it connects to, with sources.</p>
+        <div class="step" id="welcome-step">Opening the fog…</div>
+        <div class="bar"><i></i></div>
+        <div class="alt" id="welcome-alt"></div>
+      </div>
+    </div>
     <div id="scene-container"></div>
     <script type="module" src="/src/index.js"></script>
   </body>

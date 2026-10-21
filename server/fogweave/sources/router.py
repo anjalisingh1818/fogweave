@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import asyncio
 import time
+from datetime import datetime, timedelta, timezone
 
 from ..http import PoliteClient, SourceError
 from .arxiv import ArxivAdapter
@@ -86,6 +87,28 @@ class SourceRouter:
             jobs.append(gdelt_typed())
         batches = await asyncio.gather(*jobs)
         return dedupe([it for b in batches for it in b])
+
+    async def search_news(self, query: str, limit: int = 6) -> list[RawItem]:
+        """News that names `query`: the last ten days of Current events, GDELT
+        articles, and older Current events entries (the archive). Recent first,
+        then up to three older items."""
+        from ..related import mention
+
+        recent: list[RawItem] = []
+        older: list[RawItem] = []
+        wiki = self.adapters.get("wikipedia")
+        if wiki:
+            today = datetime.now(timezone.utc)
+            for back in range(10):  # cached day pages
+                try:
+                    recent += [it for it in await wiki.current_events(today - timedelta(days=back)) if mention(f"{it.title}. {it.snippet}", query)]
+                except Exception:  # noqa: BLE001
+                    continue
+            older = await self._safe(f"search-archive:{query[:30]}", wiki.archive_search(query, limit=3, min_age_days=11))
+        if "gdelt" in self.adapters:
+            recent += await self._safe(f"search-gdelt:{query[:30]}", self.adapters["gdelt"].search(query, limit=3, timespan="1w"))
+        recent = dedupe(recent)[: max(1, limit - min(3, len(older)))]
+        return dedupe(recent + older)[:limit]
 
     async def corroborate(self, query: str, limit: int = 6) -> list[RawItem]:
         jobs = []

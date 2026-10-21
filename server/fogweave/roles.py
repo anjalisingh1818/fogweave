@@ -191,3 +191,47 @@ class ImpactAnalyst:
             schema=Impact,
             max_tokens=1600,
         )
+
+
+# ---------------------------------------------------------------- Relation Reasoner
+RELATION_KINDS = ("same_event", "follow_up", "background", "cause_of", "effect_of", "precedent_of", "similar_pattern", "corroborates", "contradicts", "shares_entity", "possible_consequence", "unrelated")
+
+
+class PairJudgement(BaseModel):
+    id: str = Field(description="the candidate id, as given")
+    relation: Literal["same_event", "follow_up", "background", "cause_of", "effect_of", "precedent_of", "similar_pattern", "corroborates", "contradicts", "shares_entity", "possible_consequence", "unrelated"]
+    quote_focus: str = Field(description="a short exact quote (25 words or fewer) from the FOCUS text that shows the link")
+    quote_other: str = Field(description="a short exact quote (25 words or fewer) from the CANDIDATE text that shows the link")
+    reason: str = Field(description="one or two plain sentences: how the two are related; for similar_pattern also what differs")
+    confidence: Literal["low", "medium", "high"]
+
+
+class PairJudgements(BaseModel):
+    items: list[PairJudgement]
+
+
+class RelationReasoner:
+    """Decides how each candidate news item relates to the focus item. Code checks the quotes and dates."""
+
+    def __init__(self, llm):
+        self.llm = llm
+
+    async def run(self, focus: dict, candidates: list[dict]) -> PairJudgements:
+        cands = "\n\n".join(f"[{c['id']}] ({c['date'][:10]}) {c['text']}" for c in candidates)
+        return await self.llm.json(
+            role="relation",
+            system=(
+                "You decide how each CANDIDATE news item relates to the FOCUS news item. Relations, from the candidate's side: "
+                "same_event (reports the same event), follow_up (a later development of it), background (earlier news that explains it), "
+                "cause_of (the candidate's event caused the focus event), effect_of (the candidate's event is a result of the focus event), "
+                "precedent_of (an earlier similar case), similar_pattern (the same kind of event elsewhere; say what differs), "
+                "corroborates (independently reports the same facts), contradicts (reports conflicting facts), "
+                "shares_entity (only shares a person, place or organisation), possible_consequence (something the focus may lead to), "
+                "unrelated (none of these). Choose cause_of or effect_of only when the texts state the causal link. "
+                "Answer once for every candidate. Each quote is ONE continuous exact span copied from its text (25 words or fewer, no '...'). "
+                "If unsure, say low confidence or unrelated. " + UNTRUSTED_RULES
+            ),
+            user="FOCUS (" + focus["date"][:10] + "):\n" + wrap_untrusted(focus["text"], 2500) + "\n\nCANDIDATES:\n" + wrap_untrusted(cands, 6000),
+            schema=PairJudgements,
+            max_tokens=1600,
+        )

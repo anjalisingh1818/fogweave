@@ -71,7 +71,12 @@ export class Card {
     this.visible = true;
     this.mesh.addEventListener('pointermove', (e) => this._onMove(e));
     this.mesh.addEventListener('pointerleave', () => this._setHover(null));
-    this.mesh.addEventListener('click', (e) => this._onClick(e));
+    // press on pinch-down, fire on release: the pointer is captured, so a hand
+    // ray that drifts a little while pinching still presses the button it
+    // started on (a small button used to lose the click); releasing over a
+    // different button cancels
+    this.mesh.addEventListener('pointerdown', (e) => this._onDown(e));
+    this.mesh.addEventListener('pointerup', (e) => this._onUp(e));
   }
 
   get object3D() {
@@ -183,9 +188,31 @@ export class Card {
     this.redraw();
   }
 
-  _onClick(e) {
-    const b = this._hit(e);
-    if (b) this.press(b.id, e);
+  _onDown(e) {
+    // the button under the ray, or the one it was resting on a moment ago
+    const b = this._hit(e) || (this.hoverId && this.buttons.find((x) => x.id === this.hoverId)) || null;
+    this._pressed = b ? { id: b.id, pointerId: e.pointerId } : null;
+    if (b) {
+      try {
+        this.mesh.setPointerCapture?.(e.pointerId);
+      } catch {
+        // capture is a nicety; the press still works without it
+      }
+    }
+  }
+
+  _onUp(e) {
+    const p = this._pressed;
+    this._pressed = null;
+    if (!p) return;
+    try {
+      this.mesh.releasePointerCapture?.(p.pointerId);
+    } catch {
+      // already released
+    }
+    // XR rule: the button you pinched down on fires when you let go (a ray
+    // that drifts during the pinch must not cancel it or press a neighbour)
+    if (this.buttons.some((x) => x.id === p.id)) this.press(p.id, e);
   }
 
   /** Press a button by id (used by clicks and by scripted QA). */

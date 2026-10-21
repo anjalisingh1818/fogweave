@@ -11,24 +11,17 @@
 from __future__ import annotations
 
 import re
+import json
 import unicodedata
+from pathlib import Path
 
-PRIVATE_PERSON = [
-    r"\bwhere (does|do|did) [\w .'-]{2,40} (live|work|stay)\b",
-    r"\b(home|house|street) address\b",
-    r"\b(phone|mobile) number (of|for)\b",
-    r"\b(find|locate|track|trace|stalk|dox+)\b.{0,30}\b(person|someone|my (ex|neighbou?r|boss|coworker|colleague))\b",
-    r"\bdox+(ing)?\b",
-    r"\bbackground check\b",
-    r"\bprofile (of|on) (my|a private)\b",
-]
-HARMFUL = [
-    r"\b(make|build|synthes[iy]s?e?|produce)\b.{0,30}\b(bomb|explosive|nerve agent|sarin|ricin|anthrax|bioweapon|chemical weapon|meth(amphetamine)?)\b",
-    r"\b(ransomware|keylogger|malware)\b.{0,20}\b(write|build|make|code)\b|\b(write|build|make|code)\b.{0,20}\b(ransomware|keylogger|malware)\b",
-    r"\bhow to (kill|poison|hurt) (someone|a person|people)\b",
-]
-REFUSE_PRIVATE = "I only research topics and public news, not private people."
-REFUSE_HARMFUL = "I can't help with that. FogWeave researches public news and topics safely."
+_RULES = json.loads((Path(__file__).resolve().parents[2] / "shared" / "safety.v1.json").read_text(encoding="utf-8"))
+PRIVATE_PERSON = _RULES["private_person"]
+HARMFUL = _RULES["harmful"]
+RESTRICTED = _RULES["restricted"]  # dark web, leaks, paywall/login/bot-check bypass
+REFUSE_PRIVATE = _RULES["messages"]["private_person"]
+REFUSE_HARMFUL = _RULES["messages"]["harmful"]
+REFUSE_RESTRICTED = _RULES["messages"]["restricted"]
 
 DELIM_OPEN = "<<<UNTRUSTED_SOURCE_TEXT>>>"
 DELIM_CLOSE = "<<<END_UNTRUSTED_SOURCE_TEXT>>>"
@@ -48,6 +41,8 @@ def check_request(text: str) -> str | None:
         return REFUSE_PRIVATE
     if any(re.search(p, t) for p in HARMFUL):
         return REFUSE_HARMFUL
+    if any(re.search(p, t) for p in RESTRICTED):
+        return REFUSE_RESTRICTED
     return None
 
 

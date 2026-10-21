@@ -5,6 +5,8 @@
   POST /read            reader-card details {id}
   POST /expand          streamed graph events (text/event-stream) {id, context?, deep?}
   POST /check           safety check for typed requests {text}
+  POST /search          Ask the fog: news about any topic, as stars {q}
+  POST /patterns        Connect the dots: patterns across Library items {items}
 
 The reader's context labels arrive only with the request that needs them and
 are never stored or logged.
@@ -15,6 +17,7 @@ Run: uvicorn app:app --port 8787
 from __future__ import annotations
 
 import json
+import re
 import time
 
 from fastapi import FastAPI, HTTPException
@@ -75,6 +78,11 @@ class ExploreReq(BaseModel):
     paperTypes: list[str] = Field(default_factory=list, max_length=10)
 
 
+class DossierReq(BaseModel):
+    nodes: list[dict] = Field(default_factory=list, max_length=30)  # [{id, type, label, qid?}]
+    places: list[str] = Field(default_factory=list, max_length=20)  # place names in the story's web (public)
+
+
 class PackReq(BaseModel):
     pack: dict  # the client's JSON-LD Evidence Pack
 
@@ -122,6 +130,34 @@ def check(req: CheckReq):
     return {"ok": refusal is None, "message": refusal}
 
 
+class SearchReq(BaseModel):
+    q: str = Field(min_length=2, max_length=120)
+
+
+@app.post("/search")
+async def search(req: SearchReq):
+    refusal = check_request(req.q)
+    if refusal:
+        return {"query": req.q, "refused": True, "message": refusal, "items": []}
+    return await engine.search(req.q.strip())
+
+
+class PatternsReq(BaseModel):
+    items: list[dict] = Field(default_factory=list, max_length=24)
+
+
+@app.post("/patterns")
+async def patterns(req: PatternsReq):
+    from fogweave.patterns import find_patterns
+
+    items = [
+        {"id": str(i.get("id", ""))[:80], "type": str(i.get("type", ""))[:30], "label": str(i.get("label", ""))[:200], "date": str(i.get("date") or "")[:25], "text": str(i.get("text") or "")[:900]}
+        for i in req.items
+        if i.get("id") and i.get("label")
+    ]
+    return await find_patterns(engine.llm, items)
+
+
 @app.post("/ask")
 async def ask(req: AskReq):
     graph = {"nodes": req.graph.get("nodes", [])[:80], "edges": req.graph.get("edges", [])[:160]}
@@ -138,6 +174,19 @@ def pack(req: PackReq):
         return check_pack(req.pack)
     except Exception as exc:  # noqa: BLE001 — report, don't crash
         raise HTTPException(status_code=422, detail=f"not valid JSON-LD: {type(exc).__name__}") from exc
+
+
+@app.post("/dossiers")
+async def dossiers(req: DossierReq):
+    """Real information about each node (what it is, key facts with sources), fast and cached."""
+    from fogweave.dossier import DossierMaker
+
+    nodes = []
+    for n in req.nodes:
+        if isinstance(n, dict) and isinstance(n.get("id"), str) and isinstance(n.get("label"), str) and n["label"].strip():
+            nodes.append({"id": n["id"][:120], "label": n["label"][:120], "type": str(n.get("type", "Topic"))[:20], "qid": n.get("qid") if isinstance(n.get("qid"), str) and re.fullmatch(r"Q\d+", n.get("qid") or "") else None})
+    places = [p[:80] for p in req.places if isinstance(p, str)]
+    return {"dossiers": await DossierMaker(engine).make(nodes, places)}
 
 
 @app.post("/explore")

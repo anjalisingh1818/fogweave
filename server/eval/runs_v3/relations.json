@@ -1,0 +1,819 @@
+[
+ {
+  "id": "n:945f742db3b8|n:646d85364670",
+  "focus": {
+   "id": "n:945f742db3b8",
+   "date": "2026-10-19",
+   "text": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…. A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen. There are 14 missing."
+  },
+  "other": {
+   "id": "n:646d85364670",
+   "date": "2022-04-02",
+   "text": "Ceasefire talks between the Houthis and Saudi Arabian forces begin in Yemen in an effort to end fighting. Ceasefire talks between the Houthis and Saudi Arabian forces begin in Yemen in an effort to end fighting.",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "Both texts mention the Houthis, but the events are unrelated; one is a ceasefire negotiation, the other a missile attack.",
+  "quote_focus": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen.",
+  "quote_other": "Ceasefire talks between the Houthis and Saudi Arabian forces begin in Yemen in an effort to end fighting."
+ },
+ {
+  "id": "n:945f742db3b8|n:4f1d307cc684",
+  "focus": {
+   "id": "n:945f742db3b8",
+   "date": "2026-10-19",
+   "text": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…. A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen. There are 14 missing."
+  },
+  "other": {
+   "id": "n:4f1d307cc684",
+   "date": "2020-06-23",
+   "text": "The Houthis launch ballistic missiles and drones against Saudi Arabia, including its capital Riyadh. The Houthis launch ballistic missiles and drones against Saudi Arabia, including its capital Riyadh. Saudi-led coalition spokesman Turki al-Maliki says that Saudi forces \"managed to intercept and destroy\" the missiles an",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "Both involve missile attacks carried out by the Houthis, but target different locations and dates; no direct link beyond the common actor.",
+  "quote_focus": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen.",
+  "quote_other": "The Houthis launch ballistic missiles and drones against Saudi Arabia, including its capital Riyadh."
+ },
+ {
+  "id": "n:945f742db3b8|n:aff2a7c718a8",
+  "focus": {
+   "id": "n:945f742db3b8",
+   "date": "2026-10-19",
+   "text": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…. A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen. There are 14 missing."
+  },
+  "other": {
+   "id": "n:aff2a7c718a8",
+   "date": "2026-10-15",
+   "text": "The Houthis launch missiles against Al-Maashiq Palace, headquarters of the Presidential Leadership Council…. The Houthis launch missiles against Al-Maashiq Palace, headquarters of the Presidential Leadership Council and official residence of President Rashad al-Alimi, in Aden, Yemen, killing five people and injuring 16. No memb",
+   "older": false
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "Both reports describe separate missile attacks by the Houthis in Yemen; they share the perpetrator but are distinct events.",
+  "quote_focus": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen.",
+  "quote_other": "The Houthis launch missiles against Al-Maashiq Palace, headquarters of the Presidential Leadership Council … in Aden, Yemen, killing five people and injuring 16"
+ },
+ {
+  "id": "n:945f742db3b8|n:3a9bf872d177",
+  "focus": {
+   "id": "n:945f742db3b8",
+   "date": "2026-10-19",
+   "text": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…. A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen. There are 14 missing."
+  },
+  "other": {
+   "id": "n:3a9bf872d177",
+   "date": "2026-10-13",
+   "text": "The Royal Saudi Air Force strikes a fuel depot near Sanaa, Yemen. The Royal Saudi Air Force strikes a fuel depot near Sanaa, Yemen. The Houthis launch missiles upon multiple Saudi Arabian cities, including Riyadh and Dammam, in response.",
+   "older": false
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "Both texts involve the Houthis launching missiles, but the focus is an attack on a Yemeni training center, while the candidate describes broader retaliation against Saudi cities.",
+  "quote_focus": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen.",
+  "quote_other": "The Royal Saudi Air Force strikes a fuel depot near Sanaa, Yemen. The Houthis launch missiles upon multiple Saudi Arabian cities, including Riyadh and Dammam,"
+ },
+ {
+  "id": "n:945f742db3b8|n:aee81d6892f3",
+  "focus": {
+   "id": "n:945f742db3b8",
+   "date": "2026-10-19",
+   "text": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…. A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen. There are 14 missing."
+  },
+  "other": {
+   "id": "n:aee81d6892f3",
+   "date": "2026-10-14",
+   "text": "The Houthis claim to have shot down a Royal Saudi Air Force Eurofighter Typhoon aircraft over Saada…. The Houthis claim to have shot down a Royal Saudi Air Force Eurofighter Typhoon aircraft over Saada Governorate, Yemen. Saudi authorities did not comment on the claim.",
+   "older": false
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "Both mention the Houthis as the actor; the events (missile attack vs. claimed aircraft shoot‑down) are unrelated beyond that shared entity.",
+  "quote_focus": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen.",
+  "quote_other": "The Houthis claim to have shot down a Royal Saudi Air Force Eurofighter Typhoon aircraft over Saada Governorate, Yemen."
+ },
+ {
+  "id": "n:945f742db3b8|n:67b67b52f643",
+  "focus": {
+   "id": "n:945f742db3b8",
+   "date": "2026-10-19",
+   "text": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…. A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen. There are 14 missing."
+  },
+  "other": {
+   "id": "n:67b67b52f643",
+   "date": "2026-10-12",
+   "text": "The Houthis claim to have attacked King Khalid International Airport in Riyadh, Saudi Arabia, with a…. The Houthis claim to have attacked King Khalid International Airport in Riyadh, Saudi Arabia, with a ballistic missile for a third consecutive day.",
+   "older": false
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "Both involve missile attacks claimed by the Houthis, but target different locations (Yemen vs. Saudi Arabia); the only link is the common perpetrator.",
+  "quote_focus": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen.",
+  "quote_other": "The Houthis claim to have attacked King Khalid International Airport in Riyadh, Saudi Arabia, with a ballistic missile for a third consecutive day."
+ },
+ {
+  "id": "n:d0e0e4a57ac3|n:1def1469b371",
+  "focus": {
+   "id": "n:d0e0e4a57ac3",
+   "date": "2026-10-08",
+   "text": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…. Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that, in playful dialogue with the classical tradition, has created new forms ‌for contemporary literature\"."
+  },
+  "other": {
+   "id": "n:1def1469b371",
+   "date": "2022-10-06",
+   "text": "French author Annie Ernaux is awarded the Nobel Prize in Literature for \"the courage and clinical acuity with…. French author Annie Ernaux is awarded the Nobel Prize in Literature for \"the courage and clinical acuity with which she uncovers the roots, estrangements and collective restraints of personal memory\".",
+   "older": true
+  },
+  "relation": "precedent_of",
+  "label": "inferred",
+  "reason": "Both are recipients of the Nobel Prize in Literature, with the earlier award by Ernaux serving as a precedent for the later award to Carson.",
+  "quote_focus": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature",
+  "quote_other": "French author Annie Ernaux is awarded the Nobel Prize in Literature"
+ },
+ {
+  "id": "n:d0e0e4a57ac3|n:1610b49ca41e",
+  "focus": {
+   "id": "n:d0e0e4a57ac3",
+   "date": "2026-10-08",
+   "text": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…. Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that, in playful dialogue with the classical tradition, has created new forms ‌for contemporary literature\"."
+  },
+  "other": {
+   "id": "n:1610b49ca41e",
+   "date": "2020-10-08",
+   "text": "The Nobel Prize in Literature is awarded to Louise Glück \"for her unmistakable poetic voice that with austere…. The Nobel Prize in Literature is awarded to Louise Glück \"for her unmistakable poetic voice that with austere beauty makes individual existence universal.\"",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "Both name Nobel Prize in Literature.",
+  "quote_focus": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…. Canadian",
+  "quote_other": "The Nobel Prize in Literature is awarded to Louise Glück \"for her unmistakable"
+ },
+ {
+  "id": "n:84bb02f4d37d|n:4385bc964605",
+  "focus": {
+   "id": "n:84bb02f4d37d",
+   "date": "2026-10-19",
+   "text": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…. Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the Lesbos and Samos islands in Greece."
+  },
+  "other": {
+   "id": "n:4385bc964605",
+   "date": "2020-05-03",
+   "text": "Venezuelan Interior Minister Néstor Reverol says the country's security forces have foiled a \"marine…. Venezuelan Interior Minister Néstor Reverol says the country's security forces have foiled a \"marine incursion\" by \"terrorist mercenaries\" from Colombia, killing at least eight gunmen and capturing two others. The foreig",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "Both name speedboats.",
+  "quote_focus": "including an infant, are killed when two separate speedboats capsize off the coast of the…. Twelve migrants,",
+  "quote_other": "beach in the city of La Guaira on speedboats."
+ },
+ {
+  "id": "n:12fabc0b78de|n:6b2124a981e9",
+  "focus": {
+   "id": "n:12fabc0b78de",
+   "date": "2026-10-19",
+   "text": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…. A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban president Raúl Castro after Florida attorney general James Uthmeier charged Castro with conspiracy to commit first-degree murder by directing spies to infiltrate Brothers to the Rescue and ordering the attack on their planes in 1996."
+  },
+  "other": {
+   "id": "n:6b2124a981e9",
+   "date": "2019-09-12",
+   "text": "Twitter suspends several Cuban government and state media accounts, including First Secretary of the…. Twitter suspends several Cuban government and state media accounts, including First Secretary of the Communist Party of Cuba Raúl Castro and his daughter Mariela Castro. The pro-government Union of Journalists of Cuba de",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "Both texts mention Raúl Castro, but the candidate only discusses his Twitter account suspension, not the arrest warrant.",
+  "quote_focus": "former Cuban president Raúl Castro",
+  "quote_other": "First Secretary of the Communist Party of Cuba Raúl Castro"
+ },
+ {
+  "id": "n:12fabc0b78de|n:9335a99da24a",
+  "focus": {
+   "id": "n:12fabc0b78de",
+   "date": "2026-10-19",
+   "text": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…. A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban president Raúl Castro after Florida attorney general James Uthmeier charged Castro with conspiracy to commit first-degree murder by directing spies to infiltrate Brothers to the Rescue and ordering the attack on their planes in 1996."
+  },
+  "other": {
+   "id": "n:9335a99da24a",
+   "date": "2021-04-16",
+   "text": "Declassified documents released by the National Security Archive show that the Central Intelligence Agency…. Declassified documents released by the National Security Archive show that the Central Intelligence Agency was involved in a plot to assassinate Raúl Castro in 1960.",
+   "older": true
+  },
+  "relation": "background",
+  "label": "inferred",
+  "reason": "The candidate provides earlier historical context about Castro, which explains his prominence in the focus event.",
+  "quote_focus": "former Cuban president Raúl Castro",
+  "quote_other": "Central Intelligence Agency was involved in a plot to assassinate Raúl Castro in 1960"
+ },
+ {
+  "id": "n:b88263d4e9c2|n:f819de50ee9e",
+  "focus": {
+   "id": "n:b88263d4e9c2",
+   "date": "2026-10-16",
+   "text": "Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead of the party's planned march. Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead of the party's planned march."
+  },
+  "other": {
+   "id": "n:f819de50ee9e",
+   "date": "2026-10-17",
+   "text": "A court in New Delhi, India, orders the release of Cockroach Janta Party founder and activist Abhijeet Dipke…. A court in New Delhi, India, orders the release of Cockroach Janta Party founder and activist Abhijeet Dipke on a peace bond, one day after police detained him while he was heading to a protest against the Election Commi",
+   "older": false
+  },
+  "relation": "follow_up",
+  "label": "inferred",
+  "reason": "The court action follows the earlier detention of Dipke reported in the focus article.",
+  "quote_focus": "Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead of the party's planned march.",
+  "quote_other": "A court in New Delhi, India, orders the release of Cockroach Janta Party founder and activist Abhijeet Dipke on a peace bond, one day after"
+ },
+ {
+  "id": "n:b88263d4e9c2|n:dd598f2e69a2",
+  "focus": {
+   "id": "n:b88263d4e9c2",
+   "date": "2026-10-16",
+   "text": "Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead of the party's planned march. Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead of the party's planned march."
+  },
+  "other": {
+   "id": "n:dd598f2e69a2",
+   "date": "2026-10-14",
+   "text": "A court in New Delhi, India, remands Cockroach Janta Party spokespeople Saurav Das and Ashutosh Ranka in…. A court in New Delhi, India, remands Cockroach Janta Party spokespeople Saurav Das and Ashutosh Ranka in custody for five days after police detained them for entering the restricted Jantar Mantar protest site.",
+   "older": false
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "Both name Cockroach Janta Party.",
+  "quote_focus": "Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India,",
+  "quote_other": "A court in New Delhi, India, remands Cockroach Janta Party spokespeople Saurav Das and Ashutosh Ranka in…. A"
+ },
+ {
+  "id": "n:2ea4338fe8f4|n:e3c10a58ad24",
+  "focus": {
+   "id": "n:2ea4338fe8f4",
+   "date": "2026-10-19",
+   "text": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada. Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada."
+  },
+  "other": {
+   "id": "n:e3c10a58ad24",
+   "date": "2022-12-08",
+   "text": "The Alberta Sovereignty Within a United Canada Act, which grants the cabinet of the Canadian province of…. The Alberta Sovereignty Within a United Canada Act, which grants the cabinet of the Canadian province of Alberta the ability to nullify national laws, passes the Albertan legislature by a party line vote of 27–7, followi",
+   "older": true
+  },
+  "relation": "background",
+  "label": "inferred",
+  "reason": "The 2022 sovereignty act gave Alberta the legal framework to pursue separation, providing context for the 2026 referendum on the same issue.",
+  "quote_focus": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada.",
+  "quote_other": "The Alberta Sovereignty Within a United Canada Act, which grants the cabinet of the Canadian province of Alberta the ability to nullify national laws, passes"
+ },
+ {
+  "id": "n:fa08b85b6159|n:f36d50b440e9",
+  "focus": {
+   "id": "n:fa08b85b6159",
+   "date": "2026-10-17",
+   "text": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…. In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural hat trick in three consecutive games."
+  },
+  "other": {
+   "id": "n:f36d50b440e9",
+   "date": "2024-06-24",
+   "text": "In ice hockey, the Florida Panthers defeat the Edmonton Oilers in seven games to win the 2024 Stanley Cup…. In ice hockey, the Florida Panthers defeat the Edmonton Oilers in seven games to win the 2024 Stanley Cup Final, marking their first Stanley Cup championship in franchise history. The Panthers also avoid becoming the fif",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "The candidate reports a specific championship victory in 2024, while the focus reports a statistical milestone in 2026. They share the entity (Florida Panthers) but describe distinct events.",
+  "quote_focus": "Florida Panthers become the first team in the National Hockey League to record a natural hat trick in three consecutive games",
+  "quote_other": "Florida Panthers defeat the Edmonton Oilers in seven games to win the 2024 Stanley Cup"
+ },
+ {
+  "id": "n:fa08b85b6159|n:c1e085c41238",
+  "focus": {
+   "id": "n:fa08b85b6159",
+   "date": "2026-10-17",
+   "text": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…. In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural hat trick in three consecutive games."
+  },
+  "other": {
+   "id": "n:c1e085c41238",
+   "date": "2018-12-04",
+   "text": "In ice hockey, the National Hockey League announces that its board of governors unanimously approved a new…. In ice hockey, the National Hockey League announces that its board of governors unanimously approved a new franchise for Seattle. The new team will start play in the 2021–22 season, bringing the league's membership to 32",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "The candidate discusses league expansion in 2018, while the focus discusses a team's statistical achievement in 2026. They share the entity (NHL) but are unrelated events.",
+  "quote_focus": "Florida Panthers become the first team in the National Hockey League to record a natural hat trick in three consecutive games",
+  "quote_other": "National Hockey League announces that its board of governors unanimously approved a new franchise for Seattle"
+ },
+ {
+  "id": "n:fa08b85b6159|n:e137c100160e",
+  "focus": {
+   "id": "n:fa08b85b6159",
+   "date": "2026-10-17",
+   "text": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…. In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural hat trick in three consecutive games."
+  },
+  "other": {
+   "id": "n:e137c100160e",
+   "date": "2025-06-17",
+   "text": "In ice hockey, the Florida Panthers defeat the Edmonton Oilers in six games in a rematch of last year's…. In ice hockey, the Florida Panthers defeat the Edmonton Oilers in six games in a rematch of last year's final, repeating as Stanley Cup champions.",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "The candidate reports the 2025 Stanley Cup win, while the focus reports a 2026 statistical milestone. They share the entity (Florida Panthers) but describe distinct events.",
+  "quote_focus": "Florida Panthers become the first team in the National Hockey League to record a natural hat trick in three consecutive games",
+  "quote_other": "Florida Panthers defeat the Edmonton Oilers in six games in a rematch of last year's final"
+ },
+ {
+  "id": "n:fa08b85b6159|n:77afa8464b01",
+  "focus": {
+   "id": "n:fa08b85b6159",
+   "date": "2026-10-17",
+   "text": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…. In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural hat trick in three consecutive games."
+  },
+  "other": {
+   "id": "n:77afa8464b01",
+   "date": "2017-12-16",
+   "text": "In ice hockey, a outdoor game is held at Ottawa's Lansdowne Park in Canada to celebrate the 100th anniversary…. In ice hockey, a outdoor game is held at Ottawa's Lansdowne Park in Canada to celebrate the 100th anniversary of the National Hockey League, which was formed in November 1917. The Ottawa Senators win the game in a 3-0 sh",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "The candidate describes a 2017 anniversary game, while the focus describes a 2026 statistical achievement. They share the entity (NHL) but are unrelated events.",
+  "quote_focus": "Florida Panthers become the first team in the National Hockey League to record a natural hat trick in three consecutive games",
+  "quote_other": "outdoor game is held at Ottawa's Lansdowne Park in Canada to celebrate the 100th anniversary of the National Hockey League"
+ },
+ {
+  "id": "n:75c973928996|n:1da73c111789",
+  "focus": {
+   "id": "n:75c973928996",
+   "date": "2026-10-19",
+   "text": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan. Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan."
+  },
+  "other": {
+   "id": "n:1da73c111789",
+   "date": "2025-11-03",
+   "text": "The Integrated Food Security Phase Classification review committee reports that famine is detected in two…. The Integrated Food Security Phase Classification review committee reports that famine is detected in two Sudanese regions, Darfur and South Kordofan, amid increased fighting between the Sudanese Armed Forces and the Rap",
+   "older": true
+  },
+  "relation": "background",
+  "label": "inferred",
+  "reason": "The candidate provides the broader humanitarian and conflict context (famine and fighting) in which the specific drone strike occurred, but does not report the strike itself.",
+  "quote_focus": "alleged Rapid Support Forces drone strike in Khartoum",
+  "quote_other": "famine is detected in two Sudanese regions, Darfur and South Kordofan"
+ },
+ {
+  "id": "n:75c973928996|n:90b75aad1a16",
+  "focus": {
+   "id": "n:75c973928996",
+   "date": "2026-10-19",
+   "text": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan. Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan."
+  },
+  "other": {
+   "id": "n:90b75aad1a16",
+   "date": "2026-10-20",
+   "text": "The Rapid Support Forces launches a drone strike on a power plant in Tendelti in Sudan's White Nile State,…. The Rapid Support Forces launches a drone strike on a power plant in Tendelti in Sudan's White Nile State, knocking out the main transition line connecting North Kordofan.",
+   "older": false
+  },
+  "relation": "similar_pattern",
+  "label": "inferred",
+  "reason": "Both events involve the Rapid Support Forces using drone strikes in Sudan on the same day, representing a similar pattern of military action in different locations.",
+  "quote_focus": "alleged Rapid Support Forces drone strike in Khartoum",
+  "quote_other": "Rapid Support Forces launches a drone strike on a power plant in Tendelti"
+ },
+ {
+  "id": "n:75c973928996|n:7b5a5bd02efc",
+  "focus": {
+   "id": "n:75c973928996",
+   "date": "2026-10-19",
+   "text": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan. Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan."
+  },
+  "other": {
+   "id": "n:7b5a5bd02efc",
+   "date": "2026-10-20",
+   "text": "The Sudanese Army says that they have repelled an attack by the Rapid Support Forces and Sudan People's…. The Sudanese Army says that they have repelled an attack by the Rapid Support Forces and Sudan People's Liberation Movement–North (SPLM–N) on the Blue Nile state.",
+   "older": false
+  },
+  "relation": "similar_pattern",
+  "label": "inferred",
+  "reason": "The candidate reports a different military engagement by the same actor (RSF) in a different location (Blue Nile) on the same day, illustrating the widespread nature of the conflict.",
+  "quote_focus": "alleged Rapid Support Forces drone strike in Khartoum",
+  "quote_other": "repelled an attack by the Rapid Support Forces and Sudan People's Liberation Movement"
+ },
+ {
+  "id": "n:75c973928996|n:7aec12aa26a2",
+  "focus": {
+   "id": "n:75c973928996",
+   "date": "2026-10-19",
+   "text": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan. Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan."
+  },
+  "other": {
+   "id": "n:7aec12aa26a2",
+   "date": "2026-10-14",
+   "text": "The Sudanese Armed Forces announces that they have re-captured the Bir Kelekel area of West Darfur, Sudan,…. The Sudanese Armed Forces announces that they have re-captured the Bir Kelekel area of West Darfur, Sudan, from Rapid Support Forces, according to West Darfur state governor Bahr al-Din Adam Karama.",
+   "older": false
+  },
+  "relation": "background",
+  "label": "inferred",
+  "reason": "This is an earlier military development involving the same opposing forces (SAF and RSF) in a different region, providing context to the ongoing conflict.",
+  "quote_focus": "alleged Rapid Support Forces drone strike in Khartoum",
+  "quote_other": "re-captured the Bir Kelekel area of West Darfur"
+ },
+ {
+  "id": "n:75c973928996|n:075e009ed214",
+  "focus": {
+   "id": "n:75c973928996",
+   "date": "2026-10-19",
+   "text": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan. Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan."
+  },
+  "other": {
+   "id": "n:075e009ed214",
+   "date": "2026-09-21",
+   "text": "The Sudanese military at night launches heavy airstrikes against Rapid Support Forces targets in Nyala, South…. The Sudanese military at night launches heavy airstrikes against Rapid Support Forces targets in Nyala, South Darfur.",
+   "older": true
+  },
+  "relation": "background",
+  "label": "inferred",
+  "reason": "This is an earlier military action by the opposing side (SAF) against the RSF, providing background to the ongoing hostilities.",
+  "quote_focus": "alleged Rapid Support Forces drone strike in Khartoum",
+  "quote_other": "Sudanese military at night launches heavy airstrikes against Rapid Support Forces targets"
+ },
+ {
+  "id": "n:047b20792022|n:9f573e30cbee",
+  "focus": {
+   "id": "n:047b20792022",
+   "date": "2026-10-08",
+   "text": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…. The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European hedgehog will feature on the next set of pound sterling notes to be issued in the United Kingdom. It will be the first time animals have replaced people on banknotes in England, which is intended to increase awareness of British wildlife."
+  },
+  "other": {
+   "id": "n:9f573e30cbee",
+   "date": "2019-01-26",
+   "text": "The Bank of England blocks Maduro's officials from withdrawing $1.2 billion worth of gold. The Bank of England blocks Maduro's officials from withdrawing $1.2 billion worth of gold.",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "Both items involve the Bank of England, but the events are entirely different (banknote design vs. gold withdrawal dispute).",
+  "quote_focus": "The Bank of England announces that the Atlantic puffin",
+  "quote_other": "The Bank of England blocks Maduro's officials"
+ },
+ {
+  "id": "n:047b20792022|n:a6c727b5e01d",
+  "focus": {
+   "id": "n:047b20792022",
+   "date": "2026-10-08",
+   "text": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…. The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European hedgehog will feature on the next set of pound sterling notes to be issued in the United Kingdom. It will be the first time animals have replaced people on banknotes in England, which is intended to increase awareness of British wildlife."
+  },
+  "other": {
+   "id": "n:a6c727b5e01d",
+   "date": "2022-11-16",
+   "text": "Inflation in the United Kingdom reaches a record 11.1%, pressuring the Bank of England to raise interest…. Inflation in the United Kingdom reaches a record 11.1%, pressuring the Bank of England to raise interest rates.",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "Both items involve the Bank of England, but the events are unrelated (banknote design vs. monetary policy/inflation).",
+  "quote_focus": "The Bank of England announces that the Atlantic puffin",
+  "quote_other": "pressuring the Bank of England to raise interest rates"
+ },
+ {
+  "id": "n:8ab7353c3a4a|n:b17c77f97b22",
+  "focus": {
+   "id": "n:8ab7353c3a4a",
+   "date": "2026-10-15",
+   "text": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper…. The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper limit, allowing the Italian bank to proceed toward taking control of the German lender."
+  },
+  "other": {
+   "id": "n:b17c77f97b22",
+   "date": "2018-04-10",
+   "text": "Police say an improvised explosive device exploded overnight at a Unicredit bank in Bologna, with the bomber…. Police say an improvised explosive device exploded overnight at a Unicredit bank in Bologna, with the bomber leaving behind graffiti criticising Turkish President Recep Tayyip Erdoğan.",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "The candidate reports a violent incident at a specific UniCredit branch in 2018, which is a distinct event from the 2026 regulatory authorization for UniCredit to acquire Commerzbank. They share the entity 'UniCredit' but no causal or event-based link.",
+  "quote_focus": "UniCredit to raise its stake in Commerzbank",
+  "quote_other": "improvised explosive device exploded overnight at a Unicredit bank"
+ },
+ {
+  "id": "n:8ab7353c3a4a|n:c3e279d67ef7",
+  "focus": {
+   "id": "n:8ab7353c3a4a",
+   "date": "2026-10-15",
+   "text": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper…. The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper limit, allowing the Italian bank to proceed toward taking control of the German lender."
+  },
+  "other": {
+   "id": "n:c3e279d67ef7",
+   "date": "2018-02-19",
+   "text": "Spanish Minister of Economy and Competitiveness, Luis de Guindos, is set to be nominated by the Eurogroup to…. Spanish Minister of Economy and Competitiveness, Luis de Guindos, is set to be nominated by the Eurogroup to succeed Vítor Constâncio as Vice-President of the European Central Bank.",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "The candidate discusses a personnel change within the ECB in 2018, while the focus is on an ECB regulatory decision in 2026. They share the entity 'European Central Bank' but describe unrelated events.",
+  "quote_focus": "The European Central Bank authorizes UniCredit",
+  "quote_other": "succeed Vítor Constâncio as Vice-President of the European Central Bank"
+ },
+ {
+  "id": "n:8ab7353c3a4a|n:3cf985552f76",
+  "focus": {
+   "id": "n:8ab7353c3a4a",
+   "date": "2026-10-15",
+   "text": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper…. The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper limit, allowing the Italian bank to proceed toward taking control of the German lender."
+  },
+  "other": {
+   "id": "n:3cf985552f76",
+   "date": "2015-08-14",
+   "text": "The Hellenic Parliament approves (with 222 yes votes) Prime Minister of Greece Alexis Tsipras's bailout…. The Hellenic Parliament approves (with 222 yes votes) Prime Minister of Greece Alexis Tsipras's bailout package, despite opposition by almost one-third of his Syriza party. This third bailout plan is almost identical to ",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "The candidate concerns the Greek bailout and payments to the ECB in 2015. It shares the entity 'European Central Bank' with the focus but is unrelated to the UniCredit-Commerzbank acquisition.",
+  "quote_focus": "The European Central Bank authorizes UniCredit",
+  "quote_other": "payment to the European Central Bank"
+ },
+ {
+  "id": "n:0f5a4c632e8d|n:25ea52ec016a",
+  "focus": {
+   "id": "n:0f5a4c632e8d",
+   "date": "2026-10-19",
+   "text": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…. Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño Department, Colombia."
+  },
+  "other": {
+   "id": "n:25ea52ec016a",
+   "date": "2025-01-03",
+   "text": "At least twelve people are killed and 30 others are injured after a bus carrying tourists falls into a ravine…. At least twelve people are killed and 30 others are injured after a bus carrying tourists falls into a ravine near the Pan-American Highway between Pasto and Rumichaca in Nariño Department, Colombia.",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "Both events are fatal accidents occurring in Nariño Department, Colombia, but they involve different types of incidents (mine collapse vs. bus accident) and different dates.",
+  "quote_focus": "collapse of an open pit gold mine in Nariño Department, Colombia",
+  "quote_other": "bus carrying tourists falls into a ravine near the Pan-American Highway between Pasto and Rumichaca in Nariño Department, Colombia"
+ },
+ {
+  "id": "n:00dfe2b0206f|n:a9a856a2a4bb",
+  "focus": {
+   "id": "n:00dfe2b0206f",
+   "date": "2026-10-19",
+   "text": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…. The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding shortages, reducing the number of recipients from 1.6 million to 1.1 million."
+  },
+  "other": {
+   "id": "n:a9a856a2a4bb",
+   "date": "2017-01-28",
+   "text": "The World Food Programme cuts food aid to over 1.4 million displaced Iraqis by 50%, citing payment delays…. The World Food Programme cuts food aid to over 1.4 million displaced Iraqis by 50%, citing payment delays from donor states.",
+   "older": true
+  },
+  "relation": "similar_pattern",
+  "label": "inferred",
+  "reason": "The candidate describes a similar type of event (WFP cutting aid due to funding issues) but in a different location (Iraq) and time period (2017), making it a similar pattern rather than the same event.",
+  "quote_focus": "The World Food Programme cuts monthly food aid",
+  "quote_other": "The World Food Programme cuts food aid to over 1.4 million displaced Iraqis"
+ },
+ {
+  "id": "n:54a830f0095a|n:e2f17011491e",
+  "focus": {
+   "id": "n:54a830f0095a",
+   "date": "2026-10-19",
+   "text": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi…. Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi Levine and the mayor of Aulnoye-Aymeries, France, who were travelling with European diplomats, and seize vehicles and other evidence during raids."
+  },
+  "other": {
+   "id": "n:e2f17011491e",
+   "date": "2024-11-07",
+   "text": "Israel Police forcibly enter the French-administered Church of the Pater Noster compound in Jerusalem and…. Israel Police forcibly enter the French-administered Church of the Pater Noster compound in Jerusalem and detain two French consulate employees. French foreign minister Jean-Noël Barrot cancels his visit to the site whil",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "Both events involve Israeli police actions targeting French interests or individuals, but they are distinct incidents occurring in different locations (West Bank vs. Jerusalem) and at different times (2026 vs. 2024). They share the entity 'Israel Police' and involve French diplomatic/official figures, but do not report the same event.",
+  "quote_focus": "Israel Police arrest 10 people in the occupied West Bank",
+  "quote_other": "Israel Police forcibly enter the French-administered Church of the Pater Noster compound"
+ },
+ {
+  "id": "n:54a830f0095a|n:9eacdae21b99",
+  "focus": {
+   "id": "n:54a830f0095a",
+   "date": "2026-10-19",
+   "text": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi…. Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi Levine and the mayor of Aulnoye-Aymeries, France, who were travelling with European diplomats, and seize vehicles and other evidence during raids."
+  },
+  "other": {
+   "id": "n:9eacdae21b99",
+   "date": "2026-03-29",
+   "text": "For the first time ever, Israel Police block the Latin Patriarch of Jerusalem, Pierbattista Pizzaballa, from…. For the first time ever, Israel Police block the Latin Patriarch of Jerusalem, Pierbattista Pizzaballa, from entering the Church of the Holy Sepulchre during Palm Sunday, citing heightened risk in the Old City during the",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "Both events involve Israeli police restricting or acting against foreign religious or diplomatic figures, but they are distinct incidents. One involves arrests in the West Bank in 2026, while the other involves blocking a Patriarch in Jerusalem in 2026. They share the entity 'Israel Police' but are not the same event.",
+  "quote_focus": "Israel Police arrest 10 people in the occupied West Bank",
+  "quote_other": "Israel Police block the Latin Patriarch of Jerusalem, Pierbattista Pizzaballa"
+ },
+ {
+  "id": "n:00eab1f15d72|n:4cdf31325659",
+  "focus": {
+   "id": "n:00eab1f15d72",
+   "date": "2026-10-19",
+   "text": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan. A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan."
+  },
+  "other": {
+   "id": "n:4cdf31325659",
+   "date": "2026-10-16",
+   "text": "Thirty people are killed and 47 people are injured in a drone strike on a cattle market in Nyala, South…. Thirty people are killed and 47 people are injured in a drone strike on a cattle market in Nyala, South Darfur, Sudan.",
+   "older": false
+  },
+  "relation": "similar_pattern",
+  "label": "inferred",
+  "reason": "Both are drone strikes on markets in Sudan within days of each other, indicating a similar pattern of violence in the region, but they are distinct events in different locations.",
+  "quote_focus": "A drone strike kills at least 73 people at a market in the disputed Abyei area",
+  "quote_other": "Thirty people are killed and 47 people are injured in a drone strike on a cattle market in Nyala, South Darfur, Sudan"
+ },
+ {
+  "id": "n:00eab1f15d72|n:75c973928996",
+  "focus": {
+   "id": "n:00eab1f15d72",
+   "date": "2026-10-19",
+   "text": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan. A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan."
+  },
+  "other": {
+   "id": "n:75c973928996",
+   "date": "2026-10-19",
+   "text": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan. Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan.",
+   "older": false
+  },
+  "relation": "similar_pattern",
+  "label": "inferred",
+  "reason": "Both are drone strikes in Sudan on the same date, but in different locations (Abyei vs. Khartoum) with different victims, representing a similar pattern of ongoing conflict.",
+  "quote_focus": "A drone strike kills at least 73 people at a market in the disputed Abyei area",
+  "quote_other": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan"
+ },
+ {
+  "id": "n:00eab1f15d72|n:90b75aad1a16",
+  "focus": {
+   "id": "n:00eab1f15d72",
+   "date": "2026-10-19",
+   "text": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan. A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan."
+  },
+  "other": {
+   "id": "n:90b75aad1a16",
+   "date": "2026-10-20",
+   "text": "The Rapid Support Forces launches a drone strike on a power plant in Tendelti in Sudan's White Nile State,…. The Rapid Support Forces launches a drone strike on a power plant in Tendelti in Sudan's White Nile State, knocking out the main transition line connecting North Kordofan.",
+   "older": false
+  },
+  "relation": "similar_pattern",
+  "label": "inferred",
+  "reason": "A subsequent drone strike in Sudan on a different target (power plant) the day after the focus event, part of the same broader conflict pattern.",
+  "quote_focus": "A drone strike kills at least 73 people at a market in the disputed Abyei area",
+  "quote_other": "The Rapid Support Forces launches a drone strike on a power plant in Tendelti in Sudan's White Nile State"
+ },
+ {
+  "id": "n:e40e07b73237|n:d530b7d5236f",
+  "focus": {
+   "id": "n:e40e07b73237",
+   "date": "2026-10-18",
+   "text": "A truck loses control and runs over devotees outside a temple in Gwalior, Madhya Pradesh, India, killing at…. A truck loses control and runs over devotees outside a temple in Gwalior, Madhya Pradesh, India, killing at least 13 and injuring nearly 40 others."
+  },
+  "other": {
+   "id": "n:d530b7d5236f",
+   "date": "2023-12-28",
+   "text": "At least 13 people are killed when a bus catches fire after colliding head-on with a truck on a highway in…. At least 13 people are killed when a bus catches fire after colliding head-on with a truck on a highway in Guna district, Madhya Pradesh, India.",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "Both name Madhya Pradesh.",
+  "quote_focus": "runs over devotees outside a temple in Gwalior, Madhya Pradesh, India, killing at…. A truck loses control",
+  "quote_other": "a truck on a highway in Guna district, Madhya Pradesh, India."
+ },
+ {
+  "id": "n:e40e07b73237|n:a8b447e55982",
+  "focus": {
+   "id": "n:e40e07b73237",
+   "date": "2026-10-18",
+   "text": "A truck loses control and runs over devotees outside a temple in Gwalior, Madhya Pradesh, India, killing at…. A truck loses control and runs over devotees outside a temple in Gwalior, Madhya Pradesh, India, killing at least 13 and injuring nearly 40 others."
+  },
+  "other": {
+   "id": "n:a8b447e55982",
+   "date": "2024-02-06",
+   "text": "Eleven people are killed and 150 others are injured in a fire at a fireworks factory in Harda, Madhya…. Eleven people are killed and 150 others are injured in a fire at a fireworks factory in Harda, Madhya Pradesh, India.",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "Both name Madhya Pradesh.",
+  "quote_focus": "runs over devotees outside a temple in Gwalior, Madhya Pradesh, India, killing at…. A truck loses control",
+  "quote_other": "a fire at a fireworks factory in Harda, Madhya Pradesh, India."
+ },
+ {
+  "id": "n:c4f3475d8101|n:40c0f80db8df",
+  "focus": {
+   "id": "n:c4f3475d8101",
+   "date": "2026-10-16",
+   "text": "Brazilian environment minister João Paulo Capobianco [pt] reports that deforestation in Brazil's Amazon…. Brazilian environment minister João Paulo Capobianco [pt] reports that deforestation in Brazil's Amazon rainforest fell to 5,796 km2 (2,238 sq mi) in the year through July 2026, the lowest level since 1988 except for 2012."
+  },
+  "other": {
+   "id": "n:40c0f80db8df",
+   "date": "2026-08-07",
+   "text": "Brazil's National Institute for Space Research reports that deforestation of the Amazon rainforest fell to…. Brazil's National Institute for Space Research reports that deforestation of the Amazon rainforest fell to 2,874 square kilometres (287,400 ha) from August 2025 to July 2026, a 37% annual decline and the lowest level sin",
+   "older": true
+  },
+  "relation": "shares_entity",
+  "label": "reported",
+  "reason": "Both name National Institute for Space Research.",
+  "quote_focus": "using the \"Prodes\" satellite system, operated by the National Institute for Space Research. deforestation fell to its lowest levels since",
+  "quote_other": "Brazil's National Institute for Space Research reports that deforestation of the Amazon rainforest fell"
+ },
+ {
+  "id": "n:9700f8a230bf|n:51d07aa2665f",
+  "focus": {
+   "id": "n:9700f8a230bf",
+   "date": "2026-10-18",
+   "text": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near…. The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near Taiwan and the Pratas Island, including some that entered restricted waters."
+  },
+  "other": {
+   "id": "n:51d07aa2665f",
+   "date": "2024-03-05",
+   "text": "Four Philippine Coast Guard sailors are injured in contested waters when watercannons are deployed by the…. Four Philippine Coast Guard sailors are injured in contested waters when watercannons are deployed by the Chinese Coast Guard. The vessels were escorting a resupply convoy to a Philippine outpost in disputed territory at",
+   "older": true
+  },
+  "relation": "similar_pattern",
+  "label": "inferred",
+  "reason": "Both events involve the Chinese Coast Guard engaging in confrontational actions against another nation's maritime forces in disputed waters, but they occur in different locations (Taiwan/Pratas vs. South China Sea) and involve different parties (Taiwan vs. Philippines).",
+  "quote_focus": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels",
+  "quote_other": "Four Philippine Coast Guard sailors are injured in contested waters when watercannons are deployed by the Chinese Coast Guard"
+ },
+ {
+  "id": "n:9700f8a230bf|n:0f6233341e91",
+  "focus": {
+   "id": "n:9700f8a230bf",
+   "date": "2026-10-18",
+   "text": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near…. The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near Taiwan and the Pratas Island, including some that entered restricted waters."
+  },
+  "other": {
+   "id": "n:0f6233341e91",
+   "date": "2025-09-16",
+   "text": "China's coast guard reports that a Datu Cabaylo-class multi-mission offshore vessel of the Philippine…. China's coast guard reports that a Datu Cabaylo-class multi-mission offshore vessel of the Philippine fisheries bureau rammed a Chinese coast guard vessel near the disputed Scarborough Shoal, while the Philippines say Ch",
+   "older": true
+  },
+  "relation": "similar_pattern",
+  "label": "inferred",
+  "reason": "This candidate describes a separate incident involving the Philippines and China in the South China Sea, distinct from the focus event involving Taiwan and China near the Pratas Islands. It follows a similar pattern of maritime tension but is a different event.",
+  "quote_focus": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels",
+  "quote_other": "China's coast guard reports that a Datu Cabaylo-class multi-mission offshore vessel of the Philippine fisheries bureau rammed a Chinese coast guard vessel"
+ },
+ {
+  "id": "n:afdc5ab9ef1a|n:658a2a771679",
+  "focus": {
+   "id": "n:afdc5ab9ef1a",
+   "date": "2026-10-19",
+   "text": "A Kenyan court convicts Good News International Ministries leader Paul Nthenge Mackenzie of murdering 190…. A Kenyan court convicts Good News International Ministries leader Paul Nthenge Mackenzie of murdering 190 children and an adult whose deaths were linked to starvation in Shakahola Forest."
+  },
+  "other": {
+   "id": "n:658a2a771679",
+   "date": "2025-08-21",
+   "text": "Five bodies and ten body parts are recovered and 27 suspected mass graves are discovered at the site of the…. Five bodies and ten body parts are recovered and 27 suspected mass graves are discovered at the site of the Good News International Ministries religious cult mass-murder suicide at the Shakahola Forest in Kenya, where ov",
+   "older": true
+  },
+  "relation": "background",
+  "label": "inferred",
+  "reason": "The candidate describes the discovery of mass graves at the Shakahola Forest site, which provides the physical evidence and context for the subsequent murder conviction reported in the focus item.",
+  "quote_focus": "murdering 190 children and an adult",
+  "quote_other": "27 suspected mass graves are discovered"
+ },
+ {
+  "id": "n:6a3502fcf385|n:04233cbda03d",
+  "focus": {
+   "id": "n:6a3502fcf385",
+   "date": "2026-10-16",
+   "text": "A judge in Ensenada, Baja California, Mexico, sentences three Mexican men to over 158 years in prison each…. A judge in Ensenada, Baja California, Mexico, sentences three Mexican men to over 158 years in prison each for the murder of two Australians and an American in 2024."
+  },
+  "other": {
+   "id": "n:04233cbda03d",
+   "date": "2024-05-03",
+   "text": "Mexican authorities locate the bodies of three tourists, one American and two Australians, in Baja…. Mexican authorities locate the bodies of three tourists, one American and two Australians, in Baja California, where they were reported missing in April. Three people have been arrested and are being questioned in relati",
+   "older": true
+  },
+  "relation": "background",
+  "label": "inferred",
+  "reason": "The candidate reports the discovery of the victims and initial arrests in 2024, which is the earlier stage of the same criminal case that resulted in the 2026 sentencing in the focus item.",
+  "quote_focus": "murder of two Australians and an American in 2024",
+  "quote_other": "bodies of three tourists, one American and two Australians"
+ },
+ {
+  "id": "n:0460555895d3|n:5549db261760",
+  "focus": {
+   "id": "n:0460555895d3",
+   "date": "2026-10-18",
+   "text": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…. Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread contamination. A study in June found that at least 93% of households' water systems contained no residual chlorine, but had elevated levels of lead, mercury, nitrates, and E. coli."
+  },
+  "other": {
+   "id": "n:5549db261760",
+   "date": "2014-11-12",
+   "text": "Protesters attack the State Congress building in Mexico's Guerrero state setting alight five vehicles. Protesters attack the State Congress building in Mexico's Guerrero state setting alight five vehicles.",
+   "older": true
+  },
+  "relation": "similar_pattern",
+  "label": "inferred",
+  "reason": "The candidate describes a similar type of event (protesters attacking a state congress building) but in a different location (Guerrero vs. Jalisco) and significantly earlier time period (2014 vs. 2026), fitting the definition of a similar pattern.",
+  "quote_focus": "set fire to the entrances of the state Congress building",
+  "quote_other": "Protesters attack the State Congress building in Mexico's Guerrero state"
+ }
+]

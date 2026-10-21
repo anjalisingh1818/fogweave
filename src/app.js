@@ -15,7 +15,8 @@ import { Atmosphere } from './render/atmosphere.js';
 import { Card } from './render/card.js';
 import { CardManager } from './ui/card-manager.js';
 import { nodeCardDraw, locketDraw, coinDraw, messageDraw, pathDraw } from './ui/node-card.js';
-import { helpDraw, libraryDraw } from './ui/help.js';
+import { menuDraw, guideDraw, aboutDraw, libraryDraw } from './ui/help.js';
+import { welcomeStep, welcomeDone } from './ui/welcome.js';
 import { contextDraw } from './ui/context-card.js';
 import { Keypad } from './ui/keypad.js';
 import { Onboarding } from './ui/onboarding.js';
@@ -27,9 +28,11 @@ import { ResearchClient } from './research/client.js';
 import { ContextStore, SAMPLE_PERSONA, CONTEXT_KINDS } from './context.js';
 import { InterestStore } from './interests.js';
 import { isMuted, sampleFeed, seedFrom } from './feed.js';
+import { checkRequest } from './safety.js';
 import { interestsDraw } from './ui/interests-card.js';
 import { DEBUG, settings, loadSettings, setQuality, saveSettings } from './config.js';
-import { answerDraw, ASK_SUGGESTIONS, notesDraw, lightsPanelDraw, settingsDraw, timelineDraw, briefingDraw, exportDraw, insightsDraw } from './ui/panels.js';
+import { answerDraw, ASK_SUGGESTIONS, settingsDraw, timelineDraw, exportDraw, insightsDraw, patternsDraw } from './ui/panels.js';
+import { sharedPatterns } from './patterns.js';
 import { insights } from './insights.js';
 import { Ambient, speech } from './audio.js';
 import { sealedView, buildJsonLd, buildJsonl, buildMarkdown } from './export/pack.js';
@@ -39,7 +42,6 @@ import { QualityGovernor } from './quality.js';
 const LIBRARY_KEY = 'fogweave.library.v1';
 const NOTES_KEY = 'fogweave.notes.v1';
 const ANSWERS_KEY = 'fogweave.answers.v1';
-const BRIEFING_KEY = 'fogweave.briefing.v1';
 const SEALED_LIGHTS_KEY = 'fogweave.sealedLights.v1';
 const SNAPSHOT = 'demo/snapshot/index.json';
 
@@ -96,7 +98,6 @@ export class App {
     this.sealedAnswers = readJSON(ANSWERS_KEY, []);
     this.answers = []; // session memory of answers
     this.insightList = [];
-    this.briefing = null;
     this.ambient = new Ambient();
     this._gestureSeen = false;
     this._buildStatusCard();
@@ -108,16 +109,27 @@ export class App {
     this.ready = this._start();
   }
 
-  // ---------- startup: live or snapshot ----------
+  // ---------- startup: live by default; the Demo scene is a separate choice ----------
 
   async _start() {
-    const [health, snap] = await Promise.all([this.client.health(), this._loadSnapshot()]);
+    const wantDemo = typeof location !== 'undefined' && new URLSearchParams(location.search).has('demo');
+    const [health, snap] = await Promise.all([wantDemo ? null : this.client.health(), this._loadSnapshot()]);
     this.snapshot = snap;
-    let pool = null;
-    if (health?.ok) {
-      this.setStatus('Gathering the latest news…');
-      pool = await this.client.pool(this.interests.forServer());
-    }
+    if (wantDemo) return this.enterDemo();
+    await this.enterLive(health);
+  }
+
+  /** The live scene: today's news from the engine. Never falls back to old data silently. */
+  async enterLive(health = null) {
+    this._clearFog();
+    const scene = (this._scene = (this._scene || 0) + 1); // a later scene choice wins
+    this.mode = 'starting';
+    this.setStatus('Gathering the latest news…');
+    welcomeStep('Gathering today’s news…', { offerDemo: () => this.enterDemo() });
+    health ??= await this.client.health();
+    if (health?.ok) welcomeStep('Reading the sources and writing short summaries…', { offerDemo: () => this.enterDemo() });
+    const pool = health?.ok ? await this.client.pool(this.interests.forServer()) : null;
+    if (scene !== this._scene) return; // the Demo scene was opened while this loaded
     if (pool?.items?.length) {
       this.mode = 'live';
       const ok = Object.values(pool.sources || {}).filter((s) => s.ok).length;
@@ -126,27 +138,66 @@ export class App {
       this.notes = pool.notes || [];
       this.pool = pool.items.map((it) => ({ ...it, live: true }));
       this._poolCache = new Map([[JSON.stringify(this.interests.forServer()), this.pool]]);
-    } else if (snap) {
-      this.mode = 'offline';
-      this.lightsMeta = { kind: snap.provenance?.kind, generatedAt: snap.generatedAt };
-      this.pool = snap.pool || snap.lights || [];
     } else {
-      this.mode = 'offline';
+      // say so plainly and offer the Demo scene; old data is never shown as live
+      this.mode = 'unavailable';
       this.lightsMeta = { kind: 'none' };
+      this.pool = [];
     }
+    this._afterSceneStart();
+  }
+
+  /** The Demo / Offline scene: the bundled dated snapshot of real pipeline runs. */
+  enterDemo() {
+    this._clearFog();
+    this._scene = (this._scene || 0) + 1;
+    if (!this.snapshot) {
+      this.mode = 'unavailable';
+      this.lightsMeta = { kind: 'none' };
+      this.pool = [];
+      this.setStatus('The demo scene is missing from this build.');
+      welcomeDone();
+      return;
+    }
+    this.mode = 'offline';
+    this.lightsMeta = { kind: this.snapshot.provenance?.kind, generatedAt: this.snapshot.generatedAt };
+    this.notes = [];
+    this.pool = this.snapshot.pool || this.snapshot.lights || [];
+    this._poolCache = new Map();
+    this._afterSceneStart();
+  }
+
+  _afterSceneStart() {
     this.drawLights();
+    welcomeDone();
     this._shownKey = JSON.stringify(this.interests.forServer());
     this.setStatus('');
-    this._restoreWorkspace();
-    if (Onboarding.needed()) this.startOnboarding();
-    else this._offerBriefing();
+    this._renderStatus();
+    if (!this._startedOnce) {
+      this._startedOnce = true;
+      this._restoreWorkspace();
+      if (Onboarding.needed()) this.startOnboarding();
+    }
+    this.cards.get('help')?.redraw();
+  }
+
+  /** Switching scenes: the fog empties (the sealed Library stays). */
+  _clearFog() {
+    this.expanding?.controller?.abort?.();
+    this.cards.closeAll({ keepPinned: true });
+    const fog = [...this.store.nodes.values()].filter((n) => !n.sealed && n.type !== 'ContextNode').map((n) => n.id);
+    if (fog.length) removeNodesFromStore(this.store, fog);
+    this.trail = [];
+    this.lights.setItems([]);
+    this._shownLights = new Map();
+    this.extraItems = new Map();
   }
 
   // ---------- workspace panels (pinned cards come back where you left them) ----------
 
   _restoreWorkspace() {
     const layout = this.cards.savedLayout();
-    const open = { library: () => this.openLibrary(layout.library), notes: () => this.openNotes(layout.notes), lights: () => this.openLightsPanel(layout.lights) };
+    const open = { library: () => this.openLibrary(layout.library) }; // the Library is the one panel that is kept
     for (const key of Object.keys(layout)) {
       if (!open[key]) continue;
       open[key]();
@@ -157,16 +208,6 @@ export class App {
 
   get notesList() {
     return this.userNotes;
-  }
-
-  openNotes(slot = 3) {
-    this.closeCard('help');
-    this.cards.show('notes', { width: 0.44, height: 0.4, draw: notesDraw(this), slot });
-  }
-
-  openLightsPanel(slot = 4) {
-    this.closeCard('help');
-    this.cards.show('lights', { width: 0.46, height: 0.42, draw: lightsPanelDraw(this), slot });
   }
 
   openSettings() {
@@ -203,13 +244,13 @@ export class App {
     if (!t) return;
     this.userNotes.push({ text: t, at: new Date().toISOString() });
     writeJSON(NOTES_KEY, this.userNotes);
-    this.cards.get('notes')?.redraw();
+    this.cards.get('library')?.redraw();
   }
 
   removeNote(i) {
     this.userNotes.splice(i, 1);
     writeJSON(NOTES_KEY, this.userNotes);
-    this.cards.get('notes')?.redraw();
+    this.cards.get('library')?.redraw();
   }
 
   // ---------- Ask (GraphRAG on the server; reliability answered locally) ----------
@@ -350,94 +391,6 @@ export class App {
     this.cards.show('timeline', { width: 0.46, height: 0.42, draw: timelineDraw(this, id), slot: 2 });
   }
 
-  /** Grounded effects for a news item (never speculative): for the briefing. */
-  impactThread(newsId) {
-    const about = [...this.store.edges.values()].filter((e) => e.from === newsId && e.type === 'about').map((e) => e.to);
-    const from = new Set([newsId, ...about]);
-    const out = [];
-    for (const e of this.store.edges.values()) {
-      if (!from.has(e.from) || e.label === 'speculative' || !['affects', 'depends_on'].includes(e.type)) continue;
-      out.push({ label: e.label, text: `${this.store.nodes.get(e.from)?.label} → ${e.type.replace('_', ' ')} → ${this.store.nodes.get(e.to)?.label}` });
-    }
-    return out.sort((a, b) => (a.label === 'reported' ? -1 : 1) - (b.label === 'reported' ? -1 : 1));
-  }
-
-  // ---------- daily briefing (about 5 minutes) ----------
-
-  _offerBriefing() {
-    const today = new Date().toISOString().slice(0, 10);
-    if (readJSON(BRIEFING_KEY, {}).offered === today || this.lights.items.length < 3) return;
-    writeJSON(BRIEFING_KEY, { ...readJSON(BRIEFING_KEY, {}), offered: today });
-    this.cards.show('briefing-offer', {
-      width: 0.42,
-      height: 0.24,
-      slot: 1,
-      draw: messageDraw(this, 'briefing-offer', 'Morning briefing?', 'Five minutes: a few lights picked for you, one from outside your bubble, and what they may affect.', [
-        { id: 'start', label: 'Start', primary: true, onPress: () => this.startBriefing() },
-      ]),
-    });
-  }
-
-  pickBriefing(n = 4, seedDate = new Date().toISOString().slice(0, 10)) {
-    const items = [...this.lights.items].filter((x) => x.kind !== 'archive');
-    const ranked = items.sort((a, b) => (b.relevance ?? 0) - (a.relevance ?? 0));
-    const picks = [];
-    const stories = new Set();
-    for (const it of ranked) {
-      if (picks.length >= n) break;
-      if (stories.has(it.story)) continue; // one item per story
-      picks.push(it);
-      stories.add(it.story);
-    }
-    // one from outside the bubble: an ordinary seeded pick among the least relevant other stories
-    const rest = ranked.filter((x) => !stories.has(x.story)).slice(-Math.max(3, Math.floor(ranked.length / 2)));
-    if (rest.length) {
-      let h = 0;
-      for (const ch of seedDate) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
-      picks.push({ ...rest[h % rest.length], outside: true });
-    }
-    return picks;
-  }
-
-  startBriefing() {
-    this.closeCard('briefing-offer');
-    this.closeCard('help');
-    const items = this.pickBriefing();
-    if (!items.length) return null;
-    this.briefing = { items, i: 0, sealedCount: 0, endsAt: Date.now() + 5 * 60000, done: false };
-    this._showBriefingStep();
-    return this.briefing;
-  }
-
-  _showBriefingStep() {
-    const b = this.briefing;
-    if (!b) return;
-    if (!b.done) this.openLight(b.items[b.i].id);
-    this.cards.show('briefing', { width: 0.46, height: 0.36, draw: briefingDraw(this), slot: 1 });
-  }
-
-  briefingKeep() {
-    const b = this.briefing;
-    if (!b) return;
-    this.sealLight(b.items[b.i].id);
-    b.sealedCount++;
-    this.cards.get('briefing')?.redraw();
-  }
-
-  briefingNext() {
-    const b = this.briefing;
-    if (!b) return;
-    if (b.i + 1 < b.items.length && Date.now() < b.endsAt) b.i++;
-    else b.done = true;
-    this._showBriefingStep();
-  }
-
-  endBriefing() {
-    this.briefing = null;
-    this.closeCard('briefing');
-    writeJSON(BRIEFING_KEY, { ...readJSON(BRIEFING_KEY, {}), done: new Date().toISOString().slice(0, 10) });
-  }
-
   // ---------- Evidence Pack export ----------
 
   async exportPack() {
@@ -514,8 +467,7 @@ export class App {
     const picks = sampleFeed(this.pool, this.interests, { n: 16 - kept.length, seed: this.feedSeed, exclude: new Set(kept.map((k) => k.id)) });
     this.lights.setItems([...kept, ...picks]);
     this._applyRelevance();
-    this._refreshAt = performance.now() + 75000;
-    this.cards.get('lights')?.redraw();
+    this._refreshAt = performance.now() + nextStarDelay();
     return picks;
   }
 
@@ -579,8 +531,7 @@ export class App {
     const fill = sampleFeed(this.pool, this.interests, { n: 16 - items.length, seed: this.feedSeed, exclude: new Set(items.map((k) => k.id)) });
     this.lights.setItems([...items, ...fill]);
     this._applyRelevance();
-    this._refreshAt = performance.now() + 75000;
-    this.cards.get('lights')?.redraw();
+    this._refreshAt = performance.now() + nextStarDelay();
   }
 
   async likeLight(id, more = true) {
@@ -620,13 +571,21 @@ export class App {
     this.cards.show('interests', { width: 0.5, height: 0.5, draw: interestsDraw(this), slot: 1 });
   }
 
-  /** Slowly swap one idle light for a fresh pick (never one you look at). */
+  /**
+   * A new star every 20-40 s: it takes the place of the oldest idle one, never
+   * one you look at, have open, sealed, grew, or are reaching toward.
+   */
   _slowRefresh(now) {
     if (!this._refreshAt || now < this._refreshAt || !this.pool.length) return;
-    this._refreshAt = now + 75000;
+    this._refreshAt = now + nextStarDelay();
     const busy = this.lights.busyIds();
     const shown = new Set(this.lights.items.map((x) => x.id));
-    const victim = this.lights.items.find((x) => !busy.has(x.id) && !this.lights.sealed.has(x.id) && !x.expanded);
+    const reaching = (x) => {
+      const p = this.lights.worldPositionOf(x.id, _rp);
+      return !!p && (this.lights.hands || []).some((h) => h.distanceTo(p) < 0.4);
+    };
+    const idle = this.lights.items.filter((x) => !busy.has(x.id) && !this.lights.sealed.has(x.id) && !x.expanded && !x.search && !reaching(x));
+    const victim = idle.sort((a, b) => this.lights.ageDays(b) - this.lights.ageDays(a))[0];
     if (!victim) return;
     this.feedSeed = (this.feedSeed + 7919) >>> 0;
     const [fresh] = sampleFeed(this.pool, this.interests, { n: 1, seed: this.feedSeed, exclude: shown });
@@ -709,9 +668,10 @@ export class App {
   modeLine() {
     const m = this.lightsMeta || {};
     if (this.mode === 'live') return `Live · ${m.sources || ''}`;
-    if (m.kind === 'pipeline') return `Offline · snapshot of ${String(m.generatedAt || '').slice(0, 10)}`;
-    if (m.kind === 'fixture') return 'Offline · test fixture';
-    return this.mode === 'starting' ? 'Starting…' : 'Offline';
+    if (this.mode === 'offline' && m.kind === 'pipeline') return `Demo scene · snapshot of ${String(m.generatedAt || '').slice(0, 10)}`;
+    if (m.kind === 'fixture') return 'Demo scene · test fixture';
+    if (this.mode === 'unavailable') return 'Live news is unreachable right now.';
+    return this.mode === 'starting' ? 'Starting…' : 'Demo scene';
   }
 
   _renderStatus() {
@@ -730,8 +690,9 @@ export class App {
       }
       else {
         if (this.trail.length >= 2) ui.button('back', '‹ Back', w - pad - 470, 14, 200, h - 28, () => this.back(), { size: 24 });
+        if (this.mode === 'unavailable') ui.button('demo', 'Open demo', w - pad - 220, 14, 220, h - 28, () => this.enterDemo(), { size: 24, primary: true });
         // a short notice with Undo takes the right-hand slot for a few seconds
-        if (notice?.undo) ui.button('undo', 'Undo', w - pad - 220, 14, 220, h - 28, () => notice.undo(), { size: 24, primary: true });
+        else if (notice?.undo) ui.button('undo', 'Undo', w - pad - 220, 14, 220, h - 28, () => notice.undo(), { size: 24, primary: true });
         else if (this.insightList.length) ui.button('insights', `Noticed ${this.insightList.length}`, w - pad - 220, 14, 220, h - 28, () => this.openInsights(), { size: 24 });
       }
     });
@@ -743,18 +704,79 @@ export class App {
     // ray only: a poke target this close to its own hand's fingertip would always be hovered
     this.helpButton = new Card(this.world, { width: 0.06, height: 0.06, name: 'help-button' });
     this.helpButton.setContent((ctx, ui, w, h) => {
-      ui.button('help', '?', 6, 6, w - 12, h - 12, () => this.toggleHelp(), { size: 80 });
+      ui.button('help', 'Menu', 6, 6, w - 12, h - 12, () => this.toggleHelp(), { size: 34 });
     });
   }
 
   toggleHelp() {
     if (this.cards.get('help')) this.closeCard('help');
-    else this.cards.show('help', { width: 0.44, height: 0.52, draw: helpDraw(this), slot: 1 });
+    else this.cards.show('help', { width: 0.46, height: 0.32, draw: menuDraw(this), slot: 1 });
+  }
+
+  /** Help: how to read the fog (colours, rings, link styles, gestures). */
+  openGuide() {
+    this.closeCard('help');
+    this.cards.show('guide', { width: 0.44, height: 0.52, draw: guideDraw(this), slot: 1 });
+  }
+
+  openAbout() {
+    this.closeCard('help');
+    this.cards.show('about', { width: 0.44, height: 0.42, draw: aboutDraw(this), slot: 1 });
+  }
+
+  /** Calm: gentler motion, fewer motes, softer glow. */
+  toggleCalm() {
+    settings.comfort.gentle = !settings.comfort.gentle;
+    saveSettings();
+    this.cards.get('help')?.redraw();
   }
 
   openLibrary(slot = 1) {
     this.closeCard('help');
-    this.cards.show('library', { width: 0.44, height: 0.44, draw: libraryDraw(this), slot });
+    this.cards.show('library', { width: 0.44, height: 0.48, draw: libraryDraw(this), slot });
+  }
+
+  // ---------- Connect the dots: patterns across the Library ----------
+
+  /** Everything sealed, as short texts (news, claims, things). */
+  libraryItems() {
+    const out = new Map();
+    for (const it of Object.values(this.sealedLights || {})) out.set(it.id, { id: it.id, type: 'NewsItem', label: it.headline, date: it.date || '', text: it.summary || '' });
+    for (const n of this.store.nodes.values()) {
+      if (!n.sealed || out.has(n.id) || ['Source', 'ContextNode'].includes(n.type)) continue;
+      out.set(n.id, { id: n.id, type: n.type, label: n.label, date: n.date || '', text: n.summary || n.quote || n.dossier?.overview || n.description || '' });
+    }
+    return [...out.values()];
+  }
+
+  async findPatterns() {
+    const items = this.libraryItems();
+    const show = (r) => {
+      this.lastPatterns = r;
+      this.cards.show('patterns', { width: 0.5, height: 0.56, draw: patternsDraw(this, r), slot: 2 });
+      return r;
+    };
+    if (items.length < 2) return show({ patterns: [], note: 'Seal two or more items, then look for patterns.' });
+    const shared = sharedPatterns(this.store, items);
+    const live = this.mode === 'live';
+    show({ patterns: shared, running: live, note: live ? 'Reading your items together for other patterns…' : 'Demo scene: shared names only. Other patterns need the live engine.' });
+    if (!live) return this.lastPatterns;
+    const res = await this.client.patterns(items.slice(0, 24));
+    const more = res?.patterns || [];
+    const note = !res ? 'The engine did not answer; shared names are shown.' : res.note || (more.length || shared.length ? '' : 'No pattern the items themselves can show.');
+    return show({ patterns: [...shared, ...more].slice(0, 6), note });
+  }
+
+  /** Light up a pattern's items in the fog and open the first. */
+  showPattern(p) {
+    for (const id of p.items) if (this.store.nodes.has(id)) this.view.flash(id, 3);
+    const first = p.items.find((id) => this.store.nodes.has(id));
+    if (first) this.pinchNode(first);
+    else if (p.items.some((id) => this.lights.get(id))) this.openLight(p.items.find((id) => this.lights.get(id)));
+  }
+
+  itemLabel(id) {
+    return this.store.nodes.get(id)?.label || this.sealedLights?.[id]?.headline || this.lights.get(id)?.headline || id;
   }
 
   openContext() {
@@ -855,6 +877,7 @@ export class App {
     }
     n.explored = true;
     n.addedIds = added;
+    this.fillDossiers([id, ...added]);
     this.context.syncToStore(this.store);
     this.refreshInsights();
     this.setStatus('');
@@ -867,6 +890,51 @@ export class App {
     if (!file) return null;
     const res = await fetch(`demo/snapshot/${file}`).catch(() => null);
     return res?.ok ? res.json() : null;
+  }
+
+  /**
+   * The closest few around a grown star stay in view: related news first (up
+   * to two), then its direct claims and the people, places and organisations
+   * it names. Everything else waits, grouped, behind the card's buttons.
+   */
+  _showClosest(id, added) {
+    const direct = new Set(this.store.neighbors(id).map((x) => x.id));
+    const degree = (x) => this.store.neighbors(x).length;
+    const score = (n) => {
+      if (n.type === 'NewsItem' && n.group === 'related') return 3;
+      if (!direct.has(n.id)) return 0;
+      if (n.type === 'Claim') return n.verdict === 'supported' ? 2.5 : 2;
+      // a node that can open up further comes first among equals
+      return (['PublicFigure', 'Place', 'Organisation', 'Event'].includes(n.type) ? 2.2 : 1.5) + (this.canExplore(n.id) ? 0.4 : 0);
+    };
+    const nodes = added.map((x) => this.store.nodes.get(x)).filter(Boolean);
+    const news = nodes.filter((n) => score(n) === 3).slice(0, 2);
+    const rest = nodes.filter((n) => score(n) < 3 && score(n) > 0).sort((a, b) => score(b) - score(a) || degree(b.id) - degree(a.id));
+    const shown = new Set([...news, ...rest].slice(0, FIRST_NODES).map((n) => n.id));
+    for (const n of nodes) n.hidden = !shown.has(n.id) && !n.sealed && !n.pinned;
+    this.store._emit('node-updated', added);
+  }
+
+  /** Hidden nodes around a node, by kind: what its card can bring into view. */
+  hiddenGroups(id) {
+    const groups = new Map();
+    for (const x of this.store.nodes.get(id)?.addedIds || []) {
+      const n = this.store.nodes.get(x);
+      if (!n?.hidden) continue;
+      const g = groupOf(n);
+      if (!groups.has(g.key)) groups.set(g.key, { ...g, ids: [] });
+      groups.get(g.key).ids.push(x);
+    }
+    return [...groups.values()].sort((a, b) => b.ids.length - a.ids.length);
+  }
+
+  showGroup(id, key) {
+    const g = this.hiddenGroups(id).filter((x) => key === 'all' || x.key === key);
+    const ids = g.flatMap((x) => x.ids);
+    for (const x of ids) this.store.nodes.get(x).hidden = false;
+    this.store._emit('node-added', ids);
+    this.cards.get(`node:${id}`)?.redraw();
+    return ids.length;
   }
 
   hiddenCount(id) {
@@ -916,11 +984,75 @@ export class App {
     removeNodesFromStore(this.store, remove);
     n.addedIds = [];
     n.explored = false;
+    const it = this.lights.get(id);
+    if (it?.expanded === true) it.expanded = false; // a star can grow again
     this.cards.get(`node:${id}`)?.redraw();
     return remove.length;
   }
 
+  /**
+   * Real information about the nodes in the web (what it is, key facts with
+   * sources): fetched in one batch, cached; the Demo scene reads it from the
+   * snapshot. Nodes that already have one are skipped.
+   */
+  async fillDossiers(ids = null) {
+    const TYPES = ['Place', 'Organisation', 'PublicFigure', 'Topic', 'Technology', 'Event', 'Concept'];
+    const all = (ids ? ids.map((x) => this.store.nodes.get(x)) : [...this.store.nodes.values()]).filter((n) => n && TYPES.includes(n.type) && !n.dossier && !n.dossierLoading);
+    // an effect named by the analysis is not a thing with an encyclopedia entry: its link explains it
+    for (const n of all.filter((x) => x.derived)) n.dossier = { kind: 'effect', found: false };
+    const want = all.filter((n) => !n.derived);
+    if (!want.length) return 0;
+    for (const n of want) n.dossierLoading = true;
+    let got = {};
+    if (this.mode === 'live') {
+      for (let i = 0; i < want.length; i += 30) {
+        // the story's places tell same-named bodies apart ("Ministry of Foreign Affairs" of which country?)
+        const places = [...this.store.nodes.values()].filter((x) => ['Place', 'Organisation', 'Event'].includes(x.type) && !x.derived).map((x) => x.label).slice(0, 20);
+        const res = await this.client.dossiers(want.slice(i, i + 30).map((n) => ({ id: n.id, type: n.type, label: n.label, qid: n.qid })), places);
+        Object.assign(got, res?.dossiers || {});
+      }
+    } else {
+      got = this.snapshot?.dossiers || {};
+    }
+    let filled = 0;
+    for (const n of want) {
+      n.dossierLoading = false;
+      let d = got[n.id];
+      // the story's own event: what the reporting says about it
+      if ((!d || !d.found) && n.type === 'Event') d = this._eventDossier(n) || d;
+      if (!d) continue;
+      n.dossier = d;
+      if (!n.definition && d.overview) {
+        n.definition = d.overview;
+        n.definitionUrl = d.overviewSource?.url || '';
+        n.definitionLicence = d.overviewSource?.licence || '';
+      }
+      if (!n.qid && d.qid) n.qid = d.qid;
+      filled++;
+    }
+    for (const e of this.cards.open) if (e.key.startsWith('node:')) e.card.redraw();
+    return filled;
+  }
+
+  /** An event without its own encyclopedia entry, described by the news that reports it. */
+  _eventDossier(ev) {
+    const news = [...this.store.edges.values()].filter((e) => e.to === ev.id && e.type === 'about').map((e) => this.store.nodes.get(e.from)).filter((x) => x?.type === 'NewsItem');
+    if (!news.length) return null;
+    const item = this.getItem(news[0].id) || news[0];
+    const claims = [...this.store.edges.values()].filter((e) => e.type === 'reports' && news.some((x) => x.id === e.from)).map((e) => this.store.nodes.get(e.to)).filter((c) => c?.type === 'Claim');
+    const outlet = item.source || news[0].outlet || 'the report';
+    return {
+      kind: 'event',
+      found: true,
+      overview: item.summary || news[0].summary || news[0].label,
+      overviewSource: { url: item.url || news[0].url, licence: `as reported by ${outlet}` },
+      facts: claims.slice(0, 4).map((c) => ({ label: outlet, value: c.label, date: String(item.date || '').slice(0, 10), quote: c.quote || '', url: item.url || news[0].url, kind: 'news' })),
+    };
+  }
+
   pinchNode(id, { fromTrail = false } = {}) {
+    const node = this.store.nodes.get(id);
+    if (node && !node.dossier && !node.dossierLoading) this.fillDossiers([id]); // fast first answer for this one
     if (!this.store.nodes.has(id)) return;
     if (!fromTrail) this.focusNode(id);
     if (this.selectedId !== id) this.prevSelectedId = this.selectedId;
@@ -929,7 +1061,8 @@ export class App {
     this.view.markLabelsDirty();
     const prefer = this.view.worldPositionOf(id);
     for (const e of [...this.cards.open]) if (e.key.startsWith('node:') && e.key !== `node:${id}`) this.cards.close(e.key);
-    this.cards.show(`node:${id}`, { width: 0.46, height: 0.5, draw: nodeCardDraw(this, id), prefer });
+    const tall = ['Place', 'Organisation', 'PublicFigure', 'Topic', 'Technology', 'Event', 'Concept'].includes(this.store.nodes.get(id)?.type);
+    this.cards.show(`node:${id}`, { width: 0.46, height: tall ? 0.56 : 0.5, draw: nodeCardDraw(this, id), prefer });
     this.onboarding.notify('card-opened');
   }
 
@@ -1014,6 +1147,15 @@ export class App {
     it.expanded = 'running';
     this.notes = [];
     this.cards.get(`light:${id}`)?.redraw();
+    // about 5 nodes first (the closest), the rest wait behind group buttons on the card
+    const before = new Set(this.store.nodes.keys());
+    const added = [];
+    const mark = (ev) => {
+      if (ev.type === 'node' && ev.node.id !== id && !before.has(ev.node.id) && !added.includes(ev.node.id)) {
+        added.push(ev.node.id);
+        ev.node.hidden = added.length > FIRST_NODES;
+      }
+    };
     if (it.live && this.mode === 'live') {
       const controller = new AbortController();
       this.expanding = { id, controller };
@@ -1021,7 +1163,10 @@ export class App {
       const stats = await this.client.expand(id, {
         context: this.context.labels(),
         signal: controller.signal,
-        onEvent: (ev) => this._onResearchEvent(ev),
+        onEvent: (ev) => {
+          mark(ev);
+          this._onResearchEvent(ev);
+        },
       });
       this.expanding = null;
       this.lastStats = stats;
@@ -1034,6 +1179,7 @@ export class App {
         this.setStatus('That recorded run is missing from the snapshot.');
         return;
       }
+      for (const ev of rec.events || []) mark(ev);
       this._recordedAnswers ??= {};
       if (rec.answers) this._recordedAnswers[id] = rec.answers;
       await new Promise((resolve) => {
@@ -1048,6 +1194,11 @@ export class App {
       });
     }
     it.expanded = true;
+    if (this.store.nodes.has(id)) {
+      this.store.nodes.get(id).addedIds = added;
+      this._showClosest(id, added);
+    }
+    this.fillDossiers(); // every node around it: what it is, key facts, sources
     if (this.store.nodes.has(id)) this.focusNode(id, { explore: false });
     this.context.syncToStore(this.store);
     this._applyRelevance();
@@ -1267,8 +1418,10 @@ export class App {
     } else if (mode === 'interest') {
       this.keypad.open({ prompt: 'Add a topic you are interested in', suggestions: ['electric vehicles', 'quantum computing', 'public health', 'renewable energy'], mic });
     } else {
-      const sugg = [...this.lights.items].sort((a, b) => (b.relevance ?? 0) - (a.relevance ?? 0)).slice(0, 4).map((it) => shortHeadline(it.headline));
-      this.keypad.open({ prompt: 'Find a light', suggestions: sugg, mic });
+      // Ask the fog: any topic, any past news (also finds a star drifting here)
+      this.keypadMode = 'fog';
+      const sugg = [...this.lights.items].sort((a, b) => (b.relevance ?? 0) - (a.relevance ?? 0)).slice(0, 2).map((it) => shortHeadline(it.headline));
+      this.keypad.open({ prompt: 'Ask the fog: any topic or past news', suggestions: [...sugg, 'What happened this week in science?', 'What changed in climate policy this year?'], mic });
     }
   }
 
@@ -1293,10 +1446,76 @@ export class App {
       if (this.interests.addTopic(text, 1.5)) await this.interestsChanged();
       return null;
     }
-    return this.findLight(text);
+    return this.askFog(text);
   }
 
-  findLight(text) {
+  /**
+   * Ask the fog (touch empty fog): a star drifting here that matches opens;
+   * anything else gets a cited answer from fresh search. Refusals first.
+   */
+  async askFog(text) {
+    const q = String(text || '').trim();
+    if (!q) return null;
+    const refusal = checkRequest(q);
+    if (refusal) {
+      const a = { question: q, refused: true, answerable: false, text: refusal, sentences: [], citations: {} };
+      this.lastAnswer = a;
+      this.cards.show('answer', { width: 0.48, height: 0.3, draw: answerDraw(this, a), slot: 2 });
+      return a;
+    }
+    // a cited answer, news about it arriving as stars in front of you, and
+    // drifting stars that already name it come closer
+    const needle = q.toLowerCase();
+    const near = this.lights.items.filter((it) => `${it.headline} ${it.summary || ''}`.toLowerCase().includes(needle)).map((it) => it.id);
+    if (near.length) this.lights.pull(near, 30);
+    const [a] = await Promise.all([this.ask(q, null), this.searchStars(q)]);
+    return a;
+  }
+
+  /**
+   * Ask the fog, as stars: news about the topic (recent and older) gathers in
+   * front of the reader as one Search group. Seal keeps one; Clear removes the
+   * rest. Live: from the engine's search. Demo: from the recorded pool.
+   */
+  async searchStars(q) {
+    let items = [];
+    if (this.mode === 'live') {
+      const res = await this.client.search(q);
+      items = (res?.items || []).map((it) => ({ ...it, live: true }));
+    } else if (this.mode === 'offline') {
+      const words = q.toLowerCase().split(/\W+/).filter((w) => w.length > 2);
+      const shown = new Set(this.lights.items.map((x) => x.id));
+      items = this.pool.filter((it) => !shown.has(it.id) && words.length && words.every((w) => `${it.headline} ${it.summary || ''}`.toLowerCase().includes(w))).slice(0, 5);
+    }
+    if (!items.length) {
+      this.searchGroup = { q, ids: [] };
+      this.cards.get('answer')?.redraw();
+      return [];
+    }
+    this.clearSearch(); // one Search group at a time
+    const ids = this.lights.addItems(items.map((it) => ({ ...it, search: q })));
+    this.searchGroup = { q, ids };
+    this._applyRelevance();
+    this.showNotice(`${ids.length} star${ids.length === 1 ? '' : 's'} about “${shortLabel(q)}” came in front of you.`, { seconds: 10 });
+    this.cards.get('answer')?.redraw();
+    return ids;
+  }
+
+  /** The Search group leaves the fog; sealed, grown or open stars stay. */
+  clearSearch() {
+    const g = this.searchGroup;
+    this.searchGroup = null;
+    if (!g?.ids?.length) return 0;
+    const keep = (id) => this.lights.sealed.has(id) || this.getItem(id)?.expanded || this.lights.openId === id;
+    const drop = g.ids.filter((id) => !keep(id));
+    for (const id of drop) this.closeCard(`light:${id}`);
+    this.lights.removeItems(drop);
+    for (const id of g.ids) if (keep(id)) delete this.lights.get(id)?.search;
+    this.cards.get('answer')?.redraw();
+    return drop.length;
+  }
+
+  findLight(text, { quiet = false, min = 0.3 } = {}) {
     const needle = text.toLowerCase();
     let best = null;
     let bestScore = 0;
@@ -1308,10 +1527,11 @@ export class App {
         best = it;
       }
     }
-    if (best && bestScore >= 0.3) {
+    if (best && bestScore >= min) {
       this.openLight(best.id);
       return best.id;
     }
+    if (quiet) return null;
     this.cards.show('find', { width: 0.42, height: 0.24, draw: messageDraw(this, 'find', 'No light matches', `Nothing drifting here matches “${text}”. Asking about any topic comes with Ask.`) });
     return null;
   }
@@ -1452,6 +1672,22 @@ function importanceSeeds(app) {
   const pr = pagerank(app.store.view('all'), { seeds });
   return new Map([...pr].filter(([id]) => app.store.nodes.get(id)?.type === 'NewsItem'));
 }
+
+/** 20-40 s until the next new star appears. */
+const FIRST_NODES = 5; // nodes shown when a star grows; the rest wait in groups
+
+const GROUPS = { NewsItem: ['news', 'News'], PublicFigure: ['people', 'People'], Place: ['places', 'Places'], Organisation: ['orgs', 'Organisations'], Claim: ['claims', 'Claims'], Source: ['claims', 'Claims'] };
+
+function groupOf(n) {
+  const [key, label] = GROUPS[n.type] || ['topics', 'Topics'];
+  return { key, label };
+}
+
+function nextStarDelay() {
+  return 20000 + Math.random() * 20000;
+}
+
+const _rp = new Vector3();
 
 function shortLabel(s, n = 22) {
   s = String(s || '');
