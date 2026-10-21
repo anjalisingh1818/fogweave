@@ -86,7 +86,7 @@ class Engine:
 
     async def pool(self, interests: dict | None = None, summarize: int = 24) -> dict:
         """Candidate pool for the curated-random feed (client samples from it)."""
-        from .feed import TYPE_QUERIES, interest_queries, quality, tags_for
+        from .feed import TYPE_QUERIES, interest_queries, quality
 
         interests = interests or {}
         queries, cats = interest_queries(interests)
@@ -116,18 +116,45 @@ class Engine:
                 summaries.update({s.id: s.summary for s in out.items})
         except QuotaExhausted:
             notes.append("Free model quota is spent for now: summaries show the source's own short text.")
-        items = []
-        for i, r in enumerate(raw):
-            self.items.set(r.id, r.to_dict())
-            items.append({
-                "id": r.id, "kind": r.kind, "sourceType": r.extra.get("sourceType") or ("paper" if r.kind == "paper" else "archive" if r.kind == "archive" else "news"),
-                "headline": r.title, "source": r.outlet, "via": r.source, "url": r.url, "date": r.date,
-                "summary": summaries.get(r.id) or r.snippet[:220], "summaryBy": "model" if r.id in summaries else "source",
-                "claims": [], "tags": tags_for(r), "quality": q[i]["quality"], "qualityBreakdown": q[i]["breakdown"],
-                "story": int(stories[i]) if stories else i, "licence": r.licence, "citations": r.citations,
-                "extra": {k: v for k, v in r.extra.items() if k in ("discussion", "portal", "authors", "section", "categories", "interest")},
-            })
+        items = [self._pool_item(r, summaries, q[i], int(stories[i]) if stories else i) for i, r in enumerate(raw)]
         return {"generatedAt": now_iso(), "sources": self.router.status, "notes": notes, "interestsUsed": {"queries": [t for t, _ in typed], "paperTypes": cats}, "items": items}
+
+    def _pool_item(self, r: RawItem, summaries: dict[str, str], q: dict, story: int) -> dict:
+        from .feed import tags_for
+
+        self.items.set(r.id, r.to_dict())  # so it can grow (Show related) later
+        return {
+            "id": r.id, "kind": r.kind, "sourceType": r.extra.get("sourceType") or ("paper" if r.kind == "paper" else "archive" if r.kind == "archive" else "news"),
+            "headline": r.title, "source": r.outlet, "via": r.source, "url": r.url, "date": r.date,
+            "summary": summaries.get(r.id) or r.snippet[:220], "summaryBy": "model" if r.id in summaries else "source",
+            "claims": [], "tags": tags_for(r), "quality": q["quality"], "qualityBreakdown": q["breakdown"],
+            "story": story, "licence": r.licence, "citations": r.citations,
+            "extra": {k: v for k, v in r.extra.items() if k in ("discussion", "portal", "authors", "section", "categories", "interest")},
+        }
+
+    async def search(self, query: str, limit: int = 6) -> dict:
+        """Ask the fog: news about any topic, recent and older, as stars (V3 F4).
+        Recent Current events entries and GDELT articles that name it, plus older
+        Current events entries from the archive. Summaries as in the pool."""
+        from .feed import quality
+
+        raw = await self.router.search_news(query, limit=limit)
+        vecs = embed([f"{r.title}. {r.snippet[:200]}" for r in raw]) if raw else None
+        if vecs is not None and len(raw):
+            drop = near_duplicates(vecs)
+            keep = [i for i in range(len(raw)) if i not in drop]
+            raw, vecs = [raw[i] for i in keep], vecs[keep]
+        q = quality(raw, vecs) if raw else []
+        summaries: dict[str, str] = {}
+        notes = []
+        try:
+            if raw:
+                out = await Summarizer(self.llm).run([{"id": r.id, "title": r.title, "snippet": r.snippet} for r in raw])
+                summaries.update({s.id: s.summary for s in out.items})
+        except QuotaExhausted:
+            notes.append("Free model quota is spent for now: summaries show the source's own short text.")
+        items = [{**self._pool_item(r, summaries, q[i], 9000 + i), "search": query} for i, r in enumerate(raw)]
+        return {"generatedAt": now_iso(), "query": query, "notes": notes, "items": items}
 
     async def lights(self, context: list[str] | None = None) -> dict:
         raw = await self.router.lights()
@@ -366,6 +393,26 @@ class Engine:
                 yield ev
             if ev := edge({"type": "reports", "from": item.id, "to": cid, "label": "reported", "evidence": [prov(c["quote"])]}):
                 yield ev
+
+        # other news, recent and older, each with a typed link and two quotes
+        yield {"type": "status", "phase": "related", "text": "Finding other news about it"}
+        names = [e["name"] for e in merged if e["type"] in ("Place", "Organisation", "PublicFigure", "Event", "Technology")]
+        focus_text = " ".join([f"{item.title}.", item.snippet or "", *[c["quote"] for c in x["claims"]]])
+        try:
+            from .related import RelatedFinder
+
+            # broad names (a country, a city): too weak alone to link two stories
+            broad_re = re.compile(r"\b(country|sovereign state|city|capital|province|region|continent|federal state)\b", re.I)
+            broad = [e["name"] for e in merged if e["type"] == "Place" or broad_re.search(str(e.get("description") or ""))]
+            # a name extraction left without a description: ask Wikidata (cached) whether it is a place
+            unknown = [e["name"] for e in merged if e["name"] not in broad and not e.get("description") and e["type"] != "PublicFigure"]
+            as_place = await asyncio.gather(*(self.linker.link(n, "Place") for n in unknown))
+            broad += [n for n, hit in zip(unknown, as_place) if hit and broad_re.search(hit.get("description", ""))]
+            async for ev in RelatedFinder(self).run(item, focus_text, names, node, edge, retrieved, broad=broad):
+                yield ev
+        except Exception as exc:  # noqa: BLE001 (related news is an extra; the item still grows)
+            rejected.append({"related": type(exc).__name__, "problem": str(exc)[:120]})
+        mark("related")
 
         # reported relations
         reported_triples: set[tuple[str, str, str]] = set()

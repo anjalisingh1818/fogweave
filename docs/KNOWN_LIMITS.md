@@ -53,6 +53,12 @@
 - **Matching a name to an entry can still go wrong.** FogWeave prefers no answer to a wrong one: name-only matches must fit the node's type, and names many countries share must fit the story. A match can still be mistaken; every overview and fact links to its source.
 - **Key facts are encyclopedia statements, not checked against the news.** A population or a leader may be out of date; each fact shows its date when Wikidata gives one.
 
+## Related news
+
+- **Related news comes from Wikipedia's Current events** (recent days and the archive back to 2005), so it covers stories editors listed there. A local or niche story may have none, or only "shares a name" links.
+- **The relation type is a model's judgement, checked by code but not proven.** Quotes and dates are verified, but "same event", "background" or "precedent" are Inferred: they can be wrong, and the card shows both quotes so you can judge. Causes are never shown as Reported.
+- **One model call per star** decides the relations. When the free quota is spent, only the code-computed "shares a name" links appear, and they say so.
+
 ## Demo scene
 
 - **The Demo scene is a dated snapshot** of real pipeline runs (2026-10-21), not live news, and it says so. Only the recorded stars can show related items, and only recorded nodes can open up. Ask the fog gives an honest "needs the live engine" there.

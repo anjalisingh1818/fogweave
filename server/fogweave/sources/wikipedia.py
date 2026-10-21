@@ -248,8 +248,19 @@ class WikipediaAdapter(SourceAdapter):
         return out
 
 
+ABBREV = re.compile(r"^(?:(?:[A-Z]\.){1,3}|(?:Dr|Mr|Ms|Mrs|St|No|Gen|Lt|Col|Sgt|Jr|Sr|Inc|Ltd|Co|vs)\.)$")
+
+
 def _headline(text: str, limit: int = 110) -> str:
-    first = re.split(r"(?<=[.!?])\s", text, maxsplit=1)[0]
+    # a sentence ends at . ! ? followed by a space, but not after an abbreviation
+    # such as "U.S." or "Dr." ("U.S. envoys ..." used to become the headline "U.S")
+    first = text
+    for m in re.finditer(r"[.!?]\s", text):
+        word = re.search(r"(\S+)$", text[: m.start() + 1])
+        if word and ABBREV.match(word.group(1)):
+            continue
+        first = text[: m.start() + 1]
+        break
     if len(first) <= limit:
         return first.rstrip(".")
     cut = first[:limit].rsplit(" ", 1)[0]

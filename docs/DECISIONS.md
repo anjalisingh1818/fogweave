@@ -128,3 +128,21 @@ One line each: what was chosen, and why. Newest last.
 - **Node card order:** How it relates (a plain sentence such as "Where it happened: …" or "Named in: …", with its quote or reasoning and label) → What it is (with source) → Key facts → the buttons. Text flows into the space above the buttons; the layout check covers it.
 - **Demo scene:** `scripts/snapshot_dossiers.py` adds dossiers for every node in the recorded webs (85 nodes: 60 with real information; the rest say not enough information or ambiguous). `snapshot.py` runs it at the end.
 
+## V3 Stage B, part 2: related news with typed links and two quotes (F1) (2026-10-21)
+
+- **Related-News Finder** (`server/fogweave/related.py`):
+  - **Sources:** while a star grows, it looks for other news that names the story's people, organisations, places and events. That means recent Wikipedia Current events days (cached) plus older entries from the Current events archive back to 2005.
+  - **Ranking:** text similarity (bge-small) plus shared names. Up to 6 are kept, including up to 2 older items (30 days or more).
+  - **What counts as related:** sharing only a big place ("Russia") is too weak. A candidate must share a specific person, organisation or event, or two names, or be a similar story. Wikidata descriptions such as "country", "city" or "region" mark broad names.
+- **Relation Reasoner** (one strict-JSON call per expansion, short candidate ids C1…): `same_event, follow_up, background, cause_of, effect_of, precedent_of, similar_pattern, corroborates, contradicts, shares_entity, possible_consequence, unrelated`. Each gets a quote from each item and a reason.
+- **Code checks** (the model does not decide these):
+  - Both quotes must appear in the texts. A quote with "…" passes only if every piece is there, in order.
+  - Dates must fit: a background, cause or precedent is earlier; a follow-up or effect is later.
+  - Unrelated and low-confidence pairs are dropped.
+  - Cause/effect is Inferred at most.
+  - A possible consequence is always Speculative.
+  - "Shares a name" is computed in code (both items name it) and is Reported. It is also the fallback when the model is out of quota, so related news still appears.
+- **Ontology 2.1.0** (`shared/ontology.v2.json`): `same_event, background_of, causes, precedent_of, similar_to, corroborates, shares_entity, possible_consequence_of`, and `contradicts` may now link two news items. `follows` is reused for follow-ups.
+- **Cards:** a related news item says how it relates in plain words from its own side ("An earlier, similar case to: …", "Same event, another report: …", "Shares a name with: …"), with the reason and one quote from each item, then what it says. It can Show related in turn.
+- **Fix found on the way:** Wikipedia headlines no longer stop at "U.S." (abbreviations no longer end the first sentence).
+

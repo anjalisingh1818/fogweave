@@ -1,36 +1,282 @@
 {
-  "id": "fogweave-ontology",
-  "version": "2.0.0",
-  "classes": ["NewsItem", "Event", "Organisation", "Place", "Topic", "Technology", "PublicFigure", "ContextNode", "Claim", "Source"],
-  "groups": {
-    "Entity": ["Event", "Organisation", "Place", "Topic", "Technology", "PublicFigure"]
-  },
-  "labels": {
-    "reported": "A source says it: needs at least one evidence item with a quote and a link.",
-    "inferred": "Reasoned from reported facts: needs a reasoning step and the ids it rests on.",
-    "speculative": "Plausible but weakly supported: drawn faint, never used for rankings or insights."
-  },
-  "relations": {
-    "mentions": { "domain": ["NewsItem"], "range": ["@Entity"] },
-    "about": { "domain": ["NewsItem"], "range": ["Event", "Topic"] },
-    "reports": { "domain": ["NewsItem", "Source"], "range": ["Claim", "Event"] },
-    "happened_in": { "domain": ["Event"], "range": ["Place"] },
-    "involves": { "domain": ["Event"], "range": ["Organisation", "PublicFigure", "Technology", "Place", "Topic"] },
-    "affects": { "domain": ["@Entity", "Claim", "NewsItem"], "range": ["@Entity", "ContextNode"] },
-    "depends_on": { "domain": ["@Entity", "ContextNode"], "range": ["@Entity"] },
-    "part_of": { "domain": ["@Entity"], "range": ["@Entity"] },
-    "competes_with": { "domain": ["Organisation", "Technology"], "range": ["Organisation", "Technology"] },
-    "follows": { "domain": ["NewsItem", "Event"], "range": ["NewsItem", "Event"] },
-    "supports": { "domain": ["Source", "NewsItem", "Claim"], "range": ["Claim"] },
-    "contradicts": { "domain": ["Source", "NewsItem", "Claim"], "range": ["Claim"] },
-    "same_as": { "domain": ["ContextNode"], "range": ["@Entity"], "note": "Links a private context node to a matching entity; computed on the device." },
-    "relates_to": { "domain": ["@Entity", "NewsItem", "Claim"], "range": ["@Entity", "NewsItem", "Claim"], "labels": ["speculative"], "note": "Only for algorithmic link suggestions, always speculative." }
-  },
-  "shapes": [
-    { "id": "news-has-source-and-date", "rule": "Every NewsItem has an outlet (source) and a date." },
-    { "id": "claim-has-quote", "rule": "Every Claim has at least one quote and the id of what reported it." },
-    { "id": "reported-has-evidence", "rule": "Every reported link has at least one evidence item with a quote and a url." },
-    { "id": "inferred-has-reasoning", "rule": "Every inferred link has a reasoning step and at least one basis id." },
-    { "id": "affects-has-support", "rule": "Every affects link has an evidence quote or an inferred reasoning step." }
+ "id": "fogweave-ontology",
+ "version": "2.1.0",
+ "classes": [
+  "NewsItem",
+  "Event",
+  "Organisation",
+  "Place",
+  "Topic",
+  "Technology",
+  "PublicFigure",
+  "ContextNode",
+  "Claim",
+  "Source"
+ ],
+ "groups": {
+  "Entity": [
+   "Event",
+   "Organisation",
+   "Place",
+   "Topic",
+   "Technology",
+   "PublicFigure"
   ]
+ },
+ "labels": {
+  "reported": "A source says it: needs at least one evidence item with a quote and a link.",
+  "inferred": "Reasoned from reported facts: needs a reasoning step and the ids it rests on.",
+  "speculative": "Plausible but weakly supported: drawn faint, never used for rankings or insights."
+ },
+ "relations": {
+  "mentions": {
+   "domain": [
+    "NewsItem"
+   ],
+   "range": [
+    "@Entity"
+   ]
+  },
+  "about": {
+   "domain": [
+    "NewsItem"
+   ],
+   "range": [
+    "Event",
+    "Topic"
+   ]
+  },
+  "reports": {
+   "domain": [
+    "NewsItem",
+    "Source"
+   ],
+   "range": [
+    "Claim",
+    "Event"
+   ]
+  },
+  "happened_in": {
+   "domain": [
+    "Event"
+   ],
+   "range": [
+    "Place"
+   ]
+  },
+  "involves": {
+   "domain": [
+    "Event"
+   ],
+   "range": [
+    "Organisation",
+    "PublicFigure",
+    "Technology",
+    "Place",
+    "Topic"
+   ]
+  },
+  "affects": {
+   "domain": [
+    "@Entity",
+    "Claim",
+    "NewsItem"
+   ],
+   "range": [
+    "@Entity",
+    "ContextNode"
+   ]
+  },
+  "depends_on": {
+   "domain": [
+    "@Entity",
+    "ContextNode"
+   ],
+   "range": [
+    "@Entity"
+   ]
+  },
+  "part_of": {
+   "domain": [
+    "@Entity"
+   ],
+   "range": [
+    "@Entity"
+   ]
+  },
+  "competes_with": {
+   "domain": [
+    "Organisation",
+    "Technology"
+   ],
+   "range": [
+    "Organisation",
+    "Technology"
+   ]
+  },
+  "follows": {
+   "domain": [
+    "NewsItem",
+    "Event"
+   ],
+   "range": [
+    "NewsItem",
+    "Event"
+   ]
+  },
+  "supports": {
+   "domain": [
+    "Source",
+    "NewsItem",
+    "Claim"
+   ],
+   "range": [
+    "Claim"
+   ]
+  },
+  "contradicts": {
+   "domain": [
+    "Claim",
+    "NewsItem",
+    "Source"
+   ],
+   "range": [
+    "Claim",
+    "NewsItem"
+   ]
+  },
+  "same_as": {
+   "domain": [
+    "ContextNode"
+   ],
+   "range": [
+    "@Entity"
+   ],
+   "note": "Links a private context node to a matching entity; computed on the device."
+  },
+  "relates_to": {
+   "domain": [
+    "@Entity",
+    "NewsItem",
+    "Claim"
+   ],
+   "range": [
+    "@Entity",
+    "NewsItem",
+    "Claim"
+   ],
+   "labels": [
+    "speculative"
+   ],
+   "note": "Only for algorithmic link suggestions, always speculative."
+  },
+  "same_event": {
+   "domain": [
+    "NewsItem"
+   ],
+   "range": [
+    "NewsItem"
+   ],
+   "note": "Two reports of the same event (Relation Reasoner, quotes from both)."
+  },
+  "background_of": {
+   "domain": [
+    "NewsItem",
+    "Event"
+   ],
+   "range": [
+    "NewsItem",
+    "Event"
+   ],
+   "note": "Earlier news that explains the background of a later item."
+  },
+  "causes": {
+   "domain": [
+    "NewsItem",
+    "Event"
+   ],
+   "range": [
+    "NewsItem",
+    "Event"
+   ],
+   "note": "Cause to effect; needs two independent supports to be more than Inferred."
+  },
+  "precedent_of": {
+   "domain": [
+    "NewsItem",
+    "Event"
+   ],
+   "range": [
+    "NewsItem",
+    "Event"
+   ],
+   "note": "An earlier similar case."
+  },
+  "similar_to": {
+   "domain": [
+    "NewsItem",
+    "Event"
+   ],
+   "range": [
+    "NewsItem",
+    "Event"
+   ],
+   "note": "Same kind of event elsewhere or earlier (what differs is said in the reasoning)."
+  },
+  "corroborates": {
+   "domain": [
+    "NewsItem"
+   ],
+   "range": [
+    "NewsItem"
+   ],
+   "note": "Another outlet reports the same facts."
+  },
+  "shares_entity": {
+   "domain": [
+    "NewsItem"
+   ],
+   "range": [
+    "NewsItem"
+   ],
+   "note": "Both items name the same entity; computed in code."
+  },
+  "possible_consequence_of": {
+   "domain": [
+    "NewsItem",
+    "Event"
+   ],
+   "range": [
+    "NewsItem",
+    "Event"
+   ],
+   "labels": [
+    "speculative",
+    "inferred"
+   ],
+   "note": "Speculative unless a source states it as a forecast."
+  }
+ },
+ "shapes": [
+  {
+   "id": "news-has-source-and-date",
+   "rule": "Every NewsItem has an outlet (source) and a date."
+  },
+  {
+   "id": "claim-has-quote",
+   "rule": "Every Claim has at least one quote and the id of what reported it."
+  },
+  {
+   "id": "reported-has-evidence",
+   "rule": "Every reported link has at least one evidence item with a quote and a url."
+  },
+  {
+   "id": "inferred-has-reasoning",
+   "rule": "Every inferred link has a reasoning step and at least one basis id."
+  },
+  {
+   "id": "affects-has-support",
+   "rule": "Every affects link has an evidence quote or an inferred reasoning step."
+  }
+ ]
 }

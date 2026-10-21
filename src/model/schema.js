@@ -64,6 +64,14 @@ export const RELATION_COLOR = {
   follows: 0xe8e8f0,
   same_as: 0xffd36e,
   relates_to: 0x8a9099,
+  // news to news (Relation Reasoner)
+  same_event: 0xe9d9a6,
+  corroborates: 0x7fb6ff,
+  causes: 0xf2b866,
+  possible_consequence_of: 0x8a9099,
+  background_of: 0x7fd1c4,
+  precedent_of: 0x7fd1c4,
+  similar_to: 0x7fd1c4,
 };
 export const DEFAULT_RELATION_COLOR = 0x9aa7b6; // mentions, about, reports, involves, happened_in, part_of, competes_with
 

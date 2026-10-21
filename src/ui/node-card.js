@@ -102,6 +102,43 @@ export function relationBrief(app, id) {
   return { text, why, label: e.label || 'reported' };
 }
 
+/** Relation types (V3 §7) as plain words, from the related item's side; X = the other news item. */
+const NEWS_REL = {
+  same_event: (X) => `Same event, another report: ${X}`,
+  follow_up: (X) => `A later development of: ${X}`,
+  background: (X) => `Background to: ${X}`,
+  cause_of: (X) => `May have led to: ${X}`,
+  effect_of: (X) => `May be a result of: ${X}`,
+  precedent_of: (X) => `An earlier, similar case to: ${X}`,
+  similar_pattern: (X) => `A similar pattern to: ${X}`,
+  corroborates: (X) => `Confirms what this reports: ${X}`,
+  contradicts: (X) => `Disagrees with: ${X}`,
+  shares_entity: (X) => `Shares a name with: ${X}`,
+  possible_consequence: (X) => `Could follow from: ${X}`,
+};
+
+/**
+ * "How it relates" for a news item linked to another news item by the
+ * Relation Reasoner: the relation in plain words, the reason, and one quote
+ * from each item (with its outlet).
+ */
+export function newsBrief(app, id) {
+  if (app.store.nodes.get(id)?.group !== 'related') return null; // only a related item explains itself
+  for (const e of app.store.edges.values()) {
+    if (!e.relation || (e.from !== id && e.to !== id)) continue;
+    const otherId = e.from === id ? e.to : e.from;
+    const other = app.store.nodes.get(otherId);
+    if (!other) continue;
+    const make = NEWS_REL[e.relation];
+    const text = make ? make(other.label) : `${e.relation.replace(/_/g, ' ')}: ${other.label}`;
+    const ev = e.evidence || [];
+    const mine = ev.find((x) => x.side === 'other'); // this card is the related item
+    const theirs = ev.find((x) => x.side === 'focus');
+    return { text, why: e.reasoning || '', label: e.label || 'inferred', quotes: [mine, theirs].filter(Boolean) };
+  }
+  return null;
+}
+
 /** A paragraph that never runs below `limit` (fewer lines, or none). */
 function fit(ui, text, x, y, width, opts, limit) {
   const size = opts.size ?? 36;
@@ -189,6 +226,23 @@ export function nodeCardDraw(app, id) {
           y = fit(ui, `· ${f.label}: ${f.value}${date}`, pad, y, w - pad * 2, { size: 23, maxLines: 2, lineHeight: 1.25 }, limit) + 4;
         }
       }
+    } else if (node.type === 'NewsItem' && newsBrief(app, id)) {
+      // a related news item: how it relates to the story, with one quote from each
+      const brief = newsBrief(app, id);
+      const style = LABEL_STYLE[brief.label] || LABEL_STYLE.inferred;
+      y += 8;
+      ui.text('HOW IT RELATES', pad, y, { size: 20, color: '#ffe2a8', weight: 700 });
+      ui.text(style.label.toUpperCase(), w - pad, y, { size: 20, color: style.css, weight: 700, align: 'right' });
+      y = fit(ui, brief.text, pad, y + 32, w - pad * 2, { size: 26, weight: 600, maxLines: 2 }, limit);
+      if (brief.why) y = fit(ui, brief.why, pad, y, w - pad * 2, { size: 22, color: UI.dim, maxLines: 2 }, limit);
+      for (const q of brief.quotes) {
+        if (y + 40 > limit) break;
+        y = fit(ui, `“${q.quote}” — ${q.source || ''}`, pad + 18, y + 4, w - pad * 2 - 18, { size: 21, color: '#cdd5df', maxLines: 2 }, limit);
+      }
+      if (node.summary && y + 60 < limit) {
+        ui.text('WHAT IT SAYS', pad, y + 14, { size: 20, color: '#ffe2a8', weight: 700 });
+        y = fit(ui, node.summary, pad, y + 46, w - pad * 2, { size: 23, color: '#d3dae3', maxLines: 3 }, limit);
+      }
     } else if (node.type === 'Claim' && node.quote) y = fit(ui, `“${node.quote}”`, pad, y + 2, w - pad * 2, { size: 29, color: '#cdd5df', maxLines: 2 }, limit);
     else if (node.definition) y = fit(ui, node.definition, pad, y + 2, w - pad * 2, { size: 26, color: '#cdd5df', maxLines: 3 }, limit);
     else if (node.description) y = fit(ui, node.description, pad, y + 2, w - pad * 2, { size: 28, color: UI.dim, maxLines: 1 }, limit);
@@ -211,7 +265,7 @@ export function nodeCardDraw(app, id) {
     }
 
     // claims and news: the evidence readout and the labelled links (entities say this in their brief)
-    if (!DOSSIER_TYPES.has(node.type)) {
+    if (!DOSSIER_TYPES.has(node.type) && !newsBrief(app, id)) {
       const read = evidenceReadout(app.store, id);
       if (read) {
         y += 6;
@@ -251,7 +305,7 @@ export function nodeCardDraw(app, id) {
     if (app.trail.length >= 2) small.push({ id: 'back', label: '‹ Back', on: () => app.back() });
     const more = app.hiddenCount(id);
     if (more) small.push({ id: 'more', label: `Show ${Math.min(8, more)} more`, on: () => app.showMore(id) });
-    if (node.type === 'NewsItem' && app.canExpand(id) && !app.getItem(id)?.expanded) small.push({ id: 'expand', label: 'Expand', on: () => app.expandLight(id) });
+    if (node.type === 'NewsItem' && app.canExpand(id) && !app.getItem(id)?.expanded) small.push({ id: 'expand', label: 'Show related', on: () => app.expandLight(id) });
     small.push({ id: 'pin', label: node.pinned ? 'Unpin' : 'Pin', on: () => app.togglePin(id) });
     if (node.addedIds?.length) small.push({ id: 'collapse', label: 'Collapse', on: () => app.collapse(id) });
     const sw = (w - pad * 2 - 12 * (small.length - 1)) / Math.max(4, small.length);
@@ -263,7 +317,6 @@ export function nodeCardDraw(app, id) {
     if (node.type !== 'ContextNode') {
       buttons.push(node.sealed ? { id: 'unseal', label: 'Unseal', icon: '◇', on: () => app.unseal(id) } : { id: 'seal', label: 'Seal', icon: '◆', primary: true, on: () => app.seal(id) });
     }
-    if (node.type === 'NewsItem') buttons.push({ id: 'touch', label: 'Touches me?', on: () => app.touchesMe(id) });
     if (node.type !== 'ContextNode' && node.type !== 'Source') buttons.push({ id: 'ask', label: 'Ask', on: () => app.openAsk(id) });
     const linking = app.linkFromId && app.linkFromId !== id;
     buttons.push({ id: 'link', label: linking ? 'Path here' : app.linkFromId === id ? 'Linking…' : 'Link', primary: linking, on: () => app.link(id) });

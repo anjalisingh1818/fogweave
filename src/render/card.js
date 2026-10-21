@@ -189,7 +189,8 @@ export class Card {
   }
 
   _onDown(e) {
-    const b = this._hit(e);
+    // the button under the ray, or the one it was resting on a moment ago
+    const b = this._hit(e) || (this.hoverId && this.buttons.find((x) => x.id === this.hoverId)) || null;
     this._pressed = b ? { id: b.id, pointerId: e.pointerId } : null;
     if (b) {
       try {
@@ -209,8 +210,9 @@ export class Card {
     } catch {
       // already released
     }
-    const b = this._hit(e);
-    if (!b || b.id === p.id) this.press(p.id, e);
+    // XR rule: the button you pinched down on fires when you let go (a ray
+    // that drifts during the pinch must not cancel it or press a neighbour)
+    if (this.buttons.some((x) => x.id === p.id)) this.press(p.id, e);
   }
 
   /** Press a button by id (used by clicks and by scripted QA). */
