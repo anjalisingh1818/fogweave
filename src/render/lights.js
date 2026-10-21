@@ -41,6 +41,9 @@ export const LIGHT_KINDS = {
   archive: { label: 'Archive', color: 0xe0c08c, css: '#e0c08c', pattern: 'dim' },
 };
 const TRAIL = 3; // fading ghosts behind each light
+export const YAW_MAX = (117 * Math.PI) / 180; // widest light on the headset arc
+const ELEV_MIN = (-8 * Math.PI) / 180;
+const ELEV_MAX = (34 * Math.PI) / 180;
 
 const MAX = 48;
 const _m = new Matrix4();
@@ -128,7 +131,7 @@ export class LightField {
       const yawDeg = -110 + (220 * (i + 0.5)) / n + (r(1) - 0.5) * 14;
       this.state.set(it.id, {
         yaw: (yawDeg * Math.PI) / 180,
-        elev: ((-8 + r(2) * 42) * Math.PI) / 180,
+        elev: ELEV_MIN + r(2) * (ELEV_MAX - ELEV_MIN),
         dist: 1.45 + r(3) * 0.75,
         phase: r(4) * Math.PI * 2,
         speed: 0.015 + r(5) * 0.02,
@@ -171,14 +174,21 @@ export class LightField {
     return Number.isFinite(t) ? Math.max(0, (this.now - t) / 86400000) : 0;
   }
 
-  worldPositionOf(id, out = new Vector3()) {
+  /** Where a light is now, or `back` seconds ago on its own clock (trails). */
+  worldPositionOf(id, out = new Vector3(), back = 0) {
     const st = this.state.get(id);
     if (!st) return null;
+    const time = (st.t ?? this.time) - back;
     const { head, yaw } = this.anchor;
     const g = settings.comfort.gentle ? 0.4 : 1;
     st.pull = (st.pull || 0) + (((st.pullUntil || 0) > this.time ? 1 : 0) - (st.pull || 0)) * 0.02;
-    const a = yaw + st.yaw * (1 - 0.45 * st.pull) + Math.sin(this.time * st.speed * 6 * g + st.phase) * 0.03;
-    const e = st.elev * (1 - 0.5 * st.pull) + Math.sin(this.time * st.speed * 4 * g + st.phase * 1.7) * 0.02;
+    // flat page: the headset arc (±117°) is squeezed into the window's view,
+    // lights in the upper part so they do not sit on the web in the middle
+    const f = this.fit;
+    const baseYaw = f ? st.yaw * f.k : st.yaw;
+    const baseElev = f ? f.e0 + ((st.elev - ELEV_MIN) / (ELEV_MAX - ELEV_MIN)) * (f.e1 - f.e0) : st.elev;
+    const a = yaw + baseYaw * (1 - 0.45 * st.pull) + Math.sin(time * st.speed * 6 * g + st.phase) * (f ? 0.012 : 0.03);
+    const e = baseElev * (1 - 0.5 * st.pull) + Math.sin(time * st.speed * 4 * g + st.phase * 1.7) * (f ? 0.008 : 0.02);
     const dist = st.dist - 0.35 * st.pull;
     out.set(head.x + Math.sin(a) * Math.cos(e) * dist, head.y + Math.sin(e) * dist, head.z - Math.cos(a) * Math.cos(e) * dist);
     return out;
@@ -198,6 +208,11 @@ export class LightField {
     this.hitOrder.length = 0;
     for (const it of this.items) {
       const kind = LIGHT_KINDS[it.kind] ? it.kind : 'breaking';
+      // each light keeps its own clock, which stops while it is pointed at or open,
+      // so a hand ray or a mouse can settle on it
+      const st = this.state.get(it.id);
+      const held = it.id === this.hoveredId || it.id === this.openId;
+      if (st) st.t = (st.t ?? this.time) + (held ? 0 : delta);
       this.worldPositionOf(it.id, _p);
       const age = this.ageDays(it);
       const fresh = Math.max(0.35, 1 - age / 45) * (kind === 'archive' ? 0.75 : 1); // old lights dim, never vanish
@@ -223,18 +238,14 @@ export class LightField {
       _c.setHex(LIGHT_KINDS[kind].color).multiplyScalar((0.25 + 0.75 * rel) * fresh * lift);
       this.glow.setColorAt(this.glow.count++, _c);
       // short fading trail: where the light was a moment ago
-      if (!calm) {
-        const save = this.time;
+      if (!calm && !held) {
         for (let k = 1; k <= TRAIL; k++) {
-          this.time = save - k * 0.35;
-          this.worldPositionOf(it.id, _t);
+          this.worldPositionOf(it.id, _t, k * 0.35);
           _m.compose(_t, headQuat, _s.setScalar(core * (4 - k)));
           this.glow.setMatrixAt(this.glow.count, _m);
           _c.setHex(LIGHT_KINDS[kind].color).multiplyScalar(0.18 * (1 - k / (TRAIL + 1)) * fresh);
           this.glow.setColorAt(this.glow.count++, _c);
         }
-        this.time = save;
-        this.worldPositionOf(it.id, _p);
       }
 
       _m.compose(_p, ID_Q, _s.setScalar(0.07)); // generous touch target

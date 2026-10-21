@@ -17,6 +17,7 @@
 | IWER (Immersive Web Emulation Runtime, via IWSDK dev plugin) | 2.6.0 | MIT |
 | @pmndrs/pointer-events, @pmndrs/uikit (via IWSDK) | bundled | MIT |
 | fflate (Evidence Pack zip) | 0.8.3 | MIT |
+| WebXR input profile models (`@webxr-input-profiles/assets`; hand and Quest controller models, vendored in `public/vendor/input-profiles`) | 1.0.20 | MIT |
 | Vite | 7.3.7 | MIT |
 | Playwright (QA only) | 1.64.1 | Apache-2.0 |
 

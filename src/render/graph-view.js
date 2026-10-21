@@ -53,6 +53,9 @@ const _m = new Matrix4();
 const _q = new Quaternion();
 const _s = new Vector3();
 const _p = new Vector3();
+const _p2 = new Vector3();
+const _p2b = new Vector3();
+const _s2 = new Vector3();
 const _c = new Color();
 const _up = new Vector3(0, 1, 0);
 
@@ -76,6 +79,7 @@ export class GraphView {
     this.state = new Map();
     this.visibleIds = [];
     this.hitOrder = [];
+    this.hitRadius = new Map();
     this.selectedId = null;
     this.hoveredId = null;
     this.linkFromId = null;
@@ -316,6 +320,34 @@ export class GraphView {
     return this.hitOrder[instanceId] ?? null;
   }
 
+  /**
+   * The node a ray is aimed at. Hit spheres are enlarged so small nodes stay
+   * easy to touch, which lets a big hub's sphere swallow its neighbours; so of
+   * all spheres the ray passes through, take the one whose centre is closest
+   * to the ray (relative to its size), not the first surface hit.
+   */
+  pickAlongRay(ray, fallbackId = null) {
+    if (!ray) return fallbackId;
+    this.root.getWorldScale(_s2);
+    const scale = _s2.x;
+    let best = fallbackId;
+    let bestScore = Infinity;
+    for (const id of this.hitOrder) {
+      const r = (this.hitRadius.get(id) ?? 0) * scale;
+      if (!r) continue;
+      const p = this.worldPositionOf(id, _p2);
+      if (_p2b.subVectors(p, ray.origin).dot(ray.direction) < 0) continue; // behind the pointer
+      const d = ray.distanceToPoint(p);
+      if (d > r) continue;
+      const score = d / r;
+      if (score < bestScore) {
+        bestScore = score;
+        best = id;
+      }
+    }
+    return best;
+  }
+
   /** Hops from the focus (unexplored, far parts of the web fade first). */
   _distances(focus) {
     const d = new Map();
@@ -430,6 +462,7 @@ export class GraphView {
     this.glowMesh.count = 0;
     this.hitMesh.count = 0;
     this.hitOrder.length = 0;
+    this.hitRadius.clear();
 
     for (const id of this.visibleIds) {
       const node = this.store.nodes.get(id);
@@ -462,7 +495,9 @@ export class GraphView {
       mesh.count++;
 
       // hit target (at least 3.5 cm radius in the world)
-      _s.setScalar(Math.max(size * 1.6, 0.035 / this.radius));
+      const hitR = Math.max(size * 1.6, 0.035 / this.radius);
+      this.hitRadius.set(id, hitR);
+      _s.setScalar(hitR);
       _m.compose(_p, IDENTITY_Q, _s);
       this.hitMesh.setMatrixAt(this.hitMesh.count, _m);
       this.hitOrder.push(id);

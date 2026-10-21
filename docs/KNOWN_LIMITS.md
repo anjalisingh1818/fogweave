@@ -40,6 +40,11 @@
 - **Opening and closing many cards quickly causes brief frame dips** while canvases are allocated (seen once as 20 fps in the emulator). Steady state with five cards open measured 17.2 ms per frame.
 - **No headset camera or passthrough features are used.**
 
+## Desktop (flat page)
+
+- **The flat page is a development and demo fallback, not the main experience.** It works with a mouse (click lights and nodes, cards at the screen edges), but the product is designed for hands in VR. At most two cards show at a time, and lights are squeezed into the window's view.
+- **Nodes stacked exactly behind another node cannot be clicked** until the web is turned or the front node is closed. Aimed picking solves neighbours that are merely close.
+
 ## Privacy
 
 - The personal context is coarse by design. Addresses, numbers, health and money terms are refused. It is stored only on the device and sent only with a request that needs it; the server does not log or keep it.

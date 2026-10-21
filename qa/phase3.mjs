@@ -177,7 +177,8 @@ async function liveRun() {
 
     await step(page, 'Expand → insights appear as a gentle prompt; pinch one', async () => {
       await ev(page, () => window.__fw.app.cards.closeAll({ keepPinned: true }));
-      const id = await ev(page, () => window.__fw.app.lights.items.find((x) => x.live && !x.expanded && x.via === 'wikipedia')?.id);
+      await page.waitForFunction(() => !window.__fw.app.researching, null, { timeout: 200000 }); // one research at a time
+      const id = await ev(page, () => window.__fw.app.lights.items.find((x) => x.live && !x.expanded && x.via === 'wikipedia' && window.__fw.app.canExpand(x.id))?.id);
       await ev(page, (lid) => window.__fw.app.openLight(lid), id);
       await ev(page, (lid) => window.__qa.expand(lid), id);
       await page.waitForFunction((lid) => window.__fw.app.lights.get(lid).expanded === true, id, { timeout: 180000 });

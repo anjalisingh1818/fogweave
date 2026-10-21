@@ -64,6 +64,7 @@ export class Card {
     this.entity.addComponent(RayInteractable);
     if (poke) this.entity.addComponent(PokeInteractable);
     this.buttons = [];
+    this.boxes = []; // every drawn text/button box of the last redraw (layout tests)
     this.hoverId = null;
     this.flashId = null;
     this._draw = null;
@@ -88,6 +89,7 @@ export class Card {
     const w = canvas.width;
     const h = canvas.height;
     this.buttons = [];
+    this.boxes = [];
     ctx.clearRect(0, 0, w, h);
     roundRect(ctx, 4, 4, w - 8, h - 8, 36);
     ctx.fillStyle = UI.bg;
@@ -109,6 +111,9 @@ export class Card {
         ctx.textAlign = align;
         ctx.textBaseline = 'alphabetic';
         ctx.fillText(str, x, y, maxWidth);
+        const tw = Math.min(ctx.measureText(String(str)).width, maxWidth ?? Infinity);
+        const x0 = align === 'right' ? x - tw : align === 'center' ? x - tw / 2 : x;
+        card.boxes.push({ kind: 'text', text: String(str).slice(0, 40), x: x0, y: y - size * 0.8, w: tw, h: size });
       },
       /** wrapped paragraph; returns the y after the last line */
       para(str, x, y, maxWidth, { size = 36, color = UI.text, weight = 400, lineHeight = 1.3, maxLines = 99 } = {}) {
@@ -118,10 +123,14 @@ export class Card {
         const lines = wrap(ctx, String(str ?? ''), maxWidth);
         const shown = lines.slice(0, maxLines);
         if (lines.length > maxLines) shown[maxLines - 1] = shown[maxLines - 1].replace(/\s*\S*$/, '…');
+        const top = y - size * 0.8;
+        let wmax = 0;
         for (const line of shown) {
           ctx.fillText(line, x, y);
+          wmax = Math.max(wmax, ctx.measureText(line).width);
           y += size * lineHeight;
         }
+        if (shown.length) card.boxes.push({ kind: 'para', text: String(str).slice(0, 40), x, y: top, w: wmax, h: (shown.length - 1) * size * lineHeight + size });
         return y;
       },
       button(id, label, x, y, w, h, onPress, { size = 36, primary = false, disabled = false, icon = null } = {}) {
@@ -140,6 +149,7 @@ export class Card {
         ctx.fillText(icon ? `${icon}  ${label}` : label, x + w / 2, y + h / 2 + 2, w - 16);
         ctx.textBaseline = 'alphabetic';
         if (!disabled) card.buttons.push({ id, x, y, w, h, onPress });
+        card.boxes.push({ kind: 'button', text: id, x, y, w, h });
       },
       ringIcon(cx, cy, r, color, style) {
         drawRing(ctx, cx, cy, r, color, style);
@@ -217,6 +227,27 @@ export class Card {
     // invisible cards must not swallow rays
     if (v && !this.entity.hasComponent(RayInteractable)) this.entity.addComponent(RayInteractable);
     if (!v && this.entity.hasComponent(RayInteractable)) this.entity.removeComponent(RayInteractable);
+  }
+
+  /** Change the card's size in metres (new canvas, texture and plane; same entity). */
+  resize(width, height) {
+    if (Math.abs(width - this.width) < 1e-4 && Math.abs(height - this.height) < 1e-4) return;
+    this.width = width;
+    this.height = height;
+    this.canvas = document.createElement('canvas');
+    this.canvas.width = Math.round(width * PX_PER_M);
+    this.canvas.height = Math.round(height * PX_PER_M);
+    this.ctx = this.canvas.getContext('2d');
+    const old = this.texture;
+    this.texture = new CanvasTexture(this.canvas);
+    this.texture.colorSpace = SRGBColorSpace;
+    this.texture.anisotropy = 4;
+    this.material.map = this.texture;
+    this.material.needsUpdate = true;
+    old.dispose();
+    this.mesh.geometry.dispose();
+    this.mesh.geometry = new PlaneGeometry(width, height);
+    this.redraw();
   }
 
   /** Place at a world position, facing the given world point (the head). */

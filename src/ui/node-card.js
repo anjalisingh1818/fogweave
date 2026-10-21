@@ -4,6 +4,7 @@
  * label (Reported / Inferred / Speculative) and its quote or reasoning.
  */
 import { VERDICT_STYLE, TYPE_STYLE, LABEL_STYLE } from '../model/schema.js';
+import { sourceType, freshnessLabel } from './reader-card.js';
 import { evidenceReadout } from '../model/algorithms.js';
 import { UI } from '../render/card.js';
 
@@ -54,16 +55,24 @@ export function nodeCardDraw(app, id) {
       return;
     }
     let y = 76;
-    ui.text((TYPE_STYLE[node.type]?.label || node.type).toUpperCase(), pad, y, { size: 30, color: UI.dim, weight: 600 });
+    const item = node.type === 'NewsItem' ? app.getItem(id) : null;
+    // F9: a news item says what kind of source it is (news / paper / archive ...)
+    const typeLabel = item ? sourceType(item).toUpperCase() : (TYPE_STYLE[node.type]?.label || node.type).toUpperCase();
+    ui.text(typeLabel, pad, y, { size: 30, color: UI.dim, weight: 600 });
     if (node.type === 'Claim') {
       const v = VERDICT_STYLE[node.verdict || 'unverified'];
       ui.ringIcon(pad + 160, y - 11, 17, v.css, v.ring);
       ui.text(v.label, pad + 190, y, { size: 32, color: v.css, weight: 600 });
     }
-    const badge = node.type === 'ContextNode' ? 'PRIVATE · ON DEVICE' : node.sealed ? 'SEALED' : 'IN THE FOG';
+    const badge = node.type === 'ContextNode' ? 'PRIVATE · ON DEVICE' : node.sealed ? 'SEALED' : item ? freshnessLabel(app, item) : 'IN THE FOG';
     ui.text(badge, w - pad, y, { size: 26, color: node.sealed ? UI.accent : UI.dim, weight: 600, align: 'right' });
     y += 62;
     y = ui.para(node.label, pad, y, w - pad * 2, { size: 42, weight: 600, maxLines: 2, lineHeight: 1.18 });
+    if (item) {
+      // the real outlet and its date; the aggregator only as "found via"
+      ui.text([item.source || node.outlet, item.date ? new Date(item.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '', item.via && item.via !== item.source ? `found via ${item.via}` : ''].filter(Boolean).join(' · '), pad, y + 2, { size: 24, color: UI.dim, maxWidth: w - pad * 2 });
+      y += 34;
+    }
 
     if (node.type === 'Claim' && node.quote) y = ui.para(`“${node.quote}”`, pad, y + 2, w - pad * 2, { size: 29, color: '#cdd5df', maxLines: 2 });
     else if (node.definition) {
@@ -84,6 +93,10 @@ export function nodeCardDraw(app, id) {
         groups[g] = (groups[g] || 0) + 1;
       }
       ui.text(Object.entries(groups).map(([g, c]) => `${c} ${g}`).join(' · '), pad, y + 26, { size: 23, color: '#ffe2a8', maxWidth: w - pad * 2 });
+      y += 34;
+    } else if (node.explored === true && !node.definition) {
+      // say so plainly rather than leaving the card silent
+      ui.text('Nothing more found in open sources (Wikipedia, Wikidata, recent news, papers).', pad, y + 26, { size: 22, color: UI.dim, maxWidth: w - pad * 2 });
       y += 34;
     }
 

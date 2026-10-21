@@ -95,9 +95,24 @@ async function run(mode) {
     await step('1 see lights; touch one: reader card opens', async () => {
       const n = await ev(() => window.__fw.app.lights.items.length);
       if (n < 12 || n > 20) throw new Error(`lights ${n}`);
-      const ids = await ev((m) => {
+      const ids = await ev(async (m) => {
         const a = window.__fw.app;
-        return a.lights.items.filter((x) => (m === 'offline' ? a.snapshot.expansions[x.id] : x.via === 'wikipedia')).map((x) => x.id);
+        const ok = a.lights.items.filter((x) => (m === 'offline' ? a.snapshot.expansions[x.id] : x.via === 'wikipedia')).map((x) => x.id);
+        if (m !== 'offline') return ok;
+        // offline: lights whose recorded web leads to an explore that records a neighbour come first
+        const get = (f) => fetch(`demo/snapshot/${f}`).then((r) => r.json()).catch(() => null);
+        const score = {};
+        for (const id of ok) {
+          const ex = await get(a.snapshot.expansions[id]);
+          const explorable = [...new Set((ex?.events || []).filter((e) => e.type === 'node' && a.snapshot.explores?.[e.node.id]).map((e) => e.node.id))];
+          score[id] = 0;
+          for (const nid of explorable) {
+            const rec = await get(a.snapshot.explores[nid]);
+            if (rec?.events?.some((e) => e.type === 'node' && e.node.id !== nid && a.snapshot.explores[e.node.id])) score[id] = 2;
+            else score[id] = Math.max(score[id], 1);
+          }
+        }
+        return [...ok].sort((x, y) => score[y] - score[x]);
       }, mode);
       for (const id of ids) {
         await ev((lid) => window.__qa.pinchLight(lid), id);
@@ -113,21 +128,33 @@ async function run(mode) {
     let focus;
     await step('2 expand: entities, related news/papers/parts/origin/impact with labelled links', async () => {
       await page.waitForFunction((lid) => window.__fw.app.getItem(lid)?.expanded === true, lightId, { timeout: 200000 });
-      // explore an entity of this story (shared ones first)
-      focus = await ev((m) => {
+      // explore an entity of this story. Offline, prefer one whose recorded explore
+      // also records a neighbour (step 3 needs it); live, an entity with nothing in
+      // open sources is skipped (the card says so) and the next one is tried.
+      const cands = await ev(async (m) => {
         const a = window.__fw.app;
         const ents = [...a.store.nodes.values()].filter((x) => ['Organisation', 'Place', 'Technology', 'Topic', 'Event'].includes(x.type) && !x.derived);
-        const rec = m === 'offline' ? ents.filter((x) => a.snapshot.explores?.[x.id]) : ents;
-        return (rec[0] || ents[0])?.id;
+        if (m !== 'offline') return ents.map((x) => x.id);
+        const rec = ents.filter((x) => a.snapshot.explores?.[x.id]);
+        const withNeighbour = [];
+        for (const x of rec) {
+          const r = await fetch(`demo/snapshot/${a.snapshot.explores[x.id]}`).then((q) => q.json()).catch(() => null);
+          if (r?.events?.some((e) => e.type === 'node' && e.node.id !== x.id && a.snapshot.explores[e.node.id])) withNeighbour.push(x.id);
+        }
+        return [...withNeighbour, ...rec.map((x) => x.id).filter((id) => !withNeighbour.includes(id))];
       }, mode);
-      if (!focus) throw new Error('no entity to explore');
-      await ev(() => window.__fw.app.cards.closeAll());
-      await ev((nid) => window.__qa.pinchNode(nid), focus);
-      if (!(await ev((nid) => window.__fw.app.cards.get(`node:${nid}`), focus))) {
-        await ev(() => window.__fw.app.keypad.isOpen && window.__fw.app.keypad.close());
-        await ev((nid) => window.__fw.app.pinchNode(nid), focus); // occluded: same handler
+      if (!cands.length) throw new Error('no entity to explore');
+      for (const cand of cands.slice(0, 5)) {
+        focus = cand;
+        await ev(() => window.__fw.app.cards.closeAll());
+        await ev((nid) => window.__qa.pinchNode(nid), focus);
+        if (!(await ev((nid) => window.__fw.app.cards.get(`node:${nid}`), focus))) {
+          await ev(() => window.__fw.app.keypad.isOpen && window.__fw.app.keypad.close());
+          await ev((nid) => window.__fw.app.pinchNode(nid), focus); // occluded: same handler
+        }
+        await page.waitForFunction((nid) => window.__fw.app.store.nodes.get(nid)?.explored === true, focus, { timeout: 200000 });
+        if (await ev((nid) => (window.__fw.app.store.nodes.get(nid).addedIds || []).length, focus)) break;
       }
-      await page.waitForFunction((nid) => window.__fw.app.store.nodes.get(nid)?.explored === true, focus, { timeout: 200000 });
       const r = await ev((nid) => {
         const a = window.__fw.app;
         const n = a.store.nodes.get(nid);
@@ -164,7 +191,16 @@ async function run(mode) {
         const dbg = await ev(() => {
           const a = window.__fw.app;
           const p = a.statusCard.buttonWorldPosition('back');
-          return { buttons: a.statusCard.buttonIds(), researching: a.researching, status: a.statusText, back: p && [p.x, p.y, p.z].map((v) => +v.toFixed(2)), card: a.statusCard.mesh && [a.statusCard.mesh.getWorldPosition(new p.constructor()).toArray().map((v) => +v.toFixed(2)), a.statusCard.mesh.visible], open: a.cards.open.map((e) => e.key), keypad: a.keypad.isOpen };
+          return { buttons: a.statusCard.buttonIds(), researching: a.researching, status: a.statusText, back: p && [p.x, p.y, p.z].map((v) => +v.toFixed(2)), card: a.statusCard.mesh && [a.statusCard.mesh.getWorldPosition(new p.constructor()).toArray().map((v) => +v.toFixed(2)), a.statusCard.mesh.visible], open: a.cards.open.map((e) => e.key), keypad: a.keypad.isOpen, hit: (() => {
+            try {
+              const x = window.__fw.system.input?.xr?.multiPointers?.right?.getPointer('ray')?.getIntersection?.();
+              if (!x) return 'none';
+              const o = x.object;
+              return { name: o.name || o.type, isStatus: o === a.statusCard.mesh, isWeb: o === a.view.hitMesh, node: o === a.view.hitMesh ? a.view.nodeIdFromHit(x.instanceId) : null, d: +x.distance.toFixed(2) };
+            } catch (e) {
+              return 'err ' + e.message;
+            }
+          })(), trailIds: a.trail.slice(-3) };
         });
         throw new Error(JSON.stringify({ ...r, expected: focus, trailBefore: trail, dbg }));
       }

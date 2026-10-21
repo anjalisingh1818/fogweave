@@ -265,7 +265,8 @@ async function liveRun() {
 
     await step(page, 'Stop mid-research keeps what grew', async () => {
       await ev(() => window.__fw.app.cards.closeAll());
-      const other = await ev(() => window.__fw.app.lights.items.find((x) => !x.expanded && x.live)?.id);
+      await page.waitForFunction(() => !window.__fw.app.researching, null, { timeout: 200000 }); // one research at a time
+      const other = await ev(() => window.__fw.app.lights.items.find((x) => !x.expanded && x.live && window.__fw.app.canExpand(x.id))?.id);
       if (!other) return { skipped: 'no second light' };
       await ev((id) => window.__fw.app.openLight(id), other);
       await ev((id) => window.__qa.expand(id), other);
@@ -313,7 +314,9 @@ async function offlineRun() {
     });
 
     await step(page, 'offline: Expand replays a recorded real run', async () => {
-      const ids = await ev(() => Object.keys(window.__fw.app.snapshot.expansions));
+      // a recorded light that is among today's lights (the feed is a dated random draw)
+      const ids = await ev(() => Object.keys(window.__fw.app.snapshot.expansions).filter((id) => window.__fw.app.lights.get(id)));
+      if (!ids.length) throw new Error('none of the recorded lights is drawn today');
       await ev((id) => window.__fw.app.openLight(id), ids[0]);
       await ev((id) => window.__qa.expand(id), ids[0]);
       await page.waitForFunction((id) => window.__fw.app.lights.get(id).expanded === true, ids[0], { timeout: 60000 });

@@ -28,14 +28,9 @@ export class FogSystem extends createSystem({}) {
     this.xrManager.addEventListener('sessionstart', onStart);
     this.cleanupFuncs.push(() => this.xrManager.removeEventListener('sessionstart', onStart));
 
-    // flat page: a click on nothing opens the keypad too
-    const canvas = this.renderer.domElement;
-    const onCanvasDown = () => {
-      if (this.world.session) return;
-      this._pending = { at: performance.now(), held: this._heldCount() };
-    };
-    canvas.addEventListener('pointerdown', onCanvasDown);
-    this.cleanupFuncs.push(() => canvas.removeEventListener('pointerdown', onCanvasDown));
+    // flat page (mouse): a click that misses does nothing. With a mouse, misses
+    // on drifting lights are common, and a keypad popping up was a surprise
+    // (live test, 21 Oct). In VR, pinching empty space still opens Find.
 
     if (DEBUG) {
       window.__fw = { app: this.app, world: this.world, settings, system: this, Hovered };

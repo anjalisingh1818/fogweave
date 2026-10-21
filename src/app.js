@@ -7,7 +7,7 @@
  * Live when the backend answers; otherwise the bundled, dated snapshot of
  * real pipeline runs (take-it-away test), and the status line says which.
  */
-import { Vector3, Quaternion, Hovered } from '@iwsdk/core';
+import { Vector3, Quaternion, Ray, Hovered } from '@iwsdk/core';
 import { GraphStore, similarity, removeNodes as removeNodesFromStore } from './model/graph.js';
 import { shortestPath, importanceOf, mostImportant, evidenceReadout, bestPath, pagerank } from './model/algorithms.js';
 import { GraphView } from './render/graph-view.js';
@@ -20,19 +20,18 @@ import { contextDraw } from './ui/context-card.js';
 import { Keypad } from './ui/keypad.js';
 import { Onboarding } from './ui/onboarding.js';
 import { Props } from './props.js';
-import { LightField } from './render/lights.js';
-import { readerDraw } from './ui/reader-card.js';
+import { YAW_MAX, LightField } from './render/lights.js';
+import { readerDraw, READER_SIZE } from './ui/reader-card.js';
 import { EventPlayer, applyEvent } from './research/events.js';
 import { ResearchClient } from './research/client.js';
 import { ContextStore, SAMPLE_PERSONA, CONTEXT_KINDS } from './context.js';
 import { InterestStore } from './interests.js';
 import { isMuted, sampleFeed, seedFrom } from './feed.js';
 import { interestsDraw } from './ui/interests-card.js';
-import { settings, loadSettings, setQuality, saveSettings } from './config.js';
+import { DEBUG, settings, loadSettings, setQuality, saveSettings } from './config.js';
 import { answerDraw, ASK_SUGGESTIONS, notesDraw, lightsPanelDraw, settingsDraw, timelineDraw, briefingDraw, exportDraw, insightsDraw } from './ui/panels.js';
 import { insights } from './insights.js';
 import { Ambient, speech } from './audio.js';
-import { listenOnce } from './voice-input.js';
 import { sealedView, buildJsonLd, buildJsonl, buildMarkdown } from './export/pack.js';
 import { zipSync, strToU8 } from 'fflate';
 import { QualityGovernor } from './quality.js';
@@ -195,7 +194,8 @@ export class App {
   }
 
   voiceAvailable() {
-    return typeof window !== 'undefined' && !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+    // an `in` check: nothing speech-related is touched until the reader turns voice on
+    return typeof window !== 'undefined' && ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window);
   }
 
   addNote(text) {
@@ -629,7 +629,10 @@ export class App {
   _bubbleCenter() {
     const { head, yaw } = this.anchor;
     const b = settings.bubble;
-    return new Vector3(head.x + Math.sin(yaw) * b.forward, head.y - b.down, head.z - Math.cos(yaw) * b.forward);
+    // a growing web moves out as it grows, so its near side never reaches the
+    // status bar (nodes in front of the bar used to catch pinches meant for Back)
+    const forward = b.forward + Math.max(0, (this.view?.radius ?? b.radius) - b.radius);
+    return new Vector3(head.x + Math.sin(yaw) * forward, head.y - b.down, head.z - Math.cos(yaw) * forward);
   }
 
   /** Re-anchor everything to where the seated user's head actually is. */
@@ -654,7 +657,8 @@ export class App {
 
   _statusPosition() {
     const { head, yaw } = this.anchor;
-    return new Vector3(head.x + Math.sin(yaw) * 0.75, head.y - 0.36, head.z - Math.cos(yaw) * 0.75);
+    // in front of the web, low and close, like a desk edge (outside the web's bubble)
+    return new Vector3(head.x + Math.sin(yaw) * 0.5, head.y - 0.45, head.z - Math.cos(yaw) * 0.5);
   }
 
   setStatus(text) {
@@ -724,11 +728,22 @@ export class App {
 
   _wireNodePicking() {
     const hit = this.view.hitMesh;
+    // aimed picking: the node closest to the ray, not the first enlarged sphere
+    const aim = new Ray();
+    const pick = (e) => {
+      // the real line of aim runs from the pointer through the point it hit
+      // (the library's own e.ray uses the pointer's orientation, which for the
+      // mouse's screen ray does not follow the cursor)
+      const o = e.pointerPosition;
+      const pt = e.point;
+      const ray = o && pt ? aim.set(o, pt.clone().sub(o).normalize()) : null;
+      return this.view.pickAlongRay(ray, this.view.nodeIdFromHit(e.instanceId));
+    };
     hit.addEventListener('click', (e) => {
-      const id = this.view.nodeIdFromHit(e.instanceId);
+      const id = pick(e);
       if (id) this.pinchNode(id);
     });
-    hit.addEventListener('pointermove', (e) => this.view.setHovered(this.view.nodeIdFromHit(e.instanceId)));
+    hit.addEventListener('pointermove', (e) => this.view.setHovered(pick(e)));
     hit.addEventListener('pointerleave', () => this.view.setHovered(null));
   }
 
@@ -894,11 +909,21 @@ export class App {
     if (!it) return;
     for (const e of [...this.cards.open]) if (e.key.startsWith('light:') && e.key !== `light:${id}`) this.cards.close(e.key);
     this.lights.openId = id;
-    this.cards.show(`light:${id}`, { width: 0.46, height: 0.48, draw: readerDraw(this, id), prefer: this.lights.worldPositionOf(id) });
+    const size = this.readerDetails?.has(id) ? READER_SIZE.details : READER_SIZE.compact;
+    this.cards.show(`light:${id}`, { ...size, draw: readerDraw(this, id), prefer: this.lights.worldPositionOf(id) });
     this.onboarding.notify('light-opened');
     if (it.live && !it.claims?.length && !it.claimsLoading && this.mode === 'live') this._loadClaims(it);
     // touching a light also grows it into the web (one at a time)
     if (settings.feed.autoExpand && !it.expanded && !this.researching && this.canExpand(id)) this.expandLight(id);
+  }
+
+  /** Reader card: compact (default) or with claims, quotes and the link. */
+  toggleReaderDetails(id) {
+    this.readerDetails ??= new Set();
+    if (this.readerDetails.has(id)) this.readerDetails.delete(id);
+    else this.readerDetails.add(id);
+    const size = this.readerDetails.has(id) ? READER_SIZE.details : READER_SIZE.compact;
+    this.cards.resize(`light:${id}`, size.width, size.height);
   }
 
   async _loadClaims(it) {
@@ -1201,6 +1226,7 @@ export class App {
     const prompt = this.keypad.prompt;
     this.keypad.prompt = 'Listening…';
     this.keypad.card?.redraw();
+    const { listenOnce } = await import('./voice-input.js'); // loaded only when voice is used
     const heard = await listenOnce({ timeoutMs: 7000 });
     this.keypad.prompt = heard ? `I heard: "${heard}". Go to confirm, or edit` : `${prompt} (didn't catch that)`;
     if (heard) this.keypad.text = heard.slice(0, 80);
@@ -1315,9 +1341,20 @@ export class App {
     const now = performance.now();
     this.player?.update(delta * 1000);
     this.view.update(delta, _hp, _hq);
+    if (Math.abs((this._placedRadius ?? 0) - this.view.radius) > 0.005) {
+      this._placedRadius = this.view.radius;
+      this.view.root.position.copy(this._bubbleCenter());
+    }
     this._handPoints ??= [new Vector3(), new Vector3()];
     const tips = this.world.session ? ['left', 'right'].map((s, i) => this.sys.player.indexTipSpaces?.[s]?.getWorldPosition(this._handPoints[i])).filter(Boolean) : [];
     this.lights.setHands(tips);
+    // flat page (no headset): fit the light arc into the window's view
+    const cam = this.world.camera;
+    if (!this.world.session && cam?.isPerspectiveCamera) {
+      const halfV = (cam.fov * Math.PI) / 360;
+      const halfH = Math.atan(Math.tan(halfV) * cam.aspect);
+      this.lights.fit = { k: (halfH * 0.86) / YAW_MAX, e0: halfV * 0.3, e1: halfV * 0.82 };
+    } else this.lights.fit = null;
     this.lights.update(delta, _hq);
     this.cards.update(delta);
     this.atmosphere.update(delta);

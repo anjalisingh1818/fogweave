@@ -45,7 +45,9 @@ export class Props {
       const side = p.kind === 'locket' ? -1 : 1;
       const right = new Vector3(Math.cos(yaw), 0, Math.sin(yaw));
       const fwd = new Vector3(Math.sin(yaw), 0, -Math.cos(yaw));
-      p.home = head.clone().addScaledVector(right, side * 0.2).addScaledVector(fwd, 0.34);
+      // out to the sides, clear of the status bar in front (a hand reaching for
+      // Back used to pass through the props and grab one instead)
+      p.home = head.clone().addScaledVector(right, side * 0.36).addScaledVector(fwd, 0.3);
       p.home.y = head.y - 0.42;
       p.entity.object3D.position.copy(p.home);
       p.tag.placeFacing(p.home.clone().setY(p.home.y - 0.06), head);
