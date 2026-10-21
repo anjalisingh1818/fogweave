@@ -15,6 +15,7 @@ Run: uvicorn app:app --port 8787
 from __future__ import annotations
 
 import json
+import re
 import time
 
 from fastapi import FastAPI, HTTPException
@@ -73,6 +74,11 @@ class ExploreReq(BaseModel):
     node: dict  # {id, type, label, qid?}
     context: list[str] = Field(default_factory=list, max_length=12)
     paperTypes: list[str] = Field(default_factory=list, max_length=10)
+
+
+class DossierReq(BaseModel):
+    nodes: list[dict] = Field(default_factory=list, max_length=30)  # [{id, type, label, qid?}]
+    places: list[str] = Field(default_factory=list, max_length=20)  # place names in the story's web (public)
 
 
 class PackReq(BaseModel):
@@ -138,6 +144,19 @@ def pack(req: PackReq):
         return check_pack(req.pack)
     except Exception as exc:  # noqa: BLE001 — report, don't crash
         raise HTTPException(status_code=422, detail=f"not valid JSON-LD: {type(exc).__name__}") from exc
+
+
+@app.post("/dossiers")
+async def dossiers(req: DossierReq):
+    """Real information about each node (what it is, key facts with sources), fast and cached."""
+    from fogweave.dossier import DossierMaker
+
+    nodes = []
+    for n in req.nodes:
+        if isinstance(n, dict) and isinstance(n.get("id"), str) and isinstance(n.get("label"), str) and n["label"].strip():
+            nodes.append({"id": n["id"][:120], "label": n["label"][:120], "type": str(n.get("type", "Topic"))[:20], "qid": n.get("qid") if isinstance(n.get("qid"), str) and re.fullmatch(r"Q\d+", n.get("qid") or "") else None})
+    places = [p[:80] for p in req.places if isinstance(p, str)]
+    return {"dossiers": await DossierMaker(engine).make(nodes, places)}
 
 
 @app.post("/explore")

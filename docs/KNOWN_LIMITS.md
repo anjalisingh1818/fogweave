@@ -47,6 +47,12 @@
 - **Filings are off unless the owner sets a contact email** (the SEC requires one, and FogWeave never sends the user's own). Only U.S.-listed companies have EDGAR filings, matched by exact name.
 - **Datasets are matched by the node's name in the title or description.** A dataset that uses another word for the same thing is missed.
 
+## Node information (dossiers)
+
+- **It is only as good as Wikipedia and Wikidata.** Little-known local officials, small places and new organisations often have no entry, and the card then says "Not enough information found in open sources."
+- **Matching a name to an entry can still go wrong.** FogWeave prefers no answer to a wrong one: name-only matches must fit the node's type, and names many countries share must fit the story. A match can still be mistaken; every overview and fact links to its source.
+- **Key facts are encyclopedia statements, not checked against the news.** A population or a leader may be out of date; each fact shows its date when Wikidata gives one.
+
 ## Demo scene
 
 - **The Demo scene is a dated snapshot** of real pipeline runs (2026-10-21), not live news, and it says so. Only the recorded stars can show related items, and only recorded nodes can open up. Ask the fog gives an honest "needs the live engine" there.

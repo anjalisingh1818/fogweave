@@ -825,6 +825,7 @@ export class App {
     }
     n.explored = true;
     n.addedIds = added;
+    this.fillDossiers([id, ...added]);
     this.context.syncToStore(this.store);
     this.refreshInsights();
     this.setStatus('');
@@ -890,7 +891,69 @@ export class App {
     return remove.length;
   }
 
+  /**
+   * Real information about the nodes in the web (what it is, key facts with
+   * sources): fetched in one batch, cached; the Demo scene reads it from the
+   * snapshot. Nodes that already have one are skipped.
+   */
+  async fillDossiers(ids = null) {
+    const TYPES = ['Place', 'Organisation', 'PublicFigure', 'Topic', 'Technology', 'Event', 'Concept'];
+    const all = (ids ? ids.map((x) => this.store.nodes.get(x)) : [...this.store.nodes.values()]).filter((n) => n && TYPES.includes(n.type) && !n.dossier && !n.dossierLoading);
+    // an effect named by the analysis is not a thing with an encyclopedia entry: its link explains it
+    for (const n of all.filter((x) => x.derived)) n.dossier = { kind: 'effect', found: false };
+    const want = all.filter((n) => !n.derived);
+    if (!want.length) return 0;
+    for (const n of want) n.dossierLoading = true;
+    let got = {};
+    if (this.mode === 'live') {
+      for (let i = 0; i < want.length; i += 30) {
+        // the story's places tell same-named bodies apart ("Ministry of Foreign Affairs" of which country?)
+        const places = [...this.store.nodes.values()].filter((x) => ['Place', 'Organisation', 'Event'].includes(x.type) && !x.derived).map((x) => x.label).slice(0, 20);
+        const res = await this.client.dossiers(want.slice(i, i + 30).map((n) => ({ id: n.id, type: n.type, label: n.label, qid: n.qid })), places);
+        Object.assign(got, res?.dossiers || {});
+      }
+    } else {
+      got = this.snapshot?.dossiers || {};
+    }
+    let filled = 0;
+    for (const n of want) {
+      n.dossierLoading = false;
+      let d = got[n.id];
+      // the story's own event: what the reporting says about it
+      if ((!d || !d.found) && n.type === 'Event') d = this._eventDossier(n) || d;
+      if (!d) continue;
+      n.dossier = d;
+      if (!n.definition && d.overview) {
+        n.definition = d.overview;
+        n.definitionUrl = d.overviewSource?.url || '';
+        n.definitionLicence = d.overviewSource?.licence || '';
+      }
+      if (!n.qid && d.qid) n.qid = d.qid;
+      filled++;
+    }
+    for (const e of this.cards.open) if (e.key.startsWith('node:')) e.card.redraw();
+    return filled;
+  }
+
+  /** An event without its own encyclopedia entry, described by the news that reports it. */
+  _eventDossier(ev) {
+    const news = [...this.store.edges.values()].filter((e) => e.to === ev.id && e.type === 'about').map((e) => this.store.nodes.get(e.from)).filter((x) => x?.type === 'NewsItem');
+    if (!news.length) return null;
+    const item = this.getItem(news[0].id) || news[0];
+    const claims = [...this.store.edges.values()].filter((e) => e.type === 'reports' && news.some((x) => x.id === e.from)).map((e) => this.store.nodes.get(e.to)).filter((c) => c?.type === 'Claim');
+    const outlet = item.source || news[0].outlet || 'the report';
+    return {
+      kind: 'event',
+      found: true,
+      overview: item.summary || news[0].summary || news[0].label,
+      overviewSource: { url: item.url || news[0].url, licence: `as reported by ${outlet}` },
+      facts: claims.slice(0, 4).map((c) => ({ label: outlet, value: c.label, date: String(item.date || '').slice(0, 10), quote: c.quote || '', url: item.url || news[0].url, kind: 'news' })),
+    };
+  }
+
   pinchNode(id, { fromTrail = false } = {}) {
+    const node = this.store.nodes.get(id);
+    if (node && !node.dossier && !node.dossierLoading) this.fillDossiers([id]); // fast first answer for this one
     if (!this.store.nodes.has(id)) return;
     if (!fromTrail) this.focusNode(id);
     if (this.selectedId !== id) this.prevSelectedId = this.selectedId;
@@ -899,7 +962,8 @@ export class App {
     this.view.markLabelsDirty();
     const prefer = this.view.worldPositionOf(id);
     for (const e of [...this.cards.open]) if (e.key.startsWith('node:') && e.key !== `node:${id}`) this.cards.close(e.key);
-    this.cards.show(`node:${id}`, { width: 0.46, height: 0.5, draw: nodeCardDraw(this, id), prefer });
+    const tall = ['Place', 'Organisation', 'PublicFigure', 'Topic', 'Technology', 'Event', 'Concept'].includes(this.store.nodes.get(id)?.type);
+    this.cards.show(`node:${id}`, { width: 0.46, height: tall ? 0.56 : 0.5, draw: nodeCardDraw(this, id), prefer });
     this.onboarding.notify('card-opened');
   }
 
@@ -1018,6 +1082,7 @@ export class App {
       });
     }
     it.expanded = true;
+    this.fillDossiers(); // every node around it: what it is, key facts, sources
     if (this.store.nodes.has(id)) this.focusNode(id, { explore: false });
     this.context.syncToStore(this.store);
     this._applyRelevance();

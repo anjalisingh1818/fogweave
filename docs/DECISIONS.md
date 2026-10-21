@@ -106,3 +106,25 @@ One line each: what was chosen, and why. Newest last.
 - **Look:** fog `#343b47` (mostly gray, slight dark blue). Motes are pale gray and pale blue dust: no red, since red is an evidence colour. A new star appears every 20–40 s, replacing the oldest idle star, never one you look at, have open, sealed, grew, or are reaching toward (within 40 cm).
 - **Star card:** Expand is now **Show related**.
 
+## V3 Stage B, part 1: every node explains itself (2026-10-21)
+
+- **Node dossier, fast** (`server/fogweave/dossier.py`, `POST /dossiers`). As soon as a star's web grows (or a node opens up), one batched request returns real information for every place, organisation, public figure, topic, technology and event in it:
+  - **What it is:** the Wikipedia lead (CC BY-SA, linked).
+  - **Key facts:** chosen by type, each a Wikidata statement (CC0) with its date and link:
+    - places: country, capital, population with its year, area;
+    - organisations: founded, headquarters, industry;
+    - public figures: public roles with their years and party only (no birth dates or private details);
+    - events: date, place, deaths;
+    - topics: what kind of thing it is.
+  - It takes one Wikidata call per 50 items and one Wikipedia call per 20 titles, cached for 7 days. Measured 4–6 s cold for a whole web, and immediate when cached.
+- **No wrong entity rather than a wrong one:**
+  - Names resolve by the node's own Wikidata id, then the conservative linker, then an exact Wikipedia title or redirect ("Sudanese army" → Sudanese Armed Forces), then an exact Wikidata label or alias.
+  - A name-only match must have an English article and fit the node's type (Mercury the place is not the car brand).
+  - Names many countries share (Ministry …, Police, Army, Government …) must also fit the story's other names. Otherwise the card says "Several bodies share this name; FogWeave could not tell which one is meant here." It no longer shows Italy's foreign ministry in a story about South Sudan.
+- **Every node says something:**
+  - The story's own event without an encyclopedia entry shows what the reporting says: the summary plus the article's claims, with the outlet.
+  - An effect named by the analysis says it is an effect, and its link explains why it is there.
+  - Anything else gets "Not enough information found in open sources." Nothing is left empty or generic.
+- **Node card order:** How it relates (a plain sentence such as "Where it happened: …" or "Named in: …", with its quote or reasoning and label) → What it is (with source) → Key facts → the buttons. Text flows into the space above the buttons; the layout check covers it.
+- **Demo scene:** `scripts/snapshot_dossiers.py` adds dossiers for every node in the recorded webs (85 nodes: 60 with real information; the rest say not enough information or ambiguous). `snapshot.py` runs it at the end.
+

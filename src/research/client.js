@@ -62,6 +62,11 @@ export class ResearchClient {
     return this._json('/read', { body: { id }, timeout: 60000 });
   }
 
+  /** What each node is, with key facts and sources (fast, cached on the server). */
+  dossiers(nodes, places = []) {
+    return this._json('/dossiers', { body: { nodes, places }, timeout: 30000 });
+  }
+
   ask(question, graph) {
     return this._json('/ask', { body: { question, graph, fresh: true }, timeout: 90000 });
   }

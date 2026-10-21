@@ -197,19 +197,31 @@ try {
       await page.waitForFunction((x) => window.__fw.app.store.nodes.get(x)?.explored === true, target, { timeout: 120000 });
       found = target;
     } else {
-      const lid = await ev(() => window.__fw.app.lights.items.find((x) => x.via === 'wikipedia' && window.__fw.app.canExpand(x.id))?.id);
-      await ev((id) => window.__fw.app.openLight(id), lid);
-      await page.waitForFunction((id) => window.__fw.app.getItem(id)?.expanded === true, lid, { timeout: 200000 });
-      const cands = await ev(() => [...window.__fw.app.store.nodes.values()].filter((x) => ['Place', 'Organisation', 'Topic', 'Event'].includes(x.type) && !x.derived && window.__fw.app.canExplore(x.id)).map((x) => x.id));
-      for (const c of cands.slice(0, 4)) {
+      // live data: a star's entities may have no older news, so try a few stars
+      const lids = await ev(() => window.__fw.app.lights.items.filter((x) => x.via === 'wikipedia' && window.__fw.app.canExpand(x.id)).map((x) => x.id).slice(0, 3));
+      const tried = [];
+      for (const lid of lids) {
+        if (found) break;
         await ev(() => window.__fw.app.cards.closeAll());
-        await ev((x) => window.__fw.app.pinchNode(x), c);
-        await page.waitForFunction((x) => window.__fw.app.store.nodes.get(x)?.explored === true, c, { timeout: 200000 });
-        if (await ev((x) => (window.__fw.app.store.nodes.get(x).addedIds || []).some((n) => window.__fw.app.store.nodes.get(n)?.group === 'archive'), c)) {
-          found = c;
-          break;
+        await ev((id) => window.__fw.app.openLight(id), lid);
+        await page.waitForFunction((id) => window.__fw.app.getItem(id)?.expanded === true, lid, { timeout: 200000 }).catch(async () => {
+          throw new Error('star did not grow: ' + JSON.stringify(await ev((id) => ({ id, expanded: window.__fw.app.getItem(id)?.expanded, can: window.__fw.app.canExpand(id), researching: !!window.__fw.app.researching, pending: [window.__fw.app._pendingExpand, window.__fw.app._pendingExplore], status: window.__fw.app.statusText }), lid)));
+        });
+        const cands = await ev(() => [...window.__fw.app.store.nodes.values()].filter((x) => ['Place', 'Organisation', 'Topic', 'Event'].includes(x.type) && !x.derived && window.__fw.app.canExplore(x.id) && !x.explored).map((x) => x.id));
+        for (const c of cands.slice(0, 3)) {
+          await ev(() => window.__fw.app.cards.closeAll());
+          await ev((x) => window.__fw.app.pinchNode(x), c);
+          await page.waitForFunction((x) => window.__fw.app.store.nodes.get(x)?.explored === true, c, { timeout: 200000 }).catch(async () => {
+            throw new Error('node did not open up: ' + JSON.stringify(await ev((x) => ({ x, explored: window.__fw.app.store.nodes.get(x)?.explored, researching: !!window.__fw.app.researching, pending: [window.__fw.app._pendingExpand, window.__fw.app._pendingExplore], status: window.__fw.app.statusText }), c)));
+          });
+          tried.push(c);
+          if (await ev((x) => (window.__fw.app.store.nodes.get(x).addedIds || []).some((n) => window.__fw.app.store.nodes.get(n)?.group === 'archive'), c)) {
+            found = c;
+            break;
+          }
         }
       }
+      const cands = tried;
       if (!found) throw new Error(`no older news for ${cands.slice(0, 4).join(', ')}`);
     }
     const r = await ev((x) => {

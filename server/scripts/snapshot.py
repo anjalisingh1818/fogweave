@@ -169,6 +169,10 @@ async def main(n_expand: int, n_explore: int, n_read: int):
         shutil.rmtree(OUT, ignore_errors=True)
     shutil.copytree(tmp, OUT, dirs_exist_ok=True)
     shutil.rmtree(tmp, ignore_errors=True)
+    # what every node in the recorded webs is, with key facts and sources
+    from snapshot_dossiers import add_dossiers
+
+    await add_dossiers(OUT, eng)
     print(f"wrote {OUT} in {index['seconds']} s; shared entities {index['sharedEntities']}; llm {eng.llm.stats}", flush=True)
     await eng.http.aclose()
 

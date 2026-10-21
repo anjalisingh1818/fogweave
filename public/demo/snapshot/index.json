@@ -2081,5 +2081,4450 @@
   "wd:Q812",
   "wd:Q958"
  ],
- "seconds": 655
+ "seconds": 655,
+ "dossiers": {
+  "org:us attorney for the western district of texas": {
+   "id": "org:us attorney for the western district of texas",
+   "qid": null,
+   "label": "US Attorney for the Western District of Texas",
+   "type": "Organisation",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:41.061574Z"
+  },
+  "org:us attorney's office": {
+   "id": "org:us attorney's office",
+   "qid": null,
+   "label": "US Attorney's Office",
+   "type": "Organisation",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:41.061574Z"
+  },
+  "wd:Q1439": {
+   "id": "wd:Q1439",
+   "qid": "Q1439",
+   "label": "Texas",
+   "type": "Place",
+   "description": "state of the United States of America",
+   "overview": "Texas (  TEK-səss) is a state in the United States. Located in the south-central part of the country, it borders Louisiana, Arkansas, Oklahoma, and New Mexico.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Texas",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "U.S. state",
+     "date": "",
+     "quote": "Texas: is a U.S. state",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1439",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "United States",
+     "date": "",
+     "quote": "Texas: country United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1439",
+     "kind": "reference"
+    },
+    {
+     "label": "located in",
+     "value": "United States",
+     "date": "",
+     "quote": "Texas: located in United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1439",
+     "kind": "reference"
+    },
+    {
+     "label": "capital",
+     "value": "Austin",
+     "date": "",
+     "quote": "Texas: capital Austin",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1439",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "29,145,505",
+     "date": "2020-04-01",
+     "quote": "Texas: population 29,145,505",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1439",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "696,241 km²",
+     "date": "",
+     "quote": "Texas: area 696,241 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1439",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "It also borders Mexico along the Rio Grande, and has a coastline on the Gulf of Mexico.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Texas"
+    },
+    {
+     "text": "Covering 268,596 square miles (695,660 km2) and with an estimated population of over 31.7 million residents in 2025, it is the second-largest state by both area and population.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Texas"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.061574Z"
+  },
+  "wd:Q975": {
+   "id": "wd:Q975",
+   "qid": "Q975",
+   "label": "San Antonio",
+   "type": "Place",
+   "description": "city in Bexar, Comal, and Medina counties in Texas, United States; seat of Bexar County",
+   "overview": "San Antonio ( SAN an-TOH-nee-oh; Spanish for \"Saint Anthony\") is a city in the southern part of the U.S. state of Texas. It is the seventh-most populous city in the United States, the second-most populous city in Texas (after Houston), and the second-most populous city in the Southern U.S., with a population of 1.43 million at the 2020 census.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/San_Antonio",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "city in the United States",
+     "date": "",
+     "quote": "San Antonio: is a city in the United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q975",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "big city",
+     "date": "",
+     "quote": "San Antonio: is a big city",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q975",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "United States",
+     "date": "",
+     "quote": "San Antonio: country United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q975",
+     "kind": "reference"
+    },
+    {
+     "label": "located in",
+     "value": "Bexar County",
+     "date": "",
+     "quote": "San Antonio: located in Bexar County",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q975",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "1,434,625",
+     "date": "2020-04-01",
+     "quote": "San Antonio: population 1,434,625",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q975",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "1,208.8 km²",
+     "date": "",
+     "quote": "San Antonio: area 1,208.8 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q975",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "The Greater San Antonio metropolitan area, with an estimated 2.76 million residents, ranks as the third-largest metropolitan area in Texas and the 24th-largest in the nation.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/San_Antonio"
+    },
+    {
+     "text": "It is the county seat of Bexar County.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/San_Antonio"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.061574Z"
+  },
+  "wd:Q96": {
+   "id": "wd:Q96",
+   "qid": "Q96",
+   "label": "Mexico",
+   "type": "Place",
+   "description": "country in North America",
+   "overview": "Mexico, officially the United Mexican States, is a country in North America. It is the northernmost country in Latin America, bordering the United States of America to the north and Guatemala and Belize to the southeast, while having maritime boundaries with the Pacific Ocean to the west, the Caribbean Sea to the southeast, and the Gulf of Mexico to the east.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Mexico",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "sovereign state",
+     "date": "",
+     "quote": "Mexico: is a sovereign state",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q96",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "country",
+     "date": "",
+     "quote": "Mexico: is a country",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q96",
+     "kind": "reference"
+    },
+    {
+     "label": "capital",
+     "value": "Mexico City",
+     "date": "",
+     "quote": "Mexico: capital Mexico City",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q96",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "132,274,416",
+     "date": "2024",
+     "quote": "Mexico: population 132,274,416",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q96",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "1,972,550 km²",
+     "date": "",
+     "quote": "Mexico: area 1,972,550 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q96",
+     "kind": "reference"
+    },
+    {
+     "label": "continent",
+     "value": "North America",
+     "date": "",
+     "quote": "Mexico: continent North America",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q96",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Mexico covers 1,972,550 km2 (761,610 sq mi), and is the thirteenth-largest country in the world by land area.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Mexico"
+    },
+    {
+     "text": "With a population around 131 million as of 2025, Mexico is the tenth-most populous country in the world and is home to the largest number of native Spanish speakers.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Mexico"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.061574Z"
+  },
+  "wd:Q774": {
+   "id": "wd:Q774",
+   "qid": "Q774",
+   "label": "Guatemala",
+   "type": "Place",
+   "description": "sovereign state in Central America",
+   "overview": "Guatemala, officially the Republic of Guatemala, is a country in northern Central America. It is bordered to the north and west by Mexico, to the northeast (in the adjacency zone) by Belize, to the east by Honduras, and to the southeast by El Salvador.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Guatemala",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "sovereign state",
+     "date": "",
+     "quote": "Guatemala: is a sovereign state",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q774",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "republic",
+     "date": "",
+     "quote": "Guatemala: is a republic",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q774",
+     "kind": "reference"
+    },
+    {
+     "label": "capital",
+     "value": "Guatemala City",
+     "date": "",
+     "quote": "Guatemala: capital Guatemala City",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q774",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "17,263,239",
+     "date": "2018",
+     "quote": "Guatemala: population 17,263,239",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q774",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "108,889 km²",
+     "date": "",
+     "quote": "Guatemala: area 108,889 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q774",
+     "kind": "reference"
+    },
+    {
+     "label": "continent",
+     "value": "North America",
+     "date": "",
+     "quote": "Guatemala: continent North America",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q774",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "It is bounded by the Pacific Ocean to the south and the Gulf of Honduras to the northeast.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Guatemala"
+    },
+    {
+     "text": "The territory of modern Guatemala hosted the core of the Maya civilization, which extended across Mesoamerica; in the 16th century, most of this was conquered by the Spanish and claimed as part of the viceroyalty of New Spain.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Guatemala"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.061574Z"
+  },
+  "wd:Q783": {
+   "id": "wd:Q783",
+   "qid": "Q783",
+   "label": "Honduras",
+   "type": "Place",
+   "description": "sovereign state in Central America",
+   "overview": "Honduras, officially the Republic of Honduras, is a country in Central America. It is bordered to the west by Guatemala, to the southwest by El Salvador, to the southeast by Nicaragua, to the south by the Pacific Ocean at the Gulf of Fonseca, and to the north by the Gulf of Honduras, a large inlet of the Caribbean Sea.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Honduras",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "sovereign state",
+     "date": "",
+     "quote": "Honduras: is a sovereign state",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q783",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "country",
+     "date": "",
+     "quote": "Honduras: is a country",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q783",
+     "kind": "reference"
+    },
+    {
+     "label": "capital",
+     "value": "Tegucigalpa",
+     "date": "",
+     "quote": "Honduras: capital Tegucigalpa",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q783",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "8,303,771",
+     "date": "2013",
+     "quote": "Honduras: population 8,303,771",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q783",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "112,492 km²",
+     "date": "",
+     "quote": "Honduras: area 112,492 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q783",
+     "kind": "reference"
+    },
+    {
+     "label": "continent",
+     "value": "North America",
+     "date": "",
+     "quote": "Honduras: continent North America",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q783",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Its capital and largest city is Tegucigalpa.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Honduras"
+    },
+    {
+     "text": "Honduras was home to several important Mesoamerican cultures, most notably the Maya, before Spanish colonization in the 16th century.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Honduras"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.061574Z"
+  },
+  "org:alien smuggling organization": {
+   "id": "org:alien smuggling organization",
+   "qid": null,
+   "label": "alien smuggling organization",
+   "type": "Organisation",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:41.061574Z"
+  },
+  "ev:guatemalan national sentenced": {
+   "id": "ev:guatemalan national sentenced",
+   "qid": null,
+   "label": "Guatemalan national sentenced",
+   "type": "Event",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:41.061574Z"
+  },
+  "wd:Q336494": {
+   "id": "wd:Q336494",
+   "qid": "Q336494",
+   "label": "Abyei",
+   "type": "Place",
+   "description": "area in Sudan established by the Abyei Protocol",
+   "overview": "The Abyei Special Administrative Area (Arabic: منطقة أبيي) is an area of 10,546 km2 or 4,072 sq mi on the border between South Sudan and Sudan that has been accorded \"special administrative status\" by the 2004 Protocol on the Resolution of the Abyei Conflict (Abyei Protocol) in the Comprehensive Peace Agreement (CPA) that ended the Second Sudanese Civil War. The capital of the Abyei Area is Abyei Town.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Abyei",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "disputed territory",
+     "date": "",
+     "quote": "Abyei: is a disputed territory",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q336494",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "state of South Sudan",
+     "date": "",
+     "quote": "Abyei: is a state of South Sudan",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q336494",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "South Sudan",
+     "date": "",
+     "quote": "Abyei: country South Sudan",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q336494",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Under the terms of the Abyei Protocol, the Abyei Area is considered, on an interim basis, to be simultaneously part of both the Republic of South Sudan and Republic of Sudan, effectively a condominium.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Abyei"
+    },
+    {
+     "text": "As part of the 2011 independence process, a separate referendum was to be held in Abyei on whether they wanted to join Sudan or South Sudan; however an official referendum was never held.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Abyei"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.251410Z"
+  },
+  "org:sudanese army": {
+   "id": "org:sudanese army",
+   "qid": "Q371721",
+   "label": "Sudanese army",
+   "type": "Organisation",
+   "description": "Armed forces of Sudan",
+   "overview": "The Sudanese Armed Forces (SAF; Arabic: القوات المسلحة السودانية, romanized: Al-Qūwāt Al-Musallaḥah as-Sūdāniyah) are the military forces of the Republic of the Sudan. The force strength has been estimated at 109,300 personnel in 2011 (by IISS), 200,000 personnel before the current war in Sudan broke out in 2023 (by the CIA), and 300,000 personnel in 2024 (by Al Jazeera).",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Sudanese_Armed_Forces",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "armed forces",
+     "date": "",
+     "quote": "Sudanese army: is a armed forces",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q371721",
+     "kind": "reference"
+    },
+    {
+     "label": "founded",
+     "value": "1990",
+     "date": "1990",
+     "quote": "Sudanese army: founded 1990",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q371721",
+     "kind": "reference"
+    },
+    {
+     "label": "headquarters",
+     "value": "Khartoum",
+     "date": "",
+     "quote": "Sudanese army: headquarters Khartoum",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q371721",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "Sudan",
+     "date": "",
+     "quote": "Sudanese army: country Sudan",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q371721",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "As of 2026, the SAF and Rapid Support Forces (RSF) remain in armed conflict against one another in the ongoing civil war in Sudan.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Sudanese_Armed_Forces"
+    },
+    {
+     "text": "In 2016–2017, the RSF had 40,000 members participating in the Yemeni Civil War (of which 10,000 returned to Sudan by October 2019).",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Sudanese_Armed_Forces"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.251410Z"
+  },
+  "org:sudan": {
+   "id": "org:sudan",
+   "qid": "Q1049",
+   "label": "Sudan",
+   "type": "Organisation",
+   "description": "country in Northeast Africa",
+   "overview": "Sudan, officially the Republic of the Sudan, is a country in Northeast Africa. It borders the Central African Republic to the southwest, Chad to the west, Libya to the northwest, Egypt to the north, the Red Sea to the east, Eritrea and Ethiopia to the southeast, and South Sudan to the south.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Sudan",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "republic",
+     "date": "",
+     "quote": "Sudan: is a republic",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1049",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "sovereign state (since 1956)",
+     "date": "",
+     "quote": "Sudan: is a sovereign state (since 1956)",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1049",
+     "kind": "reference"
+    },
+    {
+     "label": "founded",
+     "value": "1 January 1956",
+     "date": "1956-01-01",
+     "quote": "Sudan: founded 1 January 1956",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1049",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Sudan has a population of 51.8 million people as of 2025 and occupies 1,886,068 square kilometres (728,215 square miles), making it Africa's third-largest country by area.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Sudan"
+    },
+    {
+     "text": "Sudan's capital and most populous city is Khartoum.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Sudan"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.251410Z"
+  },
+  "person:agnes adlino orifa oswaha": {
+   "id": "person:agnes adlino orifa oswaha",
+   "qid": null,
+   "label": "Agnes Adlino Orifa Oswaha",
+   "type": "PublicFigure",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:41.251410Z"
+  },
+  "person:yohana akol ngor": {
+   "id": "person:yohana akol ngor",
+   "qid": null,
+   "label": "Yohana Akol Ngor",
+   "type": "PublicFigure",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:41.251410Z"
+  },
+  "wd:Q789842": {
+   "id": "wd:Q789842",
+   "qid": null,
+   "label": "Ministry of Foreign Affairs and International Cooperation",
+   "type": "Organisation",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Several bodies share this name; FogWeave could not tell which one is meant here.",
+   "retrievedAt": "2026-10-21T10:46:41.251410Z"
+  },
+  "org:abyei administration": {
+   "id": "org:abyei administration",
+   "qid": null,
+   "label": "Abyei administration",
+   "type": "Organisation",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:41.251410Z"
+  },
+  "ev:drone attack on amiet market in abyei": {
+   "id": "ev:drone attack on amiet market in abyei",
+   "qid": null,
+   "label": "Drone attack on Amiet Market in Abyei",
+   "type": "Event",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:41.251410Z"
+  },
+  "person:raul castro": {
+   "id": "person:raul castro",
+   "qid": null,
+   "label": "Raul Castro",
+   "type": "PublicFigure",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:41.514585Z"
+  },
+  "person:james uthmeier": {
+   "id": "person:james uthmeier",
+   "qid": null,
+   "label": "James Uthmeier",
+   "type": "PublicFigure",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:41.514585Z"
+  },
+  "wd:Q22686": {
+   "id": "wd:Q22686",
+   "qid": "Q22686",
+   "label": "Donald Trump",
+   "type": "PublicFigure",
+   "description": "President of the United States (2017–2021; since 2025)",
+   "overview": "Donald John Trump is an American politician, media personality, and businessman who is the 47th president of the United States. A member of the Republican Party, he served as the 45th president from 2017 to 2021.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Donald_Trump",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "position held",
+     "value": "President of the United States (since 2025)",
+     "date": "",
+     "quote": "Donald Trump: position held President of the United States (since 2025)",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q22686",
+     "kind": "reference"
+    },
+    {
+     "label": "party",
+     "value": "Republican Party (since 2012)",
+     "date": "",
+     "quote": "Donald Trump: party Republican Party (since 2012)",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q22686",
+     "kind": "reference"
+    },
+    {
+     "label": "occupation",
+     "value": "business magnate",
+     "date": "",
+     "quote": "Donald Trump: occupation business magnate",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q22686",
+     "kind": "reference"
+    },
+    {
+     "label": "occupation",
+     "value": "investor",
+     "date": "",
+     "quote": "Donald Trump: occupation investor",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q22686",
+     "kind": "reference"
+    },
+    {
+     "label": "member of",
+     "value": "The World's Billionaires",
+     "date": "2021",
+     "quote": "Donald Trump: member of The World's Billionaires",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q22686",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Born into a wealthy New York City family, Trump graduated from the University of Pennsylvania in 1968 with a bachelor's degree in economics.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Donald_Trump"
+    },
+    {
+     "text": "He became the president of his family's real estate business in 1971, renamed it the Trump Organization, and began acquiring and building skyscrapers, hotels, casinos, and golf courses.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Donald_Trump"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.514585Z"
+  },
+  "wd:Q241": {
+   "id": "wd:Q241",
+   "qid": "Q241",
+   "label": "Cuba",
+   "type": "Place",
+   "description": "sovereign state situated on an island in the Caribbean Sea",
+   "overview": "Cuba, officially the Republic of Cuba, is an island country in the Caribbean. It comprises the eponymous main island as well as 4,195 islands, islets, and cays.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Cuba",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "island country",
+     "date": "",
+     "quote": "Cuba: is a island country",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q241",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "sovereign state",
+     "date": "",
+     "quote": "Cuba: is a sovereign state",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q241",
+     "kind": "reference"
+    },
+    {
+     "label": "capital",
+     "value": "Havana",
+     "date": "",
+     "quote": "Cuba: capital Havana",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q241",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "10,985,974",
+     "date": "2023",
+     "quote": "Cuba: population 10,985,974",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q241",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "109,884 km²",
+     "date": "",
+     "quote": "Cuba: area 109,884 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q241",
+     "kind": "reference"
+    },
+    {
+     "label": "continent",
+     "value": "North America",
+     "date": "",
+     "quote": "Cuba: continent North America",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q241",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Situated at the convergence of the Caribbean Sea, Gulf of Mexico, and Atlantic Ocean, Cuba is located east of the Yucatán Peninsula, south of both Florida and the Bahamas, west of Hispaniola, and north of Jamaica and the Cayman Islands.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Cuba"
+    },
+    {
+     "text": "Cuba is the largest country in the Caribbean by area and the third-largest by population, after Haiti and the Dominican Republic.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Cuba"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.514585Z"
+  },
+  "wd:Q812": {
+   "id": "wd:Q812",
+   "qid": "Q812",
+   "label": "Florida",
+   "type": "Place",
+   "description": "state of the United States of America",
+   "overview": "Florida (  FLORR-id-ə; Spanish: [floˈɾiða] ) is a state in the Southeastern and South Atlantic\nregions of the United States. It borders the Gulf of Mexico to the west, Alabama to the northwest, Georgia to the north, the Atlantic Ocean to the east, the Straits of Florida to the south, and The Bahamas to the southeast.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Florida",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "U.S. state",
+     "date": "",
+     "quote": "Florida: is a U.S. state",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q812",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "United States",
+     "date": "",
+     "quote": "Florida: country United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q812",
+     "kind": "reference"
+    },
+    {
+     "label": "located in",
+     "value": "United States",
+     "date": "",
+     "quote": "Florida: located in United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q812",
+     "kind": "reference"
+    },
+    {
+     "label": "capital",
+     "value": "Tallahassee",
+     "date": "",
+     "quote": "Florida: capital Tallahassee",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q812",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "21,538,187",
+     "date": "2020-04-01",
+     "quote": "Florida: population 21,538,187",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q812",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "170,304 km²",
+     "date": "",
+     "quote": "Florida: area 170,304 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q812",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "About two-thirds of Florida occupies a peninsula between the Gulf of Mexico and the Atlantic Ocean.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Florida"
+    },
+    {
+     "text": "It has the longest coastline in the contiguous United States, spanning approximately 1,350 miles (2,170 km), not including its many barrier islands.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Florida"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.514585Z"
+  },
+  "wd:Q990843": {
+   "id": "wd:Q990843",
+   "qid": "Q990843",
+   "label": "Brothers to the Rescue",
+   "type": "Organisation",
+   "description": "organization",
+   "overview": "Brothers to the Rescue (Spanish: Hermanos al Rescate) is an American activist nonprofit organization based in Miami, Florida, headed by José Basulto, who testified that he had been a CIA operative. Formed by Cuban exiles, the group is widely known for its opposition to the Cuban government and its former leader Fidel Castro.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Brothers_to_the_Rescue",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "organization",
+     "date": "",
+     "quote": "Brothers to the Rescue: is a organization",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q990843",
+     "kind": "reference"
+    },
+    {
+     "label": "founded",
+     "value": "1991",
+     "date": "1991",
+     "quote": "Brothers to the Rescue: founded 1991",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q990843",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "United States",
+     "date": "",
+     "quote": "Brothers to the Rescue: country United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q990843",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "The group describes itself as a humanitarian organization aiming to assist and rescue raft refugees emigrating from Cuba and to \"support the efforts of the Cuban people to free themselves from dictatorship through the use of active non-violence\".",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Brothers_to_the_Rescue"
+    },
+    {
+     "text": "The organization was founded in May 1991 \"after several pilots were touched by the death of\" fifteen-year-old Gregorio Perez Ricardo, who \"fleeing Castro's Cuba on a raft, perished of severe dehydration in the hands of U.S.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Brothers_to_the_Rescue"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.514585Z"
+  },
+  "wd:Q30": {
+   "id": "wd:Q30",
+   "qid": "Q30",
+   "label": "United States",
+   "type": "Place",
+   "description": "country located primarily in North America",
+   "overview": "The United States of America (USA), also known as the United States (U.S.) or America, is a country primarily located in North America. It is a federal republic consisting of 50 states and a federal capital district, Washington, D.C.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/United_States",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "sovereign state",
+     "date": "",
+     "quote": "United States: is a sovereign state",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q30",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "country",
+     "date": "",
+     "quote": "United States: is a country",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q30",
+     "kind": "reference"
+    },
+    {
+     "label": "capital",
+     "value": "Washington, D.C. (since 1800)",
+     "date": "",
+     "quote": "United States: capital Washington, D.C. (since 1800)",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q30",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "340,110,988",
+     "date": "2024-07-01",
+     "quote": "United States: population 340,110,988",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q30",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "9,826,675 km²",
+     "date": "",
+     "quote": "United States: area 9,826,675 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q30",
+     "kind": "reference"
+    },
+    {
+     "label": "continent",
+     "value": "North America",
+     "date": "",
+     "quote": "United States: continent North America",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q30",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "The 48 contiguous states border Canada to the north and Mexico to the south, with the semi-exclave of Alaska in the northwest and the archipelago of Hawaii in the Pacific Ocean.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/United_States"
+    },
+    {
+     "text": "The United States also asserts sovereignty over five major island territories and various uninhabited islands in Oceania and the Caribbean.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/United_States"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.514585Z"
+  },
+  "wd:Q11256": {
+   "id": "wd:Q11256",
+   "qid": "Q11256",
+   "label": "Fidel Castro",
+   "type": "PublicFigure",
+   "description": "Cuban politician, author and revolutionary (1926–2016)",
+   "overview": "Fidel Alejandro Castro Ruz (13 August 1926 – 25 November 2016) was a Cuban communist revolutionary and politician who was the leader of Cuba from 1959 to 2011. He served as prime minister from 1959 to 1976, president from 1976 to 2008, and first secretary of the Communist Party of Cuba from 1965 until 2011.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Fidel_Castro",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "position held",
+     "value": "President of Cuba (1976–2008)",
+     "date": "",
+     "quote": "Fidel Castro: position held President of Cuba (1976–2008)",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q11256",
+     "kind": "reference"
+    },
+    {
+     "label": "position held",
+     "value": "First Secretary of the Communist Party of Cuba (1961–2011)",
+     "date": "",
+     "quote": "Fidel Castro: position held First Secretary of the Communist Party of Cuba (1961–2011)",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q11256",
+     "kind": "reference"
+    },
+    {
+     "label": "party",
+     "value": "Communist Party of Cuba (since 1965)",
+     "date": "",
+     "quote": "Fidel Castro: party Communist Party of Cuba (since 1965)",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q11256",
+     "kind": "reference"
+    },
+    {
+     "label": "occupation",
+     "value": "politician",
+     "date": "",
+     "quote": "Fidel Castro: occupation politician",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q11256",
+     "kind": "reference"
+    },
+    {
+     "label": "occupation",
+     "value": "lawyer",
+     "date": "",
+     "quote": "Fidel Castro: occupation lawyer",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q11256",
+     "kind": "reference"
+    },
+    {
+     "label": "member of",
+     "value": "26th of July Movement",
+     "date": "",
+     "quote": "Fidel Castro: member of 26th of July Movement",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q11256",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Ideologically a Marxist–Leninist and Cuban nationalist, under his administration Cuba became a one-party communist state; industry and business were nationalized, and socialist reforms were implemented throughout society.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Fidel_Castro"
+    },
+    {
+     "text": "Born in Birán, the son of a wealthy Spanish farmer, Castro adopted leftist and anti-imperialist ideas while studying law at the University of Havana.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Fidel_Castro"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.514585Z"
+  },
+  "topic:federal indictment": {
+   "id": "topic:federal indictment",
+   "qid": null,
+   "label": "Federal indictment",
+   "type": "Topic",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:41.514585Z"
+  },
+  "ev:arrest warrant for raul castro": {
+   "id": "ev:arrest warrant for raul castro",
+   "qid": null,
+   "label": "Arrest warrant for Raul Castro",
+   "type": "Event",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:41.514585Z"
+  },
+  "wd:Q41662205": {
+   "id": "wd:Q41662205",
+   "qid": "Q41662205",
+   "label": "Helen Haines",
+   "type": "PublicFigure",
+   "description": "Australian nurse, health researcher and politician",
+   "overview": "Helen Mary Haines is an Australian politician and health researcher who has served as the member of Parliament (MP) for the Victorian division of Indi since 2019. She is a political independent, who has advocated for rural healthcare and housing, the building of resilience against climate change in regional Australia, and the establishment of the National Anti-Corruption Commission",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Helen_Haines",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "position held",
+     "value": "member of the Australian House of Representatives (since 2019)",
+     "date": "",
+     "quote": "Helen Haines: position held member of the Australian House of Representatives (since 2019)",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q41662205",
+     "kind": "reference"
+    },
+    {
+     "label": "party",
+     "value": "independent politician",
+     "date": "",
+     "quote": "Helen Haines: party independent politician",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q41662205",
+     "kind": "reference"
+    },
+    {
+     "label": "occupation",
+     "value": "researcher",
+     "date": "",
+     "quote": "Helen Haines: occupation researcher",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q41662205",
+     "kind": "reference"
+    },
+    {
+     "label": "occupation",
+     "value": "politician",
+     "date": "",
+     "quote": "Helen Haines: occupation politician",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q41662205",
+     "kind": "reference"
+    },
+    {
+     "label": "member of",
+     "value": "Teal Independents",
+     "date": "",
+     "quote": "Helen Haines: member of Teal Independents",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q41662205",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Before entering politics, she worked in nursing and midwifery services, and as a health researcher in academia, for more than 30 years.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Helen_Haines"
+    },
+    {
+     "text": "On 19 October 2026, Haines was struck by a vehicle outside her electorate office in Wangaratta in a deliberate attack, and was taken to hospital with critical injuries where both of her legs were later amputated.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Helen_Haines"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.676397Z"
+  },
+  "wd:Q335697": {
+   "id": "wd:Q335697",
+   "qid": "Q335697",
+   "label": "Anthony Albanese",
+   "type": "PublicFigure",
+   "description": "31st prime minister of Australia",
+   "overview": "Anthony Norman Albanese is an Australian politician who has served as the 31st prime minister of Australia since 2022. He has been the leader of the Labor Party since 2019 and the member of Parliament (MP) for the New South Wales division of Grayndler since 1996.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Anthony_Albanese",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "position held",
+     "value": "Deputy Prime Minister of Australia (2013–2013)",
+     "date": "",
+     "quote": "Anthony Albanese: position held Deputy Prime Minister of Australia (2013–2013)",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q335697",
+     "kind": "reference"
+    },
+    {
+     "label": "position held",
+     "value": "Minister for Infrastructure and Transport (2007–2013)",
+     "date": "",
+     "quote": "Anthony Albanese: position held Minister for Infrastructure and Transport (2007–2013)",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q335697",
+     "kind": "reference"
+    },
+    {
+     "label": "party",
+     "value": "Australian Labor Party",
+     "date": "",
+     "quote": "Anthony Albanese: party Australian Labor Party",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q335697",
+     "kind": "reference"
+    },
+    {
+     "label": "occupation",
+     "value": "politician",
+     "date": "",
+     "quote": "Anthony Albanese: occupation politician",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q335697",
+     "kind": "reference"
+    },
+    {
+     "label": "occupation",
+     "value": "party leader",
+     "date": "",
+     "quote": "Anthony Albanese: occupation party leader",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q335697",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Born in Sydney, Albanese attended St Mary's Cathedral College and studied economics at the University of Sydney.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Anthony_Albanese"
+    },
+    {
+     "text": "As a student, he joined the Labor Party and later worked as a party official and research officer before entering Parliament.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Anthony_Albanese"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.676397Z"
+  },
+  "wd:Q1024728": {
+   "id": "wd:Q1024728",
+   "qid": "Q1024728",
+   "label": "Wangaratta",
+   "type": "Place",
+   "description": "city in Victoria, Australia",
+   "overview": "Wangaratta ( WANG-gə-RAT-ə) is a city in the northeast of Victoria, Australia,  236 km (147 mi) from Melbourne along the Hume Highway. The city had a population of 29,808 per the 2021 Australian Census.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Wangaratta",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "city",
+     "date": "",
+     "quote": "Wangaratta: is a city",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1024728",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "gazetted locality of Victoria",
+     "date": "",
+     "quote": "Wangaratta: is a gazetted locality of Victoria",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1024728",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "Australia",
+     "date": "",
+     "quote": "Wangaratta: country Australia",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1024728",
+     "kind": "reference"
+    },
+    {
+     "label": "located in",
+     "value": "Victoria",
+     "date": "",
+     "quote": "Wangaratta: located in Victoria",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1024728",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "17,377",
+     "date": "2011",
+     "quote": "Wangaratta: population 17,377",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1024728",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "The city is located at the junction of the Ovens and King rivers, which drain the northwestern slopes of the Victorian Alps.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Wangaratta"
+    },
+    {
+     "text": "Wangaratta is the administrative centre and the most populous city in the Rural City of Wangaratta local government area.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Wangaratta"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.676397Z"
+  },
+  "wd:Q949779": {
+   "id": "wd:Q949779",
+   "qid": "Q949779",
+   "label": "Melbourne",
+   "type": "Place",
+   "description": "city in Brevard County, Florida, United States of America",
+   "overview": "Melbourne (MEL-burn) is a city in Brevard County, Florida, United States. It is located 72 miles (116 km) southeast of Orlando along Florida's Space Coast, so named because of the region's proximity to Cape Canaveral and the Kennedy Space Center.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Melbourne,_Florida",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "city in the United States",
+     "date": "",
+     "quote": "Melbourne: is a city in the United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q949779",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "United States",
+     "date": "",
+     "quote": "Melbourne: country United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q949779",
+     "kind": "reference"
+    },
+    {
+     "label": "located in",
+     "value": "Brevard County",
+     "date": "",
+     "quote": "Melbourne: located in Brevard County",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q949779",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "84,678",
+     "date": "2020-04-01",
+     "quote": "Melbourne: population 84,678",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q949779",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "112.0 km²",
+     "date": "",
+     "quote": "Melbourne: area 112.0 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q949779",
+     "kind": "reference"
+    },
+    {
+     "label": "founded",
+     "value": "1867",
+     "date": "1867",
+     "quote": "Melbourne: founded 1867",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q949779",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "The city had an estimated population of 87,561 as of July 1, 2024, according to the U.S.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Melbourne,_Florida"
+    },
+    {
+     "text": "Melbourne is a principal city of the Palm Bay–Melbourne–Titusville metropolitan statistical area.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Melbourne,_Florida"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.676397Z"
+  },
+  "wd:Q169889": {
+   "id": "wd:Q169889",
+   "qid": "Q169889",
+   "label": "American Broadcasting Company",
+   "type": "Organisation",
+   "description": "American broadcast television network owned by The Walt Disney Company",
+   "overview": "American Broadcasting Companies, Inc. (doing business as American Broadcasting Company, abbreviated as ABC) is an American commercial broadcasting television network that serves as the flagship property of the Disney Television Group division of the Walt Disney Company.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/American_Broadcasting_Company",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "television station",
+     "date": "",
+     "quote": "American Broadcasting Company: is a television station",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q169889",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "television network",
+     "date": "",
+     "quote": "American Broadcasting Company: is a television network",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q169889",
+     "kind": "reference"
+    },
+    {
+     "label": "founded",
+     "value": "12 October 1943",
+     "date": "1943-10-12",
+     "quote": "American Broadcasting Company: founded 12 October 1943",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q169889",
+     "kind": "reference"
+    },
+    {
+     "label": "headquarters",
+     "value": "New York City",
+     "date": "",
+     "quote": "American Broadcasting Company: headquarters New York City",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q169889",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "United States",
+     "date": "",
+     "quote": "American Broadcasting Company: country United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q169889",
+     "kind": "reference"
+    },
+    {
+     "label": "parent organisation",
+     "value": "The Walt Disney Company (since 1996)",
+     "date": "",
+     "quote": "American Broadcasting Company: parent organisation The Walt Disney Company (since 1996)",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q169889",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "The youngest of the \"Big Three\" American television networks, the network is sometimes referred to as the Alphabet Network, as its initialism also represents the first three letters of the English alphabet in order.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/American_Broadcasting_Company"
+    },
+    {
+     "text": "ABC launched as a radio network in 1943, as the successor to the NBC Blue Network, which had been purchased by Edward J.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/American_Broadcasting_Company"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.676397Z"
+  },
+  "org:federal police": {
+   "id": "org:federal police",
+   "qid": null,
+   "label": "Federal Police",
+   "type": "Organisation",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Several bodies share this name; FogWeave could not tell which one is meant here.",
+   "retrievedAt": "2026-10-21T10:46:41.676397Z"
+  },
+  "org:victoria state law enforcement": {
+   "id": "org:victoria state law enforcement",
+   "qid": null,
+   "label": "Victoria state law enforcement",
+   "type": "Organisation",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:41.676397Z"
+  },
+  "wd:Q914069": {
+   "id": "wd:Q914069",
+   "qid": "Q914069",
+   "label": "Toyota Land Cruiser",
+   "type": "Technology",
+   "description": "four-wheel-drive vehicle from Toyota",
+   "overview": "The Toyota Land Cruiser (Japanese: トヨタ・ランドクルーザー, Hepburn: Toyota Rando-Kurūzā), also sometimes spelt as LandCruiser, is a series of four-wheel drive vehicles produced by the Japanese automobile manufacturer Toyota. It is Toyota's longest running series of models.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Toyota_Land_Cruiser",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "car model",
+     "date": "",
+     "quote": "Toyota Land Cruiser: is a car model",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q914069",
+     "kind": "reference"
+    },
+    {
+     "label": "a kind of",
+     "value": "off-road vehicle",
+     "date": "",
+     "quote": "Toyota Land Cruiser: a kind of off-road vehicle",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q914069",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "As of 2019, the sales of the Land Cruiser totalled more than 10 million units worldwide.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Toyota_Land_Cruiser"
+    },
+    {
+     "text": "Production of the first generation of the Land Cruiser began in 1951.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Toyota_Land_Cruiser"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.676397Z"
+  },
+  "wd:Q121035921": {
+   "id": "wd:Q121035921",
+   "qid": "Q121035921",
+   "label": "Alfred Hospital",
+   "type": "Organisation",
+   "description": "production company",
+   "overview": "production company",
+   "overviewSource": {
+    "source": "wikidata.org",
+    "url": "https://www.wikidata.org/wiki/Q121035921",
+    "licence": "Wikidata, CC0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "production company",
+     "date": "",
+     "quote": "Alfred Hospital: is a production company",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q121035921",
+     "kind": "reference"
+    }
+   ],
+   "background": [],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.676397Z"
+  },
+  "ev:deliberate car attack on mp helen haines": {
+   "id": "ev:deliberate car attack on mp helen haines",
+   "qid": null,
+   "label": "Deliberate car attack on MP Helen Haines",
+   "type": "Event",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:41.676397Z"
+  },
+  "wd:Q179103": {
+   "id": "wd:Q179103",
+   "qid": null,
+   "label": "Japan Aerospace Exploration Agency",
+   "type": "Organisation",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Several bodies share this name; FogWeave could not tell which one is meant here.",
+   "retrievedAt": "2026-10-21T10:46:41.891537Z"
+  },
+  "tech:martian moons exploration spacecraft": {
+   "id": "tech:martian moons exploration spacecraft",
+   "qid": null,
+   "label": "Martian Moons eXploration spacecraft",
+   "type": "Technology",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:41.891537Z"
+  },
+  "place:tanegashima space center": {
+   "id": "place:tanegashima space center",
+   "qid": null,
+   "label": "Tanegashima Space Center",
+   "type": "Place",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:41.891537Z"
+  },
+  "tech:h3 rocket": {
+   "id": "tech:h3 rocket",
+   "qid": "Q11222053",
+   "label": "H3 rocket",
+   "type": "Technology",
+   "description": "Japanese expendable launch system",
+   "overview": "The H3 is a Japanese medium-lift launch vehicle developed by JAXA and Mitsubishi Heavy Industries (MHI). A hydrolox-fuelled rocket, it is the successor to the H-IIA and H-IIB launch vehicles.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/H3_(rocket)",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "rocket family",
+     "date": "",
+     "quote": "H3 rocket: is a rocket family",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q11222053",
+     "kind": "reference"
+    },
+    {
+     "label": "a kind of",
+     "value": "expendable launch vehicle",
+     "date": "",
+     "quote": "H3 rocket: a kind of expendable launch vehicle",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q11222053",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "The H3 uses the LE-9 main engine, which was designed to be less expensive to produce as part of a broader effort to lower launch costs.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/H3_(rocket)"
+    },
+    {
+     "text": "The rocket has a modular design: its first stage is powered by two or three LE-9 engines and can be fitted with zero, two, or four SRB-3 solid rocket boosters, which are also used on the Epsilon S small-lift launch vehicle.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/H3_(rocket)"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.891537Z"
+  },
+  "wd:Q3381348": {
+   "id": "wd:Q3381348",
+   "qid": "Q3381348",
+   "label": "Phobos",
+   "type": "Topic",
+   "description": "fictional character in Marvel Comics",
+   "overview": "fictional character in Marvel Comics",
+   "overviewSource": {
+    "source": "wikidata.org",
+    "url": "https://www.wikidata.org/wiki/Q3381348",
+    "licence": "Wikidata, CC0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "fictional human hybrid",
+     "date": "",
+     "quote": "Phobos: is a fictional human hybrid",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q3381348",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "comics character",
+     "date": "",
+     "quote": "Phobos: is a comics character",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q3381348",
+     "kind": "reference"
+    }
+   ],
+   "background": [],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.891537Z"
+  },
+  "place:earth": {
+   "id": "place:earth",
+   "qid": null,
+   "label": "Earth",
+   "type": "Place",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:41.891537Z"
+  },
+  "topic:martian moon": {
+   "id": "topic:martian moon",
+   "qid": "Q177268",
+   "label": "Martian moon",
+   "type": "Topic",
+   "description": "natural satellites orbiting Mars",
+   "overview": "The two moons of Mars are Phobos and Deimos. They are irregular in shape.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Moons_of_Mars",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "a kind of",
+     "value": "planetary moon",
+     "date": "",
+     "quote": "Martian moon: a kind of planetary moon",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q177268",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Both were discovered by American astronomer Asaph Hall in August 1877 and are named after the Greek mythological twin characters Phobos (fear and panic) and Deimos (terror and dread) who accompanied their father Ares (Mars in Roman mythology, hence the name of the planet) into battle.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Moons_of_Mars"
+    },
+    {
+     "text": "Compared to the Earth's Moon, the moons Phobos and Deimos are very small.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Moons_of_Mars"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:41.891537Z"
+  },
+  "ev:jaxa launch of martian moons exploration spacecraft": {
+   "id": "ev:jaxa launch of martian moons exploration spacecraft",
+   "qid": null,
+   "label": "JAXA launch of Martian Moons eXploration spacecraft",
+   "type": "Event",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:41.891537Z"
+  },
+  "org:malaysia's registrar of societies": {
+   "id": "org:malaysia's registrar of societies",
+   "qid": null,
+   "label": "Malaysia's Registrar of Societies",
+   "type": "Organisation",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:42.020564Z"
+  },
+  "org:perikatan nasional": {
+   "id": "org:perikatan nasional",
+   "qid": null,
+   "label": "Perikatan Nasional",
+   "type": "Organisation",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:42.020564Z"
+  },
+  "org:component parties": {
+   "id": "org:component parties",
+   "qid": null,
+   "label": "component parties",
+   "type": "Organisation",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:42.020564Z"
+  },
+  "wd:Q833": {
+   "id": "wd:Q833",
+   "qid": "Q833",
+   "label": "Malaysia",
+   "type": "Place",
+   "description": "country in Southeast Asia",
+   "overview": "Malaysia is a country in Southeast Asia. A federal constitutional monarchy, it consists of 13 states and three federal territories, separated by the South China Sea into two regions: Peninsular Malaysia on Mainland Southeast Asia and East Malaysia on the island of Borneo.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Malaysia",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "sovereign state (since 1963)",
+     "date": "",
+     "quote": "Malaysia: is a sovereign state (since 1963)",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q833",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "country",
+     "date": "",
+     "quote": "Malaysia: is a country",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q833",
+     "kind": "reference"
+    },
+    {
+     "label": "capital",
+     "value": "Kuala Lumpur",
+     "date": "",
+     "quote": "Malaysia: capital Kuala Lumpur",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q833",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "34,231,700",
+     "date": "2025",
+     "quote": "Malaysia: population 34,231,700",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q833",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "330,803 km²",
+     "date": "",
+     "quote": "Malaysia: area 330,803 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q833",
+     "kind": "reference"
+    },
+    {
+     "label": "continent",
+     "value": "Asia",
+     "date": "",
+     "quote": "Malaysia: continent Asia",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q833",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Peninsular Malaysia shares land and maritime borders with Thailand, as well as maritime borders with Singapore, Vietnam, and Indonesia; East Malaysia shares land borders with Brunei and Indonesia, and maritime borders with the Philippines and Vietnam.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Malaysia"
+    },
+    {
+     "text": "Kuala Lumpur is the country's national capital, largest city, and the seat of the legislative branch of the federal government, while Putrajaya is the federal administrative capital, representing the seat of both the executive branch and the judicial branch of the federal government.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Malaysia"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.020564Z"
+  },
+  "wd:Q7755": {
+   "id": "wd:Q7755",
+   "qid": "Q7755",
+   "label": "constitution",
+   "type": "Topic",
+   "description": "set of fundamental principles or established precedents according to which a state or other organization is governed",
+   "overview": "A constitution, or supreme law, is the aggregate of fundamental principles or established precedents that constitute the legal basis of a polity, organization or other type of entity, and commonly determines how that entity is to be governed. When these principles are written down into a single document or set of legal documents, those documents may be said to embody a written constitution; if they are encompassed in",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Constitution",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "type of law",
+     "date": "",
+     "quote": "constitution: is a type of law",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q7755",
+     "kind": "reference"
+    },
+    {
+     "label": "a kind of",
+     "value": "statute",
+     "date": "",
+     "quote": "constitution: a kind of statute",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q7755",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "The constitution of the United Kingdom is a notable example of an uncodified constitution; it is instead written in numerous fundamental acts of a legislature, court cases, and treaties.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Constitution"
+    },
+    {
+     "text": "Constitutions concern different levels of organizations, from sovereign countries to companies and unincorporated associations.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Constitution"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.020564Z"
+  },
+  "ev:deregistration of perikatan nasional": {
+   "id": "ev:deregistration of perikatan nasional",
+   "qid": null,
+   "label": "Deregistration of Perikatan Nasional",
+   "type": "Event",
+   "description": "",
+   "overview": "",
+   "overviewSource": null,
+   "facts": [],
+   "background": [],
+   "found": false,
+   "note": "Not enough information found in open sources.",
+   "retrievedAt": "2026-10-21T10:46:42.020564Z"
+  },
+  "wd:Q958": {
+   "id": "wd:Q958",
+   "qid": "Q958",
+   "label": "South Sudan",
+   "type": "Place",
+   "description": "country in East Africa",
+   "overview": "South Sudan (), officially the Republic of South Sudan, is a landlocked country in East Africa. It is bordered by Sudan to the north, Ethiopia to the east, Kenya to the southeast, Uganda to the south, the Democratic Republic of the Congo to the southwest, and the Central African Republic to the west.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/South_Sudan",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "sovereign state",
+     "date": "",
+     "quote": "South Sudan: is a sovereign state",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q958",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "landlocked country",
+     "date": "",
+     "quote": "South Sudan: is a landlocked country",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q958",
+     "kind": "reference"
+    },
+    {
+     "label": "capital",
+     "value": "Juba",
+     "date": "",
+     "quote": "South Sudan: capital Juba",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q958",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "12,575,714",
+     "date": "2017",
+     "quote": "South Sudan: population 12,575,714",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q958",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "644,329 km²",
+     "date": "",
+     "quote": "South Sudan: area 644,329 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q958",
+     "kind": "reference"
+    },
+    {
+     "label": "continent",
+     "value": "Africa",
+     "date": "",
+     "quote": "South Sudan: continent Africa",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q958",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "South Sudan's diverse landscape includes vast plains and plateaus, dry and tropical savannahs, inland floodplains, and forested mountains.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/South_Sudan"
+    },
+    {
+     "text": "The Nile River system is the defining physical feature of the country, running south to north across its center, which is dominated by a large swamp known as the Sudd.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/South_Sudan"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.054620Z"
+  },
+  "wd:Q1049": {
+   "id": "wd:Q1049",
+   "qid": "Q1049",
+   "label": "Sudan",
+   "type": "Place",
+   "description": "country in Northeast Africa",
+   "overview": "Sudan, officially the Republic of the Sudan, is a country in Northeast Africa. It borders the Central African Republic to the southwest, Chad to the west, Libya to the northwest, Egypt to the north, the Red Sea to the east, Eritrea and Ethiopia to the southeast, and South Sudan to the south.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Sudan",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "republic",
+     "date": "",
+     "quote": "Sudan: is a republic",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1049",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "sovereign state (since 1956)",
+     "date": "",
+     "quote": "Sudan: is a sovereign state (since 1956)",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1049",
+     "kind": "reference"
+    },
+    {
+     "label": "capital",
+     "value": "Khartoum",
+     "date": "",
+     "quote": "Sudan: capital Khartoum",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1049",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "40,533,330",
+     "date": "2017",
+     "quote": "Sudan: population 40,533,330",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1049",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "1,886,068 km²",
+     "date": "",
+     "quote": "Sudan: area 1,886,068 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1049",
+     "kind": "reference"
+    },
+    {
+     "label": "continent",
+     "value": "Africa",
+     "date": "",
+     "quote": "Sudan: continent Africa",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1049",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Sudan has a population of 51.8 million people as of 2025 and occupies 1,886,068 square kilometres (728,215 square miles), making it Africa's third-largest country by area.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Sudan"
+    },
+    {
+     "text": "Sudan's capital and most populous city is Khartoum.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Sudan"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.054620Z"
+  },
+  "wd:Q336469": {
+   "id": "wd:Q336469",
+   "qid": "Q336469",
+   "label": "Abyei",
+   "type": "Topic",
+   "description": "human settlement",
+   "overview": "Abyei (also spelled Abyēy; Arabic: أبيي) is a border town currently in the Abyei Area that is jointly administered by South Sudan and Sudan. The United Nations estimated the town's population at around 20,000 previous to May 2011 events.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Abyei_(town)",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "human settlement",
+     "date": "",
+     "quote": "Abyei: is a human settlement",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q336469",
+     "kind": "reference"
+    },
+    {
+     "label": "part of",
+     "value": "Sudan",
+     "date": "",
+     "quote": "Abyei: part of Sudan",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q336469",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "The oil-producing and fertile Abyei Area, with Abyei town as its center, is a disputed territorial point of contention in the July 2011 secession of South Sudan process.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Abyei_(town)"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.054620Z"
+  },
+  "wd:Q7414": {
+   "id": "wd:Q7414",
+   "qid": "Q7414",
+   "label": "The Walt Disney Company",
+   "type": "Organisation",
+   "description": "American multinational mass media company",
+   "overview": "The Walt Disney Company (TWDC), commonly known as simply Disney, is an American multinational mass media and entertainment conglomerate headquartered at the Walt Disney Studios complex in Burbank, California. Founded on October 16, 1923, as an animation studio by brothers Walt and Roy Oliver Disney as Disney Brothers Cartoon Studio, Disney operated under the names Walt Disney Studio and Walt Disney Productions before",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/The_Walt_Disney_Company",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "film production company",
+     "date": "",
+     "quote": "The Walt Disney Company: is a film production company",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q7414",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "commercial organization",
+     "date": "",
+     "quote": "The Walt Disney Company: is a commercial organization",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q7414",
+     "kind": "reference"
+    },
+    {
+     "label": "founded",
+     "value": "16 October 1923",
+     "date": "1923-10-16",
+     "quote": "The Walt Disney Company: founded 16 October 1923",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q7414",
+     "kind": "reference"
+    },
+    {
+     "label": "headquarters",
+     "value": "Burbank",
+     "date": "",
+     "quote": "The Walt Disney Company: headquarters Burbank",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q7414",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "United States",
+     "date": "",
+     "quote": "The Walt Disney Company: country United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q7414",
+     "kind": "reference"
+    },
+    {
+     "label": "industry",
+     "value": "media industry",
+     "date": "",
+     "quote": "The Walt Disney Company: industry media industry",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q7414",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "In 1928, Disney established itself as a leader in the animation industry with the short film Steamboat Willie.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/The_Walt_Disney_Company"
+    },
+    {
+     "text": "The film used synchronized sound to become the first post-produced sound cartoon, and popularized Mickey Mouse, who became Disney's mascot and corporate icon.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/The_Walt_Disney_Company"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.103057Z"
+  },
+  "wd:Q2937389": {
+   "id": "wd:Q2937389",
+   "qid": "Q2937389",
+   "label": "Capital Cities Communications",
+   "type": "Organisation",
+   "description": "former American media company",
+   "overview": "Capital Cities/ABC Inc. was an American media company. It was founded in 1985 when Capital Cities Communications purchased the much larger American Broadcasting Companies, Inc.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Capital_Cities/ABC",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "business",
+     "date": "",
+     "quote": "Capital Cities Communications: is a business",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q2937389",
+     "kind": "reference"
+    },
+    {
+     "label": "founded",
+     "value": "1947",
+     "date": "1947",
+     "quote": "Capital Cities Communications: founded 1947",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q2937389",
+     "kind": "reference"
+    },
+    {
+     "label": "headquarters",
+     "value": "New York City",
+     "date": "",
+     "quote": "Capital Cities Communications: headquarters New York City",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q2937389",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "United States",
+     "date": "",
+     "quote": "Capital Cities Communications: country United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q2937389",
+     "kind": "reference"
+    },
+    {
+     "label": "industry",
+     "value": "radio broadcasting",
+     "date": "",
+     "quote": "Capital Cities Communications: industry radio broadcasting",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q2937389",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "They were eventually acquired by Disney and re-branded themselves as Disney–ABC Television Group (now Disney Entertainment Television) in 1996.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Capital_Cities/ABC"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.103057Z"
+  },
+  "wd:Q3550714": {
+   "id": "wd:Q3550714",
+   "qid": "Q3550714",
+   "label": "Plitt Theatres",
+   "type": "Topic",
+   "description": "movie theater chain",
+   "overview": "Plitt Theatres was a major movie theater chain in the United States and went under a number of names, Publix Theaters Corporation, Paramount Publix Corporation, United Paramount Theatres, American Broadcasting-Paramount Theatres and ABC Theatres and operated a number of theater circuits under various names. The chain was originally the theater division of Paramount Pictures, incorporating a number of theater circuits",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Plitt_Theatres",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "cinema chain",
+     "date": "",
+     "quote": "Plitt Theatres: is a cinema chain",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q3550714",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "former entity",
+     "date": "",
+     "quote": "Plitt Theatres: is a former entity",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q3550714",
+     "kind": "reference"
+    },
+    {
+     "label": "since",
+     "value": "1974",
+     "date": "1974",
+     "quote": "Plitt Theatres: since 1974",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q3550714",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Paramount was required to divest the theater chain as a result of the U.S.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Plitt_Theatres"
+    },
+    {
+     "text": "Supreme Court decision in the case United States v.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Plitt_Theatres"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.103057Z"
+  },
+  "wd:Q122938552": {
+   "id": "wd:Q122938552",
+   "qid": "Q122938552",
+   "label": "JournalList",
+   "type": "Technology",
+   "description": "journalism nonprofit promoting the trust.txt protocol",
+   "overview": "journalism nonprofit promoting the trust.txt protocol",
+   "overviewSource": {
+    "source": "wikidata.org",
+    "url": "https://www.wikidata.org/wiki/Q122938552",
+    "licence": "Wikidata, CC0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "trade association",
+     "date": "",
+     "quote": "JournalList: is a trade association",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q122938552",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "computer network protocol",
+     "date": "",
+     "quote": "JournalList: is a computer network protocol",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q122938552",
+     "kind": "reference"
+    }
+   ],
+   "background": [],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.103057Z"
+  },
+  "wd:Q12585": {
+   "id": "wd:Q12585",
+   "qid": "Q12585",
+   "label": "Latin America",
+   "type": "Place",
+   "description": "region of the Americas where Romance languages are primarily spoken",
+   "overview": "Latin America (Spanish: América Latina or Latinoamérica; Portuguese: América Latina) is the cultural region of the Americas where Romance languages are predominantly spoken, primarily Spanish and Portuguese. Since it is defined according to its cultural identity instead of its geography, Latin America includes countries from both North and South America.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Latin_America",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "transcontinental region",
+     "date": "",
+     "quote": "Latin America: is a transcontinental region",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q12585",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "cultural region",
+     "date": "",
+     "quote": "Latin America: is a cultural region",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q12585",
+     "kind": "reference"
+    },
+    {
+     "label": "continent",
+     "value": "Americas",
+     "date": "",
+     "quote": "Latin America: continent Americas",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q12585",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "For instance, countries from North America like Mexico, Honduras, Guatemala, etc. tend to be included.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Latin_America"
+    },
+    {
+     "text": "In fact, most of the countries in Central America, South America and the Caribbean are considered Latin American countries.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Latin_America"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.140715Z"
+  },
+  "wd:Q49": {
+   "id": "wd:Q49",
+   "qid": "Q49",
+   "label": "North America",
+   "type": "Place",
+   "description": "continent in the Americas",
+   "overview": "North America is a continent in the Northern and Western hemispheres. It is bordered to the north by the Arctic Ocean, to the east by the Atlantic Ocean, to the southeast by South America and the Caribbean Sea, and to the south and west by the Pacific Ocean.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/North_America",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "continent",
+     "date": "",
+     "quote": "North America: is a continent",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q49",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "subcontinent",
+     "date": "",
+     "quote": "North America: is a subcontinent",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q49",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "617,280,500",
+     "date": "2025",
+     "quote": "North America: population 617,280,500",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q49",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "21,329,947 km²",
+     "date": "",
+     "quote": "North America: area 21,329,947 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q49",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "North America covers an area of around 24,709,000 square kilometers (9,540,000 square miles), representing approximately 16.5% of Earth's land area and 4.8% of its total surface area.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/North_America"
+    },
+    {
+     "text": "It is the third-largest continent by size after Asia and Africa, and the fourth-largest continent by population after Asia, Africa, and Europe.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/North_America"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.140715Z"
+  },
+  "wd:Q1563": {
+   "id": "wd:Q1563",
+   "qid": "Q1563",
+   "label": "Havana",
+   "type": "Place",
+   "description": "capital and largest city of Cuba",
+   "overview": "Havana (, US also ; Spanish: La Habana [la‿aˈβana] ) is the capital and largest city of Cuba. The heart of La Habana Province, Havana is the country's main port and commercial center.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Havana",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "city (since 1592)",
+     "date": "",
+     "quote": "Havana: is a city (since 1592)",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1563",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "largest city",
+     "date": "",
+     "quote": "Havana: is a largest city",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1563",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "Cuba (since 1895)",
+     "date": "",
+     "quote": "Havana: country Cuba (since 1895)",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1563",
+     "kind": "reference"
+    },
+    {
+     "label": "located in",
+     "value": "Havana Province",
+     "date": "",
+     "quote": "Havana: located in Havana Province",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1563",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "2,141,652",
+     "date": "2010",
+     "quote": "Havana: population 2,141,652",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1563",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "728.3 km²",
+     "date": "",
+     "quote": "Havana: area 728.3 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1563",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "It is the most populous city, the largest by area, and the second-largest metropolitan area in the Caribbean region.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Havana"
+    },
+    {
+     "text": "The population in 2021 was 2,142,939 inhabitants, and its area is 728.26 km2 (281.18 sq mi) for the capital city and 8,475.57 km2 for the metropolitan zone.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Havana"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.140715Z"
+  },
+  "wd:Q1065": {
+   "id": "wd:Q1065",
+   "qid": "Q1065",
+   "label": "United Nations",
+   "type": "Organisation",
+   "description": "global international and intergovernmental organization",
+   "overview": "The United Nations (UN) is an international intergovernmental organization established by the signing of the Charter of the United Nations on 26 June 1945 with the articulated mission of maintaining international peace and security, to develop friendly relations among states, to promote international cooperation, and to serve as a centre for harmonizing the actions of states in achieving those goals. The United Natio",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/United_Nations",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "intergovernmental organization",
+     "date": "",
+     "quote": "United Nations: is a intergovernmental organization",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1065",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "international organization",
+     "date": "",
+     "quote": "United Nations: is a international organization",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1065",
+     "kind": "reference"
+    },
+    {
+     "label": "founded",
+     "value": "24 October 1945",
+     "date": "1945-10-24",
+     "quote": "United Nations: founded 24 October 1945",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1065",
+     "kind": "reference"
+    },
+    {
+     "label": "headquarters",
+     "value": "New York City",
+     "date": "",
+     "quote": "United Nations: headquarters New York City",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1065",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "United States",
+     "date": "",
+     "quote": "United Nations: country United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1065",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "The UN comprises six principal organizations: General Assembly, Security Council, Economic and Social Council, International Court of Justice, Secretariat and Trusteeship Council which, together with several specialized agencies and related agencies, make up the UN System.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/United_Nations"
+    },
+    {
+     "text": "There is a total of 193 member states, representing nearly all of the world's sovereign states, as well as two observer states, the Holy See and the State of Palestine.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/United_Nations"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.140715Z"
+  },
+  "wd:Q7825": {
+   "id": "wd:Q7825",
+   "qid": "Q7825",
+   "label": "World Trade Organization",
+   "type": "Organisation",
+   "description": "intergovernmental organization that intends to supervise and liberalize international trade",
+   "overview": "The World Trade Organization (WTO) is an intergovernmental organization that regulates and facilitates international trade. Established on 1 January 1995, pursuant to the 1994 Marrakesh Agreement, it succeeded the General Agreement on Tariffs and Trade (GATT), which was created in 1948.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/World_Trade_Organization",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "international organization",
+     "date": "",
+     "quote": "World Trade Organization: is a international organization",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q7825",
+     "kind": "reference"
+    },
+    {
+     "label": "founded",
+     "value": "1 January 1995",
+     "date": "1995-01-01",
+     "quote": "World Trade Organization: founded 1 January 1995",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q7825",
+     "kind": "reference"
+    },
+    {
+     "label": "headquarters",
+     "value": "Centre William Rappard",
+     "date": "",
+     "quote": "World Trade Organization: headquarters Centre William Rappard",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q7825",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "Switzerland",
+     "date": "",
+     "quote": "World Trade Organization: country Switzerland",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q7825",
+     "kind": "reference"
+    },
+    {
+     "label": "employees",
+     "value": "640",
+     "date": "2018",
+     "quote": "World Trade Organization: employees 640",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q7825",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "As the world's largest international economic organization, the WTO has 166 members, representing over 98% of global trade and global GDP.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/World_Trade_Organization"
+    },
+    {
+     "text": "It is headquartered in Geneva, Switzerland.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/World_Trade_Organization"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.140715Z"
+  },
+  "wd:Q578170": {
+   "id": "wd:Q578170",
+   "qid": "Q578170",
+   "label": "contiguous United States",
+   "type": "Place",
+   "description": "the 48 states of the United States (all but Alaska and Hawaii) and the District of Columbia",
+   "overview": "The contiguous United States, also known as the U.S. mainland, officially referred to as the conterminous United States, consists of the 48 adjoining U.S. states and the District of Columbia of the United States in central North America. The term excludes the only two non-contiguous states and the last two to be admitted to the Union, which are Alaska and Hawaii, and all other offshore insular areas, such as the U.S.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Contiguous_United_States",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "territory",
+     "date": "",
+     "quote": "contiguous United States: is a territory",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q578170",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "geographic contiguity",
+     "date": "",
+     "quote": "contiguous United States: is a geographic contiguity",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q578170",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "United States",
+     "date": "",
+     "quote": "contiguous United States: country United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q578170",
+     "kind": "reference"
+    },
+    {
+     "label": "located in",
+     "value": "United States",
+     "date": "",
+     "quote": "contiguous United States: located in United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q578170",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "8,080,464.3 km²",
+     "date": "",
+     "quote": "contiguous United States: area 8,080,464.3 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q578170",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "The colloquial term Lower 48 is also used, especially in relation to Alaska.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Contiguous_United_States"
+    },
+    {
+     "text": "The term The Mainland is used in Hawaii.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Contiguous_United_States"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.157964Z"
+  },
+  "wd:Q2261430": {
+   "id": "wd:Q2261430",
+   "qid": "Q2261430",
+   "label": "South Atlantic states",
+   "type": "Place",
+   "description": "geographic census division of the United States Census Bureau",
+   "overview": "The South Atlantic states form one of the nine Census Bureau Divisions within the United States that are recognized by the United States Census Bureau. Census Bureau Region 3, Division 5, corresponds to the South (states/areas that were geographically part of the Thirteen Colonies) with the addition of Florida.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/South_Atlantic_states",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "United States census division",
+     "date": "",
+     "quote": "South Atlantic states: is a United States census division",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q2261430",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "United States",
+     "date": "",
+     "quote": "South Atlantic states: country United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q2261430",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "61,774,970",
+     "date": "2010-04-01",
+     "quote": "South Atlantic states: population 61,774,970",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q2261430",
+     "kind": "reference"
+    }
+   ],
+   "background": [],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.157964Z"
+  },
+  "wd:Q37043": {
+   "id": "wd:Q37043",
+   "qid": "Q37043",
+   "label": "Tallahassee",
+   "type": "Place",
+   "description": "capital city of the U.S. state of Florida and seat of Leon County",
+   "overview": "Tallahassee () is the capital city of the U.S. state of Florida. It is the county seat of and only incorporated municipality in Leon County.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Tallahassee,_Florida",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "city in the United States",
+     "date": "",
+     "quote": "Tallahassee: is a city in the United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q37043",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "state or insular area capital of the United States",
+     "date": "",
+     "quote": "Tallahassee: is a state or insular area capital of the United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q37043",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "United States",
+     "date": "",
+     "quote": "Tallahassee: country United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q37043",
+     "kind": "reference"
+    },
+    {
+     "label": "located in",
+     "value": "Leon County",
+     "date": "",
+     "quote": "Tallahassee: located in Leon County",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q37043",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "196,169",
+     "date": "2020-04-01",
+     "quote": "Tallahassee: population 196,169",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q37043",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "270.4 km²",
+     "date": "2016",
+     "quote": "Tallahassee: area 270.4 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q37043",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Tallahassee became the capital of Florida, then the Florida Territory, in 1824.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Tallahassee,_Florida"
+    },
+    {
+     "text": "In 2024, the estimated population was 205,089, making it the eighth–most populous city in the state of Florida.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Tallahassee,_Florida"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.157964Z"
+  },
+  "wd:Q15": {
+   "id": "wd:Q15",
+   "qid": "Q15",
+   "label": "Africa",
+   "type": "Place",
+   "description": "continent",
+   "overview": "Africa is the world's second-largest and second-most populous continent after Asia. At about 30.3 million km2 (11.7 million square miles), including adjacent islands, it covers around 20% of Earth's land area and 6% of its total surface area.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Africa",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "continent",
+     "date": "",
+     "quote": "Africa: is a continent",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q15",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "geographic location",
+     "date": "",
+     "quote": "Africa: is a geographic location",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q15",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "1,549,862,036",
+     "date": "2025",
+     "quote": "Africa: population 1,549,862,036",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q15",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "29,648,481 km²",
+     "date": "",
+     "quote": "Africa: area 29,648,481 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q15",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "With nearly 1.4 billion of the world's population, Africa's population is the youngest among the continents; the median age in 2012 was 19.7, when the worldwide median age was 30.4.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Africa"
+    },
+    {
+     "text": "Based on 2024 projections, Africa's population will exceed 3.8 billion people by 2100.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Africa"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.178075Z"
+  },
+  "wd:Q1947": {
+   "id": "wd:Q1947",
+   "qid": "Q1947",
+   "label": "Juba",
+   "type": "Place",
+   "description": "capital of the Republic of South Sudan",
+   "overview": "Juba is the capital and largest city of South Sudan. The city is situated on the White Nile and also serves as the capital of the Central Equatoria State.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Juba",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "city",
+     "date": "",
+     "quote": "Juba: is a city",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1947",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "big city",
+     "date": "",
+     "quote": "Juba: is a big city",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1947",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "South Sudan",
+     "date": "",
+     "quote": "Juba: country South Sudan",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1947",
+     "kind": "reference"
+    },
+    {
+     "label": "located in",
+     "value": "Central Equatoria",
+     "date": "",
+     "quote": "Juba: located in Central Equatoria",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1947",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "500,088",
+     "date": "2025",
+     "quote": "Juba: population 500,088",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1947",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "52 km²",
+     "date": "",
+     "quote": "Juba: area 52 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1947",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "It is the most recently declared national capital and had a population of 525,953 in 2017.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Juba"
+    },
+    {
+     "text": "It has an area of 52 km2 (20 sq mi), with the metropolitan area covering 336 km2 (130 sq mi).",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Juba"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.178075Z"
+  },
+  "wd:Q7159": {
+   "id": "wd:Q7159",
+   "qid": "Q7159",
+   "label": "African Union",
+   "type": "Organisation",
+   "description": "supranational union in Africa",
+   "overview": "The African Union (AU) is a continental union of 55 member states located on the continent of Africa. The AU was announced in the Sirte Declaration in Sirte, Libya, on 9 September 1999, calling for the establishment of the African Union.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/African_Union",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "regional organization",
+     "date": "",
+     "quote": "African Union: is a regional organization",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q7159",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "continental union",
+     "date": "",
+     "quote": "African Union: is a continental union",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q7159",
+     "kind": "reference"
+    },
+    {
+     "label": "founded",
+     "value": "9 September 1999",
+     "date": "1999-09-09",
+     "quote": "African Union: founded 9 September 1999",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q7159",
+     "kind": "reference"
+    },
+    {
+     "label": "headquarters",
+     "value": "Addis Ababa",
+     "date": "",
+     "quote": "African Union: headquarters Addis Ababa",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q7159",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "The bloc was launched on 9 July 2002 in Durban, South Africa.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/African_Union"
+    },
+    {
+     "text": "The intention of the AU was to replace the Organisation of African Unity (OAU), established on 25 May 1963 in Addis Ababa by 32 signatory governments; the OAU was disbanded on 9 July 2002.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/African_Union"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.178075Z"
+  },
+  "wd:Q242345": {
+   "id": "wd:Q242345",
+   "qid": "Q242345",
+   "label": "S&P 500",
+   "type": "Topic",
+   "description": "American stock market index",
+   "overview": "The S&P 500 (Standard and Poor's 500) is a stock market index tracking the stock performance of 500 companies listed on stock exchanges in the United States that are considered to have large market capitalizations. The S&P 500 is a subset of the S&P 1500.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/S&P_500",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "stock market index",
+     "date": "",
+     "quote": "S&P 500: is a stock market index",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q242345",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "Enumeration of 500",
+     "date": "",
+     "quote": "S&P 500: is a Enumeration of 500",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q242345",
+     "kind": "reference"
+    },
+    {
+     "label": "since",
+     "value": "4 March 1957",
+     "date": "1957-03-04",
+     "quote": "S&P 500: since 4 March 1957",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q242345",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "It is maintained by S&P Dow Jones Indices and its components are selected by a committee.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/S&P_500"
+    },
+    {
+     "text": "For a list of the criteria for addition to the index, see S&P 1500 § Selection criteria.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/S&P_500"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.186566Z"
+  },
+  "wd:Q180816": {
+   "id": "wd:Q180816",
+   "qid": "Q180816",
+   "label": "Dow Jones Industrial Average",
+   "type": "Topic",
+   "description": "stock market index",
+   "overview": "The Dow Jones Industrial Average (DJIA), Dow Jones, or simply the Dow (), is a stock market index tracking the stock performance of 30 large companies listed on stock exchanges in the United States. It is named after founder Charles Dow and his business associate, statistician Edward Jones.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "stock market index",
+     "date": "",
+     "quote": "Dow Jones Industrial Average: is a stock market index",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q180816",
+     "kind": "reference"
+    },
+    {
+     "label": "since",
+     "value": "26 May 1896",
+     "date": "1896-05-26",
+     "quote": "Dow Jones Industrial Average: since 26 May 1896",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q180816",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "It is maintained by S&P Dow Jones Indices and its components are selected by a committee.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average"
+    },
+    {
+     "text": "The index is a price-weighted index; stocks with the highest price per share have the highest weighting in the index.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.186566Z"
+  },
+  "wd:Q1546793": {
+   "id": "wd:Q1546793",
+   "qid": "Q1546793",
+   "label": "S&P 100",
+   "type": "Topic",
+   "description": "stock market index",
+   "overview": "The S&P 100 (Standard and Poor's 100) is a stock market index of United States blue chip large-cap (and/or mega-cap) stocks maintained by S&P Dow Jones Indices. The S&P 100 is a subset of the S&P 500 and the S&P 1500, and holds stocks that tend to be the largest and most established companies in the S&P 500.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/S&P_100",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "stock market index",
+     "date": "",
+     "quote": "S&P 100: is a stock market index",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1546793",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "hectad",
+     "date": "",
+     "quote": "S&P 100: is a hectad",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1546793",
+     "kind": "reference"
+    },
+    {
+     "label": "since",
+     "value": "1976",
+     "date": "1976",
+     "quote": "S&P 100: since 1976",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q1546793",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "However, the S&P 100 actually includes 101 larger US company stocks due to holding two different share classes of Alphabet Inc.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/S&P_100"
+    },
+    {
+     "text": "Constituents of the S&P 100 are selected for sector balance and represent nearly 71% of the market capitalization of the S&P 500 and 61% of the market capitalization of the U.S. equity markets as of December 2024.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/S&P_100"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.186566Z"
+  },
+  "wd:Q56611639": {
+   "id": "wd:Q56611639",
+   "qid": "Q56611639",
+   "label": "media industry",
+   "type": "Technology",
+   "description": "business model based on communicating information, art and entertainment to a large audience",
+   "overview": "business model based on communicating information, art and entertainment to a large audience",
+   "overviewSource": {
+    "source": "wikidata.org",
+    "url": "https://www.wikidata.org/wiki/Q56611639",
+    "licence": "Wikidata, CC0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "type of industry",
+     "date": "",
+     "quote": "media industry: is a type of industry",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q56611639",
+     "kind": "reference"
+    },
+    {
+     "label": "a kind of",
+     "value": "media & entertainment industry",
+     "date": "",
+     "quote": "media industry: a kind of media & entertainment industry",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q56611639",
+     "kind": "reference"
+    }
+   ],
+   "background": [],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.186566Z"
+  },
+  "wd:Q9323634": {
+   "id": "wd:Q9323634",
+   "qid": "Q9323634",
+   "label": "tourism industry",
+   "type": "Topic",
+   "description": "economic sector related to tourism",
+   "overview": "Tourism is travel for pleasure, and the commercial activity of providing and supporting such travel. UN Tourism defines tourism more generally as people \"staying in places outside their usual environment for not more than one consecutive year for leisure and not less than 24 hours, business and other purposes\".",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Tourism_industry",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "type of industry",
+     "date": "",
+     "quote": "tourism industry: is a type of industry",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q9323634",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "economic activity",
+     "date": "",
+     "quote": "tourism industry: is a economic activity",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q9323634",
+     "kind": "reference"
+    },
+    {
+     "label": "a kind of",
+     "value": "industry",
+     "date": "",
+     "quote": "tourism industry: a kind of industry",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q9323634",
+     "kind": "reference"
+    },
+    {
+     "label": "part of",
+     "value": "leisure industry",
+     "date": "",
+     "quote": "tourism industry: part of leisure industry",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q9323634",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Tourism can be domestic or international.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Tourism_industry"
+    },
+    {
+     "text": "Global tourism has both incoming and outgoing implications on a country's balance of payments.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Tourism_industry"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.186566Z"
+  },
+  "wd:Q538": {
+   "id": "wd:Q538",
+   "qid": "Q538",
+   "label": "Insular Oceania",
+   "type": "Place",
+   "description": "geographic region comprising Melanesia, Micronesia and Polynesia",
+   "overview": "Oceania is a geographical region – or, in certain classifications, one of the world’s continents – including Australasia, Melanesia, Micronesia, and Polynesia. Spanning the Eastern and Western hemispheres, at the centre of the water hemisphere, Oceania is estimated to have a land area of about 9,000,000 square kilometres (3,500,000 sq mi) and a population of around 46.3 million as of 2024, including Australia but exc",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Insular_Oceania",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "subcontinent",
+     "date": "",
+     "quote": "Insular Oceania: is a subcontinent",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q538",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "12,355,695",
+     "date": "2020",
+     "quote": "Insular Oceania: population 12,355,695",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q538",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "1,260,000 km²",
+     "date": "",
+     "quote": "Insular Oceania: area 1,260,000 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q538",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "When compared against other continental land areas, Oceania is the smallest and the second-least populated after Antarctica.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Insular_Oceania"
+    },
+    {
+     "text": "It is home to Earth's third-largest remaining area of tropical rainforest, which covers much of the island of New Guinea.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Insular_Oceania"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.219695Z"
+  },
+  "wd:Q48": {
+   "id": "wd:Q48",
+   "qid": "Q48",
+   "label": "Asia",
+   "type": "Place",
+   "description": "part of terrestrial continent, mainly in the northeastern quadrant",
+   "overview": "Asia (  AY-zhə, UK also  AY-shə) is the largest continent in the world by both land area and population. It covers an area of more than 44 million square kilometres, about 30% of Earth's total land area and 8% of Earth's total surface area.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Asia",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "continent",
+     "date": "",
+     "quote": "Asia: is a continent",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q48",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "part of the world",
+     "date": "",
+     "quote": "Asia: is a part of the world",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q48",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "4,977,954,915",
+     "date": "2025",
+     "quote": "Asia: population 4,977,954,915",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q48",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "44,614,500 km²",
+     "date": "",
+     "quote": "Asia: area 44,614,500 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q48",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "The continent, which has long been home to the majority of the human population, was the site of many of the first civilisations.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Asia"
+    },
+    {
+     "text": "Its estimated 4.8 billion people in 2025 constituted approximately 59% of the world's population.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Asia"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.219695Z"
+  },
+  "wd:Q61": {
+   "id": "wd:Q61",
+   "qid": "Q61",
+   "label": "Washington, D.C.",
+   "type": "Place",
+   "description": "capital city of the United States of America",
+   "overview": "Washington, D.C., officially the District of Columbia and commonly shortened to  Washington, or DC, is the capital city of the United States, and its only federal district. The city stands on the north-east bank of the Potomac River, across from the state of Virginia, surrounded by Maryland to its north, east, and south.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Washington,_D.C.",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "city in the United States",
+     "date": "",
+     "quote": "Washington, D.C.: is a city in the United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q61",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "big city",
+     "date": "",
+     "quote": "Washington, D.C.: is a big city",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q61",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "United States",
+     "date": "",
+     "quote": "Washington, D.C.: country United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q61",
+     "kind": "reference"
+    },
+    {
+     "label": "located in",
+     "value": "District of Columbia",
+     "date": "",
+     "quote": "Washington, D.C.: located in District of Columbia",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q61",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "689,545",
+     "date": "2020-04-01",
+     "quote": "Washington, D.C.: population 689,545",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q61",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "177 km² (since 1846)",
+     "date": "",
+     "quote": "Washington, D.C.: area 177 km² (since 1846)",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q61",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "The district was named for Columbia, the female personification of the American nation, through which human form and attributes are applied to the United States.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Washington,_D.C."
+    },
+    {
+     "text": "\"Washington\" is a more recent addition to the city's common name, and is from the name of George Washington, the first U.S. president.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Washington,_D.C."
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.219695Z"
+  },
+  "wd:Q72829598": {
+   "id": "wd:Q72829598",
+   "qid": "Q72829598",
+   "label": "Latin America and the Caribbean",
+   "type": "Place",
+   "description": "subregion of the Americas",
+   "overview": "Latin America and the Caribbean (LAC) is a geopolitical and cultural region encompassing the Americas south of the contiguous United States. It includes all countries and territories in the Americas but the United States, Canada, Greenland, Bermuda and Saint Pierre and Miquelon (Northern America).",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Latin_America_and_the_Caribbean",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "transcontinental region",
+     "date": "",
+     "quote": "Latin America and the Caribbean: is a transcontinental region",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q72829598",
+     "kind": "reference"
+    },
+    {
+     "label": "continent",
+     "value": "Americas",
+     "date": "",
+     "quote": "Latin America and the Caribbean: continent Americas",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q72829598",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "It covers an extensive region, extending from The Bahamas and Mexico in the north to Argentina and Chile in the south.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Latin_America_and_the_Caribbean"
+    },
+    {
+     "text": "In comparison to Latin America, LAC also includes countries in Central America, South America, and the Caribbean where predominantly non-Latin languages—i.e.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Latin_America_and_the_Caribbean"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.304639Z"
+  },
+  "wd:Q155": {
+   "id": "wd:Q155",
+   "qid": "Q155",
+   "label": "Brazil",
+   "type": "Place",
+   "description": "country in South America",
+   "overview": "Brazil, officially the Federative Republic of Brazil, is the largest country in South America. It is also the world's fifth-largest country by area and the seventh-largest by population, with over 214 million people.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Brazil",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "sovereign state",
+     "date": "",
+     "quote": "Brazil: is a sovereign state",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q155",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "secular state",
+     "date": "",
+     "quote": "Brazil: is a secular state",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q155",
+     "kind": "reference"
+    },
+    {
+     "label": "capital",
+     "value": "Brasília (since 1960)",
+     "date": "",
+     "quote": "Brazil: capital Brasília (since 1960)",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q155",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "214,211,951",
+     "date": "2026-07-01",
+     "quote": "Brazil: population 214,211,951",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q155",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "8,515,767 km²",
+     "date": "",
+     "quote": "Brazil: area 8,515,767 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q155",
+     "kind": "reference"
+    },
+    {
+     "label": "continent",
+     "value": "South America",
+     "date": "",
+     "quote": "Brazil: continent South America",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q155",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Brazil is a federation composed of 26 states and a Federal District, which hosts the capital, Brasília.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Brazil"
+    },
+    {
+     "text": "Its most populous city is São Paulo, followed by Rio de Janeiro.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Brazil"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.304639Z"
+  },
+  "wd:Q414": {
+   "id": "wd:Q414",
+   "qid": "Q414",
+   "label": "Argentina",
+   "type": "Place",
+   "description": "country in South America",
+   "overview": "Argentina, officially the Argentine Republic, is a country in the far south of South America. It covers an area of 2,780,085 km2 (1,073,397 mi2), making it the second-largest country in South America after Brazil, the fourth-largest country in the Americas, and the eighth-largest country in the world.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Argentina",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "sovereign state",
+     "date": "",
+     "quote": "Argentina: is a sovereign state",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q414",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "country",
+     "date": "",
+     "quote": "Argentina: is a country",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q414",
+     "kind": "reference"
+    },
+    {
+     "label": "capital",
+     "value": "Buenos Aires",
+     "date": "",
+     "quote": "Argentina: capital Buenos Aires",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q414",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "47,327,407",
+     "date": "2022",
+     "quote": "Argentina: population 47,327,407",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q414",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "2,780,400 km²",
+     "date": "",
+     "quote": "Argentina: area 2,780,400 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q414",
+     "kind": "reference"
+    },
+    {
+     "label": "continent",
+     "value": "South America",
+     "date": "",
+     "quote": "Argentina: continent South America",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q414",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Argentina shares the bulk of the Southern Cone with Chile to the west, and is also bordered by Bolivia and Paraguay to the north, Brazil to the northeast, Uruguay and the South Atlantic Ocean to the east, and the Drake Passage to the south.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Argentina"
+    },
+    {
+     "text": "Argentina is a federal state divided into twenty-three provinces, and one autonomous city, which is the federal capital and largest city of the nation, Buenos Aires.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Argentina"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.304639Z"
+  },
+  "wd:Q750": {
+   "id": "wd:Q750",
+   "qid": "Q750",
+   "label": "Bolivia",
+   "type": "Place",
+   "description": "sovereign state in South America",
+   "overview": "Bolivia, officially the Plurinational State of Bolivia, is a landlocked country located in central South America. Its geography primarily consists of an Andean region to the west and tropical lowlands to the east and north.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Bolivia",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "sovereign state",
+     "date": "",
+     "quote": "Bolivia: is a sovereign state",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q750",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "landlocked country",
+     "date": "",
+     "quote": "Bolivia: is a landlocked country",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q750",
+     "kind": "reference"
+    },
+    {
+     "label": "capital",
+     "value": "Sucre",
+     "date": "",
+     "quote": "Bolivia: capital Sucre",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q750",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "12,244,159",
+     "date": "2023",
+     "quote": "Bolivia: population 12,244,159",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q750",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "1,098,581 km²",
+     "date": "",
+     "quote": "Bolivia: area 1,098,581 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q750",
+     "kind": "reference"
+    },
+    {
+     "label": "continent",
+     "value": "South America",
+     "date": "",
+     "quote": "Bolivia: continent South America",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q750",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "The country has a diverse environment, including the vast Amazonian plain, the Gran Chaco, temperate valleys, the high-altitude Altiplano plateau, snow-capped peaks, and mountains, encompassing a wide range of climates and biomes across its regions and cities.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Bolivia"
+    },
+    {
+     "text": "It includes part of the Pantanal, the largest tropical wetland in the world, along its eastern border.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Bolivia"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.304639Z"
+  },
+  "wd:Q828": {
+   "id": "wd:Q828",
+   "qid": "Q828",
+   "label": "Americas",
+   "type": "Place",
+   "description": "North America and South America taken together as a single continent or landmass",
+   "overview": "The Americas, sometimes collectively called America, are a landmass comprising the totality of North America and South America. When viewed as a single continent, the Americas are the second largest continent by area after Asia and the third largest continent by population.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Americas",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "supercontinent",
+     "date": "",
+     "quote": "Americas: is a supercontinent",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q828",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "part of the world",
+     "date": "",
+     "quote": "Americas: is a part of the world",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q828",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "1,055,385,441",
+     "date": "2025",
+     "quote": "Americas: population 1,055,385,441",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q828",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "42,549,000 km²",
+     "date": "",
+     "quote": "Americas: area 42,549,000 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q828",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "The Americas make up most of the land in Earth's Western Hemisphere and constitute the \"New World\", in contrast to the \"Old World\" of Afro-Eurasia.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Americas"
+    },
+    {
+     "text": "Along with their associated islands, the Americas cover 8% of Earth's total surface area and 28.4% of its land area.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Americas"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.304639Z"
+  },
+  "wd:Q55416584": {
+   "id": "wd:Q55416584",
+   "qid": "Q55416584",
+   "label": "continental United States",
+   "type": "Place",
+   "description": "umbrella term for parts of the United States located on the main landmass of North America (i.e., 49 states excluding Hawaii, plus the District of Columbia)",
+   "overview": "The contiguous United States, also known as the U.S. mainland, officially referred to as the conterminous United States, consists of the 48 adjoining U.S. states and the District of Columbia of the United States in central North America. The term excludes the only two non-contiguous states and the last two to be admitted to the Union, which are Alaska and Hawaii, and all other offshore insular areas, such as the U.S.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Continental_United_States",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "territory",
+     "date": "",
+     "quote": "continental United States: is a territory",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q55416584",
+     "kind": "reference"
+    },
+    {
+     "label": "is a",
+     "value": "mainland",
+     "date": "",
+     "quote": "continental United States: is a mainland",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q55416584",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "United States",
+     "date": "",
+     "quote": "continental United States: country United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q55416584",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "The colloquial term Lower 48 is also used, especially in relation to Alaska.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Continental_United_States"
+    },
+    {
+     "text": "The term The Mainland is used in Hawaii.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Continental_United_States"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.334455Z"
+  },
+  "wd:Q173": {
+   "id": "wd:Q173",
+   "qid": "Q173",
+   "label": "Alabama",
+   "type": "Place",
+   "description": "state of the United States of America",
+   "overview": "Alabama ( , AL-ə-BAM-ə) is a state in the Southeastern and Deep Southern regions of the United States. It borders Tennessee to the north, Georgia to the east, Florida and the Gulf of Mexico to the south, and Mississippi to the west.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Alabama",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "U.S. state",
+     "date": "",
+     "quote": "Alabama: is a U.S. state",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q173",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "United States",
+     "date": "",
+     "quote": "Alabama: country United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q173",
+     "kind": "reference"
+    },
+    {
+     "label": "located in",
+     "value": "United States",
+     "date": "",
+     "quote": "Alabama: located in United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q173",
+     "kind": "reference"
+    },
+    {
+     "label": "capital",
+     "value": "Montgomery (since 1846)",
+     "date": "",
+     "quote": "Alabama: capital Montgomery (since 1846)",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q173",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "5,024,279",
+     "date": "2020-04-01",
+     "quote": "Alabama: population 5,024,279",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q173",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "135,765 km²",
+     "date": "",
+     "quote": "Alabama: area 135,765 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q173",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Alabama is the 30th largest by area, and the 24th-most populous of the 50 U.S. states.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Alabama"
+    },
+    {
+     "text": "Alabama is nicknamed the Yellowhammer State, after the state bird.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Alabama"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.334455Z"
+  },
+  "wd:Q816": {
+   "id": "wd:Q816",
+   "qid": "Q816",
+   "label": "Arizona",
+   "type": "Place",
+   "description": "state of the United States of America",
+   "overview": "Arizona is a landlocked state in the Southwestern United States, sharing the Four Corners region with Colorado, New Mexico, and Utah. It also borders Nevada to the northwest and California to the west, and shares an international border with the Mexican states of Sonora and Baja California to the south and southwest.",
+   "overviewSource": {
+    "source": "en.wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Arizona",
+    "licence": "Wikipedia, CC BY-SA 4.0"
+   },
+   "facts": [
+    {
+     "label": "is a",
+     "value": "U.S. state",
+     "date": "",
+     "quote": "Arizona: is a U.S. state",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q816",
+     "kind": "reference"
+    },
+    {
+     "label": "country",
+     "value": "United States",
+     "date": "",
+     "quote": "Arizona: country United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q816",
+     "kind": "reference"
+    },
+    {
+     "label": "located in",
+     "value": "United States",
+     "date": "",
+     "quote": "Arizona: located in United States",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q816",
+     "kind": "reference"
+    },
+    {
+     "label": "capital",
+     "value": "Phoenix",
+     "date": "",
+     "quote": "Arizona: capital Phoenix",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q816",
+     "kind": "reference"
+    },
+    {
+     "label": "population",
+     "value": "7,151,502",
+     "date": "2020-04-01",
+     "quote": "Arizona: population 7,151,502",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q816",
+     "kind": "reference"
+    },
+    {
+     "label": "area",
+     "value": "295,234 km²",
+     "date": "",
+     "quote": "Arizona: area 295,234 km²",
+     "source": "wikidata.org",
+     "url": "https://www.wikidata.org/wiki/Q816",
+     "kind": "reference"
+    }
+   ],
+   "background": [
+    {
+     "text": "Its capital and largest city is Phoenix, which is the most populous state capital and fifth-most populous city in the United States.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Arizona"
+    },
+    {
+     "text": "Arizona is divided into 15 counties.",
+     "source": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Arizona"
+    }
+   ],
+   "found": true,
+   "note": "",
+   "retrievedAt": "2026-10-21T10:46:42.334455Z"
+  }
+ }
 }
