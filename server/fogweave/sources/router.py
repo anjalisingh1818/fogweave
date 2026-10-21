@@ -11,9 +11,11 @@ import time
 from ..http import PoliteClient, SourceError
 from .arxiv import ArxivAdapter
 from .base import RawItem
+from .edgar import EdgarAdapter
 from .gdelt import GdeltAdapter
 from .hn import HackerNewsAdapter
 from .wikipedia import WikipediaAdapter
+from .zenodo import ZenodoAdapter
 
 
 class SourceRouter:
@@ -21,7 +23,7 @@ class SourceRouter:
         self.http = http or PoliteClient()
         self.adapters = adapters or {
             a.name: a
-            for a in (WikipediaAdapter(self.http), GdeltAdapter(self.http), HackerNewsAdapter(self.http), ArxivAdapter(self.http))
+            for a in (WikipediaAdapter(self.http), GdeltAdapter(self.http), HackerNewsAdapter(self.http), ArxivAdapter(self.http), ZenodoAdapter(self.http), EdgarAdapter(self.http))
         }
         self.status: dict[str, dict] = {}
 
@@ -46,7 +48,7 @@ class SourceRouter:
         batches = await asyncio.gather(*jobs)
         return dedupe([it for b in batches for it in b])
 
-    async def pool(self, gdelt_queries: list[tuple[str, str]], paper_cats: list[str]) -> list[RawItem]:
+    async def pool(self, gdelt_queries: list[tuple[str, str]], paper_cats: list[str], source_types: tuple[str, ...] = (), topics: list[str] | None = None) -> list[RawItem]:
         """Candidate pool for the curated-random feed: broad news, archive,
         tech, papers in the chosen fields, plus up to two interest-shaped
         news searches (GDELT is paced, so at most two)."""
@@ -55,6 +57,16 @@ class SourceRouter:
             jobs.append(self._safe("wikipedia", self.adapters["wikipedia"].latest(limit=26)))
             for d in (35, 400):
                 jobs.append(self._safe(f"wikipedia-archive-{d}", self.adapters["wikipedia"].archive(d, limit=2)))
+            if "archive" in source_types:  # older news: days from 3 and 5 years ago
+                for d in (3 * 365, 5 * 365):
+                    jobs.append(self._safe(f"wikipedia-archive-{d}", self.adapters["wikipedia"].archive(d, limit=2)))
+        if "dataset" in source_types and "zenodo" in self.adapters:
+            z = self.adapters["zenodo"]
+            if topics:
+                for t in topics[:2]:
+                    jobs.append(self._safe(f"zenodo:{t}", z.search(t, limit=2)))
+            else:
+                jobs.append(self._safe("zenodo", z.latest(limit=3)))
         if "hackernews" in self.adapters:
             jobs.append(self._safe("hackernews", self.adapters["hackernews"].latest(limit=6)))
         if "arxiv" in self.adapters:

@@ -23,6 +23,11 @@ def test_registered_domain_and_classes():
     assert classify_source("reuters.com") == "news"
     assert classify_source("randomsite.xyz") == "unknown"
     assert classify_source("randomsite.xyz", hint="news") == "news"
+    assert classify_source("zenodo.org", hint="primary") == "primary"
+    assert classify_source("news.ycombinator.com") == "aggregator"
+    from fogweave.evidence import CLASS_WEIGHT
+
+    assert CLASS_WEIGHT["primary"] > CLASS_WEIGHT["news"] > CLASS_WEIGHT["aggregator"]
 
 
 def test_one_outlet_many_pages_counts_once():
@@ -347,3 +352,22 @@ def test_explore_matches_titles_without_accents():
     assert _fold("Raúl Castro") == _fold("Raul Castro")
     assert _fold("Nariño Department") == _fold("Narino Department")
     assert _fold("Cuba") != _fold("Cebu")
+
+
+def test_recency_accepts_bare_dates():
+    from datetime import datetime, timezone
+
+    from fogweave.feed import _recency
+
+    now = datetime(2026, 10, 21, tzinfo=timezone.utc)
+    assert 0 < _recency("2026-10-20", now) <= 1
+    assert _recency("not a date", now) == 0.3
+
+
+def test_mention_accepts_the_singular_of_a_plural_label_only():
+    from fogweave.explore import _mention
+
+    assert _mention("A benchmark for Electric Vehicle itinerary planning", "electric vehicles")
+    assert _mention("Electric vehicles sales rise", "electric vehicles")
+    assert not _mention("Electrical vehicle-to-grid", "electric vehicles")
+    assert not _mention("A busines plan", "business")  # "-ss" words are never cut to "-s"

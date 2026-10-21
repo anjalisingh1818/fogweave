@@ -64,6 +64,9 @@ def _fold(s: str) -> str:
 
 def _mention(text: str, label: str) -> str | None:
     m = re.search(r"(?<![\w])" + re.escape(label) + r"(?![\w])", text, re.I)
+    if not m and len(label) > 4 and label.lower().endswith("s") and not label.lower().endswith("ss"):
+        # "electric vehicles" also matches "Electric Vehicle" (singular), nothing looser
+        m = re.search(r"(?<![\w])" + re.escape(label[:-1]) + r"(?![\w])", text, re.I)
     if not m:
         return None
     before = text[: m.start()].split()[-10:]
@@ -243,6 +246,39 @@ class Explorer:
                 e = emit_edge({"type": "mentions", "from": p.id, "to": nid, "label": "reported", "evidence": [{"source": "arxiv.org", "url": p.url, "quote": quote, "date": p.date, "retrievedAt": retrieved}]}, "papers")
                 if e:
                     yield e
+
+        # ---- open deep sources: older news, datasets, filings (each must name it)
+        deep = []
+        if "wikipedia" in self.router.adapters:
+            yield {"type": "status", "phase": "archive", "text": f"Looking for older news about {label}"}
+            old = await self.router._safe("wikipedia-archive-search", self.router.adapters["wikipedia"].archive_search(label, limit=3))
+            deep += [("archive", it) for it in old]
+        if "zenodo" in self.router.adapters and ntype in ("Topic", "Technology", "Place", "Organisation", "Event"):
+            ds = await self.router._safe("zenodo", self.router.adapters["zenodo"].search(label, limit=3))
+            deep += [("datasets", it) for it in ds[:2]]
+        edgar = self.router.adapters.get("edgar")
+        if edgar and ntype == "Organisation":
+            if edgar.enabled:
+                fl = await self.router._safe("edgar", edgar.search(label, limit=2))
+                deep += [("filings", it) for it in fl]
+            else:
+                self.router.status["edgar"] = {"ok": False, "error": "off: needs FW_CONTACT_EMAIL (the owner's contact, as the SEC requires)"}
+        for group, it in deep:
+            text = f"{it.title}. {it.snippet}"
+            # a filing is matched to the company by exact name, so the company name is the quote
+            quote = verify_quote(_mention(text, label) or (it.extra.get("company") if group == "filings" else "") or "", text)
+            if not quote:
+                continue
+            self.e.items.set(it.id, it.to_dict())
+            ev = emit_node({"id": it.id, "type": "NewsItem", "label": it.title, "outlet": it.outlet, "url": it.url, "date": it.date, "kind": it.kind, "sourceType": it.extra.get("sourceType", it.kind), "via": it.source, "summary": it.snippet[:220], "licence": it.licence, "_group": group})
+            if ev:
+                yield ev
+            src = it.extra.get("portal") if it.source == "wikipedia" else it.url
+            e = emit_edge({"type": "mentions", "from": it.id, "to": nid, "label": "reported", "evidence": [{"source": "en.wikipedia.org" if it.source == "wikipedia" else it.outlet, "url": src, "quote": quote, "date": it.date, "retrievedAt": retrieved, "sourceClass": it.extra.get("sourceClass")}]}, group)
+            if e:
+                yield e
+                if group == "archive":
+                    facts.append({"id": f"F{len(facts) + 1}", "text": f"({it.date[:10]}) {it.title}", "ref": it.id})
 
         # ---- impact (what it may affect), same rules as expand
         if ntype in ("Event", "Topic", "Technology", "Organisation") and facts:

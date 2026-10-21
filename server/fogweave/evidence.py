@@ -6,7 +6,8 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 
-CLASS_WEIGHT = {"government": 1.0, "education": 0.9, "organisation": 0.8, "news": 0.75, "reference": 0.6, "blog": 0.4, "unknown": 0.3}
+# primary (filings, deposited datasets) > reputable news > aggregators (V2 master §6)
+CLASS_WEIGHT = {"government": 1.0, "primary": 0.95, "education": 0.9, "organisation": 0.8, "news": 0.75, "reference": 0.6, "aggregator": 0.5, "blog": 0.4, "unknown": 0.3}
 
 NEWS_OUTLETS = {
     "reuters.com", "apnews.com", "bbc.co.uk", "bbc.com", "afp.com", "france24.com", "aljazeera.com", "theguardian.com",
@@ -15,6 +16,7 @@ NEWS_OUTLETS = {
     "cbc.ca", "politico.eu", "politico.com", "euronews.com", "japantimes.co.jp", "scmp.com", "techcrunch.com",
     "theverge.com", "arstechnica.com", "wired.com", "brusselstimes.com", "indianexpress.com", "dawn.com",
 }
+AGGREGATORS = {"news.ycombinator.com", "news.google.com", "msn.com", "news.yahoo.com", "flipboard.com", "ground.news"}
 BLOG_HOSTS = ("medium.com", "substack.com", "blogspot.", "wordpress.com", "tumblr.com", "github.io")
 SECOND_LEVEL = {"co", "com", "ac", "gov", "org", "net", "edu", "go", "or", "ne"}
 
@@ -38,6 +40,10 @@ def classify_source(domain: str, hint: str | None = None) -> str:
         return "government"
     if "edu" in labels or (len(labels) >= 3 and labels[-2] == "ac") or "university" in d or d == "arxiv.org":
         return "education"
+    if hint == "primary":
+        return "primary"  # the adapter knows: a filing or a deposited dataset
+    if d in AGGREGATORS or reg in AGGREGATORS:
+        return "aggregator"
     if reg in ("wikipedia.org", "wikidata.org", "britannica.com"):
         return "reference"
     if any(b in d for b in BLOG_HOSTS):

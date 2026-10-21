@@ -54,7 +54,8 @@ def graph_of(events):
 async def main(n_expand: int, n_explore: int, n_read: int):
     eng = Engine()
     t0 = time.monotonic()
-    pool = await eng.pool({})
+    # the pool also carries datasets and older news; the client shows datasets only when turned on
+    pool = await eng.pool({"sourceTypes": ["dataset", "archive"]})
     items = pool["items"]
     print(f"pool: {len(items)} items from {json.dumps(pool['sources'])[:200]}", flush=True)
 
@@ -114,7 +115,7 @@ async def main(n_expand: int, n_explore: int, n_read: int):
 
     # one step further: explore a neighbour of the first explored nodes, so
     # "touch a neighbour, explore again, go back" works offline too
-    for nid in list(explores)[:3]:
+    for nid in list(explores):
         rec = json.loads((tmp / explores[nid]).read_text(encoding="utf-8"))
         nb = next((ev["node"] for ev in rec["events"] if ev["type"] == "node" and ev.get("group") == "parts" and ev["node"]["id"] not in explores), None)
         if not nb:
@@ -124,6 +125,14 @@ async def main(n_expand: int, n_explore: int, n_read: int):
         (tmp / "explores" / name).write_text(json.dumps({"id": nb["id"], "recordedAt": now_iso(), "events": events}, ensure_ascii=False), encoding="utf-8")
         explores[nb["id"]] = f"explores/{name}"
         print(f"  explore neighbour {nb['id']} of {nid}", flush=True)
+
+    old_and_new = []
+    for nid, f in explores.items():
+        rec = json.loads((tmp / f).read_text(encoding="utf-8"))
+        groups = {ev.get("group") for ev in rec["events"] if ev["type"] == "edge"}
+        if "archive" in groups and "news" in groups:
+            old_and_new.append(nid)
+    print(f"  focus nodes with older and recent related news: {len(old_and_new)} {old_and_new}", flush=True)
 
     index = {
         "schema": "fogweave.snapshot/2",
@@ -141,6 +150,7 @@ async def main(n_expand: int, n_explore: int, n_read: int):
                 "News metadata: The GDELT Project, https://www.gdeltproject.org/",
                 "Via Hacker News (titles and links)",
                 "Paper metadata from arXiv (CC0); not endorsed by arXiv",
+                "Dataset metadata from Zenodo (CERN), CC0",
             ],
         },
         "persona": {"fictional": True, "labels": PERSONA},
@@ -148,6 +158,8 @@ async def main(n_expand: int, n_explore: int, n_read: int):
         "expansions": expansions,
         "explores": explores,
         "sharedEntities": {k: v for k, v in entity_count.items() if v >= 2},
+        # F10: focus nodes whose web holds both older news (archive) and recent news
+        "focusWithOldAndNew": old_and_new,
         "seconds": int(time.monotonic() - t0),
     }
     (tmp / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=1), encoding="utf-8")

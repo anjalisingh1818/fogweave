@@ -106,6 +106,7 @@ async def pool(req: PoolReq):
         "topics": [t for t in i.get("topics", []) if isinstance(t, dict) and isinstance(t.get("label"), str)][:8],
         "newsTypes": [t for t in i.get("newsTypes", []) if isinstance(t, str)][:10],
         "paperTypes": [t for t in i.get("paperTypes", []) if isinstance(t, str)][:10],
+        "sourceTypes": [t for t in i.get("sourceTypes", []) if t in ("dataset", "archive")],
     }
     return await engine.pool(clean)
 

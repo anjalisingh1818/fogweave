@@ -131,3 +131,69 @@ def test_dedupe_removes_same_url_and_same_title():
     b = RawItem("y", "breaking", "same  title", "https://b/2", "")
     c = RawItem("z", "breaking", "Other", "https://a/1", "")
     assert len(dedupe([a, b, c])) == 1
+
+
+# ---- open deep sources (Stage B): datasets, filings, older news
+
+from fogweave.sources.edgar import EdgarAdapter, norm_company, recent_filings  # noqa: E402
+from fogweave.sources.zenodo import ZenodoAdapter, parse_records  # noqa: E402
+
+
+def deep_client(handler, tmp_path):
+    c = client(handler, tmp_path)
+    c.min_interval.update({"zenodo.org": 0, "www.sec.gov": 0, "data.sec.gov": 0})
+    return c
+
+
+@pytest.mark.parametrize("call", [lambda c: ZenodoAdapter(c).search("x"), lambda c: EdgarAdapter(c, contact="owner@example.org").search("Acme"), lambda c: WikipediaAdapter(c).archive_search("Abyei")])
+def test_deep_sources_raise_source_error_on_server_failure(call, tmp_path):
+    c = deep_client(lambda req: httpx.Response(503), tmp_path)
+    with pytest.raises(SourceError):
+        run(call(c))
+
+
+@pytest.mark.parametrize("call", [lambda c: ZenodoAdapter(c).search("x"), lambda c: EdgarAdapter(c, contact="owner@example.org").search("Acme")])
+def test_deep_sources_report_rate_limits(call, tmp_path):
+    c = deep_client(lambda req: httpx.Response(429, headers={"retry-after": "3"}), tmp_path)
+    with pytest.raises(RateLimited):
+        run(call(c))
+
+
+def test_zenodo_parser_keeps_metadata_only_and_the_data_licence():
+    data = {"hits": {"hits": [{"doi_url": "https://doi.org/10.5281/zenodo.1", "created": "2026-10-01", "metadata": {"title": "EV charging sessions", "description": "<p>Charging &amp; usage</p>", "publication_date": "2026-09-30", "license": {"id": "cc-by-4.0"}, "creators": [{"name": "A Person"}], "resource_type": {"type": "dataset"}}}, {"metadata": {}}]}}
+    items = parse_records(data)
+    assert len(items) == 1
+    it = items[0]
+    assert it.kind == "dataset" and it.extra["sourceType"] == "dataset" and it.extra["sourceClass"] == "primary"
+    assert it.snippet == "Charging & usage" and "cc-by-4.0" in it.licence and it.date == "2026-09-30T00:00:00Z"
+    assert "A Person" not in json.dumps(it.to_dict())  # no creator names stored
+    with pytest.raises(SourceError):
+        parse_records({"unexpected": True})
+
+
+def test_edgar_is_off_without_the_owners_contact(tmp_path):
+    calls = []
+    c = deep_client(lambda req: (calls.append(req), httpx.Response(200, json={}))[1], tmp_path)
+    with pytest.raises(SourceError, match="FW_CONTACT_EMAIL"):
+        run(EdgarAdapter(c, contact="").search("Apple"))
+    assert not calls  # nothing was sent
+
+
+def test_edgar_matches_companies_by_exact_name_and_sends_the_contact(tmp_path):
+    seen = []
+
+    def handler(req):
+        seen.append(req.headers.get("user-agent", ""))
+        if req.url.path.endswith("company_tickers.json"):
+            return httpx.Response(200, json={"0": {"cik_str": 320193, "ticker": "AAPL", "title": "Apple Inc."}})
+        return httpx.Response(200, json={"name": "Apple Inc.", "filings": {"recent": {"form": ["4", "10-Q"], "accessionNumber": ["a", "0000320193-26-000101"], "primaryDocument": ["x.xml", "aapl-20260927.htm"], "filingDate": ["2026-10-01", "2026-10-02"], "primaryDocDescription": ["", "10-Q"]}}})
+
+    c = deep_client(handler, tmp_path)
+    ed = EdgarAdapter(c, contact="owner@example.org")
+    items = run(ed.search("Apple"))
+    assert [i.extra["form"] for i in items] == ["10-Q"]  # insider form 4 skipped
+    assert items[0].url == "https://www.sec.gov/Archives/edgar/data/320193/000032019326000101/aapl-20260927.htm"
+    assert all("owner@example.org" in ua for ua in seen)
+    assert run(ed.search("Apple Hospitality")) == []  # no fuzzy guess
+    assert norm_company("The Boeing Company") == norm_company("Boeing")
+    assert recent_filings({}, 1, 3) == []

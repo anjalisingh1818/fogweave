@@ -29,7 +29,8 @@ class RateLimited(SourceError):
 
 class PoliteClient:
     def __init__(self, min_interval: dict[str, float] | None = None, transport: httpx.AsyncBaseTransport | None = None):
-        self.min_interval = {"export.arxiv.org": 3.1, "api.gdeltproject.org": 5.5, "en.wikipedia.org": 0.2, "www.wikidata.org": 0.2}
+        # zenodo: 30 searches/min for guests; sec.gov: at most 10 requests/s
+        self.min_interval = {"export.arxiv.org": 3.1, "api.gdeltproject.org": 5.5, "en.wikipedia.org": 0.2, "www.wikidata.org": 0.2, "zenodo.org": 2.1, "www.sec.gov": 0.15, "data.sec.gov": 0.15}
         self.min_interval.update(min_interval or {})
         self._last: dict[str, float] = {}
         self._locks: dict[str, asyncio.Lock] = {}
@@ -56,7 +57,7 @@ class PoliteClient:
                 await self.sleep(wait)
             self._last[host] = time.monotonic()
 
-    async def get(self, url: str, *, params: dict | None = None, ttl: float | None = 1800, retries: int = 2, as_json: bool = False):
+    async def get(self, url: str, *, params: dict | None = None, ttl: float | None = 1800, retries: int = 2, as_json: bool = False, headers: dict | None = None):
         ck = key_of("GET", url, params)
         if ttl:
             hit = self.cache.get(ck, max_age=ttl)
@@ -69,7 +70,7 @@ class PoliteClient:
         for attempt in range(retries + 1):
             await self._pace(host)
             try:
-                r = await self.client.get(url, params=params)
+                r = await self.client.get(url, params=params, headers=headers)
             except httpx.HTTPError as exc:
                 if attempt == retries:
                     raise SourceError(f"{host}: {exc}") from exc

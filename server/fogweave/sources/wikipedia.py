@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import html
 import re
+import unicodedata
 from html.parser import HTMLParser
 from datetime import datetime, timedelta, timezone
 
@@ -18,6 +19,15 @@ from ..http import SourceError
 from .base import RawItem, SourceAdapter, domain_of, iso
 
 API = "https://en.wikipedia.org/w/api.php"
+DAY_TITLE = re.compile(r"^Portal:Current events/(?P<y>\d{4}) (?P<m>[A-Z][a-z]+) (?P<d>\d{1,2})$")
+
+
+def _fold(s: str) -> str:
+    return unicodedata.normalize("NFKD", s or "").encode("ascii", "ignore").decode().lower()
+
+
+def _word(term: str):
+    return re.compile(r"(?<![\w])" + re.escape(_fold(term)) + r"(?![\w])")
 TAG = re.compile(r"<[^>]+>")
 LI_OPEN = re.compile(r"<li[^>]*>")
 NEXT_TAG = re.compile(r"<li[^>]*>|</li>")
@@ -153,6 +163,52 @@ class WikipediaAdapter(SourceAdapter):
         for it in items:
             it.kind = "archive"
         return items
+
+    async def archive_search(self, term: str, limit: int = 3, min_age_days: int = 30, pages: int = 4) -> list[RawItem]:
+        """Older news that names `term`: Current events day pages back to 2005, found
+        with Wikipedia search, parsed like today's page, and filtered to entries that
+        name the term. Spread over years so one busy month does not take every slot."""
+        data = await self.http.get(
+            API,
+            params={"action": "query", "list": "search", "srsearch": f'"{term}" prefix:Portal:Current_events/2', "srnamespace": 100, "srlimit": 20, "format": "json", "srprop": ""},
+            as_json=True,
+            ttl=24 * 3600,
+        )
+        days = []
+        now = datetime.now(timezone.utc)
+        for hit in ((data or {}).get("query") or {}).get("search") or []:
+            m = DAY_TITLE.match(hit.get("title", ""))
+            if not m:
+                continue
+            try:
+                day = datetime.strptime(f"{m['y']} {m['m']} {m['d']}", "%Y %B %d").replace(tzinfo=timezone.utc)
+            except ValueError:
+                continue
+            if (now - day).days >= min_age_days:
+                days.append(day)
+        # one page per year first, newest years first, then fill
+        by_year: dict[int, datetime] = {}
+        for d in sorted(days, reverse=True):
+            by_year.setdefault(d.year, d)
+        chosen = list(by_year.values())[:pages]
+        chosen += [d for d in sorted(days, reverse=True) if d not in chosen][: max(0, pages - len(chosen))]
+        want = _word(term)
+        out: list[RawItem] = []
+        for day in chosen:
+            try:
+                items = await self.current_events(day)
+            except SourceError:
+                continue
+            for it in items:
+                if want.search(_fold(it.snippet)):
+                    it.kind = "archive"
+                    it.extra["sourceType"] = "archive"
+                    it.extra["foundBy"] = f"archive search: {term}"
+                    out.append(it)
+                    break  # one entry per day
+            if len(out) >= limit:
+                break
+        return out
 
     async def intros(self, titles: list[str]) -> dict[str, str]:
         """Plain-text lead sections (CC BY-SA) for a few article titles."""

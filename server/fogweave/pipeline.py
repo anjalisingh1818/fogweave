@@ -94,7 +94,9 @@ class Engine:
         for q in queries:
             qtype = next((t for t, tq in TYPE_QUERIES.items() if tq == q), "topic")
             typed.append((qtype, q))
-        raw = await self.router.pool(typed, cats)
+        source_types = tuple(t for t in interests.get("sourceTypes", []) if t in ("dataset", "archive"))
+        topic_labels = [str(t.get("label", ""))[:60] for t in interests.get("topics", []) if t.get("label")]
+        raw = await self.router.pool(typed, cats, source_types, topic_labels)
         notes = []
         vecs = embed([f"{r.title}. {r.snippet[:200]}" for r in raw]) if raw else None
         if vecs is not None and len(raw):
@@ -118,7 +120,8 @@ class Engine:
         for i, r in enumerate(raw):
             self.items.set(r.id, r.to_dict())
             items.append({
-                "id": r.id, "kind": r.kind, "headline": r.title, "source": r.outlet, "via": r.source, "url": r.url, "date": r.date,
+                "id": r.id, "kind": r.kind, "sourceType": r.extra.get("sourceType") or ("paper" if r.kind == "paper" else "archive" if r.kind == "archive" else "news"),
+                "headline": r.title, "source": r.outlet, "via": r.source, "url": r.url, "date": r.date,
                 "summary": summaries.get(r.id) or r.snippet[:220], "summaryBy": "model" if r.id in summaries else "source",
                 "claims": [], "tags": tags_for(r), "quality": q[i]["quality"], "qualityBreakdown": q[i]["breakdown"],
                 "story": int(stories[i]) if stories else i, "licence": r.licence, "citations": r.citations,

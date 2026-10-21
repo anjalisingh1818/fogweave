@@ -91,8 +91,10 @@ def tags_for(item) -> list[str]:
 def _recency(date: str, now: datetime) -> float:
     try:
         dt = datetime.fromisoformat(date.replace("Z", "+00:00"))
-    except ValueError:
+    except (ValueError, AttributeError):
         return 0.3
+    if dt.tzinfo is None:  # a bare date ("2026-09-30") counts as UTC
+        dt = dt.replace(tzinfo=timezone.utc)
     days = max(0.0, (now - dt).total_seconds() / 86400)
     return math.exp(-days / 5)  # about half after 3.5 days
 
@@ -102,7 +104,7 @@ def quality(items, vecs, now: datetime | None = None) -> list[dict]:
     now = now or datetime.now(timezone.utc)
     out = []
     for i, it in enumerate(items):
-        hint = "news" if it.source in ("gdelt", "wikipedia") else None
+        hint = it.extra.get("sourceClass") or ("news" if it.source in ("gdelt", "wikipedia") else None)
         cls = classify_source(it.outlet, hint)
         if it.source == "arxiv":
             cls = "education"
