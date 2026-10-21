@@ -75,3 +75,5 @@
 
 - The personal context is coarse by design. Addresses, numbers, health and money terms are refused. It is stored only on the device and sent only with a request that needs it; the server does not log or keep it.
 - The bundled demo uses a **fictional sample persona** and labels it as one.
+
+- **The hosted backend (Render free plan, 512 MB) runs without the bge-small embedding model.** It ran out of memory on the first news request. There, story grouping, near-duplicate removal and "similar story" ranking use hashed word vectors: they work, but group fewer stories and miss more paraphrased duplicates than the local build. The free service also sleeps after 15 minutes idle; the first visitor waits about a minute (the welcome screen offers the Demo scene after 12 s).
