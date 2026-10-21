@@ -23,7 +23,9 @@ LLM_MODELS = [
 ]
 
 ENTITY_LINKING = os.getenv("FOGWEAVE_ENTITY_LINKING", "1") == "1"
-EMBEDDINGS = os.getenv("FOGWEAVE_EMBEDDINGS", "1") == "1"
+# the bge-small model needs ~440 MB at its peak: off by default on Render (the
+# free plan has 512 MB; Render sets RENDER on its machines), on elsewhere
+EMBEDDINGS = os.getenv("FOGWEAVE_EMBEDDINGS", "0" if os.getenv("RENDER") else "1") == "1"
 
 ALLOWED_ORIGINS = [
     o.strip().rstrip("/")
