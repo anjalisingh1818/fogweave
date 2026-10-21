@@ -11,7 +11,7 @@ load_dotenv()
 ROOT = Path(__file__).resolve().parent.parent
 CACHE_DIR = Path(os.getenv("FOGWEAVE_CACHE_DIR", ROOT / ".cache"))
 
-USER_AGENT = "FogWeave/0.2 (https://github.com/shubham123sing/fogweave; research prototype) httpx"
+USER_AGENT = "FogWeave/0.2 (https://github.com/anjalisingh1818/fogweave; research prototype) httpx"
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 # Free-tier chain, best first. Llama 3.3 70B is no longer served to this

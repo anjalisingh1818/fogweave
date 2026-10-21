@@ -2,7 +2,7 @@
 
 Every source was checked on **2026-10-20** before use. FogWeave stores only titles, its own short summaries, short verbatim quotes (25 words or fewer), dates and links. It keeps more only where the licence allows it, such as Wikipedia text under CC BY-SA. Full article text is fetched transiently for extraction and is never stored or sent to the client. robots.txt is respected, there is no paywall bypass and no login scraping. A page that answers 401, 402 or 403 is skipped.
 
-All requests send `User-Agent: FogWeave/0.2 (https://github.com/shubham123sing/fogweave; research prototype)`, which the Wikimedia User-Agent policy requires (descriptive, with contact). Pacing, retries with backoff, `Retry-After` handling and caching live in `server/fogweave/http.py`. Every adapter has failure and rate-limit tests in `server/tests/test_sources.py`.
+All requests send `User-Agent: FogWeave/0.2 (https://github.com/anjalisingh1818/fogweave; research prototype)`, which the Wikimedia User-Agent policy requires (descriptive, with contact). Pacing, retries with backoff, `Retry-After` handling and caching live in `server/fogweave/http.py`. Every adapter has failure and rate-limit tests in `server/tests/test_sources.py`.
 
 | Source | Used for | Terms / licence (checked 2026-10-20) | Limits encoded | Stored | Status |
 |---|---|---|---|---|---|
