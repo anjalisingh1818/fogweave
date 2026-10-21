@@ -13,6 +13,10 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.7
+      # the free plan has 512 MB: the bge-small model does not fit next to the app,
+      # so similarity uses hashed word vectors there (see docs/KNOWN_LIMITS.md)
+      - key: FOGWEAVE_EMBEDDINGS
+        value: "0"
       - key: GROQ_API_KEY
         sync: false
       - key: FOGWEAVE_ALLOWED_ORIGINS
