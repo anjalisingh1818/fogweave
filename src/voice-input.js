@@ -4,6 +4,7 @@
  * browser has no speech support we fail loudly in the console so it's
  * obvious during on-device testing rather than silently doing nothing.
  */
+// imported lazily (only when the reader uses voice), so nothing speech-related runs at load
 const SpeechRecognitionCtor =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 

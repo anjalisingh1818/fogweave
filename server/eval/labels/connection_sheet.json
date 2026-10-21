@@ -1,0 +1,484 @@
+[
+ {
+  "item": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+  "id": "n:00dfe2b0206f",
+  "persona": "B",
+  "context": [
+   "Uttar Pradesh",
+   "farming",
+   "monsoon",
+   "rice"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+  "id": "n:00eab1f15d72",
+  "persona": "A",
+  "context": [
+   "Rotterdam",
+   "logistics",
+   "energy prices",
+   "public transport"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+  "id": "n:0460555895d3",
+  "persona": "B",
+  "context": [
+   "Uttar Pradesh",
+   "farming",
+   "monsoon",
+   "rice"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…",
+  "id": "n:047b20792022",
+  "persona": "A",
+  "context": [
+   "Rotterdam",
+   "logistics",
+   "energy prices",
+   "public transport"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+  "id": "n:0f5a4c632e8d",
+  "persona": "C",
+  "context": [
+   "Seoul",
+   "software engineering",
+   "cloud computing",
+   "semiconductors"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…",
+  "id": "n:12fabc0b78de",
+  "persona": "A",
+  "context": [
+   "Rotterdam",
+   "logistics",
+   "energy prices",
+   "public transport"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "American economists Robert Ernest Hall and Michael Dean Woodford are jointly awarded the Nobel Memorial Prize…",
+  "id": "n:2a0496d94138",
+  "persona": "B",
+  "context": [
+   "Uttar Pradesh",
+   "farming",
+   "monsoon",
+   "rice"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada",
+  "id": "n:2ea4338fe8f4",
+  "persona": "C",
+  "context": [
+   "Seoul",
+   "software engineering",
+   "cloud computing",
+   "semiconductors"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Andorra and San Marino each sign an association agreement with the European Union",
+  "id": "n:2ef6e37a2b5f",
+  "persona": "C",
+  "context": [
+   "Seoul",
+   "software engineering",
+   "cloud computing",
+   "semiconductors"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "At the General Conference on Weights and Measures, the International Bureau of Weights and Measures votes to…",
+  "id": "n:3dacd47cdd3e",
+  "persona": "B",
+  "context": [
+   "Uttar Pradesh",
+   "farming",
+   "monsoon",
+   "rice"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi…",
+  "id": "n:54a830f0095a",
+  "persona": "C",
+  "context": [
+   "Seoul",
+   "software engineering",
+   "cloud computing",
+   "semiconductors"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "A judge in Ensenada, Baja California, Mexico, sentences three Mexican men to over 158 years in prison each…",
+  "id": "n:6a3502fcf385",
+  "persona": "A",
+  "context": [
+   "Rotterdam",
+   "logistics",
+   "energy prices",
+   "public transport"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan",
+  "id": "n:75c973928996",
+  "persona": "C",
+  "context": [
+   "Seoul",
+   "software engineering",
+   "cloud computing",
+   "semiconductors"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "The New Yalu River Bridge connecting Dandong, China, and Sinuiju, North Korea, opens following a 12-year…",
+  "id": "n:77c59dd165c5",
+  "persona": "C",
+  "context": [
+   "Seoul",
+   "software engineering",
+   "cloud computing",
+   "semiconductors"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…",
+  "id": "n:84bb02f4d37d",
+  "persona": "A",
+  "context": [
+   "Rotterdam",
+   "logistics",
+   "energy prices",
+   "public transport"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [
+   "Greek maritime insurance premiums --affects/speculative--> energy prices"
+  ],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper…",
+  "id": "n:8ab7353c3a4a",
+  "persona": "B",
+  "context": [
+   "Uttar Pradesh",
+   "farming",
+   "monsoon",
+   "rice"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…",
+  "id": "n:945f742db3b8",
+  "persona": "A",
+  "context": [
+   "Rotterdam",
+   "logistics",
+   "energy prices",
+   "public transport"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near…",
+  "id": "n:9700f8a230bf",
+  "persona": "B",
+  "context": [
+   "Uttar Pradesh",
+   "farming",
+   "monsoon",
+   "rice"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Equatorial Guinea announces that it will expand its program combating malaria to the mainland and Annobón",
+  "id": "n:ac99b0896a72",
+  "persona": "B",
+  "context": [
+   "Uttar Pradesh",
+   "farming",
+   "monsoon",
+   "rice"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "South African police rescue about 200 people from an unregistered rehabilitation centre in Mpumalanga and…",
+  "id": "n:ad5ac512ee13",
+  "persona": "A",
+  "context": [
+   "Rotterdam",
+   "logistics",
+   "energy prices",
+   "public transport"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "A Kenyan court convicts Good News International Ministries leader Paul Nthenge Mackenzie of murdering 190…",
+  "id": "n:afdc5ab9ef1a",
+  "persona": "C",
+  "context": [
+   "Seoul",
+   "software engineering",
+   "cloud computing",
+   "semiconductors"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead of the party's planned march",
+  "id": "n:b88263d4e9c2",
+  "persona": "B",
+  "context": [
+   "Uttar Pradesh",
+   "farming",
+   "monsoon",
+   "rice"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "The oldest known shipwreck in the world (c",
+  "id": "n:c40c295eedaa",
+  "persona": "C",
+  "context": [
+   "Seoul",
+   "software engineering",
+   "cloud computing",
+   "semiconductors"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Brazilian environment minister João Paulo Capobianco [pt] reports that deforestation in Brazil's Amazon…",
+  "id": "n:c4f3475d8101",
+  "persona": "A",
+  "context": [
+   "Rotterdam",
+   "logistics",
+   "energy prices",
+   "public transport"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…",
+  "id": "n:d0e0e4a57ac3",
+  "persona": "B",
+  "context": [
+   "Uttar Pradesh",
+   "farming",
+   "monsoon",
+   "rice"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "In women's rugby union, Canada defeats England 24–21 in a WXV Global Series match in Toronto, ending the Red…",
+  "id": "n:d2bd9be25b92",
+  "persona": "C",
+  "context": [
+   "Seoul",
+   "software engineering",
+   "cloud computing",
+   "semiconductors"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Astronomers discover the first green star, WD J1330+6435, according to a study published by RAS Techniques…",
+  "id": "n:d7646cfd3bd0",
+  "persona": "A",
+  "context": [
+   "Rotterdam",
+   "logistics",
+   "energy prices",
+   "public transport"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "A truck loses control and runs over devotees outside a temple in Gwalior, Madhya Pradesh, India, killing at…",
+  "id": "n:e40e07b73237",
+  "persona": "C",
+  "context": [
+   "Seoul",
+   "software engineering",
+   "cloud computing",
+   "semiconductors"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Kenya confirms four additional cases of Bundibugyo ebolavirus, including three health workers who treated…",
+  "id": "n:f5225c9d8fb5",
+  "persona": "A",
+  "context": [
+   "Rotterdam",
+   "logistics",
+   "energy prices",
+   "public transport"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…",
+  "id": "n:fa08b85b6159",
+  "persona": "B",
+  "context": [
+   "Uttar Pradesh",
+   "farming",
+   "monsoon",
+   "rice"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ }
+]

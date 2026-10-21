@@ -1,0 +1,70 @@
+{
+ "runs": 30,
+ "done": 30,
+ "latency_ms": {
+  "first_node_p50": 15,
+  "first_node_p95": 31,
+  "done_p50": 41328,
+  "done_p95": 59781
+ },
+ "llm_per_item": {
+  "calls_mean": 2.67,
+  "tokens_mean": 4162,
+  "tokens_max": 5902
+ },
+ "labels": {
+  "reported": 465,
+  "inferred": 61,
+  "speculative": 81
+ },
+ "claims": {
+  "total": 99,
+  "with_quoted_source": 99,
+  "quotes_rechecked": 99,
+  "quotes_verbatim": 99
+ },
+ "statements_failing_ontology": [
+  {
+   "edge": "happened_in:ev:deforestation in brazil amazon hits nearly four-decade low->wd:Q155",
+   "problem": "happened_in cannot end at Organisation"
+  }
+ ],
+ "statements_failing_ontology_count": 1,
+ "rejected_before_emit": 52,
+ "runs_with_degraded_notes": 0,
+ "text_how": {
+  "article": 17,
+  "headline-only": 13
+ },
+ "evidence_urls": {
+  "checked": 48,
+  "ok": 47,
+  "blocked": 1,
+  "missing": 0,
+  "error": 0
+ },
+ "pack": {
+  "client_build": {
+   "runs": 30,
+   "nodes": 483,
+   "links": 596,
+   "rejectedByClient": 1,
+   "rejected": [
+    "happened_in cannot end at Organisation"
+   ]
+  },
+  "triples": 9713,
+  "shacl": {
+   "conforms": true,
+   "violations": 0,
+   "problems": []
+  },
+  "sparql_counts": {
+   "single_source_claims": 84,
+   "contradicted_claims": 5,
+   "well_backed_claims": 15,
+   "two_hop_chains": 50,
+   "story_timeline": 0
+  }
+ }
+}

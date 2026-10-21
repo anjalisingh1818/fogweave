@@ -1,0 +1,530 @@
+{
+ "stories": [
+  "Middle Eastern crisis",
+  "Russo-Ukrainian war",
+  "Gen Z protests",
+  "2026 Atlantic hurricane season",
+  "Yemeni civil war",
+  "Sudanese civil war",
+  "2026 Ebola epidemic",
+  "Tropical cyclones in 2026",
+  "2026 Poland school stabbings",
+  "Israeli settler violence",
+  "2026 Alberta referendums, 2026 Alberta independence referendum",
+  "2026 Iran war",
+  "2026 Czech Senate election",
+  "2026 anti-CEC protests",
+  "2026 Indonesia wildfires",
+  "2026 Southeast Asian haze",
+  "2026 Nobel Prizes",
+  "2026 Pacific hurricane season",
+  "2026 Khyber Pakhtunkhwa state of emergency",
+  "Mexican drug war"
+ ],
+ "entries": [
+  {
+   "id": "n:75e27475e636",
+   "title": "Egyptian president Abdel Fattah El-Sisi states that Egypt will take all necessary steps to protect and defend…",
+   "snippet": "Egyptian president Abdel Fattah El-Sisi states that Egypt will take all necessary steps to protect and defend Saudi Arabia should the latter so desire.",
+   "story": "Middle Eastern crisis",
+   "day": "2026-10-17",
+   "split": "test"
+  },
+  {
+   "id": "n:5fef230d4fbd",
+   "title": "Masked Israeli settlers attack a group of European diplomats, including the Belgian consul general, French…",
+   "snippet": "Masked Israeli settlers attack a group of European diplomats, including the Belgian consul general, French and Polish diplomats, and Catholic representatives visiting Taybeh in the occupied West Bank, Palestine.",
+   "story": "Middle Eastern crisis",
+   "day": "2026-10-17",
+   "split": "test"
+  },
+  {
+   "id": "n:aee81d6892f3",
+   "title": "The Houthis claim to have shot down a Royal Saudi Air Force Eurofighter Typhoon aircraft over Saada…",
+   "snippet": "The Houthis claim to have shot down a Royal Saudi Air Force Eurofighter Typhoon aircraft over Saada Governorate, Yemen. Saudi authorities did not comment on the claim.",
+   "story": "Middle Eastern crisis",
+   "day": "2026-10-14",
+   "split": "test"
+  },
+  {
+   "id": "n:10d0dfb4ea99",
+   "title": "The Saudi Civil Defense reports that debris from intercepted Houthi cruise missiles injured four people,…",
+   "snippet": "The Saudi Civil Defense reports that debris from intercepted Houthi cruise missiles injured four people, including a child, in Riyadh, Saudi Arabia, and damaged 15 homes.",
+   "story": "Middle Eastern crisis",
+   "day": "2026-10-14",
+   "split": "test"
+  },
+  {
+   "id": "n:43563c1cd3bc",
+   "title": "Two cargo ships, the Singapore-flagged container ship GFS Pride and the Antigua and Barbuda-flagged dry bulk…",
+   "snippet": "Two cargo ships, the Singapore-flagged container ship GFS Pride and the Antigua and Barbuda-flagged dry bulk carrier Cape Dao, sink after both are attacked by projectiles near the Strait of Hormuz while trying to navigate through what Iran's Islamic Revolutionary Guard Corps called an \"illegal and dangerous route.\" At least one crew member is killed in the attacks.",
+   "story": "Middle Eastern crisis",
+   "day": "2026-10-14",
+   "split": "test"
+  },
+  {
+   "id": "n:26764eb08244",
+   "title": "A Russian ballistic missile attack strikes a power station in the Dniprovskyi District, Kyiv, Ukraine,…",
+   "snippet": "A Russian ballistic missile attack strikes a power station in the Dniprovskyi District, Kyiv, Ukraine, leaving more than 1,000 residential buildings without heating.",
+   "story": "Russo-Ukrainian war",
+   "day": "2026-10-14",
+   "split": "test"
+  },
+  {
+   "id": "n:a4752a141068",
+   "title": "The Ukrainian citizen accused of sabotaging the Nord Stream pipelines in 2022 faces trial at the Higher…",
+   "snippet": "The Ukrainian citizen accused of sabotaging the Nord Stream pipelines in 2022 faces trial at the Higher Regional Court in Hamburg, Germany,",
+   "story": "Russo-Ukrainian war",
+   "day": "2026-10-14",
+   "split": "test"
+  },
+  {
+   "id": "n:019313658e6f",
+   "title": "Two merchant ships are hit by unknown drones off Bulgaria's Black Sea coast, with one sinking",
+   "snippet": "Two merchant ships are hit by unknown drones off Bulgaria's Black Sea coast, with one sinking. Eleven crew members are missing and 20 in total are rescued. Bulgarian prime minister Rumen Radev has blamed Russia and summoned its ambassador. It is the second such attack in six days.",
+   "story": "Russo-Ukrainian war",
+   "day": "2026-10-13",
+   "split": "test"
+  },
+  {
+   "id": "n:eb4c97eab801",
+   "title": "At least 20 people are killed and 32 others are injured in a Russian glide bomb airstrike on a five-story…",
+   "snippet": "At least 20 people are killed and 32 others are injured in a Russian glide bomb airstrike on a five-story residential building in Zaporizhzhia, Ukraine.",
+   "story": "Russo-Ukrainian war",
+   "day": "2026-10-10",
+   "split": "dev"
+  },
+  {
+   "id": "n:0afb7861de24",
+   "title": "Russian forces launch a ballistic missile attack on two buses in the city of Kramatorsk in Ukraine, killing…",
+   "snippet": "Russian forces launch a ballistic missile attack on two buses in the city of Kramatorsk in Ukraine, killing at least 30 people, while 18 others are wounded.",
+   "story": "Russo-Ukrainian war",
+   "day": "2026-10-08",
+   "split": "dev"
+  },
+  {
+   "id": "n:f361302bff95",
+   "title": "Over 500,000 people take part in protests across France, according to the national trade union confederation,…",
+   "snippet": "Over 500,000 people take part in protests across France, according to the national trade union confederation, while clashes and riots erupt in large cities.",
+   "story": "Gen Z protests",
+   "day": "2026-10-17",
+   "split": "test"
+  },
+  {
+   "id": "n:f8746454a8fa",
+   "title": "Protesters force their way into Marseille's town hall and vandalize the interior before being dispersed",
+   "snippet": "Protesters force their way into Marseille's town hall and vandalize the interior before being dispersed.",
+   "story": "Gen Z protests",
+   "day": "2026-10-17",
+   "split": "test"
+  },
+  {
+   "id": "n:d1b912e1cb1c",
+   "title": "In Lille, protesters storm the city hall and damage the premises prior to being removed by security forces",
+   "snippet": "In Lille, protesters storm the city hall and damage the premises prior to being removed by security forces.",
+   "story": "Gen Z protests",
+   "day": "2026-10-17",
+   "split": "test"
+  },
+  {
+   "id": "n:e7445b677941",
+   "title": "Dozens of shops are looted across major French cities amid widespread rioting and civil unrest",
+   "snippet": "Dozens of shops are looted across major French cities amid widespread rioting and civil unrest.",
+   "story": "Gen Z protests",
+   "day": "2026-10-17",
+   "split": "test"
+  },
+  {
+   "id": "n:92d184d5dd47",
+   "title": "The Hôtel de Ville in Limoges were partially destroyed by fire",
+   "snippet": "The Hôtel de Ville in Limoges were partially destroyed by fire.",
+   "story": "Gen Z protests",
+   "day": "2026-10-17",
+   "split": "test"
+  },
+  {
+   "id": "n:9ff9f8e40a42",
+   "title": "Six deaths are confirmed in Florida, United States, from Hurricane Isaias",
+   "snippet": "Six deaths are confirmed in Florida, United States, from Hurricane Isaias.",
+   "story": "2026 Atlantic hurricane season",
+   "day": "2026-10-13",
+   "split": "test"
+  },
+  {
+   "id": "n:e5f0b44a90b0",
+   "title": "The National Hurricane Center reports that Hurricane Isaias has weakened to a post-tropical cyclone after…",
+   "snippet": "The National Hurricane Center reports that Hurricane Isaias has weakened to a post-tropical cyclone after making landfall near Destin, Florida, United States.",
+   "story": "2026 Atlantic hurricane season",
+   "day": "2026-10-10",
+   "split": "dev"
+  },
+  {
+   "id": "n:7c2a1b22d32a",
+   "title": "Four people are killed during Isaias' landfall in the United States, with two deaths in Escambia County,…",
+   "snippet": "Four people are killed during Isaias' landfall in the United States, with two deaths in Escambia County, Florida, and another two in Alabama.",
+   "story": "2026 Atlantic hurricane season",
+   "day": "2026-10-10",
+   "split": "dev"
+  },
+  {
+   "id": "n:4b6fed6261ad",
+   "title": "In the United States, Georgia governor Brian Kemp declares a state of emergency ahead of Hurricane Isaias",
+   "snippet": "In the United States, Georgia governor Brian Kemp declares a state of emergency ahead of Hurricane Isaias.",
+   "story": "2026 Atlantic hurricane season",
+   "day": "2026-10-08",
+   "split": "dev"
+  },
+  {
+   "id": "n:75378934a3cb",
+   "title": "Hurricane Isaias strengthens into a category 2 Atlantic hurricane",
+   "snippet": "Hurricane Isaias strengthens into a category 2 Atlantic hurricane.",
+   "story": "2026 Atlantic hurricane season",
+   "day": "2026-10-08",
+   "split": "dev"
+  },
+  {
+   "id": "n:945f742db3b8",
+   "title": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…",
+   "snippet": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen. There are 14 missing.",
+   "story": "Yemeni civil war",
+   "day": "2026-10-19",
+   "split": "test"
+  },
+  {
+   "id": "n:029b884b1d4d",
+   "title": "Saudi Arabia says that it has intercepted a missile intended for Medina",
+   "snippet": "Saudi Arabia says that it has intercepted a missile intended for Medina. However, the Houthis denied launching a missile at the city.",
+   "story": "Yemeni civil war",
+   "day": "2026-10-15",
+   "split": "test"
+  },
+  {
+   "id": "n:aff2a7c718a8",
+   "title": "The Houthis launch missiles against Al-Maashiq Palace, headquarters of the Presidential Leadership Council…",
+   "snippet": "The Houthis launch missiles against Al-Maashiq Palace, headquarters of the Presidential Leadership Council and official residence of President Rashad al-Alimi, in Aden, Yemen, killing five people and injuring 16. No member of the council is harmed in the attack.",
+   "story": "Yemeni civil war",
+   "day": "2026-10-15",
+   "split": "test"
+  },
+  {
+   "id": "n:67b67b52f643",
+   "title": "The Houthis claim to have attacked King Khalid International Airport in Riyadh, Saudi Arabia, with a…",
+   "snippet": "The Houthis claim to have attacked King Khalid International Airport in Riyadh, Saudi Arabia, with a ballistic missile for a third consecutive day.",
+   "story": "Yemeni civil war",
+   "day": "2026-10-12",
+   "split": "dev"
+  },
+  {
+   "id": "n:3bac9e7f9476",
+   "title": "Delta Air Lines postpones direct flights from Atlanta's Hartsfield–Jackson Atlanta International Airport to…",
+   "snippet": "Delta Air Lines postpones direct flights from Atlanta's Hartsfield–Jackson Atlanta International Airport to Riyadh following attacks by the Houthis on the country.",
+   "story": "Yemeni civil war",
+   "day": "2026-10-12",
+   "split": "dev"
+  },
+  {
+   "id": "n:75c973928996",
+   "title": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan",
+   "snippet": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan.",
+   "story": "Sudanese civil war",
+   "day": "2026-10-19",
+   "split": "test"
+  },
+  {
+   "id": "n:4cdf31325659",
+   "title": "Thirty people are killed and 47 people are injured in a drone strike on a cattle market in Nyala, South…",
+   "snippet": "Thirty people are killed and 47 people are injured in a drone strike on a cattle market in Nyala, South Darfur, Sudan.",
+   "story": "Sudanese civil war",
+   "day": "2026-10-16",
+   "split": "test"
+  },
+  {
+   "id": "n:7aec12aa26a2",
+   "title": "The Sudanese Armed Forces announces that they have re-captured the Bir Kelekel area of West Darfur, Sudan,…",
+   "snippet": "The Sudanese Armed Forces announces that they have re-captured the Bir Kelekel area of West Darfur, Sudan, from Rapid Support Forces, according to West Darfur state governor Bahr al-Din Adam Karama.",
+   "story": "Sudanese civil war",
+   "day": "2026-10-14",
+   "split": "test"
+  },
+  {
+   "id": "n:01281ba3a14c",
+   "title": "Airstrikes are launched at the Egypt–Sudan border targeting an artisanal gold mine in a mountainous area,…",
+   "snippet": "Airstrikes are launched at the Egypt–Sudan border targeting an artisanal gold mine in a mountainous area, killing at least 72 people.",
+   "story": "Sudanese civil war",
+   "day": "2026-10-11",
+   "split": "dev"
+  },
+  {
+   "id": "n:ad17e9daac74",
+   "title": "An RSF drone strike in Blue Nile State, Sudan, kills 41 displaced people",
+   "snippet": "An RSF drone strike in Blue Nile State, Sudan, kills 41 displaced people.",
+   "story": "Sudanese civil war",
+   "day": "2026-10-09",
+   "split": "dev"
+  },
+  {
+   "id": "n:f5225c9d8fb5",
+   "title": "Kenya confirms four additional cases of Bundibugyo ebolavirus, including three health workers who treated…",
+   "snippet": "Kenya confirms four additional cases of Bundibugyo ebolavirus, including three health workers who treated Kenya's first patient and one of his relatives, raising the national total to seven. All four are already in quarantine.",
+   "story": "2026 Ebola epidemic",
+   "day": "2026-10-17",
+   "split": "test"
+  },
+  {
+   "id": "n:138d80474c6f",
+   "title": "The Kenyan health ministry reports that no Ebola cases have been reported since one patient died from the…",
+   "snippet": "The Kenyan health ministry reports that no Ebola cases have been reported since one patient died from the disease on October 5, with 293 tests conducted.",
+   "story": "2026 Ebola epidemic",
+   "day": "2026-10-11",
+   "split": "dev"
+  },
+  {
+   "id": "n:206fad2741a2",
+   "title": "Kenya confirms its first imported case of the Bundibugyo strain of the Ebolavirus in Nairobi in a deceased…",
+   "snippet": "Kenya confirms its first imported case of the Bundibugyo strain of the Ebolavirus in Nairobi in a deceased male who traveled from the Democratic Republic of the Congo.",
+   "story": "2026 Ebola epidemic",
+   "day": "2026-10-06",
+   "split": "dev"
+  },
+  {
+   "id": "n:a4476413bfbc",
+   "title": "The Nairobi Hospital steps up its infection-control measures, tracing, and staff monitoring following Kenya's…",
+   "snippet": "The Nairobi Hospital steps up its infection-control measures, tracing, and staff monitoring following Kenya's first imported case of Ebola.",
+   "story": "2026 Ebola epidemic",
+   "day": "2026-10-06",
+   "split": "dev"
+  },
+  {
+   "id": "n:f0df6a9c8dd6",
+   "title": "Isaias strengthens into a category 3 Atlantic hurricane",
+   "snippet": "Isaias strengthens into a category 3 Atlantic hurricane. It would later weaken to category 2, with 365,000 people in Alabama and Florida, United States, reported to be without power ahead of its landfall.",
+   "story": "Tropical cyclones in 2026",
+   "day": "2026-10-09",
+   "split": "dev"
+  },
+  {
+   "id": "n:f0df6a9c8dd6",
+   "title": "Isaias makes landfall near Destin, Florida, and weakens to a category 1 hurricane",
+   "snippet": "Isaias makes landfall near Destin, Florida, and weakens to a category 1 hurricane.",
+   "story": "Tropical cyclones in 2026",
+   "day": "2026-10-09",
+   "split": "dev"
+  },
+  {
+   "id": "n:67fbbbe0042c",
+   "title": "Flooding is reported in areas of Southern California, U.S., including Long Beach and Newport Beach, and the…",
+   "snippet": "Flooding is reported in areas of Southern California, U.S., including Long Beach and Newport Beach, and the National Hurricane Center issues a tropical storm warning for the area. The warning is the first issued for San Diego County, California, since 2023 during Hurricane Hilary.",
+   "story": "Tropical cyclones in 2026",
+   "day": "2026-10-09",
+   "split": "dev"
+  },
+  {
+   "id": "n:3c6d6afaf178",
+   "title": "Simon strengthens into a category 2 Pacific hurricane",
+   "snippet": "Simon strengthens into a category 2 Pacific hurricane.",
+   "story": "Tropical cyclones in 2026",
+   "day": "2026-10-09",
+   "split": "dev"
+  },
+  {
+   "id": "n:6c8863e57582",
+   "title": "A woman carries out a mass stabbing at an adult school in Warsaw, Poland, injuring three people",
+   "snippet": "A woman carries out a mass stabbing at an adult school in Warsaw, Poland, injuring three people. The suspect is arrested. It is the third such attack in the country in a week.",
+   "story": "2026 Poland school stabbings",
+   "day": "2026-10-10",
+   "split": "dev"
+  },
+  {
+   "id": "n:7fabbc4a1d54",
+   "title": "A 15-year-old student carries out a mass stabbing against staff members at a primary school in the village of…",
+   "snippet": "A 15-year-old student carries out a mass stabbing against staff members at a primary school in the village of Leszczydół-Nowiny, Wyszków County, Poland, killing one person and injuring two more. The suspect is taken into police custody.",
+   "story": "2026 Poland school stabbings",
+   "day": "2026-10-08",
+   "split": "dev"
+  },
+  {
+   "id": "n:c04f338bbc58",
+   "title": "Nine people are injured in a mass stabbing at a high school in Ostrołęka, Poland",
+   "snippet": "Nine people are injured in a mass stabbing at a high school in Ostrołęka, Poland. The suspect, a 19-year-old student, is arrested after being injured himself.",
+   "story": "2026 Poland school stabbings",
+   "day": "2026-10-07",
+   "split": "dev"
+  },
+  {
+   "id": "n:54a830f0095a",
+   "title": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi…",
+   "snippet": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi Levine and the mayor of Aulnoye-Aymeries, France, who were travelling with European diplomats, and seize vehicles and other evidence during raids.",
+   "story": "Israeli settler violence",
+   "day": "2026-10-19",
+   "split": "test"
+  },
+  {
+   "id": "n:e8c5c71e7d47",
+   "title": "Israeli settlers attack and beat a group of Palestinians and an American journalist from The Washington Post",
+   "snippet": "Israeli settlers attack and beat a group of Palestinians and an American journalist from The Washington Post.",
+   "story": "Israeli settler violence",
+   "day": "2026-10-16",
+   "split": "test"
+  },
+  {
+   "id": "n:2ea4338fe8f4",
+   "title": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada",
+   "snippet": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada.",
+   "story": "2026 Alberta referendums, 2026 Alberta independence referendum",
+   "day": "2026-10-19",
+   "split": "test"
+  },
+  {
+   "id": "n:31e326e183a6",
+   "title": "Albertan voters reject pursuing a future independence referendum, with more than two-thirds supporting the…",
+   "snippet": "Albertan voters reject pursuing a future independence referendum, with more than two-thirds supporting the province remaining in Canada.",
+   "story": "2026 Alberta referendums, 2026 Alberta independence referendum",
+   "day": "2026-10-19",
+   "split": "test"
+  },
+  {
+   "id": "n:f7c2419ab740",
+   "title": "Iran's Islamic Revolutionary Guard Corps reports that an oil tanker has caught on fire and exploded in the…",
+   "snippet": "Iran's Islamic Revolutionary Guard Corps reports that an oil tanker has caught on fire and exploded in the southern part of the Strait of Hormuz after striking a naval mine.",
+   "story": "2026 Iran war",
+   "day": "2026-10-18",
+   "split": "test"
+  },
+  {
+   "id": "n:4ea57f08f1e8",
+   "title": "The Pentagon raises the U.S",
+   "snippet": "The Pentagon raises the U.S. military death toll in the Iran war to 21 after reporting two noncombat deaths.",
+   "story": "2026 Iran war",
+   "day": "2026-10-09",
+   "split": "dev"
+  },
+  {
+   "id": "n:1798fc8c9355",
+   "title": "In Czechia, opposition parties win 22 of the contested 27 seats in the Senate",
+   "snippet": "In Czechia, opposition parties win 22 of the contested 27 seats in the Senate. The lead party of prime minister Andrej Babiš's government, ANO 2011, comes in third place. The election is the first time in the country's history where governing parties did not win a single seat in a senatorial election.",
+   "story": "2026 Czech Senate election",
+   "day": "2026-10-17",
+   "split": "test"
+  },
+  {
+   "id": "n:3b6a439cf6d0",
+   "title": "Czechs begin voting in the second round to elect 22 senators who were not elected in the first round",
+   "snippet": "Czechs begin voting in the second round to elect 22 senators who were not elected in the first round.",
+   "story": "2026 Czech Senate election",
+   "day": "2026-10-16",
+   "split": "test"
+  },
+  {
+   "id": "n:b88263d4e9c2",
+   "title": "Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead of the party's planned march",
+   "snippet": "Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead of the party's planned march.",
+   "story": "2026 anti-CEC protests",
+   "day": "2026-10-16",
+   "split": "test"
+  },
+  {
+   "id": "n:0c4ea785f558",
+   "title": "An executive magistrate's court in New Delhi, India, orders the release of Cockroach Janta Party founder…",
+   "snippet": "An executive magistrate's court in New Delhi, India, orders the release of Cockroach Janta Party founder Abhijeet Dipke and two other leaders, requiring them to avoid breaches of the peace for one year after their detention.",
+   "story": "2026 anti-CEC protests",
+   "day": "2026-10-11",
+   "split": "dev"
+  },
+  {
+   "id": "n:983bc187529b",
+   "title": "Four people are killed fighting wildfires in Bromo Tengger Semeru National Park in East Java, Indonesia,…",
+   "snippet": "Four people are killed fighting wildfires in Bromo Tengger Semeru National Park in East Java, Indonesia, after flames and thick smoke trapped them. Two others suffer serious burns.",
+   "story": "2026 Indonesia wildfires",
+   "day": "2026-10-15",
+   "split": "test"
+  },
+  {
+   "id": "n:98774ff2eef6",
+   "title": "The Indonesian forestry ministry and International Animal Rescue release eight orangutans rescued from…",
+   "snippet": "The Indonesian forestry ministry and International Animal Rescue release eight orangutans rescued from wildfires into a protected wildforest in West Kalimantan after fires destroyed habitat near plantations.",
+   "story": "2026 Indonesia wildfires",
+   "day": "2026-10-11",
+   "split": "dev"
+  },
+  {
+   "id": "n:47912f062634",
+   "title": "Singapore records its highest air pollution level of 2026 as one-hour PM2.5 concentrations reach about 288…",
+   "snippet": "Singapore records its highest air pollution level of 2026 as one-hour PM2.5 concentrations reach about 288 micrograms per cubic metre amid haze from Indonesian wildfires.",
+   "story": "2026 Southeast Asian haze",
+   "day": "2026-10-14",
+   "split": "test"
+  },
+  {
+   "id": "n:47912f062634",
+   "title": "Timor-Leste suspends in-person classes nationwide from October 15 to 17 due to worsening air quality from…",
+   "snippet": "Timor-Leste suspends in-person classes nationwide from October 15 to 17 due to worsening air quality from wildfire smoke and pollutant particles across Southeast Asia.",
+   "story": "2026 Southeast Asian haze",
+   "day": "2026-10-14",
+   "split": "test"
+  },
+  {
+   "id": "n:2a0496d94138",
+   "title": "American economists Robert Ernest Hall and Michael Dean Woodford are jointly awarded the Nobel Memorial Prize…",
+   "snippet": "American economists Robert Ernest Hall and Michael Dean Woodford are jointly awarded the Nobel Memorial Prize in Economic Sciences for their work on \"microeconomic foundations of macroeconomic stabilisation\".",
+   "story": "2026 Nobel Prizes",
+   "day": "2026-10-12",
+   "split": "dev"
+  },
+  {
+   "id": "n:843dca3f0c5c",
+   "title": "French chemist Henri B",
+   "snippet": "French chemist Henri B. Kagan from the Paris-Saclay University and Japanese organic chemist Kensō Soai from the Tokyo University of Science are jointly awarded the Nobel Prize in Chemistry for \"the discovery of non-linear effects and autocatalysis in asymmetric organic synthesis\".",
+   "story": "2026 Nobel Prizes",
+   "day": "2026-10-07",
+   "split": "dev"
+  },
+  {
+   "id": "n:f9de5f825dd0",
+   "title": "Two deaths are reported after hurricanes Rachel and Simon made landfall on Mexico's coast, with Guerrero…",
+   "snippet": "Two deaths are reported after hurricanes Rachel and Simon made landfall on Mexico's coast, with Guerrero governor Evelyn Salgado and Baja California governor Marina del Pilar Ávila confirming their deaths.",
+   "story": "2026 Pacific hurricane season",
+   "day": "2026-10-12",
+   "split": "dev"
+  },
+  {
+   "id": "n:116192a52f3a",
+   "title": "Tropical storm Simon strengthens into a category 4 Pacific hurricane with 150 mph (240 kph) winds as it heads…",
+   "snippet": "Tropical storm Simon strengthens into a category 4 Pacific hurricane with 150 mph (240 kph) winds as it heads towards Mexico's coast.",
+   "story": "2026 Pacific hurricane season",
+   "day": "2026-10-10",
+   "split": "dev"
+  },
+  {
+   "id": "n:6711edd0da19",
+   "title": "Pakistan's federal government detains hundreds of Pakistan Tehreek-e-Insaf (PTI) members, including former…",
+   "snippet": "Pakistan's federal government detains hundreds of Pakistan Tehreek-e-Insaf (PTI) members, including former Khyber Pakhtunkhwa chief minister Sohail Afridi and other provincial officials, after suspending the PTI-led provincial administration and imposing emergency rule.",
+   "story": "2026 Khyber Pakhtunkhwa state of emergency",
+   "day": "2026-10-12",
+   "split": "dev"
+  },
+  {
+   "id": "n:5cb71a4fb4d4",
+   "title": "Pakistani president Asif Ali Zardari declares a state of emergency in Khyber Pakhtunkhwa and suspends its…",
+   "snippet": "Pakistani president Asif Ali Zardari declares a state of emergency in Khyber Pakhtunkhwa and suspends its provincial government amid disputes over the province's response to Islamist militancy.",
+   "story": "2026 Khyber Pakhtunkhwa state of emergency",
+   "day": "2026-10-11",
+   "split": "dev"
+  },
+  {
+   "id": "n:c67071e35d4c",
+   "title": "Three civilians and two police officers are killed in a mass shooting in Jacona, Michoacán, Mexico, while six…",
+   "snippet": "Three civilians and two police officers are killed in a mass shooting in Jacona, Michoacán, Mexico, while six other people are wounded. Separately, three gunmen are killed in a shootout with police in Zamora.",
+   "story": "Mexican drug war",
+   "day": "2026-10-11",
+   "split": "dev"
+  },
+  {
+   "id": "n:78021f984407",
+   "title": "Twelve people, including a 2-year-old, are killed and 16 more injured during a shootout between different…",
+   "snippet": "Twelve people, including a 2-year-old, are killed and 16 more injured during a shootout between different factions of the Sinaloa Cartel at El Castillo Penitentiary Centre in Mazatlán, Sinaloa, Mexico. The incident is believed to have been an assassination attempt on Eduardo Jonathan Martínez Larios, a leader of Los Chapitos who was reportedly amongst the dead.",
+   "story": "Mexican drug war",
+   "day": "2026-10-08",
+   "split": "dev"
+  }
+ ]
+}

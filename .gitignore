@@ -17,3 +17,7 @@ server/.env
 server/.venv/
 __pycache__/
 *.pyc
+
+# scripted QA output (screenshots, videos)
+qa/recordings/
+server/.cache/

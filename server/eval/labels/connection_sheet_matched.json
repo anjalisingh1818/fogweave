@@ -1,0 +1,146 @@
+[
+ {
+  "item": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+  "id": "n:0460555895d3",
+  "persona": "matched",
+  "context": [
+   "Guadalajara",
+   "water supply",
+   "small business"
+  ],
+  "result": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread… -> Guadalajara -> Guadalajara",
+  "hops": [
+   "reported",
+   "inferred"
+  ],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…",
+  "id": "n:047b20792022",
+  "persona": "matched",
+  "context": [
+   "United Kingdom",
+   "retail",
+   "cash payments"
+  ],
+  "result": "no clear connection",
+  "hops": [],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada",
+  "id": "n:2ea4338fe8f4",
+  "persona": "matched",
+  "context": [
+   "Calgary",
+   "Alberta",
+   "oil and gas",
+   "public transport"
+  ],
+  "result": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada -> Alberta -> Alberta",
+  "hops": [
+   "reported",
+   "inferred"
+  ],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper…",
+  "id": "n:8ab7353c3a4a",
+  "persona": "matched",
+  "context": [
+   "Frankfurt",
+   "banking",
+   "Commerzbank"
+  ],
+  "result": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper… -> Commerzbank -> Commerzbank",
+  "hops": [
+   "reported",
+   "inferred"
+  ],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near…",
+  "id": "n:9700f8a230bf",
+  "persona": "matched",
+  "context": [
+   "Taiwan",
+   "fishing",
+   "semiconductors"
+  ],
+  "result": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near… -> Taiwan -> Taiwan",
+  "hops": [
+   "reported",
+   "inferred"
+  ],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Brazilian environment minister João Paulo Capobianco [pt] reports that deforestation in Brazil's Amazon…",
+  "id": "n:c4f3475d8101",
+  "persona": "matched",
+  "context": [
+   "Brazil",
+   "agriculture",
+   "climate policy"
+  ],
+  "result": "Brazilian environment minister João Paulo Capobianco [pt] reports that deforestation in Brazil's Amazon… -> Brazil -> Brazil",
+  "hops": [
+   "reported",
+   "inferred"
+  ],
+  "ctx_links_from_engine": [
+   "Deforestation rate in the Brazilian Amazon --affects/inferred--> Brazil"
+  ],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "A truck loses control and runs over devotees outside a temple in Gwalior, Madhya Pradesh, India, killing at…",
+  "id": "n:e40e07b73237",
+  "persona": "matched",
+  "context": [
+   "Madhya Pradesh",
+   "farming",
+   "road travel"
+  ],
+  "result": "A truck loses control and runs over devotees outside a temple in Gwalior, Madhya Pradesh, India, killing at… -> Madhya Pradesh -> Madhya Pradesh",
+  "hops": [
+   "reported",
+   "inferred"
+  ],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ },
+ {
+  "item": "Kenya confirms four additional cases of Bundibugyo ebolavirus, including three health workers who treated…",
+  "id": "n:f5225c9d8fb5",
+  "persona": "matched",
+  "context": [
+   "Nairobi",
+   "healthcare work",
+   "air travel"
+  ],
+  "result": "Kenya confirms four additional cases of Bundibugyo ebolavirus, including three health workers who treated… -> Nairobi -> Nairobi",
+  "hops": [
+   "reported",
+   "inferred"
+  ],
+  "ctx_links_from_engine": [],
+  "plausible_connection": null,
+  "sensible": null
+ }
+]

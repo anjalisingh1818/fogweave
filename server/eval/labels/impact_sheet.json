@@ -1,0 +1,3076 @@
+[
+ {
+  "key": "n:00dfe2b0206f|involves:ev:world food programme cuts monthly food aid in gaza->org:world food programme|reported",
+  "item": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+  "section": "International relations",
+  "label": "reported",
+  "link": "World Food Programme cuts monthly food aid in Gaza --involves--> World Food Programme",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "The World Food Programme said Monday it would end monthly assistance to 500,000 people in Gaza due to a funding shortfall",
+  "verdict": null
+ },
+ {
+  "key": "n:00dfe2b0206f|affects:org:world food programme->org:500,000 people in gaza|inferred",
+  "item": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+  "section": "International relations",
+  "label": "inferred",
+  "link": "World Food Programme --affects--> 500,000 people in Gaza",
+  "hop": 1,
+  "reasoning": "WFP ending assistance directly removes food aid for these people",
+  "basis": [
+   "WFP will end monthly assistance to 500,000 people in Gaza because of a funding shortfall."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:00dfe2b0206f|affects:org:500,000 people in gaza->topic:food insecurity in gaza|inferred",
+  "item": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+  "section": "International relations",
+  "label": "inferred",
+  "link": "500,000 people in Gaza --affects--> food insecurity in Gaza",
+  "hop": 2,
+  "reasoning": "Loss of monthly aid increases the risk of insufficient food",
+  "basis": [
+   "WFP will end monthly assistance to 500,000 people in Gaza because of a funding shortfall."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:00dfe2b0206f|depends_on:org:world food programme->topic:$450 million funding need|inferred",
+  "item": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+  "section": "International relations",
+  "label": "inferred",
+  "link": "World Food Programme --depends_on--> $450 million funding need",
+  "hop": 1,
+  "reasoning": "WFP requires this amount to sustain operations",
+  "basis": [
+   "WFP needs about $450 million for the next six months for operations in Gaza and the West Bank."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:00dfe2b0206f|affects:topic:$450 million funding need->org:donor contributions|speculative",
+  "item": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+  "section": "International relations",
+  "label": "speculative",
+  "link": "$450 million funding need --affects--> donor contributions",
+  "hop": 2,
+  "reasoning": "Large funding gaps typically prompt donor appeals",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:00eab1f15d72|happened_in:ev:drone strike on abyei market->wd:Q336494|reported",
+  "item": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+  "section": "Armed conflicts and attacks",
+  "label": "reported",
+  "link": "Drone strike on Abyei market --happened_in--> Abyei",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "at a market in the disputed Abyei area",
+  "verdict": null
+ },
+ {
+  "key": "n:00eab1f15d72|part_of:wd:Q336494->wd:Q958|reported",
+  "item": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+  "section": "Armed conflicts and attacks",
+  "label": "reported",
+  "link": "Abyei --part_of--> South Sudan",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "disputed Abyei area between South Sudan",
+  "verdict": null
+ },
+ {
+  "key": "n:00eab1f15d72|affects:ev:drone strike on abyei market->topic:73 people|reported",
+  "item": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+  "section": "Armed conflicts and attacks",
+  "label": "reported",
+  "link": "Drone strike on Abyei market --affects--> 73 people",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "kills at least 73 people",
+  "verdict": null
+ },
+ {
+  "key": "n:00eab1f15d72|affects:ev:drone strike on abyei market->place:abyei market|inferred",
+  "item": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+  "section": "Armed conflicts and attacks",
+  "label": "inferred",
+  "link": "Drone strike on Abyei market --affects--> Abyei market",
+  "hop": 1,
+  "reasoning": "The strike is reported to have occurred at the market in Abyei.",
+  "basis": [
+   "The strike occurred at a market in Abyei."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:00eab1f15d72|affects:place:abyei market->topic:local civilians|inferred",
+  "item": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+  "section": "Armed conflicts and attacks",
+  "label": "inferred",
+  "link": "Abyei market --affects--> local civilians",
+  "hop": 2,
+  "reasoning": "The strike killed at least 73 people, indicating impact on civilians present at the market.",
+  "basis": [
+   "A drone strike killed at least 73 people.",
+   "Drone strike on Abyei market affects 73 people"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:00eab1f15d72|affects:ev:drone strike on abyei market->topic:regional stability between south sudan and sudan|inferred",
+  "item": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+  "section": "Armed conflicts and attacks",
+  "label": "inferred",
+  "link": "Drone strike on Abyei market --affects--> regional stability between South Sudan and Sudan",
+  "hop": 1,
+  "reasoning": "Abyei is a disputed area; violence there can heighten tensions between the two states.",
+  "basis": [
+   "Abyei is a disputed area between South Sudan and Sudan."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:00eab1f15d72|affects:topic:regional stability between south sudan and sudan->topic:global energy prices|speculative",
+  "item": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+  "section": "Armed conflicts and attacks",
+  "label": "speculative",
+  "link": "regional stability between South Sudan and Sudan --affects--> global energy prices",
+  "hop": 2,
+  "reasoning": "Instability in a region that can affect oil transit routes may influence worldwide energy prices.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:0460555895d3|involves:ev:second protest over water crisis in guadalajara->topic:water shortages|reported",
+  "item": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+  "section": "Politics and elections",
+  "label": "reported",
+  "link": "Second protest over water crisis in Guadalajara --involves--> water shortages",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "protest over water shortages and contamination",
+  "verdict": null
+ },
+ {
+  "key": "n:0460555895d3|part_of:ev:second protest over water crisis in guadalajara->wd:Q13160|reported",
+  "item": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+  "section": "Politics and elections",
+  "label": "reported",
+  "link": "Second protest over water crisis in Guadalajara --part_of--> Jalisco",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "in Guadalajara, western Mexico",
+  "verdict": null
+ },
+ {
+  "key": "n:0460555895d3|part_of:org:state congress building->wd:Q13160|reported",
+  "item": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+  "section": "Politics and elections",
+  "label": "reported",
+  "link": "State Congress building --part_of--> Jalisco",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "state Congress building",
+  "verdict": null
+ },
+ {
+  "key": "n:0460555895d3|depends_on:wd:Q56760439->tech:aging pipes|reported",
+  "item": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+  "section": "Politics and elections",
+  "label": "reported",
+  "link": "Pablo Lemus --depends_on--> aging pipes",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Lemus attributed the water crisis to the city's aging pipes",
+  "verdict": null
+ },
+ {
+  "key": "n:0460555895d3|affects:ev:second protest over water crisis in guadalajara->topic:public order in guadalajara|inferred",
+  "item": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+  "section": "Politics and elections",
+  "label": "inferred",
+  "link": "Second protest over water crisis in Guadalajara --affects--> public order in Guadalajara",
+  "hop": 1,
+  "reasoning": "Violence and explosives at the protest indicate disruption of public order",
+  "basis": [
+   "Violence erupted during the second weekly protest over water shortages in Guadalajara.",
+   "Hooded individuals set off explosives and set fire to the entrances of the State Congress building.",
+   "Five people were detained after being found in a stolen pickup truck with gasoline containers."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:0460555895d3|affects:ev:second protest over water crisis in guadalajara->topic:detention of protesters|inferred",
+  "item": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+  "section": "Politics and elections",
+  "label": "inferred",
+  "link": "Second protest over water crisis in Guadalajara --affects--> detention of protesters",
+  "hop": 1,
+  "reasoning": "Five people were detained in connection with the protest activities",
+  "basis": [
+   "Five people were detained after being found in a stolen pickup truck with gasoline containers."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:0460555895d3|affects:ev:second protest over water crisis in guadalajara->org:political pressure on governor pablo lemur|inferred",
+  "item": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+  "section": "Politics and elections",
+  "label": "inferred",
+  "link": "Second protest over water crisis in Guadalajara --affects--> political pressure on Governor Pablo Lemur",
+  "hop": 1,
+  "reasoning": "Violent protest and a declared crisis increase scrutiny on the governor",
+  "basis": [
+   "Violence erupted during the second weekly protest over water shortages in Guadalajara.",
+   "Governor Pablo Lemus called the situation an unprecedented drinking water crisis."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:0460555895d3|depends_on:org:political pressure on governor pablo lemur->tech:aging water pipe infrastructure|inferred",
+  "item": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+  "section": "Politics and elections",
+  "label": "inferred",
+  "link": "political pressure on Governor Pablo Lemur --depends_on--> aging water pipe infrastructure",
+  "hop": 1,
+  "reasoning": "Lemus attributes the crisis to pipes not maintained for 70 years",
+  "basis": [
+   "Lemus said the water crisis is caused by the city's aging pipes that have not been maintained for more than 70 years.",
+   "Pablo Lemus depends_on aging pipes"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:0460555895d3|affects:tech:aging water pipe infrastructure->topic:water availability in guadalajara|inferred",
+  "item": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+  "section": "Politics and elections",
+  "label": "inferred",
+  "link": "aging water pipe infrastructure --affects--> water availability in Guadalajara",
+  "hop": 2,
+  "reasoning": "Neglected pipes cause the current water shortages",
+  "basis": [
+   "Lemus said the water crisis is caused by the city's aging pipes that have not been maintained for more than 70 years."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:0460555895d3|affects:topic:water availability in guadalajara->topic:public health concerns|speculative",
+  "item": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+  "section": "Politics and elections",
+  "label": "speculative",
+  "link": "water availability in Guadalajara --affects--> public health concerns",
+  "hop": 2,
+  "reasoning": "Reduced drinking water can lead to health risks for residents",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:0460555895d3|affects:ev:second protest over water crisis in guadalajara->topic:media attention to jalisco water issues|speculative",
+  "item": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+  "section": "Politics and elections",
+  "label": "speculative",
+  "link": "Second protest over water crisis in Guadalajara --affects--> media attention to Jalisco water issues",
+  "hop": 1,
+  "reasoning": "High‑profile protests typically generate news coverage",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:0460555895d3|affects:topic:media attention to jalisco water issues->topic:potential investment in water infrastructure|speculative",
+  "item": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+  "section": "Politics and elections",
+  "label": "speculative",
+  "link": "media attention to Jalisco water issues --affects--> potential investment in water infrastructure",
+  "hop": 2,
+  "reasoning": "Increased visibility may prompt authorities or investors to allocate funds",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:047b20792022|involves:ev:bank of england announces wildlife banknote designs->wd:Q183231|reported",
+  "item": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…",
+  "section": "Arts and culture",
+  "label": "reported",
+  "link": "Bank of England announces wildlife banknote designs --involves--> Bank of England",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Bank of England has revealed the four creatures that will feature on our money",
+  "verdict": null
+ },
+ {
+  "key": "n:047b20792022|involves:ev:bank of england announces wildlife banknote designs->wd:Q951830|reported",
+  "item": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…",
+  "section": "Arts and culture",
+  "label": "reported",
+  "link": "Bank of England announces wildlife banknote designs --involves--> Royal Mint",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "The puffin and bees also feature on coins, as part of the Royal Mint's redesigned 20p and £1 coins respectively",
+  "verdict": null
+ },
+ {
+  "key": "n:047b20792022|affects:wd:Q183231->topic:security of bank of england banknotes|inferred",
+  "item": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…",
+  "section": "Arts and culture",
+  "label": "inferred",
+  "link": "Bank of England --affects--> security of Bank of England banknotes",
+  "hop": 1,
+  "reasoning": "The Bank states wildlife images will enhance security and help stop counterfeiting.",
+  "basis": [
+   "The Bank says wildlife images will enhance security and help stop counterfeiting."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:047b20792022|affects:topic:security of bank of england banknotes->topic:counterfeiting incidence|speculative",
+  "item": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…",
+  "section": "Arts and culture",
+  "label": "speculative",
+  "link": "security of Bank of England banknotes --affects--> counterfeiting incidence",
+  "hop": 2,
+  "reasoning": "Improved security is likely to reduce the number of counterfeit notes.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:047b20792022|affects:wd:Q183231->topic:public awareness of british wildlife species|speculative",
+  "item": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…",
+  "section": "Arts and culture",
+  "label": "speculative",
+  "link": "Bank of England --affects--> public awareness of British wildlife species",
+  "hop": 1,
+  "reasoning": "Featuring four native species on widely‑circulated notes may increase public attention to those animals.",
+  "basis": [
+   "Four wildlife species will appear on the redesigned Bank of England notes.",
+   "The owl, bumblebee and hedgehog topped a public vote in their categories.",
+   "The puffin was included to celebrate marine life and British coastline."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:0f5a4c632e8d|happened_in:ev:collapse of open pit gold mine in nariño->place:nariño department|reported",
+  "item": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+  "section": "Disasters and accidents",
+  "label": "reported",
+  "link": "Collapse of open pit gold mine in Nariño --happened_in--> Nariño Department",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "collapse of an open pit gold mine in Nariño Department",
+  "verdict": null
+ },
+ {
+  "key": "n:0f5a4c632e8d|involves:ev:collapse of open pit gold mine in nariño->wd:Q820037|reported",
+  "item": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+  "section": "Disasters and accidents",
+  "label": "reported",
+  "link": "Collapse of open pit gold mine in Nariño --involves--> miners",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Fourteen miners are killed and seven more injured",
+  "verdict": null
+ },
+ {
+  "key": "n:0f5a4c632e8d|affects:ev:collapse of open pit gold mine in nariño->topic:open pit gold mine|reported",
+  "item": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+  "section": "Disasters and accidents",
+  "label": "reported",
+  "link": "Collapse of open pit gold mine in Nariño --affects--> open pit gold mine",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "collapse of an open pit gold mine",
+  "verdict": null
+ },
+ {
+  "key": "n:0f5a4c632e8d|part_of:place:nariño department->wd:Q739|reported",
+  "item": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+  "section": "Disasters and accidents",
+  "label": "reported",
+  "link": "Nariño Department --part_of--> Colombia",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Nariño Department, Colombia",
+  "verdict": null
+ },
+ {
+  "key": "n:0f5a4c632e8d|affects:ev:collapse of open pit gold mine in nariño->wd:Q820037|inferred",
+  "item": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+  "section": "Disasters and accidents",
+  "label": "inferred",
+  "link": "Collapse of open pit gold mine in Nariño --affects--> miners",
+  "hop": 1,
+  "reasoning": "The collapse involved miners, resulting in deaths and injuries.",
+  "basis": [
+   "Collapse of open pit gold mine in Nariño involves miners",
+   "Fourteen miners were killed in the collapse.",
+   "Seven miners were injured in the collapse."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:0f5a4c632e8d|affects:wd:Q820037->topic:local community in nariño|speculative",
+  "item": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+  "section": "Disasters and accidents",
+  "label": "speculative",
+  "link": "miners --affects--> local community in Nariño",
+  "hop": 2,
+  "reasoning": "Loss of miners likely impacts families and the surrounding community.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:0f5a4c632e8d|affects:ev:collapse of open pit gold mine in nariño->topic:open pit gold mine|inferred",
+  "item": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+  "section": "Disasters and accidents",
+  "label": "inferred",
+  "link": "Collapse of open pit gold mine in Nariño --affects--> open pit gold mine",
+  "hop": 1,
+  "reasoning": "The event directly impacted the mine where the collapse occurred.",
+  "basis": [
+   "Collapse of open pit gold mine in Nariño affects open pit gold mine",
+   "The incident occurred at an open pit gold mine."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:0f5a4c632e8d|affects:topic:open pit gold mine->topic:gold production|speculative",
+  "item": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+  "section": "Disasters and accidents",
+  "label": "speculative",
+  "link": "open pit gold mine --affects--> gold production",
+  "hop": 2,
+  "reasoning": "Disruption of the mine would likely reduce its gold output.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:0f5a4c632e8d|affects:ev:collapse of open pit gold mine in nariño->place:nariño department|inferred",
+  "item": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+  "section": "Disasters and accidents",
+  "label": "inferred",
+  "link": "Collapse of open pit gold mine in Nariño --affects--> Nariño Department",
+  "hop": 1,
+  "reasoning": "The collapse occurred within Nariño Department, affecting the region.",
+  "basis": [
+   "The collapse happened in Nariño Department, Colombia.",
+   "Collapse of open pit gold mine in Nariño happened_in Nariño Department",
+   "Nariño Department part_of Colombia"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:0f5a4c632e8d|affects:place:nariño department->topic:regional employment|speculative",
+  "item": "Fourteen miners are killed and seven more injured during the collapse of an open pit gold mine in Nariño…",
+  "section": "Disasters and accidents",
+  "label": "speculative",
+  "link": "Nariño Department --affects--> regional employment",
+  "hop": 2,
+  "reasoning": "A major mine incident can influence jobs in the surrounding area.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:12fabc0b78de|depends_on:topic:federal indictment->ev:arrest warrant for raul castro|reported",
+  "item": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…",
+  "section": "Law and crime",
+  "label": "reported",
+  "link": "Federal indictment --depends_on--> Arrest warrant for Raul Castro",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "The Trump administration unveiled a superseding indictment also targeting Raul Castro for the 1996 plane downings.",
+  "verdict": null
+ },
+ {
+  "key": "n:12fabc0b78de|affects:ev:arrest warrant for raul castro->topic:u.s.-cuba diplomatic relations|inferred",
+  "item": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…",
+  "section": "Law and crime",
+  "label": "inferred",
+  "link": "Arrest warrant for Raul Castro --affects--> U.S.-Cuba diplomatic relations",
+  "hop": 1,
+  "reasoning": "The warrant is part of a U.S. legal action that builds on existing tightened restrictions.",
+  "basis": [
+   "The Trump administration has tightened U.S. restrictions on Cuba, including a de facto energy blockade.",
+   "Federal indictment depends_on Arrest warrant for Raul Castro"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:12fabc0b78de|affects:topic:u.s.-cuba diplomatic relations->topic:energy prices in global markets|speculative",
+  "item": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…",
+  "section": "Law and crime",
+  "label": "speculative",
+  "link": "U.S.-Cuba diplomatic relations --affects--> energy prices in global markets",
+  "hop": 2,
+  "reasoning": "Further strain could reduce Cuban energy exports and affect regional supply, influencing prices.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:12fabc0b78de|affects:topic:u.s.-cuba diplomatic relations->topic:logistics flows through rotterdam port|speculative",
+  "item": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…",
+  "section": "Law and crime",
+  "label": "speculative",
+  "link": "U.S.-Cuba diplomatic relations --affects--> logistics flows through Rotterdam port",
+  "hop": 2,
+  "reasoning": "Heightened tensions may lead to sanctions that disrupt cargo routes involving Cuban trade, impacting Rotterdam logistics.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:12fabc0b78de|affects:ev:arrest warrant for raul castro->topic:public perception of u.s. policy on cuba|speculative",
+  "item": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…",
+  "section": "Law and crime",
+  "label": "speculative",
+  "link": "Arrest warrant for Raul Castro --affects--> public perception of U.S. policy on Cuba",
+  "hop": 1,
+  "reasoning": "A high‑profile warrant can shape how the public views the administration’s stance toward Cuba.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:2a0496d94138|happened_in:ev:2026 nobel prize in economic sciences awarded to hall and woodford->wd:Q1754|reported",
+  "item": "American economists Robert Ernest Hall and Michael Dean Woodford are jointly awarded the Nobel Memorial Prize…",
+  "section": "Business and economy",
+  "label": "reported",
+  "link": "2026 Nobel Prize in Economic Sciences awarded to Hall and Woodford --happened_in--> Stockholm",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "The Royal Swedish Academy of Sciences awarded the prize in Stockholm on Monday.",
+  "verdict": null
+ },
+ {
+  "key": "n:2a0496d94138|involves:ev:2026 nobel prize in economic sciences awarded to hall and woodford->org:royal swedish academy of sciences|reported",
+  "item": "American economists Robert Ernest Hall and Michael Dean Woodford are jointly awarded the Nobel Memorial Prize…",
+  "section": "Business and economy",
+  "label": "reported",
+  "link": "2026 Nobel Prize in Economic Sciences awarded to Hall and Woodford --involves--> Royal Swedish Academy of Sciences",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "The Royal Swedish Academy of Sciences awarded the prize",
+  "verdict": null
+ },
+ {
+  "key": "n:2a0496d94138|involves:ev:2026 nobel prize in economic sciences awarded to hall and woodford->wd:Q2156948|reported",
+  "item": "American economists Robert Ernest Hall and Michael Dean Woodford are jointly awarded the Nobel Memorial Prize…",
+  "section": "Business and economy",
+  "label": "reported",
+  "link": "2026 Nobel Prize in Economic Sciences awarded to Hall and Woodford --involves--> Robert Hall",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "American professors Robert E. Hall and Michael Woodford have won the 2026 Nobel prize in economics",
+  "verdict": null
+ },
+ {
+  "key": "n:2a0496d94138|involves:ev:2026 nobel prize in economic sciences awarded to hall and woodford->wd:Q381692|reported",
+  "item": "American economists Robert Ernest Hall and Michael Dean Woodford are jointly awarded the Nobel Memorial Prize…",
+  "section": "Business and economy",
+  "label": "reported",
+  "link": "2026 Nobel Prize in Economic Sciences awarded to Hall and Woodford --involves--> Michael Dean Woodford",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "American professors Robert E. Hall and Michael Woodford have won the 2026 Nobel prize in economics",
+  "verdict": null
+ },
+ {
+  "key": "n:2a0496d94138|affects:ev:2026 nobel prize in economic sciences awarded to hall and woodford->topic:economic modeling used by governments and central banks|inferred",
+  "item": "American economists Robert Ernest Hall and Michael Dean Woodford are jointly awarded the Nobel Memorial Prize…",
+  "section": "Business and economy",
+  "label": "inferred",
+  "link": "2026 Nobel Prize in Economic Sciences awarded to Hall and Woodford --affects--> Economic modeling used by governments and central banks",
+  "hop": 1,
+  "reasoning": "The prize highlights the laureates' models that already help stabilize economies.",
+  "basis": [
+   "Their economic models help governments and central banks stabilize economies against external shocks."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:2a0496d94138|affects:topic:economic modeling used by governments and central banks->topic:government macro‑policy design|speculative",
+  "item": "American economists Robert Ernest Hall and Michael Dean Woodford are jointly awarded the Nobel Memorial Prize…",
+  "section": "Business and economy",
+  "label": "speculative",
+  "link": "Economic modeling used by governments and central banks --affects--> Government macro‑policy design",
+  "hop": 2,
+  "reasoning": "Greater visibility of the models may encourage policymakers to incorporate them.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:2a0496d94138|affects:topic:economic modeling used by governments and central banks->place:agricultural policy in uttar pradesh|speculative",
+  "item": "American economists Robert Ernest Hall and Michael Dean Woodford are jointly awarded the Nobel Memorial Prize…",
+  "section": "Business and economy",
+  "label": "speculative",
+  "link": "Economic modeling used by governments and central banks --affects--> Agricultural policy in Uttar Pradesh",
+  "hop": 2,
+  "reasoning": "If governments adopt the models, they could influence sectoral policies such as those affecting farming in Uttar Pradesh.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:2ea4338fe8f4|happened_in:ev:albertans vote on ten referendums->wd:Q1951|reported",
+  "item": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada",
+  "section": "Politics and elections",
+  "label": "reported",
+  "link": "Albertans vote on ten referendums --happened_in--> Alberta",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada.",
+  "verdict": null
+ },
+ {
+  "key": "n:2ea4338fe8f4|involves:ev:albertans vote on ten referendums->topic:referendums|reported",
+  "item": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada",
+  "section": "Politics and elections",
+  "label": "reported",
+  "link": "Albertans vote on ten referendums --involves--> Referendums",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada.",
+  "verdict": null
+ },
+ {
+  "key": "n:2ea4338fe8f4|affects:ev:albertans vote on ten referendums->wd:Q1951|inferred",
+  "item": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada",
+  "section": "Politics and elections",
+  "label": "inferred",
+  "link": "Albertans vote on ten referendums --affects--> Alberta",
+  "hop": 1,
+  "reasoning": "The event is taking place in Alberta, so the province is directly affected.",
+  "basis": [
+   "Albertans are voting on ten referendums.",
+   "Albertans vote on ten referendums happened_in Alberta"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:2ea4338fe8f4|affects:ev:albertans vote on ten referendums->topic:political stability in canada|speculative",
+  "item": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada",
+  "section": "Politics and elections",
+  "label": "speculative",
+  "link": "Albertans vote on ten referendums --affects--> political stability in Canada",
+  "hop": 1,
+  "reasoning": "A referendum on separation could create uncertainty and affect national political stability.",
+  "basis": [
+   "One of the referendums asks whether Alberta should seek separation from Canada."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:2ea4338fe8f4|affects:topic:political stability in canada->topic:investment in semiconductor sector|speculative",
+  "item": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada",
+  "section": "Politics and elections",
+  "label": "speculative",
+  "link": "political stability in Canada --affects--> investment in semiconductor sector",
+  "hop": 2,
+  "reasoning": "Reduced political stability may make investors more cautious about funding capital‑intensive industries like semiconductors.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:2ea4338fe8f4|affects:ev:albertans vote on ten referendums->topic:public discourse on canadian federalism|speculative",
+  "item": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada",
+  "section": "Politics and elections",
+  "label": "speculative",
+  "link": "Albertans vote on ten referendums --affects--> public discourse on Canadian federalism",
+  "hop": 1,
+  "reasoning": "A separation referendum is likely to spark broader discussion about the federal structure of Canada.",
+  "basis": [
+   "One of the referendums asks whether Alberta should seek separation from Canada."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:2ef6e37a2b5f|involves:ev:signing of association agreements with andorra and san marino->wd:Q8880|reported",
+  "item": "Andorra and San Marino each sign an association agreement with the European Union",
+  "section": "International relations",
+  "label": "reported",
+  "link": "Signing of Association Agreements with Andorra and San Marino --involves--> European Commission",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "The European Commission has signed an Association Agreement with Andorra and San Marino",
+  "verdict": null
+ },
+ {
+  "key": "n:2ef6e37a2b5f|involves:ev:signing of association agreements with andorra and san marino->wd:Q228|reported",
+  "item": "Andorra and San Marino each sign an association agreement with the European Union",
+  "section": "International relations",
+  "label": "reported",
+  "link": "Signing of Association Agreements with Andorra and San Marino --involves--> Andorra",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "The European Commission has signed an Association Agreement with Andorra and San Marino",
+  "verdict": null
+ },
+ {
+  "key": "n:2ef6e37a2b5f|involves:ev:signing of association agreements with andorra and san marino->wd:Q238|reported",
+  "item": "Andorra and San Marino each sign an association agreement with the European Union",
+  "section": "International relations",
+  "label": "reported",
+  "link": "Signing of Association Agreements with Andorra and San Marino --involves--> San Marino",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "The European Commission has signed an Association Agreement with Andorra and San Marino",
+  "verdict": null
+ },
+ {
+  "key": "n:2ef6e37a2b5f|affects:ev:signing of association agreements with andorra and san marino->topic:internal market|reported",
+  "item": "Andorra and San Marino each sign an association agreement with the European Union",
+  "section": "International relations",
+  "label": "reported",
+  "link": "Signing of Association Agreements with Andorra and San Marino --affects--> Internal Market",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "The agreement gives Andorra and San Marino access to the EU's Internal Market",
+  "verdict": null
+ },
+ {
+  "key": "n:2ef6e37a2b5f|depends_on:ev:signing of association agreements with andorra and san marino->topic:monetary agreements|reported",
+  "item": "Andorra and San Marino each sign an association agreement with the European Union",
+  "section": "International relations",
+  "label": "reported",
+  "link": "Signing of Association Agreements with Andorra and San Marino --depends_on--> Monetary Agreements",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "The EU has also signed updated Monetary Agreements with Andorra and San Marino to address overlaps with the new Association Agreement",
+  "verdict": null
+ },
+ {
+  "key": "n:2ef6e37a2b5f|affects:wd:Q8880->topic:internal market|inferred",
+  "item": "Andorra and San Marino each sign an association agreement with the European Union",
+  "section": "International relations",
+  "label": "inferred",
+  "link": "European Commission --affects--> Internal Market",
+  "hop": 1,
+  "reasoning": "The agreements are stated to affect the Internal Market",
+  "basis": [
+   "Signing of Association Agreements with Andorra and San Marino affects Internal Market"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:2ef6e37a2b5f|affects:ev:signing of association agreements with andorra and san marino->org:businesses|inferred",
+  "item": "Andorra and San Marino each sign an association agreement with the European Union",
+  "section": "International relations",
+  "label": "inferred",
+  "link": "Signing of Association Agreements with Andorra and San Marino --affects--> Businesses",
+  "hop": 1,
+  "reasoning": "The deals aim to provide greater legal certainty for businesses",
+  "basis": [
+   "The deals aim to provide greater legal certainty and predictability for citizens, businesses and public authorities."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:2ef6e37a2b5f|affects:ev:signing of association agreements with andorra and san marino->org:citizens|inferred",
+  "item": "Andorra and San Marino each sign an association agreement with the European Union",
+  "section": "International relations",
+  "label": "inferred",
+  "link": "Signing of Association Agreements with Andorra and San Marino --affects--> Citizens",
+  "hop": 1,
+  "reasoning": "The deals aim to provide greater predictability for citizens",
+  "basis": [
+   "The deals aim to provide greater legal certainty and predictability for citizens, businesses and public authorities."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:2ef6e37a2b5f|depends_on:ev:signing of association agreements with andorra and san marino->topic:monetary agreements|inferred",
+  "item": "Andorra and San Marino each sign an association agreement with the European Union",
+  "section": "International relations",
+  "label": "inferred",
+  "link": "Signing of Association Agreements with Andorra and San Marino --depends_on--> Monetary Agreements",
+  "hop": 1,
+  "reasoning": "The agreements depend on the updated Monetary Agreements",
+  "basis": [
+   "Signing of Association Agreements with Andorra and San Marino depends_on Monetary Agreements"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:2ef6e37a2b5f|affects:topic:monetary agreements->org:public authorities|inferred",
+  "item": "Andorra and San Marino each sign an association agreement with the European Union",
+  "section": "International relations",
+  "label": "inferred",
+  "link": "Monetary Agreements --affects--> Public authorities",
+  "hop": 2,
+  "reasoning": "Updated monetary terms impact public authorities in the parties",
+  "basis": [
+   "Updated Monetary Agreements were also signed with Andorra and San Marino to address overlaps with the new Association Agreement."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:2ef6e37a2b5f|affects:ev:signing of association agreements with andorra and san marino->topic:eu external relations|speculative",
+  "item": "Andorra and San Marino each sign an association agreement with the European Union",
+  "section": "International relations",
+  "label": "speculative",
+  "link": "Signing of Association Agreements with Andorra and San Marino --affects--> EU external relations",
+  "hop": 1,
+  "reasoning": "New agreements could strengthen the EU's relations with Andorra and San Marino",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:3dacd47cdd3e|happened_in:ev:ibwm vote to adopt leap hour->wd:Q621|reported",
+  "item": "At the General Conference on Weights and Measures, the International Bureau of Weights and Measures votes to…",
+  "section": "Science and technology",
+  "label": "reported",
+  "link": "IBWM vote to adopt leap hour --happened_in--> Versailles",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "The vote at Versailles means that coordinated universal time (UTC) can drift up to an hour ...",
+  "verdict": null
+ },
+ {
+  "key": "n:3dacd47cdd3e|involves:ev:ibwm vote to adopt leap hour->tech:leap hour|reported",
+  "item": "At the General Conference on Weights and Measures, the International Bureau of Weights and Measures votes to…",
+  "section": "Science and technology",
+  "label": "reported",
+  "link": "IBWM vote to adopt leap hour --involves--> leap hour",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "to replace what many viewed as a tiresome correction: the leap second. It's time, they say, for the leap hour.",
+  "verdict": null
+ },
+ {
+  "key": "n:3dacd47cdd3e|involves:ev:ibwm vote to adopt leap hour->tech:leap second|reported",
+  "item": "At the General Conference on Weights and Measures, the International Bureau of Weights and Measures votes to…",
+  "section": "Science and technology",
+  "label": "reported",
+  "link": "IBWM vote to adopt leap hour --involves--> leap second",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "to replace what many viewed as a tiresome correction: the leap second.",
+  "verdict": null
+ },
+ {
+  "key": "n:3dacd47cdd3e|competes_with:tech:leap second->tech:leap hour|reported",
+  "item": "At the General Conference on Weights and Measures, the International Bureau of Weights and Measures votes to…",
+  "section": "Science and technology",
+  "label": "reported",
+  "link": "leap second --competes_with--> leap hour",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "the leap second is making way for the leap hour",
+  "verdict": null
+ },
+ {
+  "key": "n:3dacd47cdd3e|part_of:org:iers earth orientation centre->wd:Q142|reported",
+  "item": "At the General Conference on Weights and Measures, the International Bureau of Weights and Measures votes to…",
+  "section": "Science and technology",
+  "label": "reported",
+  "link": "IERS Earth Orientation Centre --part_of--> France",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "The IERS Earth Orientation Centre, in Paris, tracks changes ...",
+  "verdict": null
+ },
+ {
+  "key": "n:3dacd47cdd3e|affects:ev:ibwm vote to adopt leap hour->topic:leap hour adoption|inferred",
+  "item": "At the General Conference on Weights and Measures, the International Bureau of Weights and Measures votes to…",
+  "section": "Science and technology",
+  "label": "inferred",
+  "link": "IBWM vote to adopt leap hour --affects--> leap hour adoption",
+  "hop": 1,
+  "reasoning": "The vote explicitly involved adopting a leap hour.",
+  "basis": [
+   "IBWM vote to adopt leap hour involves leap hour",
+   "IBWM vote to adopt leap hour happened_in Versailles"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:3dacd47cdd3e|affects:topic:leap hour adoption->topic:coordinated universal time (utc)|inferred",
+  "item": "At the General Conference on Weights and Measures, the International Bureau of Weights and Measures votes to…",
+  "section": "Science and technology",
+  "label": "inferred",
+  "link": "leap hour adoption --affects--> Coordinated Universal Time (UTC)",
+  "hop": 2,
+  "reasoning": "A leap hour is introduced when UTC drifts from astronomical time.",
+  "basis": [
+   "UTC may drift up to an hour from astronomical time before a leap hour is needed."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:3dacd47cdd3e|affects:ev:ibwm vote to adopt leap hour->org:iers earth orientation centre|inferred",
+  "item": "At the General Conference on Weights and Measures, the International Bureau of Weights and Measures votes to…",
+  "section": "Science and technology",
+  "label": "inferred",
+  "link": "IBWM vote to adopt leap hour --affects--> IERS Earth Orientation Centre",
+  "hop": 1,
+  "reasoning": "The centre provides the data that underpins decisions about leap adjustments.",
+  "basis": [
+   "The IERS Earth Orientation Centre tracks Earth rotation changes that feed into UTC.",
+   "IERS Earth Orientation Centre part_of France"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:3dacd47cdd3e|depends_on:org:iers earth orientation centre->topic:earth rotation measurements|inferred",
+  "item": "At the General Conference on Weights and Measures, the International Bureau of Weights and Measures votes to…",
+  "section": "Science and technology",
+  "label": "inferred",
+  "link": "IERS Earth Orientation Centre --depends_on--> Earth rotation measurements",
+  "hop": 2,
+  "reasoning": "The centre tracks Earth rotation changes to compute UTC corrections.",
+  "basis": [
+   "The IERS Earth Orientation Centre tracks Earth rotation changes that feed into UTC."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:54a830f0095a|happened_in:ev:arrest of 10 people in west bank->wd:Q36678|reported",
+  "item": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi…",
+  "section": "Law and crime",
+  "label": "reported",
+  "link": "Arrest of 10 people in West Bank --happened_in--> West Bank",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Israeli police said Monday they had arrested 10 people in the occupied West Bank",
+  "verdict": null
+ },
+ {
+  "key": "n:54a830f0095a|involves:ev:arrest of 10 people in west bank->wd:Q594444|reported",
+  "item": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi…",
+  "section": "Law and crime",
+  "label": "reported",
+  "link": "Arrest of 10 people in West Bank --involves--> Israel Police",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Israeli police said Monday they had arrested 10 people",
+  "verdict": null
+ },
+ {
+  "key": "n:54a830f0095a|affects:wd:Q594444->topic:israeli police reputation|speculative",
+  "item": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi…",
+  "section": "Law and crime",
+  "label": "speculative",
+  "link": "Israel Police --affects--> Israeli police reputation",
+  "hop": 1,
+  "reasoning": "Arrests may influence public perception of the police force.",
+  "basis": [
+   "Israeli police arrested 10 people in the occupied West Bank after settler attacks on an American photographer and a French mayor.",
+   "Arrest of 10 people in West Bank involves Israel Police"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:54a830f0095a|affects:ev:arrest of 10 people in west bank->topic:settler‑palestinian tensions|speculative",
+  "item": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi…",
+  "section": "Law and crime",
+  "label": "speculative",
+  "link": "Arrest of 10 people in West Bank --affects--> settler‑Palestinian tensions",
+  "hop": 1,
+  "reasoning": "Detaining individuals after settler attacks could heighten or reduce local tensions.",
+  "basis": [
+   "Israeli police arrested 10 people in the occupied West Bank after settler attacks on an American photographer and a French mayor.",
+   "Arrest of 10 people in West Bank happened_in West Bank"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:54a830f0095a|affects:ev:arrest of 10 people in west bank->topic:british diplomatic pressure on israel|speculative",
+  "item": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi…",
+  "section": "Law and crime",
+  "label": "speculative",
+  "link": "Arrest of 10 people in West Bank --affects--> British diplomatic pressure on Israel",
+  "hop": 1,
+  "reasoning": "The arrests occur in the same context that prompted the British foreign secretary to call for sanctions.",
+  "basis": [
+   "British Foreign Secretary Ed Miliband accused Israel of an \"ethnic cleansing\" campaign and warned of sanctions on settlement goods."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:6a3502fcf385|happened_in:ev:sentencing of three mexican men in ensenada->wd:Q656189|reported",
+  "item": "A judge in Ensenada, Baja California, Mexico, sentences three Mexican men to over 158 years in prison each…",
+  "section": "Law and crimes",
+  "label": "reported",
+  "link": "Sentencing of three Mexican men in Ensenada --happened_in--> Ensenada",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "A judge in Ensenada, Baja California, Mexico, sentences three Mexican men...",
+  "verdict": null
+ },
+ {
+  "key": "n:6a3502fcf385|involves:ev:sentencing of three mexican men in ensenada->org:three mexican men|reported",
+  "item": "A judge in Ensenada, Baja California, Mexico, sentences three Mexican men to over 158 years in prison each…",
+  "section": "Law and crimes",
+  "label": "reported",
+  "link": "Sentencing of three Mexican men in Ensenada --involves--> Three Mexican men",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "three Mexican men to over 158 years in prison each",
+  "verdict": null
+ },
+ {
+  "key": "n:6a3502fcf385|involves:ev:sentencing of three mexican men in ensenada->person:two australians|reported",
+  "item": "A judge in Ensenada, Baja California, Mexico, sentences three Mexican men to over 158 years in prison each…",
+  "section": "Law and crimes",
+  "label": "reported",
+  "link": "Sentencing of three Mexican men in Ensenada --involves--> Two Australians",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "murder of two Australians",
+  "verdict": null
+ },
+ {
+  "key": "n:6a3502fcf385|involves:ev:sentencing of three mexican men in ensenada->person:american|reported",
+  "item": "A judge in Ensenada, Baja California, Mexico, sentences three Mexican men to over 158 years in prison each…",
+  "section": "Law and crimes",
+  "label": "reported",
+  "link": "Sentencing of three Mexican men in Ensenada --involves--> American",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "and an American",
+  "verdict": null
+ },
+ {
+  "key": "n:6a3502fcf385|part_of:wd:Q58731->wd:Q96|reported",
+  "item": "A judge in Ensenada, Baja California, Mexico, sentences three Mexican men to over 158 years in prison each…",
+  "section": "Law and crimes",
+  "label": "reported",
+  "link": "Baja California --part_of--> Mexico",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Baja California, Mexico",
+  "verdict": null
+ },
+ {
+  "key": "n:6a3502fcf385|affects:ev:sentencing of three mexican men in ensenada->org:three mexican men|inferred",
+  "item": "A judge in Ensenada, Baja California, Mexico, sentences three Mexican men to over 158 years in prison each…",
+  "section": "Law and crimes",
+  "label": "inferred",
+  "link": "Sentencing of three Mexican men in Ensenada --affects--> Three Mexican men",
+  "hop": 1,
+  "reasoning": "The judge sentenced the three men, directly impacting them.",
+  "basis": [
+   "A judge in Ensenada sentenced three Mexican men to over 158 years in prison each.",
+   "Sentencing of three Mexican men in Ensenada involves Three Mexican men"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:6a3502fcf385|affects:ev:sentencing of three mexican men in ensenada->topic:perception of safety for foreign tourists in baja california|inferred",
+  "item": "A judge in Ensenada, Baja California, Mexico, sentences three Mexican men to over 158 years in prison each…",
+  "section": "Law and crimes",
+  "label": "inferred",
+  "link": "Sentencing of three Mexican men in Ensenada --affects--> Perception of safety for foreign tourists in Baja California",
+  "hop": 1,
+  "reasoning": "The murder of two Australians and an American and the heavy sentences highlight risks to visitors.",
+  "basis": [
+   "The sentencing was for the murder of two Australians and an American.",
+   "Sentencing of three Mexican men in Ensenada involves Two Australians",
+   "Sentencing of three Mexican men in Ensenada involves American"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:6a3502fcf385|affects:topic:perception of safety for foreign tourists in baja california->topic:tourism in baja california|speculative",
+  "item": "A judge in Ensenada, Baja California, Mexico, sentences three Mexican men to over 158 years in prison each…",
+  "section": "Law and crimes",
+  "label": "speculative",
+  "link": "Perception of safety for foreign tourists in Baja California --affects--> Tourism in Baja California",
+  "hop": 2,
+  "reasoning": "If safety is perceived as low, tourist arrivals may decline.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:6a3502fcf385|affects:topic:tourism in baja california->topic:logistics demand in rotterdam|speculative",
+  "item": "A judge in Ensenada, Baja California, Mexico, sentences three Mexican men to over 158 years in prison each…",
+  "section": "Law and crimes",
+  "label": "speculative",
+  "link": "Tourism in Baja California --affects--> Logistics demand in Rotterdam",
+  "hop": 2,
+  "reasoning": "Changes in tourism flows can alter international freight volumes handled by Rotterdam ports.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:75c973928996|happened_in:ev:rapid support forces drone strike->wd:Q1963|reported",
+  "item": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan",
+  "section": "Armed conflicts and attacks",
+  "label": "reported",
+  "link": "Rapid Support Forces drone strike --happened_in--> Khartoum",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan.",
+  "verdict": null
+ },
+ {
+  "key": "n:75c973928996|involves:ev:rapid support forces drone strike->org:rapid support forces|reported",
+  "item": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan",
+  "section": "Armed conflicts and attacks",
+  "label": "reported",
+  "link": "Rapid Support Forces drone strike --involves--> Rapid Support Forces",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan.",
+  "verdict": null
+ },
+ {
+  "key": "n:75c973928996|part_of:wd:Q1963->wd:Q1049|reported",
+  "item": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan",
+  "section": "Armed conflicts and attacks",
+  "label": "reported",
+  "link": "Khartoum --part_of--> Sudan",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan.",
+  "verdict": null
+ },
+ {
+  "key": "n:75c973928996|affects:ev:rapid support forces drone strike->wd:Q19884357|reported",
+  "item": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan",
+  "section": "Armed conflicts and attacks",
+  "label": "reported",
+  "link": "Rapid Support Forces drone strike --affects--> three children",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan.",
+  "verdict": null
+ },
+ {
+  "key": "n:75c973928996|affects:ev:rapid support forces drone strike->wd:Q19884357|inferred",
+  "item": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan",
+  "section": "Armed conflicts and attacks",
+  "label": "inferred",
+  "link": "Rapid Support Forces drone strike --affects--> three children",
+  "hop": 1,
+  "reasoning": "The strike killed three children.",
+  "basis": [
+   "Three children were killed in the strike.",
+   "Rapid Support Forces drone strike affects three children"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:75c973928996|affects:wd:Q19884357->topic:public outrage|speculative",
+  "item": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan",
+  "section": "Armed conflicts and attacks",
+  "label": "speculative",
+  "link": "three children --affects--> public outrage",
+  "hop": 2,
+  "reasoning": "Deaths of children often trigger public outrage.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:75c973928996|affects:ev:rapid support forces drone strike->topic:international condemnation|speculative",
+  "item": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan",
+  "section": "Armed conflicts and attacks",
+  "label": "speculative",
+  "link": "Rapid Support Forces drone strike --affects--> international condemnation",
+  "hop": 1,
+  "reasoning": "Civilian casualties in a drone strike can lead to condemnation from other states and NGOs.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:75c973928996|affects:topic:international condemnation->topic:sudan's diplomatic relations|speculative",
+  "item": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan",
+  "section": "Armed conflicts and attacks",
+  "label": "speculative",
+  "link": "international condemnation --affects--> Sudan's diplomatic relations",
+  "hop": 2,
+  "reasoning": "Condemnation may strain Sudan's diplomatic ties with other countries.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:77c59dd165c5|affects:ev:opening of the new yalu river bridge->topic:china-north korea trade|speculative",
+  "item": "The New Yalu River Bridge connecting Dandong, China, and Sinuiju, North Korea, opens following a 12-year…",
+  "section": "Business and economy",
+  "label": "speculative",
+  "link": "Opening of the New Yalu River Bridge --affects--> China-North Korea trade",
+  "hop": 1,
+  "reasoning": "A new bridge creates a physical route that could enable more cross‑border trade.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:77c59dd165c5|affects:org:north korea->topic:sharp increase in trade between china and north korea|inferred",
+  "item": "The New Yalu River Bridge connecting Dandong, China, and Sinuiju, North Korea, opens following a 12-year…",
+  "section": "Business and economy",
+  "label": "inferred",
+  "link": "North Korea --affects--> Sharp increase in trade between China and North Korea",
+  "hop": 1,
+  "reasoning": "The sanctions explicitly limit the ability to expand trade.",
+  "basis": [
+   "UN sanctions on North Korea remain in effect, making a sharp increase in trade unlikely."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:77c59dd165c5|affects:topic:china-north korea trade->topic:semiconductor supply chain|speculative",
+  "item": "The New Yalu River Bridge connecting Dandong, China, and Sinuiju, North Korea, opens following a 12-year…",
+  "section": "Business and economy",
+  "label": "speculative",
+  "link": "China-North Korea trade --affects--> Semiconductor supply chain",
+  "hop": 2,
+  "reasoning": "Changes in trade volumes could alter the flow of raw materials used in semiconductor manufacturing.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:77c59dd165c5|depends_on:ev:opening of the new yalu river bridge->topic:sharp increase in trade between china and north korea|speculative",
+  "item": "The New Yalu River Bridge connecting Dandong, China, and Sinuiju, North Korea, opens following a 12-year…",
+  "section": "Business and economy",
+  "label": "speculative",
+  "link": "Opening of the New Yalu River Bridge --depends_on--> Sharp increase in trade between China and North Korea",
+  "hop": 2,
+  "reasoning": "The bridge’s impact on trade depends on whether sanctions are relaxed enough to allow a sharp increase.",
+  "basis": [
+   "UN sanctions on North Korea remain in effect, making a sharp increase in trade unlikely."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:84bb02f4d37d|happened_in:ev:twelve migrants killed off lesbos and samos->wd:Q128087|reported",
+  "item": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…",
+  "section": "Disasters and accidents",
+  "label": "reported",
+  "link": "Twelve migrants killed off Lesbos and Samos --happened_in--> Lesbos",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "off the coast of the Lesbos",
+  "verdict": null
+ },
+ {
+  "key": "n:84bb02f4d37d|involves:ev:twelve migrants killed off lesbos and samos->topic:twelve migrants|reported",
+  "item": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…",
+  "section": "Disasters and accidents",
+  "label": "reported",
+  "link": "Twelve migrants killed off Lesbos and Samos --involves--> Twelve migrants",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Twelve migrants, including an infant, are killed",
+  "verdict": null
+ },
+ {
+  "key": "n:84bb02f4d37d|involves:ev:twelve migrants killed off lesbos and samos->tech:speedboats|reported",
+  "item": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…",
+  "section": "Disasters and accidents",
+  "label": "reported",
+  "link": "Twelve migrants killed off Lesbos and Samos --involves--> speedboats",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "two separate speedboats capsize",
+  "verdict": null
+ },
+ {
+  "key": "n:84bb02f4d37d|affects:ev:twelve migrants killed off lesbos and samos->topic:greek maritime safety regulations|speculative",
+  "item": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…",
+  "section": "Disasters and accidents",
+  "label": "speculative",
+  "link": "Twelve migrants killed off Lesbos and Samos --affects--> Greek maritime safety regulations",
+  "hop": 1,
+  "reasoning": "The incident may prompt Greece to review and tighten maritime safety rules.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:84bb02f4d37d|affects:topic:greek maritime safety regulations->topic:shipping routes in the aegean sea|speculative",
+  "item": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…",
+  "section": "Disasters and accidents",
+  "label": "speculative",
+  "link": "Greek maritime safety regulations --affects--> shipping routes in the Aegean Sea",
+  "hop": 2,
+  "reasoning": "Stricter safety rules could alter preferred shipping lanes.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:84bb02f4d37d|affects:ev:twelve migrants killed off lesbos and samos->topic:greek maritime insurance premiums|speculative",
+  "item": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…",
+  "section": "Disasters and accidents",
+  "label": "speculative",
+  "link": "Twelve migrants killed off Lesbos and Samos --affects--> Greek maritime insurance premiums",
+  "hop": 1,
+  "reasoning": "Incidents often lead to higher insurance costs for maritime operators.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:84bb02f4d37d|affects:topic:greek maritime insurance premiums->ctx:energy-prices|speculative",
+  "item": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…",
+  "section": "Disasters and accidents",
+  "label": "speculative",
+  "link": "Greek maritime insurance premiums --affects--> energy prices",
+  "hop": 2,
+  "reasoning": "Higher shipping insurance can increase overall energy transport costs, feeding into energy prices.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:84bb02f4d37d|affects:ev:twelve migrants killed off lesbos and samos->topic:public transport in lesbos and samos|speculative",
+  "item": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…",
+  "section": "Disasters and accidents",
+  "label": "speculative",
+  "link": "Twelve migrants killed off Lesbos and Samos --affects--> public transport in Lesbos and Samos",
+  "hop": 1,
+  "reasoning": "The tragedy may strain local transport services handling migrant movements.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:84bb02f4d37d|affects:topic:public transport in lesbos and samos->topic:public transport in greece|speculative",
+  "item": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…",
+  "section": "Disasters and accidents",
+  "label": "speculative",
+  "link": "public transport in Lesbos and Samos --affects--> public transport in Greece",
+  "hop": 2,
+  "reasoning": "Local disruptions can ripple into national public transport planning.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:84bb02f4d37d|affects:ev:twelve migrants killed off lesbos and samos->topic:international maritime safety protocols|speculative",
+  "item": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…",
+  "section": "Disasters and accidents",
+  "label": "speculative",
+  "link": "Twelve migrants killed off Lesbos and Samos --affects--> international maritime safety protocols",
+  "hop": 1,
+  "reasoning": "High-profile incidents can influence global maritime safety standards.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:8ab7353c3a4a|involves:ev:ecb authorizes unicredit stake increase->wd:Q8901|reported",
+  "item": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper…",
+  "section": "Business and economy",
+  "label": "reported",
+  "link": "ECB authorizes UniCredit stake increase --involves--> European Central Bank",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "The European Central Bank authorizes UniCredit",
+  "verdict": null
+ },
+ {
+  "key": "n:8ab7353c3a4a|involves:ev:ecb authorizes unicredit stake increase->wd:Q45568|reported",
+  "item": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper…",
+  "section": "Business and economy",
+  "label": "reported",
+  "link": "ECB authorizes UniCredit stake increase --involves--> UniCredit",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "authorizes UniCredit to raise its stake",
+  "verdict": null
+ },
+ {
+  "key": "n:8ab7353c3a4a|involves:ev:ecb authorizes unicredit stake increase->org:commerzbank|reported",
+  "item": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper…",
+  "section": "Business and economy",
+  "label": "reported",
+  "link": "ECB authorizes UniCredit stake increase --involves--> Commerzbank",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "raise its stake in Commerzbank",
+  "verdict": null
+ },
+ {
+  "key": "n:8ab7353c3a4a|affects:ev:ecb authorizes unicredit stake increase->wd:Q45568|inferred",
+  "item": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper…",
+  "section": "Business and economy",
+  "label": "inferred",
+  "link": "ECB authorizes UniCredit stake increase --affects--> UniCredit",
+  "hop": 1,
+  "reasoning": "The authorization directly involves UniCredit.",
+  "basis": [
+   "ECB authorizes UniCredit stake increase involves UniCredit"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:8ab7353c3a4a|affects:ev:ecb authorizes unicredit stake increase->org:commerzbank|inferred",
+  "item": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper…",
+  "section": "Business and economy",
+  "label": "inferred",
+  "link": "ECB authorizes UniCredit stake increase --affects--> Commerzbank",
+  "hop": 1,
+  "reasoning": "The authorization directly involves Commerzbank.",
+  "basis": [
+   "ECB authorizes UniCredit stake increase involves Commerzbank"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:8ab7353c3a4a|affects:wd:Q45568->topic:commerzbank ownership structure|inferred",
+  "item": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper…",
+  "section": "Business and economy",
+  "label": "inferred",
+  "link": "UniCredit --affects--> Commerzbank ownership structure",
+  "hop": 2,
+  "reasoning": "UniCredit can raise its stake above 30% with no upper limit, moving toward control.",
+  "basis": [
+   "The European Central Bank authorized UniCredit to raise its stake in Commerzbank above 30%.",
+   "There is no upper limit on the stake UniCredit can acquire in Commerzbank.",
+   "The authorization allows UniCredit to proceed toward taking control of the German lender."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:8ab7353c3a4a|affects:wd:Q45568->topic:italian banking sector exposure to german market|speculative",
+  "item": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper…",
+  "section": "Business and economy",
+  "label": "speculative",
+  "link": "UniCredit --affects--> Italian banking sector exposure to German market",
+  "hop": 2,
+  "reasoning": "Greater control of a German lender increases UniCredit's exposure to Germany.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:945f742db3b8|happened_in:ev:houthis missile attack on training center->place:shabwah governorate|reported",
+  "item": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…",
+  "section": "Armed conflicts and attacks",
+  "label": "reported",
+  "link": "Houthis missile attack on training center --happened_in--> Shabwah Governorate",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "at a training center in Shabwah Governorate",
+  "verdict": null
+ },
+ {
+  "key": "n:945f742db3b8|involves:ev:houthis missile attack on training center->wd:Q3042087|reported",
+  "item": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…",
+  "section": "Armed conflicts and attacks",
+  "label": "reported",
+  "link": "Houthis missile attack on training center --involves--> Houthis",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "A missile attack by the Houthis",
+  "verdict": null
+ },
+ {
+  "key": "n:945f742db3b8|affects:ev:houthis missile attack on training center->wd:Q4991371|reported",
+  "item": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…",
+  "section": "Armed conflicts and attacks",
+  "label": "reported",
+  "link": "Houthis missile attack on training center --affects--> soldier",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "kills 58 soldiers and injure over 200",
+  "verdict": null
+ },
+ {
+  "key": "n:945f742db3b8|part_of:place:shabwah governorate->wd:Q805|reported",
+  "item": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…",
+  "section": "Armed conflicts and attacks",
+  "label": "reported",
+  "link": "Shabwah Governorate --part_of--> Yemen",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Shabwah Governorate, Yemen",
+  "verdict": null
+ },
+ {
+  "key": "n:945f742db3b8|affects:ev:houthis missile attack on training center->org:yemeni military personnel|inferred",
+  "item": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…",
+  "section": "Armed conflicts and attacks",
+  "label": "inferred",
+  "link": "Houthis missile attack on training center --affects--> Yemeni military personnel",
+  "hop": 1,
+  "reasoning": "The attack killed, injured and left missing a large number of soldiers.",
+  "basis": [
+   "58 soldiers were killed in the missile attack.",
+   "Over 200 soldiers were injured in the missile attack.",
+   "14 soldiers are missing after the attack.",
+   "Houthis missile attack on training center affects soldier"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:945f742db3b8|affects:org:yemeni military personnel->topic:yemen's internal security|speculative",
+  "item": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…",
+  "section": "Armed conflicts and attacks",
+  "label": "speculative",
+  "link": "Yemeni military personnel --affects--> Yemen's internal security",
+  "hop": 2,
+  "reasoning": "Reduced combat strength may weaken the government's ability to maintain security.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:945f742db3b8|affects:ev:houthis missile attack on training center->topic:houthis' operational reputation|speculative",
+  "item": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…",
+  "section": "Armed conflicts and attacks",
+  "label": "speculative",
+  "link": "Houthis missile attack on training center --affects--> Houthis' operational reputation",
+  "hop": 1,
+  "reasoning": "A high‑profile strike demonstrates capability, potentially enhancing the group's perceived strength.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:945f742db3b8|affects:topic:houthis' operational reputation->topic:regional risk perception for shipping routes|speculative",
+  "item": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…",
+  "section": "Armed conflicts and attacks",
+  "label": "speculative",
+  "link": "Houthis' operational reputation --affects--> Regional risk perception for shipping routes",
+  "hop": 2,
+  "reasoning": "Increased perception of Houthi threat may raise security concerns for vessels transiting nearby waters.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:945f742db3b8|affects:ev:houthis missile attack on training center->topic:energy market sentiment|speculative",
+  "item": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…",
+  "section": "Armed conflicts and attacks",
+  "label": "speculative",
+  "link": "Houthis missile attack on training center --affects--> Energy market sentiment",
+  "hop": 1,
+  "reasoning": "Escalation of conflict in Yemen can influence expectations about oil supply disruptions.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:945f742db3b8|affects:topic:energy market sentiment->topic:energy prices in europe|speculative",
+  "item": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…",
+  "section": "Armed conflicts and attacks",
+  "label": "speculative",
+  "link": "Energy market sentiment --affects--> Energy prices in Europe",
+  "hop": 2,
+  "reasoning": "Shifts in sentiment about supply risk can translate into price movements for European energy markets.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:9700f8a230bf|happened_in:ev:taiwanese coast guard drives away 16 chinese vessels->place:pratas|reported",
+  "item": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near…",
+  "section": "International relations",
+  "label": "reported",
+  "link": "Taiwanese coast guard drives away 16 Chinese vessels --happened_in--> Pratas",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "around Taiwan's main island and Pratas",
+  "verdict": null
+ },
+ {
+  "key": "n:9700f8a230bf|involves:ev:taiwanese coast guard drives away 16 chinese vessels->org:chinese coast guard|reported",
+  "item": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near…",
+  "section": "International relations",
+  "label": "reported",
+  "link": "Taiwanese coast guard drives away 16 Chinese vessels --involves--> Chinese coast guard",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "16 Chinese coast guard, research and fishing vessels",
+  "verdict": null
+ },
+ {
+  "key": "n:9700f8a230bf|affects:org:beijing->wd:Q127031|reported",
+  "item": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near…",
+  "section": "International relations",
+  "label": "reported",
+  "link": "Beijing --affects--> Taiwan Strait",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "China is attempting to unilaterally alter the status quo across the Taiwan Strait",
+  "verdict": null
+ },
+ {
+  "key": "n:9700f8a230bf|part_of:org:beijing->wd:Q37660|reported",
+  "item": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near…",
+  "section": "International relations",
+  "label": "reported",
+  "link": "Beijing --part_of--> South China Sea",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "near Pratas, in the northern part of the South China Sea",
+  "verdict": null
+ },
+ {
+  "key": "n:9700f8a230bf|affects:ev:taiwanese coast guard drives away 16 chinese vessels->wd:Q127031|inferred",
+  "item": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near…",
+  "section": "International relations",
+  "label": "inferred",
+  "link": "Taiwanese coast guard drives away 16 Chinese vessels --affects--> Taiwan Strait",
+  "hop": 1,
+  "reasoning": "The presence of Chinese vessels in harassment operations directly impacts the Taiwan Strait.",
+  "basis": [
+   "Taiwan drove away 16 Chinese vessels in simultaneous maritime harassment operations.",
+   "Beijing affects Taiwan Strait"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:9700f8a230bf|affects:wd:Q127031->topic:regional trade routes|speculative",
+  "item": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near…",
+  "section": "International relations",
+  "label": "speculative",
+  "link": "Taiwan Strait --affects--> regional trade routes",
+  "hop": 2,
+  "reasoning": "Tension in a major waterway could disrupt commercial shipping.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:9700f8a230bf|affects:org:beijing->wd:Q865|inferred",
+  "item": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near…",
+  "section": "International relations",
+  "label": "inferred",
+  "link": "Beijing --affects--> Taiwan",
+  "hop": 1,
+  "reasoning": "Beijing's claim over Taiwan translates into political pressure on the Taiwanese government.",
+  "basis": [
+   "Beijing claims Taiwan and the waters around it are part of China, a claim rejected by Taipei."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:9700f8a230bf|affects:wd:Q865->topic:chinese maritime strategy|speculative",
+  "item": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near…",
+  "section": "International relations",
+  "label": "speculative",
+  "link": "Taiwan --affects--> Chinese maritime strategy",
+  "hop": 2,
+  "reasoning": "Taiwan's defensive actions may cause China to adjust its maritime deployment patterns.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:9700f8a230bf|affects:place:pratas->topic:south china sea dynamics|inferred",
+  "item": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near…",
+  "section": "International relations",
+  "label": "inferred",
+  "link": "Pratas --affects--> South China Sea dynamics",
+  "hop": 1,
+  "reasoning": "Incidents around Pratas, a disputed feature, influence broader South China Sea tensions.",
+  "basis": [
+   "The Chinese vessels operated around Taiwan's main island and the disputed Pratas island.",
+   "Beijing part_of South China Sea"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:9700f8a230bf|affects:ev:taiwanese coast guard drives away 16 chinese vessels->topic:taiwan security|inferred",
+  "item": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near…",
+  "section": "International relations",
+  "label": "inferred",
+  "link": "Taiwanese coast guard drives away 16 Chinese vessels --affects--> Taiwan security",
+  "hop": 1,
+  "reasoning": "A record deployment of vessels heightens security concerns for Taiwan.",
+  "basis": [
+   "China has increased maritime pressure, deploying a record 244 vessels in July."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:9700f8a230bf|affects:topic:taiwan security->topic:regional stability|speculative",
+  "item": "The Taiwanese coast guard drives away 16 Chinese coast guard, research, and fishing vessels operating near…",
+  "section": "International relations",
+  "label": "speculative",
+  "link": "Taiwan security --affects--> regional stability",
+  "hop": 2,
+  "reasoning": "Greater security pressure on Taiwan could ripple into broader regional stability.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:ac99b0896a72|involves:ev:equatorial guinea expands malaria program->wd:Q983|reported",
+  "item": "Equatorial Guinea announces that it will expand its program combating malaria to the mainland and Annobón",
+  "section": "Health and environment",
+  "label": "reported",
+  "link": "Equatorial Guinea expands malaria program --involves--> Equatorial Guinea",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Equatorial Guinea announces that it will expand its program...",
+  "verdict": null
+ },
+ {
+  "key": "n:ac99b0896a72|happened_in:ev:equatorial guinea expands malaria program->wd:Q148749|reported",
+  "item": "Equatorial Guinea announces that it will expand its program combating malaria to the mainland and Annobón",
+  "section": "Health and environment",
+  "label": "reported",
+  "link": "Equatorial Guinea expands malaria program --happened_in--> Mainland",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "expand its program combating malaria to the mainland",
+  "verdict": null
+ },
+ {
+  "key": "n:ac99b0896a72|affects:ev:equatorial guinea expands malaria program->wd:Q12156|reported",
+  "item": "Equatorial Guinea announces that it will expand its program combating malaria to the mainland and Annobón",
+  "section": "Health and environment",
+  "label": "reported",
+  "link": "Equatorial Guinea expands malaria program --affects--> malaria",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "program combating malaria",
+  "verdict": null
+ },
+ {
+  "key": "n:ac99b0896a72|affects:ev:equatorial guinea expands malaria program->topic:malaria cases on mainland|speculative",
+  "item": "Equatorial Guinea announces that it will expand its program combating malaria to the mainland and Annobón",
+  "section": "Health and environment",
+  "label": "speculative",
+  "link": "Equatorial Guinea expands malaria program --affects--> malaria cases on mainland",
+  "hop": 1,
+  "reasoning": "Past expansion on Bioko reduced cases, so similar effect is plausible on the mainland",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:ac99b0896a72|affects:topic:malaria cases on mainland->topic:farm productivity in mainland|speculative",
+  "item": "Equatorial Guinea announces that it will expand its program combating malaria to the mainland and Annobón",
+  "section": "Health and environment",
+  "label": "speculative",
+  "link": "malaria cases on mainland --affects--> farm productivity in mainland",
+  "hop": 2,
+  "reasoning": "Fewer malaria cases improve worker health, likely boosting agricultural output",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:ad5ac512ee13|happened_in:ev:police rescue from unregistered rehab centre->wd:Q132410|reported",
+  "item": "South African police rescue about 200 people from an unregistered rehabilitation centre in Mpumalanga and…",
+  "section": "Law and crimes",
+  "label": "reported",
+  "link": "Police rescue from unregistered rehab centre --happened_in--> Mpumalanga",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "South African police rescue about 200 people from an unregistered rehabilitation centre in Mpumalanga",
+  "verdict": null
+ },
+ {
+  "key": "n:ad5ac512ee13|involves:ev:police rescue from unregistered rehab centre->wd:Q2304339|reported",
+  "item": "South African police rescue about 200 people from an unregistered rehabilitation centre in Mpumalanga and…",
+  "section": "Law and crimes",
+  "label": "reported",
+  "link": "Police rescue from unregistered rehab centre --involves--> South African Police",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "South African police rescue about 200 people",
+  "verdict": null
+ },
+ {
+  "key": "n:ad5ac512ee13|involves:ev:police rescue from unregistered rehab centre->org:unregistered rehabilitation centre|reported",
+  "item": "South African police rescue about 200 people from an unregistered rehabilitation centre in Mpumalanga and…",
+  "section": "Law and crimes",
+  "label": "reported",
+  "link": "Police rescue from unregistered rehab centre --involves--> unregistered rehabilitation centre",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "from an unregistered rehabilitation centre",
+  "verdict": null
+ },
+ {
+  "key": "n:ad5ac512ee13|affects:ev:police rescue from unregistered rehab centre->topic:about 200 people|reported",
+  "item": "South African police rescue about 200 people from an unregistered rehabilitation centre in Mpumalanga and…",
+  "section": "Law and crimes",
+  "label": "reported",
+  "link": "Police rescue from unregistered rehab centre --affects--> about 200 people",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "rescue about 200 people",
+  "verdict": null
+ },
+ {
+  "key": "n:ad5ac512ee13|affects:ev:police rescue from unregistered rehab centre->topic:fourteen people|reported",
+  "item": "South African police rescue about 200 people from an unregistered rehabilitation centre in Mpumalanga and…",
+  "section": "Law and crimes",
+  "label": "reported",
+  "link": "Police rescue from unregistered rehab centre --affects--> fourteen people",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Fourteen people receive medical treatment following the rescue",
+  "verdict": null
+ },
+ {
+  "key": "n:ad5ac512ee13|depends_on:ev:police rescue from unregistered rehab centre->wd:Q4220055|reported",
+  "item": "South African police rescue about 200 people from an unregistered rehabilitation centre in Mpumalanga and…",
+  "section": "Law and crimes",
+  "label": "reported",
+  "link": "Police rescue from unregistered rehab centre --depends_on--> Kidnapping",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "investigating alleged kidnapping",
+  "verdict": null
+ },
+ {
+  "key": "n:ad5ac512ee13|affects:ev:police rescue from unregistered rehab centre->topic:about 200 people|inferred",
+  "item": "South African police rescue about 200 people from an unregistered rehabilitation centre in Mpumalanga and…",
+  "section": "Law and crimes",
+  "label": "inferred",
+  "link": "Police rescue from unregistered rehab centre --affects--> about 200 people",
+  "hop": 1,
+  "reasoning": "The rescue operation involved roughly 200 individuals.",
+  "basis": [
+   "South African police rescued about 200 people from an unregistered rehabilitation centre in Mpumalanga.",
+   "Police rescue from unregistered rehab centre affects about 200 people"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:ad5ac512ee13|affects:ev:police rescue from unregistered rehab centre->topic:fourteen people receiving medical treatment|inferred",
+  "item": "South African police rescue about 200 people from an unregistered rehabilitation centre in Mpumalanga and…",
+  "section": "Law and crimes",
+  "label": "inferred",
+  "link": "Police rescue from unregistered rehab centre --affects--> fourteen people receiving medical treatment",
+  "hop": 1,
+  "reasoning": "Fourteen rescued persons required medical care.",
+  "basis": [
+   "Fourteen people received medical treatment after the rescue.",
+   "Police rescue from unregistered rehab centre affects fourteen people"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:ad5ac512ee13|affects:ev:police rescue from unregistered rehab centre->topic:two arrested individuals|inferred",
+  "item": "South African police rescue about 200 people from an unregistered rehabilitation centre in Mpumalanga and…",
+  "section": "Law and crimes",
+  "label": "inferred",
+  "link": "Police rescue from unregistered rehab centre --affects--> two arrested individuals",
+  "hop": 1,
+  "reasoning": "Two people were taken into custody during the operation.",
+  "basis": [
+   "Two people were arrested during the operation."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:ad5ac512ee13|depends_on:ev:police rescue from unregistered rehab centre->topic:kidnapping allegations|inferred",
+  "item": "South African police rescue about 200 people from an unregistered rehabilitation centre in Mpumalanga and…",
+  "section": "Law and crimes",
+  "label": "inferred",
+  "link": "Police rescue from unregistered rehab centre --depends_on--> kidnapping allegations",
+  "hop": 1,
+  "reasoning": "The rescue is linked to investigations of alleged kidnapping.",
+  "basis": [
+   "Police are investigating alleged kidnapping related to the centre.",
+   "Police rescue from unregistered rehab centre depends_on Kidnapping"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:ad5ac512ee13|affects:topic:kidnapping allegations->topic:public trust in rehabilitation centres|speculative",
+  "item": "South African police rescue about 200 people from an unregistered rehabilitation centre in Mpumalanga and…",
+  "section": "Law and crimes",
+  "label": "speculative",
+  "link": "kidnapping allegations --affects--> public trust in rehabilitation centres",
+  "hop": 2,
+  "reasoning": "Alleged kidnappings could erode confidence in such facilities.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:ad5ac512ee13|affects:ev:police rescue from unregistered rehab centre->topic:health and safety regulatory scrutiny of rehab industry|speculative",
+  "item": "South African police rescue about 200 people from an unregistered rehabilitation centre in Mpumalanga and…",
+  "section": "Law and crimes",
+  "label": "speculative",
+  "link": "Police rescue from unregistered rehab centre --affects--> health and safety regulatory scrutiny of rehab industry",
+  "hop": 1,
+  "reasoning": "Investigations into violations may prompt tighter oversight.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:ad5ac512ee13|affects:topic:health and safety regulatory scrutiny of rehab industry->topic:future licensing requirements for rehabilitation centres|speculative",
+  "item": "South African police rescue about 200 people from an unregistered rehabilitation centre in Mpumalanga and…",
+  "section": "Law and crimes",
+  "label": "speculative",
+  "link": "health and safety regulatory scrutiny of rehab industry --affects--> future licensing requirements for rehabilitation centres",
+  "hop": 2,
+  "reasoning": "Increased scrutiny often leads to stricter licensing rules.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:ad5ac512ee13|affects:ev:police rescue from unregistered rehab centre->topic:local community perception of safety in mpumalanga|speculative",
+  "item": "South African police rescue about 200 people from an unregistered rehabilitation centre in Mpumalanga and…",
+  "section": "Law and crimes",
+  "label": "speculative",
+  "link": "Police rescue from unregistered rehab centre --affects--> local community perception of safety in Mpumalanga",
+  "hop": 1,
+  "reasoning": "A large rescue operation can influence how residents feel about safety.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:afdc5ab9ef1a|happened_in:ev:conviction of paul nthenge mackenzie->wd:Q114|reported",
+  "item": "A Kenyan court convicts Good News International Ministries leader Paul Nthenge Mackenzie of murdering 190…",
+  "section": "Law and crime",
+  "label": "reported",
+  "link": "Conviction of Paul Nthenge Mackenzie --happened_in--> Kenya",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "A Kenyan court convicts",
+  "verdict": null
+ },
+ {
+  "key": "n:afdc5ab9ef1a|involves:ev:conviction of paul nthenge mackenzie->person:paul nthenge mackenzie|reported",
+  "item": "A Kenyan court convicts Good News International Ministries leader Paul Nthenge Mackenzie of murdering 190…",
+  "section": "Law and crime",
+  "label": "reported",
+  "link": "Conviction of Paul Nthenge Mackenzie --involves--> Paul Nthenge Mackenzie",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "leader Paul Nthenge Mackenzie",
+  "verdict": null
+ },
+ {
+  "key": "n:afdc5ab9ef1a|involves:ev:conviction of paul nthenge mackenzie->wd:Q117837664|reported",
+  "item": "A Kenyan court convicts Good News International Ministries leader Paul Nthenge Mackenzie of murdering 190…",
+  "section": "Law and crime",
+  "label": "reported",
+  "link": "Conviction of Paul Nthenge Mackenzie --involves--> Good News International Ministries",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Good News International Ministries leader",
+  "verdict": null
+ },
+ {
+  "key": "n:afdc5ab9ef1a|involves:ev:conviction of paul nthenge mackenzie->place:shakahola forest|reported",
+  "item": "A Kenyan court convicts Good News International Ministries leader Paul Nthenge Mackenzie of murdering 190…",
+  "section": "Law and crime",
+  "label": "reported",
+  "link": "Conviction of Paul Nthenge Mackenzie --involves--> Shakahola Forest",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "starvation in Shakahola Forest",
+  "verdict": null
+ },
+ {
+  "key": "n:afdc5ab9ef1a|part_of:topic:190 children and an adult->place:shakahola forest|reported",
+  "item": "A Kenyan court convicts Good News International Ministries leader Paul Nthenge Mackenzie of murdering 190…",
+  "section": "Law and crime",
+  "label": "reported",
+  "link": "190 children and an adult --part_of--> Shakahola Forest",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "deaths were linked to starvation in Shakahola Forest",
+  "verdict": null
+ },
+ {
+  "key": "n:afdc5ab9ef1a|affects:ev:conviction of paul nthenge mackenzie->wd:Q117837664|inferred",
+  "item": "A Kenyan court convicts Good News International Ministries leader Paul Nthenge Mackenzie of murdering 190…",
+  "section": "Law and crime",
+  "label": "inferred",
+  "link": "Conviction of Paul Nthenge Mackenzie --affects--> Good News International Ministries",
+  "hop": 1,
+  "reasoning": "The conviction directly involves the ministry led by Mackenzie.",
+  "basis": [
+   "Good News International Ministries is the organization led by Paul Nthenge Mackenzie.",
+   "Conviction of Paul Nthenge Mackenzie involves Good News International Ministries"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:afdc5ab9ef1a|affects:ev:conviction of paul nthenge mackenzie->topic:public trust in religious organisations|speculative",
+  "item": "A Kenyan court convicts Good News International Ministries leader Paul Nthenge Mackenzie of murdering 190…",
+  "section": "Law and crime",
+  "label": "speculative",
+  "link": "Conviction of Paul Nthenge Mackenzie --affects--> public trust in religious organisations",
+  "hop": 1,
+  "reasoning": "High‑profile criminal cases often erode confidence in similar groups.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:afdc5ab9ef1a|affects:ev:conviction of paul nthenge mackenzie->topic:kenyan legal and regulatory scrutiny of cult‑like groups|speculative",
+  "item": "A Kenyan court convicts Good News International Ministries leader Paul Nthenge Mackenzie of murdering 190…",
+  "section": "Law and crime",
+  "label": "speculative",
+  "link": "Conviction of Paul Nthenge Mackenzie --affects--> Kenyan legal and regulatory scrutiny of cult‑like groups",
+  "hop": 1,
+  "reasoning": "A mass‑murder conviction is likely to prompt tighter oversight.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:afdc5ab9ef1a|affects:ev:conviction of paul nthenge mackenzie->place:shakahola forest|speculative",
+  "item": "A Kenyan court convicts Good News International Ministries leader Paul Nthenge Mackenzie of murdering 190…",
+  "section": "Law and crime",
+  "label": "speculative",
+  "link": "Conviction of Paul Nthenge Mackenzie --affects--> Shakahola Forest",
+  "hop": 1,
+  "reasoning": "The forest was the site of the deaths, so the case may lead to investigations or restrictions there.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:b88263d4e9c2|involves:ev:detention of abhijeet dipke->org:cockroach janta party|reported",
+  "item": "Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead of the party's planned march",
+  "section": "Law and crimes",
+  "label": "reported",
+  "link": "Detention of Abhijeet Dipke --involves--> Cockroach Janta Party",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "The Gen Z-led Cockroach Janta Party (CJP) accuses...",
+  "verdict": null
+ },
+ {
+  "key": "n:b88263d4e9c2|affects:ev:detention of abhijeet dipke->place:planned protest at central park in connaught place|inferred",
+  "item": "Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead of the party's planned march",
+  "section": "Law and crimes",
+  "label": "inferred",
+  "link": "Detention of Abhijeet Dipke --affects--> planned protest at Central Park in Connaught Place",
+  "hop": 1,
+  "reasoning": "Detaining a protest organizer is likely to disrupt the scheduled demonstration.",
+  "basis": [
+   "Abhijeet Dipke was detained by police in Delhi ahead of a planned protest.",
+   "The protest was planned for Central Park in Connaught Place."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:b88263d4e9c2|affects:ev:detention of abhijeet dipke->org:cockroach janta party mobilisation|inferred",
+  "item": "Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead of the party's planned march",
+  "section": "Law and crimes",
+  "label": "inferred",
+  "link": "Detention of Abhijeet Dipke --affects--> Cockroach Janta Party mobilisation",
+  "hop": 1,
+  "reasoning": "The party’s leader and other CJP leaders were detained, reducing its ability to coordinate actions.",
+  "basis": [
+   "Abhijeet Dipke was detained by police in Delhi ahead of a planned protest.",
+   "Police also detained other CJP leaders Saurav Das and Ashutosh Ranka after they returned to Jantar Mantar.",
+   "Detention of Abhijeet Dipke involves Cockroach Janta Party"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:b88263d4e9c2|affects:ev:detention of abhijeet dipke->topic:opposition morale|speculative",
+  "item": "Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead of the party's planned march",
+  "section": "Law and crimes",
+  "label": "speculative",
+  "link": "Detention of Abhijeet Dipke --affects--> Opposition morale",
+  "hop": 1,
+  "reasoning": "Arrests of opposition figures can lower morale among their supporters.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:b88263d4e9c2|affects:place:planned protest at central park in connaught place->topic:public visibility of cjp grievances|speculative",
+  "item": "Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead of the party's planned march",
+  "section": "Law and crimes",
+  "label": "speculative",
+  "link": "planned protest at Central Park in Connaught Place --affects--> public visibility of CJP grievances",
+  "hop": 2,
+  "reasoning": "A cancelled protest reduces media exposure of the party’s complaints.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:b88263d4e9c2|affects:org:cockroach janta party mobilisation->org:pressure on election commission|speculative",
+  "item": "Cockroach Janta Party leader Abhijeet Dipke is detained in Delhi, India, ahead of the party's planned march",
+  "section": "Law and crimes",
+  "label": "speculative",
+  "link": "Cockroach Janta Party mobilisation --affects--> pressure on Election Commission",
+  "hop": 2,
+  "reasoning": "Weaker mobilisation may lessen the party’s ability to pressure the Election Commission.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:c40c295eedaa|happened_in:ev:discovery of the oldest known shipwreck->place:kekova island|reported",
+  "item": "The oldest known shipwreck in the world (c",
+  "section": "Science and technology",
+  "label": "reported",
+  "link": "Discovery of the oldest known shipwreck --happened_in--> Kekova Island",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "found at a depth of around 100 feet near Kekova Island off the coast of southern Turkey",
+  "verdict": null
+ },
+ {
+  "key": "n:c40c295eedaa|involves:ev:discovery of the oldest known shipwreck->wd:Q169939|reported",
+  "item": "The oldest known shipwreck in the world (c",
+  "section": "Science and technology",
+  "label": "reported",
+  "link": "Discovery of the oldest known shipwreck --involves--> Akdeniz University",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "excavations were led by Hakan Öniz, a professor at Akdeniz University",
+  "verdict": null
+ },
+ {
+  "key": "n:c40c295eedaa|involves:ev:discovery of the oldest known shipwreck->person:hakan öniz|reported",
+  "item": "The oldest known shipwreck in the world (c",
+  "section": "Science and technology",
+  "label": "reported",
+  "link": "Discovery of the oldest known shipwreck --involves--> Hakan Öniz",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "excavations were led by Hakan Öniz",
+  "verdict": null
+ },
+ {
+  "key": "n:c40c295eedaa|involves:ev:discovery of the oldest known shipwreck->person:mehmet nuri ersoy|reported",
+  "item": "The oldest known shipwreck in the world (c",
+  "section": "Science and technology",
+  "label": "reported",
+  "link": "Discovery of the oldest known shipwreck --involves--> Mehmet Nuri Ersoy",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Turkey's culture and tourism minister, Mehmet Nuri Ersoy, said the amphorae appear to have moved around the Eastern Mediterranean",
+  "verdict": null
+ },
+ {
+  "key": "n:c40c295eedaa|affects:ev:discovery of the oldest known shipwreck->wd:Q169939|inferred",
+  "item": "The oldest known shipwreck in the world (c",
+  "section": "Science and technology",
+  "label": "inferred",
+  "link": "Discovery of the oldest known shipwreck --affects--> Akdeniz University",
+  "hop": 1,
+  "reasoning": "The facts state the university is involved in the discovery.",
+  "basis": [
+   "Discovery of the oldest known shipwreck involves Akdeniz University"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:c40c295eedaa|affects:wd:Q169939->topic:research funding for maritime archaeology|speculative",
+  "item": "The oldest known shipwreck in the world (c",
+  "section": "Science and technology",
+  "label": "speculative",
+  "link": "Akdeniz University --affects--> research funding for maritime archaeology",
+  "hop": 2,
+  "reasoning": "University involvement may attract additional research grants.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:c40c295eedaa|affects:ev:discovery of the oldest known shipwreck->org:jordan valley amphora workshops|inferred",
+  "item": "The oldest known shipwreck in the world (c",
+  "section": "Science and technology",
+  "label": "inferred",
+  "link": "Discovery of the oldest known shipwreck --affects--> Jordan Valley amphora workshops",
+  "hop": 1,
+  "reasoning": "Amphorae recovered were likely produced in those workshops.",
+  "basis": [
+   "The amphorae were likely produced in workshops in the Jordan Valley."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:c40c295eedaa|affects:org:jordan valley amphora workshops->topic:interest in ancient trade routes|speculative",
+  "item": "The oldest known shipwreck in the world (c",
+  "section": "Science and technology",
+  "label": "speculative",
+  "link": "Jordan Valley amphora workshops --affects--> interest in ancient trade routes",
+  "hop": 2,
+  "reasoning": "New evidence of early export goods can spark scholarly interest in trade networks.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:c40c295eedaa|affects:ev:discovery of the oldest known shipwreck->place:kekova island|inferred",
+  "item": "The oldest known shipwreck in the world (c",
+  "section": "Science and technology",
+  "label": "inferred",
+  "link": "Discovery of the oldest known shipwreck --affects--> Kekova Island",
+  "hop": 1,
+  "reasoning": "The wreck was discovered at this location.",
+  "basis": [
+   "Discovery of the oldest known shipwreck happened_in Kekova Island"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:c40c295eedaa|affects:place:kekova island->topic:local tourism economy|speculative",
+  "item": "The oldest known shipwreck in the world (c",
+  "section": "Science and technology",
+  "label": "speculative",
+  "link": "Kekova Island --affects--> local tourism economy",
+  "hop": 2,
+  "reasoning": "High‑profile archaeological finds often attract visitors and boost tourism revenue.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:c40c295eedaa|affects:ev:discovery of the oldest known shipwreck->person:hakan öniz|inferred",
+  "item": "The oldest known shipwreck in the world (c",
+  "section": "Science and technology",
+  "label": "inferred",
+  "link": "Discovery of the oldest known shipwreck --affects--> Hakan Öniz",
+  "hop": 1,
+  "reasoning": "He is listed as involved in the discovery.",
+  "basis": [
+   "Discovery of the oldest known shipwreck involves Hakan Öniz"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:c40c295eedaa|affects:ev:discovery of the oldest known shipwreck->person:mehmet nuri ersoy|inferred",
+  "item": "The oldest known shipwreck in the world (c",
+  "section": "Science and technology",
+  "label": "inferred",
+  "link": "Discovery of the oldest known shipwreck --affects--> Mehmet Nuri Ersoy",
+  "hop": 1,
+  "reasoning": "He is listed as involved in the discovery.",
+  "basis": [
+   "Discovery of the oldest known shipwreck involves Mehmet Nuri Ersoy"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:c4f3475d8101|happened_in:ev:deforestation in brazil amazon hits nearly four-decade low->wd:Q155|reported",
+  "item": "Brazilian environment minister João Paulo Capobianco [pt] reports that deforestation in Brazil's Amazon…",
+  "section": "Health and environment",
+  "label": "reported",
+  "link": "Deforestation in Brazil Amazon hits nearly four-decade low --happened_in--> Brazil",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Deforestation of the Brazilian Amazon has fallen to its lowest level in nearly 40 years",
+  "verdict": null
+ },
+ {
+  "key": "n:c4f3475d8101|affects:ev:deforestation in brazil amazon hits nearly four-decade low->wd:Q155|reported",
+  "item": "Brazilian environment minister João Paulo Capobianco [pt] reports that deforestation in Brazil's Amazon…",
+  "section": "Health and environment",
+  "label": "reported",
+  "link": "Deforestation in Brazil Amazon hits nearly four-decade low --affects--> Brazil",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Brazil is home to approximately 60 percent of the world's largest rainforest",
+  "verdict": null
+ },
+ {
+  "key": "n:c4f3475d8101|part_of:tech:prodes->wd:Q1108347|reported",
+  "item": "Brazilian environment minister João Paulo Capobianco [pt] reports that deforestation in Brazil's Amazon…",
+  "section": "Health and environment",
+  "label": "reported",
+  "link": "Prodes --part_of--> National Institute for Space Research",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Prodes\" satellite system, operated by the National Institute for Space Research",
+  "verdict": null
+ },
+ {
+  "key": "n:c4f3475d8101|part_of:place:cerrado savanna->wd:Q155|reported",
+  "item": "Brazilian environment minister João Paulo Capobianco [pt] reports that deforestation in Brazil's Amazon…",
+  "section": "Health and environment",
+  "label": "reported",
+  "link": "Cerrado savanna --part_of--> Brazil",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "the vast Cerrado savanna south of the Amazon",
+  "verdict": null
+ },
+ {
+  "key": "n:c4f3475d8101|affects:ev:deforestation in brazil amazon hits nearly four-decade low->wd:Q155|inferred",
+  "item": "Brazilian environment minister João Paulo Capobianco [pt] reports that deforestation in Brazil's Amazon…",
+  "section": "Health and environment",
+  "label": "inferred",
+  "link": "Deforestation in Brazil Amazon hits nearly four-decade low --affects--> Brazil",
+  "hop": 1,
+  "reasoning": "The event is explicitly stated to occur in Brazil and affect Brazil.",
+  "basis": [
+   "Deforestation in Brazil Amazon hits nearly four-decade low happened_in Brazil",
+   "Deforestation in Brazil Amazon hits nearly four-decade low affects Brazil"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:c4f3475d8101|affects:wd:Q155->topic:national carbon emissions|speculative",
+  "item": "Brazilian environment minister João Paulo Capobianco [pt] reports that deforestation in Brazil's Amazon…",
+  "section": "Health and environment",
+  "label": "speculative",
+  "link": "Brazil --affects--> national carbon emissions",
+  "hop": 2,
+  "reasoning": "Lower deforestation likely reduces the amount of carbon released from forest loss.",
+  "basis": [
+   "Deforestation in the Brazilian Amazon fell to its lowest level since 1988."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:c4f3475d8101|affects:topic:national carbon emissions->topic:global energy prices|speculative",
+  "item": "Brazilian environment minister João Paulo Capobianco [pt] reports that deforestation in Brazil's Amazon…",
+  "section": "Health and environment",
+  "label": "speculative",
+  "link": "national carbon emissions --affects--> global energy prices",
+  "hop": 2,
+  "reasoning": "Reduced emissions can ease pressure on energy markets, potentially lowering prices.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:c4f3475d8101|affects:wd:Q155->org:rotterdam logistics sector|speculative",
+  "item": "Brazilian environment minister João Paulo Capobianco [pt] reports that deforestation in Brazil's Amazon…",
+  "section": "Health and environment",
+  "label": "speculative",
+  "link": "Brazil --affects--> Rotterdam logistics sector",
+  "hop": 2,
+  "reasoning": "Less timber and agricultural export from Brazil may reduce cargo volumes handled in Rotterdam.",
+  "basis": [
+   "3,335 square kilometers were cleared between August 2025 and July 2026, a 42% decline from the previous year."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:c4f3475d8101|affects:topic:national carbon emissions->topic:public transport usage in brazil|speculative",
+  "item": "Brazilian environment minister João Paulo Capobianco [pt] reports that deforestation in Brazil's Amazon…",
+  "section": "Health and environment",
+  "label": "speculative",
+  "link": "national carbon emissions --affects--> public transport usage in Brazil",
+  "hop": 2,
+  "reasoning": "Improved air quality from lower emissions could encourage more people to use public transport.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:d0e0e4a57ac3|involves:ev:anne carson awarded nobel prize in literature->person:anne carson|reported",
+  "item": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…",
+  "section": "Arts and culture",
+  "label": "reported",
+  "link": "Anne Carson awarded Nobel Prize in Literature --involves--> Anne Carson",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Canadian poet, essayist and translator Anne Carson has been awarded this year's Nobel Prize in Literature.",
+  "verdict": null
+ },
+ {
+  "key": "n:d0e0e4a57ac3|involves:ev:anne carson awarded nobel prize in literature->org:swedish academy|reported",
+  "item": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…",
+  "section": "Arts and culture",
+  "label": "reported",
+  "link": "Anne Carson awarded Nobel Prize in Literature --involves--> Swedish Academy",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Ingrid Carlberg, permanent secretary of the Swedish Academy, said she had broken the news to Carson",
+  "verdict": null
+ },
+ {
+  "key": "n:d0e0e4a57ac3|affects:ev:anne carson awarded nobel prize in literature->wd:Q16|reported",
+  "item": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…",
+  "section": "Arts and culture",
+  "label": "reported",
+  "link": "Anne Carson awarded Nobel Prize in Literature --affects--> Canada",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Canadian Prime Minister Mark Carney said Carson's win was \"an extraordinary achievement and a proud moment for Canada\".",
+  "verdict": null
+ },
+ {
+  "key": "n:d0e0e4a57ac3|involves:ev:anne carson awarded nobel prize in literature->wd:Q192533|reported",
+  "item": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…",
+  "section": "Arts and culture",
+  "label": "reported",
+  "link": "Anne Carson awarded Nobel Prize in Literature --involves--> Mark Carney",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Canadian Prime Minister Mark Carney said Carson's win was \"an extraordinary achievement and a proud moment for Canada\".",
+  "verdict": null
+ },
+ {
+  "key": "n:d0e0e4a57ac3|involves:ev:anne carson awarded nobel prize in literature->person:anders olsson|reported",
+  "item": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…",
+  "section": "Arts and culture",
+  "label": "reported",
+  "link": "Anne Carson awarded Nobel Prize in Literature --involves--> Anders Olsson",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Anders Olsson, chairman of the Swedish Academy's Nobel committee for Literature, praised the way Carson has \"broken away from lyrical poetry...",
+  "verdict": null
+ },
+ {
+  "key": "n:d0e0e4a57ac3|involves:ev:anne carson awarded nobel prize in literature->person:ingrid carlberg|reported",
+  "item": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…",
+  "section": "Arts and culture",
+  "label": "reported",
+  "link": "Anne Carson awarded Nobel Prize in Literature --involves--> Ingrid Carlberg",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Ingrid Carlberg, permanent secretary of the Swedish Academy, said she had broken the news to Carson on the phone",
+  "verdict": null
+ },
+ {
+  "key": "n:d0e0e4a57ac3|part_of:ev:anne carson awarded nobel prize in literature->org:swedish academy's nobel committee for literature|reported",
+  "item": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…",
+  "section": "Arts and culture",
+  "label": "reported",
+  "link": "Anne Carson awarded Nobel Prize in Literature --part_of--> Swedish Academy's Nobel committee for Literature",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Anders Olsson, chairman of the Swedish Academy's Nobel committee for Literature, praised the way Carson has...",
+  "verdict": null
+ },
+ {
+  "key": "n:d0e0e4a57ac3|affects:ev:anne carson awarded nobel prize in literature->wd:Q16|inferred",
+  "item": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…",
+  "section": "Arts and culture",
+  "label": "inferred",
+  "link": "Anne Carson awarded Nobel Prize in Literature --affects--> Canada",
+  "hop": 1,
+  "reasoning": "Fact F8 explicitly states the award affects Canada.",
+  "basis": [
+   "Anne Carson awarded Nobel Prize in Literature affects Canada"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:d0e0e4a57ac3|affects:wd:Q16->topic:canadian literary community|speculative",
+  "item": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…",
+  "section": "Arts and culture",
+  "label": "speculative",
+  "link": "Canada --affects--> Canadian literary community",
+  "hop": 2,
+  "reasoning": "A Nobel win linked to Canada is likely to raise interest and activity within its literary community.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:d0e0e4a57ac3|affects:ev:anne carson awarded nobel prize in literature->org:swedish academy|inferred",
+  "item": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…",
+  "section": "Arts and culture",
+  "label": "inferred",
+  "link": "Anne Carson awarded Nobel Prize in Literature --affects--> Swedish Academy",
+  "hop": 1,
+  "reasoning": "Fact F7 notes the award involves the Swedish Academy, implying an effect on the Academy.",
+  "basis": [
+   "Anne Carson awarded Nobel Prize in Literature involves Swedish Academy"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:d0e0e4a57ac3|affects:org:swedish academy->topic:global perception of the nobel prize in literature|speculative",
+  "item": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…",
+  "section": "Arts and culture",
+  "label": "speculative",
+  "link": "Swedish Academy --affects--> global perception of the Nobel Prize in Literature",
+  "hop": 2,
+  "reasoning": "Changes in the Academy’s decisions can influence how the Nobel Prize is viewed worldwide.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:d2bd9be25b92|involves:ev:canada defeats england 24–21 in wxv global series match->org:canada|reported",
+  "item": "In women's rugby union, Canada defeats England 24–21 in a WXV Global Series match in Toronto, ending the Red…",
+  "section": "Sports",
+  "label": "reported",
+  "link": "Canada defeats England 24–21 in WXV Global Series match --involves--> Canada",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Canada defeats England",
+  "verdict": null
+ },
+ {
+  "key": "n:d2bd9be25b92|involves:ev:canada defeats england 24–21 in wxv global series match->org:england|reported",
+  "item": "In women's rugby union, Canada defeats England 24–21 in a WXV Global Series match in Toronto, ending the Red…",
+  "section": "Sports",
+  "label": "reported",
+  "link": "Canada defeats England 24–21 in WXV Global Series match --involves--> England",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Canada defeats England",
+  "verdict": null
+ },
+ {
+  "key": "n:d2bd9be25b92|involves:ev:canada defeats england 24–21 in wxv global series match->wd:Q139505275|reported",
+  "item": "In women's rugby union, Canada defeats England 24–21 in a WXV Global Series match in Toronto, ending the Red…",
+  "section": "Sports",
+  "label": "reported",
+  "link": "Canada defeats England 24–21 in WXV Global Series match --involves--> WXV Global Series",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "WXV Global Series match",
+  "verdict": null
+ },
+ {
+  "key": "n:d2bd9be25b92|affects:ev:canada defeats england 24–21 in wxv global series match->org:red roses|reported",
+  "item": "In women's rugby union, Canada defeats England 24–21 in a WXV Global Series match in Toronto, ending the Red…",
+  "section": "Sports",
+  "label": "reported",
+  "link": "Canada defeats England 24–21 in WXV Global Series match --affects--> Red Roses",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "ending the Red Roses' four-year unbeaten run",
+  "verdict": null
+ },
+ {
+  "key": "n:d2bd9be25b92|part_of:org:red roses->topic:four-year unbeaten run|reported",
+  "item": "In women's rugby union, Canada defeats England 24–21 in a WXV Global Series match in Toronto, ending the Red…",
+  "section": "Sports",
+  "label": "reported",
+  "link": "Red Roses --part_of--> four-year unbeaten run",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Red Roses' four-year unbeaten run",
+  "verdict": null
+ },
+ {
+  "key": "n:d2bd9be25b92|part_of:topic:four-year unbeaten run->topic:41 matches|reported",
+  "item": "In women's rugby union, Canada defeats England 24–21 in a WXV Global Series match in Toronto, ending the Red…",
+  "section": "Sports",
+  "label": "reported",
+  "link": "four-year unbeaten run --part_of--> 41 matches",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "four-year unbeaten run at 41 matches",
+  "verdict": null
+ },
+ {
+  "key": "n:d2bd9be25b92|affects:person:shoshanah seumanutafa->ev:canada defeats england 24–21 in wxv global series match|reported",
+  "item": "In women's rugby union, Canada defeats England 24–21 in a WXV Global Series match in Toronto, ending the Red…",
+  "section": "Sports",
+  "label": "reported",
+  "link": "Shoshanah Seumanutafa --affects--> Canada defeats England 24–21 in WXV Global Series match",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "after Shoshanah Seumanutafa scores a late try",
+  "verdict": null
+ },
+ {
+  "key": "n:d2bd9be25b92|affects:ev:canada defeats england 24–21 in wxv global series match->org:red roses|inferred",
+  "item": "In women's rugby union, Canada defeats England 24–21 in a WXV Global Series match in Toronto, ending the Red…",
+  "section": "Sports",
+  "label": "inferred",
+  "link": "Canada defeats England 24–21 in WXV Global Series match --affects--> Red Roses",
+  "hop": 1,
+  "reasoning": "Fact states the match affects the Red Roses.",
+  "basis": [
+   "Canada defeats England 24–21 in WXV Global Series match affects Red Roses"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:d2bd9be25b92|affects:org:red roses->topic:england's four‑year unbeaten run|inferred",
+  "item": "In women's rugby union, Canada defeats England 24–21 in a WXV Global Series match in Toronto, ending the Red…",
+  "section": "Sports",
+  "label": "inferred",
+  "link": "Red Roses --affects--> England's four‑year unbeaten run",
+  "hop": 2,
+  "reasoning": "The Red Roses are the team that held the unbeaten run; affecting them ends that run.",
+  "basis": [
+   "The match ended the Red Roses' four‑year unbeaten run of 41 matches.",
+   "Red Roses part_of four-year unbeaten run"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:d2bd9be25b92|affects:ev:canada defeats england 24–21 in wxv global series match->topic:canada women's rugby profile|speculative",
+  "item": "In women's rugby union, Canada defeats England 24–21 in a WXV Global Series match in Toronto, ending the Red…",
+  "section": "Sports",
+  "label": "speculative",
+  "link": "Canada defeats England 24–21 in WXV Global Series match --affects--> Canada women's rugby profile",
+  "hop": 1,
+  "reasoning": "A victory over a top side typically raises the winning nation's sport profile.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:d2bd9be25b92|affects:person:shoshanah seumanutafa->topic:canada's win|inferred",
+  "item": "In women's rugby union, Canada defeats England 24–21 in a WXV Global Series match in Toronto, ending the Red…",
+  "section": "Sports",
+  "label": "inferred",
+  "link": "Shoshanah Seumanutafa --affects--> Canada's win",
+  "hop": 1,
+  "reasoning": "Fact links the player to the match outcome.",
+  "basis": [
+   "Shoshanah Seumanutafa affects Canada defeats England 24–21 in WXV Global Series match"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:d2bd9be25b92|affects:topic:canada's win->topic:canadian rugby funding prospects|speculative",
+  "item": "In women's rugby union, Canada defeats England 24–21 in a WXV Global Series match in Toronto, ending the Red…",
+  "section": "Sports",
+  "label": "speculative",
+  "link": "Canada's win --affects--> Canadian rugby funding prospects",
+  "hop": 2,
+  "reasoning": "Success in international competition can influence future funding decisions.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:d7646cfd3bd0|involves:ev:discovery of first green star wd j1330+6435->topic:wd j1330+6435|reported",
+  "item": "Astronomers discover the first green star, WD J1330+6435, according to a study published by RAS Techniques…",
+  "section": "Science and technology",
+  "label": "reported",
+  "link": "Discovery of first green star WD J1330+6435 --involves--> WD J1330+6435",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "The most striking example is WD J1330+6435",
+  "verdict": null
+ },
+ {
+  "key": "n:d7646cfd3bd0|part_of:topic:wd j1330+6435->wd:Q54012779|reported",
+  "item": "Astronomers discover the first green star, WD J1330+6435, according to a study published by RAS Techniques…",
+  "section": "Science and technology",
+  "label": "reported",
+  "link": "WD J1330+6435 --part_of--> White Dwarf Stars",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "white dwarfs can glow in a wide range of colors",
+  "verdict": null
+ },
+ {
+  "key": "n:d7646cfd3bd0|affects:ev:discovery of first green star wd j1330+6435->topic:public interest in astronomy|speculative",
+  "item": "Astronomers discover the first green star, WD J1330+6435, according to a study published by RAS Techniques…",
+  "section": "Science and technology",
+  "label": "speculative",
+  "link": "Discovery of first green star WD J1330+6435 --affects--> public interest in astronomy",
+  "hop": 1,
+  "reasoning": "A novel astronomical finding is likely to attract media attention and public curiosity.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:d7646cfd3bd0|affects:topic:public interest in astronomy->org:science education programmes|speculative",
+  "item": "Astronomers discover the first green star, WD J1330+6435, according to a study published by RAS Techniques…",
+  "section": "Science and technology",
+  "label": "speculative",
+  "link": "public interest in astronomy --affects--> science education programmes",
+  "hop": 2,
+  "reasoning": "Higher public interest can lead schools and museums to expand astronomy‑related curricula and events.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:f5225c9d8fb5|part_of:person:first victim->wd:Q974|reported",
+  "item": "Kenya confirms four additional cases of Bundibugyo ebolavirus, including three health workers who treated…",
+  "section": "Health and environment",
+  "label": "reported",
+  "link": "first victim --part_of--> Democratic Republic of the Congo",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "He had been treated in the DRC, before travelling overland to the Ugandan capital, Kampala",
+  "verdict": null
+ },
+ {
+  "key": "n:f5225c9d8fb5|affects:ev:kenya confirms four additional bundibugyo ebolavirus cases->org:kenya ministry of health|inferred",
+  "item": "Kenya confirms four additional cases of Bundibugyo ebolavirus, including three health workers who treated…",
+  "section": "Health and environment",
+  "label": "inferred",
+  "link": "Kenya confirms four additional Bundibugyo ebolavirus cases --affects--> Kenya Ministry of Health",
+  "hop": 1,
+  "reasoning": "The announcement triggers a direct response from the national health authority.",
+  "basis": [
+   "Kenya confirmed four new cases of Bundibugyo ebolavirus, raising the total to seven.",
+   "The risk to the general public remains low with no evidence of community transmission."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:f5225c9d8fb5|affects:org:kenya ministry of health->topic:border screening and cargo handling procedures|speculative",
+  "item": "Kenya confirms four additional cases of Bundibugyo ebolavirus, including three health workers who treated…",
+  "section": "Health and environment",
+  "label": "speculative",
+  "link": "Kenya Ministry of Health --affects--> border screening and cargo handling procedures",
+  "hop": 2,
+  "reasoning": "Health authorities may tighten screening, which can impact logistics at ports and airports.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:f5225c9d8fb5|affects:ev:kenya confirms four additional bundibugyo ebolavirus cases->topic:public perception of ebola risk in east africa|inferred",
+  "item": "Kenya confirms four additional cases of Bundibugyo ebolavirus, including three health workers who treated…",
+  "section": "Health and environment",
+  "label": "inferred",
+  "link": "Kenya confirms four additional Bundibugyo ebolavirus cases --affects--> public perception of Ebola risk in East Africa",
+  "hop": 1,
+  "reasoning": "The increase in confirmed cases raises awareness of the disease in the region.",
+  "basis": [
+   "Kenya confirmed four new cases of Bundibugyo ebolavirus, raising the total to seven.",
+   "The risk to the general public remains low with no evidence of community transmission."
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:f5225c9d8fb5|affects:topic:public perception of ebola risk in east africa->topic:international travel demand to kenya|speculative",
+  "item": "Kenya confirms four additional cases of Bundibugyo ebolavirus, including three health workers who treated…",
+  "section": "Health and environment",
+  "label": "speculative",
+  "link": "public perception of Ebola risk in East Africa --affects--> international travel demand to Kenya",
+  "hop": 2,
+  "reasoning": "Higher perceived risk may discourage tourists and business travelers, affecting travel volumes.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:f5225c9d8fb5|affects:topic:international travel demand to kenya->place:global logistics flows through major hubs such as rotterdam|speculative",
+  "item": "Kenya confirms four additional cases of Bundibugyo ebolavirus, including three health workers who treated…",
+  "section": "Health and environment",
+  "label": "speculative",
+  "link": "international travel demand to Kenya --affects--> global logistics flows through major hubs such as Rotterdam",
+  "hop": 2,
+  "reasoning": "Reduced travel can lead to lower cargo volumes on connecting routes that pass through Rotterdam.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:f5225c9d8fb5|affects:ev:kenya confirms four additional bundibugyo ebolavirus cases->topic:local public transport usage in kenya|speculative",
+  "item": "Kenya confirms four additional cases of Bundibugyo ebolavirus, including three health workers who treated…",
+  "section": "Health and environment",
+  "label": "speculative",
+  "link": "Kenya confirms four additional Bundibugyo ebolavirus cases --affects--> local public transport usage in Kenya",
+  "hop": 1,
+  "reasoning": "Outbreak news often leads people to avoid crowded buses and trains.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:f5225c9d8fb5|affects:topic:local public transport usage in kenya->topic:fuel consumption patterns in kenya|speculative",
+  "item": "Kenya confirms four additional cases of Bundibugyo ebolavirus, including three health workers who treated…",
+  "section": "Health and environment",
+  "label": "speculative",
+  "link": "local public transport usage in Kenya --affects--> fuel consumption patterns in Kenya",
+  "hop": 2,
+  "reasoning": "Reduced ridership may shift travel to private vehicles, altering fuel demand.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:f5225c9d8fb5|affects:topic:fuel consumption patterns in kenya->topic:regional energy price trends|speculative",
+  "item": "Kenya confirms four additional cases of Bundibugyo ebolavirus, including three health workers who treated…",
+  "section": "Health and environment",
+  "label": "speculative",
+  "link": "fuel consumption patterns in Kenya --affects--> regional energy price trends",
+  "hop": 2,
+  "reasoning": "Changes in demand from a sizable market can influence regional oil price dynamics.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:fa08b85b6159|involves:ev:florida panthers natural hat trick streak->org:florida panthers|reported",
+  "item": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…",
+  "section": "Sports",
+  "label": "reported",
+  "link": "Florida Panthers natural hat trick streak --involves--> Florida Panthers",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "Florida Panthers become the first team in the National Hockey League...",
+  "verdict": null
+ },
+ {
+  "key": "n:fa08b85b6159|involves:ev:florida panthers natural hat trick streak->org:national hockey league|reported",
+  "item": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…",
+  "section": "Sports",
+  "label": "reported",
+  "link": "Florida Panthers natural hat trick streak --involves--> National Hockey League",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "first team in the National Hockey League to record a natural hat trick...",
+  "verdict": null
+ },
+ {
+  "key": "n:fa08b85b6159|part_of:ev:florida panthers natural hat trick streak->wd:Q41466|reported",
+  "item": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…",
+  "section": "Sports",
+  "label": "reported",
+  "link": "Florida Panthers natural hat trick streak --part_of--> ice hockey",
+  "hop": null,
+  "reasoning": null,
+  "basis": [],
+  "quote": "In ice hockey, the Florida Panthers become the first team...",
+  "verdict": null
+ },
+ {
+  "key": "n:fa08b85b6159|affects:ev:florida panthers natural hat trick streak->topic:nhl fan engagement|inferred",
+  "item": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…",
+  "section": "Sports",
+  "label": "inferred",
+  "link": "Florida Panthers natural hat trick streak --affects--> NHL fan engagement",
+  "hop": 1,
+  "reasoning": "A historic scoring streak draws media attention and boosts interest in the league.",
+  "basis": [
+   "The Florida Panthers became the first NHL team to record a natural hat trick in three consecutive games.",
+   "Florida Panthers natural hat trick streak involves National Hockey League"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:fa08b85b6159|affects:topic:nhl fan engagement->org:ticket sales for florida panthers games|speculative",
+  "item": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…",
+  "section": "Sports",
+  "label": "speculative",
+  "link": "NHL fan engagement --affects--> ticket sales for Florida Panthers games",
+  "hop": 2,
+  "reasoning": "Higher fan interest typically leads to increased attendance.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:fa08b85b6159|affects:ev:florida panthers natural hat trick streak->topic:panthers merchandise sales|speculative",
+  "item": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…",
+  "section": "Sports",
+  "label": "speculative",
+  "link": "Florida Panthers natural hat trick streak --affects--> Panthers merchandise sales",
+  "hop": 1,
+  "reasoning": "Notable player achievements often drive demand for team apparel.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:fa08b85b6159|affects:ev:florida panthers natural hat trick streak->topic:media coverage of the nhl|inferred",
+  "item": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…",
+  "section": "Sports",
+  "label": "inferred",
+  "link": "Florida Panthers natural hat trick streak --affects--> media coverage of the NHL",
+  "hop": 1,
+  "reasoning": "A first‑ever three‑game natural hat‑trick streak is newsworthy for sports outlets.",
+  "basis": [
+   "The Florida Panthers became the first NHL team to record a natural hat trick in three consecutive games.",
+   "Florida Panthers natural hat trick streak involves National Hockey League"
+  ],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:fa08b85b6159|affects:topic:media coverage of the nhl->org:advertising revenue for nhl broadcast partners|speculative",
+  "item": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…",
+  "section": "Sports",
+  "label": "speculative",
+  "link": "media coverage of the NHL --affects--> advertising revenue for NHL broadcast partners",
+  "hop": 2,
+  "reasoning": "More coverage can increase viewership, which advertisers value.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ },
+ {
+  "key": "n:fa08b85b6159|affects:ev:florida panthers natural hat trick streak->topic:player marketability (e.g., endorsement opportunities)|speculative",
+  "item": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…",
+  "section": "Sports",
+  "label": "speculative",
+  "link": "Florida Panthers natural hat trick streak --affects--> player marketability (e.g., endorsement opportunities)",
+  "hop": 1,
+  "reasoning": "Players involved in a historic streak become more visible to sponsors.",
+  "basis": [],
+  "quote": null,
+  "verdict": null
+ }
+]
