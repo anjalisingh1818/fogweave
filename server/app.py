@@ -5,6 +5,8 @@
   POST /read            reader-card details {id}
   POST /expand          streamed graph events (text/event-stream) {id, context?, deep?}
   POST /check           safety check for typed requests {text}
+  POST /search          Ask the fog: news about any topic, as stars {q}
+  POST /patterns        Connect the dots: patterns across Library items {items}
 
 The reader's context labels arrive only with the request that needs them and
 are never stored or logged.
@@ -126,6 +128,34 @@ async def read(req: ReadReq):
 def check(req: CheckReq):
     refusal = check_request(req.text)
     return {"ok": refusal is None, "message": refusal}
+
+
+class SearchReq(BaseModel):
+    q: str = Field(min_length=2, max_length=120)
+
+
+@app.post("/search")
+async def search(req: SearchReq):
+    refusal = check_request(req.q)
+    if refusal:
+        return {"query": req.q, "refused": True, "message": refusal, "items": []}
+    return await engine.search(req.q.strip())
+
+
+class PatternsReq(BaseModel):
+    items: list[dict] = Field(default_factory=list, max_length=24)
+
+
+@app.post("/patterns")
+async def patterns(req: PatternsReq):
+    from fogweave.patterns import find_patterns
+
+    items = [
+        {"id": str(i.get("id", ""))[:80], "type": str(i.get("type", ""))[:30], "label": str(i.get("label", ""))[:200], "date": str(i.get("date") or "")[:25], "text": str(i.get("text") or "")[:900]}
+        for i in req.items
+        if i.get("id") and i.get("label")
+    ]
+    return await find_patterns(engine.llm, items)
 
 
 @app.post("/ask")

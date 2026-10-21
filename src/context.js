@@ -48,8 +48,15 @@ export function rejectReason(label) {
 
 export class ContextStore {
   constructor() {
-    this.items = load();
-    this.sample = this.items.some((i) => i.sample);
+    // V3: "My context" is no longer part of the app (it is off the Menu and out
+    // of the fog); anything an older version stored on this device is cleared
+    this.items = [];
+    this.sample = false;
+    try {
+      localStorage.removeItem(KEY);
+    } catch {
+      // nothing stored
+    }
   }
 
   list() {
@@ -117,15 +124,6 @@ export class ContextStore {
       }
     }
     store._emit('context');
-  }
-}
-
-function load() {
-  try {
-    const v = JSON.parse(localStorage.getItem(KEY) || '[]');
-    return Array.isArray(v) ? v.filter((i) => i && i.id && i.label) : [];
-  } catch {
-    return [];
   }
 }
 

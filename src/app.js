@@ -16,6 +16,7 @@ import { Card } from './render/card.js';
 import { CardManager } from './ui/card-manager.js';
 import { nodeCardDraw, locketDraw, coinDraw, messageDraw, pathDraw } from './ui/node-card.js';
 import { menuDraw, guideDraw, aboutDraw, libraryDraw } from './ui/help.js';
+import { welcomeStep, welcomeDone } from './ui/welcome.js';
 import { contextDraw } from './ui/context-card.js';
 import { Keypad } from './ui/keypad.js';
 import { Onboarding } from './ui/onboarding.js';
@@ -120,10 +121,14 @@ export class App {
   /** The live scene: today's news from the engine. Never falls back to old data silently. */
   async enterLive(health = null) {
     this._clearFog();
+    const scene = (this._scene = (this._scene || 0) + 1); // a later scene choice wins
     this.mode = 'starting';
     this.setStatus('Gathering the latest news…');
+    welcomeStep('Gathering today’s news…', { offerDemo: () => this.enterDemo() });
     health ??= await this.client.health();
+    if (health?.ok) welcomeStep('Reading the sources and writing short summaries…', { offerDemo: () => this.enterDemo() });
     const pool = health?.ok ? await this.client.pool(this.interests.forServer()) : null;
+    if (scene !== this._scene) return; // the Demo scene was opened while this loaded
     if (pool?.items?.length) {
       this.mode = 'live';
       const ok = Object.values(pool.sources || {}).filter((s) => s.ok).length;
@@ -144,11 +149,13 @@ export class App {
   /** The Demo / Offline scene: the bundled dated snapshot of real pipeline runs. */
   enterDemo() {
     this._clearFog();
+    this._scene = (this._scene || 0) + 1;
     if (!this.snapshot) {
       this.mode = 'unavailable';
       this.lightsMeta = { kind: 'none' };
       this.pool = [];
       this.setStatus('The demo scene is missing from this build.');
+      welcomeDone();
       return;
     }
     this.mode = 'offline';
@@ -161,6 +168,7 @@ export class App {
 
   _afterSceneStart() {
     this.drawLights();
+    welcomeDone();
     this._shownKey = JSON.stringify(this.interests.forServer());
     this.setStatus('');
     this._renderStatus();

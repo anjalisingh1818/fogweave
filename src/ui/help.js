@@ -7,7 +7,7 @@ import { VERDICT_STYLE, LABEL_STYLE } from '../model/schema.js';
 import { UI } from '../render/card.js';
 import { settings } from '../config.js';
 
-/** Menu: Library, Interests, My context, Calm, Demo / Live scene, Help, About, Settings. */
+/** Menu: Library, Interests, Calm, Demo / Live scene, Help, About, Settings. */
 export function menuDraw(app) {
   return (ctx, ui, w, h) => {
     const pad = 44;
@@ -18,7 +18,6 @@ export function menuDraw(app) {
     const items = [
       ['library', `Library ${n}`, () => app.openLibrary(), true],
       ['interests', 'Interests', () => app.openInterests()],
-      ['context', 'My context', () => app.openContext()],
       ['calm', settings.comfort.gentle ? 'Calm: on' : 'Calm: off', () => app.toggleCalm()],
       ['scene', demo ? 'Live scene' : 'Demo scene', () => (demo ? app.enterLive() : app.enterDemo())],
       ['guide', 'Help', () => app.openGuide()],
@@ -93,7 +92,7 @@ export function aboutDraw(app) {
       'Effects and links marked Inferred or Speculative are reasoning, and can be wrong. Check the sources.',
       'Free news sources and free AI models are limited: this is not "all news", and archives are partial.',
       '"Deep web" here means open sources search engines rarely show, never secrets or anything behind a login.',
-      'Your interests, context and Library stay on this device.',
+      'Your interests and Library stay on this device.',
       'Tested with emulated hands; real headset timing may differ.',
     ];
     let y = 120;
