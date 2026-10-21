@@ -40,9 +40,15 @@ def key(name: str) -> str:
     return canonical(name).lower()
 
 
+# fiction and creative works share names with real things ("Phobos": the Marvel
+# character is Wikidata's first hit, the moon of Mars the second); names in news
+# are never linked to them
+FICTION = re.compile(r"\b(fictional|character in|comics?|manga|anime|video game|film|television series|tv series|novel|album|song|single by|band|episode|board game|play by|opera)\b", re.I)
+
+
 def fits(entity_type: str, description: str) -> bool:
     d = (description or "").lower()
-    if not d:
+    if not d or FICTION.search(d):
         return False
     if entity_type == "Topic":
         return "human" not in d and not any(h in d for h in TYPE_HINTS["PublicFigure"])

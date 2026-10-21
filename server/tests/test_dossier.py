@@ -123,3 +123,13 @@ def test_same_named_bodies_must_fit_the_story(tmp_path):
 def test_a_name_only_match_must_fit_the_node_type(tmp_path):
     out = asyncio.run(DossierMaker(FakeEngine(tmp_path)).make([{"id": "place:mercury", "type": "Place", "label": "Mercury"}]))
     assert out["place:mercury"]["found"] is False  # the place is not the car brand
+
+
+def test_fiction_is_never_linked():
+    """'Phobos' in a space story is the moon, not the Marvel character (Wikidata's first hit)."""
+    from fogweave.linking import fits
+
+    assert not fits("Topic", "fictional character in Marvel Comics")
+    assert not fits("Technology", "2020 video game")
+    assert not fits("Organisation", "American rock band")
+    assert fits("Topic", "natural satellite of Mars")
