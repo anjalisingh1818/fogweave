@@ -63,7 +63,9 @@ export function sampleFeed(pool, interests, { n = 16, seed = 1, exclude = new Se
   const rnd = mulberry32(seed);
   const empty = !(d.topics?.length || d.newsTypes?.length || d.paperTypes?.length);
   const surprise = d.surprise ?? 0.25;
-  const candidates = pool.filter((it) => (it.quality ?? 0.5) >= floor && !exclude.has(it.id) && !isMuted(it, d));
+  // datasets are an opt-in source type (Interests → Also show)
+  const optIn = (it) => (it.sourceType || it.kind) !== 'dataset' || (d.sourceTypes || []).includes('dataset');
+  const candidates = pool.filter((it) => (it.quality ?? 0.5) >= floor && !exclude.has(it.id) && !isMuted(it, d) && optIn(it));
   const scored = candidates.map((it) => ({ it, match: interestMatch(it, d) }));
   const nOutside = empty ? 0 : Math.round(n * (0.15 + 0.3 * surprise)); // about 1 in 4 at the default
   const paperCap = Math.ceil(n * (d.paperTypes?.length ? 0.5 : 0.25));
@@ -96,6 +98,11 @@ export function sampleFeed(pool, interests, { n = 16, seed = 1, exclude = new Se
     return usable[usable.length - 1];
   };
   const q2 = (x) => (x.it.quality ?? 0.5) ** 2;
+  // a source type the reader turned on (Also show) gets at least one light when there is one
+  for (const t of d.sourceTypes || []) {
+    const x = draw(scored.filter((y) => (y.it.sourceType || y.it.kind) === t), q2);
+    if (x && picks.length < n) take(x, false);
+  }
   // outside the bubble first, so they are guaranteed a share
   const outsideList = scored.filter((x) => x.match < 0.15);
   for (let i = 0; i < nOutside; i++) {

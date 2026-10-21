@@ -40,6 +40,13 @@
 - **Opening and closing many cards quickly causes brief frame dips** while canvases are allocated (seen once as 20 fps in the emulator). Steady state with five cards open measured 17.2 ms per frame.
 - **No headset camera or passthrough features are used.**
 
+## Open deep sources
+
+- **"Deep web" here means open, legal sources that search engines rarely show** (an encyclopedia's news archive, a research data repository, a regulator's filings), not secrets, leaks, paywalls or anything behind a login.
+- **Older news comes only from Wikipedia's Current events archive** (back to 2005). It is broad but selective: a small company or a local story may have no older entries, and then the node shows none.
+- **Filings are off unless the owner sets a contact email** (the SEC requires one, and FogWeave never sends the user's own). Only U.S.-listed companies have EDGAR filings, matched by exact name.
+- **Datasets are matched by the node's name in the title or description.** A dataset that uses another word for the same thing is missed.
+
 ## Desktop (flat page)
 
 - **The flat page is a development and demo fallback, not the main experience.** It works with a mouse (click lights and nodes, cards at the screen edges), but the product is designed for hands in VR. At most two cards show at a time, and lights are squeezed into the window's view.

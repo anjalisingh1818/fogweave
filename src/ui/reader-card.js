@@ -24,8 +24,7 @@ const VIA_NAMES = { wikipedia: 'Wikipedia Current events', gdelt: 'GDELT', hacke
 /** news / paper / archive / filing / dataset */
 export function sourceType(it) {
   if (it.sourceType && SOURCE_TYPES[it.sourceType]) return it.sourceType;
-  if (it.kind === 'paper') return 'paper';
-  if (it.kind === 'archive') return 'archive';
+  if (SOURCE_TYPES[it.kind] && it.kind !== 'news') return it.kind; // paper, archive, filing, dataset
   return 'news';
 }
 

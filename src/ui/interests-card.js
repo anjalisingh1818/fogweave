@@ -4,7 +4,7 @@
  * lights" and "Clear interests". Stored on this device.
  */
 import { UI } from '../render/card.js';
-import { NEWS_TYPES, PAPER_TYPES } from '../interests.js';
+import { NEWS_TYPES, PAPER_TYPES, SOURCE_TYPES } from '../interests.js';
 
 export function interestsDraw(app) {
   return (ctx, ui, w, h) => {
@@ -51,6 +51,18 @@ export function interestsDraw(app) {
     if (!d.topics.length) ui.text('None yet: add one, or press "More like this" on a light.', pad, y + 34, { size: 21, color: UI.dim });
     y += 128;
     if (d.muted.length) ui.text(`Muted: ${d.muted.join(', ')}`, pad, y, { size: 21, color: UI.dim, maxWidth: w - pad * 2 });
+    // open deep sources the reader can add to the feed
+    y += 40;
+    ui.text('Also show', pad, y + 34, { size: 22, color: UI.dim, weight: 600 });
+    Object.entries(SOURCE_TYPES).forEach(([t, label], i) => {
+      ui.button(`source:${t}`, label, pad + 150 + i * (cw + 10), y, cw, 52, () => {
+        app.interests.toggleSourceType(t);
+        app.interestsChanged();
+      }, { size: 20, primary: (d.sourceTypes || []).includes(t) });
+    });
+    if (app.interests.canUndo) {
+      ui.button('undo', 'Undo', w - pad - cw, y, cw, 52, () => app.undoInterests(), { size: 20 });
+    }
     // surprise level
     const lv = [['Low', 0.05], ['Some', 0.25], ['More', 0.6]];
     ui.text('Surprise', pad, h - 150, { size: 22, color: UI.dim });

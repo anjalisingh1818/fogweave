@@ -537,25 +537,37 @@ export class App {
     const key = JSON.stringify(this.interests.forServer());
     this._shownLights ??= new Map();
     if (this._shownKey) this._shownLights.set(this._shownKey, [...this.lights.items]);
+    const earlier = this._shownLights.get(key);
+    const show = () => {
+      if (earlier) this._restoreLights(earlier);
+      else this.drawLights();
+      this._shownKey = key;
+    };
     if (this.mode === 'live') {
       this._poolCache ??= new Map();
-      let pool = this._poolCache.get(key);
-      if (!pool) {
-        this.setStatus('Looking for lights that match…');
-        const res = await this.client.pool(this.interests.forServer());
-        if (res?.items?.length) {
-          pool = res.items.map((it) => ({ ...it, live: true }));
-          this._poolCache.set(key, pool);
-        }
+      const cached = this._poolCache.get(key);
+      if (cached) {
+        this.pool = cached;
+        // an older fetch may still be running for interests no longer wanted
+        if (this.statusText.startsWith('Looking for more lights')) this.setStatus('');
       }
-      if (gen !== this._interestGen) return; // a newer change is on its way
-      if (this.statusText.startsWith('Looking for lights')) this.setStatus('');
-      if (pool) this.pool = pool;
+      else {
+        // at once: the current pool, re-weighted by the new interests (a fresh
+        // pool takes 30-60 s live: paced news searches and summaries)
+        show();
+        this.setStatus('Looking for more lights that match…');
+        const res = await this.client.pool(this.interests.forServer());
+        if (gen !== this._interestGen) return; // a newer change is on its way
+        if (this.statusText.startsWith('Looking for more lights')) this.setStatus('');
+        if (res?.items?.length) {
+          this.pool = res.items.map((it) => ({ ...it, live: true }));
+          this._poolCache.set(key, this.pool);
+          this.drawLights();
+        }
+        return;
+      }
     }
-    const earlier = this._shownLights.get(key);
-    if (earlier) this._restoreLights(earlier);
-    else this.drawLights();
-    this._shownKey = key;
+    show();
   }
 
   /** Show these lights again, topped up by the sampler. */
@@ -571,12 +583,36 @@ export class App {
     this.cards.get('lights')?.redraw();
   }
 
-  likeLight(id, more = true) {
-    const it = this.lights.get(id);
+  async likeLight(id, more = true) {
+    const it = this.getItem(id);
     if (!it) return;
-    this.interests.likeItem(it, more);
+    const types = this.interests.likeItem(it, more);
     this.cards.get(`light:${id}`)?.redraw();
+    if (!types.length) {
+      this.showNotice('Nothing to learn from this light: it has no topic tags.');
+      return;
+    }
+    const text = `${more ? 'More' : 'Less'} like this: ${types.join(', ')}`;
+    const undo = () => this.undoInterests();
+    this.showNotice(text, { undo });
+    await this.interestsChanged();
+    // keep Undo in reach until a while after the lights have settled
+    if (this.notice?.undo === undo) this.showNotice(text, { undo });
+  }
+
+  /** Interests back to before the last change; the lights follow. */
+  undoInterests() {
+    if (!this.interests.undo()) return;
+    this.showNotice('Interests restored.');
     this.interestsChanged();
+  }
+
+  /** A short line on the status bar (with an optional Undo) for a few seconds. */
+  showNotice(text, { undo = null, seconds = 12 } = {}) {
+    this.notice = { text, undo, until: performance.now() + seconds * 1000 };
+    this._renderStatus();
+    clearTimeout(this._noticeTimer);
+    this._noticeTimer = setTimeout(() => this._renderStatus(), seconds * 1000 + 50);
   }
 
   openInterests() {
@@ -683,13 +719,20 @@ export class App {
     this.statusCard.setContent((ctx, ui, w, h) => {
       const pad = 34;
       const crumbs = this.trail.slice(-3).map((t) => shortLabel(this.store.nodes.get(t)?.label)).join(' › ');
-      const label = running ? `Fog is looking · ${this.statusText}` : this.statusText || (crumbs && this.trail.length >= 2 ? crumbs : '') || this.notes[0] || this.modeLine();
+      const notice = this.notice && performance.now() < this.notice.until ? this.notice : null;
+      const label = running ? (notice ? notice.text : `Fog is looking · ${this.statusText}`) : notice?.text || this.statusText || (crumbs && this.trail.length >= 2 ? crumbs : '') || this.notes[0] || this.modeLine();
       if (running) ui.ringIcon(pad + 14, h / 2 - 2, 14, '#d9dee6', this.player?.paused ? 'dotted' : 'dashed');
-      ui.text(label, pad + (running ? 44 : 0), h / 2 + 11, { size: 28, maxWidth: w - pad * 2 - (running ? 240 : (this.insightList.length ? 240 : 0) + (this.trail.length >= 2 ? 250 : 0)) });
-      if (running) ui.button('stop', 'Stop', w - pad - 180, 14, 180, h - 28, () => this.stopResearch(), { size: 26 });
+      ui.text(label, pad + (running ? 44 : 0), h / 2 + 11, { size: 28, maxWidth: w - pad * 2 - (running ? (notice?.undo ? 470 : 240) : (this.insightList.length ? 240 : 0) + (this.trail.length >= 2 ? 250 : 0)) });
+      if (running) {
+        ui.button('stop', 'Stop', w - pad - 180, 14, 180, h - 28, () => this.stopResearch(), { size: 26 });
+        // Undo stays reachable while something grows
+        if (notice?.undo) ui.button('undo', 'Undo', w - pad - 410, 14, 210, h - 28, () => notice.undo(), { size: 24, primary: true });
+      }
       else {
         if (this.trail.length >= 2) ui.button('back', '‹ Back', w - pad - 470, 14, 200, h - 28, () => this.back(), { size: 24 });
-        if (this.insightList.length) ui.button('insights', `Noticed ${this.insightList.length}`, w - pad - 220, 14, 220, h - 28, () => this.openInsights(), { size: 24 });
+        // a short notice with Undo takes the right-hand slot for a few seconds
+        if (notice?.undo) ui.button('undo', 'Undo', w - pad - 220, 14, 220, h - 28, () => notice.undo(), { size: 24, primary: true });
+        else if (this.insightList.length) ui.button('insights', `Noticed ${this.insightList.length}`, w - pad - 220, 14, 220, h - 28, () => this.openInsights(), { size: 24 });
       }
     });
   }
@@ -777,7 +820,13 @@ export class App {
 
   async exploreNode(id) {
     const n = this.store.nodes.get(id);
-    if (!n || this.researching) return;
+    if (!n) return;
+    if (this.researching) {
+      // one growth at a time: this node opens as soon as the current one finishes
+      this._pendingExplore = id;
+      this.showNotice(`Opening ${shortLabel(n.label)} next, when the current growth finishes.`, { seconds: 8 });
+      return;
+    }
     n.explored = 'running';
     const added = [];
     const before = new Set(this.store.nodes.keys());
@@ -914,7 +963,10 @@ export class App {
     this.onboarding.notify('light-opened');
     if (it.live && !it.claims?.length && !it.claimsLoading && this.mode === 'live') this._loadClaims(it);
     // touching a light also grows it into the web (one at a time)
-    if (settings.feed.autoExpand && !it.expanded && !this.researching && this.canExpand(id)) this.expandLight(id);
+    if (settings.feed.autoExpand && !it.expanded && this.canExpand(id)) {
+      if (!this.researching) this.expandLight(id);
+      else this._pendingExpand = id; // grows when the current growth finishes
+    }
   }
 
   /** Reader card: compact (default) or with claims, quotes and the link. */
@@ -944,7 +996,7 @@ export class App {
     if (n?.type !== 'NewsItem') return null;
     this.extraItems ??= new Map();
     if (!this.extraItems.has(id)) {
-      this.extraItems.set(id, { id, kind: n.kind || 'breaking', headline: n.label, source: n.outlet, url: n.url, date: n.date, summary: n.summary || '', live: this.mode === 'live', claims: [] });
+      this.extraItems.set(id, { id, kind: n.kind || 'breaking', sourceType: n.sourceType, headline: n.label, source: n.outlet, url: n.url, date: n.date, summary: n.summary || '', live: this.mode === 'live', claims: [] });
     }
     return this.extraItems.get(id);
   }
@@ -1365,6 +1417,16 @@ export class App {
     if (this._wasResearching !== this.researching) {
       this._wasResearching = this.researching;
       this._renderStatus();
+      if (!this.researching && this._pendingExpand) {
+        const next = this._pendingExpand;
+        this._pendingExpand = null;
+        if (!this.getItem(next)?.expanded) this.expandLight(next);
+      } else if (!this.researching && this._pendingExplore) {
+        const next = this._pendingExplore;
+        this._pendingExplore = null;
+        const n = this.store.nodes.get(next);
+        if (n && !n.explored) this.exploreNode(next);
+      }
     }
   }
 

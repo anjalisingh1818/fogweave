@@ -93,3 +93,38 @@ test('more / less like this adjusts interests', () => {
   s.likeItem({ tags: ['sports'] }, false);
   assert.ok(s.data.muted.includes('sports'));
 });
+
+test('F7: more like this can be undone, persists across reloads, and reaches the server', () => {
+  const mem = new Mem();
+  const s = new InterestStore(mem);
+  const before = sampleFeed(pool(), s, { seed: 5, n: 16 }).map((x) => x.id);
+  s.likeItem({ tags: ['space', 'science'] }, true);
+  const liked = sampleFeed(pool(), s, { seed: 5, n: 16 }).map((x) => x.id);
+  assert.notDeepEqual(liked, before); // the next lights change
+  assert.ok(new InterestStore(mem).data.newsTypes.includes('space')); // kept on the device
+  assert.ok(s.canUndo);
+  assert.ok(s.undo());
+  assert.deepEqual(sampleFeed(pool(), s, { seed: 5, n: 16 }).map((x) => x.id), before); // and back
+  assert.ok(!new InterestStore(mem).data.newsTypes.includes('space'));
+  s.toggleSourceType('dataset');
+  s.toggleSourceType('nonsense'); // ignored
+  assert.deepEqual(s.forServer().sourceTypes, ['dataset']);
+  assert.equal(s.likeItem({ tags: [] }, true).length, 0); // nothing to learn: no undo step added
+  s.undo();
+  assert.deepEqual(s.forServer().sourceTypes, []);
+});
+
+test('dataset lights appear only when the reader turns datasets on', () => {
+  const s = new InterestStore(new Mem());
+  const p = [...pool(), { id: 'ds1', kind: 'dataset', sourceType: 'dataset', headline: 'EV charging sessions', quality: 0.95, story: 999, tags: [] }];
+  assert.ok(!sampleFeed(p, s, { seed: 2, n: 40 }).some((x) => x.id === 'ds1'));
+  s.toggleSourceType('dataset');
+  assert.ok(sampleFeed(p, s, { seed: 2, n: 40 }).some((x) => x.id === 'ds1'));
+});
+
+test('a source type turned on always gets at least one light when the pool has one', () => {
+  const s = new InterestStore(new Mem());
+  s.toggleSourceType('dataset');
+  const p = [...pool(), { id: 'ds-low', kind: 'dataset', sourceType: 'dataset', headline: 'Sensor readings', quality: 0.5, story: 998, tags: [] }];
+  for (const seed of [1, 2, 3, 4, 5, 6]) assert.ok(sampleFeed(p, s, { seed, n: 16 }).some((x) => x.id === 'ds-low'), `seed ${seed}`);
+});

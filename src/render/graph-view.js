@@ -336,6 +336,7 @@ export class GraphView {
       const r = (this.hitRadius.get(id) ?? 0) * scale;
       if (!r) continue;
       const p = this.worldPositionOf(id, _p2);
+      if (!p) continue; // left the web since the last frame
       if (_p2b.subVectors(p, ray.origin).dot(ray.direction) < 0) continue; // behind the pointer
       const d = ray.distanceToPoint(p);
       if (d > r) continue;

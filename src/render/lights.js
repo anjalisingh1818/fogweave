@@ -11,6 +11,7 @@ import {
   Group,
   InstancedMesh,
   OctahedronGeometry,
+  BoxGeometry,
   SphereGeometry,
   PlaneGeometry,
   MeshBasicMaterial,
@@ -39,6 +40,7 @@ export const LIGHT_KINDS = {
   breaking: { label: 'Latest', color: 0xffe6b4, css: '#ffe6b4', pattern: 'steady' },
   paper: { label: 'Research', color: 0xfff2d6, css: '#fff2d6', pattern: 'breathe' },
   archive: { label: 'Archive', color: 0xe0c08c, css: '#e0c08c', pattern: 'dim' },
+  dataset: { label: 'Dataset', color: 0xf3e6c8, css: '#f3e6c8', pattern: 'steady' }, // a small cube
 };
 const TRAIL = 3; // fading ghosts behind each light
 export const YAW_MAX = (117 * Math.PI) / 180; // widest light on the headset arc
@@ -71,7 +73,7 @@ export class LightField {
     world.createTransformEntity(this.group);
 
     this.cores = {};
-    const geo = { breaking: new OctahedronGeometry(1, 0), paper: new SphereGeometry(1, 16, 12), archive: new SphereGeometry(1, 10, 8) };
+    const geo = { breaking: new OctahedronGeometry(1, 0), paper: new SphereGeometry(1, 16, 12), archive: new SphereGeometry(1, 10, 8), dataset: new BoxGeometry(1.3, 1.3, 1.3) };
     for (const kind of Object.keys(LIGHT_KINDS)) {
       const mesh = new InstancedMesh(geo[kind], new MeshBasicMaterial({ color: 0xffffff }), MAX);
       mesh.instanceMatrix.setUsage(DynamicDrawUsage);

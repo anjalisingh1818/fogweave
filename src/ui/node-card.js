@@ -92,7 +92,8 @@ export function nodeCardDraw(app, id) {
         const g = app.store.nodes.get(x)?.group || 'other';
         groups[g] = (groups[g] || 0) + 1;
       }
-      ui.text(Object.entries(groups).map(([g, c]) => `${c} ${g}`).join(' · '), pad, y + 26, { size: 23, color: '#ffe2a8', maxWidth: w - pad * 2 });
+      const GROUP_NAMES = { archive: 'older news', news: 'recent news', datasets: 'datasets', filings: 'filings' };
+      ui.text(Object.entries(groups).map(([g, c]) => `${c} ${GROUP_NAMES[g] || g}`).join(' · '), pad, y + 26, { size: 23, color: '#ffe2a8', maxWidth: w - pad * 2 });
       y += 34;
     } else if (node.explored === true && !node.definition) {
       // say so plainly rather than leaving the card silent

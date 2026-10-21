@@ -81,3 +81,17 @@ One line each: what was chosen, and why. Newest last.
 - **Real source first (F9):** cards show the outlet (e.g. reuters.com) with its date and link; the aggregator that found it reads "found via Wikipedia Current events". Every item shows a source-type badge (news / paper / archive; filing and dataset are ready for Stage B) and LIVE or SNAPSHOT with the snapshot date.
 - **Explore uses a node's own Wikidata id** and matches Wikipedia titles without accents ("Raul Castro" = "Raúl Castro"). When open sources have nothing more on a node, its card says so.
 
+## V2 master, Stage B (2026-10-21)
+
+- **Open deep sources** (each checked for terms on 2026-10-21; see SOURCES.md):
+  - **Older news** comes from Wikipedia's Current events archive (back to 2005), found with Wikipedia search and parsed like today's page. One entry per day, spread across years, and only entries that name the node.
+  - **Datasets** come from Zenodo (metadata CC0; the data licence is shown).
+  - **Filings** come from SEC EDGAR. They are off unless the owner sets `FW_CONTACT_EMAIL`, because the SEC requires a contact address and FogWeave never sends the user's own.
+  - **The Library of Congress API is not used**: it answered behind a Cloudflare bot challenge, and FogWeave does not try to get past bot detection.
+- **Explore groups:** a node now opens up with "older news", "datasets" and "filings" next to parts, recent news, papers and impact. Every item must name the node (checked quote, 25 words or fewer). Older news also becomes dated facts for the impact step (precedents come in Stage C).
+- **Source classes:** primary (filings, deposited datasets) 0.95 > reputable news 0.75 > aggregators 0.5 (Hacker News, Google News, MSN, Yahoo News). Tested.
+- **Feed source types (opt-in):** Interests → Also show → Datasets / Older news. A turned-on type always gets at least one light when the pool has one. Datasets never appear unless turned on.
+- **F7, more / less like this:** the lights change at once, re-weighted from the current pool; a fresh pool for the new interests replaces them when it arrives (30–60 s live). A status-bar notice names what was learned and offers **Undo** (12 s, and again after the fresh lights). Interests stay on the device across reloads. The Interests card has an Undo too.
+- **One growth at a time, but nothing is dropped:** touching a light or a node while something else grows queues it ("Opening X next…"), and it grows when the current one finishes. Before, the touch was silently ignored.
+- **Snapshot (F10):** re-recorded from the live pipeline on 2026-10-21. The pool carries 3 datasets and 8 archive items. 11 explores, including a neighbour of every explored node. 3 focus nodes (Abyei, Florida, South Sudan) have both older and recent related news.
+

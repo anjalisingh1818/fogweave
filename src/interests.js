@@ -21,12 +21,34 @@ export const PAPER_TYPES = {
   'cond-mat.mtrl-sci': 'Materials science',
 };
 
-const EMPTY = () => ({ topics: [], newsTypes: [], paperTypes: [], muted: [], surprise: 0.25 });
+const EMPTY = () => ({ topics: [], newsTypes: [], paperTypes: [], sourceTypes: [], muted: [], surprise: 0.25 });
+/** Extra source types the reader can add to the feed (open deep sources). */
+export const SOURCE_TYPES = { dataset: 'Datasets', archive: 'Older news' };
 
 export class InterestStore {
   constructor(storage = globalThis.localStorage) {
     this.storage = storage;
     this.data = this._load();
+    this.history = []; // snapshots for Undo (this session)
+  }
+
+  /** Remember the current interests so the next change can be undone. */
+  checkpoint() {
+    this.history.push(JSON.stringify(this.data));
+    if (this.history.length > 20) this.history.shift();
+  }
+
+  get canUndo() {
+    return this.history.length > 0;
+  }
+
+  /** Back to the interests before the last change. */
+  undo() {
+    const prev = this.history.pop();
+    if (!prev) return false;
+    this.data = { ...EMPTY(), ...JSON.parse(prev) };
+    this.save();
+    return true;
   }
 
   _load() {
@@ -50,7 +72,17 @@ export class InterestStore {
     return !d.topics.length && !d.newsTypes.length && !d.paperTypes.length;
   }
 
+  toggleSourceType(t) {
+    if (!SOURCE_TYPES[t]) return;
+    this.checkpoint();
+    const s = new Set(this.data.sourceTypes);
+    s.has(t) ? s.delete(t) : s.add(t);
+    this.data.sourceTypes = [...s];
+    this.save();
+  }
+
   toggleNewsType(t) {
+    this.checkpoint();
     const s = new Set(this.data.newsTypes);
     s.has(t) ? s.delete(t) : s.add(t);
     this.data.newsTypes = [...s];
@@ -58,6 +90,7 @@ export class InterestStore {
   }
 
   togglePaperType(c) {
+    this.checkpoint();
     const s = new Set(this.data.paperTypes);
     s.has(c) ? s.delete(c) : s.add(c);
     this.data.paperTypes = [...s];
@@ -108,6 +141,7 @@ export class InterestStore {
   /** "More like this": strengthen the item's news types; "less": weaken or mute them. */
   likeItem(item, more = true) {
     const types = (item.tags || []).filter((t) => NEWS_TYPES.includes(t));
+    if (types.length) this.checkpoint();
     for (const t of types.slice(0, 2)) {
       if (more) {
         if (!this.data.newsTypes.includes(t)) this.data.newsTypes.push(t);
@@ -134,7 +168,7 @@ export class InterestStore {
 
   /** What the server needs to shape the pool (labels only). */
   forServer() {
-    const { topics, newsTypes, paperTypes } = this.data;
-    return { topics, newsTypes, paperTypes };
+    const { topics, newsTypes, paperTypes, sourceTypes } = this.data;
+    return { topics, newsTypes, paperTypes, sourceTypes };
   }
 }
