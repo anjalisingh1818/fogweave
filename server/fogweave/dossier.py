@@ -25,7 +25,7 @@ import unicodedata
 from datetime import datetime, timezone
 
 from .http import SourceError
-from .linking import fits, key
+from .linking import FICTION, fits, key
 
 WD_API = "https://www.wikidata.org/w/api.php"
 WIKI_API = "https://en.wikipedia.org/w/api.php"
@@ -160,11 +160,13 @@ class DossierMaker:
 
     async def _resolve(self, node: dict) -> str | None:
         """Wikidata id: from the node, else a conservative label match."""
-        if node.get("qid"):
-            return node["qid"]
-        nid = str(node.get("id", ""))
-        if nid.startswith("wd:Q"):
-            return nid[3:]
+        own = node.get("qid") or (str(node.get("id", ""))[3:] if str(node.get("id", "")).startswith("wd:Q") else None)
+        if own:
+            # an id from an earlier link that points at fiction (the Marvel "Phobos") is not trusted
+            ent = (await self._entities([own], "descriptions")).get(own) or {}
+            desc = ((ent.get("descriptions") or {}).get("en") or {}).get("value", "")
+            if not FICTION.search(desc):
+                return own
         try:
             hit = await self.e.linker.link(node.get("label", ""), node.get("type", "Topic"))
         except Exception:  # noqa: BLE001
@@ -189,7 +191,7 @@ class DossierMaker:
             data = await self.http.get(WD_API, params={"action": "wbsearchentities", "search": label, "language": "en", "type": "item", "limit": 5, "format": "json"}, as_json=True, ttl=7 * 86400)
             for r in (data or {}).get("search") or []:
                 names = [r.get("label", "")] + list((r.get("aliases") or [])) + [(r.get("match") or {}).get("text", "")]
-                if any(_fold(x) == want for x in names if x):
+                if any(_fold(x) == want for x in names if x) and not FICTION.search(r.get("description", "")):
                     self._by_search.add(r.get("id"))
                     return r.get("id")
         except SourceError:
@@ -273,6 +275,7 @@ class DossierMaker:
             overview = " ".join(sents[:2])[:420]
             if n["type"] == "PublicFigure":
                 overview = BORN.sub("", overview)  # public role only: no birth details
+            overview = re.sub(r"\s*\(\s*[;,]?\s*\)", "", overview)  # "Phobos ()": a pronunciation the plain-text lead left out
             desc = ((ent.get("descriptions") or {}).get("en") or {}).get("value", "")
             facts = []
             seen = set()
