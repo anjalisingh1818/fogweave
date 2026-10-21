@@ -6,17 +6,21 @@
     <link rel="icon" href="data:," />
     <title>FogWeave</title>
     <style>
-      html, body { margin: 0; height: 100%; background: #343b47; }
+      html, body { margin: 0; height: 100%; background: #05070d; }
       #scene-container { width: 100%; height: 100%; }
 
       /* Welcome screen: shown from the first frame until the stars are in (src/ui/welcome.js) */
       #welcome {
         position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center;
-        background: radial-gradient(ellipse at 50% 38%, #56607199 0%, #3b4250 55%, #2c323d 100%), #343b47;
+        background: linear-gradient(180deg, #020308 0%, #050a17 40%, #0c1a33 72%, #070d1c 100%), #05070d;
         color: #eef1f6; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
         transition: opacity 0.9s ease; overflow: hidden;
       }
       #welcome.gone { opacity: 0; pointer-events: none; }
+      /* gray fog drifting over the night */
+      #welcome .fog { position: absolute; width: 70vmax; height: 40vmax; border-radius: 50%; filter: blur(40px);
+        background: radial-gradient(ellipse at center, #9aa3b133 0%, #9aa3b11a 45%, transparent 70%); animation: fw-fog 38s ease-in-out infinite alternate; }
+      @keyframes fw-fog { from { transform: translate(-8vw, 2vh) scale(1); } to { transform: translate(8vw, -3vh) scale(1.15); } }
       #welcome .box { position: relative; text-align: center; padding: 0 24px; max-width: 560px; }
       #welcome h1 { margin: 0 0 14px; font-size: clamp(40px, 8vw, 68px); font-weight: 300; letter-spacing: 0.14em; }
       #welcome h1 b { font-weight: 600; color: #ffe6b4; }
@@ -34,12 +38,15 @@
       @keyframes fw-slide { from { transform: translateX(-110%); } to { transform: translateX(260%); } }
       @keyframes fw-drift { from { transform: translate(0, 0); opacity: 0.45; } to { transform: translate(18px, -14px); opacity: 1; } }
       @media (prefers-reduced-motion: reduce) {
-        #welcome .star, #welcome .bar i { animation: none; }
+        #welcome .star, #welcome .bar i, #welcome .fog { animation: none; }
       }
     </style>
   </head>
   <body>
     <div id="welcome" role="status" aria-live="polite">
+      <span class="fog" style="left: -20vmax; top: 10%"></span>
+      <span class="fog" style="right: -25vmax; top: 45%; animation-delay: -14s; animation-duration: 46s"></span>
+      <span class="fog" style="left: 10%; bottom: -18vmax; animation-delay: -25s"></span>
       <span class="star" style="left: 14%; top: 22%"></span>
       <span class="star" style="left: 78%; top: 18%; animation-delay: -3s"></span>
       <span class="star" style="left: 66%; top: 70%; animation-delay: -6s"></span>

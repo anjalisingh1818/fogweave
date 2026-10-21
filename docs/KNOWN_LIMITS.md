@@ -17,7 +17,10 @@
 - **Entity linking can err.** It is conservative: a wrong merge is worse than none, so near-duplicates may stay separate. Entity types from extraction are sometimes off (e.g. a country typed as an organisation); the ontology rejects the resulting invalid triples rather than drawing them.
 - **Story clustering is moderate:** pairwise F1 0.48 on held-out days against Wikipedia's own story headings (single-link baseline 0.31).
 - **The ontology is checked before drawing, but one statement in 607 slipped through** in the eval, when entity linking re-typed a node after its edge was checked. The SHACL shapes do not check relation ranges.
-- **"Touches me?" finds only short threads.** In the eval, every path found was one hop (a shared place or organisation), and one real connection was missed.
+- **"Touches me?" and My context are no longer in the app** (V3 cut list). The V2 eval of them stays in the report for the record.
+- **Ask-the-fog stars come from Wikipedia Current events and GDELT only.** A topic those do not cover (a niche technology, a local story) gets an answer but few or no stars; the answer card says "No news stars found for this."
+- **Connect the dots needs the live engine for anything beyond shared names.** In the Demo scene it shows only names that two or more sealed items share. Live, a pattern is kept only with a verbatim quote from each item, so a real pattern that the short summaries do not show is missed.
+- **Relation precision was measured before the last two related-news rules** (proper names only; places never link on their own); the pairs have not been re-collected since.
 
 - **Answers are only as good as the web around the item.** Ask is GraphRAG over the reader's web plus a small fresh search, using a free LLM. Answers can be incomplete. Sentences without a retrieved citation are marked as guesses. Offline, only the suggested questions have recorded answers.
 - **"Is this reliable?" is computed locally** from the evidence breakdown. It reports what was checked, not whether the story is true.

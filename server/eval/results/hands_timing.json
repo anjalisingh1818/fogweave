@@ -1,14 +1,14 @@
 {
- "when": "2026-10-20T13:27:20.687Z",
+ "when": "2026-10-21T15:17:42.602Z",
  "scripted": true,
  "mode": "offline (recorded run)",
  "steps": {
-  "touch light → reader card open": 546,
-  "pinch Expand → first node": 1381,
-  "pinch Expand → web complete (recorded replay)": 9904,
-  "pinch Ask → suggestion → answer card": 1915,
-  "pinch Seal → sealed": 957,
-  "wrist ? → Library open": 1552
+  "touch light → reader card open": 658,
+  "pinch Expand → first node": 346,
+  "pinch Expand → web complete (recorded replay)": 9051,
+  "pinch Ask → suggestion → answer card": 2256,
+  "pinch Seal → sealed": 1005,
+  "wrist ? → Library open": 1575
  },
- "total_ms": 14874
+ "total_ms": 14545
 }

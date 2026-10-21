@@ -396,13 +396,14 @@ class Engine:
 
         # other news, recent and older, each with a typed link and two quotes
         yield {"type": "status", "phase": "related", "text": "Finding other news about it"}
-        names = [e["name"] for e in merged if e["type"] in ("Place", "Organisation", "PublicFigure", "Event", "Technology")]
+        # proper names only: a common noun ("speedboats") is not a reason to link two stories
+        names = [e["name"] for e in merged if e["type"] in ("Place", "Organisation", "PublicFigure", "Event", "Technology") and e["name"][:1].isupper()]
         focus_text = " ".join([f"{item.title}.", item.snippet or "", *[c["quote"] for c in x["claims"]]])
         try:
             from .related import RelatedFinder
 
             # broad names (a country, a city): too weak alone to link two stories
-            broad_re = re.compile(r"\b(country|sovereign state|city|capital|province|region|continent|federal state)\b", re.I)
+            broad_re = re.compile(r"\b(country|sovereign state|city|capital|province|region|continent|state|district|county|governorate|department|oblast|prefecture)\b", re.I)
             broad = [e["name"] for e in merged if e["type"] == "Place" or broad_re.search(str(e.get("description") or ""))]
             # a name extraction left without a description: ask Wikidata (cached) whether it is a place
             unknown = [e["name"] for e in merged if e["name"] not in broad and not e.get("description") and e["type"] != "PublicFigure"]

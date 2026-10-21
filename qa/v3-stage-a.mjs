@@ -130,7 +130,7 @@ const step = async (page, name, fn) => {
   const ev = (fn, a) => page.evaluate(fn, a);
   try {
     await boot(page, context);
-    await step(page, 'live is the default scene, labelled LIVE; the fog is gray with a slight blue', async () => {
+    await step(page, 'live is the default scene, labelled LIVE; a dark blue night sky behind the fog', async () => {
       const r = await ev(() => ({ mode: window.__fw.app.mode, line: window.__fw.app.modeLine(), lights: window.__fw.app.lights.items.length, live: window.__fw.app.lights.items.every((x) => x.live), fog: window.__fw.world.scene.background.getHexString() }));
       await shot(page, 'v3a-3-live');
       if (r.mode !== 'live' || !r.live || r.lights < 12) throw new Error(JSON.stringify(r));
@@ -141,7 +141,8 @@ const step = async (page, name, fn) => {
     await step(page, 'Menu by pinch → Demo scene → Live scene', async () => {
       await ev(() => window.__qa.menu());
       const ids = await ev(() => window.__fw.app.cards.get('help')?.buttonIds());
-      if (!ids || !['library', 'interests', 'context', 'calm', 'scene', 'guide', 'about'].every((x) => ids.includes(x))) throw new Error(JSON.stringify(ids));
+      // My context was removed (V3 cut list)
+      if (!ids || !['library', 'interests', 'calm', 'scene', 'guide', 'about'].every((x) => ids.includes(x)) || ids.includes('context')) throw new Error(JSON.stringify(ids));
       await shot(page, 'v3a-4-menu');
       await ev(() => window.__qa.press('help', 'scene'));
       await page.waitForFunction(() => window.__fw.app.mode === 'offline' && window.__fw.app.lights.items.length > 0, null, { timeout: 20000 });

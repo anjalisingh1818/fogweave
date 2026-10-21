@@ -40,6 +40,13 @@ export function answerDraw(app, a) {
     const sealed = app.sealedAnswers.some((x) => x.question === a.question && x.text === a.text);
     ui.button('seal', sealed ? 'Kept' : 'Keep', pad, by, 200, 80, () => app.keepAnswer(a), { primary: !sealed, disabled: sealed || a.refused, icon: '◆', size: 28 });
     if (speech.available() && settings.audio.readAloud) ui.button('listen', 'Listen', pad + 220, by, 200, 80, () => speech.speak(`${a.question}. ${a.text}`), { size: 28 });
+    // Ask the fog: the news it found arrived as stars
+    const g = app.searchGroup;
+    if (g && g.q === a.question) {
+      const n = g.ids.length;
+      ui.text(n ? `${n} star${n === 1 ? '' : 's'} about this came in front of you.` : 'No news stars found for this.', pad, by - 22, { size: 22, color: UI.dim, maxWidth: w - pad * 2 });
+      if (n) ui.button('clearstars', 'Clear stars', w - pad - 420, by, 200, 80, () => app.clearSearch(), { size: 26 });
+    }
     ui.button('close', 'Close', w - pad - 200, by, 200, 80, () => app.closeCard('answer'), { icon: '✕', size: 28 });
   };
 }
@@ -111,6 +118,42 @@ export function exportDraw(app, r) {
       y = ui.para(l, pad, y, w - pad * 2, { size: 26, maxLines: 2 }) + 6;
     }
     ui.button('close', 'Close', w - pad - 200, h - 104, 200, 76, () => app.closeCard('export'), { icon: '✕', size: 28 });
+  };
+}
+
+const PATTERN_KIND = {
+  shared: 'SHARED NAME',
+  same_actor: 'SAME ACTOR',
+  recurring: 'RECURRING',
+  sequence: 'SEQUENCE',
+  contrast: 'CONTRAST',
+  common_theme: 'COMMON THEME',
+};
+
+/** Connect the dots: patterns across the Library, each with its items and a quote from each. */
+export function patternsDraw(app, r) {
+  return (ctx, ui, w, h) => {
+    const pad = 44;
+    ui.text('PATTERNS IN YOUR LIBRARY', pad, 66, { size: 26, color: UI.accent, weight: 700 });
+    let y = 104;
+    const limit = h - 130;
+    (r.patterns || []).forEach((p, i) => {
+      if (y + 90 > limit) return;
+      const style = LABEL_STYLE[p.label] || LABEL_STYLE.inferred;
+      ui.text(PATTERN_KIND[p.kind] || p.kind.toUpperCase(), pad, y, { size: 20, color: '#ffe2a8', weight: 700 });
+      ui.text(style.label.toUpperCase(), pad + 260, y, { size: 20, color: style.css, weight: 700 });
+      ui.button(`show:${i}`, 'Show', w - pad - 250, y - 30, 120, 50, () => app.showPattern(p), { size: 22 });
+      ui.button(`note:${i}`, 'Note', w - pad - 120, y - 30, 120, 50, () => app.addNote(`Pattern: ${p.text}`), { size: 22 });
+      y = ui.para(p.text, pad, y + 34, w - pad * 2, { size: 25, weight: 600, maxLines: 2 }) + 2;
+      const names = p.items.map((id) => app.itemLabel(id)).map((s) => (s.length > 34 ? `${s.slice(0, 33)}…` : s));
+      y = ui.para(names.join(' · '), pad, y, w - pad * 2, { size: 21, color: UI.dim, maxLines: 2 }) + 2;
+      const q = (p.quotes || [])[0];
+      if (q && y + 30 < limit) y = ui.para(`“${q.quote}”`, pad, y, w - pad * 2, { size: 21, color: '#c8d3e0', maxLines: 1 }) + 2;
+      y += 22;
+    });
+    if (!(r.patterns || []).length && !r.running) y = ui.para('No shared names among your items yet.', pad, y, w - pad * 2, { size: 25, color: UI.dim, maxLines: 2 }) + 8;
+    if (r.note) ui.para(r.note, pad, Math.min(y, limit - 10), w - pad * 2 - 230, { size: 21, color: UI.dim, maxLines: 2 });
+    ui.button('close', 'Close', w - pad - 200, h - 104, 200, 76, () => app.closeCard('patterns'), { icon: '✕', size: 28 });
   };
 }
 

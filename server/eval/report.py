@@ -6,7 +6,7 @@
 from __future__ import annotations
 
 import json
-from collections import Counter
+from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -54,6 +54,9 @@ def main():
     qa3 = load(QA / "phase3-results.json", {})
     v2a = load(QA / "v2-accept-results.json", {})
     hands = load(RES / "hands_timing.json", {})
+    v3_dossiers = load(RES / "v3_dossiers.json", {})
+    v3_pairs = load(ROOT / "eval" / "runs_v3" / "relations.json", [])
+    v3_labels = load(LAB / "v3_relation_labels.json", {})
 
     md = []
     add = md.append
@@ -118,6 +121,13 @@ def main():
         lat = auto["latency_ms"]
         rows.append(("Latency: first event (the news node) p50 / web complete p50 (p95)", f"{lat['first_node_p50']} ms / {lat['done_p50'] / 1000:.0f} s ({lat['done_p95'] / 1000:.0f} s)"))
         rows.append(("LLM per item: calls / tokens (mean)", f"{auto['llm_per_item']['calls_mean']} / {auto['llm_per_item']['tokens_mean']}"))
+    v3_rows = [(p, v3_labels[p["id"]]) for p in v3_pairs if p["id"] in v3_labels]
+    if v3_rows:
+        ok = sum(lab["ok"] for _, lab in v3_rows)
+        rows.append(("V3 related-news relation precision", f"{ok / len(v3_rows):.2f} (n={len(v3_rows)} pairs, {sum(p['other']['older'] for p, _ in v3_rows)} with older news)"))
+    if v3_dossiers:
+        rows.append(("V3 dossier key facts matching their source (Wikidata)", f"{v3_dossiers['facts_supported']}/{v3_dossiers['facts']} on {v3_dossiers['nodes']} nodes"))
+        rows.append(("V3 dossier overviews verbatim in the Wikipedia lead", f"{v3_dossiers['overviews_verbatim']}/{v3_dossiers['overviews']}"))
     if special:
         rows.append(("Safety cases passed", f"{sum(1 for v in special.values() if v.get('pass'))}/{len(special)}"))
     add("## Summary")
@@ -283,6 +293,43 @@ def main():
             add(f"- V2 acceptance (§12.5, `qa/v2-accept.mjs`): {sum(r['pass'] for r in res)}/{len(res)} steps passed ({', '.join(modes)}). "
                 "When a scripted pinch misses a node that is still settling, the script closes the keypad the miss opened and opens the node through the same handler a hit would call.")
         add("")
+
+    if v3_rows or v3_dossiers:
+        add("## 8b. V3: related news and dossiers (V3 §11)")
+        add("")
+        if v3_rows:
+            by = defaultdict(list)
+            for p, lab in v3_rows:
+                by[p["relation"]].append(lab["ok"])
+            add(f"**Relation precision.** The 30 eval news items (`eval/data/items.json`) were grown live; every related-news link the Related-News Finder emitted is a pair "
+                f"({len(v3_rows)} pairs, `eval/runs_v3/relations.json`). A label says whether the stated relation holds for the two texts (kind, direction in time, and the quotes show it). "
+                "Labels by Claude, with reasons, in `eval/labels/v3_relation_labels.json`.")
+            add("")
+            add("| Relation | n | precision |")
+            add("|---|---|---|")
+            for rel, v in sorted(by.items(), key=lambda x: -len(x[1])):
+                add(f"| {rel} | {len(v)} | {sum(v) / len(v):.2f} |")
+            ok = sum(lab["ok"] for _, lab in v3_rows)
+            useful = sum(lab.get("useful", lab["ok"]) for _, lab in v3_rows)
+            add(f"| **all** | {len(v3_rows)} | **{ok / len(v3_rows):.2f}** |")
+            add("")
+            add(f"True and also useful (not a generic or broad-place-only link): {useful}/{len(v3_rows)}. Wrong:")
+            add("")
+            for p, lab in v3_rows:
+                if not lab["ok"]:
+                    add(f"- `{p['relation']}`: {lab['reason']}")
+            add("")
+            add("Changed after labelling: a shared name must be a proper name (\"speedboats\" was linked), and big places (a state with its country) never link two stories on their own; "
+                "the pairs above were collected before these two rules.")
+            add("")
+        if v3_dossiers:
+            add(f"**Dossier facts.** {v3_dossiers['nodes']} nodes with a dossier from the Demo snapshot ({', '.join(f'{k} {v}' for k, v in v3_dossiers['types'].items())}), "
+                "re-checked against their sources by another route (`eval/v3_dossiers.py`, automatic, no hand labels): each key fact against the item's Wikidata entry "
+                "(Special:EntityData), each overview against the Wikipedia lead (parentheticals set aside: the dossier drops a person's \"(born …)\").")
+            add("")
+            add(f"- Key facts matching their source: **{v3_dossiers['facts_supported']}/{v3_dossiers['facts']}**")
+            add(f"- Overviews verbatim: **{v3_dossiers['overviews_verbatim']}/{v3_dossiers['overviews']}**")
+            add("")
 
     notes = load(LAB / "notes.json", {})
     if notes:

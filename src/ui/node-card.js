@@ -158,7 +158,8 @@ export function nodeCardDraw(app, id) {
       ui.button('close', 'Close', w - 260, h - 130, 210, 90, () => app.closeCard(`node:${id}`));
       return;
     }
-    const limit = h - 222; // the button rows start below this
+    const groups = app.hiddenGroups(id);
+    const limit = h - (groups.length ? 292 : 222); // the button rows start below this
     let y = 76;
     const item = node.type === 'NewsItem' ? app.getItem(id) : null;
     // F9: a news item says what kind of source it is (news / paper / archive ...)
@@ -303,11 +304,16 @@ export function nodeCardDraw(app, id) {
     // small row: trail / show more / pin / collapse / expand a news node
     const small = [];
     if (app.trail.length >= 2) small.push({ id: 'back', label: '‹ Back', on: () => app.back() });
-    const more = app.hiddenCount(id);
-    if (more) small.push({ id: 'more', label: `Show ${Math.min(8, more)} more`, on: () => app.showMore(id) });
     if (node.type === 'NewsItem' && app.canExpand(id) && !app.getItem(id)?.expanded) small.push({ id: 'expand', label: 'Show related', on: () => app.expandLight(id) });
     small.push({ id: 'pin', label: node.pinned ? 'Unpin' : 'Pin', on: () => app.togglePin(id) });
     if (node.addedIds?.length) small.push({ id: 'collapse', label: 'Collapse', on: () => app.collapse(id) });
+    // more around it, by kind: "+3 People", "+4 Places" ... (the closest few are already shown)
+    if (groups.length) {
+      const chips = groups.slice(0, 3).map((g) => ({ id: `grp:${g.key}`, label: `+${g.ids.length} ${g.label}`, on: () => app.showGroup(id, g.key) }));
+      if (groups.length > 1) chips.push({ id: 'grp:all', label: `All ${groups.reduce((s, g) => s + g.ids.length, 0)}`, on: () => app.showGroup(id, 'all') });
+      const cw = (w - pad * 2 - 12 * (chips.length - 1)) / Math.max(4, chips.length);
+      chips.forEach((b, i) => ui.button(b.id, b.label, pad + i * (cw + 12), h - 270, cw, 58, b.on, { size: 22 }));
+    }
     const sw = (w - pad * 2 - 12 * (small.length - 1)) / Math.max(4, small.length);
     small.forEach((b, i) => ui.button(b.id, b.label, pad + i * (sw + 12), h - 200, sw, 58, b.on, { size: 22 }));
 

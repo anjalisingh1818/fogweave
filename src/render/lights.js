@@ -145,6 +145,31 @@ export class LightField {
     return this.items.find((x) => x.id === id) || null;
   }
 
+  /** Ask the fog results: new stars gathered in front of the reader (one Search group). */
+  addItems(items) {
+    const fresh = items.filter((it) => !this.get(it.id)).slice(0, Math.max(0, MAX - this.items.length));
+    fresh.forEach((it, i) => {
+      const r = (k) => hash01(it.id, k);
+      const yawDeg = -32 + (64 * (i + 0.5)) / fresh.length + (r(1) - 0.5) * 6;
+      this.items.push(it);
+      this.state.set(it.id, {
+        yaw: (yawDeg * Math.PI) / 180,
+        elev: ((4 + r(2) * 16) * Math.PI) / 180,
+        dist: 1.2 + r(3) * 0.3,
+        phase: r(4) * Math.PI * 2,
+        speed: 0.012 + r(5) * 0.01,
+        born: this.time,
+      });
+    });
+    return fresh.map((x) => x.id);
+  }
+
+  removeItems(ids) {
+    const drop = new Set(ids);
+    this.items = this.items.filter((x) => !drop.has(x.id));
+    for (const id of drop) this.state.delete(id);
+  }
+
   /** Swap one light for another in the same place in the sky (slow refresh). */
   replaceItem(oldId, item) {
     const i = this.items.findIndex((x) => x.id === oldId);
@@ -281,7 +306,7 @@ export class LightField {
       ctx.font = `600 30px ${UI.font}`;
       ctx.fillStyle = LIGHT_KINDS[it.kind]?.css || '#fff';
       ctx.textBaseline = 'middle';
-      const mark = `${LIGHT_KINDS[it.kind]?.label || ''} · ${ageMark(this.ageDays(it))}`;
+      const mark = `${it.search ? 'Search · ' : ''}${LIGHT_KINDS[it.kind]?.label || ''} · ${ageMark(this.ageDays(it))}`;
       ctx.fillText(mark, 30, 56);
       const w = ctx.measureText(mark).width;
       ctx.font = `500 32px ${UI.font}`;

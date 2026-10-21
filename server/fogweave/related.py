@@ -120,10 +120,9 @@ class RelatedFinder:
         self.router = engine.router
 
     def _strong(self, text: str, names: list[str], broad: set[str]) -> bool:
-        """Names a specific person, organisation or event of the story, or two of its names.
-        A shared big place alone ("Russia") is too weak a reason to link two stories."""
-        hits = [n for n in names if mention(text, n)]
-        return any(n not in broad for n in hits) or len(hits) >= 2
+        """Names a specific person, organisation or event of the story. Shared big places
+        ("Russia", or a state and its country) are too weak a reason to link two stories."""
+        return any(n not in broad and mention(text, n) for n in names)
 
     async def candidates(self, item: RawItem, names: list[str], broad: set[str] = frozenset()) -> list[RawItem]:
         """Recent Current events entries and older archive entries that name the story's entities."""
@@ -140,7 +139,8 @@ class RelatedFinder:
                     recent += await wiki.current_events(today - timedelta(days=back))
                 except Exception:  # noqa: BLE001
                     continue
-            found += [it for it in recent if self._strong(f"{it.title}. {it.snippet}", names, broad)]
+            # a specific shared name, or two shared places (the model then judges the content)
+            found += [it for it in recent if self._strong(f"{it.title}. {it.snippet}", names, broad) or sum(1 for n in names if mention(f"{it.title}. {it.snippet}", n)) >= 2]
             for n in [x for x in names if x not in broad][:2] or names[:1]:
                 found += await self.router._safe(f"related-archive:{n[:30]}", wiki.archive_search(n, limit=2, min_age_days=OLD_DAYS))
         # not the focus itself, no duplicates
@@ -213,11 +213,11 @@ class RelatedFinder:
         for c in cands:
             if c.id in done:
                 continue
-            # specific names first; a broad place only as the second of two shared names
-            shared = [n for n in names if mention(texts[c.id], n)]
-            if not shared or (all(n in broad_set for n in shared) and len(shared) < 2):
+            # only a specific shared name (a person, an organisation, an event): never places alone
+            shared = [n for n in names if mention(texts[c.id], n) and n not in broad_set]
+            if not shared:
                 continue
-            for n in sorted(shared, key=lambda x: x in broad_set):
+            for n in shared:
                 q_focus = verify_quote(mention(focus_text, n) or "", focus_text)
                 q_other = verify_quote(mention(texts[c.id], n) or "", texts[c.id])
                 if q_focus and q_other:

@@ -158,9 +158,10 @@ export function libraryDraw(app) {
       ui.button(`rm:${idx}`, '✕', w - pad - 56, h - 252 + i * 40, 56, 38, () => app.removeNote(idx), { size: 20 });
     });
     if (!notes.length) ui.text('Short notes, by keypad or suggestion cards.', pad + 150, h - 222, { size: 22, color: UI.dim, maxWidth: w - pad * 2 - 150 });
-    const bw = (w - pad * 2 - 40) / 3;
-    ui.button('note', 'Add note', pad, h - 112, bw, 80, () => app.openKeypad('note'), { size: 26 });
-    ui.button('export', 'Export pack', pad + bw + 20, h - 112, bw, 80, () => app.exportPack(), { primary: true, size: 26 });
-    ui.button('close', 'Close', pad + (bw + 20) * 2, h - 112, bw, 80, () => app.closeCard('library'), { icon: '✕', size: 26 });
+    const bw = (w - pad * 2 - 60) / 4;
+    ui.button('note', 'Add note', pad, h - 112, bw, 80, () => app.openKeypad('note'), { size: 24 });
+    ui.button('patterns', 'Find patterns', pad + bw + 20, h - 112, bw, 80, () => app.findPatterns(), { size: 24 });
+    ui.button('export', 'Export pack', pad + (bw + 20) * 2, h - 112, bw, 80, () => app.exportPack(), { primary: true, size: 24 });
+    ui.button('close', 'Close', pad + (bw + 20) * 3, h - 112, bw, 80, () => app.closeCard('library'), { icon: '✕', size: 24 });
   };
 }

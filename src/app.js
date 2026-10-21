@@ -31,7 +31,8 @@ import { isMuted, sampleFeed, seedFrom } from './feed.js';
 import { checkRequest } from './safety.js';
 import { interestsDraw } from './ui/interests-card.js';
 import { DEBUG, settings, loadSettings, setQuality, saveSettings } from './config.js';
-import { answerDraw, ASK_SUGGESTIONS, settingsDraw, timelineDraw, exportDraw, insightsDraw } from './ui/panels.js';
+import { answerDraw, ASK_SUGGESTIONS, settingsDraw, timelineDraw, exportDraw, insightsDraw, patternsDraw } from './ui/panels.js';
+import { sharedPatterns } from './patterns.js';
 import { insights } from './insights.js';
 import { Ambient, speech } from './audio.js';
 import { sealedView, buildJsonLd, buildJsonl, buildMarkdown } from './export/pack.js';
@@ -583,7 +584,7 @@ export class App {
       const p = this.lights.worldPositionOf(x.id, _rp);
       return !!p && (this.lights.hands || []).some((h) => h.distanceTo(p) < 0.4);
     };
-    const idle = this.lights.items.filter((x) => !busy.has(x.id) && !this.lights.sealed.has(x.id) && !x.expanded && !reaching(x));
+    const idle = this.lights.items.filter((x) => !busy.has(x.id) && !this.lights.sealed.has(x.id) && !x.expanded && !x.search && !reaching(x));
     const victim = idle.sort((a, b) => this.lights.ageDays(b) - this.lights.ageDays(a))[0];
     if (!victim) return;
     this.feedSeed = (this.feedSeed + 7919) >>> 0;
@@ -735,6 +736,49 @@ export class App {
     this.cards.show('library', { width: 0.44, height: 0.48, draw: libraryDraw(this), slot });
   }
 
+  // ---------- Connect the dots: patterns across the Library ----------
+
+  /** Everything sealed, as short texts (news, claims, things). */
+  libraryItems() {
+    const out = new Map();
+    for (const it of Object.values(this.sealedLights || {})) out.set(it.id, { id: it.id, type: 'NewsItem', label: it.headline, date: it.date || '', text: it.summary || '' });
+    for (const n of this.store.nodes.values()) {
+      if (!n.sealed || out.has(n.id) || ['Source', 'ContextNode'].includes(n.type)) continue;
+      out.set(n.id, { id: n.id, type: n.type, label: n.label, date: n.date || '', text: n.summary || n.quote || n.dossier?.overview || n.description || '' });
+    }
+    return [...out.values()];
+  }
+
+  async findPatterns() {
+    const items = this.libraryItems();
+    const show = (r) => {
+      this.lastPatterns = r;
+      this.cards.show('patterns', { width: 0.5, height: 0.56, draw: patternsDraw(this, r), slot: 2 });
+      return r;
+    };
+    if (items.length < 2) return show({ patterns: [], note: 'Seal two or more items, then look for patterns.' });
+    const shared = sharedPatterns(this.store, items);
+    const live = this.mode === 'live';
+    show({ patterns: shared, running: live, note: live ? 'Reading your items together for other patterns…' : 'Demo scene: shared names only. Other patterns need the live engine.' });
+    if (!live) return this.lastPatterns;
+    const res = await this.client.patterns(items.slice(0, 24));
+    const more = res?.patterns || [];
+    const note = !res ? 'The engine did not answer; shared names are shown.' : res.note || (more.length || shared.length ? '' : 'No pattern the items themselves can show.');
+    return show({ patterns: [...shared, ...more].slice(0, 6), note });
+  }
+
+  /** Light up a pattern's items in the fog and open the first. */
+  showPattern(p) {
+    for (const id of p.items) if (this.store.nodes.has(id)) this.view.flash(id, 3);
+    const first = p.items.find((id) => this.store.nodes.has(id));
+    if (first) this.pinchNode(first);
+    else if (p.items.some((id) => this.lights.get(id))) this.openLight(p.items.find((id) => this.lights.get(id)));
+  }
+
+  itemLabel(id) {
+    return this.store.nodes.get(id)?.label || this.sealedLights?.[id]?.headline || this.lights.get(id)?.headline || id;
+  }
+
   openContext() {
     this.closeCard('help');
     this.cards.show('context', { width: 0.46, height: 0.42, draw: contextDraw(this), slot: 1 });
@@ -848,6 +892,51 @@ export class App {
     return res?.ok ? res.json() : null;
   }
 
+  /**
+   * The closest few around a grown star stay in view: related news first (up
+   * to two), then its direct claims and the people, places and organisations
+   * it names. Everything else waits, grouped, behind the card's buttons.
+   */
+  _showClosest(id, added) {
+    const direct = new Set(this.store.neighbors(id).map((x) => x.id));
+    const degree = (x) => this.store.neighbors(x).length;
+    const score = (n) => {
+      if (n.type === 'NewsItem' && n.group === 'related') return 3;
+      if (!direct.has(n.id)) return 0;
+      if (n.type === 'Claim') return n.verdict === 'supported' ? 2.5 : 2;
+      // a node that can open up further comes first among equals
+      return (['PublicFigure', 'Place', 'Organisation', 'Event'].includes(n.type) ? 2.2 : 1.5) + (this.canExplore(n.id) ? 0.4 : 0);
+    };
+    const nodes = added.map((x) => this.store.nodes.get(x)).filter(Boolean);
+    const news = nodes.filter((n) => score(n) === 3).slice(0, 2);
+    const rest = nodes.filter((n) => score(n) < 3 && score(n) > 0).sort((a, b) => score(b) - score(a) || degree(b.id) - degree(a.id));
+    const shown = new Set([...news, ...rest].slice(0, FIRST_NODES).map((n) => n.id));
+    for (const n of nodes) n.hidden = !shown.has(n.id) && !n.sealed && !n.pinned;
+    this.store._emit('node-updated', added);
+  }
+
+  /** Hidden nodes around a node, by kind: what its card can bring into view. */
+  hiddenGroups(id) {
+    const groups = new Map();
+    for (const x of this.store.nodes.get(id)?.addedIds || []) {
+      const n = this.store.nodes.get(x);
+      if (!n?.hidden) continue;
+      const g = groupOf(n);
+      if (!groups.has(g.key)) groups.set(g.key, { ...g, ids: [] });
+      groups.get(g.key).ids.push(x);
+    }
+    return [...groups.values()].sort((a, b) => b.ids.length - a.ids.length);
+  }
+
+  showGroup(id, key) {
+    const g = this.hiddenGroups(id).filter((x) => key === 'all' || x.key === key);
+    const ids = g.flatMap((x) => x.ids);
+    for (const x of ids) this.store.nodes.get(x).hidden = false;
+    this.store._emit('node-added', ids);
+    this.cards.get(`node:${id}`)?.redraw();
+    return ids.length;
+  }
+
   hiddenCount(id) {
     return (this.store.nodes.get(id)?.addedIds || []).filter((x) => this.store.nodes.get(x)?.hidden).length;
   }
@@ -895,6 +984,8 @@ export class App {
     removeNodesFromStore(this.store, remove);
     n.addedIds = [];
     n.explored = false;
+    const it = this.lights.get(id);
+    if (it?.expanded === true) it.expanded = false; // a star can grow again
     this.cards.get(`node:${id}`)?.redraw();
     return remove.length;
   }
@@ -1056,6 +1147,15 @@ export class App {
     it.expanded = 'running';
     this.notes = [];
     this.cards.get(`light:${id}`)?.redraw();
+    // about 5 nodes first (the closest), the rest wait behind group buttons on the card
+    const before = new Set(this.store.nodes.keys());
+    const added = [];
+    const mark = (ev) => {
+      if (ev.type === 'node' && ev.node.id !== id && !before.has(ev.node.id) && !added.includes(ev.node.id)) {
+        added.push(ev.node.id);
+        ev.node.hidden = added.length > FIRST_NODES;
+      }
+    };
     if (it.live && this.mode === 'live') {
       const controller = new AbortController();
       this.expanding = { id, controller };
@@ -1063,7 +1163,10 @@ export class App {
       const stats = await this.client.expand(id, {
         context: this.context.labels(),
         signal: controller.signal,
-        onEvent: (ev) => this._onResearchEvent(ev),
+        onEvent: (ev) => {
+          mark(ev);
+          this._onResearchEvent(ev);
+        },
       });
       this.expanding = null;
       this.lastStats = stats;
@@ -1076,6 +1179,7 @@ export class App {
         this.setStatus('That recorded run is missing from the snapshot.');
         return;
       }
+      for (const ev of rec.events || []) mark(ev);
       this._recordedAnswers ??= {};
       if (rec.answers) this._recordedAnswers[id] = rec.answers;
       await new Promise((resolve) => {
@@ -1090,6 +1194,10 @@ export class App {
       });
     }
     it.expanded = true;
+    if (this.store.nodes.has(id)) {
+      this.store.nodes.get(id).addedIds = added;
+      this._showClosest(id, added);
+    }
     this.fillDossiers(); // every node around it: what it is, key facts, sources
     if (this.store.nodes.has(id)) this.focusNode(id, { explore: false });
     this.context.syncToStore(this.store);
@@ -1355,9 +1463,56 @@ export class App {
       this.cards.show('answer', { width: 0.48, height: 0.3, draw: answerDraw(this, a), slot: 2 });
       return a;
     }
-    const hit = this.findLight(q, { quiet: true, min: 0.55 });
-    if (hit) return hit;
-    return this.ask(q, null);
+    // a cited answer, news about it arriving as stars in front of you, and
+    // drifting stars that already name it come closer
+    const needle = q.toLowerCase();
+    const near = this.lights.items.filter((it) => `${it.headline} ${it.summary || ''}`.toLowerCase().includes(needle)).map((it) => it.id);
+    if (near.length) this.lights.pull(near, 30);
+    const [a] = await Promise.all([this.ask(q, null), this.searchStars(q)]);
+    return a;
+  }
+
+  /**
+   * Ask the fog, as stars: news about the topic (recent and older) gathers in
+   * front of the reader as one Search group. Seal keeps one; Clear removes the
+   * rest. Live: from the engine's search. Demo: from the recorded pool.
+   */
+  async searchStars(q) {
+    let items = [];
+    if (this.mode === 'live') {
+      const res = await this.client.search(q);
+      items = (res?.items || []).map((it) => ({ ...it, live: true }));
+    } else if (this.mode === 'offline') {
+      const words = q.toLowerCase().split(/\W+/).filter((w) => w.length > 2);
+      const shown = new Set(this.lights.items.map((x) => x.id));
+      items = this.pool.filter((it) => !shown.has(it.id) && words.length && words.every((w) => `${it.headline} ${it.summary || ''}`.toLowerCase().includes(w))).slice(0, 5);
+    }
+    if (!items.length) {
+      this.searchGroup = { q, ids: [] };
+      this.cards.get('answer')?.redraw();
+      return [];
+    }
+    this.clearSearch(); // one Search group at a time
+    const ids = this.lights.addItems(items.map((it) => ({ ...it, search: q })));
+    this.searchGroup = { q, ids };
+    this._applyRelevance();
+    this.showNotice(`${ids.length} star${ids.length === 1 ? '' : 's'} about “${shortLabel(q)}” came in front of you.`, { seconds: 10 });
+    this.cards.get('answer')?.redraw();
+    return ids;
+  }
+
+  /** The Search group leaves the fog; sealed, grown or open stars stay. */
+  clearSearch() {
+    const g = this.searchGroup;
+    this.searchGroup = null;
+    if (!g?.ids?.length) return 0;
+    const keep = (id) => this.lights.sealed.has(id) || this.getItem(id)?.expanded || this.lights.openId === id;
+    const drop = g.ids.filter((id) => !keep(id));
+    for (const id of drop) this.closeCard(`light:${id}`);
+    this.lights.removeItems(drop);
+    for (const id of g.ids) if (keep(id)) delete this.lights.get(id)?.search;
+    this.cards.get('answer')?.redraw();
+    return drop.length;
   }
 
   findLight(text, { quiet = false, min = 0.3 } = {}) {
@@ -1519,6 +1674,15 @@ function importanceSeeds(app) {
 }
 
 /** 20-40 s until the next new star appears. */
+const FIRST_NODES = 5; // nodes shown when a star grows; the rest wait in groups
+
+const GROUPS = { NewsItem: ['news', 'News'], PublicFigure: ['people', 'People'], Place: ['places', 'Places'], Organisation: ['orgs', 'Organisations'], Claim: ['claims', 'Claims'], Source: ['claims', 'Claims'] };
+
+function groupOf(n) {
+  const [key, label] = GROUPS[n.type] || ['topics', 'Topics'];
+  return { key, label };
+}
+
 function nextStarDelay() {
   return 20000 + Math.random() * 20000;
 }
