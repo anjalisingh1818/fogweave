@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import asyncio
 import re
+import unicodedata
 
 from . import ontology
 from .http import SourceError
@@ -56,6 +57,11 @@ def _type_from_description(desc: str) -> str:
     return "Topic"
 
 
+def _fold(s: str) -> str:
+    """key() without accents: "Raúl Castro" and "Raul Castro" are the same title."""
+    return unicodedata.normalize("NFKD", key(s)).encode("ascii", "ignore").decode()
+
+
 def _mention(text: str, label: str) -> str | None:
     m = re.search(r"(?<![\w])" + re.escape(label) + r"(?![\w])", text, re.I)
     if not m:
@@ -71,12 +77,15 @@ class Explorer:
         self.http = engine.http
         self.router = engine.router
 
-    async def _wikidata(self, qid: str | None, label: str) -> tuple[str | None, dict]:
+    async def _wikidata(self, qid: str | None, label: str, ntype: str = "Topic") -> tuple[str | None, dict]:
         """(qid, entity json) — find the item by label if no qid (conservative)."""
         try:
             if not qid:
-                hit = await self.e.linker.link(label, "Topic") or await self.e.linker.link(label, "Organisation") or await self.e.linker.link(label, "Place")
-                qid = hit and hit["qid"]
+                for t in dict.fromkeys([ntype, "Topic", "Organisation", "Place"]):
+                    hit = await self.e.linker.link(label, t)
+                    if hit:
+                        qid = hit["qid"]
+                        break
             if not qid:
                 return None, {}
             data = await self.http.get(WD_API, params={"action": "wbgetentities", "ids": qid, "props": "labels|descriptions|claims|sitelinks", "sitefilter": "enwiki", "languages": "en", "format": "json"}, as_json=True, ttl=7 * 86400)
@@ -122,12 +131,14 @@ class Explorer:
             return {"type": "edge", "edge": e, "group": group}
 
         yield {"type": "status", "phase": "define", "text": f"Looking up {label}"}
-        qid, ent = await self._wikidata(node.get("qid"), label)
+        # a linked node's own id is its Wikidata item
+        known_qid = node.get("qid") or (nid[3:] if nid.startswith("wd:Q") else None)
+        qid, ent = await self._wikidata(known_qid, label, ntype)
         title = ent.get("sitelinks", {}).get("enwiki", {}).get("title") if ent else None
         if not title:
             try:
                 hits = await self.router.adapters["wikipedia"].search(label, limit=1)
-                title = hits[0].title if hits and key(hits[0].title) == key(label) else None
+                title = hits[0].title if hits and _fold(hits[0].title) == _fold(label) else None
             except Exception:  # noqa: BLE001
                 title = None
         if title and not qid:

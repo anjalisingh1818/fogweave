@@ -339,3 +339,11 @@ def test_impact_does_not_restate_reported_structure(monkeypatch):
     asyncio.run(go())
     assert len(edges) == 1
     assert edges[0]["from"] == "ev:mine" and edges[0]["to"].endswith("families of miners")
+
+
+def test_explore_matches_titles_without_accents():
+    from fogweave.explore import _fold
+
+    assert _fold("Raúl Castro") == _fold("Raul Castro")
+    assert _fold("Nariño Department") == _fold("Narino Department")
+    assert _fold("Cuba") != _fold("Cebu")
