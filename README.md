@@ -1,6 +1,6 @@
 # FogWeave
 
-A hands-first VR **news impact graph** set in a gray fog. News arrives as drifting lights. Touch one to see what it connects to, what it may affect, and how it may reach your own world. Every link is labelled by how well supported it is, and you seal only what you trust into a cited, exportable Library. (Plan: [docs/PLAN.md](docs/PLAN.md); V2 spec: [docs/FOGWEAVE_V2_DELTA.md](docs/FOGWEAVE_V2_DELTA.md).)
+A hands-first VR **news impact graph** set in a gray fog. News arrives as drifting lights. Touch one to see what it connects to, what it may affect, and how it may reach your own world. Every link is labelled by how well supported it is, and you seal only what you trust into a cited, exportable Library. (Plan: [docs/FOGWEAVE_V3_BEST_PROMPT.md](docs/FOGWEAVE_V3_BEST_PROMPT.md); older prompts in docs/old-prompts.)
 
 Built with [IWSDK](https://developers.meta.com/horizon/documentation/iwsdk/) (WebXR, three.js and ECS) for the Meta VR Start Developer Competition 2026. It is seated and works with hands only; voice is an optional extra.
 
