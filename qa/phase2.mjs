@@ -300,7 +300,7 @@ async function offlineRun() {
   try {
     // take-it-away test: the backend is unreachable
     await context.route('http://localhost:8787/**', (route) => route.abort());
-    await open(page);
+    await open(page, { query: '?debug&demo' });
     await enterXR(page);
     await helpers(page);
     const ev = (fn, a) => page.evaluate(fn, a);

@@ -8,7 +8,7 @@
  * never run under a button or the link (every drawn box is recorded on the card
  * and checked by qa/stage-a.mjs at three viewport sizes).
  *
- * Expand grows the item into the web (live, or a recorded run offline).
+ * Show related grows the item into the web (live, or a recorded run in the Demo scene).
  * Ask answers from the web with citations (live; recorded answers offline).
  */
 import { UI } from '../render/card.js';
@@ -109,7 +109,7 @@ export function readerDraw(app, id) {
 
     // ---- status note (one line)
     const can = app.canExpand(id);
-    const note = it.expanded === 'running' ? 'Growing into the web…' : it.expanded ? 'In the web: touch its node for links and effects.' : can ? 'Expand shows what it connects to and may affect.' : 'Expand needs the live engine (no recorded run for this light).';
+    const note = it.expanded === 'running' ? 'Finding what it relates to…' : it.expanded ? 'Related items are around it: touch one to see how it relates.' : can ? 'Show related: what it connects to, older news included.' : 'Showing related items needs the live engine (no recorded run for this star).';
     ui.text(note, pad, noteY, { size: 22, color: UI.dim, maxWidth: w - pad * 2 });
 
     // ---- small row
@@ -119,7 +119,6 @@ export function readerDraw(app, id) {
     }
     const mates = app.storyMates(id).length;
     if (details && mates) small.push({ id: 'story', label: `Story +${mates}`, on: () => app.openTimeline(id) });
-    if (it.expanded === true) small.push({ id: 'touch', label: 'Touches me?', on: () => app.touchesMe(id) });
     small.push({ id: 'more', label: 'More like this', on: () => app.likeLight(id, true) });
     small.push({ id: 'less', label: 'Less like this', on: () => app.likeLight(id, false) });
     const gap = 10;
@@ -131,8 +130,8 @@ export function readerDraw(app, id) {
     const x = (i) => pad + i * (mw + gap);
     if (sealed) ui.button('unseal', 'Unseal', x(0), byMain, mw, rowH, () => app.unsealLight(id), { icon: '◇', size: 26 });
     else ui.button('seal', 'Seal', x(0), byMain, mw, rowH, () => app.sealLight(id), { primary: true, icon: '◆', size: 26 });
-    const expLabel = it.expanded === 'running' ? 'Growing' : it.expanded ? 'In web' : 'Expand';
-    ui.button('expand', expLabel, x(1), byMain, mw, rowH, () => app.expandLight(id), { disabled: !can || !!it.expanded || app.researching, size: 26, primary: can && !it.expanded });
+    const expLabel = it.expanded === 'running' ? 'Finding…' : it.expanded ? 'Related ✓' : 'Show related';
+    ui.button('expand', expLabel, x(1), byMain, mw, rowH, () => app.expandLight(id), { disabled: !can || !!it.expanded || app.researching, size: 22, primary: can && !it.expanded });
     ui.button('ask', 'Ask', x(2), byMain, mw, rowH, () => app.openAsk(id), { size: 26 });
     ui.button('details', details ? 'Hide ▴' : 'Details ▾', x(3), byMain, mw, rowH, () => app.toggleReaderDetails(id), { size: 24 });
     ui.button('close', 'Close', x(4), byMain, mw, rowH, () => app.closeCard(`light:${id}`), { icon: '✕', size: 26 });

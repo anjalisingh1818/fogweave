@@ -18,7 +18,8 @@ import {
 import { particleTexture, fogSheetTexture } from './textures.js';
 import { settings } from '../config.js';
 
-export const FOG_COLOR = 0x4a4e55;
+// mostly gray with a slight dark blue tint (V3 §2.1)
+export const FOG_COLOR = 0x343b47;
 
 export class Atmosphere {
   constructor(world) {
@@ -47,12 +48,12 @@ export class Atmosphere {
       this.seed[i] = rnd() * 100;
     }
     this.base = pos.slice();
-    // purely decorative motes: faint white, red and blue, tiny, no meaning
+    // tiny dust motes, pale gray and pale blue, no meaning
     // (evidence colours live only on node rings and links; see DECISIONS)
     const col = new Float32Array(n * 3);
-    const tints = [[0.86, 0.88, 0.92], [0.92, 0.7, 0.7], [0.68, 0.76, 0.95]];
+    const tints = [[0.82, 0.85, 0.9], [0.66, 0.74, 0.88]];
     for (let i = 0; i < n; i++) {
-      const t = tints[i % 7 === 0 ? 1 : i % 5 === 0 ? 2 : 0];
+      const t = tints[i % 4 === 0 ? 1 : 0];
       col.set(t, i * 3);
     }
     const geo = new BufferGeometry();
@@ -79,7 +80,7 @@ export class Atmosphere {
       transparent: true,
       opacity: 0.55,
       depthWrite: false,
-      color: 0xc6cad2,
+      color: 0xa9b3c4,
       fog: false,
     });
     for (let i = 0; i < 6; i++) {

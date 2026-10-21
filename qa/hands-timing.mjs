@@ -10,7 +10,7 @@ import { launch, open, enterXR } from './lib.mjs';
 
 const { browser, context, page } = await launch();
 await context.route('http://localhost:8787/**', (r) => r.abort());
-await open(page);
+await open(page, { query: '?debug&demo' }); // the Demo scene (V3: offline is a separate scene)
 await enterXR(page);
 await page.waitForFunction(() => window.__fw.app.mode !== 'starting', null, { timeout: 60000 });
 await page.evaluate(() => {

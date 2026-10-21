@@ -15,7 +15,7 @@ import { Atmosphere } from './render/atmosphere.js';
 import { Card } from './render/card.js';
 import { CardManager } from './ui/card-manager.js';
 import { nodeCardDraw, locketDraw, coinDraw, messageDraw, pathDraw } from './ui/node-card.js';
-import { helpDraw, libraryDraw } from './ui/help.js';
+import { menuDraw, guideDraw, aboutDraw, libraryDraw } from './ui/help.js';
 import { contextDraw } from './ui/context-card.js';
 import { Keypad } from './ui/keypad.js';
 import { Onboarding } from './ui/onboarding.js';
@@ -27,9 +27,10 @@ import { ResearchClient } from './research/client.js';
 import { ContextStore, SAMPLE_PERSONA, CONTEXT_KINDS } from './context.js';
 import { InterestStore } from './interests.js';
 import { isMuted, sampleFeed, seedFrom } from './feed.js';
+import { checkRequest } from './safety.js';
 import { interestsDraw } from './ui/interests-card.js';
 import { DEBUG, settings, loadSettings, setQuality, saveSettings } from './config.js';
-import { answerDraw, ASK_SUGGESTIONS, notesDraw, lightsPanelDraw, settingsDraw, timelineDraw, briefingDraw, exportDraw, insightsDraw } from './ui/panels.js';
+import { answerDraw, ASK_SUGGESTIONS, settingsDraw, timelineDraw, exportDraw, insightsDraw } from './ui/panels.js';
 import { insights } from './insights.js';
 import { Ambient, speech } from './audio.js';
 import { sealedView, buildJsonLd, buildJsonl, buildMarkdown } from './export/pack.js';
@@ -39,7 +40,6 @@ import { QualityGovernor } from './quality.js';
 const LIBRARY_KEY = 'fogweave.library.v1';
 const NOTES_KEY = 'fogweave.notes.v1';
 const ANSWERS_KEY = 'fogweave.answers.v1';
-const BRIEFING_KEY = 'fogweave.briefing.v1';
 const SEALED_LIGHTS_KEY = 'fogweave.sealedLights.v1';
 const SNAPSHOT = 'demo/snapshot/index.json';
 
@@ -96,7 +96,6 @@ export class App {
     this.sealedAnswers = readJSON(ANSWERS_KEY, []);
     this.answers = []; // session memory of answers
     this.insightList = [];
-    this.briefing = null;
     this.ambient = new Ambient();
     this._gestureSeen = false;
     this._buildStatusCard();
@@ -108,16 +107,23 @@ export class App {
     this.ready = this._start();
   }
 
-  // ---------- startup: live or snapshot ----------
+  // ---------- startup: live by default; the Demo scene is a separate choice ----------
 
   async _start() {
-    const [health, snap] = await Promise.all([this.client.health(), this._loadSnapshot()]);
+    const wantDemo = typeof location !== 'undefined' && new URLSearchParams(location.search).has('demo');
+    const [health, snap] = await Promise.all([wantDemo ? null : this.client.health(), this._loadSnapshot()]);
     this.snapshot = snap;
-    let pool = null;
-    if (health?.ok) {
-      this.setStatus('Gathering the latest news…');
-      pool = await this.client.pool(this.interests.forServer());
-    }
+    if (wantDemo) return this.enterDemo();
+    await this.enterLive(health);
+  }
+
+  /** The live scene: today's news from the engine. Never falls back to old data silently. */
+  async enterLive(health = null) {
+    this._clearFog();
+    this.mode = 'starting';
+    this.setStatus('Gathering the latest news…');
+    health ??= await this.client.health();
+    const pool = health?.ok ? await this.client.pool(this.interests.forServer()) : null;
     if (pool?.items?.length) {
       this.mode = 'live';
       const ok = Object.values(pool.sources || {}).filter((s) => s.ok).length;
@@ -126,27 +132,63 @@ export class App {
       this.notes = pool.notes || [];
       this.pool = pool.items.map((it) => ({ ...it, live: true }));
       this._poolCache = new Map([[JSON.stringify(this.interests.forServer()), this.pool]]);
-    } else if (snap) {
-      this.mode = 'offline';
-      this.lightsMeta = { kind: snap.provenance?.kind, generatedAt: snap.generatedAt };
-      this.pool = snap.pool || snap.lights || [];
     } else {
-      this.mode = 'offline';
+      // say so plainly and offer the Demo scene; old data is never shown as live
+      this.mode = 'unavailable';
       this.lightsMeta = { kind: 'none' };
+      this.pool = [];
     }
+    this._afterSceneStart();
+  }
+
+  /** The Demo / Offline scene: the bundled dated snapshot of real pipeline runs. */
+  enterDemo() {
+    this._clearFog();
+    if (!this.snapshot) {
+      this.mode = 'unavailable';
+      this.lightsMeta = { kind: 'none' };
+      this.pool = [];
+      this.setStatus('The demo scene is missing from this build.');
+      return;
+    }
+    this.mode = 'offline';
+    this.lightsMeta = { kind: this.snapshot.provenance?.kind, generatedAt: this.snapshot.generatedAt };
+    this.notes = [];
+    this.pool = this.snapshot.pool || this.snapshot.lights || [];
+    this._poolCache = new Map();
+    this._afterSceneStart();
+  }
+
+  _afterSceneStart() {
     this.drawLights();
     this._shownKey = JSON.stringify(this.interests.forServer());
     this.setStatus('');
-    this._restoreWorkspace();
-    if (Onboarding.needed()) this.startOnboarding();
-    else this._offerBriefing();
+    this._renderStatus();
+    if (!this._startedOnce) {
+      this._startedOnce = true;
+      this._restoreWorkspace();
+      if (Onboarding.needed()) this.startOnboarding();
+    }
+    this.cards.get('help')?.redraw();
+  }
+
+  /** Switching scenes: the fog empties (the sealed Library stays). */
+  _clearFog() {
+    this.expanding?.controller?.abort?.();
+    this.cards.closeAll({ keepPinned: true });
+    const fog = [...this.store.nodes.values()].filter((n) => !n.sealed && n.type !== 'ContextNode').map((n) => n.id);
+    if (fog.length) removeNodesFromStore(this.store, fog);
+    this.trail = [];
+    this.lights.setItems([]);
+    this._shownLights = new Map();
+    this.extraItems = new Map();
   }
 
   // ---------- workspace panels (pinned cards come back where you left them) ----------
 
   _restoreWorkspace() {
     const layout = this.cards.savedLayout();
-    const open = { library: () => this.openLibrary(layout.library), notes: () => this.openNotes(layout.notes), lights: () => this.openLightsPanel(layout.lights) };
+    const open = { library: () => this.openLibrary(layout.library) }; // the Library is the one panel that is kept
     for (const key of Object.keys(layout)) {
       if (!open[key]) continue;
       open[key]();
@@ -157,16 +199,6 @@ export class App {
 
   get notesList() {
     return this.userNotes;
-  }
-
-  openNotes(slot = 3) {
-    this.closeCard('help');
-    this.cards.show('notes', { width: 0.44, height: 0.4, draw: notesDraw(this), slot });
-  }
-
-  openLightsPanel(slot = 4) {
-    this.closeCard('help');
-    this.cards.show('lights', { width: 0.46, height: 0.42, draw: lightsPanelDraw(this), slot });
   }
 
   openSettings() {
@@ -203,13 +235,13 @@ export class App {
     if (!t) return;
     this.userNotes.push({ text: t, at: new Date().toISOString() });
     writeJSON(NOTES_KEY, this.userNotes);
-    this.cards.get('notes')?.redraw();
+    this.cards.get('library')?.redraw();
   }
 
   removeNote(i) {
     this.userNotes.splice(i, 1);
     writeJSON(NOTES_KEY, this.userNotes);
-    this.cards.get('notes')?.redraw();
+    this.cards.get('library')?.redraw();
   }
 
   // ---------- Ask (GraphRAG on the server; reliability answered locally) ----------
@@ -350,94 +382,6 @@ export class App {
     this.cards.show('timeline', { width: 0.46, height: 0.42, draw: timelineDraw(this, id), slot: 2 });
   }
 
-  /** Grounded effects for a news item (never speculative): for the briefing. */
-  impactThread(newsId) {
-    const about = [...this.store.edges.values()].filter((e) => e.from === newsId && e.type === 'about').map((e) => e.to);
-    const from = new Set([newsId, ...about]);
-    const out = [];
-    for (const e of this.store.edges.values()) {
-      if (!from.has(e.from) || e.label === 'speculative' || !['affects', 'depends_on'].includes(e.type)) continue;
-      out.push({ label: e.label, text: `${this.store.nodes.get(e.from)?.label} → ${e.type.replace('_', ' ')} → ${this.store.nodes.get(e.to)?.label}` });
-    }
-    return out.sort((a, b) => (a.label === 'reported' ? -1 : 1) - (b.label === 'reported' ? -1 : 1));
-  }
-
-  // ---------- daily briefing (about 5 minutes) ----------
-
-  _offerBriefing() {
-    const today = new Date().toISOString().slice(0, 10);
-    if (readJSON(BRIEFING_KEY, {}).offered === today || this.lights.items.length < 3) return;
-    writeJSON(BRIEFING_KEY, { ...readJSON(BRIEFING_KEY, {}), offered: today });
-    this.cards.show('briefing-offer', {
-      width: 0.42,
-      height: 0.24,
-      slot: 1,
-      draw: messageDraw(this, 'briefing-offer', 'Morning briefing?', 'Five minutes: a few lights picked for you, one from outside your bubble, and what they may affect.', [
-        { id: 'start', label: 'Start', primary: true, onPress: () => this.startBriefing() },
-      ]),
-    });
-  }
-
-  pickBriefing(n = 4, seedDate = new Date().toISOString().slice(0, 10)) {
-    const items = [...this.lights.items].filter((x) => x.kind !== 'archive');
-    const ranked = items.sort((a, b) => (b.relevance ?? 0) - (a.relevance ?? 0));
-    const picks = [];
-    const stories = new Set();
-    for (const it of ranked) {
-      if (picks.length >= n) break;
-      if (stories.has(it.story)) continue; // one item per story
-      picks.push(it);
-      stories.add(it.story);
-    }
-    // one from outside the bubble: an ordinary seeded pick among the least relevant other stories
-    const rest = ranked.filter((x) => !stories.has(x.story)).slice(-Math.max(3, Math.floor(ranked.length / 2)));
-    if (rest.length) {
-      let h = 0;
-      for (const ch of seedDate) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
-      picks.push({ ...rest[h % rest.length], outside: true });
-    }
-    return picks;
-  }
-
-  startBriefing() {
-    this.closeCard('briefing-offer');
-    this.closeCard('help');
-    const items = this.pickBriefing();
-    if (!items.length) return null;
-    this.briefing = { items, i: 0, sealedCount: 0, endsAt: Date.now() + 5 * 60000, done: false };
-    this._showBriefingStep();
-    return this.briefing;
-  }
-
-  _showBriefingStep() {
-    const b = this.briefing;
-    if (!b) return;
-    if (!b.done) this.openLight(b.items[b.i].id);
-    this.cards.show('briefing', { width: 0.46, height: 0.36, draw: briefingDraw(this), slot: 1 });
-  }
-
-  briefingKeep() {
-    const b = this.briefing;
-    if (!b) return;
-    this.sealLight(b.items[b.i].id);
-    b.sealedCount++;
-    this.cards.get('briefing')?.redraw();
-  }
-
-  briefingNext() {
-    const b = this.briefing;
-    if (!b) return;
-    if (b.i + 1 < b.items.length && Date.now() < b.endsAt) b.i++;
-    else b.done = true;
-    this._showBriefingStep();
-  }
-
-  endBriefing() {
-    this.briefing = null;
-    this.closeCard('briefing');
-    writeJSON(BRIEFING_KEY, { ...readJSON(BRIEFING_KEY, {}), done: new Date().toISOString().slice(0, 10) });
-  }
-
   // ---------- Evidence Pack export ----------
 
   async exportPack() {
@@ -514,8 +458,7 @@ export class App {
     const picks = sampleFeed(this.pool, this.interests, { n: 16 - kept.length, seed: this.feedSeed, exclude: new Set(kept.map((k) => k.id)) });
     this.lights.setItems([...kept, ...picks]);
     this._applyRelevance();
-    this._refreshAt = performance.now() + 75000;
-    this.cards.get('lights')?.redraw();
+    this._refreshAt = performance.now() + nextStarDelay();
     return picks;
   }
 
@@ -579,8 +522,7 @@ export class App {
     const fill = sampleFeed(this.pool, this.interests, { n: 16 - items.length, seed: this.feedSeed, exclude: new Set(items.map((k) => k.id)) });
     this.lights.setItems([...items, ...fill]);
     this._applyRelevance();
-    this._refreshAt = performance.now() + 75000;
-    this.cards.get('lights')?.redraw();
+    this._refreshAt = performance.now() + nextStarDelay();
   }
 
   async likeLight(id, more = true) {
@@ -620,13 +562,21 @@ export class App {
     this.cards.show('interests', { width: 0.5, height: 0.5, draw: interestsDraw(this), slot: 1 });
   }
 
-  /** Slowly swap one idle light for a fresh pick (never one you look at). */
+  /**
+   * A new star every 20-40 s: it takes the place of the oldest idle one, never
+   * one you look at, have open, sealed, grew, or are reaching toward.
+   */
   _slowRefresh(now) {
     if (!this._refreshAt || now < this._refreshAt || !this.pool.length) return;
-    this._refreshAt = now + 75000;
+    this._refreshAt = now + nextStarDelay();
     const busy = this.lights.busyIds();
     const shown = new Set(this.lights.items.map((x) => x.id));
-    const victim = this.lights.items.find((x) => !busy.has(x.id) && !this.lights.sealed.has(x.id) && !x.expanded);
+    const reaching = (x) => {
+      const p = this.lights.worldPositionOf(x.id, _rp);
+      return !!p && (this.lights.hands || []).some((h) => h.distanceTo(p) < 0.4);
+    };
+    const idle = this.lights.items.filter((x) => !busy.has(x.id) && !this.lights.sealed.has(x.id) && !x.expanded && !reaching(x));
+    const victim = idle.sort((a, b) => this.lights.ageDays(b) - this.lights.ageDays(a))[0];
     if (!victim) return;
     this.feedSeed = (this.feedSeed + 7919) >>> 0;
     const [fresh] = sampleFeed(this.pool, this.interests, { n: 1, seed: this.feedSeed, exclude: shown });
@@ -709,9 +659,10 @@ export class App {
   modeLine() {
     const m = this.lightsMeta || {};
     if (this.mode === 'live') return `Live · ${m.sources || ''}`;
-    if (m.kind === 'pipeline') return `Offline · snapshot of ${String(m.generatedAt || '').slice(0, 10)}`;
-    if (m.kind === 'fixture') return 'Offline · test fixture';
-    return this.mode === 'starting' ? 'Starting…' : 'Offline';
+    if (this.mode === 'offline' && m.kind === 'pipeline') return `Demo scene · snapshot of ${String(m.generatedAt || '').slice(0, 10)}`;
+    if (m.kind === 'fixture') return 'Demo scene · test fixture';
+    if (this.mode === 'unavailable') return 'Live news is unreachable right now.';
+    return this.mode === 'starting' ? 'Starting…' : 'Demo scene';
   }
 
   _renderStatus() {
@@ -730,8 +681,9 @@ export class App {
       }
       else {
         if (this.trail.length >= 2) ui.button('back', '‹ Back', w - pad - 470, 14, 200, h - 28, () => this.back(), { size: 24 });
+        if (this.mode === 'unavailable') ui.button('demo', 'Open demo', w - pad - 220, 14, 220, h - 28, () => this.enterDemo(), { size: 24, primary: true });
         // a short notice with Undo takes the right-hand slot for a few seconds
-        if (notice?.undo) ui.button('undo', 'Undo', w - pad - 220, 14, 220, h - 28, () => notice.undo(), { size: 24, primary: true });
+        else if (notice?.undo) ui.button('undo', 'Undo', w - pad - 220, 14, 220, h - 28, () => notice.undo(), { size: 24, primary: true });
         else if (this.insightList.length) ui.button('insights', `Noticed ${this.insightList.length}`, w - pad - 220, 14, 220, h - 28, () => this.openInsights(), { size: 24 });
       }
     });
@@ -743,18 +695,36 @@ export class App {
     // ray only: a poke target this close to its own hand's fingertip would always be hovered
     this.helpButton = new Card(this.world, { width: 0.06, height: 0.06, name: 'help-button' });
     this.helpButton.setContent((ctx, ui, w, h) => {
-      ui.button('help', '?', 6, 6, w - 12, h - 12, () => this.toggleHelp(), { size: 80 });
+      ui.button('help', 'Menu', 6, 6, w - 12, h - 12, () => this.toggleHelp(), { size: 34 });
     });
   }
 
   toggleHelp() {
     if (this.cards.get('help')) this.closeCard('help');
-    else this.cards.show('help', { width: 0.44, height: 0.52, draw: helpDraw(this), slot: 1 });
+    else this.cards.show('help', { width: 0.46, height: 0.32, draw: menuDraw(this), slot: 1 });
+  }
+
+  /** Help: how to read the fog (colours, rings, link styles, gestures). */
+  openGuide() {
+    this.closeCard('help');
+    this.cards.show('guide', { width: 0.44, height: 0.52, draw: guideDraw(this), slot: 1 });
+  }
+
+  openAbout() {
+    this.closeCard('help');
+    this.cards.show('about', { width: 0.44, height: 0.42, draw: aboutDraw(this), slot: 1 });
+  }
+
+  /** Calm: gentler motion, fewer motes, softer glow. */
+  toggleCalm() {
+    settings.comfort.gentle = !settings.comfort.gentle;
+    saveSettings();
+    this.cards.get('help')?.redraw();
   }
 
   openLibrary(slot = 1) {
     this.closeCard('help');
-    this.cards.show('library', { width: 0.44, height: 0.44, draw: libraryDraw(this), slot });
+    this.cards.show('library', { width: 0.44, height: 0.48, draw: libraryDraw(this), slot });
   }
 
   openContext() {
@@ -1267,8 +1237,10 @@ export class App {
     } else if (mode === 'interest') {
       this.keypad.open({ prompt: 'Add a topic you are interested in', suggestions: ['electric vehicles', 'quantum computing', 'public health', 'renewable energy'], mic });
     } else {
-      const sugg = [...this.lights.items].sort((a, b) => (b.relevance ?? 0) - (a.relevance ?? 0)).slice(0, 4).map((it) => shortHeadline(it.headline));
-      this.keypad.open({ prompt: 'Find a light', suggestions: sugg, mic });
+      // Ask the fog: any topic, any past news (also finds a star drifting here)
+      this.keypadMode = 'fog';
+      const sugg = [...this.lights.items].sort((a, b) => (b.relevance ?? 0) - (a.relevance ?? 0)).slice(0, 2).map((it) => shortHeadline(it.headline));
+      this.keypad.open({ prompt: 'Ask the fog: any topic or past news', suggestions: [...sugg, 'What happened this week in science?', 'What changed in climate policy this year?'], mic });
     }
   }
 
@@ -1293,10 +1265,29 @@ export class App {
       if (this.interests.addTopic(text, 1.5)) await this.interestsChanged();
       return null;
     }
-    return this.findLight(text);
+    return this.askFog(text);
   }
 
-  findLight(text) {
+  /**
+   * Ask the fog (touch empty fog): a star drifting here that matches opens;
+   * anything else gets a cited answer from fresh search. Refusals first.
+   */
+  async askFog(text) {
+    const q = String(text || '').trim();
+    if (!q) return null;
+    const refusal = checkRequest(q);
+    if (refusal) {
+      const a = { question: q, refused: true, answerable: false, text: refusal, sentences: [], citations: {} };
+      this.lastAnswer = a;
+      this.cards.show('answer', { width: 0.48, height: 0.3, draw: answerDraw(this, a), slot: 2 });
+      return a;
+    }
+    const hit = this.findLight(q, { quiet: true, min: 0.55 });
+    if (hit) return hit;
+    return this.ask(q, null);
+  }
+
+  findLight(text, { quiet = false, min = 0.3 } = {}) {
     const needle = text.toLowerCase();
     let best = null;
     let bestScore = 0;
@@ -1308,10 +1299,11 @@ export class App {
         best = it;
       }
     }
-    if (best && bestScore >= 0.3) {
+    if (best && bestScore >= min) {
       this.openLight(best.id);
       return best.id;
     }
+    if (quiet) return null;
     this.cards.show('find', { width: 0.42, height: 0.24, draw: messageDraw(this, 'find', 'No light matches', `Nothing drifting here matches “${text}”. Asking about any topic comes with Ask.`) });
     return null;
   }
@@ -1452,6 +1444,13 @@ function importanceSeeds(app) {
   const pr = pagerank(app.store.view('all'), { seeds });
   return new Map([...pr].filter(([id]) => app.store.nodes.get(id)?.type === 'NewsItem'));
 }
+
+/** 20-40 s until the next new star appears. */
+function nextStarDelay() {
+  return 20000 + Math.random() * 20000;
+}
+
+const _rp = new Vector3();
 
 function shortLabel(s, n = 22) {
   s = String(s || '');

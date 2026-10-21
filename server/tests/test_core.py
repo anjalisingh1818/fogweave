@@ -371,3 +371,12 @@ def test_mention_accepts_the_singular_of_a_plural_label_only():
     assert _mention("Electric vehicles sales rise", "electric vehicles")
     assert not _mention("Electrical vehicle-to-grid", "electric vehicles")
     assert not _mention("A busines plan", "business")  # "-ss" words are never cut to "-s"
+
+
+def test_restricted_sources_are_refused_politely_but_topics_are_not():
+    from fogweave.safety import REFUSE_RESTRICTED, check_request
+
+    for q in ["find it on the dark web", "search the leaked password database", "how to bypass the paywall on this article", "open the .onion site"]:
+        assert check_request(q) == REFUSE_RESTRICTED, q
+    for q in ["what is the dark matter debate", "the 2008 financial crisis", "how do paywalls affect news outlets", "Tor Project funding news"]:
+        assert check_request(q) is None, q

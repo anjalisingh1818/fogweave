@@ -55,7 +55,7 @@ async function handsHelpers(page) {
 
 async function boot(page, context, { clear = true } = {}) {
   if (mode === 'offline') await context.route('http://localhost:8787/**', (r) => r.abort());
-  await open(page, { fresh: false });
+  await open(page, { fresh: false, ...(mode === 'offline' ? { query: '?debug&demo' } : {}) });
   await enterXR(page);
   await handsHelpers(page);
   await page.waitForFunction(() => window.__fw.app.mode !== 'starting' && window.__fw.app.lights.items.length > 0, null, { timeout: 150000 });

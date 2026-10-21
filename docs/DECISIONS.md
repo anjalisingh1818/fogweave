@@ -95,3 +95,14 @@ One line each: what was chosen, and why. Newest last.
 - **One growth at a time, but nothing is dropped:** touching a light or a node while something else grows queues it ("Opening X next…"), and it grows when the current one finishes. Before, the touch was silently ignored.
 - **Snapshot (F10):** re-recorded from the live pipeline on 2026-10-21. The pool carries 3 datasets and 8 archive items. 11 explores, including a neighbour of every explored node. 3 focus nodes (Abyei, Florida, South Sudan) have both older and recent related news.
 
+## V3 (FOGWEAVE_V3_BEST_PROMPT.md, V3-LITE), Stage A (2026-10-21)
+
+- **Scope:** V3-LITE overrides the rest of the prompt. Touches me?, the context graph, Listen and the Interests card already exist and work, so they stay (V3-LITE: "keep only if it already exists and works"), but Touches me? is no longer on the star card (V3-LITE card: Show related, More/Less like this, Seal; plus Ask and Details). Nothing new is built for them.
+- **Removed:** the daily briefing; the Notes and Lights panels and the multi-panel workspace. Notes now live in the Library, the one panel that can still be pinned and comes back. No System/Blueprint mode, QRNG or detective code existed.
+- **Live first, Demo on request:** the default scene is live. An unreachable engine is said plainly ("Live news is unreachable right now.") with **Open demo** on the status bar. The Demo scene (Menu, or `?demo`) loads the dated snapshot and is labelled "Demo scene · snapshot of (date)". Switching scenes empties the fog; the sealed Library stays.
+- **Menu** (the wrist button, renamed from "?"): Library, Interests, My context, Calm, Demo / Live scene, Help, About & limits, Settings. Fields filter is not built, because field halos are cut in V3-LITE.
+- **Ask the fog (F11):** pinching empty fog opens it again, as in the first version. A matching star opens; otherwise Ask answers with citations (GraphRAG plus fresh search). Results as stars in a Search group come in Stage B.
+- **Refusals in one shared list** (`shared/safety.v1.json`), read by both server and client: private people, harmful how-tos, and now restricted sources (dark web, .onion, leaked or hacked data, paywall/login/bot-check bypass). Tested on both sides, including topics that must not be refused ("Tor Project funding news", "how paywalls affect news outlets").
+- **Look:** fog `#343b47` (mostly gray, slight dark blue). Motes are pale gray and pale blue dust: no red, since red is an evidence colour. A new star appears every 20–40 s, replacing the oldest idle star, never one you look at, have open, sealed, grew, or are reaching toward (within 40 cm).
+- **Star card:** Expand is now **Show related**.
+

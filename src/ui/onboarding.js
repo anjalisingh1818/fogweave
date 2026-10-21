@@ -9,16 +9,16 @@ const STEPS = [
   {
     id: 'welcome',
     title: 'Welcome to FogWeave',
-    body: 'News drifts here as lights. Each link you will see says whether a source reported it, it was inferred, or it is only speculative.',
+    body: 'Today’s news drifts here as stars. Each link you will see says whether a source reported it, it was inferred, or it is only speculative.',
     wait: null,
   },
-  { id: 'light', title: 'Touch a light', body: 'Point at a drifting light and pinch. Its reader card shows the story, key claims and quotes.', wait: 'light-opened' },
-  { id: 'expand', title: 'Grow it into the web', body: 'Press Expand on the card. Watch who and what it involves, and what it may affect.', wait: 'expanded' },
-  { id: 'pinch-node', title: 'Open a node', body: 'Pinch a node in the web. Its card shows its links with quotes or reasoning.', wait: 'card-opened' },
+  { id: 'light', title: 'Touch a star', body: 'Point at a drifting star and pinch. Its card shows the story, its source and date.', wait: 'light-opened' },
+  { id: 'expand', title: 'Show related', body: 'Related items grow around it: who and what it involves, other and older news, and what it may affect.', wait: 'expanded' },
+  { id: 'pinch-node', title: 'Open a node', body: 'Pinch a node in the web. Its card shows how it relates, with quotes or reasoning.', wait: 'card-opened' },
   { id: 'seal', title: 'Keep what you trust', body: 'Press Seal. Sealed items turn solid and go to your Library.', wait: 'sealed' },
   { id: 'coin', title: 'The Coin', body: 'Tap the Coin at your lower right (or flip it near a node) to read its evidence.', wait: 'coin' },
   { id: 'locket', title: 'The Locket', body: 'Tap the Locket at your lower left (or swing it near a node) to see how relevant it is.', wait: 'locket' },
-  { id: 'your-turn', title: 'Make it yours', body: 'The "?" on your left wrist has My context: add a city, field or tools you use, then try "Touches me?".', wait: null, last: true },
+  { id: 'your-turn', title: 'Ask the fog', body: 'Pinch empty fog to ask about any topic or past news. The Menu on your left wrist has your Library, Interests and the Demo scene.', wait: null, last: true },
 ];
 
 const DONE_KEY = 'fogweave.onboarded.v1';

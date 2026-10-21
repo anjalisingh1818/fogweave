@@ -1,6 +1,6 @@
 /**
  * Phase 3 scripted-hands QA: Ask with citations, local reliability, kept
- * answers, notes + pinned workspace, lights panel, briefing, settings,
+ * answers, Library notes + pinned Library, settings,
  * insights, Evidence Pack export (real download, validated), audio/voice
  * availability, and the offline paths. SCRIPTED IWER hands, not a Quest.
  *
@@ -82,7 +82,7 @@ async function helpers(page) {
 }
 
 async function boot(page, { offline = false } = {}) {
-  await open(page);
+  await open(page, offline ? { query: '?debug&demo' } : {});
   await enterXR(page);
   await helpers(page);
   await page.waitForFunction(() => window.__fw.app.mode !== 'starting', null, { timeout: 120000 });
@@ -140,39 +140,30 @@ async function liveRun() {
       return { kept: n };
     });
 
-    await step(page, 'Notes: help → Notes → Add note by typing → Pin', async () => {
+    await step(page, 'Library notes: Menu → Library → Add note by typing → Pin', async () => {
       await ev(page, () => window.__fw.app.cards.closeAll());
       await ev(page, () => window.__qa.help());
-      await ev(page, () => window.__qa.press('help', 'notes'));
-      await ev(page, () => window.__qa.press('notes', 'add'));
+      await ev(page, () => window.__qa.press('help', 'library'));
+      await ev(page, () => window.__qa.press('library', 'note'));
       await ev(page, () => window.__qa.type('check port news'));
       await ev(page, () => window.__qa.press('keypad', 'go'));
-      await ev(page, () => window.__qa.press('notes', 'pin'));
+      await ev(page, () => window.__qa.press('library', 'pin'));
       const r = await ev(page, () => ({ notes: window.__fw.app.userNotes.map((n) => n.text), layout: JSON.parse(localStorage.getItem('fogweave.workspace.v1') || '{}') }));
-      if (!r.notes.includes('check port news') || !('notes' in r.layout)) throw new Error(JSON.stringify(r));
+      if (!r.notes.includes('check port news') || !('library' in r.layout)) throw new Error(JSON.stringify(r));
       return r;
     });
 
-    await step(page, 'pinned panel comes back after a reload', async () => {
+    await step(page, 'the pinned Library comes back after a reload', async () => {
       await page.reload();
       await page.waitForFunction(() => window.__fw?.app && window.IWER_DEVICE, null, { timeout: 30000 });
       await enterXR(page);
       await helpers(page);
       await page.waitForFunction(() => window.__fw.app.mode !== 'starting', null, { timeout: 120000 });
-      const r = await ev(page, () => ({ open: window.__qa.open(), pinned: window.__fw.app.cards.entry('notes')?.pinned }));
-      if (!r.open.includes('notes') || !r.pinned) throw new Error(JSON.stringify(r));
-      await ev(page, () => window.__qa.press('notes', 'move'));
-      return r;
-    });
-
-    await step(page, 'Lights panel: pinch a row opens its reader card', async () => {
+      const r = await ev(page, () => ({ open: window.__qa.open(), pinned: window.__fw.app.cards.entry('library')?.pinned }));
+      if (!r.open.includes('library') || !r.pinned) throw new Error(JSON.stringify(r));
+      await ev(page, () => window.__qa.press('library', 'pin')); // unpin for the next steps
       await ev(page, () => window.__fw.app.onboarding.finish());
-      await ev(page, () => window.__fw.app.openLightsPanel());
-      const row = await ev(page, () => window.__qa.cardOf('lights').buttonIds().find((b) => b.startsWith('open:')));
-      await ev(page, (b) => window.__qa.press('lights', b), row);
-      const open = await ev(page, () => window.__qa.open());
-      if (!open.some((k) => k.startsWith('light:'))) throw new Error(JSON.stringify(open));
-      return { open };
+      return r;
     });
 
     await step(page, 'Expand → insights appear as a gentle prompt; pinch one', async () => {
@@ -189,21 +180,6 @@ async function liveRun() {
       const open = await ev(page, () => window.__qa.open());
       await shot(page, 'p3-02-insights');
       return { insights: n, open };
-    });
-
-    await step(page, 'Daily briefing by pinch: keep one, step to the end', async () => {
-      await ev(page, () => window.__fw.app.cards.closeAll({ keepPinned: true }));
-      await ev(page, () => window.__qa.help());
-      await ev(page, () => window.__qa.press('help', 'briefing'));
-      const b0 = await ev(page, () => ({ n: window.__fw.app.briefing?.items.length, outside: window.__fw.app.briefing?.items.filter((x) => x.outside).length }));
-      if (!b0.n || b0.outside !== 1) throw new Error(JSON.stringify(b0));
-      await ev(page, () => window.__qa.press('briefing', 'seal'));
-      for (let i = 0; i < b0.n; i++) await ev(page, () => window.__qa.press('briefing', 'next'));
-      const r = await ev(page, () => ({ done: window.__fw.app.briefing?.done, kept: window.__fw.app.briefing?.sealedCount }));
-      if (!r.done || r.kept < 1) throw new Error(JSON.stringify(r));
-      await shot(page, 'p3-03-briefing');
-      await ev(page, () => window.__qa.press('briefing', 'close'));
-      return { ...b0, ...r };
     });
 
     await step(page, 'Settings by pinch: gentle motion on, persisted', async () => {

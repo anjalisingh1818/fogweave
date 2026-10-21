@@ -47,6 +47,10 @@
 - **Filings are off unless the owner sets a contact email** (the SEC requires one, and FogWeave never sends the user's own). Only U.S.-listed companies have EDGAR filings, matched by exact name.
 - **Datasets are matched by the node's name in the title or description.** A dataset that uses another word for the same thing is missed.
 
+## Demo scene
+
+- **The Demo scene is a dated snapshot** of real pipeline runs (2026-10-21), not live news, and it says so. Only the recorded stars can show related items, and only recorded nodes can open up. Ask the fog gives an honest "needs the live engine" there.
+
 ## Desktop (flat page)
 
 - **The flat page is a development and demo fallback, not the main experience.** It works with a mouse (click lights and nodes, cards at the screen edges), but the product is designed for hands in VR. At most two cards show at a time, and lights are squeezed into the window's view.
