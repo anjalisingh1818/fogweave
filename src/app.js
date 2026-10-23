@@ -813,6 +813,55 @@ export class App {
   }
 
   /** True while any of our interactive things is under a pointer. */
+  /** Flat page: a small "Ask about a topic" option at the click; pressing it opens Ask the fog. */
+  offerAsk(x, y) {
+    if (typeof document === 'undefined' || this.keypad.isOpen) return;
+    let b = this._askOption;
+    if (!b) {
+      b = this._askOption = document.createElement('button');
+      b.type = 'button';
+      b.textContent = 'Ask about a topic…';
+      b.style.cssText =
+        'position:fixed;z-index:20;transform:translate(-50%,-130%);padding:9px 18px;border-radius:20px;cursor:pointer;' +
+        'font:500 15px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#eef1f6;background:rgba(10,14,26,0.86);' +
+        'border:1px solid rgba(233,217,166,0.55);box-shadow:0 4px 18px rgba(0,0,0,0.35);transition:opacity .2s;opacity:0';
+      b.addEventListener('pointerdown', (e) => e.stopPropagation());
+      b.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.hideAskOption();
+        this.onEmptyPinch();
+      });
+      document.body.appendChild(b);
+    }
+    b.style.left = `${x}px`;
+    b.style.top = `${y}px`;
+    b.style.display = 'block';
+    requestAnimationFrame(() => (b.style.opacity = '1'));
+    clearTimeout(this._askOptionTimer);
+    this._askOptionTimer = setTimeout(() => this.hideAskOption(), 5000);
+  }
+
+  hideAskOption() {
+    clearTimeout(this._askOptionTimer);
+    if (this._askOption) this._askOption.style.display = 'none';
+  }
+
+  /** Flat page: is this screen point empty fog, well away from every star, node and card? */
+  isEmptyAt(cx, cy, canvas, radius = 70) {
+    if (this.keypad.isOpen || this.anythingHovered()) return false;
+    const cam = this.world.camera;
+    const r = canvas.getBoundingClientRect();
+    const near = (p) => {
+      if (!p) return false;
+      const v = p.project(cam);
+      if (v.z > 1) return false; // behind the camera
+      return Math.hypot(r.left + ((v.x + 1) / 2) * r.width - cx, r.top + ((1 - v.y) / 2) * r.height - cy) < radius;
+    };
+    for (const it of this.lights.items) if (near(this.lights.worldPositionOf(it.id, new Vector3()))) return false;
+    for (const id of this.view.visibleIds) if (near(this.view.worldPositionOf(id, new Vector3()))) return false;
+    return true;
+  }
+
   anythingHovered() {
     const entities = [this.view.hitEntity, this.lights.hitEntity, this.statusCard.entity, this.helpButton.entity, ...this.props.items.map((p) => p.entity)];
     for (const e of this.cards.open) entities.push(e.card.entity);
