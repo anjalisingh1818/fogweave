@@ -35,13 +35,15 @@ export class FogSystem extends createSystem({}) {
     if (canvas) {
       let down = null;
       const onDown = (e) => {
-        down = { x: e.clientX, y: e.clientY, t: performance.now() };
+        // a press that starts on a card, star or node is theirs, even if the card
+        // is gone a moment later (Close)
+        down = { x: e.clientX, y: e.clientY, t: performance.now(), onSomething: this.app.anythingHovered() };
         this.app.hideAskOption();
       };
       const onUp = (e) => {
         const d = down;
         down = null;
-        if (!d || this.world.session || e.button !== 0) return;
+        if (!d || d.onSomething || this.world.session || e.button !== 0) return;
         if (Math.hypot(e.clientX - d.x, e.clientY - d.y) > 6 || performance.now() - d.t > 600) return; // a drag, not a click
         const { clientX: x, clientY: y } = e;
         // like a pinch: give a card, star or node the first chance to claim it
