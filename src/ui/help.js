@@ -33,7 +33,7 @@ export function menuDraw(app) {
       ui.button(id, label, pad + (i % cols) * (bw + 18), top + Math.floor(i / cols) * (bh + 18), bw, bh, on, { size: 27, primary: !!primary });
     });
     const y = top + 3 * (bh + 18) + 40;
-    ui.para(demo ? 'Demo scene: a dated snapshot of real runs. Nothing here is live.' : 'Pinch empty fog to ask about any topic or past news.', pad, y, w - pad * 2, { size: 23, color: UI.dim, maxLines: 2 });
+    ui.para(demo ? 'Demo scene: a dated snapshot of real runs. Nothing here is live.' : 'Pinch (or click) empty fog to ask about any topic or past news.', pad, y, w - pad * 2, { size: 23, color: UI.dim, maxLines: 2 });
   };
 }
 
@@ -70,7 +70,7 @@ export function guideDraw(app) {
     const tips = [
       'Touch a star: its card · Show related: the web around it',
       'Touch a node: how it relates, and what it is',
-      'Pinch empty fog: ask about any topic or past news',
+      'Pinch (or click) empty fog: ask about any topic or past news',
       'Seal: keep it in your Library · Flick a card away',
       'Coin: evidence · Locket: relevance to you',
     ];

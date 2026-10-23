@@ -17,6 +17,18 @@ export class Keypad {
     this.prompt = 'Name a topic';
     this.suggestions = [];
     this.card = null;
+    // flat page: the computer keyboard types into the open keypad too
+    if (typeof window !== 'undefined') window.addEventListener('keydown', (e) => this._onKey(e));
+  }
+
+  _onKey(e) {
+    if (!this.card || this.world.session || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key === 'Enter') this.submit();
+    else if (e.key === 'Escape') this.close();
+    else if (e.key === 'Backspace') this.backspace();
+    else if (e.key.length === 1 && /[\p{L}\p{N} .,'?!-]/u.test(e.key)) this.type(e.key);
+    else return;
+    e.preventDefault();
   }
 
   get isOpen() {

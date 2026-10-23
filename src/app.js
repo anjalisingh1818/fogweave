@@ -813,6 +813,22 @@ export class App {
   }
 
   /** True while any of our interactive things is under a pointer. */
+  /** Flat page: is this screen point empty fog, well away from every star, node and card? */
+  isEmptyAt(cx, cy, canvas, radius = 70) {
+    if (this.keypad.isOpen || this.anythingHovered()) return false;
+    const cam = this.world.camera;
+    const r = canvas.getBoundingClientRect();
+    const near = (p) => {
+      if (!p) return false;
+      const v = p.project(cam);
+      if (v.z > 1) return false; // behind the camera
+      return Math.hypot(r.left + ((v.x + 1) / 2) * r.width - cx, r.top + ((1 - v.y) / 2) * r.height - cy) < radius;
+    };
+    for (const it of this.lights.items) if (near(this.lights.worldPositionOf(it.id, new Vector3()))) return false;
+    for (const id of this.view.visibleIds) if (near(this.view.worldPositionOf(id, new Vector3()))) return false;
+    return true;
+  }
+
   anythingHovered() {
     const entities = [this.view.hitEntity, this.lights.hitEntity, this.statusCard.entity, this.helpButton.entity, ...this.props.items.map((p) => p.entity)];
     for (const e of this.cards.open) entities.push(e.card.entity);
