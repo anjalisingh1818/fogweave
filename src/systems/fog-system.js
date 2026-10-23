@@ -28,13 +28,16 @@ export class FogSystem extends createSystem({}) {
     this.xrManager.addEventListener('sessionstart', onStart);
     this.cleanupFuncs.push(() => this.xrManager.removeEventListener('sessionstart', onStart));
 
-    // flat page (mouse): a click on empty fog asks the fog, like a pinch in VR.
-    // Only well away from every star, node and card: a near miss on a drifting
-    // star does nothing (a keypad on every miss was a surprise; live test, 21 Oct).
+    // flat page (mouse): a click on the fog offers a small "Ask about a topic"
+    // option where you clicked; pressing it opens Ask the fog (in VR a pinch on
+    // the fog opens it). Not on a star, node or card: those open as before.
     const canvas = this.world.renderer?.domElement;
     if (canvas) {
       let down = null;
-      const onDown = (e) => (down = { x: e.clientX, y: e.clientY, t: performance.now() });
+      const onDown = (e) => {
+        down = { x: e.clientX, y: e.clientY, t: performance.now() };
+        this.app.hideAskOption();
+      };
       const onUp = (e) => {
         const d = down;
         down = null;
@@ -43,7 +46,7 @@ export class FogSystem extends createSystem({}) {
         const { clientX: x, clientY: y } = e;
         // like a pinch: give a card, star or node the first chance to claim it
         setTimeout(() => {
-          if (this.app.isEmptyAt(x, y, canvas)) this.app.onEmptyPinch();
+          if (this.app.isEmptyAt(x, y, canvas)) this.app.offerAsk(x, y);
         }, settings.gestures.spawnDeferMs);
       };
       canvas.addEventListener('pointerdown', onDown);

@@ -1,6 +1,7 @@
 // Ask the fog on the flat page (mouse + keyboard): a click on the fog (not on a
-// star) opens Ask the fog; the computer keyboard types into it; Enter brings a
-// cited answer and news as stars. A click on a star still opens the star.
+// star) shows a small "Ask about a topic" option; pressing it opens Ask the fog;
+// the computer keyboard types into it; Enter brings a cited answer and news as
+// stars. A click on a star still opens the star.
 //   node qa/v3-ask-click.mjs
 import { writeFileSync } from 'node:fs';
 import { launch, open, shot, errorsOf, OUT } from './lib.mjs';
@@ -53,14 +54,32 @@ try {
     return r;
   });
 
-  await step('a click on the fog opens Ask the fog', async () => {
+  const option = () => ev(() => {
+    const b = window.__fw.app._askOption;
+    if (!b || b.style.display === 'none') return null;
+    const r = b.getBoundingClientRect();
+    return { text: b.textContent, x: r.left + r.width / 2, y: r.top + r.height / 2 };
+  });
+
+  await step('a click on the fog shows a small "Ask about a topic" option', async () => {
     if (!pts.fog) throw new Error('no fog point found');
     await page.mouse.move(pts.fog.x, pts.fog.y);
     await page.waitForTimeout(300);
     await page.mouse.click(pts.fog.x, pts.fog.y);
-    await page.waitForTimeout(700);
+    await page.waitForTimeout(600);
+    const o = await option();
+    const keypad = await ev(() => window.__fw.app.keypad.isOpen);
+    await shot(page, 'v3ac-1-ask-option');
+    if (!o || keypad) throw new Error(JSON.stringify({ o, keypad }));
+    return o;
+  });
+
+  await step('pressing the option opens Ask the fog', async () => {
+    const o = await option();
+    await page.mouse.click(o.x, o.y);
+    await page.waitForTimeout(600);
     const r = await ev(() => ({ keypad: window.__fw.app.keypad.isOpen, prompt: window.__fw.app.keypad.prompt }));
-    await shot(page, 'v3ac-1-ask-opened');
+    await shot(page, 'v3ac-2-ask-opened');
     if (!r.keypad || !/^Ask the fog/.test(r.prompt)) throw new Error(JSON.stringify(r));
     return r;
   });
@@ -79,14 +98,23 @@ try {
     await page.keyboard.press('Enter');
     await page.waitForFunction(() => window.__fw.app.cards.get('answer') && window.__fw.app.searchGroup, null, { timeout: 30000 });
     const r = await ev(() => ({ q: window.__fw.app.searchGroup.q, stars: window.__fw.app.searchGroup.ids.length, keypadClosed: !window.__fw.app.keypad.isOpen }));
-    await shot(page, 'v3ac-2-answer-and-stars');
+    await shot(page, 'v3ac-3-answer-and-stars');
     if (!r.stars || !r.keypadClosed) throw new Error(JSON.stringify(r));
     return { typed, ...r };
   });
 
-  await step('Escape closes the search without asking', async () => {
+  await step('the option goes away by itself; Escape closes the search', async () => {
     await page.mouse.click(pts.fog.x, pts.fog.y);
-    await page.waitForTimeout(700);
+    await page.waitForTimeout(600);
+    const shown = !!(await option());
+    await page.waitForTimeout(5600);
+    const gone = !(await option());
+    if (!shown || !gone) throw new Error(JSON.stringify({ shown, gone }));
+    await page.mouse.click(pts.fog.x, pts.fog.y);
+    await page.waitForTimeout(600);
+    const o = await option();
+    await page.mouse.click(o.x, o.y);
+    await page.waitForTimeout(600);
     const opened = await ev(() => window.__fw.app.keypad.isOpen);
     await page.keyboard.press('Escape');
     const closed = await ev(() => !window.__fw.app.keypad.isOpen);
