@@ -28,9 +28,31 @@ export class FogSystem extends createSystem({}) {
     this.xrManager.addEventListener('sessionstart', onStart);
     this.cleanupFuncs.push(() => this.xrManager.removeEventListener('sessionstart', onStart));
 
-    // flat page (mouse): a click that misses does nothing. With a mouse, misses
-    // on drifting lights are common, and a keypad popping up was a surprise
-    // (live test, 21 Oct). In VR, pinching empty space still opens Find.
+    // flat page (mouse): a click on empty fog asks the fog, like a pinch in VR.
+    // Only well away from every star, node and card: a near miss on a drifting
+    // star does nothing (a keypad on every miss was a surprise; live test, 21 Oct).
+    const canvas = this.world.renderer?.domElement;
+    if (canvas) {
+      let down = null;
+      const onDown = (e) => (down = { x: e.clientX, y: e.clientY, t: performance.now() });
+      const onUp = (e) => {
+        const d = down;
+        down = null;
+        if (!d || this.world.session || e.button !== 0) return;
+        if (Math.hypot(e.clientX - d.x, e.clientY - d.y) > 6 || performance.now() - d.t > 600) return; // a drag, not a click
+        const { clientX: x, clientY: y } = e;
+        // like a pinch: give a card, star or node the first chance to claim it
+        setTimeout(() => {
+          if (this.app.isEmptyAt(x, y, canvas)) this.app.onEmptyPinch();
+        }, settings.gestures.spawnDeferMs);
+      };
+      canvas.addEventListener('pointerdown', onDown);
+      canvas.addEventListener('pointerup', onUp);
+      this.cleanupFuncs.push(() => {
+        canvas.removeEventListener('pointerdown', onDown);
+        canvas.removeEventListener('pointerup', onUp);
+      });
+    }
 
     if (DEBUG) {
       window.__fw = { app: this.app, world: this.world, settings, system: this, Hovered };

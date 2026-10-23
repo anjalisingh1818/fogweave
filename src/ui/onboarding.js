@@ -18,7 +18,7 @@ const STEPS = [
   { id: 'seal', title: 'Keep what you trust', body: 'Press Seal. Sealed items turn solid and go to your Library.', wait: 'sealed' },
   { id: 'coin', title: 'The Coin', body: 'Tap the Coin at your lower right (or flip it near a node) to read its evidence.', wait: 'coin' },
   { id: 'locket', title: 'The Locket', body: 'Tap the Locket at your lower left (or swing it near a node) to see how relevant it is.', wait: 'locket' },
-  { id: 'your-turn', title: 'Ask the fog', body: 'Pinch empty fog to ask about any topic or past news. The Menu on your left wrist has your Library, Interests and the Demo scene.', wait: null, last: true },
+  { id: 'your-turn', title: 'Ask the fog', body: 'Pinch (or click) empty fog to ask about any topic or past news. The Menu on your left wrist has your Library, Interests and the Demo scene.', wait: null, last: true },
 ];
 
 const DONE_KEY = 'fogweave.onboarded.v1';
