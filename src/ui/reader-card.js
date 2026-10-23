@@ -42,7 +42,7 @@ export function readerDraw(app, id) {
     const pad = 40;
     if (!it) {
       ui.text('This light has faded.', pad, 100, { size: 36, color: UI.dim });
-      ui.button('close', 'Close', w - pad - 200, h - pad - 76, 200, 76, () => app.closeCard(`light:${id}`), { icon: '✕', size: 28 });
+      ui.button('close', 'Close', w - pad - 200, h - pad - 76, 200, 76, () => app.closeStar(id), { icon: '✕', size: 28 });
       return;
     }
     const details = !!app.readerDetails?.has(id);
@@ -134,7 +134,7 @@ export function readerDraw(app, id) {
     ui.button('expand', expLabel, x(1), byMain, mw, rowH, () => app.expandLight(id), { disabled: !can || !!it.expanded || app.researching, size: 22, primary: can && !it.expanded });
     ui.button('ask', 'Ask', x(2), byMain, mw, rowH, () => app.openAsk(id), { size: 26 });
     ui.button('details', details ? 'Hide ▴' : 'Details ▾', x(3), byMain, mw, rowH, () => app.toggleReaderDetails(id), { size: 24 });
-    ui.button('close', 'Close', x(4), byMain, mw, rowH, () => app.closeCard(`light:${id}`), { icon: '✕', size: 26 });
+    ui.button('close', 'Close', x(4), byMain, mw, rowH, () => app.closeStar(id), { icon: '✕', size: 26 });
   };
 }
 

@@ -822,7 +822,7 @@ export class App {
       b.type = 'button';
       b.textContent = 'Ask about a topic…';
       b.style.cssText =
-        'position:fixed;z-index:20;transform:translate(-50%,-130%);padding:9px 18px;border-radius:20px;cursor:pointer;' +
+        'position:fixed;z-index:20;transform:translate(-50%,-130%);padding:9px 18px;border-radius:20px;cursor:pointer;white-space:nowrap;' +
         'font:500 15px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#eef1f6;background:rgba(10,14,26,0.86);' +
         'border:1px solid rgba(233,217,166,0.55);box-shadow:0 4px 18px rgba(0,0,0,0.35);transition:opacity .2s;opacity:0';
       b.addEventListener('pointerdown', (e) => e.stopPropagation());
@@ -833,8 +833,9 @@ export class App {
       });
       document.body.appendChild(b);
     }
-    b.style.left = `${x}px`;
-    b.style.top = `${y}px`;
+    // whole on screen, near where you clicked
+    b.style.left = `${Math.min(Math.max(x, 110), innerWidth - 110)}px`;
+    b.style.top = `${Math.max(y, 70)}px`;
     b.style.display = 'block';
     requestAnimationFrame(() => (b.style.opacity = '1'));
     clearTimeout(this._askOptionTimer);
@@ -1117,6 +1118,28 @@ export class App {
 
   closeCard(key) {
     this.cards.close(key);
+  }
+
+  /**
+   * Close on a star's news card: its web leaves the fog and it is a star again
+   * (touch it to grow it again). Sealed and pinned items stay.
+   */
+  closeStar(id) {
+    if (this.expanding?.id === id) this.stopResearch();
+    else if (this.player && !this.player.done && this.getItem(id)?.expanded === 'running') this.stopResearch();
+    const before = new Set(this.store.nodes.keys());
+    this.collapse(id);
+    const n = this.store.nodes.get(id);
+    if (n && !n.sealed && !n.pinned && !this.store.neighbors(id).length) removeNodesFromStore(this.store, [id]);
+    const gone = [...before].filter((x) => !this.store.nodes.has(x));
+    for (const x of gone) this.closeCard(`node:${x}`);
+    this.trail = this.trail.filter((x) => this.store.nodes.has(x));
+    const it = this.lights.get(id);
+    if (it && it.expanded) it.expanded = false;
+    this.closeCard(`light:${id}`);
+    this.view.markLabelsDirty();
+    this._renderStatus();
+    return gone.length;
   }
 
   _onCardClosed(key) {
