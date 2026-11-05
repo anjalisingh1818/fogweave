@@ -1,0 +1,137 @@
+{
+ "L|n:fa08b85b6159|old|The Florida Panthers repeatedly win the ": {
+  "good": true,
+  "reason": "two finals, two wins, as quoted",
+  "by": "Claude, method hidden"
+ },
+ "L|n:fa08b85b6159|new|The Florida Panthers won the Stanley Cup": {
+  "good": true,
+  "reason": "consecutive wins, as quoted",
+  "by": "Claude, method hidden"
+ },
+ "L|n:047b20792022|old|The Bank of England repeatedly appears i": {
+  "good": false,
+  "reason": "banknote animals and inflation pressure share only the institution",
+  "by": "Claude, method hidden"
+ },
+ "L|n:047b20792022|old|The Bank of England is mentioned in mult": {
+  "good": false,
+  "reason": "says only that the bank appears in diverse topics",
+  "by": "Claude, method hidden"
+ },
+ "L|n:945f742db3b8|old|The Houthis are involved in multiple rep": {
+  "good": true,
+  "reason": "same actor in attacks and in talks, a useful connection",
+  "by": "Claude, method hidden"
+ },
+ "L|n:fa08b85b6159|old|The Florida Panthers' 2024 championship ": {
+  "good": true,
+  "reason": "rematch follows the first final",
+  "by": "Claude, method hidden"
+ },
+ "L|n:fa08b85b6159|old|The Florida Panthers are the common team": {
+  "good": true,
+  "reason": "same team in three items",
+  "by": "Claude, method hidden"
+ },
+ "L|n:945f742db3b8|old|Missile attacks by the Houthis are repor": {
+  "good": true,
+  "reason": "repeated Houthi missile attacks across years",
+  "by": "Claude, method hidden"
+ },
+ "L|n:945f742db3b8|old|While the Houthis are engaged in violent": {
+  "good": false,
+  "reason": "contrasts unrelated events in different regions",
+  "by": "Claude, method hidden"
+ },
+ "L|n:54a830f0095a|old|Israel Police actions repeatedly target ": {
+  "good": true,
+  "reason": "both quotes show police actions at religious sites or figures",
+  "by": "Claude, method hidden"
+ },
+ "L|n:12fabc0b78de|old|Raúl Castro is the common figure mention": {
+  "good": false,
+  "reason": "a Twitter suspension is neither legal nor covert action",
+  "by": "Claude, method hidden"
+ },
+ "L|n:8ab7353c3a4a|old|UniCredit appears in both items, first a": {
+  "good": false,
+  "reason": "a stake and a bomb: only a shared name",
+  "by": "Claude, method hidden"
+ },
+ "L|n:54a830f0095a|old|Israel Police are involved in multiple i": {
+  "good": true,
+  "reason": "same police force in three incidents",
+  "by": "Claude, method hidden"
+ },
+ "L|n:8ab7353c3a4a|old|The European Central Bank is mentioned i": {
+  "good": false,
+  "reason": "only a shared institution",
+  "by": "Claude, method hidden"
+ },
+ "L|n:00eab1f15d72|new|Between October 16 and 20, 2026, multipl": {
+  "good": true,
+  "reason": "several strikes, as quoted, in one week per the item dates",
+  "by": "Claude"
+ },
+ "L|n:fa08b85b6159|new|The 2024 Stanley Cup Final is followed b": {
+  "good": true,
+  "reason": "as quoted",
+  "by": "Claude"
+ },
+ "W|n:54a830f0095a|new|The arrests in the West Bank were direct": {
+  "good": false,
+  "reason": "the story says it; the second quote has nothing to do with it",
+  "by": "Claude"
+ },
+ "L|n:945f742db3b8|new|The Houthi movement repeatedly launches ": {
+  "good": true,
+  "reason": "as quoted",
+  "by": "Claude"
+ },
+ "L|n:fa08b85b6159|new|The Florida Panthers are the focal team ": {
+  "good": true,
+  "reason": "as quoted",
+  "by": "Claude"
+ },
+ "W|n:945f742db3b8|new|Previous Houthi missile strikes, such as": {
+  "good": true,
+  "reason": "an earlier attack by the same actor on a government site",
+  "by": "Claude"
+ },
+ "L|n:945f742db3b8|new|Yemen’s Houthi missile attacks on milita": {
+  "good": false,
+  "reason": "contrasts unrelated events",
+  "by": "Claude"
+ },
+ "L|n:54a830f0095a|new|Israel Police repeatedly intervene in re": {
+  "good": true,
+  "reason": "as quoted",
+  "by": "Claude"
+ },
+ "W|n:945f742db3b8|new|The ongoing conflict between the Houthis": {
+  "good": true,
+  "reason": "talks show the war this attack belongs to",
+  "by": "Claude"
+ },
+ "W|n:00eab1f15d72|new|The Abyei region’s long‑standing dispute": {
+  "good": false,
+  "reason": "tribal fighting elsewhere does not show this; the dispute is not in the second quote",
+  "by": "Claude"
+ },
+ "W|n:54a830f0095a|new|A prior detainment of French consulate s": {
+  "good": false,
+  "reason": "one detention and a mayor attacked by others is no pattern of confronting French officials",
+  "by": "Claude"
+ },
+ "W|n:54a830f0095a|new|The repeated confrontations between Isra": {
+  "good": false,
+  "reason": "not shown by the quotes",
+  "by": "Claude"
+ },
+ "L|n:12fabc0b78de|new|All Castro-related items reflect a commo": {
+  "good": false,
+  "reason": "a Twitter suspension is not state violence; the items do not show one theme",
+  "by": "Claude"
+ }
+}

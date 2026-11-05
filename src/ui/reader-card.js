@@ -119,11 +119,12 @@ export function readerDraw(app, id) {
     }
     const mates = app.storyMates(id).length;
     if (details && mates) small.push({ id: 'story', label: `Story +${mates}`, on: () => app.openTimeline(id) });
+    if (it.expanded === true && app.canAskWhy(id)) small.push({ id: 'why', label: 'Why did this happen?', primary: true, on: () => app.askWhy(id) });
     small.push({ id: 'more', label: 'More like this', on: () => app.likeLight(id, true) });
     small.push({ id: 'less', label: 'Less like this', on: () => app.likeLight(id, false) });
     const gap = 10;
     const sw = (w - pad * 2 - gap * (small.length - 1)) / small.length;
-    small.forEach((b, i) => ui.button(b.id, b.label, pad + i * (sw + gap), bySmall, sw, smallH, b.on, { size: small.length > 4 ? 20 : 24 }));
+    small.forEach((b, i) => ui.button(b.id, b.label, pad + i * (sw + gap), bySmall, sw, smallH, b.on, { size: small.length > 4 ? 20 : small.length > 2 ? 21 : 24, primary: b.primary }));
 
     // ---- main row: Seal, Expand, Ask, Details, Close
     const mw = (w - pad * 2 - gap * 4) / 5;

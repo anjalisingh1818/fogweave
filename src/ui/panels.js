@@ -157,6 +157,56 @@ export function patternsDraw(app, r) {
   };
 }
 
+const WHY_KIND = { background: 'BACKGROUND', precedent: 'PRECEDENT', trigger: 'POSSIBLE TRIGGER' };
+
+/** The thinking agent's card: where it is now, what survived and what was dropped. */
+export function agentDraw(app, run) {
+  return (ctx, ui, w, h) => {
+    const pad = 44;
+    ui.text(run.title, pad, 66, { size: 26, color: UI.accent, weight: 700, maxWidth: w - pad * 2 });
+    let y = 106;
+    const limit = h - 130;
+    const count = run.thoughts.size;
+    const gone = run.dropped.length;
+    const line = run.running ? run.status || 'Thinking' : count ? `Checked ${count} idea${count === 1 ? '' : 's'}: ${gone} dropped` : '';
+    if (line) y = ui.para(line, pad, y, w - pad * 2, { size: 24, color: run.running ? '#cfe0f5' : UI.dim, maxLines: 1 }) + 6;
+    if (run.tool) y = ui.para(run.tool, pad, y, w - pad * 2, { size: 22, color: UI.dim, maxLines: 1 }) + 6;
+    y += 8;
+    const items = [...(run.shared || []), ...run.results];
+    items.forEach((p, i) => {
+      if (y + 100 > limit) return;
+      const style = LABEL_STYLE[p.label] || LABEL_STYLE.inferred;
+      ui.text(WHY_KIND[p.kind] || PATTERN_KIND[p.kind] || String(p.kind).toUpperCase(), pad, y, { size: 20, color: '#ffe2a8', weight: 700 });
+      ui.text(style.label.toUpperCase(), pad + 300, y, { size: 20, color: style.css, weight: 700 });
+      ui.button(`show:${i}`, 'Show', w - pad - 250, y - 30, 120, 50, () => app.showAgentResult(run, p), { size: 22 });
+      ui.button(`note:${i}`, 'Note', w - pad - 120, y - 30, 120, 50, () => app.addNote(`${run.noteLabel}: ${p.text}`), { size: 22 });
+      y = ui.para(p.text, pad, y + 46, w - pad * 2, { size: 26, weight: 600, maxLines: 3 }) + 2;
+      for (const q of (p.quotes || []).slice(0, 2)) {
+        if (y + 30 > limit) break;
+        y = ui.para(`“${q.quote}”`, pad, y, w - pad * 2, { size: 22, color: '#c8d3e0', maxLines: 1 }) + 2;
+      }
+      y += 20;
+    });
+    if (!run.running && !items.length) y = ui.para(run.empty, pad, y, w - pad * 2, { size: 25, color: UI.dim, maxLines: 3 }) + 8;
+    if (!run.running && gone && y + 30 < limit) {
+      const reason = run.dropped[0].why;
+      y = ui.para(`Dropped, for example: ${reason}`, pad, y, w - pad * 2, { size: 22, color: UI.dim, maxLines: 2 }) + 8;
+    }
+    if (run.next?.length && y + 60 < limit) {
+      ui.text('EXPLORE NEXT', pad, y + 8, { size: 20, color: '#ffe2a8', weight: 700 });
+      y += 26;
+      run.next.forEach((n, i) => {
+        if (y + 62 > limit) return;
+        ui.button(`next:${i}`, `${n.label}: ${n.question}`, pad, y, w - pad * 2, 56, () => app.exploreSuggested(n.id), { size: 21 });
+        y += 64;
+      });
+    }
+    if (run.note) ui.para(run.note, pad, limit + 26, w - pad * 2 - 230, { size: 21, color: '#f0c987', maxLines: 2 });
+    else ui.para(run.running ? 'Every idea must show real quotes, or it is dropped.' : 'Inferred: reasoned from the quotes, checked by code and a second look.', pad, limit + 26, w - pad * 2 - 230, { size: 21, color: UI.dim, maxLines: 2 });
+    ui.button('close', run.running ? 'Stop' : 'Close', w - pad - 200, h - 104, 200, 76, () => app.closeAgent(), { icon: '✕', size: 28 });
+  };
+}
+
 export function insightsDraw(app, list) {
   return (ctx, ui, w, h) => {
     const pad = 44;

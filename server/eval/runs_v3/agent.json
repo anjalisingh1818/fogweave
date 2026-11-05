@@ -1,0 +1,1528 @@
+{
+ "library": {
+  "n:945f742db3b8": {
+   "items": [
+    {
+     "id": "n:945f742db3b8",
+     "type": "NewsItem",
+     "label": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…",
+     "date": "2026-10-19",
+     "text": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen. There are 14 missing."
+    },
+    {
+     "id": "n:646d85364670",
+     "type": "NewsItem",
+     "label": "Ceasefire talks between the Houthis and Saudi Arabian forces begin in Yemen in an effort to end fighting",
+     "date": "2022-04-02",
+     "text": "Ceasefire talks between the Houthis and Saudi Arabian forces begin in Yemen in an effort to end fighting."
+    },
+    {
+     "id": "n:4f1d307cc684",
+     "type": "NewsItem",
+     "label": "The Houthis launch ballistic missiles and drones against Saudi Arabia, including its capital Riyadh",
+     "date": "2020-06-23",
+     "text": "The Houthis launch ballistic missiles and drones against Saudi Arabia, including its capital Riyadh. Saudi-led coalition spokesman Turki al-Maliki says that Saudi forces \"managed to intercept and destroy\" the missiles an"
+    },
+    {
+     "id": "n:aff2a7c718a8",
+     "type": "NewsItem",
+     "label": "The Houthis launch missiles against Al-Maashiq Palace, headquarters of the Presidential Leadership Council…",
+     "date": "2026-10-15",
+     "text": "The Houthis launch missiles against Al-Maashiq Palace, headquarters of the Presidential Leadership Council and official residence of President Rashad al-Alimi, in Aden, Yemen, killing five people and injuring 16. No memb"
+    },
+    {
+     "id": "n:00dfe2b0206f",
+     "type": "NewsItem",
+     "label": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding…",
+     "date": "2026-10-19",
+     "text": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding shortages, reducing the number of recipients from 1.6 million to 1.1 million."
+    },
+    {
+     "id": "n:2ea4338fe8f4",
+     "type": "NewsItem",
+     "label": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada",
+     "date": "2026-10-19",
+     "text": "Albertans vote on ten referendums, including one to decide if Alberta should seek separation from Canada."
+    }
+   ],
+   "old": {
+    "results": [
+     {
+      "kind": "same_actor",
+      "text": "The Houthis are involved in multiple reported events, including attacks and cease‑fire talks.",
+      "label": "inferred",
+      "items": [
+       "n:945f742db3b8",
+       "n:646d85364670",
+       "n:4f1d307cc684",
+       "n:aff2a7c718a8"
+      ],
+      "quotes": [
+       {
+        "id": "n:945f742db3b8",
+        "quote": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate",
+        "date": "2026-10-19"
+       },
+       {
+        "id": "n:646d85364670",
+        "quote": "Ceasefire talks between the Houthis and Saudi Arabian forces begin in Yemen",
+        "date": "2022-04-02"
+       },
+       {
+        "id": "n:4f1d307cc684",
+        "quote": "The Houthis launch ballistic missiles and drones against Saudi Arabia, including its capital Riyadh",
+        "date": "2020-06-23"
+       },
+       {
+        "id": "n:aff2a7c718a8",
+        "quote": "The Houthis launch missiles against Al-Maashiq Palace, headquarters of the Presidential Leadership Council",
+        "date": "2026-10-15"
+       }
+      ]
+     },
+     {
+      "kind": "recurring",
+      "text": "Missile attacks by the Houthis are reported repeatedly over several years.",
+      "label": "inferred",
+      "items": [
+       "n:945f742db3b8",
+       "n:4f1d307cc684",
+       "n:aff2a7c718a8"
+      ],
+      "quotes": [
+       {
+        "id": "n:945f742db3b8",
+        "quote": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate",
+        "date": "2026-10-19"
+       },
+       {
+        "id": "n:4f1d307cc684",
+        "quote": "The Houthis launch ballistic missiles and drones against Saudi Arabia, including its capital Riyadh",
+        "date": "2020-06-23"
+       },
+       {
+        "id": "n:aff2a7c718a8",
+        "quote": "The Houthis launch missiles against Al-Maashiq Palace, headquarters of the Presidential Leadership Council",
+        "date": "2026-10-15"
+       }
+      ]
+     },
+     {
+      "kind": "contrast",
+      "text": "While the Houthis are engaged in violent attacks, the World Food Programme is reducing humanitarian aid in a different region.",
+      "label": "inferred",
+      "items": [
+       "n:aff2a7c718a8",
+       "n:00dfe2b0206f"
+      ],
+      "quotes": [
+       {
+        "id": "n:aff2a7c718a8",
+        "quote": "The Houthis launch missiles against Al-Maashiq Palace, headquarters of the Presidential Leadership Council and official residence of President Rashad al-Alimi",
+        "date": "2026-10-15"
+       },
+       {
+        "id": "n:00dfe2b0206f",
+        "quote": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding shortages",
+        "date": "2026-10-19"
+       }
+      ]
+     }
+    ],
+    "seconds": 0.0,
+    "calls": 0,
+    "note": "1 suggested pattern dropped: quotes not found in the items, too few items, or low confidence."
+   },
+   "new": {
+    "results": [
+     {
+      "kind": "same_actor",
+      "text": "The Houthi movement repeatedly launches missile and drone attacks against Saudi Arabia and Yemen’s government sites.",
+      "label": "inferred",
+      "items": [
+       "n:945f742db3b8",
+       "n:4f1d307cc684",
+       "n:aff2a7c718a8"
+      ],
+      "quotes": [
+       {
+        "id": "n:945f742db3b8",
+        "quote": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen.",
+        "date": "2026-10-19"
+       },
+       {
+        "id": "n:4f1d307cc684",
+        "quote": "The Houthis launch ballistic missiles and drones against Saudi Arabia, including its capital Riyadh.",
+        "date": "2020-06-23"
+       },
+       {
+        "id": "n:aff2a7c718a8",
+        "quote": "The Houthis launch missiles against Al-Maashiq Palace, headquarters of the Presidential Leadership Council and official residence of President Rashad al-Alimi, in Aden, Yemen.",
+        "date": "2026-10-15"
+       }
+      ]
+     },
+     {
+      "kind": "contrast",
+      "text": "Yemen’s Houthi missile attacks on military targets contrast with the World Food Programme’s reduction of food aid to Gaza, highlighting a shift from regional security threats to humanitarian funding cuts.",
+      "label": "inferred",
+      "items": [
+       "n:945f742db3b8",
+       "n:00dfe2b0206f"
+      ],
+      "quotes": [
+       {
+        "id": "n:945f742db3b8",
+        "quote": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen.",
+        "date": "2026-10-19"
+       },
+       {
+        "id": "n:00dfe2b0206f",
+        "quote": "The World Food Programme cuts monthly food aid for about 500,000 people in the Gaza Strip because of funding shortages, reducing the number of recipients",
+        "date": "2026-10-19"
+       }
+      ]
+     }
+    ],
+    "seconds": 4.8,
+    "calls": 5,
+    "dropped": [
+     {
+      "thought": "T2",
+      "why": "a second look: Only two 2026 incidents, insufficient recurrence evidence"
+     }
+    ],
+    "note": ""
+   }
+  },
+  "n:75c973928996": {
+   "items": [
+    {
+     "id": "n:75c973928996",
+     "type": "NewsItem",
+     "label": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan",
+     "date": "2026-10-19",
+     "text": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan."
+    },
+    {
+     "id": "n:1da73c111789",
+     "type": "NewsItem",
+     "label": "The Integrated Food Security Phase Classification review committee reports that famine is detected in two…",
+     "date": "2025-11-03",
+     "text": "The Integrated Food Security Phase Classification review committee reports that famine is detected in two Sudanese regions, Darfur and South Kordofan, amid increased fighting between the Sudanese Armed Forces and the Rap"
+    },
+    {
+     "id": "n:90b75aad1a16",
+     "type": "NewsItem",
+     "label": "The Rapid Support Forces launches a drone strike on a power plant in Tendelti in Sudan's White Nile State,…",
+     "date": "2026-10-20",
+     "text": "The Rapid Support Forces launches a drone strike on a power plant in Tendelti in Sudan's White Nile State, knocking out the main transition line connecting North Kordofan."
+    },
+    {
+     "id": "n:7b5a5bd02efc",
+     "type": "NewsItem",
+     "label": "The Sudanese Army says that they have repelled an attack by the Rapid Support Forces and Sudan People's…",
+     "date": "2026-10-20",
+     "text": "The Sudanese Army says that they have repelled an attack by the Rapid Support Forces and Sudan People's Liberation Movement–North (SPLM–N) on the Blue Nile state."
+    },
+    {
+     "id": "n:00eab1f15d72",
+     "type": "NewsItem",
+     "label": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+     "date": "2026-10-19",
+     "text": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan."
+    },
+    {
+     "id": "n:d0e0e4a57ac3",
+     "type": "NewsItem",
+     "label": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…",
+     "date": "2026-10-08",
+     "text": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that, in playful dialogue with the classical tradition, has created new forms ‌for contemporary literature\"."
+    }
+   ],
+   "old": {
+    "results": [],
+    "seconds": 0.0,
+    "calls": 0,
+    "note": ""
+   },
+   "new": {
+    "results": [],
+    "seconds": 1.8,
+    "calls": 2,
+    "dropped": [
+     {
+      "thought": "T1",
+      "why": "names RSF, which its items do not"
+     },
+     {
+      "thought": "T2",
+      "why": "too unsure"
+     },
+     {
+      "thought": "T3",
+      "why": "too unsure"
+     }
+    ],
+    "note": ""
+   }
+  },
+  "n:fa08b85b6159": {
+   "items": [
+    {
+     "id": "n:fa08b85b6159",
+     "type": "NewsItem",
+     "label": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…",
+     "date": "2026-10-17",
+     "text": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural hat trick in three consecutive games."
+    },
+    {
+     "id": "n:f36d50b440e9",
+     "type": "NewsItem",
+     "label": "In ice hockey, the Florida Panthers defeat the Edmonton Oilers in seven games to win the 2024 Stanley Cup…",
+     "date": "2024-06-24",
+     "text": "In ice hockey, the Florida Panthers defeat the Edmonton Oilers in seven games to win the 2024 Stanley Cup Final, marking their first Stanley Cup championship in franchise history. The Panthers also avoid becoming the fif"
+    },
+    {
+     "id": "n:c1e085c41238",
+     "type": "NewsItem",
+     "label": "In ice hockey, the National Hockey League announces that its board of governors unanimously approved a new…",
+     "date": "2018-12-04",
+     "text": "In ice hockey, the National Hockey League announces that its board of governors unanimously approved a new franchise for Seattle. The new team will start play in the 2021–22 season, bringing the league's membership to 32"
+    },
+    {
+     "id": "n:e137c100160e",
+     "type": "NewsItem",
+     "label": "In ice hockey, the Florida Panthers defeat the Edmonton Oilers in six games in a rematch of last year's…",
+     "date": "2025-06-17",
+     "text": "In ice hockey, the Florida Panthers defeat the Edmonton Oilers in six games in a rematch of last year's final, repeating as Stanley Cup champions."
+    },
+    {
+     "id": "n:84bb02f4d37d",
+     "type": "NewsItem",
+     "label": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…",
+     "date": "2026-10-19",
+     "text": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the Lesbos and Samos islands in Greece."
+    },
+    {
+     "id": "n:6a3502fcf385",
+     "type": "NewsItem",
+     "label": "A judge in Ensenada, Baja California, Mexico, sentences three Mexican men to over 158 years in prison each…",
+     "date": "2026-10-16",
+     "text": "A judge in Ensenada, Baja California, Mexico, sentences three Mexican men to over 158 years in prison each for the murder of two Australians and an American in 2024."
+    }
+   ],
+   "old": {
+    "results": [
+     {
+      "kind": "same_actor",
+      "text": "The Florida Panthers are the common team featured in multiple news items.",
+      "label": "inferred",
+      "items": [
+       "n:fa08b85b6159",
+       "n:f36d50b440e9",
+       "n:e137c100160e"
+      ],
+      "quotes": [
+       {
+        "id": "n:fa08b85b6159",
+        "quote": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural hat trick in three consecutive games.",
+        "date": "2026-10-17"
+       },
+       {
+        "id": "n:f36d50b440e9",
+        "quote": "In ice hockey, the Florida Panthers defeat the Edmonton Oilers in seven games to win the 2024 Stanley Cup Final, marking their first Stanley Cup",
+        "date": "2024-06-24"
+       },
+       {
+        "id": "n:e137c100160e",
+        "quote": "In ice hockey, the Florida Panthers defeat the Edmonton Oilers in six games in a rematch of last year's final, repeating as Stanley Cup champions.",
+        "date": "2025-06-17"
+       }
+      ]
+     },
+     {
+      "kind": "recurring",
+      "text": "The Florida Panthers repeatedly win the Stanley Cup in consecutive years.",
+      "label": "inferred",
+      "items": [
+       "n:f36d50b440e9",
+       "n:e137c100160e"
+      ],
+      "quotes": [
+       {
+        "id": "n:f36d50b440e9",
+        "quote": "In ice hockey, the Florida Panthers defeat the Edmonton Oilers in seven games to win the 2024 Stanley Cup Final, marking their first Stanley Cup",
+        "date": "2024-06-24"
+       },
+       {
+        "id": "n:e137c100160e",
+        "quote": "In ice hockey, the Florida Panthers defeat the Edmonton Oilers in six games in a rematch of last year's final, repeating as Stanley Cup champions.",
+        "date": "2025-06-17"
+       }
+      ]
+     },
+     {
+      "kind": "sequence",
+      "text": "The Florida Panthers' 2024 championship is followed by a 2025 rematch victory.",
+      "label": "inferred",
+      "items": [
+       "n:f36d50b440e9",
+       "n:e137c100160e"
+      ],
+      "quotes": [
+       {
+        "id": "n:f36d50b440e9",
+        "quote": "In ice hockey, the Florida Panthers defeat the Edmonton Oilers in seven games to win the 2024 Stanley Cup Final, marking their first Stanley Cup",
+        "date": "2024-06-24"
+       },
+       {
+        "id": "n:e137c100160e",
+        "quote": "In ice hockey, the Florida Panthers defeat the Edmonton Oilers in six games in a rematch of last year's final, repeating as Stanley Cup champions.",
+        "date": "2025-06-17"
+       }
+      ]
+     }
+    ],
+    "seconds": 0.0,
+    "calls": 0,
+    "note": ""
+   },
+   "new": {
+    "results": [
+     {
+      "kind": "same_actor",
+      "text": "The Florida Panthers are the focal team in multiple hockey stories, appearing in reports of record‑setting performances and championship victories.",
+      "label": "inferred",
+      "items": [
+       "n:fa08b85b6159",
+       "n:f36d50b440e9",
+       "n:e137c100160e"
+      ],
+      "quotes": [
+       {
+        "id": "n:fa08b85b6159",
+        "quote": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural hat trick in three consecutive games.",
+        "date": "2026-10-17"
+       },
+       {
+        "id": "n:f36d50b440e9",
+        "quote": "In ice hockey, the Florida Panthers defeat the Edmonton Oilers in seven games to win the 2024 Stanley Cup Final, marking their first Stanley Cup",
+        "date": "2024-06-24"
+       },
+       {
+        "id": "n:e137c100160e",
+        "quote": "In ice hockey, the Florida Panthers defeat the Edmonton Oilers in six games in a rematch of last year's final, repeating as Stanley Cup champions.",
+        "date": "2025-06-17"
+       }
+      ]
+     },
+     {
+      "kind": "recurring",
+      "text": "The Florida Panthers won the Stanley Cup in back‑to‑back seasons, 2024 and 2025, showing a consecutive championship pattern.",
+      "label": "inferred",
+      "items": [
+       "n:f36d50b440e9",
+       "n:e137c100160e"
+      ],
+      "quotes": [
+       {
+        "id": "n:f36d50b440e9",
+        "quote": "Florida Panthers defeat the Edmonton Oilers in seven games to win the 2024 Stanley Cup Final, marking their first Stanley Cup championship in franchise history.",
+        "date": "2024-06-24"
+       },
+       {
+        "id": "n:e137c100160e",
+        "quote": "Florida Panthers defeat the Edmonton Oilers in six games in a rematch of last year's final, repeating as Stanley Cup champions.",
+        "date": "2025-06-17"
+       }
+      ]
+     },
+     {
+      "kind": "sequence",
+      "text": "The 2024 Stanley Cup Final is followed by a 2025 rematch, forming a sequence of related events.",
+      "label": "inferred",
+      "items": [
+       "n:f36d50b440e9",
+       "n:e137c100160e"
+      ],
+      "quotes": [
+       {
+        "id": "n:f36d50b440e9",
+        "quote": "Florida Panthers defeat the Edmonton Oilers in seven games to win the 2024 Stanley Cup Final, marking their first Stanley Cup championship in franchise history.",
+        "date": "2024-06-24"
+       },
+       {
+        "id": "n:e137c100160e",
+        "quote": "Florida Panthers defeat the Edmonton Oilers in six games in a rematch of last year's final, repeating as Stanley Cup champions.",
+        "date": "2025-06-17"
+       }
+      ]
+     }
+    ],
+    "seconds": 3.9,
+    "calls": 5,
+    "dropped": [],
+    "note": ""
+   }
+  },
+  "n:00eab1f15d72": {
+   "items": [
+    {
+     "id": "n:00eab1f15d72",
+     "type": "NewsItem",
+     "label": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+     "date": "2026-10-19",
+     "text": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan."
+    },
+    {
+     "id": "n:4cdf31325659",
+     "type": "NewsItem",
+     "label": "Thirty people are killed and 47 people are injured in a drone strike on a cattle market in Nyala, South…",
+     "date": "2026-10-16",
+     "text": "Thirty people are killed and 47 people are injured in a drone strike on a cattle market in Nyala, South Darfur, Sudan."
+    },
+    {
+     "id": "n:75c973928996",
+     "type": "NewsItem",
+     "label": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan",
+     "date": "2026-10-19",
+     "text": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan."
+    },
+    {
+     "id": "n:90b75aad1a16",
+     "type": "NewsItem",
+     "label": "The Rapid Support Forces launches a drone strike on a power plant in Tendelti in Sudan's White Nile State,…",
+     "date": "2026-10-20",
+     "text": "The Rapid Support Forces launches a drone strike on a power plant in Tendelti in Sudan's White Nile State, knocking out the main transition line connecting North Kordofan."
+    },
+    {
+     "id": "n:12fabc0b78de",
+     "type": "NewsItem",
+     "label": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…",
+     "date": "2026-10-19",
+     "text": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban president Raúl Castro after Florida attorney general James Uthmeier charged Castro with conspiracy to commit first-degree murder by directing spies to infiltrate Brothers to the Rescue and ordering the attack on their planes in 1996."
+    },
+    {
+     "id": "n:54a830f0095a",
+     "type": "NewsItem",
+     "label": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi…",
+     "date": "2026-10-19",
+     "text": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi Levine and the mayor of Aulnoye-Aymeries, France, who were travelling with European diplomats, and seize vehicles and other evidence during raids."
+    }
+   ],
+   "old": {
+    "results": [],
+    "seconds": 0.0,
+    "calls": 0,
+    "note": ""
+   },
+   "new": {
+    "results": [
+     {
+      "kind": "recurring",
+      "text": "Between October 16 and 20, 2026, multiple distinct drone strikes occurred in different locations across Sudan (Abyei, Nyala, Khartoum, Tendelti). This frequency and geographic spread indicate a recurring pattern of aerial attacks during this specific week.",
+      "label": "inferred",
+      "items": [
+       "n:00eab1f15d72",
+       "n:4cdf31325659",
+       "n:90b75aad1a16"
+      ],
+      "quotes": [
+       {
+        "id": "n:00eab1f15d72",
+        "quote": "A drone strike kills at least 73 people",
+        "date": "2026-10-19"
+       },
+       {
+        "id": "n:4cdf31325659",
+        "quote": "drone strike on a cattle market",
+        "date": "2026-10-16"
+       },
+       {
+        "id": "n:90b75aad1a16",
+        "quote": "launches a drone strike on a power plant",
+        "date": "2026-10-20"
+       }
+      ]
+     }
+    ],
+    "seconds": 2.6,
+    "calls": 4,
+    "dropped": [
+     {
+      "thought": "T1",
+      "why": "names RSF, which its items do not"
+     },
+     {
+      "thought": "T3",
+      "why": "too unsure"
+     }
+    ],
+    "note": ""
+   }
+  },
+  "n:8ab7353c3a4a": {
+   "items": [
+    {
+     "id": "n:8ab7353c3a4a",
+     "type": "NewsItem",
+     "label": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper…",
+     "date": "2026-10-15",
+     "text": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper limit, allowing the Italian bank to proceed toward taking control of the German lender."
+    },
+    {
+     "id": "n:b17c77f97b22",
+     "type": "NewsItem",
+     "label": "Police say an improvised explosive device exploded overnight at a Unicredit bank in Bologna, with the bomber…",
+     "date": "2018-04-10",
+     "text": "Police say an improvised explosive device exploded overnight at a Unicredit bank in Bologna, with the bomber leaving behind graffiti criticising Turkish President Recep Tayyip Erdoğan."
+    },
+    {
+     "id": "n:c3e279d67ef7",
+     "type": "NewsItem",
+     "label": "Spanish Minister of Economy and Competitiveness, Luis de Guindos, is set to be nominated by the Eurogroup to…",
+     "date": "2018-02-19",
+     "text": "Spanish Minister of Economy and Competitiveness, Luis de Guindos, is set to be nominated by the Eurogroup to succeed Vítor Constâncio as Vice-President of the European Central Bank."
+    },
+    {
+     "id": "n:3cf985552f76",
+     "type": "NewsItem",
+     "label": "The Hellenic Parliament approves (with 222 yes votes) Prime Minister of Greece Alexis Tsipras's bailout…",
+     "date": "2015-08-14",
+     "text": "The Hellenic Parliament approves (with 222 yes votes) Prime Minister of Greece Alexis Tsipras's bailout package, despite opposition by almost one-third of his Syriza party. This third bailout plan is almost identical to "
+    },
+    {
+     "id": "n:0460555895d3",
+     "type": "NewsItem",
+     "label": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+     "date": "2026-10-18",
+     "text": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread contamination. A study in June found that at least 93% of households' water systems contained no residual chlorine, but had elevated levels of lead, mercury, nitrates, and E. coli."
+    },
+    {
+     "id": "n:d0e0e4a57ac3",
+     "type": "NewsItem",
+     "label": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…",
+     "date": "2026-10-08",
+     "text": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that, in playful dialogue with the classical tradition, has created new forms ‌for contemporary literature\"."
+    }
+   ],
+   "old": {
+    "results": [
+     {
+      "kind": "same_actor",
+      "text": "UniCredit appears in both items, first as the beneficiary of an ECB authorization and later as the target of a bomb attack.",
+      "label": "inferred",
+      "items": [
+       "n:8ab7353c3a4a",
+       "n:b17c77f97b22"
+      ],
+      "quotes": [
+       {
+        "id": "n:8ab7353c3a4a",
+        "quote": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30%",
+        "date": "2026-10-15"
+       },
+       {
+        "id": "n:b17c77f97b22",
+        "quote": "Police say an improvised explosive device exploded overnight at a Unicredit bank in Bologna",
+        "date": "2018-04-10"
+       }
+      ]
+     },
+     {
+      "kind": "recurring",
+      "text": "The European Central Bank is mentioned in multiple items, first authorizing a bank stake and later being involved in a leadership nomination.",
+      "label": "inferred",
+      "items": [
+       "n:8ab7353c3a4a",
+       "n:c3e279d67ef7"
+      ],
+      "quotes": [
+       {
+        "id": "n:8ab7353c3a4a",
+        "quote": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30%",
+        "date": "2026-10-15"
+       },
+       {
+        "id": "n:c3e279d67ef7",
+        "quote": "Spanish Minister … is set to be nominated by the Eurogroup to succeed Vítor Constâncio as Vice-President of the European Central Bank",
+        "date": "2018-02-19"
+       }
+      ]
+     }
+    ],
+    "seconds": 0.0,
+    "calls": 0,
+    "note": ""
+   },
+   "new": {
+    "results": [],
+    "seconds": 4.2,
+    "calls": 3,
+    "dropped": [
+     {
+      "thought": "T2",
+      "why": "too unsure"
+     },
+     {
+      "thought": "T3",
+      "why": "too unsure"
+     },
+     {
+      "thought": "T1",
+      "why": "a second look: Only name shared, no causal link"
+     }
+    ],
+    "note": ""
+   }
+  },
+  "n:047b20792022": {
+   "items": [
+    {
+     "id": "n:047b20792022",
+     "type": "NewsItem",
+     "label": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…",
+     "date": "2026-10-08",
+     "text": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European hedgehog will feature on the next set of pound sterling notes to be issued in the United Kingdom. It will be the first time animals have replaced people on banknotes in England, which is intended to increase awareness of British wildlife."
+    },
+    {
+     "id": "n:9f573e30cbee",
+     "type": "NewsItem",
+     "label": "The Bank of England blocks Maduro's officials from withdrawing $1.2 billion worth of gold",
+     "date": "2019-01-26",
+     "text": "The Bank of England blocks Maduro's officials from withdrawing $1.2 billion worth of gold."
+    },
+    {
+     "id": "n:a6c727b5e01d",
+     "type": "NewsItem",
+     "label": "Inflation in the United Kingdom reaches a record 11.1%, pressuring the Bank of England to raise interest…",
+     "date": "2022-11-16",
+     "text": "Inflation in the United Kingdom reaches a record 11.1%, pressuring the Bank of England to raise interest rates."
+    },
+    {
+     "id": "n:afdc5ab9ef1a",
+     "type": "NewsItem",
+     "label": "A Kenyan court convicts Good News International Ministries leader Paul Nthenge Mackenzie of murdering 190…",
+     "date": "2026-10-19",
+     "text": "A Kenyan court convicts Good News International Ministries leader Paul Nthenge Mackenzie of murdering 190 children and an adult whose deaths were linked to starvation in Shakahola Forest."
+    },
+    {
+     "id": "n:fa08b85b6159",
+     "type": "NewsItem",
+     "label": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…",
+     "date": "2026-10-17",
+     "text": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural hat trick in three consecutive games."
+    }
+   ],
+   "old": {
+    "results": [
+     {
+      "kind": "same_actor",
+      "text": "The Bank of England is mentioned in multiple items, showing its involvement in diverse news topics.",
+      "label": "inferred",
+      "items": [
+       "n:047b20792022",
+       "n:9f573e30cbee",
+       "n:a6c727b5e01d"
+      ],
+      "quotes": [
+       {
+        "id": "n:047b20792022",
+        "quote": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European hedgehog will feature on the next set of pound sterling",
+        "date": "2026-10-08"
+       },
+       {
+        "id": "n:9f573e30cbee",
+        "quote": "The Bank of England blocks Maduro's officials from withdrawing $1.2 billion worth of gold",
+        "date": "2019-01-26"
+       },
+       {
+        "id": "n:a6c727b5e01d",
+        "quote": "Inflation in the United Kingdom reaches a record 11.1%, pressuring the Bank of England to raise interest rates",
+        "date": "2022-11-16"
+       }
+      ]
+     },
+     {
+      "kind": "recurring",
+      "text": "The Bank of England repeatedly appears in news related to policy decisions and financial actions.",
+      "label": "inferred",
+      "items": [
+       "n:047b20792022",
+       "n:a6c727b5e01d"
+      ],
+      "quotes": [
+       {
+        "id": "n:047b20792022",
+        "quote": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European hedgehog will feature on the next set of pound sterling",
+        "date": "2026-10-08"
+       },
+       {
+        "id": "n:a6c727b5e01d",
+        "quote": "Inflation in the United Kingdom reaches a record 11.1%, pressuring the Bank of England to raise interest rates",
+        "date": "2022-11-16"
+       }
+      ]
+     }
+    ],
+    "seconds": 0.0,
+    "calls": 0,
+    "note": "2 suggested patterns dropped: quotes not found in the items, too few items, or low confidence."
+   },
+   "new": {
+    "results": [],
+    "seconds": 3.6,
+    "calls": 2,
+    "dropped": [
+     {
+      "thought": "T1",
+      "why": "no quote found in two items"
+     },
+     {
+      "thought": "T2",
+      "why": "too unsure"
+     },
+     {
+      "thought": "T3",
+      "why": "no quote found in two items"
+     }
+    ],
+    "note": ""
+   }
+  },
+  "n:12fabc0b78de": {
+   "items": [
+    {
+     "id": "n:12fabc0b78de",
+     "type": "NewsItem",
+     "label": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…",
+     "date": "2026-10-19",
+     "text": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban president Raúl Castro after Florida attorney general James Uthmeier charged Castro with conspiracy to commit first-degree murder by directing spies to infiltrate Brothers to the Rescue and ordering the attack on their planes in 1996."
+    },
+    {
+     "id": "n:6b2124a981e9",
+     "type": "NewsItem",
+     "label": "Twitter suspends several Cuban government and state media accounts, including First Secretary of the…",
+     "date": "2019-09-12",
+     "text": "Twitter suspends several Cuban government and state media accounts, including First Secretary of the Communist Party of Cuba Raúl Castro and his daughter Mariela Castro. The pro-government Union of Journalists of Cuba de"
+    },
+    {
+     "id": "n:9335a99da24a",
+     "type": "NewsItem",
+     "label": "Declassified documents released by the National Security Archive show that the Central Intelligence Agency…",
+     "date": "2021-04-16",
+     "text": "Declassified documents released by the National Security Archive show that the Central Intelligence Agency was involved in a plot to assassinate Raúl Castro in 1960."
+    },
+    {
+     "id": "n:d0e0e4a57ac3",
+     "type": "NewsItem",
+     "label": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that,…",
+     "date": "2026-10-08",
+     "text": "Canadian poet Anne Carson is awarded the Nobel Prize in Literature for \"her bold and inventive oeuvre that, in playful dialogue with the classical tradition, has created new forms ‌for contemporary literature\"."
+    },
+    {
+     "id": "n:84bb02f4d37d",
+     "type": "NewsItem",
+     "label": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the…",
+     "date": "2026-10-19",
+     "text": "Twelve migrants, including an infant, are killed when two separate speedboats capsize off the coast of the Lesbos and Samos islands in Greece."
+    }
+   ],
+   "old": {
+    "results": [
+     {
+      "kind": "same_actor",
+      "text": "Raúl Castro is the common figure mentioned in multiple items, showing repeated legal and covert actions involving him.",
+      "label": "inferred",
+      "items": [
+       "n:12fabc0b78de",
+       "n:6b2124a981e9",
+       "n:9335a99da24a"
+      ],
+      "quotes": [
+       {
+        "id": "n:12fabc0b78de",
+        "quote": "former Cuban president Raúl Castro after Florida attorney general James Uthmeier charged Castro with conspiracy",
+        "date": "2026-10-19"
+       },
+       {
+        "id": "n:6b2124a981e9",
+        "quote": "First Secretary of the Communist Party of Cuba Raúl Castro and his daughter Mariela Castro",
+        "date": "2019-09-12"
+       },
+       {
+        "id": "n:9335a99da24a",
+        "quote": "Central Intelligence Agency was involved in a plot to assassinate Raúl Castro in 1960",
+        "date": "2021-04-16"
+       }
+      ]
+     }
+    ],
+    "seconds": 0.0,
+    "calls": 0,
+    "note": ""
+   },
+   "new": {
+    "results": [
+     {
+      "kind": "common_theme",
+      "text": "All Castro-related items reflect a common theme of state-sponsored violence and intimidation, including assassination plots, legal persecution, and social media suppression.",
+      "label": "inferred",
+      "items": [
+       "n:9335a99da24a",
+       "n:12fabc0b78de",
+       "n:6b2124a981e9"
+      ],
+      "quotes": [
+       {
+        "id": "n:9335a99da24a",
+        "quote": "Central Intelligence Agency was involved in a plot to assassinate Raúl Castro in 1960",
+        "date": "2021-04-16"
+       },
+       {
+        "id": "n:12fabc0b78de",
+        "quote": "conspiracy to commit first-degree murder by directing spies to infiltrate Brothers to the Rescue and ordering the attack on their planes in 1996",
+        "date": "2026-10-19"
+       },
+       {
+        "id": "n:6b2124a981e9",
+        "quote": "Twitter suspends several Cuban government and state media accounts, including First Secretary of the Communist Party of Cuba Raúl Castro",
+        "date": "2019-09-12"
+       }
+      ]
+     }
+    ],
+    "seconds": 5.4,
+    "calls": 4,
+    "dropped": [
+     {
+      "thought": "T1",
+      "why": "names CIA, which its items do not"
+     },
+     {
+      "thought": "T2",
+      "why": "names CIA, which its items do not"
+     },
+     {
+      "thought": "T3a",
+      "why": "names Raúl Castro, which its items do not"
+     }
+    ],
+    "note": ""
+   }
+  },
+  "n:54a830f0095a": {
+   "items": [
+    {
+     "id": "n:54a830f0095a",
+     "type": "NewsItem",
+     "label": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi…",
+     "date": "2026-10-19",
+     "text": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi Levine and the mayor of Aulnoye-Aymeries, France, who were travelling with European diplomats, and seize vehicles and other evidence during raids."
+    },
+    {
+     "id": "n:e2f17011491e",
+     "type": "NewsItem",
+     "label": "Israel Police forcibly enter the French-administered Church of the Pater Noster compound in Jerusalem and…",
+     "date": "2024-11-07",
+     "text": "Israel Police forcibly enter the French-administered Church of the Pater Noster compound in Jerusalem and detain two French consulate employees. French foreign minister Jean-Noël Barrot cancels his visit to the site whil"
+    },
+    {
+     "id": "n:9eacdae21b99",
+     "type": "NewsItem",
+     "label": "For the first time ever, Israel Police block the Latin Patriarch of Jerusalem, Pierbattista Pizzaballa, from…",
+     "date": "2026-03-29",
+     "text": "For the first time ever, Israel Police block the Latin Patriarch of Jerusalem, Pierbattista Pizzaballa, from entering the Church of the Holy Sepulchre during Palm Sunday, citing heightened risk in the Old City during the"
+    },
+    {
+     "id": "n:e40e07b73237",
+     "type": "NewsItem",
+     "label": "A truck loses control and runs over devotees outside a temple in Gwalior, Madhya Pradesh, India, killing at…",
+     "date": "2026-10-18",
+     "text": "A truck loses control and runs over devotees outside a temple in Gwalior, Madhya Pradesh, India, killing at least 13 and injuring nearly 40 others."
+    },
+    {
+     "id": "n:0460555895d3",
+     "type": "NewsItem",
+     "label": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread…",
+     "date": "2026-10-18",
+     "text": "Protests continue for the second week in Guadalajara, Jalisco, Mexico, over water shortages and widespread contamination. A study in June found that at least 93% of households' water systems contained no residual chlorine, but had elevated levels of lead, mercury, nitrates, and E. coli."
+    }
+   ],
+   "old": {
+    "results": [
+     {
+      "kind": "same_actor",
+      "text": "Israel Police are involved in multiple incidents reported in the items.",
+      "label": "inferred",
+      "items": [
+       "n:54a830f0095a",
+       "n:e2f17011491e",
+       "n:9eacdae21b99"
+      ],
+      "quotes": [
+       {
+        "id": "n:54a830f0095a",
+        "quote": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi Levine",
+        "date": "2026-10-19"
+       },
+       {
+        "id": "n:e2f17011491e",
+        "quote": "Israel Police forcibly enter the French-administered Church of the Pater Noster compound in Jerusalem and detain two French consulate employees",
+        "date": "2024-11-07"
+       },
+       {
+        "id": "n:9eacdae21b99",
+        "quote": "Israel Police block the Latin Patriarch of Jerusalem, Pierbattista Pizzaballa, from entering the Church of the Holy Sepulchre",
+        "date": "2026-03-29"
+       }
+      ]
+     },
+     {
+      "kind": "recurring",
+      "text": "Israel Police actions repeatedly target religious sites or figures.",
+      "label": "inferred",
+      "items": [
+       "n:e2f17011491e",
+       "n:9eacdae21b99"
+      ],
+      "quotes": [
+       {
+        "id": "n:e2f17011491e",
+        "quote": "Israel Police forcibly enter the French-administered Church of the Pater Noster compound in Jerusalem and detain two French consulate employees",
+        "date": "2024-11-07"
+       },
+       {
+        "id": "n:9eacdae21b99",
+        "quote": "Israel Police block the Latin Patriarch of Jerusalem, Pierbattista Pizzaballa, from entering the Church of the Holy Sepulchre",
+        "date": "2026-03-29"
+       }
+      ]
+     }
+    ],
+    "seconds": 0.0,
+    "calls": 0,
+    "note": ""
+   },
+   "new": {
+    "results": [
+     {
+      "kind": "same_actor",
+      "text": "Israel Police repeatedly intervene in religious sites and arrest individuals in the West Bank.",
+      "label": "inferred",
+      "items": [
+       "n:54a830f0095a",
+       "n:e2f17011491e",
+       "n:9eacdae21b99"
+      ],
+      "quotes": [
+       {
+        "id": "n:54a830f0095a",
+        "quote": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi Levine",
+        "date": "2026-10-19"
+       },
+       {
+        "id": "n:e2f17011491e",
+        "quote": "Israel Police forcibly enter the French-administered Church of the Pater Noster compound in Jerusalem",
+        "date": "2024-11-07"
+       },
+       {
+        "id": "n:9eacdae21b99",
+        "quote": "Israel Police block the Latin Patriarch of Jerusalem, Pierbattista Pizzaballa, from entering the Church of the Holy Sepulchre",
+        "date": "2026-03-29"
+       }
+      ]
+     }
+    ],
+    "seconds": 26.6,
+    "calls": 4,
+    "dropped": [
+     {
+      "thought": "T2",
+      "why": "no quote found in two items"
+     },
+     {
+      "thought": "T3",
+      "why": "too unsure"
+     },
+     {
+      "thought": "T1b",
+      "why": "names West Bank, which its items do not"
+     }
+    ],
+    "note": ""
+   }
+  }
+ },
+ "why": {
+  "n:945f742db3b8": {
+   "story": {
+    "id": "n:945f742db3b8",
+    "type": "NewsItem",
+    "label": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…",
+    "date": "2026-10-19",
+    "text": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen. There are 14 missing."
+   },
+   "new": {
+    "results": [
+     {
+      "kind": "background",
+      "text": "The ongoing conflict between the Houthis and Saudi Arabian forces, evidenced by earlier ceasefire talks, created the conditions for the missile attack.",
+      "label": "inferred",
+      "items": [
+       "n:945f742db3b8",
+       "n:646d85364670"
+      ],
+      "quotes": [
+       {
+        "id": "n:945f742db3b8",
+        "quote": "A missile attack by the Houthis",
+        "date": "2026-10-19"
+       },
+       {
+        "id": "n:646d85364670",
+        "quote": "Ceasefire talks between the Houthis and Saudi Arabian forces",
+        "date": "2022-04-02"
+       }
+      ]
+     },
+     {
+      "kind": "precedent",
+      "text": "Previous Houthi missile strikes, such as the 2026‑10‑15 attack on Al‑Maashiq Palace, demonstrate a pattern of targeting military and governmental sites.",
+      "label": "inferred",
+      "items": [
+       "n:945f742db3b8",
+       "n:aff2a7c718a8"
+      ],
+      "quotes": [
+       {
+        "id": "n:945f742db3b8",
+        "quote": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah Governorate, Yemen.",
+        "date": "2026-10-19"
+       },
+       {
+        "id": "n:aff2a7c718a8",
+        "quote": "The Houthis launch missiles against Al-Maashiq Palace, headquarters of the Presidential Leadership Council and official residence of President Rashad al-Alimi, in Aden, Yemen, killing five",
+        "date": "2026-10-15"
+       }
+      ]
+     }
+    ],
+    "items": {
+     "n:aff2a7c718a8": {
+      "id": "n:aff2a7c718a8",
+      "label": "The Houthis launch missiles against Al-Maashiq Palace, headquarters of the Presidential Leadership Council…",
+      "date": "2026-10-15"
+     },
+     "n:646d85364670": {
+      "id": "n:646d85364670",
+      "label": "Ceasefire talks between the Houthis and Saudi Arabian forces begin in Yemen in an effort to end fighting",
+      "date": "2022-04-02"
+     },
+     "n:945f742db3b8": {
+      "id": "n:945f742db3b8",
+      "label": "A missile attack by the Houthis kills 58 soldiers and injure over 200 at a training center in Shabwah…",
+      "date": "2026-10-19"
+     }
+    },
+    "seconds": 8.1,
+    "calls": 5,
+    "dropped": [
+     {
+      "thought": "T3",
+      "why": "a second look: No causal link between ceasefire talks and subsequent strike."
+     },
+     {
+      "thought": "T1b",
+      "why": "names Presidential Leadership Council's, which its items do not"
+     },
+     {
+      "thought": "T2a",
+      "why": "no quote from another item"
+     }
+    ],
+    "tools": [
+     {
+      "query": "Houthis",
+      "found": 2
+     }
+    ],
+    "note": ""
+   }
+  },
+  "n:75c973928996": {
+   "story": {
+    "id": "n:75c973928996",
+    "type": "NewsItem",
+    "label": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan",
+    "date": "2026-10-19",
+    "text": "Three children are killed in an alleged Rapid Support Forces drone strike in Khartoum, Sudan."
+   },
+   "new": {
+    "results": [],
+    "items": {},
+    "seconds": 24.0,
+    "calls": 2,
+    "dropped": [
+     {
+      "thought": "T1",
+      "why": "names RSF, which its items do not"
+     },
+     {
+      "thought": "T2",
+      "why": "names RSF, which its items do not"
+     },
+     {
+      "thought": "T3",
+      "why": "too unsure"
+     }
+    ],
+    "tools": [
+     {
+      "query": "Rapid Support Forces",
+      "found": 3
+     }
+    ],
+    "note": ""
+   }
+  },
+  "n:fa08b85b6159": {
+   "story": {
+    "id": "n:fa08b85b6159",
+    "type": "NewsItem",
+    "label": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural…",
+    "date": "2026-10-17",
+    "text": "In ice hockey, the Florida Panthers become the first team in the National Hockey League to record a natural hat trick in three consecutive games."
+   },
+   "new": {
+    "results": [],
+    "items": {},
+    "seconds": 2.8,
+    "calls": 3,
+    "dropped": [
+     {
+      "thought": "T3",
+      "why": "too unsure"
+     },
+     {
+      "thought": "T1",
+      "why": "a second look: No causal link between Cup win and hat‑trick streak"
+     },
+     {
+      "thought": "T2",
+      "why": "a second look: No evidence of precedent effect on future streak"
+     }
+    ],
+    "tools": [
+     {
+      "query": "National Hockey League",
+      "found": 3
+     }
+    ],
+    "note": ""
+   }
+  },
+  "n:00eab1f15d72": {
+   "story": {
+    "id": "n:00eab1f15d72",
+    "type": "NewsItem",
+    "label": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+    "date": "2026-10-19",
+    "text": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan."
+   },
+   "new": {
+    "results": [
+     {
+      "kind": "background",
+      "text": "The Abyei region’s long‑standing dispute between South Sudan and Sudan has created a volatile security environment that can lead to violent incidents such as drone attacks.",
+      "label": "inferred",
+      "items": [
+       "n:00eab1f15d72",
+       "n:398814ffc7ea"
+      ],
+      "quotes": [
+       {
+        "id": "n:00eab1f15d72",
+        "quote": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan.",
+        "date": "2026-10-19"
+       },
+       {
+        "id": "n:398814ffc7ea",
+        "quote": "The UN Office for the Coordination of Humanitarian Affairs says that renewed fighting between tribes has displaced more than 8,000 civilians in South Sudan.",
+        "date": "2022-10-11T00:00:00Z"
+       }
+      ]
+     }
+    ],
+    "items": {
+     "n:398814ffc7ea": {
+      "id": "n:398814ffc7ea",
+      "label": "The UN Office for the Coordination of Humanitarian Affairs says that renewed fighting between tribes has…",
+      "date": "2022-10-11T00:00:00Z",
+      "url": "https://english.news.cn/20221011/0f9d1ae5219041ba99af770008787809/c.html",
+      "source": "english.news.cn",
+      "kind": "archive",
+      "star": {
+       "id": "n:398814ffc7ea",
+       "kind": "archive",
+       "sourceType": "archive",
+       "headline": "The UN Office for the Coordination of Humanitarian Affairs says that renewed fighting between tribes has…",
+       "source": "english.news.cn",
+       "via": "wikipedia",
+       "url": "https://english.news.cn/20221011/0f9d1ae5219041ba99af770008787809/c.html",
+       "date": "2022-10-11T00:00:00Z",
+       "summary": "The UN Office for the Coordination of Humanitarian Affairs says that renewed fighting between tribes has displaced more than 8,000 civilians in South Sudan.",
+       "summaryBy": "source",
+       "claims": [],
+       "tags": [
+        "world"
+       ],
+       "quality": 0.5,
+       "qualityBreakdown": {},
+       "story": 9000,
+       "licence": "CC BY-SA 4.0 (Wikipedia contributors)",
+       "citations": [
+        "https://english.news.cn/20221011/0f9d1ae5219041ba99af770008787809/c.html"
+       ],
+       "extra": {
+        "portal": "https://en.wikipedia.org/wiki/Portal:Current_events/2022_October_11#3",
+        "section": "Armed conflicts and attacks"
+       }
+      }
+     },
+     "n:00eab1f15d72": {
+      "id": "n:00eab1f15d72",
+      "label": "A drone strike kills at least 73 people at a market in the disputed Abyei area between South Sudan and Sudan",
+      "date": "2026-10-19"
+     }
+    },
+    "seconds": 2.3,
+    "calls": 4,
+    "dropped": [
+     {
+      "thought": "T2",
+      "why": "names RSF, which its items do not"
+     },
+     {
+      "thought": "T3",
+      "why": "names RSF, which its items do not"
+     }
+    ],
+    "tools": [
+     {
+      "query": "South Sudan",
+      "found": 4
+     }
+    ],
+    "note": ""
+   }
+  },
+  "n:8ab7353c3a4a": {
+   "story": {
+    "id": "n:8ab7353c3a4a",
+    "type": "NewsItem",
+    "label": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper…",
+    "date": "2026-10-15",
+    "text": "The European Central Bank authorizes UniCredit to raise its stake in Commerzbank above 30% without an upper limit, allowing the Italian bank to proceed toward taking control of the German lender."
+   },
+   "new": {
+    "results": [],
+    "items": {},
+    "seconds": 2.6,
+    "calls": 2,
+    "dropped": [
+     {
+      "thought": "T1",
+      "why": "too unsure"
+     },
+     {
+      "thought": "T2",
+      "why": "too unsure"
+     },
+     {
+      "thought": "T3",
+      "why": "too unsure"
+     }
+    ],
+    "tools": [
+     {
+      "query": "European Central Bank",
+      "found": 2
+     }
+    ],
+    "note": ""
+   }
+  },
+  "n:047b20792022": {
+   "story": {
+    "id": "n:047b20792022",
+    "type": "NewsItem",
+    "label": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European…",
+    "date": "2026-10-08",
+    "text": "The Bank of England announces that the Atlantic puffin, barn owl, buff-tailed bumblebee, and European hedgehog will feature on the next set of pound sterling notes to be issued in the United Kingdom. It will be the first time animals have replaced people on banknotes in England, which is intended to increase awareness of British wildlife."
+   },
+   "new": {
+    "results": [],
+    "items": {},
+    "seconds": 3.8,
+    "calls": 2,
+    "dropped": [
+     {
+      "thought": "T1",
+      "why": "too unsure"
+     },
+     {
+      "thought": "T2",
+      "why": "too unsure"
+     },
+     {
+      "thought": "T3",
+      "why": "no quote from the story"
+     }
+    ],
+    "tools": [
+     {
+      "query": "Bank of England",
+      "found": 2
+     }
+    ],
+    "note": ""
+   }
+  },
+  "n:12fabc0b78de": {
+   "story": {
+    "id": "n:12fabc0b78de",
+    "type": "NewsItem",
+    "label": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban…",
+    "date": "2026-10-19",
+    "text": "A judge in Miami-Dade County, Florida, United States, issues a no-bail bond arrest warrant for former Cuban president Raúl Castro after Florida attorney general James Uthmeier charged Castro with conspiracy to commit first-degree murder by directing spies to infiltrate Brothers to the Rescue and ordering the attack on their planes in 1996."
+   },
+   "new": {
+    "results": [],
+    "items": {},
+    "seconds": 2.0,
+    "calls": 2,
+    "dropped": [
+     {
+      "thought": "T1",
+      "why": "names CIA, which its items do not"
+     },
+     {
+      "thought": "T2",
+      "why": "names CIA, which its items do not"
+     },
+     {
+      "thought": "T3",
+      "why": "too unsure"
+     }
+    ],
+    "tools": [
+     {
+      "query": "Miami-Dade County",
+      "found": 3
+     }
+    ],
+    "note": ""
+   }
+  },
+  "n:54a830f0095a": {
+   "story": {
+    "id": "n:54a830f0095a",
+    "type": "NewsItem",
+    "label": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi…",
+    "date": "2026-10-19",
+    "text": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi Levine and the mayor of Aulnoye-Aymeries, France, who were travelling with European diplomats, and seize vehicles and other evidence during raids."
+   },
+   "new": {
+    "results": [
+     {
+      "kind": "background",
+      "text": "The repeated confrontations between Israeli police and French diplomatic personnel in the West Bank and Jerusalem set a tense atmosphere that contextualizes the 2026 arrests of 10 individuals linked to attacks on a French mayor and an American photojournalist.",
+      "label": "inferred",
+      "items": [
+       "n:54a830f0095a",
+       "n:e2f17011491e"
+      ],
+      "quotes": [
+       {
+        "id": "n:54a830f0095a",
+        "quote": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi Levine and the mayor of Aulnoye-Aymeries, France, who were",
+        "date": "2026-10-19"
+       },
+       {
+        "id": "n:e2f17011491e",
+        "quote": "Israel Police forcibly enter the French-administered Church of the Pater Noster compound in Jerusalem and detain two French consulate employees",
+        "date": "2024-11-07"
+       }
+      ]
+     },
+     {
+      "kind": "trigger",
+      "text": "The arrests in the West Bank were directly triggered by the attacks on the American photojournalist and the French mayor, as the police action followed those incidents.",
+      "label": "inferred",
+      "items": [
+       "n:54a830f0095a",
+       "n:e2f17011491e"
+      ],
+      "quotes": [
+       {
+        "id": "n:54a830f0095a",
+        "quote": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi Levine and the mayor of Aulnoye-Aymeries, France, who were",
+        "date": "2026-10-19"
+       },
+       {
+        "id": "n:e2f17011491e",
+        "quote": "Israel Police forcibly enter the French-administered Church of the Pater Noster compound in Jerusalem and detain two French consulate employees.",
+        "date": "2024-11-07"
+       }
+      ]
+     },
+     {
+      "kind": "precedent",
+      "text": "A prior detainment of French consulate staff by Israeli police shows a pattern of confronting French officials.",
+      "label": "inferred",
+      "items": [
+       "n:54a830f0095a",
+       "n:e2f17011491e"
+      ],
+      "quotes": [
+       {
+        "id": "n:54a830f0095a",
+        "quote": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi Levine and the mayor of Aulnoye-Aymeries, France, who were",
+        "date": "2026-10-19"
+       },
+       {
+        "id": "n:e2f17011491e",
+        "quote": "Israel Police forcibly enter the French-administered Church of the Pater Noster compound in Jerusalem and detain two French consulate employees.",
+        "date": "2024-11-07"
+       }
+      ]
+     }
+    ],
+    "items": {
+     "n:54a830f0095a": {
+      "id": "n:54a830f0095a",
+      "label": "Israel Police arrest 10 people in the occupied West Bank over attacks on American photojournalist Heidi…",
+      "date": "2026-10-19"
+     },
+     "n:e2f17011491e": {
+      "id": "n:e2f17011491e",
+      "label": "Israel Police forcibly enter the French-administered Church of the Pater Noster compound in Jerusalem and…",
+      "date": "2024-11-07"
+     }
+    },
+    "seconds": 5.6,
+    "calls": 5,
+    "dropped": [],
+    "tools": [
+     {
+      "query": "Israel Police",
+      "found": 1
+     }
+    ],
+    "note": ""
+   }
+  }
+ }
+}

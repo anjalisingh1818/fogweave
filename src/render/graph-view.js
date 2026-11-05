@@ -348,6 +348,15 @@ export class GraphView {
 
   // ---------- public API ----------
 
+  /** The web steps back while the agent's thoughts are in front of it. */
+  setQuiet(on) {
+    this.quiet = on;
+    if (on && !this.hoveredId) {
+      this._litId = null;
+      this._lit = new Set();
+    }
+  }
+
   /** The next web grows out of this star: its node starts here (a world point). */
   setOrigin(id, world) {
     this._origin = { id, world: world.clone() };
@@ -496,7 +505,7 @@ export class GraphView {
       st.cur.lerp(st.target, st.placed ? ease : ease * 0.4);
       st.scale = Math.min(1, st.scale + delta * 1.4);
     }
-    this._dim += ((this.hoveredId ? 1 : 0) - this._dim) * (1 - Math.exp(-delta * 8));
+    this._dim += ((this.hoveredId ? 1 : this.quiet ? 0.55 : 0) - this._dim) * (1 - Math.exp(-delta * 8));
     if (settings.comfort.gentle) this._dim = Math.min(this._dim, 0.5);
     // Speculative links breathe slowly (far below any flashing rate)
     const breathe = settings.comfort.gentle ? 1 : 0.65 + 0.35 * Math.sin(this.time * 1.2);
@@ -825,7 +834,7 @@ export class GraphView {
       lab.sprite.position.copy(_p);
       const k = 1 / this.radius;
       lab.sprite.scale.set(0.2 * k * lab.aspect, 0.035 * k, 1);
-      lab.sprite.material.opacity = this._lit.has(id) ? 1 : 1 - 0.6 * this._dim;
+      lab.sprite.material.opacity = this._lit.has(id) ? 1 : this.quiet ? 0.2 : 1 - 0.6 * this._dim; // the agent's thoughts are read first
       lab.sprite.visible = true;
     });
   }

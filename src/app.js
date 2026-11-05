@@ -24,6 +24,7 @@ import { Props } from './props.js';
 import { YAW_MAX, LIGHT_KINDS, LightField } from './render/lights.js';
 import { Effects } from './render/effects.js';
 import { Constellation } from './render/constellation.js';
+import { ThoughtTree } from './render/thought-tree.js';
 import { hash01 } from './layout/force.js';
 import { readerDraw, READER_SIZE } from './ui/reader-card.js';
 import { EventPlayer, applyEvent } from './research/events.js';
@@ -34,7 +35,7 @@ import { isMuted, sampleFeed, seedFrom } from './feed.js';
 import { checkRequest } from './safety.js';
 import { interestsDraw } from './ui/interests-card.js';
 import { DEBUG, settings, loadSettings, setQuality, saveSettings } from './config.js';
-import { answerDraw, ASK_SUGGESTIONS, settingsDraw, timelineDraw, exportDraw, insightsDraw, patternsDraw } from './ui/panels.js';
+import { answerDraw, ASK_SUGGESTIONS, settingsDraw, timelineDraw, exportDraw, insightsDraw, patternsDraw, agentDraw } from './ui/panels.js';
 import { sharedPatterns } from './patterns.js';
 import { insights } from './insights.js';
 import { Ambient, speech } from './audio.js';
@@ -76,6 +77,11 @@ export class App {
     this.lights.onBorn = (it, pos, delay) => this._shootingStar(it, pos, delay);
     this.constellation = new Constellation(this.world, this.anchor);
     this.constellation.onSelect = (id) => this._openKept(id);
+    this.thoughts = new ThoughtTree(this.world, this.anchor);
+    this.thoughts.onChosen = (pos) => {
+      this.fx.burst(pos, 0xffd98a, { size: 0.18 });
+      this.ambient?.bell(this._panOf(pos));
+    };
     this.view.headRef = this.anchor.head;
     this.view.onBloom = (id) => this.ambient?.pluck(this._panOf(this.view.worldPositionOf(id)));
     Card.onPress = () => this.ambient?.tick();
@@ -769,13 +775,118 @@ export class App {
     };
     if (items.length < 2) return show({ patterns: [], note: 'Seal two or more items, then look for patterns.' });
     const shared = sharedPatterns(this.store, items);
-    const live = this.mode === 'live';
-    show({ patterns: shared, running: live, note: live ? 'Reading your items together for other patterns…' : 'Demo scene: shared names only. Other patterns need the live engine.' });
-    if (!live) return this.lastPatterns;
-    const res = await this.client.patterns(items.slice(0, 24));
-    const more = res?.patterns || [];
-    const note = !res ? 'The engine did not answer; shared names are shown.' : res.note || (more.length || shared.length ? '' : 'No pattern the items themselves can show.');
-    return show({ patterns: [...shared, ...more].slice(0, 6), note });
+    if (this.mode !== 'live') return show({ patterns: shared, running: false, note: 'Demo scene: shared names only. Other patterns need the live engine.' });
+    const run = this._agentRun({ job: 'patterns', cardKey: 'patterns', title: 'PATTERNS IN YOUR LIBRARY', question: `Looking across your ${items.length} items`, noteLabel: 'Pattern', shared, empty: 'No pattern the items themselves can show.' });
+    this.lastPatterns = { patterns: shared, running: true };
+    const stats = await this.client.agentPatterns(items.slice(0, 24), { signal: run.controller.signal, onEvent: (ev) => this._onAgentEvent(run, ev) });
+    this._agentDone(run, stats);
+    this.lastPatterns = { patterns: [...shared, ...run.results].slice(0, 6), note: run.note || (run.results.length || shared.length ? '' : run.empty) };
+    return this.lastPatterns;
+  }
+
+  // ---------- the thinking agent: its thoughts grow in the fog ----------
+
+  _agentRun(fields) {
+    this.closeAgent();
+    const run = { thoughts: new Map(), results: [], dropped: [], items: {}, next: [], running: true, status: 'Thinking', tool: '', note: '', controller: new AbortController(), ...fields };
+    this.agent = run;
+    this.view.setQuiet(true);
+    this.thoughts.start(run.question);
+    // the tree stands in the middle: nothing else in front of it
+    if (this.cards.flat) this.cards.closeAll({ keepPinned: true });
+    else for (const e of this.cards.open) if (e.slot === 0) this.cards.move(e.key);
+    this.cards.show(run.cardKey, { width: 0.5, height: 0.62, draw: agentDraw(this, run), slot: 2 });
+    return run;
+  }
+
+  _onAgentEvent(run, ev) {
+    if (run !== this.agent) return;
+    if (ev.type === 'status') run.status = ev.text;
+    else if (ev.type === 'tool') run.tool = ev.state === 'running' ? `Searching the news: ${ev.query}` : `Searched “${ev.query}”: ${ev.found} new item${ev.found === 1 ? '' : 's'}`;
+    else if (ev.type === 'thought') {
+      if (ev.parent !== undefined) {
+        run.thoughts.set(ev.id, ev);
+        this.ambient?.pluck();
+      }
+      this.thoughts.onThought(ev);
+    } else if (ev.type === 'result') {
+      run.results = ev.results || [];
+      run.dropped = ev.dropped || [];
+      run.items = ev.items || {};
+      run.calls = ev.calls;
+      run.note = ev.note || '';
+    } else if (ev.type === 'next') run.next = ev.items || [];
+    this.cards.get(run.cardKey)?.redraw();
+  }
+
+  _agentDone(run, stats) {
+    if (run !== this.agent) return;
+    run.running = false;
+    if (!stats && !run.results.length && !run.note) run.note = 'The engine did not answer in time. Try again in a minute.';
+    this.setStatus('');
+    this.cards.get(run.cardKey)?.redraw();
+  }
+
+  closeAgent() {
+    const run = this.agent;
+    if (!run) return;
+    run.controller?.abort();
+    this.agent = null;
+    this.thoughts.hide();
+    this.view.setQuiet(false);
+    this.closeCard(run.cardKey);
+  }
+
+  /** A web or a recorded run to answer from. */
+  canAskWhy(id) {
+    return this.mode === 'live' || !!this._recordedWhy?.(id);
+  }
+
+  /** The story, the earlier news around it, and the nodes not opened yet. */
+  _whyBody(id) {
+    const it = this.getItem(id);
+    const text = (n) => [n.summary, ...(n.claims || []).map((c) => c.quote).filter(Boolean)].filter(Boolean).join(' ');
+    const related = [];
+    const nodes = [];
+    for (const { id: other } of this.store.neighbors(id)) {
+      const n = this.store.nodes.get(other);
+      if (!n) continue;
+      if (n.type === 'NewsItem') related.push({ id: n.id, type: n.type, label: n.label, date: n.date || '', text: n.summary || '' });
+      else if (this.canExplore(n.id) && !n.explored) nodes.push({ id: n.id, type: n.type, label: n.label });
+    }
+    return { story: { id, type: 'NewsItem', label: it.headline, date: it.date || '', text: text(it) }, related: related.slice(0, 8), nodes: nodes.slice(0, 12) };
+  }
+
+  /** "Why did this happen?": the agent tries explanations and shows what holds. */
+  async askWhy(id) {
+    const run = this._agentRun({ job: 'why', focus: id, cardKey: 'agent', title: 'WHY DID THIS HAPPEN?', question: 'Why did this happen?', noteLabel: 'Why', empty: 'No explanation held up: the news here does not show why. That is an honest answer.' });
+    const stats = await this.client.agentWhy(this._whyBody(id), { signal: run.controller.signal, onEvent: (ev) => this._onAgentEvent(run, ev) });
+    this._agentDone(run, stats);
+    return run;
+  }
+
+  /** Show what an explanation or pattern rests on: its items light up; a star that came from search arrives. */
+  showAgentResult(run, p) {
+    this.view.setQuiet(false);
+    if (run.job === 'patterns') return this.showPattern(p);
+    const stars = (p.items || []).map((id) => run.items[id]?.star).filter((s) => s && !this.lights.get(s.id) && !this.store.nodes.has(s.id));
+    if (stars.length) this.lights.addItems(stars.map((s) => ({ ...s, search: 'why' })));
+    for (const id of p.items || []) if (this.store.nodes.has(id)) this.view.flash(id, 3);
+    const other = (p.items || []).find((id) => id !== run.focus);
+    if (other && this.store.nodes.has(other)) this.pinchNode(other);
+    else if (other && this.lights.get(other)) this.openLight(other);
+  }
+
+  /** A node the agent suggests: bring it out if it waits behind a group, and open it. */
+  exploreSuggested(id) {
+    const n = this.store.nodes.get(id);
+    if (!n) return;
+    if (n.hidden) {
+      n.hidden = false;
+      this.store._emit('node-added', [id]);
+    }
+    this.closeAgent();
+    this.pinchNode(id);
   }
 
   /** Light up a pattern's items in the fog and open the first. */
@@ -1138,6 +1249,7 @@ export class App {
    * (touch it to grow it again). Sealed and pinned items stay.
    */
   closeStar(id) {
+    if (this.agent?.focus === id) this.closeAgent();
     const growing = this.getItem(id);
     if (growing?.expanded === 'running') {
       growing.closed = true;
@@ -1166,6 +1278,7 @@ export class App {
   }
 
   _onCardClosed(key) {
+    if (this.agent?.cardKey === key) this.closeAgent(); // the tree goes with its card
     if (key.startsWith('node:') && this.selectedId === key.slice(5)) {
       this.selectedId = null;
       this.view.setSelected(null);
@@ -1835,6 +1948,8 @@ export class App {
     this.fx.update(delta, _hq);
     this.constellation.fit = this.lights.fit;
     this.constellation.update(delta, _hq);
+    this.thoughts.flat = !this.world.session;
+    this.thoughts.update(delta, _hq);
     this.cards.update(delta);
     this.atmosphere.update(delta);
     this.props.update(delta, now);
