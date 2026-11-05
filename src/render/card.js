@@ -256,6 +256,13 @@ export class Card {
     if (!v && this.entity.hasComponent(RayInteractable)) this.entity.removeComponent(RayInteractable);
   }
 
+  /** A card on its way out stays visible for a moment but takes no more rays. */
+  disarm() {
+    this.visible = false;
+    if (this.entity.hasComponent(RayInteractable)) this.entity.removeComponent(RayInteractable);
+    if (this.entity.hasComponent(PokeInteractable)) this.entity.removeComponent(PokeInteractable);
+  }
+
   /** Change the card's size in metres (new canvas, texture and plane; same entity). */
   resize(width, height) {
     if (Math.abs(width - this.width) < 1e-4 && Math.abs(height - this.height) < 1e-4) return;

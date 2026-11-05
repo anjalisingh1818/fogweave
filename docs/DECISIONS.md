@@ -163,3 +163,14 @@ One line each: what was chosen, and why. Newest last.
 - **Fog that fills the space:** 72 soft fog banks (canvas cloud puffs with a round falloff, so no edges show) and a low fog floor of 14. They sit in a shell 1.6–9 m around the reader, mostly around eye level and below, thinning upward. Each drifts slowly around the reader (a few against the others), turns, rises and falls slightly, and breathes. Fine dust motes are smaller and fainter than before.
 - **Readability:** fog thins within about 2.5 m of the eyes, so cards, the web and labels stay clear. Distance haze is a dark blue-gray (`#1c222d`, lower density), so far things sink into the night rather than into gray.
 - **Comfort and performance:** Calm mode slows the drift and thins the fog. The quality governor drops to about a third of the banks, then to none, before touching anything else. The welcome screen uses the same night with CSS fog that drifts slowly (no motion with reduced-motion).
+
+## Living motion (UI v2, phase 1; owner's request, 2026-11-05)
+
+- **Opening:** a star swells and a soft ring opens around it; its card comes part of the way out of the star and unfolds (0.26 s). Closing folds it (0.16 s). A folding card is already closed in the app and takes no rays.
+- **Growing:** a star's node starts at the star in the sky; other nodes start inside what they connect to and open one after another (0.07 s apart, at most 1.4 s of waiting). A thread of light with a bright tip grows from the older end. A node that has not opened yet cannot be touched.
+- **Pointing:** the node and its neighbours stay lit and named, the rest dim. Speculative links breathe slowly (about one breath in five seconds, far below any flashing rate).
+- **Closing a star:** each shown node runs back to the star as a light with a thread. Nodes waiting behind a group button were never out, so they do not. A web that comes back grows again from the start.
+- **New news:** a new star (refresh or Ask the fog) arrives as a shooting star and appears when it lands. A first load of stars has none.
+- **Hands:** fine motes move out of a fingertip's way, and a fast hand leaves faint puffs (at most 14).
+- **Calm mode and budget:** Calm mode has no shooting stars or puffs and softens the rest. Effects are two instanced quads and one line object in `src/render/effects.js`; over budget they are not drawn. They are decoration only and never change the graph.
+- **Close while growing:** the star now stays closed and can grow again; before, the growth finished after the Close and marked the star as grown with no web.

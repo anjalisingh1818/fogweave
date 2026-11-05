@@ -33,6 +33,7 @@ export const FOG_COLOR = 0x1c222d; // distance haze: dark blue-gray, so far thin
 const BANK_COLOR = 0x9aa3b1; // the gray fog banks
 const BANKS = 72;
 const FLOOR = 14;
+const HAND_REACH = 0.25; // m
 const _cam = new Vector3();
 const _p = new Vector3();
 
@@ -113,6 +114,12 @@ export class Atmosphere {
     );
     this.points.frustumCulled = false;
     this.group.add(this.points);
+    this.hands = [];
+  }
+
+  /** World positions of the fingertips: the fine fog moves out of a hand's way. */
+  setHands(points) {
+    this.hands = points;
   }
 
   update(delta) {
@@ -154,6 +161,18 @@ export class Atmosphere {
         arr[i * 3] = this.base[i * 3] + Math.sin(this.t * 0.07 + sd) * 0.12;
         arr[i * 3 + 1] = this.base[i * 3 + 1] + Math.sin(this.t * 0.05 + sd * 1.3) * 0.08;
         arr[i * 3 + 2] = this.base[i * 3 + 2] + Math.cos(this.t * 0.06 + sd) * 0.12;
+        for (const h of this.hands) {
+          const dx = arr[i * 3] - h.x;
+          const dy = arr[i * 3 + 1] - h.y;
+          const dz = arr[i * 3 + 2] - h.z;
+          const d2 = dx * dx + dy * dy + dz * dz;
+          if (d2 > HAND_REACH * HAND_REACH || d2 < 1e-6) continue;
+          const d = Math.sqrt(d2);
+          const push = ((HAND_REACH - d) / d) * 0.8;
+          arr[i * 3] += dx * push;
+          arr[i * 3 + 1] += dy * push;
+          arr[i * 3 + 2] += dz * push;
+        }
       }
       attr.needsUpdate = true;
     }

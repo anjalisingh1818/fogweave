@@ -21,7 +21,9 @@ import { contextDraw } from './ui/context-card.js';
 import { Keypad } from './ui/keypad.js';
 import { Onboarding } from './ui/onboarding.js';
 import { Props } from './props.js';
-import { YAW_MAX, LightField } from './render/lights.js';
+import { YAW_MAX, LIGHT_KINDS, LightField } from './render/lights.js';
+import { Effects } from './render/effects.js';
+import { hash01 } from './layout/force.js';
 import { readerDraw, READER_SIZE } from './ui/reader-card.js';
 import { EventPlayer, applyEvent } from './research/events.js';
 import { ResearchClient } from './research/client.js';
@@ -69,6 +71,8 @@ export class App {
     });
     this.lights = new LightField(this.world, this.anchor);
     this.lights.onSelect = (id) => this.openLight(id);
+    this.fx = new Effects(this.world);
+    this.lights.onBorn = (it, pos, delay) => this._shootingStar(it, pos, delay);
     this.lightsMeta = null;
     this.sealedLights = readJSON(SEALED_LIGHTS_KEY, {});
     this.lights.sealed = new Set(Object.keys(this.sealedLights));
@@ -1031,6 +1035,7 @@ export class App {
       }
     };
     walk(id);
+    this._retract(remove, id);
     removeNodesFromStore(this.store, remove);
     n.addedIds = [];
     n.explored = false;
@@ -1125,12 +1130,22 @@ export class App {
    * (touch it to grow it again). Sealed and pinned items stay.
    */
   closeStar(id) {
+    const growing = this.getItem(id);
+    if (growing?.expanded === 'running') {
+      growing.closed = true;
+      // what has arrived so far leaves with it
+      const node = this.store.nodes.get(id);
+      if (node && this._growing?.id === id) node.addedIds = this._growing.added;
+    }
     if (this.expanding?.id === id) this.stopResearch();
     else if (this.player && !this.player.done && this.getItem(id)?.expanded === 'running') this.stopResearch();
     const before = new Set(this.store.nodes.keys());
     this.collapse(id);
     const n = this.store.nodes.get(id);
-    if (n && !n.sealed && !n.pinned && !this.store.neighbors(id).length) removeNodesFromStore(this.store, [id]);
+    if (n && !n.sealed && !n.pinned && !this.store.neighbors(id).length) {
+      this._retract([id], id);
+      removeNodesFromStore(this.store, [id]);
+    }
     const gone = [...before].filter((x) => !this.store.nodes.has(x));
     for (const x of gone) this.closeCard(`node:${x}`);
     this.trail = this.trail.filter((x) => this.store.nodes.has(x));
@@ -1162,6 +1177,12 @@ export class App {
     const it = this.lights.get(id);
     if (!it) return;
     for (const e of [...this.cards.open]) if (e.key.startsWith('light:') && e.key !== `light:${id}`) this.cards.close(e.key);
+    const starAt = this.lights.worldPositionOf(id, new Vector3());
+    if (starAt && this.lights.openId !== id) {
+      this.lights.pop(id);
+      this.fx.burst(starAt, LIGHT_KINDS[it.kind]?.color ?? 0xffe6b4);
+      if (!this.store.nodes.has(id)) this.view.setOrigin(id, starAt);
+    }
     this.lights.openId = id;
     const size = this.readerDetails?.has(id) ? READER_SIZE.details : READER_SIZE.compact;
     this.cards.show(`light:${id}`, { ...size, draw: readerDraw(this, id), prefer: this.lights.worldPositionOf(id) });
@@ -1172,6 +1193,31 @@ export class App {
       if (!this.researching) this.expandLight(id);
       else this._pendingExpand = id; // grows when the current growth finishes
     }
+  }
+
+  /** News arrives as a shooting star; returns how long until the star itself appears. */
+  _shootingStar(it, pos, delay) {
+    if (settings.comfort.gentle) return delay; // Calm mode: the star only fades in
+    const color = LIGHT_KINDS[it.kind]?.color ?? 0xffe6b4;
+    const side = hash01(it.id, 8) < 0.5 ? -1 : 1;
+    const from = pos.clone().add(new Vector3(side * 0.9, 0.22, -0.25));
+    const life = 0.95;
+    this.fx.comet(from, pos, color, { life, delay, onArrive: () => this.fx.burst(pos, color, { size: 0.12, life: 0.6, strength: 0.8 }) });
+    return delay + life;
+  }
+
+  /** A closing web runs back home: a light and a thread from each node to its star. */
+  _retract(ids, homeId) {
+    const home = this.lights.worldPositionOf(homeId, new Vector3()) || this.view.worldPositionOf(homeId, new Vector3());
+    if (!home) return;
+    let i = 0;
+    for (const id of ids.slice(0, 48)) {
+      const node = this.store.nodes.get(id);
+      if (!node || node.hidden) continue; // nodes waiting behind a group button were never out
+      const at = this.view.worldPositionOf(id, new Vector3());
+      if (at) this.fx.retract(at, home, this.view._nodeColor(node), { delay: i++ * 0.012 });
+    }
+    if (i) this.fx.burst(home, 0xffe6b4, { delay: 0.5, size: 0.12, strength: 0.7 });
   }
 
   /** Reader card: compact (default) or with claims, quotes and the link. */
@@ -1222,6 +1268,7 @@ export class App {
     // about 5 nodes first (the closest), the rest wait behind group buttons on the card
     const before = new Set(this.store.nodes.keys());
     const added = [];
+    this._growing = { id, added };
     const mark = (ev) => {
       if (ev.type === 'node' && ev.node.id !== id && !before.has(ev.node.id) && !added.includes(ev.node.id)) {
         added.push(ev.node.id);
@@ -1251,6 +1298,7 @@ export class App {
         this.setStatus('That recorded run is missing from the snapshot.');
         return;
       }
+      if (it.closed) return this._grownAfterClose(it);
       for (const ev of rec.events || []) mark(ev);
       this._recordedAnswers ??= {};
       if (rec.answers) this._recordedAnswers[id] = rec.answers;
@@ -1265,6 +1313,7 @@ export class App {
         this._renderStatus();
       });
     }
+    if (it.closed) return this._grownAfterClose(it);
     it.expanded = true;
     if (this.store.nodes.has(id)) {
       this.store.nodes.get(id).addedIds = added;
@@ -1278,6 +1327,14 @@ export class App {
     this.setStatus('');
     this._refreshCards();
     this.onboarding.notify('expanded');
+  }
+
+  /** Closed while it was growing: nothing more is added, and it can grow again. */
+  _grownAfterClose(it) {
+    it.closed = false;
+    it.expanded = false;
+    this.setStatus('');
+    this.cards.get(`light:${it.id}`)?.redraw();
   }
 
   _onResearchEvent(ev) {
@@ -1692,6 +1749,8 @@ export class App {
     this._handPoints ??= [new Vector3(), new Vector3()];
     const tips = this.world.session ? ['left', 'right'].map((s, i) => this.sys.player.indexTipSpaces?.[s]?.getWorldPosition(this._handPoints[i])).filter(Boolean) : [];
     this.lights.setHands(tips);
+    this.atmosphere.setHands(tips);
+    this._handPuffs(tips, delta);
     // flat page (no headset): fit the light arc into the window's view
     const cam = this.world.camera;
     if (!this.world.session && cam?.isPerspectiveCamera) {
@@ -1700,6 +1759,7 @@ export class App {
       this.lights.fit = { k: (halfH * 0.86) / YAW_MAX, e0: halfV * 0.3, e1: halfV * 0.82 };
     } else this.lights.fit = null;
     this.lights.update(delta, _hq);
+    this.fx.update(delta, _hq);
     this.cards.update(delta);
     this.atmosphere.update(delta);
     this.props.update(delta, now);
@@ -1720,6 +1780,18 @@ export class App {
         if (n && !n.explored) this.exploreNode(next);
       }
     }
+  }
+
+  /** A hand moving quickly through the fog leaves a faint puff behind it. */
+  _handPuffs(tips, delta) {
+    this._puffAt = (this._puffAt || 0) - delta;
+    this._prevTips ??= [new Vector3(), new Vector3()];
+    tips.forEach((p, i) => {
+      const prev = this._prevTips[i];
+      if (this._puffAt <= 0 && delta > 0 && prev.lengthSq() && p.distanceTo(prev) / delta > 0.6) this.fx.puff(p);
+      prev.copy(p);
+    });
+    if (this._puffAt <= 0) this._puffAt = 0.09;
   }
 
   _followWrist() {

@@ -159,6 +159,7 @@ export class LightField {
         phase: r(4) * Math.PI * 2,
         speed: 0.012 + r(5) * 0.01,
         born: this.time,
+        delay: i * 0.14,
       });
     });
     return fresh.map((x) => x.id);
@@ -177,8 +178,21 @@ export class LightField {
     const st = this.state.get(oldId);
     this.state.delete(oldId);
     this.items[i] = item;
-    if (st) this.state.set(item.id, { ...st, pullUntil: 0, pull: 0, born: this.time });
+    if (st) this.state.set(item.id, { ...st, pullUntil: 0, pull: 0, born: this.time, delay: 0, wait: undefined });
     return true;
+  }
+
+  /** A star answers the touch that opens it: a short swell of light. */
+  pop(id) {
+    const st = this.state.get(id);
+    if (st) st.popAt = this.time;
+  }
+
+  /** How far a new star has risen (0..1): it appears when its shooting star lands. */
+  _rise(it, st) {
+    if (st?.born === undefined) return 1;
+    if (st.wait === undefined) st.wait = this.onBorn?.(it, this.worldPositionOf(it.id, new Vector3()), st.delay || 0) ?? 0;
+    return Math.max(0, Math.min(1, (this.time - st.born - st.wait) / 0.5));
   }
 
   /** Lights the reader is engaged with: never swapped out. */
@@ -250,7 +264,10 @@ export class LightField {
       const ph = hash01(it.id, 6) * 6;
       // slow patterns only (well under 3 flashes per second)
       const twinkle = LIGHT_KINDS[kind].pattern === 'breathe' ? 1 + 0.18 * Math.sin(this.time * 0.9 + ph) : 1 + 0.06 * Math.sin(this.time * 1.3 + ph);
-      const core = (kind === 'breaking' ? 0.026 : 0.021) * (focus ? 1.35 : 1);
+      const rise = this._rise(it, st);
+      const popT = st?.popAt === undefined ? 1 : Math.min(1, (this.time - st.popAt) / 0.55);
+      const pop = 1 + (calm ? 0.25 : 0.7) * Math.sin(Math.PI * popT) * (1 - popT);
+      const core = (kind === 'breaking' ? 0.026 : 0.021) * (focus ? 1.35 : 1) * rise * pop;
 
       const mesh = this.cores[kind];
       _q.setFromAxisAngle(_s.set(0, 1, 0), this.time * 0.4 + hash01(it.id, 7) * 6);
@@ -265,7 +282,7 @@ export class LightField {
       _c.setHex(LIGHT_KINDS[kind].color).multiplyScalar((0.25 + 0.75 * rel) * fresh * lift);
       this.glow.setColorAt(this.glow.count++, _c);
       // short fading trail: where the light was a moment ago
-      if (!calm && !held) {
+      if (!calm && !held && rise === 1) {
         for (let k = 1; k <= TRAIL; k++) {
           this.worldPositionOf(it.id, _t, k * 0.35);
           _m.compose(_t, headQuat, _s.setScalar(core * (4 - k)));
