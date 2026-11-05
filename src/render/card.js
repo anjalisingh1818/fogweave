@@ -96,11 +96,20 @@ export class Card {
     this.buttons = [];
     this.boxes = [];
     ctx.clearRect(0, 0, w, h);
+    // glass: a little light from above, dark enough behind the text to read in any fog
     roundRect(ctx, 4, 4, w - 8, h - 8, 36);
-    ctx.fillStyle = UI.bg;
+    const glass = ctx.createLinearGradient(0, 0, 0, h);
+    glass.addColorStop(0, 'rgba(38,45,60,0.93)');
+    glass.addColorStop(0.35, 'rgba(20,23,31,0.94)');
+    glass.addColorStop(1, 'rgba(12,14,20,0.96)');
+    ctx.fillStyle = glass;
     ctx.fill();
+    const rim = ctx.createLinearGradient(0, 0, 0, h);
+    rim.addColorStop(0, 'rgba(255,233,180,0.55)');
+    rim.addColorStop(0.5, UI.border);
+    rim.addColorStop(1, 'rgba(200,210,225,0.1)');
     ctx.lineWidth = 4;
-    ctx.strokeStyle = UI.border;
+    ctx.strokeStyle = rim;
     ctx.stroke();
     if (this._draw) this._draw(ctx, this._helpers(), w, h);
     this.texture.needsUpdate = true;
@@ -221,6 +230,7 @@ export class Card {
     if (!b) return false;
     this.flashId = id;
     this.redraw();
+    Card.onPress?.(this);
     setTimeout(() => {
       if (this.flashId === id) {
         this.flashId = null;

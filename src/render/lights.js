@@ -134,7 +134,8 @@ export class LightField {
       this.state.set(it.id, {
         yaw: (yawDeg * Math.PI) / 180,
         elev: ELEV_MIN + r(2) * (ELEV_MAX - ELEV_MIN),
-        dist: 1.45 + r(3) * 0.75,
+        // the older the news, the further out it drifts
+        dist: 1.45 + r(3) * 0.2 + 0.6 * Math.min(1, Math.log10(1 + this.ageDays(it) / 30) / 2),
         phase: r(4) * Math.PI * 2,
         speed: 0.015 + r(5) * 0.02,
       });

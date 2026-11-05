@@ -186,20 +186,21 @@ export function nodeCardDraw(app, id) {
       if (brief) {
         y += 8;
         const style = brief.label ? LABEL_STYLE[brief.label] : null;
-        ui.text('HOW IT RELATES', pad, y, { size: 20, color: '#ffe2a8', weight: 700 });
-        if (style) ui.text(style.label.toUpperCase(), w - pad, y, { size: 20, color: style.css, weight: 700, align: 'right' });
-        y = fit(ui, brief.text, pad, y + 32, w - pad * 2, { size: 27, weight: 600, maxLines: 2 }, limit);
-        if (brief.why) y = fit(ui, brief.why, pad, y, w - pad * 2, { size: 22, color: UI.dim, maxLines: 2 }, limit);
+        ui.text('HOW IT RELATES', pad, y, { size: 22, color: '#ffe2a8', weight: 700 });
+        if (style) ui.text(style.label.toUpperCase(), w - pad, y, { size: 22, color: style.css, weight: 700, align: 'right' });
+        y = fit(ui, brief.text, pad, y + 34, w - pad * 2, { size: 29, weight: 600, maxLines: 2 }, limit);
+        if (brief.why) y = fit(ui, brief.why, pad, y, w - pad * 2, { size: 24, color: UI.dim, maxLines: 2 }, limit);
+        if (style) y = fit(ui, `${style.label}: ${style.note}`, pad, y, w - pad * 2, { size: 22, color: style.css, maxLines: 1 }, limit);
       }
       // 2. what it is (real information from the web, with its source)
       const d = node.dossier;
       const overview = d?.overview || node.definition || node.description;
       y += 10;
       if (y + 60 < limit) {
-        ui.text('WHAT IT IS', pad, y + 6, { size: 20, color: '#ffe2a8', weight: 700 });
-        y += 38;
+        ui.text('WHAT IT IS', pad, y + 6, { size: 22, color: '#ffe2a8', weight: 700 });
+        y += 40;
         if (overview) {
-          y = fit(ui, overview, pad, y, w - pad * 2, { size: 24, color: '#d3dae3', maxLines: 3 }, limit);
+          y = fit(ui, overview, pad, y, w - pad * 2, { size: 26, color: '#d3dae3', maxLines: 3 }, limit);
           const src = d?.overviewSource || (node.definitionUrl ? { url: node.definitionUrl, licence: node.definitionLicence } : null);
           if (src?.url && y + 24 < limit) {
             ui.text(`${src.licence || 'source'} · ${String(src.url).replace('https://', '')}`, pad, y + 2, { size: 19, color: '#8fb7e6', maxWidth: w - pad * 2 });
@@ -218,13 +219,13 @@ export function nodeCardDraw(app, id) {
       // 3. key facts (each a sourced statement, with its date when known)
       const facts = (d?.facts || []).slice(0, 4);
       if (facts.length && y + 60 < limit) {
-        ui.text(d.kind === 'event' ? 'WHAT THE REPORTING SAYS' : 'KEY FACTS', pad, y + 10, { size: 20, color: '#ffe2a8', weight: 700 });
+        ui.text(d.kind === 'event' ? 'WHAT THE REPORTING SAYS' : 'KEY FACTS', pad, y + 10, { size: 22, color: '#ffe2a8', weight: 700 });
         ui.text(d.kind === 'event' ? 'news' : 'Wikidata', w - pad, y + 10, { size: 19, color: '#8fb7e6', align: 'right' });
         y += 42;
         for (const f of facts) {
           if (y + 24 > limit) break;
           const date = f.date && d.kind !== 'event' && !String(f.value).includes(f.date.slice(0, 4)) ? ` (${f.date})` : '';
-          y = fit(ui, `· ${f.label}: ${f.value}${date}`, pad, y, w - pad * 2, { size: 23, maxLines: 2, lineHeight: 1.25 }, limit) + 4;
+          y = fit(ui, `· ${f.label}: ${f.value}${date}`, pad, y, w - pad * 2, { size: 25, maxLines: 2, lineHeight: 1.25 }, limit) + 4;
         }
       }
     } else if (node.type === 'NewsItem' && newsBrief(app, id)) {
@@ -232,17 +233,19 @@ export function nodeCardDraw(app, id) {
       const brief = newsBrief(app, id);
       const style = LABEL_STYLE[brief.label] || LABEL_STYLE.inferred;
       y += 8;
-      ui.text('HOW IT RELATES', pad, y, { size: 20, color: '#ffe2a8', weight: 700 });
-      ui.text(style.label.toUpperCase(), w - pad, y, { size: 20, color: style.css, weight: 700, align: 'right' });
-      y = fit(ui, brief.text, pad, y + 32, w - pad * 2, { size: 26, weight: 600, maxLines: 2 }, limit);
-      if (brief.why) y = fit(ui, brief.why, pad, y, w - pad * 2, { size: 22, color: UI.dim, maxLines: 2 }, limit);
-      for (const q of brief.quotes) {
-        if (y + 40 > limit) break;
-        y = fit(ui, `“${q.quote}” — ${q.source || ''}`, pad + 18, y + 4, w - pad * 2 - 18, { size: 21, color: '#cdd5df', maxLines: 2 }, limit);
-      }
-      if (node.summary && y + 60 < limit) {
-        ui.text('WHAT IT SAYS', pad, y + 14, { size: 20, color: '#ffe2a8', weight: 700 });
-        y = fit(ui, node.summary, pad, y + 46, w - pad * 2, { size: 23, color: '#d3dae3', maxLines: 3 }, limit);
+      ui.text('HOW IT RELATES', pad, y, { size: 22, color: '#ffe2a8', weight: 700 });
+      ui.text(style.label.toUpperCase(), w - pad, y, { size: 22, color: style.css, weight: 700, align: 'right' });
+      y = fit(ui, brief.text, pad, y + 34, w - pad * 2, { size: 29, weight: 600, maxLines: 2 }, limit);
+      if (brief.why) y = fit(ui, brief.why, pad, y, w - pad * 2, { size: 24, color: UI.dim, maxLines: 2 }, limit);
+      y = fit(ui, `${style.label}: ${style.note}`, pad, y, w - pad * 2, { size: 22, color: style.css, maxLines: 1 }, limit);
+      if (app.quotesOpen?.has(id)) {
+        for (const q of brief.quotes) {
+          if (y + 40 > limit) break;
+          y = fit(ui, `“${q.quote}” — ${q.source || ''}`, pad + 18, y + 6, w - pad * 2 - 18, { size: 24, color: '#cdd5df', maxLines: 3 }, limit);
+        }
+      } else if (node.summary && y + 60 < limit) {
+        ui.text('WHAT IT SAYS', pad, y + 14, { size: 22, color: '#ffe2a8', weight: 700 });
+        y = fit(ui, node.summary, pad, y + 48, w - pad * 2, { size: 26, color: '#d3dae3', maxLines: 3 }, limit);
       }
     } else if (node.type === 'Claim' && node.quote) y = fit(ui, `“${node.quote}”`, pad, y + 2, w - pad * 2, { size: 29, color: '#cdd5df', maxLines: 2 }, limit);
     else if (node.definition) y = fit(ui, node.definition, pad, y + 2, w - pad * 2, { size: 26, color: '#cdd5df', maxLines: 3 }, limit);
@@ -303,6 +306,8 @@ export function nodeCardDraw(app, id) {
 
     // small row: trail / show more / pin / collapse / expand a news node
     const small = [];
+    const quotes = node.type === 'NewsItem' ? newsBrief(app, id)?.quotes?.length : 0;
+    if (quotes) small.push({ id: 'quotes', label: app.quotesOpen?.has(id) ? 'Hide quotes' : `Show ${quotes} quotes`, primary: true, on: () => app.toggleQuotes(id) });
     if (app.trail.length >= 2) small.push({ id: 'back', label: '‹ Back', on: () => app.back() });
     if (node.type === 'NewsItem' && app.canExpand(id) && !app.getItem(id)?.expanded) small.push({ id: 'expand', label: 'Show related', on: () => app.expandLight(id) });
     small.push({ id: 'pin', label: node.pinned ? 'Unpin' : 'Pin', on: () => app.togglePin(id) });
@@ -315,7 +320,7 @@ export function nodeCardDraw(app, id) {
       chips.forEach((b, i) => ui.button(b.id, b.label, pad + i * (cw + 12), h - 270, cw, 58, b.on, { size: 22 }));
     }
     const sw = (w - pad * 2 - 12 * (small.length - 1)) / Math.max(4, small.length);
-    small.forEach((b, i) => ui.button(b.id, b.label, pad + i * (sw + 12), h - 200, sw, 58, b.on, { size: 22 }));
+    small.forEach((b, i) => ui.button(b.id, b.label, pad + i * (sw + 12), h - 200, sw, 58, b.on, { size: 22, primary: b.primary }));
 
     // actions
     const by = h - 122;

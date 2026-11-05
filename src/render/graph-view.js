@@ -60,6 +60,7 @@ const _c = new Color();
 const _up = new Vector3(0, 1, 0);
 const BLOOM_GAP = 0.07; // s between nodes opening
 const BLOOM_MAX = 1.4; // s: the longest a node waits for its turn
+const DEPTH_FROM_DAYS = 14; // news this much older than the story starts to sit further away
 
 export class GraphView {
   constructor(world, store, { center, radius = 0.5 }) {
@@ -97,6 +98,8 @@ export class GraphView {
     this._litId = null; // pointed at: it and its neighbours stay lit, the rest dim
     this._lit = new Set();
     this._dim = 0;
+    this.depthFrom = Date.now(); // the date of the story the web grows from
+    this.headRef = null; // the seated head (time runs away from it)
 
     this._buildMeshes();
     this._buildLabels();
@@ -259,9 +262,13 @@ export class GraphView {
   async _runLayout() {
     const { nodes, edges } = this.store.view('all');
     const previous = {};
+    const axis = this._awayAxis();
     for (const n of nodes) {
       const st = this.state.get(n.id);
-      if (st?.placed) previous[n.id] = [st.target.x / SHAPE[0], st.target.y / SHAPE[1], st.target.z / SHAPE[2]];
+      if (st?.placed) {
+        _p.copy(st.target).addScaledVector(axis, -(st.depth || 0)); // the layout does not know about time
+        previous[n.id] = [_p.x / SHAPE[0], _p.y / SHAPE[1], _p.z / SHAPE[2]];
+      }
     }
     const positions = await this.layout.layout(nodes, edges, previous);
     if (!positions) return; // superseded by a newer request
@@ -269,6 +276,9 @@ export class GraphView {
       const st = this._ensureState(id);
       // wide, shallow bubble: a seated viewer sees across it, not into it
       st.target.set(p[0] * SHAPE[0], p[1] * SHAPE[1], p[2] * SHAPE[2]);
+      // time as depth: the older the news, the further from you
+      st.depth = this._ageDepth(this.store.nodes.get(id));
+      st.target.addScaledVector(axis, st.depth);
       st.placed = true;
     }
   }
@@ -310,6 +320,25 @@ export class GraphView {
       if (s) return s.target;
     }
     return null;
+  }
+
+  /** From the seated head out through the web's centre. */
+  _awayAxis() {
+    const axis = new Vector3(0, 0, -1);
+    if (this.headRef) {
+      axis.subVectors(this.root.position, this.headRef);
+      axis.y = 0;
+      axis.normalize();
+    }
+    return axis;
+  }
+
+  /** How much further away an older news item sits: months count, then years count less. */
+  _ageDepth(node) {
+    if (node?.type !== 'NewsItem' || !node.date) return 0;
+    const days = (this.depthFrom - Date.parse(node.date)) / 86400000;
+    if (!(days > DEPTH_FROM_DAYS)) return 0;
+    return Math.min(1.1, 0.42 * Math.log10(1 + days / 30));
   }
 
   _neighborId(id) {
@@ -459,6 +488,10 @@ export class GraphView {
         const from = st.parent && this.state.get(st.parent);
         if (from) st.cur.copy(from.cur);
         continue;
+      }
+      if (!st.opened) {
+        st.opened = true;
+        this.onBloom?.(id);
       }
       st.cur.lerp(st.target, st.placed ? ease : ease * 0.4);
       st.scale = Math.min(1, st.scale + delta * 1.4);
@@ -778,10 +811,12 @@ export class GraphView {
         return;
       }
       if (redraw) {
-        const key = `${node.label}|${node.sealed}|${id === this.selectedId}`;
+        // news that sits further away says when it is from
+        const year = st.depth > 0 ? String(node.date).slice(0, 4) : '';
+        const key = `${node.label}|${node.sealed}|${id === this.selectedId}|${year}`;
         if (lab.key !== key) {
           lab.key = key;
-          drawLabel(lab, node, id === this.selectedId);
+          drawLabel(lab, node, id === this.selectedId, year);
         }
       }
       this._drawPos(id, _p);
@@ -832,15 +867,16 @@ function hash(str, salt) {
   return ((h >>> 0) % 10000) / 10000;
 }
 
-function drawLabel(lab, node, selected) {
+function drawLabel(lab, node, selected, year = '') {
   const { ctx, canvas, tex } = lab;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const strong = node.type === 'NewsItem' || node.type === 'ContextNode';
   ctx.font = `${strong ? 600 : 500} 46px ${UI.font}`;
-  let text = node.label;
+  const full = year ? `${year} · ${node.label}` : node.label;
+  let text = full;
   const maxW = canvas.width - 40;
   while (ctx.measureText(text).width > maxW && text.length > 4) text = text.slice(0, -2);
-  if (text !== node.label) text = text.replace(/\s*\S?$/, '') + '…';
+  if (text !== full) text = text.replace(/\s*\S?$/, '') + '…';
   const w = Math.min(canvas.width, ctx.measureText(text).width + 40);
   const x0 = (canvas.width - w) / 2;
   ctx.fillStyle = selected ? 'rgba(60,50,25,0.82)' : 'rgba(12,14,18,0.62)';

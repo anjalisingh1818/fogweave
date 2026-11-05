@@ -50,7 +50,7 @@ export const TYPE_STYLE = {
 
 /** Link label -> line style. Speculative is faint and never ranked. */
 export const LABEL_STYLE = {
-  reported: { label: 'Reported', dash: null, opacity: [0.42, 0.9], css: '#d6dde6', note: 'a source says it' },
+  reported: { label: 'Reported', dash: null, opacity: [0.42, 0.9], css: '#d6dde6', note: 'a source says it (not proof that it is true)' },
   inferred: { label: 'Inferred', dash: [0.03, 0.02], opacity: [0.38, 0.85], css: '#f2c27a', note: 'reasoned from reported facts' },
   speculative: { label: 'Speculative', dash: [0.006, 0.022], opacity: [0.16, 0.3], css: '#8a9099', note: 'plausible, weakly supported' },
 };

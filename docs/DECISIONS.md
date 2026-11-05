@@ -174,3 +174,14 @@ One line each: what was chosen, and why. Newest last.
 - **Hands:** fine motes move out of a fingertip's way, and a fast hand leaves faint puffs (at most 14).
 - **Calm mode and budget:** Calm mode has no shooting stars or puffs and softens the rest. Effects are two instanced quads and one line object in `src/render/effects.js`; over budget they are not drawn. They are decoration only and never change the graph.
 - **Close while growing:** the star now stays closed and can grow again; before, the growth finished after the Close and marked the star as grown with no web.
+
+## Easier to read, sound and time (UI v2, phase 2; owner's request, 2026-11-06)
+
+- **Cards:** glass look, still dark behind the text. Larger text on news and node cards, and two lines of summary on a closed news card. Cards are a little taller for it.
+- **Quotes one pinch away:** a related news card opens with how it relates and what it says; "Show 2 quotes" brings the two verbatim quotes. They are still checked and still on every link: this only keeps the first look light.
+- **What a label means:** each "how it relates" says it in words. Reported now reads "a source says it (not proof that it is true)", because a label can be read as "verified".
+- **Sound:** generated in code, no files. A chime when a star opens, a phrase of soft notes as a web opens, a falling whoosh when it closes, a shimmer when news lands, a bell when you keep something, a tick on buttons. Placed left or right of where it happens. The same switch as the ambient sound turns them off, and nothing plays before a gesture. Nobody has judged the volume by ear yet.
+- **Time as depth:** a news item more than two weeks older than the story sits further from you (months count, then years count less; up to about half a metre or more in a big web) and its label starts with its year. Older stars also drift further out.
+- **Your constellation:** what you seal becomes gold stars high in the sky, joined by thin lines, and stays on this device with the Library. A star's place comes from its id, so the shape is the same every day. Touching one opens the item, or the Library if it is not in the fog. A line here says nothing about how two items relate; that stays with labelled links and Connect the dots.
+- **A stuck star no longer blocks the others:** a stream with nothing new for 70 s gives up. What arrived stays; if nothing arrived, the star is not marked as grown and touching it tries again.
+- **Testing note:** the "Target crashed" seen in QA runs came from the runs' own time limit stopping a test that was waiting on a slow growth (the old version did the same); it was not a browser crash.

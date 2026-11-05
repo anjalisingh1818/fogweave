@@ -23,6 +23,7 @@ import { Onboarding } from './ui/onboarding.js';
 import { Props } from './props.js';
 import { YAW_MAX, LIGHT_KINDS, LightField } from './render/lights.js';
 import { Effects } from './render/effects.js';
+import { Constellation } from './render/constellation.js';
 import { hash01 } from './layout/force.js';
 import { readerDraw, READER_SIZE } from './ui/reader-card.js';
 import { EventPlayer, applyEvent } from './research/events.js';
@@ -73,6 +74,11 @@ export class App {
     this.lights.onSelect = (id) => this.openLight(id);
     this.fx = new Effects(this.world);
     this.lights.onBorn = (it, pos, delay) => this._shootingStar(it, pos, delay);
+    this.constellation = new Constellation(this.world, this.anchor);
+    this.constellation.onSelect = (id) => this._openKept(id);
+    this.view.headRef = this.anchor.head;
+    this.view.onBloom = (id) => this.ambient?.pluck(this._panOf(this.view.worldPositionOf(id)));
+    Card.onPress = () => this.ambient?.tick();
     this.lightsMeta = null;
     this.sealedLights = readJSON(SEALED_LIGHTS_KEY, {});
     this.lights.sealed = new Set(Object.keys(this.sealedLights));
@@ -109,6 +115,7 @@ export class App {
     this._wireNodePicking();
     this.store.on((ev) => this._onStoreChange(ev));
     this._restoreLibrary();
+    this.constellation.setItems(this.libraryItems());
     this.context.syncToStore(this.store);
     this.ready = this._start();
   }
@@ -864,11 +871,12 @@ export class App {
     };
     for (const it of this.lights.items) if (near(this.lights.worldPositionOf(it.id, new Vector3()))) return false;
     for (const id of this.view.visibleIds) if (near(this.view.worldPositionOf(id, new Vector3()))) return false;
+    for (const id of this.constellation.stars.keys()) if (near(this.constellation.worldPositionOf(id, new Vector3()))) return false;
     return true;
   }
 
   anythingHovered() {
-    const entities = [this.view.hitEntity, this.lights.hitEntity, this.statusCard.entity, this.helpButton.entity, ...this.props.items.map((p) => p.entity)];
+    const entities = [this.view.hitEntity, this.lights.hitEntity, this.constellation.hitEntity, this.statusCard.entity, this.helpButton.entity, ...this.props.items.map((p) => p.entity)];
     for (const e of this.cards.open) entities.push(e.card.entity);
     if (this.keypad.card) entities.push(this.keypad.card.entity);
     return entities.some((e) => e?.hasComponent?.(Hovered));
@@ -1117,7 +1125,7 @@ export class App {
     const prefer = this.view.worldPositionOf(id);
     for (const e of [...this.cards.open]) if (e.key.startsWith('node:') && e.key !== `node:${id}`) this.cards.close(e.key);
     const tall = ['Place', 'Organisation', 'PublicFigure', 'Topic', 'Technology', 'Event', 'Concept'].includes(this.store.nodes.get(id)?.type);
-    this.cards.show(`node:${id}`, { width: 0.46, height: tall ? 0.56 : 0.5, draw: nodeCardDraw(this, id), prefer });
+    this.cards.show(`node:${id}`, { width: 0.46, height: tall ? 0.6 : 0.54, draw: nodeCardDraw(this, id), prefer });
     this.onboarding.notify('card-opened');
   }
 
@@ -1181,7 +1189,10 @@ export class App {
     if (starAt && this.lights.openId !== id) {
       this.lights.pop(id);
       this.fx.burst(starAt, LIGHT_KINDS[it.kind]?.color ?? 0xffe6b4);
+      this.ambient?.chime(this._panOf(starAt));
       if (!this.store.nodes.has(id)) this.view.setOrigin(id, starAt);
+      const t = Date.parse(it.date || '');
+      this.view.depthFrom = Number.isFinite(t) ? t : Date.now();
     }
     this.lights.openId = id;
     const size = this.readerDetails?.has(id) ? READER_SIZE.details : READER_SIZE.compact;
@@ -1195,6 +1206,48 @@ export class App {
     }
   }
 
+  /** Left or right of the head, for sound (-1 to 1). */
+  _panOf(pos) {
+    if (!pos) return 0;
+    const v = new Vector3().subVectors(pos, _hp).applyQuaternion(_hq.clone().invert());
+    return Math.max(-0.8, Math.min(0.8, v.x / Math.max(0.3, v.length())));
+  }
+
+  /** Quotes on a related news card: one pinch away, so the first look stays light. */
+  toggleQuotes(id) {
+    this.quotesOpen ??= new Set();
+    if (this.quotesOpen.has(id)) this.quotesOpen.delete(id);
+    else this.quotesOpen.add(id);
+    this.cards.get(`node:${id}`)?.redraw();
+  }
+
+  /** What you keep becomes your constellation: new items fly up to it. */
+  _syncConstellation() {
+    const before = this.constellation.stars.size;
+    const fresh = this.constellation.setItems(this.libraryItems());
+    let i = 0;
+    for (const id of fresh) {
+      const from = this.lights.worldPositionOf(id, new Vector3()) || this.view.worldPositionOf(id, new Vector3());
+      const to = this.constellation.worldPositionOf(id, new Vector3());
+      if (!from || i >= 6 || settings.comfort.gentle) {
+        this.constellation.appear(id, 0);
+        continue;
+      }
+      const delay = i++ * 0.12;
+      this.constellation.appear(id, delay + 0.85);
+      this.fx.comet(from, to, 0xffd98a, { life: 0.85, delay });
+    }
+    if (fresh.length) this.ambient?.bell();
+    if (fresh.length && !before) this.showNotice('The first star of your constellation, high in the sky. It grows with everything you keep.', { seconds: 8 });
+  }
+
+  /** A star of your constellation: open it if it is here, else the Library. */
+  _openKept(id) {
+    if (this.lights.get(id)) this.openLight(id);
+    else if (this.store.nodes.has(id)) this.pinchNode(id);
+    else this.openLibrary();
+  }
+
   /** News arrives as a shooting star; returns how long until the star itself appears. */
   _shootingStar(it, pos, delay) {
     if (settings.comfort.gentle) return delay; // Calm mode: the star only fades in
@@ -1202,7 +1255,14 @@ export class App {
     const side = hash01(it.id, 8) < 0.5 ? -1 : 1;
     const from = pos.clone().add(new Vector3(side * 0.9, 0.22, -0.25));
     const life = 0.95;
-    this.fx.comet(from, pos, color, { life, delay, onArrive: () => this.fx.burst(pos, color, { size: 0.12, life: 0.6, strength: 0.8 }) });
+    this.fx.comet(from, pos, color, {
+      life,
+      delay,
+      onArrive: () => {
+        this.fx.burst(pos, color, { size: 0.12, life: 0.6, strength: 0.8 });
+        this.ambient?.shimmer(this._panOf(pos));
+      },
+    });
     return delay + life;
   }
 
@@ -1217,7 +1277,10 @@ export class App {
       const at = this.view.worldPositionOf(id, new Vector3());
       if (at) this.fx.retract(at, home, this.view._nodeColor(node), { delay: i++ * 0.012 });
     }
-    if (i) this.fx.burst(home, 0xffe6b4, { delay: 0.5, size: 0.12, strength: 0.7 });
+    if (i) {
+      this.fx.burst(home, 0xffe6b4, { delay: 0.5, size: 0.12, strength: 0.7 });
+      this.ambient?.whoosh({ down: true, pan: this._panOf(home), seconds: 0.6 });
+    }
   }
 
   /** Reader card: compact (default) or with claims, quotes and the link. */
@@ -1314,6 +1377,13 @@ export class App {
       });
     }
     if (it.closed) return this._grownAfterClose(it);
+    if (it.live && this.mode === 'live' && !this.lastStats && !added.length) {
+      // nothing came back: not "grown", so touching the star again tries again
+      it.expanded = false;
+      this.setStatus('The engine did not answer in time. Touch the star to try again.');
+      this.cards.get(`light:${id}`)?.redraw();
+      return;
+    }
     it.expanded = true;
     if (this.store.nodes.has(id)) {
       this.store.nodes.get(id).addedIds = added;
@@ -1363,6 +1433,7 @@ export class App {
     this.lights.sealed.add(id);
     writeJSON(SEALED_LIGHTS_KEY, this.sealedLights);
     if (this.store.nodes.has(id)) this.seal(id);
+    this._syncConstellation();
     this.cards.get(`light:${id}`)?.redraw();
     this.onboarding.notify('sealed');
   }
@@ -1372,6 +1443,7 @@ export class App {
     this.lights.sealed.delete(id);
     writeJSON(SEALED_LIGHTS_KEY, this.sealedLights);
     if (this.store.nodes.get(id)?.sealed) this.unseal(id);
+    this._syncConstellation();
     this.cards.get(`light:${id}`)?.redraw();
   }
 
@@ -1704,6 +1776,7 @@ export class App {
     if (ev.kind === 'sealed' || ev.kind === 'unsealed' || ev.kind === 'node-updated') {
       for (const e of this.cards.open) if (e.key.startsWith('node:') || e.key === 'library') e.card.redraw();
     }
+    if (ev.kind === 'sealed' || ev.kind === 'unsealed' || ev.kind === 'clear' || ev.kind === 'loaded') this._syncConstellation();
   }
 
   // ---------- empty-space pinch & flick ----------
@@ -1760,6 +1833,8 @@ export class App {
     } else this.lights.fit = null;
     this.lights.update(delta, _hq);
     this.fx.update(delta, _hq);
+    this.constellation.fit = this.lights.fit;
+    this.constellation.update(delta, _hq);
     this.cards.update(delta);
     this.atmosphere.update(delta);
     this.props.update(delta, now);

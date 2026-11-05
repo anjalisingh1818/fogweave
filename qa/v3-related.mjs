@@ -72,6 +72,7 @@ try {
     await page.waitForTimeout(500);
     const r = await ev((x) => {
       const c = window.__fw.app.cards.get(`node:${x}`);
+      c.press('quotes'); // the two quotes are one pinch away
       const texts = c.boxes.filter((b) => b.kind !== 'button').map((b) => b.text);
       const boxes = c.boxes.filter((b) => b.w > 0 && b.h > 0);
       let overlaps = 0;
