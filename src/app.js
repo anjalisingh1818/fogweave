@@ -880,7 +880,7 @@ export class App {
   async openExploreNext(id) {
     const next = { id, running: true, items: [], note: '' };
     this.nextSteps = next;
-    this.cards.show('next', { width: 0.46, height: 0.46, draw: nextDraw(this, next), slot: 1 });
+    this.cards.show('next', { width: 0.46, height: 0.46, draw: nextDraw(this, next), slot: 2 });
     const r = await this.client.agentNext({ story: this._storyBody(id), nodes: this._nextNodes(id) });
     if (this.nextSteps !== next) return next;
     next.running = false;

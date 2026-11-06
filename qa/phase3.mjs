@@ -250,7 +250,11 @@ async function offlineRun() {
     await boot(page, { offline: true });
 
     await step(page, 'offline: recorded answer replays for a suggested question', async () => {
-      const id = await ev(page, () => Object.keys(window.__fw.app.snapshot.expansions)[1] || Object.keys(window.__fw.app.snapshot.expansions)[0]);
+      const id = await ev(page, () => {
+        const a = window.__fw.app;
+        const here = a.lights.items.filter((x) => a.snapshot.expansions[x.id]).map((x) => x.id);
+        return here[1] || here[0];
+      });
       await ev(page, (lid) => window.__fw.app.openLight(lid), id);
       await ev(page, (lid) => window.__qa.expand(lid), id);
       await page.waitForFunction((lid) => window.__fw.app.lights.get(lid).expanded === true, id, { timeout: 60000 });
@@ -297,4 +301,5 @@ try {
   writeFileSync(`${OUT}/phase3-results.json`, JSON.stringify({ when: new Date().toISOString(), scripted: true, results }, null, 1));
   const passed = results.filter((r) => r.pass).length;
   console.log(`\n${passed}/${results.length} passed (scripted IWER hands, headless Chromium; not a real Quest)`);
+  process.exitCode = passed === results.length ? 0 : 1;
 }
