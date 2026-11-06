@@ -197,7 +197,7 @@ async def tree_of_thoughts(llm, task: Task, search=None) -> AsyncIterator[dict]:
 
     kinds = ", ".join(task.kinds)
     # 1. branch
-    yield {"type": "status", "text": "Thinking of different explanations"}
+    yield {"type": "status", "text": "Thinking of different ideas"}
     ideas: list[Idea] = []
     try:
         spend()
