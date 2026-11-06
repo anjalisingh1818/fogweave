@@ -773,9 +773,9 @@ export class App {
       this.cards.show('patterns', { width: 0.5, height: 0.56, draw: patternsDraw(this, r), slot: 2 });
       return r;
     };
-    if (items.length < 2) return show({ patterns: [], note: 'Seal two or more items, then look for patterns.' });
+    if (items.length < 2) return show({ patterns: [], note: this.mode === 'live' ? 'Seal two or more items, then look for patterns.' : 'Seal two or more items to look for shared names, or watch a recording of the thinking agent.' });
     const shared = sharedPatterns(this.store, items);
-    if (this.mode !== 'live') return show({ patterns: shared, running: false, note: 'Demo scene: shared names only. Other patterns need the live engine.' });
+    if (this.mode !== 'live') return show({ patterns: shared, running: false, note: 'Here: shared names only. The thinking agent needs the live engine, but you can watch a recording of it.' });
     const run = this._agentRun({ job: 'patterns', cardKey: 'patterns', title: 'PATTERNS IN YOUR LIBRARY', question: `Looking across your ${items.length} items`, noteLabel: 'Pattern', shared, empty: 'No pattern the items themselves can show.' });
     this.lastPatterns = { patterns: shared, running: true };
     const stats = await this.client.agentPatterns(items.slice(0, 24), { signal: run.controller.signal, onEvent: (ev) => this._onAgentEvent(run, ev) });
@@ -789,12 +789,12 @@ export class App {
   _agentRun(fields) {
     this.closeAgent();
     const run = { thoughts: new Map(), results: [], dropped: [], items: {}, next: [], running: true, status: 'Thinking', tool: '', note: '', controller: new AbortController(), ...fields };
-    this.agent = run;
     this.view.setQuiet(true);
     this.thoughts.start(run.question);
     // the tree stands in the middle: nothing else in front of it
     if (this.cards.flat) this.cards.closeAll({ keepPinned: true });
     else for (const e of this.cards.open) if (e.slot === 0) this.cards.move(e.key);
+    this.agent = run; // only now: a card closed above must not end this run
     this.cards.show(run.cardKey, { width: 0.5, height: 0.62, draw: agentDraw(this, run), slot: 2 });
     return run;
   }
@@ -898,12 +898,38 @@ export class App {
     return run;
   }
 
+  /**
+   * The agent without the engine: a real run, replayed slowly on its own stories.
+   * It says it is a recording, and it does not look at what the reader sealed.
+   */
+  async watchRecordedAgent() {
+    const res = await fetch('demo/snapshot/agent-run.json').catch(() => null);
+    const rec = res?.ok ? await res.json().catch(() => null) : null;
+    if (!rec) {
+      this.setStatus('That recorded run is missing from the snapshot.');
+      return null;
+    }
+    const date = rec.recordedAt;
+    const run = this._agentRun({ job: 'patterns', recorded: true, cardKey: 'patterns', title: `RECORDED AGENT RUN · ${date}`, question: `A recorded run on ${rec.itemCount} stories`, noteLabel: 'Pattern', empty: 'No pattern held up in this recording.' });
+    const pace = { open: 1700, kept: 1300, dropped: 1500, chosen: 1200 };
+    const stars = Object.fromEntries(rec.stars.map((s) => [s.id, { star: s }]));
+    for (const ev of rec.events) {
+      if (run !== this.agent || run.controller.signal.aborted) return run;
+      if (ev.type === 'done') break;
+      this._onAgentEvent(run, ev.type === 'result' ? { ...ev, items: stars } : ev);
+      await new Promise((r) => setTimeout(r, ev.type === 'status' ? 500 : pace[ev.state] || 400));
+    }
+    if (run !== this.agent) return run;
+    this._agentDone(run, { calls: 0 });
+    return run;
+  }
+
   /** Show what an explanation or pattern rests on: its items light up; a star that came from search arrives. */
   showAgentResult(run, p) {
     this.view.setQuiet(false);
+    const stars = (p.items || []).map((id) => run.items?.[id]?.star).filter((s) => s && !this.lights.get(s.id) && !this.store.nodes.has(s.id));
+    if (stars.length) this.lights.addItems(stars.map((s) => ({ ...s, search: run.recorded ? 'recorded run' : 'why' })));
     if (run.job === 'patterns') return this.showPattern(p);
-    const stars = (p.items || []).map((id) => run.items[id]?.star).filter((s) => s && !this.lights.get(s.id) && !this.store.nodes.has(s.id));
-    if (stars.length) this.lights.addItems(stars.map((s) => ({ ...s, search: 'why' })));
     for (const id of p.items || []) if (this.store.nodes.has(id)) this.view.flash(id, 3);
     const other = (p.items || []).find((id) => id !== run.focus);
     if (other && this.store.nodes.has(other)) this.pinchNode(other);

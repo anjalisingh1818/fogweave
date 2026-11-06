@@ -1,0 +1,200 @@
+{
+ "recordedAt": "2026-11-06",
+ "about": "A real run of the agent (server/fogweave/agent.py) on real models. Replayed slowly in the Demo scene; never passed off as live.",
+ "itemCount": 5,
+ "stars": [
+  {
+   "id": "n:67e039915881",
+   "kind": "breaking",
+   "sourceType": "news",
+   "headline": "JAXA launches the Martian Moons eXploration spacecraft from the Tanegashima Space Center toward Phobos aboard…",
+   "source": "reuters.com",
+   "via": "wikipedia",
+   "url": "https://www.reuters.com/science/japan-launches-mission-return-samples-mars-moon-2026-10-19/",
+   "date": "2026-10-20T14:30:10.905245Z",
+   "summary": "JAXA launched the Martian Moons eXploration spacecraft on an H3 rocket toward Phobos, aiming to collect surface material and return it to Earth in 2031.",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)"
+  },
+  {
+   "id": "n:9a04728f63b2",
+   "kind": "archive",
+   "sourceType": "archive",
+   "headline": "NASA awards Lockheed Martin a contract to build a next-generation \"Mars Ascent Vehicle\" to return the first…",
+   "source": "phys.org",
+   "via": "wikipedia",
+   "url": "https://phys.org/news/2022-02-lockheed-martin-nasa-mars-samples.html",
+   "date": "2022-02-08T00:00:00Z",
+   "summary": "NASA awarded Lockheed Martin a contract to build a next‑generation Mars Ascent Vehicle that will return the first rock samples from Mars to Earth in the 2030s.",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)"
+  },
+  {
+   "id": "n:b45e59aa97cc",
+   "kind": "archive",
+   "sourceType": "archive",
+   "headline": "NASA selects Jezero crater on Mars as the landing site for the Mars 2020 rover",
+   "source": "bbc.co.uk",
+   "via": "wikipedia",
+   "url": "https://www.bbc.co.uk/news/science-environment-46264383",
+   "date": "2018-11-19T00:00:00Z",
+   "summary": "NASA selected Jezero crater on Mars as the landing site for the Mars 2020 rover, a crater that once held a large lake and may contain evidence of ancient life.",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)"
+  },
+  {
+   "id": "n:d1b819bd622a",
+   "kind": "archive",
+   "sourceType": "archive",
+   "headline": "NASA launches the robotic Mars Science Laboratory, the largest rover yet sent to Mars, with the aim of…",
+   "source": "bbc.co.uk",
+   "via": "wikipedia",
+   "url": "https://www.bbc.co.uk/news/science-environment-15904408",
+   "date": "2011-11-26T00:00:00Z",
+   "summary": "NASA launched the robotic Mars Science Laboratory, the largest rover yet sent to Mars, to search for evidence of past or present life on the planet.",
+   "licence": "CC BY-SA 4.0 (Wikipedia contributors)"
+  }
+ ],
+ "events": [
+  {
+   "type": "status",
+   "text": "Thinking of different ideas"
+  },
+  {
+   "type": "thought",
+   "state": "open",
+   "id": "T1",
+   "parent": null,
+   "depth": 1,
+   "kind": "same_actor",
+   "text": "JAXA is the common actor launching multiple Mars missions, including the 2026 Phobos probe."
+  },
+  {
+   "type": "thought",
+   "state": "open",
+   "id": "T2",
+   "parent": null,
+   "depth": 1,
+   "kind": "recurring",
+   "text": "Recurring theme of Mars sample return missions in the 2030s, seen in JAXA, NASA contracts, and future plans."
+  },
+  {
+   "type": "thought",
+   "state": "open",
+   "id": "T3",
+   "parent": null,
+   "depth": 1,
+   "kind": "sequence",
+   "text": "Sequence of events: NASA chose Jezero in 2018, launched the rover in 2011, and plans future sample return."
+  },
+  {
+   "type": "status",
+   "text": "Checking each one against the items"
+  },
+  {
+   "type": "thought",
+   "id": "T1",
+   "state": "dropped",
+   "why": "too unsure"
+  },
+  {
+   "type": "thought",
+   "id": "T2",
+   "state": "kept",
+   "score": 6,
+   "text": "Both items refer to Mars sample return missions planned for the 2030s, indicating a recurring theme."
+  },
+  {
+   "type": "thought",
+   "id": "T3",
+   "state": "dropped",
+   "why": "too unsure"
+  },
+  {
+   "type": "status",
+   "text": "A skeptic looks for what is weak"
+  },
+  {
+   "type": "status",
+   "text": "Going deeper on the strongest idea"
+  },
+  {
+   "type": "thought",
+   "state": "open",
+   "id": "T2a",
+   "parent": "T2",
+   "depth": 2,
+   "kind": "recurring",
+   "text": "Both JAXA’s 2031 Phobos sample‑return plan and NASA’s 2030s Mars ascent vehicle contract show a recurring focus on returning Martian samples to Earth."
+  },
+  {
+   "type": "thought",
+   "id": "T2a",
+   "state": "kept",
+   "score": 6,
+   "text": "Both JAXA’s 2031 Phobos sample‑return plan and NASA’s 2030s Mars ascent vehicle contract show a recurring focus on returning Martian samples to Earth."
+  },
+  {
+   "type": "thought",
+   "id": "T2a",
+   "state": "chosen"
+  },
+  {
+   "type": "result",
+   "results": [
+    {
+     "kind": "recurring",
+     "text": "Both JAXA’s 2031 Phobos sample‑return plan and NASA’s 2030s Mars ascent vehicle contract show a recurring focus on returning Martian samples to Earth.",
+     "label": "inferred",
+     "items": [
+      "n:67e039915881",
+      "n:9a04728f63b2"
+     ],
+     "quotes": [
+      {
+       "id": "n:67e039915881",
+       "quote": "JAXA launched the Martian Moons eXploration spacecraft on an H3 rocket toward Phobos, aiming to collect surface material and return it to Earth in 2031.",
+       "date": "2026-10-20T14:30:10.90524"
+      },
+      {
+       "id": "n:9a04728f63b2",
+       "quote": "NASA awarded Lockheed Martin a contract to build a next‑generation Mars Ascent Vehicle to return the first rock samples from Mars to Earth in the",
+       "date": "2022-02-08T00:00:00Z"
+      }
+     ]
+    }
+   ],
+   "items": {
+    "n:67e039915881": {
+     "id": "n:67e039915881",
+     "label": "JAXA launches the Martian Moons eXploration spacecraft from the Tanegashima Space Center toward Phobos aboard…",
+     "date": "2026-10-20T14:30:10.90524"
+    },
+    "n:9a04728f63b2": {
+     "id": "n:9a04728f63b2",
+     "label": "NASA awards Lockheed Martin a contract to build a next-generation \"Mars Ascent Vehicle\" to return the first…",
+     "date": "2022-02-08T00:00:00Z"
+    }
+   },
+   "dropped": [
+    {
+     "thought": "T1",
+     "why": "too unsure"
+    },
+    {
+     "thought": "T3",
+     "why": "too unsure"
+    }
+   ],
+   "calls": 4,
+   "note": ""
+  },
+  {
+   "type": "done",
+   "stats": {
+    "calls": 4,
+    "thoughts": 4,
+    "dropped": 2,
+    "chosen": 1,
+    "stopped": ""
+   }
+  }
+ ]
+}
