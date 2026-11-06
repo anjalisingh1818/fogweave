@@ -152,7 +152,9 @@ export function patternsDraw(app, r) {
       y += 22;
     });
     if (!(r.patterns || []).length && !r.running) y = ui.para('No shared names among your items yet.', pad, y, w - pad * 2, { size: 25, color: UI.dim, maxLines: 2 }) + 8;
-    if (r.note) ui.para(r.note, pad, Math.min(y, limit - 10), w - pad * 2 - 230, { size: 21, color: UI.dim, maxLines: 2 });
+    const offline = app.mode !== 'live';
+    if (r.note) ui.para(r.note, pad, Math.min(y, limit - (offline ? 50 : 10)), w - pad * 2 - (offline ? 0 : 230), { size: 21, color: UI.dim, maxLines: 2 });
+    if (offline) ui.button('recorded', 'Watch a recorded agent run', pad, h - 104, w - pad * 2 - 220, 76, () => app.watchRecordedAgent(), { primary: true, size: 25 });
     ui.button('close', 'Close', w - pad - 200, h - 104, 200, 76, () => app.closeCard('patterns'), { icon: '✕', size: 28 });
   };
 }
@@ -202,6 +204,7 @@ export function agentDraw(app, run) {
       });
     }
     if (run.note) ui.para(run.note, pad, limit + 26, w - pad * 2 - 230, { size: 21, color: '#f0c987', maxLines: 2 });
+    else if (run.recorded) ui.para('Recording of a real run, slowed down.', pad, limit + 26, w - pad * 2 - 230, { size: 21, color: '#f0c987', maxLines: 2 });
     else ui.para(run.running ? 'Every idea must show real quotes, or it is dropped.' : 'Inferred: reasoned from the quotes, checked by code and a second look.', pad, limit + 26, w - pad * 2 - 230, { size: 21, color: UI.dim, maxLines: 2 });
     ui.button('close', run.running ? 'Stop' : 'Close', w - pad - 200, h - 104, 200, 76, () => app.closeAgent(), { icon: '✕', size: 28 });
   };

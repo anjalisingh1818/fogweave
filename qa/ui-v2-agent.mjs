@@ -241,6 +241,67 @@ try {
     return { nodes: r.nodes, buttons: r.buttons };
   });
 
+  await step('Demo scene: Find patterns offers a recording, and the recording says so', async () => {
+    let asked = false;
+    page.on('request', (q) => {
+      if (/\/agent\//.test(q.url())) asked = true;
+    });
+    await ev(() => {
+      const a = window.__fw.app;
+      a.closeAgent();
+      a.cards.closeAll();
+      a.mode = 'offline';
+      a.findPatterns();
+    });
+    await page.waitForTimeout(400);
+    const card = await ev(() => {
+      const c = window.__fw.app.cards.get('patterns');
+      const boxes = c.boxes.filter((b) => b.w > 0 && b.h > 0);
+      const overlaps = [];
+      for (let i = 0; i < boxes.length; i++)
+        for (let j = i + 1; j < boxes.length; j++) {
+          const p = boxes[i];
+          const q = boxes[j];
+          if (Math.min(p.x + p.w, q.x + q.w) - Math.max(p.x, q.x) > 2 && Math.min(p.y + p.h, q.y + q.h) - Math.max(p.y, q.y) > 2) overlaps.push(`${p.text} / ${q.text}`);
+        }
+      return { overlaps, buttons: c.buttonIds() };
+    });
+    if (card.overlaps.length || !card.buttons.includes('recorded')) throw new Error(JSON.stringify(card));
+    await ev(() => {
+      window.__fw.app.cards.get('patterns').press('recorded');
+    });
+    await page.waitForFunction(() => window.__fw.app.agent?.recorded && window.__fw.app.thoughts.nodes.size >= 3, null, { timeout: 8000 });
+    await shot(page, 'uiv2a-5-recorded-growing');
+    await page.waitForFunction(() => window.__fw.app.agent?.recorded && !window.__fw.app.agent.running, null, { timeout: 30000 });
+    await page.waitForTimeout(600);
+    await shot(page, 'uiv2a-6-recorded-done');
+    const r = await ev(() => {
+      const a = window.__fw.app;
+      const c = a.cards.get('patterns');
+      return { text: c.boxes.map((b) => b.text).join(' | '), results: a.agent.results.length, dropped: a.agent.dropped.length, chosen: [...a.thoughts.nodes.values()].some((n) => n.state === 'chosen'), buttons: c.buttonIds() };
+    });
+    if (asked || !/RECORDED AGENT RUN/.test(r.text) || !/Recording of a real run/.test(r.text) || r.results !== 1 || !r.chosen || !r.buttons.includes('show:0')) throw new Error(JSON.stringify({ asked, ...r }));
+    return { results: r.results, dropped: r.dropped, buttons: r.buttons };
+  });
+
+  await step('Show on the recording opens its story, with its real source', async () => {
+    const r = await ev(() => {
+      const a = window.__fw.app;
+      a.cards.get('patterns').press('show:0');
+      const key = a.cards.open.map((e) => e.key).find((k) => k.startsWith('light:') || k.startsWith('node:'));
+      const it = key && a.getItem(key.split(':').slice(1).join(':'));
+      return { key, headline: it?.headline, source: it?.source, url: it?.url, quiet: a.view.quiet };
+    });
+    if (!r.key || !r.headline || !r.source || !r.url || r.quiet) throw new Error(JSON.stringify(r));
+    await ev(() => {
+      const a = window.__fw.app;
+      a.closeAgent();
+      a.cards.closeAll();
+      a.mode = 'live';
+    });
+    return r;
+  });
+
   await step('Stop ends a run that never answers, and the tree leaves', async () => {
     why = () => null;
     await ev((x) => {
