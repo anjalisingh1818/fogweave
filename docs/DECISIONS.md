@@ -163,3 +163,33 @@ One line each: what was chosen, and why. Newest last.
 - **Fog that fills the space:** 72 soft fog banks (canvas cloud puffs with a round falloff, so no edges show) and a low fog floor of 14. They sit in a shell 1.6–9 m around the reader, mostly around eye level and below, thinning upward. Each drifts slowly around the reader (a few against the others), turns, rises and falls slightly, and breathes. Fine dust motes are smaller and fainter than before.
 - **Readability:** fog thins within about 2.5 m of the eyes, so cards, the web and labels stay clear. Distance haze is a dark blue-gray (`#1c222d`, lower density), so far things sink into the night rather than into gray.
 - **Comfort and performance:** Calm mode slows the drift and thins the fog. The quality governor drops to about a third of the banks, then to none, before touching anything else. The welcome screen uses the same night with CSS fog that drifts slowly (no motion with reduced-motion).
+
+## Living motion (UI v2, phase 1; owner's request, 2026-11-05)
+
+- **Opening:** a star swells and a soft ring opens around it; its card comes part of the way out of the star and unfolds (0.26 s). Closing folds it (0.16 s). A folding card is already closed in the app and takes no rays.
+- **Growing:** a star's node starts at the star in the sky; other nodes start inside what they connect to and open one after another (0.07 s apart, at most 1.4 s of waiting). A thread of light with a bright tip grows from the older end. A node that has not opened yet cannot be touched.
+- **Pointing:** the node and its neighbours stay lit and named, the rest dim. Speculative links breathe slowly (about one breath in five seconds, far below any flashing rate).
+- **Closing a star:** each shown node runs back to the star as a light with a thread. Nodes waiting behind a group button were never out, so they do not. A web that comes back grows again from the start.
+- **New news:** a new star (refresh or Ask the fog) arrives as a shooting star and appears when it lands. A first load of stars has none.
+- **Hands:** fine motes move out of a fingertip's way, and a fast hand leaves faint puffs (at most 14).
+- **Calm mode and budget:** Calm mode has no shooting stars or puffs and softens the rest. Effects are two instanced quads and one line object in `src/render/effects.js`; over budget they are not drawn. They are decoration only and never change the graph.
+- **Close while growing:** the star now stays closed and can grow again; before, the growth finished after the Close and marked the star as grown with no web.
+
+## Easier to read, sound and time (UI v2, phase 2; owner's request, 2026-11-06)
+
+- **Cards:** glass look, still dark behind the text. Larger text on news and node cards, and two lines of summary on a closed news card. Cards are a little taller for it.
+- **Quotes one pinch away:** a related news card opens with how it relates and what it says; "Show 2 quotes" brings the two verbatim quotes. They are still checked and still on every link: this only keeps the first look light.
+- **What a label means:** each "how it relates" says it in words. Reported now reads "a source says it (not proof that it is true)", because a label can be read as "verified".
+- **Sound:** generated in code, no files. A chime when a star opens, a phrase of soft notes as a web opens, a falling whoosh when it closes, a shimmer when news lands, a bell when you keep something, a tick on buttons. Placed left or right of where it happens. The same switch as the ambient sound turns them off, and nothing plays before a gesture. Nobody has judged the volume by ear yet.
+- **Time as depth:** a news item more than two weeks older than the story sits further from you (months count, then years count less; up to about half a metre or more in a big web) and its label starts with its year. Older stars also drift further out.
+- **Your constellation:** what you seal becomes gold stars high in the sky, joined by thin lines, and stays on this device with the Library. A star's place comes from its id, so the shape is the same every day. Touching one opens the item, or the Library if it is not in the fog. A line here says nothing about how two items relate; that stays with labelled links and Connect the dots.
+- **A stuck star no longer blocks the others:** a stream with nothing new for 70 s gives up. What arrived stays; if nothing arrived, the star is not marked as grown and touching it tries again.
+- **Testing note:** the "Target crashed" seen in QA runs came from the runs' own time limit stopping a test that was waiting on a slow growth (the old version did the same); it was not a browser crash.
+
+## The thinking agent (UI v2, phase 3; owner's request, 2026-11-06)
+
+- **Tree of Thoughts** (`server/fogweave/agent.py`): up to 3 different ideas, a search of older news (Why only; the story's main name, archive only, at most 20 s), a judge that must give quotes, code checks, a skeptic, and one sharper round for the best 2. At most 6 model calls per question. When the quota runs out it stops and keeps what it has shown.
+- **The model proposes; code and a skeptic decide.** A thought survives only with verbatim quotes from the right items, dates in the right order, and no name or abbreviation that its quoted items do not mention. Everything it says is Inferred. Real quotes do not make a good argument, which is why the skeptic exists: it rejects statements that only share a name, or that claim a cause, motive or trend the quotes do not state.
+- **You can watch it** (`src/render/thought-tree.js`): every state in the tree comes from a server event. Dropped thoughts sink and say why. These are short public statements, not hidden reasoning.
+- **What ships (owner's choice, 2026-11-06):** the agent answers Find patterns. The "Why did this happen?" button is hidden, because most of its explanations were not good enough and a wrong cause hurts the honesty FogWeave stands on; its code stays, and `canAskWhy` brings it back. "Explore next" moved to the news card, as a labelled suggestion that can only name nodes really in the web.
+- **Eval** (`server/eval/v4_agent.py`, labels by Claude, not an independent human; small sample; the model varies between runs): on 8 Library sets, the one-pass finder gave 13 patterns of which 7 were good (0.54), the agent 8 of which 6 were good (0.75). So it is cleaner, not richer, at about 4 times the calls and several times the wait. "Why did this happen?" answered 3 of 8 stories with 6 explanations, 2 of them good (0.33).

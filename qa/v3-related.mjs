@@ -44,12 +44,14 @@ try {
 
   let rows = [];
   await step('a star grows: other news appears, each with a typed, labelled link and two quotes', async () => {
-    const stars = await ev((m) => {
-      const a = window.__fw.app;
-      return a.lights.items.filter((x) => (m === 'offline' ? a.snapshot.expansions[x.id] : x.via === 'wikipedia' && a.canExpand(x.id))).map((x) => x.id);
-    }, mode);
     const seen = [];
-    for (const id of stars.slice(0, 4)) {
+    // chosen when its turn comes: a star listed earlier may have left the sky by now
+    for (let i = 0; i < 8; i++) {
+      const id = await ev((m) => {
+        const a = window.__fw.app;
+        return a.lights.items.find((x) => !x.expanded && (m === 'offline' ? a.snapshot.expansions[x.id] : x.via === 'wikipedia' && a.canExpand(x.id)))?.id;
+      }, mode);
+      if (!id) break;
       await ev((x) => window.__fw.app.openLight(x), id);
       await page.waitForFunction((x) => window.__fw.app.getItem(x)?.expanded === true, id, { timeout: 200000 });
       rows = await ev(RELATED);
@@ -72,6 +74,7 @@ try {
     await page.waitForTimeout(500);
     const r = await ev((x) => {
       const c = window.__fw.app.cards.get(`node:${x}`);
+      c.press('quotes'); // the two quotes are one pinch away
       const texts = c.boxes.filter((b) => b.kind !== 'button').map((b) => b.text);
       const boxes = c.boxes.filter((b) => b.w > 0 && b.h > 0);
       let overlaps = 0;

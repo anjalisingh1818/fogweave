@@ -15,6 +15,8 @@ async function withTimeout(promise, ms, controller) {
   }
 }
 
+const STALL_MS = 70000; // longer than the server's wait for a model and a free server's wake-up
+
 export class ResearchClient {
   constructor(base = API_BASE) {
     this.base = base;
@@ -103,8 +105,42 @@ export class ResearchClient {
     return this._stream('/explore', { node, context, paperTypes }, { signal, onEvent });
   }
 
+  /** The thinking agent on Library items: thoughts stream as they grow, then a result. */
+  agentPatterns(items, { signal, onEvent }) {
+    return this._stream('/agent/patterns', { items }, { signal, onEvent });
+  }
+
+  /** The thinking agent: why did this happen? */
+  agentWhy(body, { signal, onEvent }) {
+    return this._stream('/agent/why', body, { signal, onEvent });
+  }
+
+  /** Which nodes around a story are worth opening next. */
+  agentNext(body) {
+    return this._json('/agent/next', { body, timeout: 40000 });
+  }
+
   async _stream(path, body, { signal, onEvent }) {
     if (!this.base) return null;
+    // a stream with nothing new for a long time gives up, so one stuck star
+    // (a server waiting on its free model quota) cannot block all the others
+    const stall = new AbortController();
+    const stop = () => stall.abort();
+    signal?.addEventListener('abort', stop);
+    let timer = setTimeout(stop, this.stallMs ?? STALL_MS);
+    const alive = () => {
+      clearTimeout(timer);
+      timer = setTimeout(stop, this.stallMs ?? STALL_MS);
+    };
+    try {
+      return await this._read(path, body, stall.signal, onEvent, alive);
+    } finally {
+      clearTimeout(timer);
+      signal?.removeEventListener('abort', stop);
+    }
+  }
+
+  async _read(path, body, signal, onEvent, alive) {
     let res;
     try {
       res = await fetch(this.base + path, {
@@ -125,6 +161,7 @@ export class ResearchClient {
       while (true) {
         const { value, done } = await reader.read();
         if (done) break;
+        alive();
         buf += decoder.decode(value, { stream: true });
         let cut;
         while ((cut = buf.indexOf('\n\n')) >= 0) {

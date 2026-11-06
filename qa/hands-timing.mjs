@@ -50,7 +50,8 @@ await page.evaluate(() => {
 });
 const steps = {};
 const t = () => Date.now();
-const id = await page.evaluate(() => Object.keys(window.__fw.app.snapshot.expansions)[0]);
+// a star that is drifting now (the feed changes with the date) and has a recorded web
+const id = await page.evaluate(() => window.__fw.app.lights.items.find((x) => window.__fw.app.snapshot.expansions[x.id]).id);
 
 let t0 = t();
 await page.evaluate(async (lid) => {

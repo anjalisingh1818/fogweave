@@ -156,6 +156,18 @@ class Engine:
         items = [{**self._pool_item(r, summaries, q[i], 9000 + i), "search": query} for i, r in enumerate(raw)]
         return {"generatedAt": now_iso(), "query": query, "notes": notes, "items": items}
 
+    async def older_news(self, query: str, limit: int = 5) -> list[dict]:
+        """The agent's search tool: older Current events entries that name it, as evidence.
+        The archive only: quick, no model call, and earlier news is what explains a story."""
+        wiki = self.router.adapters.get("wikipedia")
+        if not wiki:
+            return []
+        raw = await wiki.archive_search(query, limit=limit, min_age_days=11)
+        return [
+            {"id": r.id, "type": "NewsItem", "label": r.title, "date": r.date or "", "text": r.snippet or "", "url": r.url, "source": r.outlet, "kind": r.kind, "star": self._pool_item(r, {}, {"quality": 0.5, "breakdown": {}}, 9000 + i)}
+            for i, r in enumerate(raw)
+        ]
+
     async def lights(self, context: list[str] | None = None) -> dict:
         raw = await self.router.lights()
         notes = []

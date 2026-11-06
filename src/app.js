@@ -21,7 +21,11 @@ import { contextDraw } from './ui/context-card.js';
 import { Keypad } from './ui/keypad.js';
 import { Onboarding } from './ui/onboarding.js';
 import { Props } from './props.js';
-import { YAW_MAX, LightField } from './render/lights.js';
+import { YAW_MAX, LIGHT_KINDS, LightField } from './render/lights.js';
+import { Effects } from './render/effects.js';
+import { Constellation } from './render/constellation.js';
+import { ThoughtTree } from './render/thought-tree.js';
+import { hash01 } from './layout/force.js';
 import { readerDraw, READER_SIZE } from './ui/reader-card.js';
 import { EventPlayer, applyEvent } from './research/events.js';
 import { ResearchClient } from './research/client.js';
@@ -31,7 +35,7 @@ import { isMuted, sampleFeed, seedFrom } from './feed.js';
 import { checkRequest } from './safety.js';
 import { interestsDraw } from './ui/interests-card.js';
 import { DEBUG, settings, loadSettings, setQuality, saveSettings } from './config.js';
-import { answerDraw, ASK_SUGGESTIONS, settingsDraw, timelineDraw, exportDraw, insightsDraw, patternsDraw } from './ui/panels.js';
+import { answerDraw, ASK_SUGGESTIONS, settingsDraw, timelineDraw, exportDraw, insightsDraw, patternsDraw, agentDraw, nextDraw } from './ui/panels.js';
 import { sharedPatterns } from './patterns.js';
 import { insights } from './insights.js';
 import { Ambient, speech } from './audio.js';
@@ -69,6 +73,18 @@ export class App {
     });
     this.lights = new LightField(this.world, this.anchor);
     this.lights.onSelect = (id) => this.openLight(id);
+    this.fx = new Effects(this.world);
+    this.lights.onBorn = (it, pos, delay) => this._shootingStar(it, pos, delay);
+    this.constellation = new Constellation(this.world, this.anchor);
+    this.constellation.onSelect = (id) => this._openKept(id);
+    this.thoughts = new ThoughtTree(this.world, this.anchor);
+    this.thoughts.onChosen = (pos) => {
+      this.fx.burst(pos, 0xffd98a, { size: 0.18 });
+      this.ambient?.bell(this._panOf(pos));
+    };
+    this.view.headRef = this.anchor.head;
+    this.view.onBloom = (id) => this.ambient?.pluck(this._panOf(this.view.worldPositionOf(id)));
+    Card.onPress = () => this.ambient?.tick();
     this.lightsMeta = null;
     this.sealedLights = readJSON(SEALED_LIGHTS_KEY, {});
     this.lights.sealed = new Set(Object.keys(this.sealedLights));
@@ -105,6 +121,7 @@ export class App {
     this._wireNodePicking();
     this.store.on((ev) => this._onStoreChange(ev));
     this._restoreLibrary();
+    this.constellation.setItems(this.libraryItems());
     this.context.syncToStore(this.store);
     this.ready = this._start();
   }
@@ -758,13 +775,152 @@ export class App {
     };
     if (items.length < 2) return show({ patterns: [], note: 'Seal two or more items, then look for patterns.' });
     const shared = sharedPatterns(this.store, items);
-    const live = this.mode === 'live';
-    show({ patterns: shared, running: live, note: live ? 'Reading your items together for other patterns…' : 'Demo scene: shared names only. Other patterns need the live engine.' });
-    if (!live) return this.lastPatterns;
-    const res = await this.client.patterns(items.slice(0, 24));
-    const more = res?.patterns || [];
-    const note = !res ? 'The engine did not answer; shared names are shown.' : res.note || (more.length || shared.length ? '' : 'No pattern the items themselves can show.');
-    return show({ patterns: [...shared, ...more].slice(0, 6), note });
+    if (this.mode !== 'live') return show({ patterns: shared, running: false, note: 'Demo scene: shared names only. Other patterns need the live engine.' });
+    const run = this._agentRun({ job: 'patterns', cardKey: 'patterns', title: 'PATTERNS IN YOUR LIBRARY', question: `Looking across your ${items.length} items`, noteLabel: 'Pattern', shared, empty: 'No pattern the items themselves can show.' });
+    this.lastPatterns = { patterns: shared, running: true };
+    const stats = await this.client.agentPatterns(items.slice(0, 24), { signal: run.controller.signal, onEvent: (ev) => this._onAgentEvent(run, ev) });
+    this._agentDone(run, stats);
+    this.lastPatterns = { patterns: [...shared, ...run.results].slice(0, 6), note: run.note || (run.results.length || shared.length ? '' : run.empty) };
+    return this.lastPatterns;
+  }
+
+  // ---------- the thinking agent: its thoughts grow in the fog ----------
+
+  _agentRun(fields) {
+    this.closeAgent();
+    const run = { thoughts: new Map(), results: [], dropped: [], items: {}, next: [], running: true, status: 'Thinking', tool: '', note: '', controller: new AbortController(), ...fields };
+    this.agent = run;
+    this.view.setQuiet(true);
+    this.thoughts.start(run.question);
+    // the tree stands in the middle: nothing else in front of it
+    if (this.cards.flat) this.cards.closeAll({ keepPinned: true });
+    else for (const e of this.cards.open) if (e.slot === 0) this.cards.move(e.key);
+    this.cards.show(run.cardKey, { width: 0.5, height: 0.62, draw: agentDraw(this, run), slot: 2 });
+    return run;
+  }
+
+  _onAgentEvent(run, ev) {
+    if (run !== this.agent) return;
+    if (ev.type === 'status') run.status = ev.text;
+    else if (ev.type === 'tool') run.tool = ev.state === 'running' ? `Searching the news: ${ev.query}` : `Searched “${ev.query}”: ${ev.found} new item${ev.found === 1 ? '' : 's'}`;
+    else if (ev.type === 'thought') {
+      if (ev.parent !== undefined) {
+        run.thoughts.set(ev.id, ev);
+        this.ambient?.pluck();
+      }
+      this.thoughts.onThought(ev);
+    } else if (ev.type === 'result') {
+      run.results = ev.results || [];
+      run.dropped = ev.dropped || [];
+      run.items = ev.items || {};
+      run.calls = ev.calls;
+      run.note = ev.note || '';
+    } else if (ev.type === 'next') run.next = ev.items || [];
+    this.cards.get(run.cardKey)?.redraw();
+  }
+
+  _agentDone(run, stats) {
+    if (run !== this.agent) return;
+    run.running = false;
+    if (!stats && !run.results.length && !run.note) run.note = 'The engine did not answer in time. Try again in a minute.';
+    this.setStatus('');
+    this.cards.get(run.cardKey)?.redraw();
+  }
+
+  closeAgent() {
+    const run = this.agent;
+    if (!run) return;
+    run.controller?.abort();
+    this.agent = null;
+    this.thoughts.hide();
+    this.view.setQuiet(false);
+    this.closeCard(run.cardKey);
+  }
+
+  /**
+   * "Why did this happen?" is hidden: in the eval only 2 of its 6 explanations were
+   * good (docs/DECISIONS.md). To bring the button back, return this.mode === 'live'.
+   */
+  canAskWhy() {
+    return false;
+  }
+
+  /** The nodes around a story that have not been opened yet. */
+  _nextNodes(id) {
+    const nodes = [];
+    for (const { id: other } of this.store.neighbors(id)) {
+      const n = this.store.nodes.get(other);
+      if (n && this.canExplore(n.id) && !n.explored) nodes.push({ id: n.id, type: n.type, label: n.label });
+    }
+    return nodes.slice(0, 12);
+  }
+
+  _storyBody(id) {
+    const it = this.getItem(id);
+    const text = [it.summary, ...(it.claims || []).map((c) => c.quote).filter(Boolean)].filter(Boolean).join(' ');
+    return { id, type: 'NewsItem', label: it.headline, date: it.date || '', text };
+  }
+
+  /** The story, the earlier news around it, and the nodes not opened yet. */
+  _whyBody(id) {
+    const related = [];
+    for (const { id: other } of this.store.neighbors(id)) {
+      const n = this.store.nodes.get(other);
+      if (n?.type === 'NewsItem') related.push({ id: n.id, type: n.type, label: n.label, date: n.date || '', text: n.summary || '' });
+    }
+    return { story: this._storyBody(id), related: related.slice(0, 8), nodes: this._nextNodes(id) };
+  }
+
+  /** The live engine, and something around this story still to open. */
+  canExploreNext(id) {
+    return this.mode === 'live' && this._nextNodes(id).length > 0;
+  }
+
+  /** "Explore next": the AI suggests which nodes around this story to open, and why. */
+  async openExploreNext(id) {
+    const next = { id, running: true, items: [], note: '' };
+    this.nextSteps = next;
+    this.cards.show('next', { width: 0.46, height: 0.46, draw: nextDraw(this, next), slot: 2 });
+    const r = await this.client.agentNext({ story: this._storyBody(id), nodes: this._nextNodes(id) });
+    if (this.nextSteps !== next) return next;
+    next.running = false;
+    next.items = r?.items || [];
+    if (!r) next.note = 'The engine did not answer in time. Try again in a minute.';
+    this.cards.get('next')?.redraw();
+    return next;
+  }
+
+  /** "Why did this happen?": the agent tries explanations and shows what holds. */
+  async askWhy(id) {
+    const run = this._agentRun({ job: 'why', focus: id, cardKey: 'agent', title: 'WHY DID THIS HAPPEN?', question: 'Why did this happen?', noteLabel: 'Why', empty: 'No explanation held up: the news here does not show why. That is an honest answer.' });
+    const stats = await this.client.agentWhy(this._whyBody(id), { signal: run.controller.signal, onEvent: (ev) => this._onAgentEvent(run, ev) });
+    this._agentDone(run, stats);
+    return run;
+  }
+
+  /** Show what an explanation or pattern rests on: its items light up; a star that came from search arrives. */
+  showAgentResult(run, p) {
+    this.view.setQuiet(false);
+    if (run.job === 'patterns') return this.showPattern(p);
+    const stars = (p.items || []).map((id) => run.items[id]?.star).filter((s) => s && !this.lights.get(s.id) && !this.store.nodes.has(s.id));
+    if (stars.length) this.lights.addItems(stars.map((s) => ({ ...s, search: 'why' })));
+    for (const id of p.items || []) if (this.store.nodes.has(id)) this.view.flash(id, 3);
+    const other = (p.items || []).find((id) => id !== run.focus);
+    if (other && this.store.nodes.has(other)) this.pinchNode(other);
+    else if (other && this.lights.get(other)) this.openLight(other);
+  }
+
+  /** A node the agent suggests: bring it out if it waits behind a group, and open it. */
+  exploreSuggested(id) {
+    const n = this.store.nodes.get(id);
+    if (!n) return;
+    if (n.hidden) {
+      n.hidden = false;
+      this.store._emit('node-added', [id]);
+    }
+    this.closeAgent();
+    this.closeCard('next');
+    this.pinchNode(id);
   }
 
   /** Light up a pattern's items in the fog and open the first. */
@@ -860,11 +1016,12 @@ export class App {
     };
     for (const it of this.lights.items) if (near(this.lights.worldPositionOf(it.id, new Vector3()))) return false;
     for (const id of this.view.visibleIds) if (near(this.view.worldPositionOf(id, new Vector3()))) return false;
+    for (const id of this.constellation.stars.keys()) if (near(this.constellation.worldPositionOf(id, new Vector3()))) return false;
     return true;
   }
 
   anythingHovered() {
-    const entities = [this.view.hitEntity, this.lights.hitEntity, this.statusCard.entity, this.helpButton.entity, ...this.props.items.map((p) => p.entity)];
+    const entities = [this.view.hitEntity, this.lights.hitEntity, this.constellation.hitEntity, this.statusCard.entity, this.helpButton.entity, ...this.props.items.map((p) => p.entity)];
     for (const e of this.cards.open) entities.push(e.card.entity);
     if (this.keypad.card) entities.push(this.keypad.card.entity);
     return entities.some((e) => e?.hasComponent?.(Hovered));
@@ -1031,6 +1188,7 @@ export class App {
       }
     };
     walk(id);
+    this._retract(remove, id);
     removeNodesFromStore(this.store, remove);
     n.addedIds = [];
     n.explored = false;
@@ -1112,7 +1270,7 @@ export class App {
     const prefer = this.view.worldPositionOf(id);
     for (const e of [...this.cards.open]) if (e.key.startsWith('node:') && e.key !== `node:${id}`) this.cards.close(e.key);
     const tall = ['Place', 'Organisation', 'PublicFigure', 'Topic', 'Technology', 'Event', 'Concept'].includes(this.store.nodes.get(id)?.type);
-    this.cards.show(`node:${id}`, { width: 0.46, height: tall ? 0.56 : 0.5, draw: nodeCardDraw(this, id), prefer });
+    this.cards.show(`node:${id}`, { width: 0.46, height: tall ? 0.6 : 0.54, draw: nodeCardDraw(this, id), prefer });
     this.onboarding.notify('card-opened');
   }
 
@@ -1125,12 +1283,23 @@ export class App {
    * (touch it to grow it again). Sealed and pinned items stay.
    */
   closeStar(id) {
+    if (this.agent?.focus === id) this.closeAgent();
+    const growing = this.getItem(id);
+    if (growing?.expanded === 'running') {
+      growing.closed = true;
+      // what has arrived so far leaves with it
+      const node = this.store.nodes.get(id);
+      if (node && this._growing?.id === id) node.addedIds = this._growing.added;
+    }
     if (this.expanding?.id === id) this.stopResearch();
     else if (this.player && !this.player.done && this.getItem(id)?.expanded === 'running') this.stopResearch();
     const before = new Set(this.store.nodes.keys());
     this.collapse(id);
     const n = this.store.nodes.get(id);
-    if (n && !n.sealed && !n.pinned && !this.store.neighbors(id).length) removeNodesFromStore(this.store, [id]);
+    if (n && !n.sealed && !n.pinned && !this.store.neighbors(id).length) {
+      this._retract([id], id);
+      removeNodesFromStore(this.store, [id]);
+    }
     const gone = [...before].filter((x) => !this.store.nodes.has(x));
     for (const x of gone) this.closeCard(`node:${x}`);
     this.trail = this.trail.filter((x) => this.store.nodes.has(x));
@@ -1143,6 +1312,7 @@ export class App {
   }
 
   _onCardClosed(key) {
+    if (this.agent?.cardKey === key) this.closeAgent(); // the tree goes with its card
     if (key.startsWith('node:') && this.selectedId === key.slice(5)) {
       this.selectedId = null;
       this.view.setSelected(null);
@@ -1162,6 +1332,15 @@ export class App {
     const it = this.lights.get(id);
     if (!it) return;
     for (const e of [...this.cards.open]) if (e.key.startsWith('light:') && e.key !== `light:${id}`) this.cards.close(e.key);
+    const starAt = this.lights.worldPositionOf(id, new Vector3());
+    if (starAt && this.lights.openId !== id) {
+      this.lights.pop(id);
+      this.fx.burst(starAt, LIGHT_KINDS[it.kind]?.color ?? 0xffe6b4);
+      this.ambient?.chime(this._panOf(starAt));
+      if (!this.store.nodes.has(id)) this.view.setOrigin(id, starAt);
+      const t = Date.parse(it.date || '');
+      this.view.depthFrom = Number.isFinite(t) ? t : Date.now();
+    }
     this.lights.openId = id;
     const size = this.readerDetails?.has(id) ? READER_SIZE.details : READER_SIZE.compact;
     this.cards.show(`light:${id}`, { ...size, draw: readerDraw(this, id), prefer: this.lights.worldPositionOf(id) });
@@ -1171,6 +1350,83 @@ export class App {
     if (settings.feed.autoExpand && !it.expanded && this.canExpand(id)) {
       if (!this.researching) this.expandLight(id);
       else this._pendingExpand = id; // grows when the current growth finishes
+    }
+  }
+
+  /** Left or right of the head, for sound (-1 to 1). */
+  _panOf(pos) {
+    if (!pos) return 0;
+    const v = new Vector3().subVectors(pos, _hp).applyQuaternion(_hq.clone().invert());
+    return Math.max(-0.8, Math.min(0.8, v.x / Math.max(0.3, v.length())));
+  }
+
+  /** Quotes on a related news card: one pinch away, so the first look stays light. */
+  toggleQuotes(id) {
+    this.quotesOpen ??= new Set();
+    if (this.quotesOpen.has(id)) this.quotesOpen.delete(id);
+    else this.quotesOpen.add(id);
+    this.cards.get(`node:${id}`)?.redraw();
+  }
+
+  /** What you keep becomes your constellation: new items fly up to it. */
+  _syncConstellation() {
+    const before = this.constellation.stars.size;
+    const fresh = this.constellation.setItems(this.libraryItems());
+    let i = 0;
+    for (const id of fresh) {
+      const from = this.lights.worldPositionOf(id, new Vector3()) || this.view.worldPositionOf(id, new Vector3());
+      const to = this.constellation.worldPositionOf(id, new Vector3());
+      if (!from || i >= 6 || settings.comfort.gentle) {
+        this.constellation.appear(id, 0);
+        continue;
+      }
+      const delay = i++ * 0.12;
+      this.constellation.appear(id, delay + 0.85);
+      this.fx.comet(from, to, 0xffd98a, { life: 0.85, delay });
+    }
+    if (fresh.length) this.ambient?.bell();
+    if (fresh.length && !before) this.showNotice('The first star of your constellation, high in the sky. It grows with everything you keep.', { seconds: 8 });
+  }
+
+  /** A star of your constellation: open it if it is here, else the Library. */
+  _openKept(id) {
+    if (this.lights.get(id)) this.openLight(id);
+    else if (this.store.nodes.has(id)) this.pinchNode(id);
+    else this.openLibrary();
+  }
+
+  /** News arrives as a shooting star; returns how long until the star itself appears. */
+  _shootingStar(it, pos, delay) {
+    if (settings.comfort.gentle) return delay; // Calm mode: the star only fades in
+    const color = LIGHT_KINDS[it.kind]?.color ?? 0xffe6b4;
+    const side = hash01(it.id, 8) < 0.5 ? -1 : 1;
+    const from = pos.clone().add(new Vector3(side * 0.9, 0.22, -0.25));
+    const life = 0.95;
+    this.fx.comet(from, pos, color, {
+      life,
+      delay,
+      onArrive: () => {
+        this.fx.burst(pos, color, { size: 0.12, life: 0.6, strength: 0.8 });
+        this.ambient?.shimmer(this._panOf(pos));
+      },
+    });
+    return delay + life;
+  }
+
+  /** A closing web runs back home: a light and a thread from each node to its star. */
+  _retract(ids, homeId) {
+    const home = this.lights.worldPositionOf(homeId, new Vector3()) || this.view.worldPositionOf(homeId, new Vector3());
+    if (!home) return;
+    let i = 0;
+    for (const id of ids.slice(0, 48)) {
+      const node = this.store.nodes.get(id);
+      if (!node || node.hidden) continue; // nodes waiting behind a group button were never out
+      const at = this.view.worldPositionOf(id, new Vector3());
+      if (at) this.fx.retract(at, home, this.view._nodeColor(node), { delay: i++ * 0.012 });
+    }
+    if (i) {
+      this.fx.burst(home, 0xffe6b4, { delay: 0.5, size: 0.12, strength: 0.7 });
+      this.ambient?.whoosh({ down: true, pan: this._panOf(home), seconds: 0.6 });
     }
   }
 
@@ -1222,6 +1478,7 @@ export class App {
     // about 5 nodes first (the closest), the rest wait behind group buttons on the card
     const before = new Set(this.store.nodes.keys());
     const added = [];
+    this._growing = { id, added };
     const mark = (ev) => {
       if (ev.type === 'node' && ev.node.id !== id && !before.has(ev.node.id) && !added.includes(ev.node.id)) {
         added.push(ev.node.id);
@@ -1251,6 +1508,7 @@ export class App {
         this.setStatus('That recorded run is missing from the snapshot.');
         return;
       }
+      if (it.closed) return this._grownAfterClose(it);
       for (const ev of rec.events || []) mark(ev);
       this._recordedAnswers ??= {};
       if (rec.answers) this._recordedAnswers[id] = rec.answers;
@@ -1265,6 +1523,14 @@ export class App {
         this._renderStatus();
       });
     }
+    if (it.closed) return this._grownAfterClose(it);
+    if (it.live && this.mode === 'live' && !this.lastStats && !added.length) {
+      // nothing came back: not "grown", so touching the star again tries again
+      it.expanded = false;
+      this.setStatus('The engine did not answer in time. Touch the star to try again.');
+      this.cards.get(`light:${id}`)?.redraw();
+      return;
+    }
     it.expanded = true;
     if (this.store.nodes.has(id)) {
       this.store.nodes.get(id).addedIds = added;
@@ -1278,6 +1544,14 @@ export class App {
     this.setStatus('');
     this._refreshCards();
     this.onboarding.notify('expanded');
+  }
+
+  /** Closed while it was growing: nothing more is added, and it can grow again. */
+  _grownAfterClose(it) {
+    it.closed = false;
+    it.expanded = false;
+    this.setStatus('');
+    this.cards.get(`light:${it.id}`)?.redraw();
   }
 
   _onResearchEvent(ev) {
@@ -1306,6 +1580,7 @@ export class App {
     this.lights.sealed.add(id);
     writeJSON(SEALED_LIGHTS_KEY, this.sealedLights);
     if (this.store.nodes.has(id)) this.seal(id);
+    this._syncConstellation();
     this.cards.get(`light:${id}`)?.redraw();
     this.onboarding.notify('sealed');
   }
@@ -1315,6 +1590,7 @@ export class App {
     this.lights.sealed.delete(id);
     writeJSON(SEALED_LIGHTS_KEY, this.sealedLights);
     if (this.store.nodes.get(id)?.sealed) this.unseal(id);
+    this._syncConstellation();
     this.cards.get(`light:${id}`)?.redraw();
   }
 
@@ -1647,6 +1923,7 @@ export class App {
     if (ev.kind === 'sealed' || ev.kind === 'unsealed' || ev.kind === 'node-updated') {
       for (const e of this.cards.open) if (e.key.startsWith('node:') || e.key === 'library') e.card.redraw();
     }
+    if (ev.kind === 'sealed' || ev.kind === 'unsealed' || ev.kind === 'clear' || ev.kind === 'loaded') this._syncConstellation();
   }
 
   // ---------- empty-space pinch & flick ----------
@@ -1692,6 +1969,8 @@ export class App {
     this._handPoints ??= [new Vector3(), new Vector3()];
     const tips = this.world.session ? ['left', 'right'].map((s, i) => this.sys.player.indexTipSpaces?.[s]?.getWorldPosition(this._handPoints[i])).filter(Boolean) : [];
     this.lights.setHands(tips);
+    this.atmosphere.setHands(tips);
+    this._handPuffs(tips, delta);
     // flat page (no headset): fit the light arc into the window's view
     const cam = this.world.camera;
     if (!this.world.session && cam?.isPerspectiveCamera) {
@@ -1700,6 +1979,11 @@ export class App {
       this.lights.fit = { k: (halfH * 0.86) / YAW_MAX, e0: halfV * 0.3, e1: halfV * 0.82 };
     } else this.lights.fit = null;
     this.lights.update(delta, _hq);
+    this.fx.update(delta, _hq);
+    this.constellation.fit = this.lights.fit;
+    this.constellation.update(delta, _hq);
+    this.thoughts.flat = !this.world.session;
+    this.thoughts.update(delta, _hq);
     this.cards.update(delta);
     this.atmosphere.update(delta);
     this.props.update(delta, now);
@@ -1720,6 +2004,18 @@ export class App {
         if (n && !n.explored) this.exploreNode(next);
       }
     }
+  }
+
+  /** A hand moving quickly through the fog leaves a faint puff behind it. */
+  _handPuffs(tips, delta) {
+    this._puffAt = (this._puffAt || 0) - delta;
+    this._prevTips ??= [new Vector3(), new Vector3()];
+    tips.forEach((p, i) => {
+      const prev = this._prevTips[i];
+      if (this._puffAt <= 0 && delta > 0 && prev.lengthSq() && p.distanceTo(prev) / delta > 0.6) this.fx.puff(p);
+      prev.copy(p);
+    });
+    if (this._puffAt <= 0) this._puffAt = 0.09;
   }
 
   _followWrist() {

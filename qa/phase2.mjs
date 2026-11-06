@@ -166,28 +166,14 @@ async function liveRun() {
         open = await ev(() => window.__qa.open());
       }
       const buttons = await ev((id) => window.__qa.cardOf(`node:${id}`).buttonIds(), lightId);
-      if (!buttons.includes('touch')) throw new Error(JSON.stringify(buttons));
+      if (!buttons.includes('seal') || !buttons.includes('ask')) throw new Error(JSON.stringify(buttons));
       await shot(page, 'p2-04-news-node');
       return { buttons };
     });
 
-    await step(page, '"Touches me?" without context asks for context', async () => {
-      await ev(() => window.__fw.app.clearContext());
-      await ev((id) => window.__qa.press(`node:${id}`, 'touch'), lightId);
-      const open = await ev(() => window.__qa.open());
-      if (!open.includes('path')) throw new Error(JSON.stringify(open));
-      return { open };
-    });
-
-    await step(page, 'My context: sample persona by pinch (help → context → Sample)', async () => {
+    await step(page, 'My context: sample persona', async () => {
       await ev(() => window.__fw.app.cards.closeAll());
-      await ev(async () => {
-        const qa = window.__qa;
-        await qa.wait(300);
-        const p = qa.buttonPos?.('help-button', 'help') || window.__fw.app.helpButton.buttonWorldPosition('help');
-        await qa.pinchAt('hand-right', { x: p.x, y: p.y, z: p.z });
-      });
-      await ev(() => window.__qa.press('help', 'context'));
+      await ev(() => window.__fw.app.openContext());
       await ev(() => window.__qa.press('context', 'sample'));
       const r = await ev(() => ({ n: window.__fw.app.context.list().length, ctxNodes: [...window.__fw.app.store.nodes.values()].filter((n) => n.type === 'ContextNode').length }));
       if (r.n !== 6 || r.ctxNodes !== 6) throw new Error(JSON.stringify(r));
@@ -199,19 +185,6 @@ async function liveRun() {
       const r = await ev(() => [window.__fw.app.addContext('12 Baker Street'), window.__fw.app.addContext('my diabetes'), window.__fw.app.addContext('salary 50k')]);
       if (r.some((x) => x.ok)) throw new Error(JSON.stringify(r));
       return { refused: r.length };
-    });
-
-    await step(page, '"Touches me?" with context: grounded thread or honest no', async () => {
-      await ev(() => window.__fw.app.cards.closeAll());
-      await ev((id) => window.__fw.app.pinchNode(id), lightId);
-      await ev((id) => window.__qa.press(`node:${id}`, 'touch'), lightId);
-      const r = await ev(() => {
-        const p = window.__fw.app.lastTouch;
-        return p ? { path: p.nodes.length, labels: p.edges.map((e) => e.label) } : { path: 0, said: 'no clear connection' };
-      });
-      if (r.labels?.includes('speculative')) throw new Error('speculative link used: ' + JSON.stringify(r));
-      await shot(page, 'p2-06-touches-me');
-      return r;
     });
 
     await step(page, 'Seal the news node by pinch; Library keeps it', async () => {
@@ -244,7 +217,7 @@ async function liveRun() {
       return { lines: r.result.lines };
     });
 
-    await step(page, 'empty-space pinch → keypad → find a light by typing', async () => {
+    await step(page, 'empty-space pinch → keypad → typing asks the fog', async () => {
       await ev(() => window.__fw.app.cards.closeAll());
       await ev(async () => {
         const h = window.__fw.app.anchor.head;
@@ -258,9 +231,9 @@ async function liveRun() {
       });
       for (const ch of word) await ev((c) => window.__qa.press('keypad', `key:${c}`), ch);
       await ev(() => window.__qa.press('keypad', 'go'));
-      const open = await ev(() => window.__qa.open());
-      if (!open.some((k) => k.startsWith('light:'))) throw new Error(JSON.stringify({ word, open }));
-      return { word, open };
+      // the answer arrives on a card; stars that name it come closer (no star opens by itself)
+      await page.waitForFunction((w) => window.__fw.app.lastAnswer?.question === w, word, { timeout: 90000 });
+      return { word, open: await ev(() => window.__qa.open()) };
     });
 
     await step(page, 'Stop mid-research keeps what grew', async () => {
@@ -386,4 +359,5 @@ try {
   writeFileSync(`${OUT}/phase2-results.json`, JSON.stringify({ when: new Date().toISOString(), scripted: true, timings, results }, null, 1));
   const passed = results.filter((r) => r.pass).length;
   console.log(`\n${passed}/${results.length} passed (scripted IWER hands, headless Chromium; not a real Quest)`);
+  process.exitCode = passed === results.length ? 0 : 1;
 }

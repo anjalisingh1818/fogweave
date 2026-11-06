@@ -16,7 +16,7 @@ import { LIGHT_KINDS, ageMark } from '../render/lights.js';
 import { speech } from '../audio.js';
 import { settings } from '../config.js';
 
-export const READER_SIZE = { compact: { width: 0.46, height: 0.25 }, details: { width: 0.46, height: 0.52 } };
+export const READER_SIZE = { compact: { width: 0.46, height: 0.3 }, details: { width: 0.46, height: 0.56 } };
 
 const SOURCE_TYPES = { paper: 'PAPER', archive: 'ARCHIVE', filing: 'FILING', dataset: 'DATASET', news: 'NEWS' };
 const VIA_NAMES = { wikipedia: 'Wikipedia Current events', gdelt: 'GDELT', hackernews: 'Hacker News', arxiv: 'arXiv' };
@@ -73,18 +73,18 @@ export function readerDraw(app, id) {
     ui.button('move', '⇄', w - pad - 58, y - 34, 58, 46, () => app.cards.move(`light:${id}`), { size: 26 });
     ui.text(badge, w - pad - 72, y, { size: 24, color: badge === 'SEALED' ? UI.accent : badge === 'LIVE' ? '#9fe3ff' : badge === 'TEST FIXTURE' ? '#f0c987' : UI.dim, weight: 700, align: 'right' });
     y += 52;
-    y = fitPara(ui, it.headline, pad, y, w - pad * 2, { size: 38, weight: 600, maxLines: 2, lineHeight: 1.18 }, limit);
+    y = fitPara(ui, it.headline, pad, y, w - pad * 2, { size: 42, weight: 600, maxLines: 2, lineHeight: 1.18 }, limit);
     // the real outlet first; the aggregator that found it second
     const via = it.via && it.via !== it.source ? ` · found via ${VIA_NAMES[it.via] || it.via}` : '';
     if (y + 26 <= limit) {
-      ui.text(`${it.source || 'unknown source'} · ${shortDate(it.date)}${via}`, pad, y + 4, { size: 25, color: UI.dim, maxWidth: w - pad * 2 });
-      y += 40;
+      ui.text(`${it.source || 'unknown source'} · ${shortDate(it.date)}${via}`, pad, y + 4, { size: 27, color: UI.dim, maxWidth: w - pad * 2 });
+      y += 42;
     }
     if (it.outside && y + 24 <= limit) {
       ui.text('Outside your usual interests', pad, y + 2, { size: 22, color: '#9fe3ff' });
       y += 32;
     }
-    if (it.summary) y = fitPara(ui, it.summary, pad, y + 4, w - pad * 2, { size: 27, color: '#d3dae3', maxLines: details ? 3 : 1 }, limit) + 4;
+    if (it.summary) y = fitPara(ui, it.summary, pad, y + 4, w - pad * 2, { size: 30, color: '#d3dae3', maxLines: details ? 3 : 2 }, limit) + 4;
 
     if (details) {
       ui.rule(y - 10, pad, w - pad);
@@ -110,7 +110,7 @@ export function readerDraw(app, id) {
     // ---- status note (one line)
     const can = app.canExpand(id);
     const note = it.expanded === 'running' ? 'Finding what it relates to…' : it.expanded ? 'Related items are around it: touch one to see how it relates.' : can ? 'Show related: what it connects to, older news included.' : 'Showing related items needs the live engine (no recorded run for this star).';
-    ui.text(note, pad, noteY, { size: 22, color: UI.dim, maxWidth: w - pad * 2 });
+    ui.text(note, pad, noteY, { size: 24, color: UI.dim, maxWidth: w - pad * 2 });
 
     // ---- small row
     const small = [];
@@ -119,11 +119,13 @@ export function readerDraw(app, id) {
     }
     const mates = app.storyMates(id).length;
     if (details && mates) small.push({ id: 'story', label: `Story +${mates}`, on: () => app.openTimeline(id) });
+    if (it.expanded === true && app.canAskWhy(id)) small.push({ id: 'why', label: 'Why did this happen?', primary: true, on: () => app.askWhy(id) });
+    if (it.expanded === true && app.canExploreNext(id)) small.push({ id: 'next', label: 'Explore next', primary: true, on: () => app.openExploreNext(id) });
     small.push({ id: 'more', label: 'More like this', on: () => app.likeLight(id, true) });
     small.push({ id: 'less', label: 'Less like this', on: () => app.likeLight(id, false) });
     const gap = 10;
     const sw = (w - pad * 2 - gap * (small.length - 1)) / small.length;
-    small.forEach((b, i) => ui.button(b.id, b.label, pad + i * (sw + gap), bySmall, sw, smallH, b.on, { size: small.length > 4 ? 19 : 22 }));
+    small.forEach((b, i) => ui.button(b.id, b.label, pad + i * (sw + gap), bySmall, sw, smallH, b.on, { size: small.length > 4 ? 20 : small.length > 2 ? 21 : 24, primary: b.primary }));
 
     // ---- main row: Seal, Expand, Ask, Details, Close
     const mw = (w - pad * 2 - gap * 4) / 5;

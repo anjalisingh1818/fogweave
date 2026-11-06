@@ -12,9 +12,11 @@ export const OUT = 'qa/recordings';
 export async function launch({ width = 1280, height = 800, gpu = true } = {}) {
   mkdirSync(OUT, { recursive: true });
   const args = gpu ? ['--use-angle=d3d11', '--enable-gpu', '--ignore-gpu-blocklist'] : [];
+  if (process.env.FW_MUTE) args.push('--mute-audio');
   const browser = await chromium.launch({ headless: true, args });
   const context = await browser.newContext({
     acceptDownloads: true,
+    ignoreHTTPSErrors: true, // the dev server's own certificate
     viewport: { width, height },
     recordVideo: process.env.FW_VIDEO ? { dir: OUT, size: { width, height } } : undefined,
   });

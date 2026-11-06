@@ -7,6 +7,9 @@
   POST /check           safety check for typed requests {text}
   POST /search          Ask the fog: news about any topic, as stars {q}
   POST /patterns        Connect the dots: patterns across Library items {items}
+  POST /agent/patterns  the thinking agent on Library items (streamed thoughts) {items}
+  POST /agent/why       the thinking agent: why did this happen? (streamed; the client hides it for now) {story, related, nodes}
+  POST /agent/next      which nodes around a story are worth opening next {story, nodes}
 
 The reader's context labels arrive only with the request that needs them and
 are never stored or logged.
@@ -156,6 +159,77 @@ async def patterns(req: PatternsReq):
         if i.get("id") and i.get("label")
     ]
     return await find_patterns(engine.llm, items)
+
+
+class AgentPatternsReq(BaseModel):
+    items: list[dict] = Field(default_factory=list, max_length=24)
+
+
+class AgentWhyReq(BaseModel):
+    story: dict
+    related: list[dict] = Field(default_factory=list, max_length=8)
+    nodes: list[dict] = Field(default_factory=list, max_length=20)  # nodes not opened yet: [{id, type, label}]
+
+
+class AgentNextReq(BaseModel):
+    story: dict
+    nodes: list[dict] = Field(default_factory=list, max_length=20)
+
+
+def _clean_nodes(nodes: list[dict]) -> list[dict]:
+    return [{"id": str(n.get("id", ""))[:80], "type": str(n.get("type", ""))[:30], "label": str(n.get("label", ""))[:120]} for n in nodes if n.get("id") and n.get("label")]
+
+
+def _clean_item(i: dict) -> dict:
+    return {"id": str(i.get("id", ""))[:80], "type": str(i.get("type", ""))[:30], "label": str(i.get("label", ""))[:200], "date": str(i.get("date") or "")[:25], "text": str(i.get("text") or "")[:900]}
+
+
+def _sse(events):
+    async def stream():
+        try:
+            async for ev in events:
+                yield f"data: {json.dumps(ev, ensure_ascii=False)}\n\n"
+        except Exception as exc:  # noqa: BLE001 (the client must always get a 'done')
+            yield f"data: {json.dumps({'type': 'done', 'stats': {'error': type(exc).__name__}})}\n\n"
+
+    return StreamingResponse(stream(), media_type="text/event-stream", headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
+
+@app.post("/agent/patterns")
+async def agent_patterns(req: AgentPatternsReq):
+    from fogweave.agent import patterns_task, tree_of_thoughts
+
+    items = [_clean_item(i) for i in req.items if i.get("id") and i.get("label")]
+    return _sse(tree_of_thoughts(engine.llm, patterns_task(items)))
+
+
+async def _why_events(story: dict, related: list[dict], nodes: list[dict]):
+    from fogweave.agent import next_steps, tree_of_thoughts, why_task
+
+    done = None
+    async for ev in tree_of_thoughts(engine.llm, why_task(story, related), search=engine.older_news):
+        if ev["type"] == "done":
+            done = ev
+            continue
+        yield ev
+    next_up = await next_steps(engine.llm, story, nodes)
+    if next_up:
+        yield {"type": "next", "items": next_up}
+    yield done or {"type": "done", "stats": {}}
+
+
+@app.post("/agent/why")
+async def agent_why(req: AgentWhyReq):
+    story = _clean_item(req.story)
+    related = [_clean_item(i) for i in req.related if i.get("id") and i.get("label")]
+    return _sse(_why_events(story, related, _clean_nodes(req.nodes)))
+
+
+@app.post("/agent/next")
+async def agent_next(req: AgentNextReq):
+    from fogweave.agent import next_steps
+
+    return {"items": await next_steps(engine.llm, _clean_item(req.story), _clean_nodes(req.nodes))}
 
 
 @app.post("/ask")

@@ -58,6 +58,9 @@ const _p2b = new Vector3();
 const _s2 = new Vector3();
 const _c = new Color();
 const _up = new Vector3(0, 1, 0);
+const BLOOM_GAP = 0.07; // s between nodes opening
+const BLOOM_MAX = 1.4; // s: the longest a node waits for its turn
+const DEPTH_FROM_DAYS = 14; // news this much older than the story starts to sit further away
 
 export class GraphView {
   constructor(world, store, { center, radius = 0.5 }) {
@@ -90,6 +93,13 @@ export class GraphView {
     this._layoutTimer = null;
     this._dirty = true;
     this._ranks = new Map();
+    this._origin = null; // { id, world }: the next web starts at this star in the sky
+    this._nextWake = 0;
+    this._litId = null; // pointed at: it and its neighbours stay lit, the rest dim
+    this._lit = new Set();
+    this._dim = 0;
+    this.depthFrom = Date.now(); // the date of the story the web grows from
+    this.headRef = null; // the seated head (time runs away from it)
 
     this._buildMeshes();
     this._buildLabels();
@@ -236,6 +246,8 @@ export class GraphView {
       this.selectedId = this.hoveredId = this.linkFromId = null;
       this.clearPath();
     }
+    // a node that comes back later grows out again
+    if (ev.kind === 'removed') for (const id of ev.ids || []) this.state.delete(id);
     this._dirty = true;
     if (ev.kind !== 'node-updated' && ev.kind !== 'sealed' && ev.kind !== 'unsealed' && ev.kind !== 'meta') {
       this._scheduleLayout();
@@ -250,9 +262,13 @@ export class GraphView {
   async _runLayout() {
     const { nodes, edges } = this.store.view('all');
     const previous = {};
+    const axis = this._awayAxis();
     for (const n of nodes) {
       const st = this.state.get(n.id);
-      if (st?.placed) previous[n.id] = [st.target.x / SHAPE[0], st.target.y / SHAPE[1], st.target.z / SHAPE[2]];
+      if (st?.placed) {
+        _p.copy(st.target).addScaledVector(axis, -(st.depth || 0)); // the layout does not know about time
+        previous[n.id] = [_p.x / SHAPE[0], _p.y / SHAPE[1], _p.z / SHAPE[2]];
+      }
     }
     const positions = await this.layout.layout(nodes, edges, previous);
     if (!positions) return; // superseded by a newer request
@@ -260,6 +276,9 @@ export class GraphView {
       const st = this._ensureState(id);
       // wide, shallow bubble: a seated viewer sees across it, not into it
       st.target.set(p[0] * SHAPE[0], p[1] * SHAPE[1], p[2] * SHAPE[2]);
+      // time as depth: the older the news, the further from you
+      st.depth = this._ageDepth(this.store.nodes.get(id));
+      st.target.addScaledVector(axis, st.depth);
       st.placed = true;
     }
   }
@@ -267,14 +286,26 @@ export class GraphView {
   _ensureState(id) {
     let st = this.state.get(id);
     if (st) return st;
-    // new nodes appear far out in the fog, then drift in
+    // new nodes grow out of what they connect to, one after another; a star's
+    // own node starts at the star; anything else drifts in from far out in the fog
     const node = this.store.nodes.get(id);
     const anchor = node && this._neighborTarget(id);
     const dir = new Vector3(hash(id, 1) - 0.5, hash(id, 2) - 0.5, hash(id, 3) - 0.5).normalize();
+    const parent = (node && this._neighborId(id)) || (this.focusId !== id ? this.focusId : null);
+    const from = parent && this.state.get(parent);
+    let start = from ? from.cur.clone() : dir.clone().multiplyScalar(2.6);
+    if (this._origin?.id === id) {
+      start = this.root.worldToLocal(this._origin.world.clone());
+      this._origin = null;
+    }
+    const wakeAt = Math.max(this.time, Math.min(this._nextWake, this.time + BLOOM_MAX));
+    this._nextWake = wakeAt + BLOOM_GAP;
     st = {
-      cur: dir.clone().multiplyScalar(2.6),
+      cur: start,
       target: anchor ? anchor.clone().add(dir.clone().multiplyScalar(0.12)) : dir.clone().multiplyScalar(0.7),
       born: this.time,
+      wakeAt,
+      parent: from ? parent : null,
       scale: 0,
       placed: false,
       phase: hash(id, 4) * Math.PI * 2,
@@ -291,7 +322,45 @@ export class GraphView {
     return null;
   }
 
+  /** From the seated head out through the web's centre. */
+  _awayAxis() {
+    const axis = new Vector3(0, 0, -1);
+    if (this.headRef) {
+      axis.subVectors(this.root.position, this.headRef);
+      axis.y = 0;
+      axis.normalize();
+    }
+    return axis;
+  }
+
+  /** How much further away an older news item sits: months count, then years count less. */
+  _ageDepth(node) {
+    if (node?.type !== 'NewsItem' || !node.date) return 0;
+    const days = (this.depthFrom - Date.parse(node.date)) / 86400000;
+    if (!(days > DEPTH_FROM_DAYS)) return 0;
+    return Math.min(1.1, 0.42 * Math.log10(1 + days / 30));
+  }
+
+  _neighborId(id) {
+    for (const { id: nb } of this.store.neighbors(id)) if (this.state.has(nb)) return nb;
+    return null;
+  }
+
   // ---------- public API ----------
+
+  /** The web steps back while the agent's thoughts are in front of it. */
+  setQuiet(on) {
+    this.quiet = on;
+    if (on && !this.hoveredId) {
+      this._litId = null;
+      this._lit = new Set();
+    }
+  }
+
+  /** The next web grows out of this star: its node starts here (a world point). */
+  setOrigin(id, world) {
+    this._origin = { id, world: world.clone() };
+  }
 
   /** World position of a node (for cards, props, reveals). */
   worldPositionOf(id, out = new Vector3()) {
@@ -382,6 +451,10 @@ export class GraphView {
   setHovered(id) {
     if (this.hoveredId === id) return;
     this.hoveredId = id;
+    if (id) {
+      this._litId = id;
+      this._lit = new Set([id, ...this.store.neighbors(id).map((x) => x.id)]);
+    }
     this._dirty = true;
   }
 
@@ -419,8 +492,25 @@ export class GraphView {
 
     for (const id of this.visibleIds) {
       const st = this._ensureState(id);
+      if (this.time < st.wakeAt) {
+        // still waiting for its turn: it rides along inside its parent
+        const from = st.parent && this.state.get(st.parent);
+        if (from) st.cur.copy(from.cur);
+        continue;
+      }
+      if (!st.opened) {
+        st.opened = true;
+        this.onBloom?.(id);
+      }
       st.cur.lerp(st.target, st.placed ? ease : ease * 0.4);
       st.scale = Math.min(1, st.scale + delta * 1.4);
+    }
+    this._dim += ((this.hoveredId ? 1 : this.quiet ? 0.55 : 0) - this._dim) * (1 - Math.exp(-delta * 8));
+    if (settings.comfort.gentle) this._dim = Math.min(this._dim, 0.5);
+    // Speculative links breathe slowly (far below any flashing rate)
+    const breathe = settings.comfort.gentle ? 1 : 0.65 + 0.35 * Math.sin(this.time * 1.2);
+    for (const layer of LAYERS) {
+      this.edgeLines[`speculative:${layer}`].material.opacity = LABEL_STYLE.speculative.opacity[layer === 'sealed' ? 1 : 0] * breathe;
     }
 
     // billboard orientation in root-local space
@@ -485,24 +575,29 @@ export class GraphView {
         _p.y += Math.cos(t * 0.8) * 0.025;
       }
 
+      const lit = this._lit.has(id) ? 1 + 0.25 * this._dim : 1 - 0.68 * this._dim;
       const mesh = this.nodeMeshes[`${node.type}:${layer}`];
       _s.setScalar(size);
       _m.compose(_p, node.type === 'Claim' ? IDENTITY_Q : spinQ(this.time, st.phase), _s);
       mesh.setMatrixAt(mesh.count, _m);
       _c.setHex(this._nodeColor(node));
       if (!node.sealed) _c.multiplyScalar(0.85);
+      _c.multiplyScalar(lit);
       mesh.setColorAt(mesh.count, _c);
       mesh.ids.push(id);
       mesh.count++;
 
       // hit target (at least 3.5 cm radius in the world)
-      const hitR = Math.max(size * 1.6, 0.035 / this.radius);
-      this.hitRadius.set(id, hitR);
-      _s.setScalar(hitR);
-      _m.compose(_p, IDENTITY_Q, _s);
-      this.hitMesh.setMatrixAt(this.hitMesh.count, _m);
-      this.hitOrder.push(id);
-      this.hitMesh.count++;
+      // (a node that has not opened yet cannot be touched)
+      if (st.scale > 0.1) {
+        const hitR = Math.max(size * 1.6, 0.035 / this.radius);
+        this.hitRadius.set(id, hitR);
+        _s.setScalar(hitR);
+        _m.compose(_p, IDENTITY_Q, _s);
+        this.hitMesh.setMatrixAt(this.hitMesh.count, _m);
+        this.hitOrder.push(id);
+        this.hitMesh.count++;
+      }
 
       // verdict ring (claims)
       if (node.type === 'Claim') {
@@ -521,7 +616,9 @@ export class GraphView {
       if (node.type === 'NewsItem' || node.type === 'ContextNode') glow = 0.5;
       if (emphasized) glow = 1;
       if (flashing) glow = 1.2;
-      _s.setScalar(size * (emphasized || flashing ? 5.5 : 4));
+      const opening = 1 - st.scale; // a node opens with a soft flare of light
+      glow = (glow + opening * 1.1) * lit;
+      _s.setScalar(size * (emphasized || flashing ? 5.5 : 4) * (1 + opening * 1.6));
       _m.compose(_p, billboardQ, _s);
       this.glowMesh.setMatrixAt(this.glowMesh.count, _m);
       _c.setHex(this.pathNodes.has(id) ? 0xffd98a : this._nodeColor(node)).multiplyScalar(glow * settings.quality.glow);
@@ -569,12 +666,13 @@ export class GraphView {
         const sa = this.state.get(e.from);
         const sb = this.state.get(e.to);
         if (!sa || !sb) continue;
-        this._drawPos(e.from, a);
-        this._drawPos(e.to, b);
-        // edges grow out as the younger endpoint blooms in
-        const grow = Math.min(sa.scale, sb.scale);
-        b.lerpVectors(a, b, grow);
-        _c.setHex(RELATION_COLOR[e.type] ?? DEFAULT_RELATION_COLOR);
+        // a thread of light grows from the older end as the younger one opens
+        const older = sa.wakeAt <= sb.wakeAt;
+        this._drawPos(older ? e.from : e.to, a);
+        this._drawPos(older ? e.to : e.from, b);
+        b.lerpVectors(a, b, easeOutCubic(Math.min(sa.scale, sb.scale)));
+        const hit = this._dim > 0.01 && (e.from === this._litId || e.to === this._litId);
+        _c.setHex(RELATION_COLOR[e.type] ?? DEFAULT_RELATION_COLOR).multiplyScalar(hit ? 1 + 0.5 * this._dim : 1 - 0.75 * this._dim);
         for (let k = 0; k < 2; k++) {
           col.array[i + k * 3] = _c.r;
           col.array[i + k * 3 + 1] = _c.g;
@@ -611,6 +709,7 @@ export class GraphView {
         this._drawPos(e.from, a);
         this._drawPos(e.to, b);
         const label = e.label || 'reported';
+        const off = this._dim > 0.01 && e.from !== this._litId && e.to !== this._litId ? 1 - 0.8 * this._dim : 1;
         // depends_on points from the dependent to what it needs: the effect flows the other way
         const [p0, p1] = e.type === 'depends_on' ? [b, a] : [a, b];
         const t = (this.time * SPEED[label] * gentle + hash(e.id, 9)) % 1;
@@ -618,7 +717,26 @@ export class GraphView {
         _s.setScalar((0.006 + 0.004 * BRIGHT[label]) / this.radius);
         _m.compose(_p, IDENTITY_Q, _s);
         this.pulseMesh.setMatrixAt(n, _m);
-        _c.setHex(RELATION_COLOR[e.type] ?? DEFAULT_RELATION_COLOR).multiplyScalar(BRIGHT[label] * Math.sin(Math.PI * t) * (e.sealed ? 1.2 : 0.9));
+        _c.setHex(RELATION_COLOR[e.type] ?? DEFAULT_RELATION_COLOR).multiplyScalar(BRIGHT[label] * Math.sin(Math.PI * t) * (e.sealed ? 1.2 : 0.9) * off);
+        this.pulseMesh.setColorAt(n, _c);
+        n++;
+      }
+      // the bright tip of a thread that is still growing
+      for (const e of line.edges) {
+        if (n >= 300) break;
+        const sa = this.state.get(e.from);
+        const sb = this.state.get(e.to);
+        if (!sa || !sb) continue;
+        const grow = Math.min(sa.scale, sb.scale);
+        if (grow <= 0 || grow >= 1) continue;
+        const older = sa.wakeAt <= sb.wakeAt;
+        this._drawPos(older ? e.from : e.to, a);
+        this._drawPos(older ? e.to : e.from, b);
+        _p.lerpVectors(a, b, easeOutCubic(grow));
+        _s.setScalar(0.011 / this.radius);
+        _m.compose(_p, IDENTITY_Q, _s);
+        this.pulseMesh.setMatrixAt(n, _m);
+        _c.setHex(RELATION_COLOR[e.type] ?? DEFAULT_RELATION_COLOR).multiplyScalar(1.6);
         this.pulseMesh.setColorAt(n, _c);
         n++;
       }
@@ -671,6 +789,7 @@ export class GraphView {
         if (n.sealed) p += 200;
         if (this.pathNodes.has(id)) p += 800;
         if (id === this.hoveredId) p += 900;
+        else if (this.hoveredId && this._lit.has(id)) p += 600; // pointing at a node names its neighbours
         if (id === this.selectedId || id === this.linkFromId) p += 1000;
         if (n.type === 'Source' && p < 500) p -= 50; // sources are labelled last
         return { id, p };
@@ -701,10 +820,12 @@ export class GraphView {
         return;
       }
       if (redraw) {
-        const key = `${node.label}|${node.sealed}|${id === this.selectedId}`;
+        // news that sits further away says when it is from
+        const year = st.depth > 0 ? String(node.date).slice(0, 4) : '';
+        const key = `${node.label}|${node.sealed}|${id === this.selectedId}|${year}`;
         if (lab.key !== key) {
           lab.key = key;
-          drawLabel(lab, node, id === this.selectedId);
+          drawLabel(lab, node, id === this.selectedId, year);
         }
       }
       this._drawPos(id, _p);
@@ -713,6 +834,7 @@ export class GraphView {
       lab.sprite.position.copy(_p);
       const k = 1 / this.radius;
       lab.sprite.scale.set(0.2 * k * lab.aspect, 0.035 * k, 1);
+      lab.sprite.material.opacity = this._lit.has(id) ? 1 : this.quiet ? 0.2 : 1 - 0.6 * this._dim; // the agent's thoughts are read first
       lab.sprite.visible = true;
     });
   }
@@ -722,6 +844,10 @@ const IDENTITY_Q = new Quaternion();
 const _spin = new Quaternion();
 function spinQ(t, phase) {
   return _spin.setFromAxisAngle(_up, t * 0.25 + phase);
+}
+
+function easeOutCubic(x) {
+  return 1 - (1 - x) * (1 - x) * (1 - x);
 }
 
 function easeOutBack(x) {
@@ -750,15 +876,16 @@ function hash(str, salt) {
   return ((h >>> 0) % 10000) / 10000;
 }
 
-function drawLabel(lab, node, selected) {
+function drawLabel(lab, node, selected, year = '') {
   const { ctx, canvas, tex } = lab;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const strong = node.type === 'NewsItem' || node.type === 'ContextNode';
   ctx.font = `${strong ? 600 : 500} 46px ${UI.font}`;
-  let text = node.label;
+  const full = year ? `${year} · ${node.label}` : node.label;
+  let text = full;
   const maxW = canvas.width - 40;
   while (ctx.measureText(text).width > maxW && text.length > 4) text = text.slice(0, -2);
-  if (text !== node.label) text = text.replace(/\s*\S?$/, '') + '…';
+  if (text !== full) text = text.replace(/\s*\S?$/, '') + '…';
   const w = Math.min(canvas.width, ctx.measureText(text).width + 40);
   const x0 = (canvas.width - w) / 2;
   ctx.fillStyle = selected ? 'rgba(60,50,25,0.82)' : 'rgba(12,14,18,0.62)';

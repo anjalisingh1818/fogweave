@@ -39,6 +39,7 @@ export class FogSystem extends createSystem({}) {
         // is gone a moment later (Close)
         down = { x: e.clientX, y: e.clientY, t: performance.now(), onSomething: this.app.anythingHovered() };
         this.app.hideAskOption();
+        this.app.userGesture();
       };
       const onUp = (e) => {
         const d = down;

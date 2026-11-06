@@ -14,7 +14,7 @@ const measure = () => page.evaluate(async () => {
 await page.evaluate(() => { const a = window.__fw.app; a.onboarding.finish(); a.cards.closeAll(); a.governor.locked = true; a.governor.level = 2; a.governor.onChange(2); });
 await page.waitForTimeout(2000);
 console.log('no cards', JSON.stringify(await measure()));
-await page.evaluate(() => { const a = window.__fw.app; a.openLibrary(); a.openNotes(); a.openLightsPanel(); a.openSettings(); a.openLight(a.lights.items[0].id); });
+await page.evaluate(() => { const a = window.__fw.app; a.openLibrary(); a.openContext(); a.openSettings(); a.openLight(a.lights.items[0].id); });
 await page.waitForTimeout(3000);
 console.log('5 cards ', JSON.stringify(await measure()));
 await browser.close();

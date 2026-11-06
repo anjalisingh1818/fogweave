@@ -24,6 +24,8 @@ export const SLOTS = [
 const LAYOUT_KEY = 'fogweave.workspace.v1';
 const FLAT_MAX = 2;
 const FLAT_DIST = 0.6; // m in front of the camera
+const UNFOLD = 0.26; // s: a card unfolds when it opens
+const FOLD = 0.16; // s: and folds when it closes
 const _q = new Quaternion();
 const _p = new Vector3();
 
@@ -31,7 +33,8 @@ export class CardManager {
   constructor(world, anchor) {
     this.world = world;
     this.anchor = anchor; // { head: Vector3 (seated head position), yaw: radians }
-    this.open = []; // { key, card, slot, target, pinned }
+    this.open = []; // { key, card, slot, target, pinned, age }
+    this.closing = []; // cards folding away: already closed, they only finish the animation
   }
 
   /**
@@ -49,16 +52,18 @@ export class CardManager {
       // a requested slot is a preference: never push out the card you came from
       const busy = new Set(this.open.map((e) => e.slot));
       const s = slot !== null && !busy.has(slot) ? slot : this._freeSlot(prefer, null);
-      entry = { key, card, slot: s, born: performance.now(), pinned, side: this._flatSide(prefer) };
+      entry = { key, card, slot: s, born: performance.now(), pinned, side: this._flatSide(prefer), age: 0 };
       const clash = this.open.find((e) => e.slot === s);
       if (clash && !clash.pinned) this.close(clash.key); // only when the arc is full
       this.open.push(entry);
       const t = this._slotPosition(entry.slot);
-      card.placeFacing(t.clone().lerp(this.anchor.head, -0.25), this.anchor.head);
+      // it comes out of the thing it belongs to (part of the way), else from a little further off
+      card.placeFacing(prefer ? t.clone().lerp(prefer, 0.35) : t.clone().lerp(this.anchor.head, -0.25), this.anchor.head);
       if (this.flat && this.world.camera) {
         card.object3D.scale.setScalar(this._flatPose(entry, _p));
-        card.object3D.position.copy(_p);
+        card.object3D.position.copy(prefer ? _p.lerp(prefer, 0.35) : _p);
       }
+      this._unfold(entry);
     }
     entry.card.setContent(draw);
     entry.target = this._slotPosition(entry.slot);
@@ -87,7 +92,8 @@ export class CardManager {
     const i = this.open.findIndex((e) => e.key === key);
     if (i < 0) return;
     const [entry] = this.open.splice(i, 1);
-    entry.card.dispose();
+    entry.card.disarm();
+    this.closing.push({ card: entry.card, age: 0, sx: entry.card.object3D.scale.x, sy: entry.card.object3D.scale.y });
     if (entry.pinned) this._saveLayout();
     this.onClose?.(key);
   }
@@ -194,20 +200,47 @@ export class CardManager {
     return scale;
   }
 
+  /** The opening animation: folded flat and faint, then full size. */
+  _unfold(e, scale = 1) {
+    const o = e.card.object3D;
+    const t = Math.min(1, (e.age ?? UNFOLD) / UNFOLD);
+    const u = 1 - (1 - t) * (1 - t) * (1 - t);
+    o.scale.set(scale * (0.92 + 0.08 * u), scale * (0.06 + 0.94 * u), scale);
+    e.card.material.opacity = u;
+  }
+
+  _fold(delta) {
+    let keep = 0;
+    for (const c of this.closing) {
+      c.age += delta;
+      if (c.age >= FOLD) {
+        c.card.dispose();
+        continue;
+      }
+      this.closing[keep++] = c;
+      const u = 1 - c.age / FOLD;
+      c.card.object3D.scale.set(c.sx * (0.94 + 0.06 * u), c.sy * (0.1 + 0.9 * u), c.card.object3D.scale.z);
+      c.card.material.opacity = u;
+    }
+    this.closing.length = keep;
+  }
+
   update(delta) {
+    this._fold(delta);
     const k = 1 - Math.exp(-delta * 8);
     const flat = this.flat && this.world.camera;
     if (flat) this.world.camera.getWorldQuaternion(_q);
     for (const e of this.open) {
       const o = e.card.object3D;
+      e.age = (e.age ?? UNFOLD) + delta;
       if (flat) {
         const scale = this._flatPose(e, _p);
         o.position.lerp(_p, k);
         o.quaternion.copy(_q);
-        o.scale.setScalar(scale);
+        this._unfold(e, scale);
         continue;
       }
-      o.scale.setScalar(1);
+      this._unfold(e);
       o.position.lerp(e.target, k);
       o.lookAt(this.anchor.head);
     }

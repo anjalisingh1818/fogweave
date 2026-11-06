@@ -221,9 +221,8 @@ async function desktopFlow() {
 
     await step('desktop', 'F5 the light grows into the web; click an entity node: its card opens (and it opens up where it can)', async (p) => {
       await p.waitForFunction((x) => window.__fw.app.getItem(x)?.expanded === true, lightId, { timeout: 200000 });
-      // close the reader card with the mouse, as a person would, so it hides nothing
-      await mouseClick(p, await ev(p, (x) => window.__sa.button(`light:${x}`, 'close'), lightId));
-      if (await ev(p, (x) => !!window.__fw.app.cards.get(`light:${x}`), lightId)) throw new Error('Close by mouse did not close the reader card');
+      // put the reader card away so it hides nothing, keeping the web (its Close button clears the web too: qa/v3-close-star.mjs)
+      await ev(p, (x) => window.__fw.app.cards.close(`light:${x}`), lightId);
       await p.waitForTimeout(1500); // let the web settle
       const misses = [];
       for (let tries = 0; tries < 4; tries++) {
