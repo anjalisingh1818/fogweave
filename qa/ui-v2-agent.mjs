@@ -1,6 +1,7 @@
 // The thinking agent in the client, with its answers scripted so no model quota is
 // spent: the button, the tree that grows in the fog, dropped thoughts with their
 // reasons, the card, Show, Explore next, Stop, and a run that never answers.
+// "Why did this happen?" has no button for now, but its run shares all of this.
 // What the real agent finds is measured in server/eval/v4_agent.py, not here.
 //   node qa/ui-v2-agent.mjs      (needs the local backend for live mode)
 import { writeFileSync } from 'node:fs';
@@ -31,6 +32,28 @@ try {
     await route.fulfill({ status: 200, contentType: 'text/event-stream', body: sse(body) });
   });
   // a real recorded web to work on; the engine's answers are scripted
+  let nextSent = null;
+  await context.route('**/agent/next', async (route) => {
+    nextSent = route.request().postDataJSON();
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ items: nextSent.nodes.slice(0, 2).map((n) => ({ id: n.id, label: n.label, question: 'What does this add to the story?' })) }) });
+  });
+  await context.route('**/agent/patterns', async (route) => {
+    const ids = route.request().postDataJSON().items.map((i) => i.id);
+    const quotes = ids.slice(0, 2).map((x) => ({ id: x, quote: 'A quote from this item', date: '2026-10-01' }));
+    await route.fulfill({
+      status: 200,
+      contentType: 'text/event-stream',
+      body: sse([
+        { type: 'status', text: 'Thinking of different patterns' },
+        { type: 'thought', state: 'open', id: 'T1', parent: null, depth: 1, kind: 'recurring', text: 'The same kind of event comes back' },
+        { type: 'thought', state: 'open', id: 'T2', parent: null, depth: 1, kind: 'common_theme', text: 'They only look alike' },
+        { type: 'thought', id: 'T2', state: 'dropped', why: 'too unsure' },
+        { type: 'thought', id: 'T1', state: 'chosen' },
+        { type: 'result', results: [{ kind: 'recurring', label: 'inferred', text: 'The same kind of event comes back in these items.', items: ids.slice(0, 2), quotes }], dropped: [{ thought: 'T2', why: 'too unsure' }], items: {}, calls: 3, note: '' },
+        { type: 'done', stats: { calls: 3 } },
+      ]),
+    });
+  });
   await open(page, { query: '?debug&demo' });
   await page.waitForFunction(() => window.__fw.app.mode === 'offline' && window.__fw.app.lights.items.length > 1, null, { timeout: 60000 });
   const { id, older, waiting } = await (async () => {
@@ -59,9 +82,9 @@ try {
   })();
   await page.waitForTimeout(500);
 
-  await step('the news card offers "Why did this happen?" once the web has grown', async () => {
+  await step('the news card offers Explore next once the web has grown, and no Why button', async () => {
     const b = await ev((x) => window.__fw.app.cards.get(`light:${x}`).buttonIds(), id);
-    if (!b.includes('why')) throw new Error(JSON.stringify(b));
+    if (!b.includes('next') || b.includes('why')) throw new Error(JSON.stringify(b));
     return b;
   });
 
@@ -146,14 +169,76 @@ try {
     return r;
   });
 
-  await step('Explore next brings out the node that was waiting, and opens it', async () => {
-    const r = await ev((w) => {
+  await step('Explore next on the news card lists real nodes, and says they are suggestions', async () => {
+    await ev((x) => {
       const a = window.__fw.app;
-      a.cards.get('agent').press('next:0');
-      return { hidden: a.store.nodes.get(w).hidden, open: a.cards.open.map((e) => e.key), agent: !!a.agent, tree: a.thoughts.want };
-    }, waiting);
-    if (r.hidden || !r.open.includes(`node:${waiting}`) || r.agent || r.tree) throw new Error(JSON.stringify(r));
+      a.closeAgent();
+      a.cards.closeAll();
+      a.openLight(x);
+    }, id);
+    await page.waitForTimeout(400);
+    await ev((x) => window.__fw.app.cards.get(`light:${x}`).press('next'), id);
+    await page.waitForFunction(() => window.__fw.app.nextSteps && !window.__fw.app.nextSteps.running, null, { timeout: 8000 });
+    await page.waitForTimeout(500);
+    await shot(page, 'uiv2a-3-explore-next');
+    const r = await ev(() => {
+      const c = window.__fw.app.cards.get('next');
+      const boxes = c.boxes.filter((b) => b.w > 0 && b.h > 0);
+      const overlaps = [];
+      for (let i = 0; i < boxes.length; i++)
+        for (let j = i + 1; j < boxes.length; j++) {
+          const p = boxes[i];
+          const q = boxes[j];
+          if (Math.min(p.x + p.w, q.x + q.w) - Math.max(p.x, q.x) > 2 && Math.min(p.y + p.h, q.y + q.h) - Math.max(p.y, q.y) > 2) overlaps.push(`${p.text} / ${q.text}`);
+        }
+      return { overlaps, buttons: c.buttonIds(), text: c.boxes.map((b) => b.text).join(' | ') };
+    });
+    if (r.overlaps.length || !r.buttons.includes('next:0') || !/Suggested by AI/.test(r.text)) throw new Error(JSON.stringify(r));
+    if (nextSent?.story?.id !== id || !nextSent.nodes.some((n) => n.id === waiting)) throw new Error(JSON.stringify(nextSent).slice(0, 300));
+    return { nodes: nextSent.nodes.length, buttons: r.buttons };
+  });
+
+  await step('a suggestion brings out the node that was waiting, and opens it', async () => {
+    const r = await ev(({ w }) => {
+      const a = window.__fw.app;
+      const c = a.cards.get('next');
+      const i = a.nextSteps.items.findIndex((n) => n.id === w);
+      if (i < 0) a.nextSteps.items.unshift({ id: w, label: 'Waiting', question: 'What is it?' });
+      c.redraw();
+      c.press(`next:${Math.max(i, 0)}`);
+      return { hidden: a.store.nodes.get(w).hidden, open: a.cards.open.map((e) => e.key) };
+    }, { w: waiting });
+    if (r.hidden || !r.open.includes(`node:${waiting}`) || r.open.includes('next')) throw new Error(JSON.stringify(r));
     return r;
+  });
+
+  await step('Find patterns runs the agent: its tree grows and Show lights the items', async () => {
+    await ev(() => {
+      const a = window.__fw.app;
+      a.cards.closeAll();
+      for (const it of a.lights.items.slice(0, 3)) a.sealLight(it.id);
+      a.findPatterns();
+    });
+    await page.waitForFunction(() => window.__fw.app.agent?.job === 'patterns' && !window.__fw.app.agent.running, null, { timeout: 8000 });
+    await page.waitForTimeout(900);
+    await shot(page, 'uiv2a-4-patterns');
+    const r = await ev(() => {
+      const a = window.__fw.app;
+      const c = a.cards.get('patterns');
+      return { buttons: c.buttonIds(), nodes: a.thoughts.nodes.size, chosen: a.thoughts.nodes.get('T1')?.state, last: a.lastPatterns };
+    });
+    if (!r.buttons.some((b) => b.startsWith('show:')) || r.nodes < 3 || r.chosen !== 'chosen') throw new Error(JSON.stringify(r));
+    const after = await ev(() => {
+      const a = window.__fw.app;
+      const c = a.cards.get('patterns');
+      const n = a.agent.results.length + (a.agent.shared || []).length;
+      c.press(`show:${n - 1}`);
+      const quiet = a.view.quiet;
+      a.closeAgent();
+      return { quiet, want: a.thoughts.want };
+    });
+    if (after.quiet || after.want) throw new Error(JSON.stringify(after));
+    return { nodes: r.nodes, buttons: r.buttons };
   });
 
   await step('Stop ends a run that never answers, and the tree leaves', async () => {

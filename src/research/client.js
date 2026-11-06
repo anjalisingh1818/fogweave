@@ -115,6 +115,11 @@ export class ResearchClient {
     return this._stream('/agent/why', body, { signal, onEvent });
   }
 
+  /** Which nodes around a story are worth opening next. */
+  agentNext(body) {
+    return this._json('/agent/next', { body, timeout: 40000 });
+  }
+
   async _stream(path, body, { signal, onEvent }) {
     if (!this.base) return null;
     // a stream with nothing new for a long time gives up, so one stuck star

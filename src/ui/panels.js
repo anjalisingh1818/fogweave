@@ -207,6 +207,25 @@ export function agentDraw(app, run) {
   };
 }
 
+/** "Explore next": suggestions only, so it says so. The server keeps only nodes that are really there. */
+export function nextDraw(app, next) {
+  return (ctx, ui, w, h) => {
+    const pad = 44;
+    ui.text('EXPLORE NEXT', pad, 66, { size: 26, color: UI.accent, weight: 700 });
+    let y = ui.para(app.getItem(next.id)?.headline || '', pad, 106, w - pad * 2, { size: 26, color: UI.dim, maxLines: 2 }) + 12;
+    const limit = h - 130;
+    if (next.running) ui.para('Choosing what would help most…', pad, y, w - pad * 2, { size: 26, color: '#cfe0f5', maxLines: 1 });
+    else if (!next.items.length && !next.note) ui.para('No suggestion this time. You can still touch any node around the story.', pad, y, w - pad * 2, { size: 26, color: UI.dim, maxLines: 2 });
+    next.items.forEach((n, i) => {
+      if (y + 82 > limit) return;
+      ui.button(`next:${i}`, `${n.label}: ${n.question}`, pad, y, w - pad * 2, 74, () => app.exploreSuggested(n.id), { size: 23 });
+      y += 84;
+    });
+    ui.para(next.note || 'Suggested by AI: places to look, not findings.', pad, limit + 26, w - pad * 2 - 230, { size: 21, color: next.note ? '#f0c987' : UI.dim, maxLines: 2 });
+    ui.button('close', 'Close', w - pad - 200, h - 104, 200, 76, () => app.closeCard('next'), { icon: '✕', size: 28 });
+  };
+}
+
 export function insightsDraw(app, list) {
   return (ctx, ui, w, h) => {
     const pad = 44;

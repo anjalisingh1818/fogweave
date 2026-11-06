@@ -208,6 +208,6 @@ def test_a_broken_answer_does_not_break_the_stream():
 
 def test_next_steps_only_uses_real_nodes():
     nodes = [{"id": "wd:Q1", "label": "Geneva", "type": "Place"}, {"id": "wd:Q2", "label": "The envoy", "type": "PublicFigure"}]
-    out = NextSteps(items=[NextStep(id="wd:Q1", question="Why Geneva?"), NextStep(id="wd:Q9", question="Invented?"), NextStep(id="wd:Q1", question="Again?")])
+    out = NextSteps(items=[NextStep(id="N1", question="Why Geneva?"), NextStep(id="N9", question="Invented?"), NextStep(id="wd:Q2", question="A real id, not the one it was given?"), NextStep(id="N1", question="Again?")])
     r = asyncio.run(next_steps(FakeLLM(agent_next=out), STORY, nodes))
     assert r == [{"id": "wd:Q1", "label": "Geneva", "question": "Why Geneva?"}]

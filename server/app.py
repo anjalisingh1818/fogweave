@@ -8,7 +8,8 @@
   POST /search          Ask the fog: news about any topic, as stars {q}
   POST /patterns        Connect the dots: patterns across Library items {items}
   POST /agent/patterns  the thinking agent on Library items (streamed thoughts) {items}
-  POST /agent/why       the thinking agent: why did this happen? (streamed) {story, related, nodes}
+  POST /agent/why       the thinking agent: why did this happen? (streamed; the client hides it for now) {story, related, nodes}
+  POST /agent/next      which nodes around a story are worth opening next {story, nodes}
 
 The reader's context labels arrive only with the request that needs them and
 are never stored or logged.
@@ -170,6 +171,15 @@ class AgentWhyReq(BaseModel):
     nodes: list[dict] = Field(default_factory=list, max_length=20)  # nodes not opened yet: [{id, type, label}]
 
 
+class AgentNextReq(BaseModel):
+    story: dict
+    nodes: list[dict] = Field(default_factory=list, max_length=20)
+
+
+def _clean_nodes(nodes: list[dict]) -> list[dict]:
+    return [{"id": str(n.get("id", ""))[:80], "type": str(n.get("type", ""))[:30], "label": str(n.get("label", ""))[:120]} for n in nodes if n.get("id") and n.get("label")]
+
+
 def _clean_item(i: dict) -> dict:
     return {"id": str(i.get("id", ""))[:80], "type": str(i.get("type", ""))[:30], "label": str(i.get("label", ""))[:200], "date": str(i.get("date") or "")[:25], "text": str(i.get("text") or "")[:900]}
 
@@ -212,8 +222,14 @@ async def _why_events(story: dict, related: list[dict], nodes: list[dict]):
 async def agent_why(req: AgentWhyReq):
     story = _clean_item(req.story)
     related = [_clean_item(i) for i in req.related if i.get("id") and i.get("label")]
-    nodes = [{"id": str(n.get("id", ""))[:80], "type": str(n.get("type", ""))[:30], "label": str(n.get("label", ""))[:120]} for n in req.nodes if n.get("id") and n.get("label")]
-    return _sse(_why_events(story, related, nodes))
+    return _sse(_why_events(story, related, _clean_nodes(req.nodes)))
+
+
+@app.post("/agent/next")
+async def agent_next(req: AgentNextReq):
+    from fogweave.agent import next_steps
+
+    return {"items": await next_steps(engine.llm, _clean_item(req.story), _clean_nodes(req.nodes))}
 
 
 @app.post("/ask")

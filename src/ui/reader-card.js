@@ -120,6 +120,7 @@ export function readerDraw(app, id) {
     const mates = app.storyMates(id).length;
     if (details && mates) small.push({ id: 'story', label: `Story +${mates}`, on: () => app.openTimeline(id) });
     if (it.expanded === true && app.canAskWhy(id)) small.push({ id: 'why', label: 'Why did this happen?', primary: true, on: () => app.askWhy(id) });
+    if (it.expanded === true && app.canExploreNext(id)) small.push({ id: 'next', label: 'Explore next', primary: true, on: () => app.openExploreNext(id) });
     small.push({ id: 'more', label: 'More like this', on: () => app.likeLight(id, true) });
     small.push({ id: 'less', label: 'Less like this', on: () => app.likeLight(id, false) });
     const gap = 10;

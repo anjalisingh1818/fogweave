@@ -35,7 +35,7 @@ import { isMuted, sampleFeed, seedFrom } from './feed.js';
 import { checkRequest } from './safety.js';
 import { interestsDraw } from './ui/interests-card.js';
 import { DEBUG, settings, loadSettings, setQuality, saveSettings } from './config.js';
-import { answerDraw, ASK_SUGGESTIONS, settingsDraw, timelineDraw, exportDraw, insightsDraw, patternsDraw, agentDraw } from './ui/panels.js';
+import { answerDraw, ASK_SUGGESTIONS, settingsDraw, timelineDraw, exportDraw, insightsDraw, patternsDraw, agentDraw, nextDraw } from './ui/panels.js';
 import { sharedPatterns } from './patterns.js';
 import { insights } from './insights.js';
 import { Ambient, speech } from './audio.js';
@@ -837,24 +837,57 @@ export class App {
     this.closeCard(run.cardKey);
   }
 
-  /** A web or a recorded run to answer from. */
-  canAskWhy(id) {
-    return this.mode === 'live' || !!this._recordedWhy?.(id);
+  /**
+   * "Why did this happen?" is hidden: in the eval only 2 of its 6 explanations were
+   * good (docs/DECISIONS.md). To bring the button back, return this.mode === 'live'.
+   */
+  canAskWhy() {
+    return false;
+  }
+
+  /** The nodes around a story that have not been opened yet. */
+  _nextNodes(id) {
+    const nodes = [];
+    for (const { id: other } of this.store.neighbors(id)) {
+      const n = this.store.nodes.get(other);
+      if (n && this.canExplore(n.id) && !n.explored) nodes.push({ id: n.id, type: n.type, label: n.label });
+    }
+    return nodes.slice(0, 12);
+  }
+
+  _storyBody(id) {
+    const it = this.getItem(id);
+    const text = [it.summary, ...(it.claims || []).map((c) => c.quote).filter(Boolean)].filter(Boolean).join(' ');
+    return { id, type: 'NewsItem', label: it.headline, date: it.date || '', text };
   }
 
   /** The story, the earlier news around it, and the nodes not opened yet. */
   _whyBody(id) {
-    const it = this.getItem(id);
-    const text = (n) => [n.summary, ...(n.claims || []).map((c) => c.quote).filter(Boolean)].filter(Boolean).join(' ');
     const related = [];
-    const nodes = [];
     for (const { id: other } of this.store.neighbors(id)) {
       const n = this.store.nodes.get(other);
-      if (!n) continue;
-      if (n.type === 'NewsItem') related.push({ id: n.id, type: n.type, label: n.label, date: n.date || '', text: n.summary || '' });
-      else if (this.canExplore(n.id) && !n.explored) nodes.push({ id: n.id, type: n.type, label: n.label });
+      if (n?.type === 'NewsItem') related.push({ id: n.id, type: n.type, label: n.label, date: n.date || '', text: n.summary || '' });
     }
-    return { story: { id, type: 'NewsItem', label: it.headline, date: it.date || '', text: text(it) }, related: related.slice(0, 8), nodes: nodes.slice(0, 12) };
+    return { story: this._storyBody(id), related: related.slice(0, 8), nodes: this._nextNodes(id) };
+  }
+
+  /** The live engine, and something around this story still to open. */
+  canExploreNext(id) {
+    return this.mode === 'live' && this._nextNodes(id).length > 0;
+  }
+
+  /** "Explore next": the AI suggests which nodes around this story to open, and why. */
+  async openExploreNext(id) {
+    const next = { id, running: true, items: [], note: '' };
+    this.nextSteps = next;
+    this.cards.show('next', { width: 0.46, height: 0.46, draw: nextDraw(this, next), slot: 1 });
+    const r = await this.client.agentNext({ story: this._storyBody(id), nodes: this._nextNodes(id) });
+    if (this.nextSteps !== next) return next;
+    next.running = false;
+    next.items = r?.items || [];
+    if (!r) next.note = 'The engine did not answer in time. Try again in a minute.';
+    this.cards.get('next')?.redraw();
+    return next;
   }
 
   /** "Why did this happen?": the agent tries explanations and shows what holds. */
@@ -886,6 +919,7 @@ export class App {
       this.store._emit('node-added', [id]);
     }
     this.closeAgent();
+    this.closeCard('next');
     this.pinchNode(id);
   }
 

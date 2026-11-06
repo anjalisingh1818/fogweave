@@ -412,8 +412,9 @@ async def next_steps(llm, story: dict, nodes: list[dict]) -> list[dict]:
     """Which nodes in the web are most worth opening next, and what each could answer."""
     if not nodes:
         return []
-    by_id = {n["id"]: n for n in nodes}
-    listing = "\n".join(f"{n['id']} ({n.get('type', 'node')}): {n['label']}" for n in nodes)
+    # short ids: the model shortens real ones (wd:Q1 came back as Q1, and was thrown away)
+    by_id = {f"N{i + 1}": n for i, n in enumerate(nodes)}
+    listing = "\n".join(f"{sid} ({n.get('type', 'node')}): {n['label']}" for sid, n in by_id.items())
     try:
         out = await llm.json(
             role="agent_next",
@@ -428,5 +429,5 @@ async def next_steps(llm, story: dict, nodes: list[dict]) -> list[dict]:
     for s in out.items:
         if s.id in by_id and s.id not in seen:
             seen.add(s.id)
-            kept.append({"id": s.id, "label": by_id[s.id]["label"], "question": s.question.strip()})
+            kept.append({"id": by_id[s.id]["id"], "label": by_id[s.id]["label"], "question": s.question.strip()})
     return kept[:3]

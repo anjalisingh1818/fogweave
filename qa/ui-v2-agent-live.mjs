@@ -1,5 +1,5 @@
 // The real agent end to end in the emulated headset: real news, real model calls.
-// Seal a few stars from one story, run Find patterns; grow a star, ask why.
+// Grow a star, ask what to explore next; seal a few stars, run Find patterns.
 // It spends free model quota, so it is run by hand. Not a real Quest.
 //   node qa/ui-v2-agent-live.mjs
 import { launch, open, enterXR, shot, errorsOf } from './lib.mjs';
@@ -28,15 +28,11 @@ try {
   console.log('story:', await ev((x) => window.__fw.app.getItem(x).headline, id));
 
   let t0 = Date.now();
-  await ev((x) => {
-    window.__fw.app.askWhy(x);
-  }, id);
-  await page.waitForTimeout(1500);
-  await shot(page, 'uiv2live-1-why-thinking');
-  await page.waitForFunction(() => window.__fw.app.agent && !window.__fw.app.agent.running, null, { timeout: 120000 });
-  await page.waitForTimeout(1500);
-  await shot(page, 'uiv2live-2-why-done');
-  console.log('WHY', Math.round((Date.now() - t0) / 1000), 's', JSON.stringify(await report()));
+  await ev((x) => window.__fw.app.cards.get(`light:${x}`).press('next'), id);
+  await page.waitForFunction(() => window.__fw.app.nextSteps && !window.__fw.app.nextSteps.running, null, { timeout: 60000 });
+  await page.waitForTimeout(800);
+  await shot(page, 'uiv2live-1-explore-next');
+  console.log('NEXT', Math.round((Date.now() - t0) / 1000), 's', JSON.stringify(await ev(() => window.__fw.app.nextSteps)));
 
   await ev(() => {
     const a = window.__fw.app;
