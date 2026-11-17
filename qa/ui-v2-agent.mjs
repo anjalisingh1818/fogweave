@@ -272,16 +272,19 @@ try {
     });
     await page.waitForFunction(() => window.__fw.app.agent?.recorded && window.__fw.app.thoughts.nodes.size >= 3, null, { timeout: 8000 });
     await shot(page, 'uiv2a-5-recorded-growing');
-    await page.waitForFunction(() => window.__fw.app.agent?.recorded && !window.__fw.app.agent.running, null, { timeout: 30000 });
+    await page.waitForFunction(() => window.__fw.app.agent?.recorded && !window.__fw.app.agent.running, null, { timeout: 60000 });
     await page.waitForTimeout(600);
     await shot(page, 'uiv2a-6-recorded-done');
     const r = await ev(() => {
       const a = window.__fw.app;
       const c = a.cards.get('patterns');
-      return { text: c.boxes.map((b) => b.text).join(' | '), results: a.agent.results.length, dropped: a.agent.dropped.length, chosen: [...a.thoughts.nodes.values()].some((n) => n.state === 'chosen'), buttons: c.buttonIds() };
+      window.__lastRun = a.agent;
+      const m = a.thoughts.nodes.get('M1');
+      return { text: c.boxes.map((b) => b.text).join(' | '), results: a.agent.results.length, merged: a.agent.results[0]?.merged, mergeNode: m && { parents: m.parents, state: m.state }, dropped: a.agent.dropped.length, chosen: [...a.thoughts.nodes.values()].some((n) => n.state === 'chosen'), buttons: c.buttonIds() };
     });
-    if (asked || !/RECORDED AGENT RUN/.test(r.text) || !/Recording of a real run/.test(r.text) || r.results !== 1 || !r.chosen || !r.buttons.includes('show:0')) throw new Error(JSON.stringify({ asked, ...r }));
-    return { results: r.results, dropped: r.dropped, buttons: r.buttons };
+    // the recording includes a merge (Graph of Thoughts): one finding with two parents
+    if (asked || !/RECORDED AGENT RUN/.test(r.text) || !/Recording of a real run/.test(r.text) || r.results !== 3 || r.merged?.length !== 2 || r.mergeNode?.parents?.length !== 2 || r.mergeNode.state !== 'chosen' || !r.chosen || !r.buttons.includes('show:0') || !r.buttons.includes('board')) throw new Error(JSON.stringify({ asked, ...r }));
+    return { results: r.results, merged: r.merged, dropped: r.dropped, buttons: r.buttons };
   });
 
   await step('Show on the recording opens its story, with its real source', async () => {
@@ -300,6 +303,38 @@ try {
       a.mode = 'live';
     });
     return r;
+  });
+
+  await step('the detective board pins the findings: strings to their stories, the merge on top', async () => {
+    const r = await ev(() => {
+      const a = window.__fw.app;
+      a.cards.closeAll();
+      const b = a.openBoard(window.__lastRun);
+      const c = a.cards.get('board');
+      const texts = c.boxes.filter((x) => x.kind !== 'button' && x.w > 0 && x.h > 0);
+      const overlaps = [];
+      for (let i = 0; i < texts.length; i++)
+        for (let j = i + 1; j < texts.length; j++) {
+          const p = texts[i];
+          const q = texts[j];
+          if (Math.min(p.x + p.w, q.x + q.w) - Math.max(p.x, q.x) > 2 && Math.min(p.y + p.h, q.y + q.h) - Math.max(p.y, q.y) > 2) overlaps.push(`${p.text} / ${q.text}`);
+        }
+      const out = (x) => x.x < 0 || x.y < 0 || x.x + x.w > c.canvas.width + 1 || x.y + x.h > c.canvas.height + 1;
+      return { open: a.cards.open.map((e) => e.key), selMerged: !!b.results[b.sel]?.merged, findings: c.buttonIds().filter((x) => x.startsWith('f:')).length, stories: c.buttonIds().filter((x) => x.startsWith('i:')).length, labels: Object.values(b.labels).every((l) => l.label && !l.label.startsWith('n:')), overlaps, outside: c.boxes.filter(out).map((x) => x.text), text: texts.map((x) => x.text).join(' | '), tree: a.thoughts.want };
+    });
+    await shot(page, 'uiv2a-board');
+    if (r.open.join() !== 'board' || !r.selMerged || r.findings !== 3 || r.stories < 3 || !r.labels || r.overlaps.length || r.outside.length || !/MERGED/.test(r.text) || r.tree) throw new Error(JSON.stringify(r));
+    // pinch another finding, then show it in the fog: the board steps aside for its story
+    const s = await ev(() => {
+      const a = window.__fw.app;
+      a.cards.get('board').press('f:1');
+      const sel = a.board.sel;
+      a.cards.get('board').press('show');
+      return { sel, board: !!a.cards.get('board'), opened: a.cards.open.map((e) => e.key) };
+    });
+    if (s.sel !== 1 || s.board || !s.opened.some((k) => k.startsWith('light:') || k.startsWith('node:'))) throw new Error(JSON.stringify(s));
+    await ev(() => window.__fw.app.cards.closeAll());
+    return { ...r, text: undefined, then: s };
   });
 
   await step('Stop ends a run that never answers, and the tree leaves', async () => {

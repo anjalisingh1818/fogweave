@@ -211,3 +211,44 @@ def test_next_steps_only_uses_real_nodes():
     out = NextSteps(items=[NextStep(id="N1", question="Why Geneva?"), NextStep(id="N9", question="Invented?"), NextStep(id="wd:Q2", question="A real id, not the one it was given?"), NextStep(id="N1", question="Again?")])
     r = asyncio.run(next_steps(FakeLLM(agent_next=out), STORY, nodes))
     assert r == [{"id": "wd:Q1", "label": "Geneva", "question": "Why Geneva?"}]
+
+
+def two_findings():
+    a = good_pattern("T1")
+    b = Verdict(thought="T2", kind="sequence", text="A release follows a probe.", confidence="high", quotes=[Quote(id="I3", quote="launches a probe to the moons of Mars"), Quote(id="I2", quote="A prisoner is released")])
+    return Verdicts(items=[a, b])
+
+
+def test_two_findings_merge_into_one_that_rests_on_both():
+    whole = Verdict(thought="M1", kind="common_theme", text="The envoy's visit, the release and the probe all come in one week.", confidence="medium", quotes=[Quote(id="I1", quote="special envoy arrives"), Quote(id="I2", quote="A prisoner is released"), Quote(id="I3", quote="The agency launches a probe")])
+    llm = FakeLLM(agent_propose=ideas(2), agent_judge=two_findings(), agent_deepen=Verdicts(items=[]), agent_merge=Verdicts(items=[whole]))
+    ev = run(llm, patterns_task([dict(i) for i in ITEMS]))
+    r = result_of(ev)
+    assert r["results"][0]["merged"] == ["T1", "T2"] and r["results"][0]["thought"] == "M1"
+    assert sorted(r["results"][0]["items"]) == ["n:a", "n:b", "n:c"]
+    assert {x["thought"] for x in r["results"][1:]} == {"T1", "T2"}
+    opened = next(e for e in ev if e["type"] == "thought" and e["id"] == "M1" and e["state"] == "open")
+    assert opened["parents"] == ["T1", "T2"] and opened["depth"] == 3
+    assert ("M1", "chosen") in [(e["id"], e["state"]) for e in ev if e["type"] == "thought"]
+    assert llm.calls.count("agent_merge") == 1 and len(llm.calls) <= MAX_CALLS
+
+
+def test_a_merge_that_shows_only_two_items_is_dropped():
+    small = Verdict(thought="M1", kind="same_actor", text="The envoy appears in both.", confidence="high", quotes=[Quote(id="I1", quote="special envoy arrives"), Quote(id="I2", quote="A prisoner is released")])
+    llm = FakeLLM(agent_propose=ideas(2), agent_judge=two_findings(), agent_deepen=Verdicts(items=[]), agent_merge=Verdicts(items=[small]))
+    r = result_of(run(llm, patterns_task([dict(i) for i in ITEMS])))
+    assert not any(x.get("merged") for x in r["results"]) and len(r["results"]) == 2
+    assert {"thought": "M1", "why": "a merge must show three or more items"} in r["dropped"]
+
+
+def test_ideas_that_do_not_combine_stay_as_they_are():
+    llm = FakeLLM(agent_propose=ideas(2), agent_judge=two_findings(), agent_deepen=Verdicts(items=[]), agent_merge=Verdicts(items=[]))
+    r = result_of(run(llm, patterns_task([dict(i) for i in ITEMS])))
+    assert len(r["results"]) == 2 and {"thought": "M1", "why": "the two ideas do not combine"} in r["dropped"]
+
+
+def test_no_merge_when_the_two_findings_show_the_same_items():
+    b = good_pattern("T2", text="The envoy acts again.")
+    llm = FakeLLM(agent_propose=ideas(2), agent_judge=Verdicts(items=[good_pattern(), b]), agent_deepen=Verdicts(items=[]))
+    run(llm, patterns_task([dict(i) for i in ITEMS]))
+    assert "agent_merge" not in llm.calls

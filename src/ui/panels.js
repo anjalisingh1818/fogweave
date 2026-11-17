@@ -8,6 +8,7 @@ import { LIGHT_KINDS } from '../render/lights.js';
 import { LABEL_STYLE } from '../model/schema.js';
 import { settings } from '../config.js';
 import { speech } from '../audio.js';
+import { kindLabel } from './board.js';
 
 export const ASK_SUGGESTIONS = ['What changes because of this?', 'Who is affected?', 'What happened before this?', 'Is this reliable?'];
 
@@ -178,7 +179,7 @@ export function agentDraw(app, run) {
     items.forEach((p, i) => {
       if (y + 100 > limit) return;
       const style = LABEL_STYLE[p.label] || LABEL_STYLE.inferred;
-      ui.text(WHY_KIND[p.kind] || PATTERN_KIND[p.kind] || String(p.kind).toUpperCase(), pad, y, { size: 20, color: '#ffe2a8', weight: 700 });
+      ui.text(p.merged ? kindLabel(p) : WHY_KIND[p.kind] || PATTERN_KIND[p.kind] || String(p.kind).toUpperCase(), pad, y, { size: 20, color: '#ffe2a8', weight: 700 });
       ui.text(style.label.toUpperCase(), pad + 300, y, { size: 20, color: style.css, weight: 700 });
       ui.button(`show:${i}`, 'Show', w - pad - 250, y - 30, 120, 50, () => app.showAgentResult(run, p), { size: 22 });
       ui.button(`note:${i}`, 'Note', w - pad - 120, y - 30, 120, 50, () => app.addNote(`${run.noteLabel}: ${p.text}`), { size: 22 });
@@ -203,9 +204,12 @@ export function agentDraw(app, run) {
         y += 64;
       });
     }
-    if (run.note) ui.para(run.note, pad, limit + 26, w - pad * 2 - 230, { size: 21, color: '#f0c987', maxLines: 2 });
-    else if (run.recorded) ui.para('Recording of a real run, slowed down.', pad, limit + 26, w - pad * 2 - 230, { size: 21, color: '#f0c987', maxLines: 2 });
-    else ui.para(run.running ? 'Every idea must show real quotes, or it is dropped.' : 'Inferred: reasoned from the quotes, checked by code and a second look.', pad, limit + 26, w - pad * 2 - 230, { size: 21, color: UI.dim, maxLines: 2 });
+    const board = !run.running && run.results.length > 0;
+    if (board) ui.button('board', 'Board', w - pad - 420, h - 104, 200, 76, () => app.openBoard(run), { primary: true, icon: '▦', size: 28 });
+    const nw = w - pad * 2 - (board ? 450 : 230);
+    if (run.note) ui.para(run.note, pad, limit + 26, nw, { size: 21, color: '#f0c987', maxLines: 2 });
+    else if (run.recorded) ui.para('Recording of a real run, slowed down.', pad, limit + 26, nw, { size: 21, color: '#f0c987', maxLines: 2 });
+    else ui.para(run.running ? 'Every idea must show real quotes, or it is dropped.' : 'Inferred: reasoned from the quotes, checked by code and a second look.', pad, limit + 26, nw, { size: 21, color: UI.dim, maxLines: 2 });
     ui.button('close', run.running ? 'Stop' : 'Close', w - pad - 200, h - 104, 200, 76, () => app.closeAgent(), { icon: '✕', size: 28 });
   };
 }
