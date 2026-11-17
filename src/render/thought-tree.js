@@ -3,6 +3,8 @@
  * Open thoughts glow pale blue, kept ones warm, the chosen ones gold; dropped ones
  * sink and fade, with the reason they were dropped. It shows what really happened
  * in the run (every state comes from the server's events), nothing decorative.
+ * A merged thought has two parents: its two lines join above them, so the tree
+ * becomes a graph (Graph of Thoughts).
  */
 import {
   Group,
@@ -64,8 +66,8 @@ export class ThoughtTree {
     this.group.add(this.glow);
 
     const geo = new BufferGeometry();
-    geo.setAttribute('position', new Float32BufferAttribute(new Float32Array(MAX * 6), 3).setUsage(DynamicDrawUsage));
-    geo.setAttribute('color', new Float32BufferAttribute(new Float32Array(MAX * 6), 3).setUsage(DynamicDrawUsage));
+    geo.setAttribute('position', new Float32BufferAttribute(new Float32Array(MAX * 12), 3).setUsage(DynamicDrawUsage));
+    geo.setAttribute('color', new Float32BufferAttribute(new Float32Array(MAX * 12), 3).setUsage(DynamicDrawUsage));
     geo.setDrawRange(0, 0);
     this.lines = new LineSegments(geo, new LineBasicMaterial({ vertexColors: true, transparent: true, depthWrite: false, fog: false, blending: AdditiveBlending }));
     this.lines.frustumCulled = false;
@@ -109,7 +111,7 @@ export class ThoughtTree {
     const cur = this.nodes.get(ev.id);
     if (!cur) {
       if (this.nodes.size >= MAX) return;
-      this._add({ id: ev.id, parent: ev.parent || 'root', depth: ev.depth || 1, text: ev.text || '', state: ev.state || 'open', why: ev.why });
+      this._add({ id: ev.id, parent: ev.parent || 'root', parents: ev.parents || null, depth: ev.depth || 1, text: ev.text || '', state: ev.state || 'open', why: ev.why });
       return;
     }
     if (ev.state) cur.state = ev.state;
@@ -122,13 +124,22 @@ export class ThoughtTree {
   _local(n, out) {
     if (n.depth === 0) return out.set(0, -0.3, 0);
     const parent = this.nodes.get(n.parent);
+    if (n.parents) {
+      // a merge sits above, between the thoughts it joins
+      const ps = n.parents.map((id) => this.nodes.get(id)).filter(Boolean);
+      out.set(0, 0, 0);
+      const tmp = new Vector3();
+      for (const p of ps) out.x += this._local(p, tmp).x / ps.length;
+      out.y = 0.47 - n.sink * 0.14;
+      return out;
+    }
     if (n.depth === 1) {
       const count = [...this.nodes.values()].filter((x) => x.depth === 1).length;
-      return out.set((n.index - (count - 1) / 2) * 0.46, -0.08 - n.sink * 0.14, 0);
+      return out.set((n.index - (count - 1) / 2) * 0.56, -0.08 - n.sink * 0.14, 0);
     }
     this._local(parent, out);
-    out.x += (n.index - 0.5) * 0.24;
-    out.y = 0.17 - n.sink * 0.14;
+    out.x += (n.index - 0.5) * 0.28;
+    out.y = 0.17 + n.index * 0.11 - n.sink * 0.14; // the second child a little higher: labels never sit on each other
     return out;
   }
 
@@ -149,7 +160,7 @@ export class ThoughtTree {
     const cx = head.x + Math.sin(a) * dist;
     const cz = head.z - Math.cos(a) * dist;
     const x = v.x * sx;
-    v.set(cx + Math.cos(a) * x, head.y + (f ? 0.02 : 0.12) + v.y * (f ? 0.8 : 1), cz + Math.sin(a) * x);
+    v.set(cx + Math.cos(a) * x, head.y + (f ? -0.05 : 0.12) + v.y * (f ? 0.8 : 1), cz + Math.sin(a) * x);
     return v;
   }
 
@@ -168,8 +179,9 @@ export class ThoughtTree {
       n.sink += ((n.state === 'dropped' ? 1 : 0) - n.sink) * (1 - Math.exp(-delta * 3));
       const st = STATE[n.state] || STATE.open;
       this.positionOf(n.id, _p);
-      if (n.parent) {
-        const from = this.positionOf(n.parent, new Vector3());
+      for (const pid of n.parents || (n.parent ? [n.parent] : [])) {
+        const from = this.positionOf(pid, new Vector3());
+        if (!from) continue;
         const tip = from.clone().lerp(_p, 1 - (1 - n.grow) * (1 - n.grow));
         const i = lines * 6;
         attr.array.set([from.x, from.y, from.z, tip.x, tip.y, tip.z], i);
@@ -204,7 +216,8 @@ export class ThoughtTree {
     this.positionOf(n.id, _p);
     _p.y += n.depth === 0 ? -0.09 : 0.1;
     lab.sprite.position.copy(_p);
-    lab.sprite.scale.set(0.42 * (this.flat ? 0.64 : 1), 0.1155 * (this.flat ? 0.64 : 1), 1);
+    const k = (n.depth === 2 ? 0.86 : 1) * (this.flat ? 0.64 : 1); // deeper thoughts sit closer together
+    lab.sprite.scale.set(0.42 * k, 0.1155 * k, 1);
     lab.sprite.material.opacity = this.visible * n.grow * (n.state === 'dropped' ? 0.75 : 1);
     lab.sprite.visible = this.visible > 0.01;
     return i + 1;

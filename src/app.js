@@ -35,6 +35,7 @@ import { isMuted, sampleFeed, seedFrom } from './feed.js';
 import { checkRequest } from './safety.js';
 import { interestsDraw } from './ui/interests-card.js';
 import { DEBUG, settings, loadSettings, setQuality, saveSettings } from './config.js';
+import { boardDraw } from './ui/board.js';
 import { answerDraw, ASK_SUGGESTIONS, settingsDraw, timelineDraw, exportDraw, insightsDraw, patternsDraw, agentDraw, nextDraw } from './ui/panels.js';
 import { sharedPatterns } from './patterns.js';
 import { insights } from './insights.js';
@@ -936,6 +937,53 @@ export class App {
     else if (other && this.lights.get(other)) this.openLight(other);
   }
 
+  // ---------- the detective board: the agent's findings, pinned up ----------
+
+  /** The board for a finished run: findings tied by string to the stories they quote. */
+  openBoard(run = this.agent) {
+    if (!run) return null;
+    const results = run.results.length ? run.results : run.shared || [];
+    const labels = {};
+    for (const id of new Set(results.flatMap((p) => p.items || []))) {
+      const it = run.items?.[id] || {};
+      const star = it.star || this.lights.get(id) || this.sealedLights?.[id];
+      labels[id] = { label: it.label || star?.headline || this.itemLabel(id), date: it.date || star?.date || '', source: it.source || star?.source || '' };
+    }
+    const merged = results.findIndex((p) => p.merged);
+    const board = { run, results, labels, sel: merged >= 0 ? merged : 0, recorded: run.recorded ? String(run.title).replace(/^.*· /, '') : '', empty: run.empty };
+    this.board = board;
+    this.closeAgent();
+    this.cards.closeAll();
+    this.cards.show('board', { width: 0.64, height: 0.46, draw: boardDraw(this, board), slot: 0 });
+    return board;
+  }
+
+  boardSelect(i) {
+    if (!this.board) return;
+    this.board.sel = i;
+    this.cards.get('board')?.redraw();
+  }
+
+  /** Show the chosen finding in the fog: its stories light up (the board steps aside). */
+  boardShow() {
+    const b = this.board;
+    const p = b?.results[b.sel];
+    if (!p) return;
+    this.closeBoard();
+    this.showAgentResult(b.run, p);
+  }
+
+  boardOpenItem(id) {
+    const b = this.board;
+    if (!b) return;
+    this.closeBoard();
+    this.showAgentResult(b.run, { items: [id] });
+  }
+
+  closeBoard() {
+    this.closeCard('board');
+  }
+
   /** A node the agent suggests: bring it out if it waits behind a group, and open it. */
   exploreSuggested(id) {
     const n = this.store.nodes.get(id);
@@ -1344,6 +1392,7 @@ export class App {
       this.view.setSelected(null);
     }
     if (key === 'path') this.view.clearPath();
+    if (key === 'board') this.board = null;
     if (key.startsWith('light:') && this.lights.openId === key.slice(6)) this.lights.openId = null;
   }
 

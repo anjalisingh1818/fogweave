@@ -172,8 +172,16 @@ async function run(mode) {
     await step('3 touch a neighbour, expand again; go back with the breadcrumb', async () => {
       const nb = await ev((nid) => {
         const a = window.__fw.app;
-        return (a.store.nodes.get(nid).addedIds || []).find((x) => !a.store.nodes.get(x).hidden && a.canExplore(x));
+        const ids = (a.store.nodes.get(nid).addedIds || []).filter((x) => a.canExplore(x));
+        const shown = ids.find((x) => !a.store.nodes.get(x).hidden);
+        if (shown || !ids.length) return shown;
+        // the one with a recorded run waits behind a group button: bring it out, as that button would
+        const n = a.store.nodes.get(ids[0]);
+        n.hidden = false;
+        a.store._emit('node-added', [n.id]);
+        return n.id;
       }, focus);
+      await page.waitForTimeout(800); // let it settle where a hand can reach it
       if (!nb) throw new Error('no explorable neighbour (offline: the snapshot must record one)');
       await ev(() => window.__fw.app.cards.closeAll());
       await ev((x) => window.__qa.pinchNode(x), nb);

@@ -1,4 +1,4 @@
-"""The thinking agent: a small Tree of Thoughts over the reader's items.
+"""The thinking agent: a small Graph of Thoughts over the reader's items.
 
 Instead of one answer in one go, the agent
   1. branches: proposes a few different explanations (thoughts);
@@ -6,7 +6,11 @@ Instead of one answer in one go, the agent
   3. judges: each thought must show itself with quotes from the items;
   4. prunes: code drops what it cannot show, a skeptic attacks what is left (real
      quotes do not make a good argument), and code ranks the rest;
-  5. deepens: the best thoughts get one sharper round, judged the same way.
+  5. deepens: the best thoughts get one sharper round, judged the same way;
+  6. merges: the two strongest findings from different branches may combine into
+     one larger finding that neither shows alone. That makes the tree a graph (a
+     thought with two parents). The merge is checked like any thought, and must
+     quote items from both of its parents, or it is dropped.
 
 The model proposes; code decides. A thought survives only with verbatim quotes
 from the items, the right items, and dates in the right order, exactly as for
@@ -36,7 +40,7 @@ from .safety import UNTRUSTED_RULES, check_request, wrap_untrusted
 BRANCH = 3  # thoughts in the first round
 KEEP = 2  # thoughts that go one level deeper
 CHILDREN = 2  # sharper versions of each
-MAX_CALLS = 6  # model calls for one question, searches included
+MAX_CALLS = 7  # model calls for one question, searches included
 MAX_SEARCHES = 1
 SEARCH_SECONDS = 20  # the reader is watching: a slow search is skipped
 MAX_RESULTS = 3
@@ -354,6 +358,52 @@ async def tree_of_thoughts(llm, task: Task, search=None) -> AsyncIterator[dict]:
         if cur is None or t["score"] > cur["score"] or (t["score"] == cur["score"] and t["depth"] > cur["depth"]):
             branch_best[root] = t
     chosen = sorted(branch_best.values(), key=lambda t: -t["score"])[:MAX_RESULTS]
+
+    # 6. merge: two findings from different branches, combined only if code can show the whole
+    merged = None
+    if len(chosen) >= 2 and not stopped:
+        a, b = chosen[0], chosen[1]
+        items_a, items_b = set(a["result"]["items"]), set(b["result"]["items"])
+        if len(items_a | items_b) >= 3 and spend():
+            yield {"type": "status", "text": "Trying to merge the two strongest ideas"}
+            m = {"id": "M1", "parent": a["id"], "parents": [a["id"], b["id"]], "depth": 3, "kind": a["kind"], "text": "Merging the two strongest ideas"}
+            yield {"type": "thought", "state": "open", **m}
+            try:
+                out = await llm.json(
+                    role="agent_merge",
+                    system=(
+                        f"{task.goal} Here are two findings (A and B) that each hold on their own. If together they show ONE larger finding that neither shows alone, "
+                        "state it in one or two plain sentences. Say only what the quotes show: no cause, motive, coordination or trend they do not state. "
+                        f"{task.quote_rule} Quote at least three different items, including items from both A and B. Each quote is ONE continuous exact span "
+                        "copied from that item's text (20 words or fewer, no '...'). If they do not combine, give no items. Kinds: " + kinds + ". " + UNTRUSTED_RULES
+                    ),
+                    user=f"A ({a['kind']}): {a['result']['text']}\nB ({b['kind']}): {b['result']['text']}\n\nITEMS:\n" + wrap_untrusted(task.listing(), 7000),
+                    schema=Verdicts,
+                    max_tokens=800,
+                )
+                v = out.items[0] if out.items else None
+            except QuotaExhausted:
+                stopped, v = "Free model quota ran out while merging.", None
+            except Exception:  # noqa: BLE001 (no merge: the two findings stay as they are)
+                v = None
+            result, why = task.check(v) if v is not None else (None, "the two ideas do not combine")
+            if result is not None:
+                shown = set(result["items"])
+                if len(shown) < 3:
+                    result, why = None, "a merge must show three or more items"
+                elif not (shown & items_a and shown & items_b) or shown <= items_a or shown <= items_b:
+                    result, why = None, "it does not rest on both ideas"
+            if result is None:
+                dropped.append({"thought": "M1", "why": why})
+                yield {"type": "thought", "id": "M1", "state": "dropped", "why": why}
+            else:
+                result.update({"thought": "M1", "merged": [a["id"], b["id"]]})
+                merged = {**m, "kind": v.kind, "result": result, "score": _score(result, v.confidence)}
+                yield {"type": "thought", "id": "M1", "state": "kept", "score": merged["score"], "text": result["text"]}
+    for t in chosen:
+        t["result"]["thought"] = t["id"]
+    if merged:
+        chosen = [merged, *chosen][:MAX_RESULTS]
     for t in chosen:
         yield {"type": "thought", "id": t["id"], "state": "chosen"}
     known_ids = {it["id"]: it for it in task.by_sid.values()}
