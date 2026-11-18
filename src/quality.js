@@ -21,6 +21,19 @@ export class QualityGovernor {
     this.targetMs = 1000 / (hz || 72);
   }
 
+  /**
+   * A real headset starts one step down (fewer fog banks), so the first seconds
+   * do not stutter while the frame rate is still unknown. If frames stay fast,
+   * the usual rule raises it to full quality (six fast windows, about 10 s at 72 Hz).
+   */
+  startHeadset() {
+    this.window.length = 0;
+    this.over = this.under = 0;
+    if (this.locked || this.level <= 1) return;
+    this.level = 1;
+    this.onChange(this.level);
+  }
+
   sample(delta) {
     const ms = delta * 1000;
     if (ms <= 0 || ms > 250) return; // tab switches, pauses
