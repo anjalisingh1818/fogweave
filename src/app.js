@@ -138,13 +138,21 @@ export class App {
   }
 
   /** The live scene: today's news from the engine. Never falls back to old data silently. */
-  async enterLive(health = null) {
+  async enterLive(health = undefined) {
     this._clearFog();
     const scene = (this._scene = (this._scene || 0) + 1); // a later scene choice wins
     this.mode = 'starting';
     this.setStatus('Gathering the latest news…');
     welcomeStep('Gathering today’s news…', { offerDemo: () => this.enterDemo() });
-    health ??= await this.client.health();
+    if (health === undefined) health = await this.client.health();
+    if (!health?.ok && this.client.base) {
+      // the free server sleeps when nobody visits, and waking it takes about a minute:
+      // wait for it instead of giving up, with the Demo scene on offer meanwhile
+      this.setStatus('Waking the news server…');
+      welcomeStep('Waking the news server. This can take up to a minute…', { offerDemo: () => this.enterDemo(), after: 8000 });
+      health = await this.client.health({ timeout: 75000 });
+      if (scene !== this._scene) return; // the Demo scene was opened while it woke
+    }
     if (health?.ok) welcomeStep('Reading the sources and writing short summaries…', { offerDemo: () => this.enterDemo() });
     const pool = health?.ok ? await this.client.pool(this.interests.forServer()) : null;
     if (scene !== this._scene) return; // the Demo scene was opened while this loaded

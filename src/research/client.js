@@ -45,8 +45,9 @@ export class ResearchClient {
     }
   }
 
-  async health() {
-    const h = await this._json('/health', { timeout: 4000 });
+  /** A quick check by default; startup waits longer while a sleeping free server wakes. */
+  async health({ timeout = 4000 } = {}) {
+    const h = await this._json('/health', { timeout });
     this.online = !!h?.ok;
     this.lastHealth = h;
     return h;
