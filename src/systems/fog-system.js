@@ -24,6 +24,8 @@ export class FogSystem extends createSystem({}) {
       this._attachSession();
       this._recenterAt = performance.now() + 400; // let the head pose settle
       this.app.governor.setTargetHz(this.world.session?.frameRate || 72);
+      // a real headset (not the desktop emulator) starts one step down; it climbs back if frames are fast
+      if (!window.IWER_DEVICE) this.app.governor.startHeadset();
     };
     this.xrManager.addEventListener('sessionstart', onStart);
     this.cleanupFuncs.push(() => this.xrManager.removeEventListener('sessionstart', onStart));
